@@ -5,6 +5,13 @@ import ChecklistCard from '../features/guides/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
 
 const Home = () => {
+  const defaultOnboarding = [
+    { id: 1, task: 'Find your specific guide', completed: false },
+    { id: 2, task: 'Read step-by-step process', completed: false },
+    { id: 3, task: 'Prepare requirements', completed: false },
+    { id: 4, task: 'Sign up to save progress', completed: false },
+  ];
+
   return (
     // Use min-h-screen to ensure the dark color covers the whole height
     <div className="min-h-screen flex flex-col lg:flex-row gap-8 px-8 items-start transition-colors duration-300 
@@ -24,7 +31,10 @@ const Home = () => {
       </div>
 
       <div className="w-full lg:w-96 space-y-6 sticky top-8 pt-4">
-        <ChecklistCard />
+        <ChecklistCard 
+          title="Getting Started" 
+          initialSteps={defaultOnboarding}
+        />
 
         <div className="p-4 border rounded-xl shadow-sm bg-white dark:bg-[#242729] dark:border-gray-800">
           <p className="text-[10px] text-gray-400 mb-2 text-center uppercase font-bold tracking-widest">
