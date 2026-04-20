@@ -1,14 +1,16 @@
-import { FileText, BookOpen, ShieldCheck, CreditCard, UserCircle } from 'lucide-react';
+import { FileText, BookOpen, ShieldCheck, CreditCard, UserCircle, ReceiptText } from 'lucide-react';
+import { useState } from 'react';
 
 const guides = [
-  { id: 1, name: 'NBI Clearance', icon: <FileText className="text-blue-800" /> },
-  { id: 2, name: 'Passport Appointment', icon: <BookOpen className="text-red-800" /> },
-  { id: 3, name: 'SSS Registration', icon: <ShieldCheck className="text-blue-600" /> },
-  { id: 4, name: 'UMID Card', icon: <CreditCard className="text-blue-900" /> },
-  { id: 5, name: 'PhilHealth ID', icon: <UserCircle className="text-yellow-600" /> },
+  { id: 1, name: 'NBI Clearance', slug: 'nbi-clearance', icon: <FileText className="text-blue-800" /> },
+  { id: 2, name: 'Passport Appointment', slug: 'passport-appointment', icon: <BookOpen className="text-red-800" /> },
+  { id: 3, name: 'SSS Registration', slug: 'sss-registration', icon: <ShieldCheck className="text-blue-600" /> },
+  { id: 4, name: 'UMID Card', slug: 'umid-card', icon: <CreditCard className="text-blue-900" /> },
+  { id: 5, name: 'PhilHealth ID', slug: 'philhealth-id', icon: <UserCircle className="text-yellow-600" /> },
+  { id: 6, name: 'Digital TIN ID', slug: 'tin-id', icon: <ReceiptText className="text-yellow-800" /> },
 ];
 
-const TrendingGuides = () => {
+const TrendingGuides = ({ onSelectGuide }) => {
   return (
     <div className="mt-8 transition-colors duration-300">
       <h2 className="text-xl font-bold mb-4 uppercase text-gray-800 dark:text-gray-100">
@@ -18,6 +20,7 @@ const TrendingGuides = () => {
         {guides.map((guide) => (
           <div
             key={guide.id}
+            onClick={() => onSelectGuide(guide.slug)}
             className="flex items-center gap-4 p-4 border rounded-xl shadow-sm hover:shadow-md cursor-pointer transition-all
               bg-white border-gray-200 
               dark:bg-[#242729] dark:border-gray-800 dark:hover:border-teal-900"

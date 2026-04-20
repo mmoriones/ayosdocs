@@ -1,15 +1,16 @@
 import { CheckSquare, Square, ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ChecklistCard = ({ title, initialSteps, slug }) => {
   const navigate = useNavigate();
-  const [steps, setSteps] = useState(initialSteps || [
-    { id: 1, task: 'Gather REQUIREMENTS', completed: true },
-    { id: 2, task: 'Book Appointment', completed: true },
-    { id: 3, task: 'Pay Fee', completed: true },
-    { id: 4, task: 'Photo & Biometrics', completed: false },
-  ]);
+  const [steps, setSteps] = useState(initialSteps || []);
+
+  useEffect(() => {
+    if (initialSteps) {
+      setSteps(initialSteps);
+    }
+  }, [initialSteps]);
 
   const progress = Math.round((steps.filter(s => s.completed).length / steps.length) * 100);
 
@@ -18,21 +19,22 @@ const ChecklistCard = ({ title, initialSteps, slug }) => {
       bg-white border-gray-100 
       dark:bg-[#242729] dark:border-gray-800">
 
-      <h3 className="text-lg font-black mb-4 border-b pb-2 uppercase italic 
-        text-gray-900 dark:text-gray-100 dark:border-gray-700">
-        {title || "Passport Renewal"}
+      <h3 className="text-lg font-black mb-4 border-b pb-2 uppercase 
+        text-gray-700 dark:text-gray-100 dark:border-gray-700">
+        {title}
       </h3>
 
       <div className="space-y-4 mb-6">
-        {steps.map((step, index)  => (
-          <div key={step.id} className="flex items-start gap-3 group cursor-pointer">
+        {steps.map((step, index) => (
+          <div key={`${slug}-${step.id || index}`}
+            className="flex items-start gap-3 group cursor-pointer">
             {step.completed ?
               <CheckSquare className="text-teal-600 shrink-0" size={20} /> :
               <Square className="text-gray-300 dark:text-gray-600 shrink-0" size={20} />
             }
             <span className={`text-sm font-medium transition-colors ${step.completed
-                ? 'text-gray-800 dark:text-gray-200'
-                : 'text-gray-400 dark:text-gray-600'
+              ? 'text-gray-800 dark:text-gray-200'
+              : 'text-gray-400 dark:text-gray-600'
               }`}>
               {index + 1}. {step.task}
             </span>
@@ -53,7 +55,7 @@ const ChecklistCard = ({ title, initialSteps, slug }) => {
 
       <div className="space-y-3">
         {/* New "View Full Guide" Button */}
-        <button 
+        <button
           onClick={() => navigate(`/guides/${slug}`)}
           className="w-full flex items-center justify-center gap-2 py-3 rounded-lg text-xs font-bold uppercase tracking-wider transition-all border-2
             text-teal-700 border-teal-600 hover:bg-teal-50

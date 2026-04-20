@@ -1,26 +1,52 @@
-// src/pages/Home.jsx
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import SearchBar from '../features/guides/SearchBar';
 import TrendingGuides from '../features/guides/TrendingGuides';
 import ChecklistCard from '../features/guides/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
 
 const Home = () => {
-  const defaultOnboarding = [
-    { id: 1, task: 'Find your specific guide', completed: false },
-    { id: 2, task: 'Read step-by-step process', completed: false },
-    { id: 3, task: 'Prepare requirements', completed: false },
-    { id: 4, task: 'Sign up to save progress', completed: false },
-  ];
+  const [activeSlug, setActiveSlug] = useState('getting-started');
+  const [checklistData, setChecklistData] = useState({
+    title: "Getting Started",
+    steps: [
+      { id: 1, task: 'Find your specific guide', completed: false },
+      { id: 2, task: 'Read step-by-step process', completed: false },
+      { id: 3, task: 'Prepare requirements', completed: false },
+      { id: 4, task: 'Sign up to save progress', completed: false },
+    ]
+  });
+
+  useEffect(() => {
+    if (activeSlug == 'getting-started') return;
+    
+    const fetchChecklist = async () =>{
+      try {
+        const res = await axios.get(`http://localhost:5000/api/guides/${activeSlug}`);
+        setChecklistData({
+          title: res.data.title,
+          steps: res.data.checklist
+        });
+      }catch (err) {
+        console.log("Error fetching checklist:", err);
+      }
+    }
+    fetchChecklist();
+  }, [activeSlug]);
 
   return (
     // Use min-h-screen to ensure the dark color covers the whole height
     <div className="min-h-screen flex flex-col lg:flex-row gap-8 px-8 items-start transition-colors duration-300 
       bg-gray-50 text-gray-900 
       dark:bg-[#1a1c1e] dark:text-gray-100">
-      
+
       <div className="flex-1 w-full space-y-8 pt-4">
         <section><SearchBar /></section>
-        <section><TrendingGuides /></section>
+
+        <section>
+          <TrendingGuides onSelectGuide={(slug) => setActiveSlug(slug)}/>
+        </section>
+
         <section><HolidayAlert /></section>
 
         <div className="hidden lg:block h-32 w-full border border-dashed rounded-lg flex items-center justify-center text-xs
@@ -31,9 +57,10 @@ const Home = () => {
       </div>
 
       <div className="w-full lg:w-96 space-y-6 sticky top-8 pt-4">
-        <ChecklistCard 
-          title="Getting Started" 
-          initialSteps={defaultOnboarding}
+        <ChecklistCard
+          title={checklistData.title}
+          initialSteps={checklistData.steps}
+          slug={activeSlug}
         />
 
         <div className="p-4 border rounded-xl shadow-sm bg-white dark:bg-[#242729] dark:border-gray-800">
