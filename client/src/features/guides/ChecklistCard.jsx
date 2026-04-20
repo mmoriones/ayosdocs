@@ -24,7 +24,7 @@ const ChecklistCard = ({ title, initialSteps, slug }) => {
       </h3>
 
       <div className="space-y-4 mb-6">
-        {steps.map(step => (
+        {steps.map((step, index)  => (
           <div key={step.id} className="flex items-start gap-3 group cursor-pointer">
             {step.completed ?
               <CheckSquare className="text-teal-600 shrink-0" size={20} /> :
@@ -34,7 +34,7 @@ const ChecklistCard = ({ title, initialSteps, slug }) => {
                 ? 'text-gray-800 dark:text-gray-200'
                 : 'text-gray-400 dark:text-gray-600'
               }`}>
-              {step.id}. {step.task}
+              {index + 1}. {step.task}
             </span>
           </div>
         ))}
