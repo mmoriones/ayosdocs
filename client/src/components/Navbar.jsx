@@ -1,6 +1,10 @@
 import { Sun, Menu, User } from 'lucide-react';
+import { useState } from 'react';
+import AuthModal from '../features/auth/AuthModal';
 
 const Navbar = () => {
+  const [isAuthModalOpen, setIsAuthModalOpen ] = useState(false);
+
   return (
     <nav className="w-full">
       {/* Top Gradient Bar */}
@@ -30,7 +34,9 @@ const Navbar = () => {
             <a href="#" className="hover:text-teal-100 transition-colors">About</a>
             
             {/* Login Button */}
-            <button className="bg-[#006666] hover:bg-[#004d4d] px-4 py-2 rounded-md border border-teal-300 shadow-inner flex items-center gap-2 transition-all">
+            <button 
+            onClick={() => setIsAuthModalOpen(true)}
+            className="bg-[#006666] hover:bg-[#004d4d] px-4 py-2 rounded-md border border-teal-300 shadow-inner flex items-center gap-2 transition-all">
               <User size={14} />
               LOGIN / REGISTER
             </button>
@@ -42,8 +48,12 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <AuthModal 
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+      />
 
-      {/* Optional Thin Accent Bar below the nav */}
+      {/* Thin Accent Bar below the nav */}
       <div className="h-1 bg-teal-900/10 w-full"></div>
     </nav>
   );

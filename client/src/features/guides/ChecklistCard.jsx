@@ -1,10 +1,12 @@
 import { CheckSquare, Square, ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AuthModal from '../auth/AuthModal';
 
 const ChecklistCard = ({ title, initialSteps, slug }) => {
   const navigate = useNavigate();
   const [steps, setSteps] = useState(initialSteps || []);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   useEffect(() => {
     if (initialSteps) {
@@ -66,10 +68,16 @@ const ChecklistCard = ({ title, initialSteps, slug }) => {
         </button>
 
         {/* Existing Register Button */}
-        <button className="w-full bg-teal-700 text-white text-xs py-3 rounded-lg font-bold uppercase tracking-wider hover:bg-teal-800 transition-colors">
+        <button 
+        onClick={() => setIsAuthModalOpen(true)}
+          className="w-full bg-teal-700 text-white text-xs py-3 rounded-lg font-bold uppercase tracking-wider hover:bg-teal-800 transition-colors">
           Register / Login to Track Your Progress
         </button>
       </div>
+      <AuthModal 
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+      />
     </div>
   );
 };
