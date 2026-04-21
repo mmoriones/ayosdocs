@@ -33,4 +33,23 @@ router.post('/update-progress', protect, async (req, res) => {
     }
 });
 
+// get the progress of the current user by slug
+router.get('/get-progress/:slug', protect, async (req, res ) =>{
+    try {
+        const user = await User.findById(req.user.id);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        // Find the specific progress entry for this slug
+        const progress = user.savedProgress.find(p => p.guideSlug === req.params.slug);
+
+        if (progress) {
+            res.status(200).json({ completedTasks: progress.completedTasks });
+        } else {
+            res.status(404).json({ message: "No progress found for this guide" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 module.exports = router;
