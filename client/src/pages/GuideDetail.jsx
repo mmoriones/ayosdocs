@@ -23,6 +23,7 @@ const GuideDetail = () => {
       lastUpdated={guide.lastUpdated}
       guideName={guide.title}
       checklistSteps={guide.checklist}
+      slug={slug}
     >
       <div dangerouslySetInnerHTML={{ __html: guide.content }} />
     </FullGuide>

@@ -1,9 +1,9 @@
 import React from 'react';
 import ChecklistCard from '../features/guides/ChecklistCard';
 
-const FullGuide = ({ title, lastUpdated, children, checklistSteps, guideName }) => {
+const FullGuide = ({ title, lastUpdated, children, checklistSteps, guideName, slug }) => {
   return (
-    <div className="flex flex-col lg:flex-row gap-8 items-start animate-fadeIn transition-colors duration-300">
+    <div className="flex flex-col lg:flex-row gap-8 px-8 py-6 items-start animate-fadeIn transition-colors duration-300">
       
       {/* LEFT COLUMN: SEO Blog Content */}
       <div className="flex-1 w-full p-6 lg:p-10 rounded-2xl shadow-sm border 
@@ -37,7 +37,12 @@ const FullGuide = ({ title, lastUpdated, children, checklistSteps, guideName }) 
       {/* RIGHT COLUMN: Sticky Sidebar */}
       <div className="w-full lg:w-96 space-y-6 sticky top-8">
         
-        <ChecklistCard title={guideName} initialSteps={checklistSteps} />
+        <ChecklistCard 
+          title={guideName} 
+          initialSteps={checklistSteps} 
+          slug={slug}
+          isFullPage={true}
+          />
 
         {/* Sidebar Ads */}
         <div className="p-4 border rounded-xl shadow-sm bg-white dark:bg-[#242729] dark:border-gray-800">
