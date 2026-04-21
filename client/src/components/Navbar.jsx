@@ -14,12 +14,12 @@ const Navbar = () => {
           {/* Logo Section */}
           <div className="flex items-center gap-2">
             <h1 className="text-4xl md:text-5xl font-black tracking-tighter flex items-center gap-2">
-              FILO-DOCS 
+              AyosDocs 
               <Sun className="text-yellow-400 fill-yellow-400 mt-1" size={36} strokeWidth={3} />
             </h1>
             <div className="hidden md:block h-10 w-[2px] bg-white/30 mx-2"></div>
             <p className="text-[10px] md:text-xs font-medium uppercase tracking-widest opacity-90 max-w-[200px] leading-tight">
-              Filo-Docs | Your Guide to Government Documents & More
+              AyosDocs | Your Guide to Government Documents & More
             </p>
           </div>
 

@@ -23,7 +23,7 @@ const ChecklistCard = ({ title, initialSteps, slug }) => {
 
       <h3 className="text-lg font-black mb-4 border-b pb-2 uppercase 
         text-gray-700 dark:text-gray-100 dark:border-gray-700">
-        {title}
+        {slug == 'getting-started' ? 'Getting Started': `${title}`}
       </h3>
 
       <div className="space-y-4 mb-6">

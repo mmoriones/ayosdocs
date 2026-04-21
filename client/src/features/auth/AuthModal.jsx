@@ -58,7 +58,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
             </div>
 
             <button className="w-full bg-teal-700 hover:bg-teal-800 text-white font-bold py-4 rounded-xl uppercase tracking-widest text-xs transition-colors mt-2 shadow-lg shadow-teal-900/20">
-              {view === 'login' ? 'Login' : 'Join Filo-Docs'}
+              {view === 'login' ? 'Login' : 'Join AyosDocs'}
             </button>
           </form>
 

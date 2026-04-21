@@ -47,7 +47,7 @@ const Footer = () => {
 
           {/* Copyright Section */}
           <div className="flex items-center gap-2 border-l pl-6 border-gray-200 dark:border-gray-700">
-            <span className="text-[11px]">© {currentYear} Filo-Docs.com</span>
+            <span className="text-[11px]">© {currentYear} AyosDocs.com</span>
             
             {/* The Branding Diamond Icon */}
             <div className="w-4 h-4 rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-600">

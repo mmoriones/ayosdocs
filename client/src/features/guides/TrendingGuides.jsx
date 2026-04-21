@@ -1,5 +1,6 @@
 import { FileText, BookOpen, ShieldCheck, CreditCard, UserCircle, ReceiptText } from 'lucide-react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const guides = [
   { id: 1, name: 'NBI Clearance', slug: 'nbi-clearance', icon: <FileText className="text-blue-800" /> },
@@ -11,6 +12,11 @@ const guides = [
 ];
 
 const TrendingGuides = ({ onSelectGuide }) => {
+  const navigate = useNavigate();
+  const handleSelection = (slug) => {
+    navigate(`/guides/${slug}`);
+    onSelectGuide(slug);
+  }
   return (
     <div className="mt-8 transition-colors duration-300">
       <h2 className="text-xl font-bold mb-4 uppercase text-gray-800 dark:text-gray-100">
@@ -20,7 +26,7 @@ const TrendingGuides = ({ onSelectGuide }) => {
         {guides.map((guide) => (
           <div
             key={guide.id}
-            onClick={() => onSelectGuide(guide.slug)}
+            onClick={() => handleSelection(guide.slug)}
             className="flex items-center gap-4 p-4 border rounded-xl shadow-sm hover:shadow-md cursor-pointer transition-all
               bg-white border-gray-200 
               dark:bg-[#242729] dark:border-gray-800 dark:hover:border-teal-900"

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /admin
-Sitemap: https://filo-docs.com/sitemap.xml
+Sitemap: https://ayosdocs.com/sitemap.xml

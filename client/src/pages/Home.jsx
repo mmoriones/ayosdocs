@@ -5,8 +5,8 @@ import TrendingGuides from '../features/guides/TrendingGuides';
 import ChecklistCard from '../features/guides/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
 
-const Home = () => {
-  const [activeSlug, setActiveSlug] = useState('getting-started');
+const Home = ({activeSlug, setActiveSlug}) => {
+  //const [activeSlug, setActiveSlug] = useState('getting-started');
   const [checklistData, setChecklistData] = useState({
     title: "Getting Started",
     steps: [
