@@ -26,8 +26,13 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
       const res = await axios.post(`http://localhost:5000${endpoint}`, formData);
 
       if (view === 'login') {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
+        const userData = {
+          ...res.data.user,
+          token: res.data.token
+        };
+
+        localStorage.setItem("user", JSON.stringify(userData));
+
         alert("Login Successful!");
         onClose();
         window.location.reload();
