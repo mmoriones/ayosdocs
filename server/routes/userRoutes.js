@@ -52,4 +52,30 @@ router.get('/get-progress/:slug', protect, async (req, res ) =>{
     }
 });
 
+//get all data of the user
+router.get('/get-data', protect, async (req, res) => {
+    try{
+        const user = await User.findById(req.user.id);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        const data = user.savedProgress;
+
+        if (data && data.length > 0){
+            res.status(200).json({
+                message: "Progress data retrieved successfully",
+                savedProgress: data
+            });
+
+        } else {
+            res.status(200).json({ 
+                message: "No saved progress found", 
+                savedProgress: []
+            });
+        }
+    }catch (error) {
+        console.error("Fetch Data Error:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+})
+
 module.exports = router;
