@@ -6,9 +6,12 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded( {extended: true }));
 
 // Routes
 app.use('/api/guides', require('./routes/guideRoutes'));
+
+app.use('/api/auth', require('./routes/authRoutes'));
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)
