@@ -2,7 +2,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const axios = require("axios");
 const User = require('../models/User.js');
+
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // POST: register
 router.post('/register', async (req, res) => {
@@ -42,6 +46,12 @@ router.post('/login', async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
+        if (user.googleAuth) {
+            return res.status(400).json({
+                message: "Please login using Google"
+            });
+        }
+
         //validate pass
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
@@ -66,7 +76,53 @@ router.post('/login', async (req, res) => {
     }
 });
 
-//GET: verify email
-//router.get('/verify/:token')
+// google oauth
+router.post("/google", async (req, res) => {
+    try {
+        const { access_token } = req.body;
+        console.log(req.body);
+
+        const googleRes = await axios.get(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        {
+            headers: {
+            Authorization: `Bearer ${access_token}`,
+            },
+        }
+        );
+
+        const { email, name } = googleRes.data;
+
+        let user = await User.findOne({ email });
+
+        if (!user) {
+        user = await User.create({
+            fullName: name,
+            email,
+            password: null
+        });
+        }
+
+        const token = jwt.sign(
+        { id: user._id, isAdmin: user.isAdmin },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+        );
+
+        res.json({
+        token,
+        user: {
+            id: user._id,
+            fullName: user.fullName,
+            email: user.email,
+            isAdmin: user.isAdmin
+        }
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Google authentication failed" });
+    }
+    });
 
 module.exports = router;

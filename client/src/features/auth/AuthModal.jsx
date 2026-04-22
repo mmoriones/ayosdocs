@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { X, Eye, EyeOff } from "lucide-react"; 
 import axios from 'axios';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
@@ -19,6 +20,33 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const googleLogin = useGoogleLogin({
+    flow: 'implicit',
+    onSuccess: async (tokenResponse) => {
+      try {
+        console.log(tokenResponse);
+        const res = await axios.post(`${API_URL}/api/auth/google`, {
+          access_token: tokenResponse.access_token
+        });
+
+        const userData = {
+          ...res.data.user,
+          token: res.data.token
+        };
+
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        onClose();
+        window.location.reload();
+
+      } catch (err) {
+        setError("Google login failed");
+      }
+    },
+    onError: () => setError("Google Login Failed")
+  });
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -111,7 +139,6 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                 onChange={handleChange}
                 className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 dark:bg-[#1a1c1e] border-gray-100 dark:border-gray-800 focus:border-teal-600 outline-none transition-colors dark:text-white" 
               />
-              {/* Toggle Button */}
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
@@ -121,10 +148,40 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
               </button>
             </div>
 
-            <button type="submit" className="w-full bg-teal-700 hover:bg-teal-800 text-white font-bold py-4 rounded-xl uppercase tracking-widest text-xs transition-colors mt-2 shadow-lg shadow-teal-900/20">
+            {/* Login/Register Button */}
+            <button
+              type="submit"
+              className="w-full bg-teal-700 hover:bg-teal-800 text-white font-bold py-4 rounded-xl uppercase tracking-widest text-xs transition-colors mt-2 shadow-lg shadow-teal-900/20"
+            >
               {view === 'login' ? 'Login' : 'Join AyosDocs'}
             </button>
           </form>
+
+          {/* OR Divider */}
+          <div className="flex items-center my-5">
+            <div className="flex-1 border-t border-gray-200 dark:border-gray-700"></div>
+            <span className="px-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+              Or continue with
+            </span>
+            <div className="flex-1 border-t border-gray-200 dark:border-gray-700"></div>
+          </div>
+
+          {/* Google Login Button */}
+          <div className="w-full flex justify-center">
+            <button
+                onClick={() => googleLogin()}
+                type="button"
+                className="w-full flex items-center justify-center gap-3 border-2 border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#1a1c1e] hover:bg-gray-100 dark:hover:bg-[#2a2d2f] text-gray-700 dark:text-gray-200 font-bold py-4 rounded-xl uppercase tracking-widest text-xs transition-colors"
+              >
+                <img
+                  src="https://www.svgrepo.com/show/475656/google-color.svg"
+                  alt="Google"
+                  className="w-5 h-5"
+                />
+                Continue with Google
+              </button>
+          </div>
+
 
           <div className="mt-6 text-center">
             <button
