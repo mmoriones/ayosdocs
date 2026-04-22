@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ChecklistCard from '../features/guides/ChecklistCard';
+import ProgressCard from '../features/guides/ProgressCard';
 import axios from 'axios';
 
 const UserProgress = () => {
@@ -62,19 +62,18 @@ const UserProgress = () => {
             <h1 className="text-2xl font-black uppercase mb-8 dark:text-white">My Tracked Guides</h1>
             
             {/* Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 {progressList.length > 0 ? (
                     progressList.map((data) => (
-                        <ChecklistCard
+                        <ProgressCard
                             key={data.slug}
                             title={data.title}
-                            initialSteps={data.steps}
+                            steps={data.steps}
                             slug={data.slug}
-                            isFullPage={false}
                         />
                     ))
                 ) : (
-                    <p className="text-gray-500">You haven't saved any progress yet.</p>
+                    <p className="text-gray-500 italic">No guides tracked yet.</p>
                 )}
             </div>
         </div>
