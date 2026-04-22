@@ -6,6 +6,7 @@ import ChecklistCard from '../features/guides/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
 
 const Home = ({activeSlug, setActiveSlug}) => {
+  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const [checklistData, setChecklistData] = useState({
     title: "Getting Started",
     steps: [
@@ -21,7 +22,7 @@ const Home = ({activeSlug, setActiveSlug}) => {
     
     const fetchChecklist = async () =>{
       try {
-        const res = await axios.get(`http://localhost:5000/api/guides/${activeSlug}`);
+        const res = await axios.get(`${API_URL}/api/guides/${activeSlug}`);
         setChecklistData({
           title: res.data.title,
           steps: res.data.checklist

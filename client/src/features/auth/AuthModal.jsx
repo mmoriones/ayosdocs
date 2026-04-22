@@ -3,6 +3,8 @@ import { X, Eye, EyeOff } from "lucide-react";
 import axios from 'axios';
 
 const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
+  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
+  
   const [view, setView] = useState(initialView);
   const [showPassword, setShowPassword] = useState(false); 
 
@@ -23,7 +25,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
     setError("");
     try {
       const endpoint = view === 'login' ? '/api/auth/login' : '/api/auth/register';
-      const res = await axios.post(`http://localhost:5000${endpoint}`, formData);
+      const res = await axios.post(`${API_URL}${endpoint}`, formData);
 
       if (view === 'login') {
         const userData = {

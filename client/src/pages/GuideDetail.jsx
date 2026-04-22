@@ -26,6 +26,7 @@ const extractHeadings = (markdown) => {
 };
 
 const GuideDetail = () => {
+  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const { slug } = useParams();
   const [guide, setGuide] = useState(null);
   const [headings, setHeadings] = useState([]);
@@ -33,7 +34,7 @@ const GuideDetail = () => {
   useEffect(() => {
     const fetchGuide = async () => {
       const res = await axios.get(
-        `http://localhost:5000/api/guides/${slug}`
+        `${API_URL}/api/guides/${slug}`
       );
 
       setGuide(res.data);

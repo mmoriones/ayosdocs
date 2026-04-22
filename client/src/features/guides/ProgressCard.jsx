@@ -2,6 +2,7 @@ import { Trash2, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const ProgressCard = ({ title, steps, slug, onDelete }) => {
+  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const navigate = useNavigate();
   
   const completedCount = steps.filter(s => s.completed).length;
@@ -14,7 +15,7 @@ const ProgressCard = ({ title, steps, slug, onDelete }) => {
       if (window.confirm(`Stop tracking "${title}"?`)) {
         try {
           const storedUser = JSON.parse(localStorage.getItem("user"));
-          const response = await fetch(`http://localhost:5000/api/user/delete/${slug}`, {
+          const response = await fetch(`${API_URL}/api/user/delete/${slug}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${storedUser.token}` }
           });

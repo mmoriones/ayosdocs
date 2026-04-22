@@ -4,6 +4,7 @@ import axios from "axios";
 import { Search, X } from "lucide-react";
 
 const SearchBar = () => {
+  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const SearchBar = () => {
 
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/guides/search?q=${query}`
+          `${API_URL}/api/guides/search?q=${query}`
         );
         setResults(res.data);
       } catch (err) {

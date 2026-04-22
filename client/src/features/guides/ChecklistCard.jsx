@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthModal from '../auth/AuthModal';
 
 const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
+  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const navigate = useNavigate();
   const [steps, setSteps] = useState(initialSteps || []);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -18,7 +19,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
             const storedUser = JSON.parse(localStorage.getItem("user"));
             
             try {
-                const response = await fetch(`http://localhost:5000/api/user/get-progress/${slug}`, {
+                const response = await fetch(`${API_URL}/api/user/get-progress/${slug}`, {
                     headers: { 'Authorization': `Bearer ${storedUser.token}` }
                 });
 
@@ -78,7 +79,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
         .filter((i) => i !== null)
         .join(",");
 
-      const response = await fetch(`http://localhost:5000/api/user/update-progress`, {
+      const response = await fetch(`${API_URL}/api/user/update-progress`, {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json',

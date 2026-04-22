@@ -3,6 +3,7 @@ import ProgressCard from '../features/guides/ProgressCard';
 import axios from 'axios';
 
 const UserProgress = () => {
+    const API_URL = import.meta.env.VITE_BACKEND_API_URL;
     const [progressList, setProgressList] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -17,7 +18,7 @@ const UserProgress = () => {
 
             try {
                 //Get the list of slugs and completed strings
-                const response = await fetch('http://localhost:5000/api/user/get-data', {
+                const response = await fetch(`${API_URL}/api/user/get-data`, {
                     headers: { 'Authorization': `Bearer ${storedUser.token}` }
                 });
                 const result = await response.json();
@@ -27,7 +28,7 @@ const UserProgress = () => {
                 const detailedProgress = await Promise.all(
                     savedItems.map(async (item) => {
                         try {
-                            const guideRes = await axios.get(`http://localhost:5000/api/guides/${item.guideSlug}`);
+                            const guideRes = await axios.get(`${API_URL}/api/guides/${item.guideSlug}`);
                             
                             // Map the completed indices string to the actual checklist items
                             const completedIndices = item.completedTasks.split(',').map(Number);
