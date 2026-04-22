@@ -80,7 +80,6 @@ router.post('/login', async (req, res) => {
 router.post("/google", async (req, res) => {
     try {
         const { access_token } = req.body;
-        console.log(req.body);
 
         const googleRes = await axios.get(
         "https://www.googleapis.com/oauth2/v3/userinfo",
@@ -99,7 +98,9 @@ router.post("/google", async (req, res) => {
         user = await User.create({
             fullName: name,
             email,
-            password: null
+            password: null,
+            googleAuth: true,
+            isVerified: true
         });
         }
 

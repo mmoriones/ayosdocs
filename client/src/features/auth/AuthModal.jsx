@@ -25,7 +25,6 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
     flow: 'implicit',
     onSuccess: async (tokenResponse) => {
       try {
-        console.log(tokenResponse);
         const res = await axios.post(`${API_URL}/api/auth/google`, {
           access_token: tokenResponse.access_token
         });
