@@ -6,6 +6,10 @@ const UserProgress = () => {
     const [progressList, setProgressList] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const handleRemoveFromUI = (slugToRemove) => {
+        setProgressList(prevList => prevList.filter(item => item.slug !== slugToRemove));
+    };
+
     useEffect(() => {
         const fetchAllProgress = async () => {
             const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -70,6 +74,7 @@ const UserProgress = () => {
                             title={data.title}
                             steps={data.steps}
                             slug={data.slug}
+                            onDelete={handleRemoveFromUI}
                         />
                     ))
                 ) : (

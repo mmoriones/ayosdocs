@@ -76,6 +76,40 @@ router.get('/get-data', protect, async (req, res) => {
         console.error("Fetch Data Error:", error);
         res.status(500).json({ message: "Server error" });
     }
-})
+});
+
+// dlete progress for a specific guide by slug
+router.delete('/delete/:slug', protect, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // check if the progress entry exists before attempting to delete
+        const progressExists = user.savedProgress.some(p => p.guideSlug === req.params.slug);
+
+        if (!progressExists) {
+            return res.status(404).json({ message: "Progress entry not found" });
+        }
+
+        // Filter out the specific guideSlug
+        user.savedProgress = user.savedProgress.filter(
+            (p) => p.guideSlug !== req.params.slug
+        );
+
+        await user.save();
+
+        res.status(200).json({ 
+            message: "Progress deleted successfully", 
+            savedProgress: user.savedProgress 
+        });
+        
+    } catch (error) {
+        console.error("Delete Progress Error:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
 
 module.exports = router;

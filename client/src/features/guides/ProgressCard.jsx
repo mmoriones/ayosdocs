@@ -1,22 +1,33 @@
 import { Trash2, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const ProgressCard = ({ title, steps, slug }) => {
+const ProgressCard = ({ title, steps, slug, onDelete }) => {
   const navigate = useNavigate();
   
   const completedCount = steps.filter(s => s.completed).length;
   const totalSteps = steps.length;
   const progress = Math.round((completedCount / totalSteps) * 100);
 
-  const handleDelete = (e) => {
-    e.stopPropagation();
-    
-    const confirmed = window.confirm(`Stop tracking "${title}"?`);
-    if (confirmed) {
-      console.log("Delete endpoint placeholder for:", slug);
-      // implement delete
-    }
-  };
+  const handleDelete = async (e) => {
+      e.stopPropagation();
+      
+      if (window.confirm(`Stop tracking "${title}"?`)) {
+        try {
+          const storedUser = JSON.parse(localStorage.getItem("user"));
+          const response = await fetch(`http://localhost:5000/api/user/delete/${slug}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${storedUser.token}` }
+          });
+
+          if (response.ok) {
+            // Trigger the parent's function to update the UI immediately
+            onDelete(slug); 
+          }
+        } catch (error) {
+          console.error("Delete failed:", error);
+        }
+      }
+    };
 
   return (
     <div 
