@@ -19,13 +19,13 @@ const loadGuides = () => {
 };
 
 const addGuide = async (guideData) => {
-  const result = await Guide.findOneAndUpdate(
+  const result = await Guide.replaceOne(
     { slug: guideData.slug },
     guideData,
     { upsert: true, returnDocument: 'after' }
   );
 
-  console.log(`✅ Synced: ${result.slug}`);
+  console.log(`✅ Synced: ${guideData.slug}`);
 };
 
 mongoose.connect(process.env.MONGO_URI)

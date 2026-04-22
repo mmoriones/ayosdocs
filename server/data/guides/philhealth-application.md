@@ -85,12 +85,11 @@ PhilHealth helps cover part of the costs for:
 Always bring your PhilHealth number or ID when visiting accredited hospitals or clinics so your benefits can be properly applied.
 `,
   checklist: [
-    { task: "Register Membership", completed: false },
-    { task: "Fill PMRF Form", completed: false },
-    { task: "Prepare Required Documents", completed: false },
-    { task: "Submit Requirements", completed: false },
-    { task: "Get PhilHealth Number", completed: false },
-    { task: "Claim ID", completed: false }
-  ],
-  category: "Health"
+    { task: "Register Membership" },
+    { task: "Fill PMRF Form" },
+    { task: "Prepare Required Documents" },
+    { task: "Submit Requirements" },
+    { task: "Get PhilHealth Number" },
+    { task: "Claim ID" }
+  ]
 };

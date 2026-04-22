@@ -173,11 +173,10 @@ Applying for a Digital TIN ID involves several steps including registration, sub
 Always remember that each individual should have **only one TIN**, and it must be used for all tax-related transactions throughout your lifetime.
 `,
   checklist: [
-    { task: "Apply for TIN", completed: false },
-    { task: "Prepare Required Documents", completed: false },
-    { task: "Submit BIR Application Form", completed: false },
-    { task: "Receive TIN Number", completed: false },
-    { task: "Access Digital TIN ID", completed: false }
-  ],
-  category: "Finance"
+    { task: "Apply for TIN" },
+    { task: "Prepare Required Documents" },
+    { task: "Submit BIR Application Form" },
+    { task: "Receive TIN Number" },
+    { task: "Access Digital TIN ID" }
+  ]
 }

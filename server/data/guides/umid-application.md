@@ -138,12 +138,11 @@ Keep your card safe and avoid sharing your personal information with unauthorize
 Properly maintaining your UMID card will help ensure smooth transactions with government agencies.
 `,
   checklist: [
-    { task: "Fill Application Form", completed: false },
-    { task: "Prepare Required Documents", completed: false },
-    { task: "Submit Documents", completed: false },
-    { task: "Biometrics", completed: false },
-    { task: "Wait for Processing", completed: false },
-    { task: "Receive Card", completed: false }
-  ],
-  category: "Government ID"
+    { task: "Fill Application Form" },
+    { task: "Prepare Required Documents" },
+    { task: "Submit Documents" },
+    { task: "Biometrics" },
+    { task: "Wait for Processing" },
+    { task: "Receive Card" }
+  ]
 };

@@ -63,12 +63,11 @@ Processing usually takes several days depending on the processing type you selec
 Make sure to keep your claim stub or tracking number so you can monitor the status of your passport.
 `,
   checklist: [
-    { task: "Register Online Account", completed: false },
-    { task: "Set Appointment", completed: false },
-    { task: "Pay Fee", completed: false },
-    { task: "Prepare Required Documents", completed: false },
-    { task: "Attend Appointment", completed: false },
-    { task: "Claim Passport", completed: false }
-  ],
-  category: "Legal"
+    { task: "Register Online Account" },
+    { task: "Set Appointment" },
+    { task: "Pay Fee" },
+    { task: "Prepare Required Documents" },
+    { task: "Attend Appointment" },
+    { task: "Claim Passport" }
+  ]
 };

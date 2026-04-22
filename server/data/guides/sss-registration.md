@@ -111,13 +111,12 @@ Through the online portal you can:
 Keeping your records updated will help prevent issues when applying for benefits in the future.
 `,
   checklist: [
-    { task: "Register Online", completed: false },
-    { task: "Get SS Number", completed: false },
-    { task: "Verify Email and Create My.SSS Account", completed: false },
-    { task: "Prepare Required Documents", completed: false },
-    { task: "Submit Documents", completed: false },
-    { task: "Activate Account", completed: false },
-    { task: "Start Contributions", completed: false }
-  ],
-  category: "Government"
+    { task: "Register Online" },
+    { task: "Get SS Number" },
+    { task: "Verify Email and Create My.SSS Account" },
+    { task: "Prepare Required Documents" },
+    { task: "Submit Documents" },
+    { task: "Activate Account" },
+    { task: "Start Contributions" }
+  ]
 };

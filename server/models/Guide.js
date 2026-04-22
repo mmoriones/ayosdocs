@@ -2,16 +2,14 @@ const mongoose = require('mongoose');
 
 const guideSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  slug: { type: String, required: true, unique: true }, // e.g., 'nbi-clearance-guide'
+  slug: { type: String, required: true, unique: true },
   lastUpdated: { type: String, default: () => new Date().toLocaleDateString() },
-  content: { type: String, required: true }, // Long SEO text/Markdown
+  content: { type: String, required: true },
   checklist: [
     {
-      task: String,
-      completed: { type: Boolean, default: false }
+      task: { type: String, required: true }
     }
-  ],
-  category: String
+  ]
 });
 
 module.exports = mongoose.model('Guide', guideSchema);

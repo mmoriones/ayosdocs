@@ -146,12 +146,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat justo non
 
 `,
   checklist: [
-    { task: "Read the introduction", completed: false },
-    { task: "Prepare documents", completed: false },
-    { task: "Register account", completed: false },
-    { task: "Submit application", completed: false },
-    { task: "Wait for processing", completed: false },
-    { task: "Receive result", completed: false }
-  ],
-  category: "Testing"
+    { task: "Read the introduction" },
+    { task: "Prepare documents" },
+    { task: "Register account" },
+    { task: "Submit application" },
+    { task: "Wait for processing" },
+    { task: "Receive result" }
+  ]
 };

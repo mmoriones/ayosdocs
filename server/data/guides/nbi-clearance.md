@@ -220,6 +220,5 @@ Always keep your clearance in a safe place, as it may be required for various le
     { task: "Pay Fee" },
     { task: "Biometrics" },
     { task: "Claim Clearance" }
-  ],
-  category: "Legal"
+  ]
 };
