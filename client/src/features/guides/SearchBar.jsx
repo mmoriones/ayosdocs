@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
@@ -28,15 +28,15 @@ const SearchBar = () => {
     fetchResults();
   }, [query]);
 
-  const handleSearch = () => {
-    if (!query) return;
-    navigate(`/search?q=${query}`);
-  };
-
   const handleSelect = (slug) => {
     setResults([]);
     setQuery("");
     navigate(`/guides/${slug}`);
+  };
+
+  const clearSearch = () => {
+    setQuery("");
+    setResults([]);
   };
 
   return (
@@ -45,29 +45,39 @@ const SearchBar = () => {
         Find Your Guide:
       </h2>
 
-      <div className="relative flex items-center gap-2">
+      {/* INPUT */}
+      <div className="relative">
+
+        {/* Search Icon */}
+        <Search
+          size={18}
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+        />
+
         <input
           type="text"
-          placeholder="SEARCH FOR DOCUMENT OR PROCESS... (e.g., NBI Clearance)"
+          placeholder="Search for document or process... (e.g., NBI Clearance)"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full p-4 pr-12 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm italic transition-colors
+          className="w-full p-4 pl-11 pr-10 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm italic transition-colors
           bg-white border-teal-600 text-gray-800
           dark:bg-[#1a1c1e] dark:border-teal-700 dark:text-gray-200 dark:placeholder-gray-500"
         />
 
-        <button
-          onClick={handleSearch}
-          className="bg-teal-700 hover:bg-teal-800 text-white px-8 py-4 rounded-lg font-bold transition-colors flex items-center gap-2"
-        >
-          <Search size={18} />
-          SEARCH
-        </button>
+        {/* Clear button */}
+        {query && (
+          <button
+            onClick={clearSearch}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          >
+            <X size={18} />
+          </button>
+        )}
       </div>
 
-      {/* SEARCH RESULTS */}
+      {/* RESULTS */}
       {results.length > 0 && (
-        <div className="absolute w-full mt-2 bg-white dark:bg-[#1a1c1e] border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50">
+        <div className="absolute w-full mt-2 bg-white dark:bg-[#1a1c1e] border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 overflow-hidden">
           {results.map((guide) => (
             <div
               key={guide.slug}
