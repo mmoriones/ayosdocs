@@ -5,6 +5,7 @@ import GuideDetail from './pages/GuideDetail';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import UserProgress from './pages/UserProgress';
+import Verified from './pages/Verifed';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home activeSlug={activeSlug} setActiveSlug={setActiveSlug} />} />
           <Route path="/guides/:slug" element={<GuideDetail />} />
           <Route path="/my-progress" element={<UserProgress />} />
+          <Route path="/verified" element={<Verified />} />
         </Routes>
         <Footer />
       </div>
