@@ -110,6 +110,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                   name="fullName"
                   type="text" 
                   required
+                  value={formData.fullName}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 dark:bg-[#1a1c1e] border-gray-100 dark:border-gray-800 focus:border-teal-600 outline-none transition-colors dark:text-white" 
                   placeholder="Juan Dela Cruz" 
@@ -123,6 +124,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                 name="email"
                 type="email" 
                 required
+                value={formData.email}
                 onChange={handleChange}
                 className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 dark:bg-[#1a1c1e] border-gray-100 dark:border-gray-800 focus:border-teal-600 outline-none transition-colors dark:text-white" 
                 placeholder="juan@example.com" 
@@ -135,6 +137,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                 name="password"
                 type={showPassword ? "text" : "password"} 
                 required
+                value={formData.password}
                 onChange={handleChange}
                 className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 dark:bg-[#1a1c1e] border-gray-100 dark:border-gray-800 focus:border-teal-600 outline-none transition-colors dark:text-white" 
               />
@@ -180,11 +183,19 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                 Continue with Google
               </button>
           </div>
-
-
+          
           <div className="mt-6 text-center">
             <button
-              onClick={() => { setView(view === 'login' ? 'register' : 'login'); setError(""); }}
+              onClick={() => { 
+                setView(view === 'login' ? 'register' : 'login'); 
+                setError(""); 
+                setFormData({
+                  fullName: "",
+                  email: "",
+                  password: ""
+                });
+                setShowPassword(!showPassword);
+               }}
               className="text-xs font-bold text-teal-600 dark:text-teal-500 hover:underline underline-offset-4"
             >
               {view === 'login' ? "Don't have an account? Sign Up" : "Already have an account? Login"}
