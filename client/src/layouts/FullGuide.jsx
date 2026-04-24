@@ -7,29 +7,26 @@ const FullGuide = ({ title, lastUpdated, children, checklistSteps, guideName, sl
       
       {/* LEFT COLUMN: SEO Blog Content */}
       <div className="flex-1 w-full p-6 lg:p-10 rounded-2xl shadow-sm border 
-        bg-white border-gray-100 
-        dark:bg-[#242729] dark:border-gray-800">
+        bg-white border-gray-100">
         
         <header className="mb-8">
-          <h1 className="text-3xl lg:text-4xl font-black uppercase tracking-tight 
-            text-gray-900 dark:text-gray-100">
+          <h1 className="text-3xl lg:text-4xl font-black uppercase tracking-tight text-gray-900">
             STEP-BY-STEP GUIDE: {title}
           </h1>
-          <p className="text-sm mt-2 font-medium text-gray-500 dark:text-gray-400">
+          <p className="text-sm mt-2 font-medium text-gray-500">
             Last Updated: {lastUpdated}
           </p>
         </header>
 
         {/* Article content with Typography support */}
         <article className="prose prose-teal max-w-none leading-relaxed 
-          text-gray-700 dark:text-gray-300 dark:prose-invert">
+          text-gray-700">
           {children}
         </article>
 
         {/* Bottom AdSense Placeholder */}
         <div className="mt-12 p-4 border border-dashed rounded-lg text-center text-xs 
-          bg-gray-50 border-gray-300 text-gray-400
-          dark:bg-[#1a1c1e] dark:border-gray-700 dark:text-gray-500">
+          bg-gray-50 border-gray-300 text-gray-400">
           In-Article AdSense Placeholder
         </div>
       </div>
@@ -45,19 +42,17 @@ const FullGuide = ({ title, lastUpdated, children, checklistSteps, guideName, sl
           />
 
         {/* Sidebar Ads */}
-        <div className="p-4 border rounded-xl shadow-sm bg-white dark:bg-[#242729] dark:border-gray-800">
-          <p className="text-[10px] mb-2 text-center uppercase font-bold tracking-widest text-gray-400 dark:text-gray-500">
+        <div className="p-4 border rounded-xl shadow-sm bg-white">
+          <p className="text-[10px] mb-2 text-center uppercase font-bold tracking-widest text-gray-400">
             Sponsored Ads
           </p>
           <div className="space-y-4">
             <div className="h-64 w-full border border-dashed rounded flex items-center justify-center text-xs
-              bg-gray-100 border-gray-200 text-gray-400
-              dark:bg-[#1a1c1e] dark:border-gray-800 dark:text-gray-500">
+              bg-gray-100 border-gray-200 text-gray-400">
               [ADSENSE PLACEHOLDER]
             </div>
             <div className="h-64 w-full border border-dashed rounded flex items-center justify-center text-xs
-              bg-gray-100 border-gray-200 text-gray-400
-              dark:bg-[#1a1c1e] dark:border-gray-800 dark:text-gray-500">
+              bg-gray-100 border-gray-200 text-gray-400">
               [ADSENSE PLACEHOLDER]
             </div>
           </div>

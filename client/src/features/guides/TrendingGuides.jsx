@@ -19,7 +19,7 @@ const TrendingGuides = ({ onSelectGuide }) => {
   }
   return (
     <div className="mt-8 transition-colors duration-300">
-      <h2 className="text-xl font-bold mb-4 uppercase text-gray-800 dark:text-gray-100">
+      <h2 className="text-xl font-bold mb-4 uppercase text-gray-800">
         Trending Guides
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -28,13 +28,12 @@ const TrendingGuides = ({ onSelectGuide }) => {
             key={guide.id}
             onClick={() => handleSelection(guide.slug)}
             className="flex items-center gap-4 p-4 border rounded-xl shadow-sm hover:shadow-md cursor-pointer transition-all
-              bg-white border-gray-200 
-              dark:bg-[#242729] dark:border-gray-800 dark:hover:border-teal-900"
+              bg-white border-gray-200"
           >
-            <div className="p-2 rounded-lg bg-gray-50 dark:bg-[#1a1c1e]">
+            <div className="p-2 rounded-lg bg-gray-50">
               {guide.icon}
             </div>
-            <span className="font-bold text-sm text-gray-700 dark:text-gray-200">
+            <span className="font-bold text-sm text-gray-700">
               {guide.name}
             </span>
           </div>

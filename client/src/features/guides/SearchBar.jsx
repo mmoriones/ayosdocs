@@ -42,7 +42,7 @@ const SearchBar = () => {
 
   return (
     <div className="w-full max-w-2xl transition-colors duration-300 relative">
-      <h2 className="text-xl font-bold mb-3 uppercase tracking-tight text-gray-800 dark:text-gray-100">
+      <h2 className="text-xl font-bold mb-3 uppercase tracking-tight text-gray-800">
         Find Your Guide:
       </h2>
 
@@ -61,8 +61,7 @@ const SearchBar = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="w-full p-4 pl-11 pr-10 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm italic transition-colors
-          bg-white border-teal-600 text-gray-800
-          dark:bg-[#1a1c1e] dark:border-teal-700 dark:text-gray-200 dark:placeholder-gray-500"
+          bg-white border-teal-600 text-gray-800"
         />
 
         {/* Clear button */}
@@ -78,12 +77,12 @@ const SearchBar = () => {
 
       {/* RESULTS */}
       {results.length > 0 && (
-        <div className="absolute w-full mt-2 bg-white dark:bg-[#1a1c1e] border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50 overflow-hidden">
+        <div className="absolute w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden">
           {results.map((guide) => (
             <div
               key={guide.slug}
               onClick={() => handleSelect(guide.slug)}
-              className="px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-sm text-gray-800 dark:text-gray-200"
+              className="px-4 py-3 cursor-pointer hover:bg-gray-100 transition-colors text-sm text-gray-800"
             >
               {guide.title}
             </div>

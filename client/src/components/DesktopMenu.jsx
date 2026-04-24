@@ -91,13 +91,13 @@ const DesktopMenu = ({
 
           {/* Dropdown */}
           {isProfileOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-[#242729] rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 py-2 z-50">
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
               
               {/* Profile */}
               <Link 
                 to="/profile" 
                 onClick={() => setIsProfileOpen(false)}
-                className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-gray-700  hover:bg-teal-50 transition-colors"
               >
                 <User size={14} /> Profile Settings
               </Link>
@@ -108,7 +108,7 @@ const DesktopMenu = ({
                   setIsProfileOpen(false);
                   handleLogout();
                 }}
-                className="w-full flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors"
+                className="w-full flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 transition-colors"
               >
                 <LogOut size={14} /> Logout
               </button>

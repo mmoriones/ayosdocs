@@ -12,7 +12,7 @@ function App() {
   const [activeSlug, setActiveSlug] = useState('getting-started')
   return (
     <Router>
-      <div className="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-[#1a1c1e]">
+      <div className="min-h-screen transition-colors duration-300 bg-gray-50">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home activeSlug={activeSlug} setActiveSlug={setActiveSlug} />} />

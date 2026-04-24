@@ -12,14 +12,14 @@ const Verified = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-[#1a1c1e]">
-      <div className="p-8 rounded-2xl shadow-xl border-2 bg-white dark:bg-[#242729] border-gray-100 dark:border-gray-800 text-center">
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="p-8 rounded-2xl shadow-xl border-2 bg-white border-gray-100 text-center">
         
-        <h2 className="text-xl font-black uppercase text-gray-800 dark:text-white mb-2">
+        <h2 className="text-xl font-black uppercase text-gray-800 mb-2">
           Email Verified 🎉
         </h2>
 
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+        <p className="text-sm text-gray-500 mb-6">
           Your account has been successfully verified.
         </p>
 

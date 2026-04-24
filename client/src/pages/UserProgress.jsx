@@ -63,8 +63,8 @@ const UserProgress = () => {
     if (loading) return <div className="p-8 text-center">Loading your progress...</div>;
 
     return (
-        <div className="min-h-screen p-8 transition-colors duration-300 bg-gray-50 dark:bg-[#1a1c1e]">
-            <h1 className="text-2xl font-black uppercase mb-8 dark:text-white">My Tracked Guides</h1>
+        <div className="min-h-screen p-8 transition-colors duration-300 bg-gray-50">
+            <h1 className="text-2xl font-black uppercase mb-8">My Tracked Guides</h1>
             
             {/* Grid Layout */}
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">

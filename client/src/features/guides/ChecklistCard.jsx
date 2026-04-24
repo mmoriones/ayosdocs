@@ -107,8 +107,8 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
   const progress = Math.round((steps.filter(s => s.completed).length / steps.length) * 100);
 
   return (
-    <div className="transition-colors duration-300 p-6 max-w-sm rounded-2xl shadow-lg border-2 bg-white border-gray-100 dark:bg-[#242729] dark:border-gray-800">
-      <h3 className="text-lg font-black mb-4 border-b pb-2 uppercase text-gray-700 dark:text-gray-100 dark:border-gray-700">
+    <div className="transition-colors duration-300 p-6 max-w-sm rounded-2xl shadow-lg border-2 bg-white border-gray-100">
+      <h3 className="text-lg font-black mb-4 border-b pb-2 uppercase text-gray-700">
         {slug === 'getting-started' ? 'Getting Started' : `${title}`}
       </h3>
 
@@ -121,9 +121,9 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
           >
             {step.completed ?
               <CheckSquare className="text-teal-600 shrink-0" size={20} /> :
-              <Square className="text-gray-300 dark:text-gray-600 shrink-0" size={20} />
+              <Square className="text-gray-300 shrink-0" size={20} />
             }
-            <span className={`text-sm font-medium transition-colors ${step.completed ? 'text-gray-800 dark:text-gray-200' : 'text-gray-400 dark:text-gray-600'}`}>
+            <span className={`text-sm font-medium transition-colors ${step.completed ? 'text-gray-800' : 'text-gray-400'}`}>
               {index + 1}. {step.task}
             </span>
           </div>
@@ -132,7 +132,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
 
       {/* Progress Bar */}
       {slug !== 'getting-started' && (
-        <div className="h-4 rounded-full overflow-hidden mb-4 relative bg-gray-100 dark:bg-[#1a1c1e]">
+        <div className="h-4 rounded-full overflow-hidden mb-4 relative bg-gray-100">
           <div className="bg-teal-600 h-full transition-all duration-500" style={{ width: `${progress}%` }}></div>
           <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-white">
             {progress}%

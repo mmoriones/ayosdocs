@@ -89,14 +89,14 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
       <div className="relative w-full max-w-md overflow-hidden rounded-2xl shadow-2xl border-2 
-        bg-white border-gray-100 dark:bg-[#242729] dark:border-gray-800 transition-all duration-300">
+        bg-white border-gray-100 transition-all duration-300">
 
-        <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-full text-gray-400 hover:bg-gray-100 dark:hover:bg-[#1a1c1e]">
+        <button onClick={onClose} className="absolute top-4 right-4 p-2 rounded-full text-gray-400 hover:bg-gray-100">
           <X size={20} />
         </button>
 
         <div className="p-8">
-          <h2 className="text-2xl font-black mb-6 uppercase tracking-tight text-gray-800 dark:text-gray-100">
+          <h2 className="text-2xl font-black mb-6 uppercase tracking-tight text-gray-800">
             {view === 'login' ? 'Welcome Back' : 'Create Account'}
           </h2>
 
@@ -112,7 +112,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                   required
                   value={formData.fullName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 dark:bg-[#1a1c1e] border-gray-100 dark:border-gray-800 focus:border-teal-600 outline-none transition-colors dark:text-white" 
+                  className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 border-gray-100 focus:border-teal-600 outline-none transition-colors" 
                   placeholder="Juan Dela Cruz" 
                 />
               </div>
@@ -126,7 +126,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 dark:bg-[#1a1c1e] border-gray-100 dark:border-gray-800 focus:border-teal-600 outline-none transition-colors dark:text-white" 
+                className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 focus:border-teal-600 outline-none transition-colors" 
                 placeholder="juan@example.com" 
               />
             </div>
@@ -139,7 +139,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 dark:bg-[#1a1c1e] border-gray-100 dark:border-gray-800 focus:border-teal-600 outline-none transition-colors dark:text-white" 
+                className="w-full px-4 py-3 rounded-xl border-2 bg-gray-50 focus:border-teal-600 outline-none transition-colors" 
               />
               <button
                 type="button"
@@ -161,11 +161,11 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
 
           {/* OR Divider */}
           <div className="flex items-center my-5">
-            <div className="flex-1 border-t border-gray-200 dark:border-gray-700"></div>
+            <div className="flex-1 border-t border-gray-200"></div>
             <span className="px-3 text-[10px] font-bold uppercase tracking-widest text-gray-400">
               Or continue with
             </span>
-            <div className="flex-1 border-t border-gray-200 dark:border-gray-700"></div>
+            <div className="flex-1 border-t border-gray-200"></div>
           </div>
 
           {/* Google Login Button */}
@@ -173,7 +173,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
             <button
                 onClick={() => googleLogin()}
                 type="button"
-                className="w-full flex items-center justify-center gap-3 border-2 border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#1a1c1e] hover:bg-gray-100 dark:hover:bg-[#2a2d2f] text-gray-700 dark:text-gray-200 font-bold py-4 rounded-xl uppercase tracking-widest text-xs transition-colors"
+                className="w-full flex items-center justify-center gap-3 border-2 border-gray-200 hover:bg-gray-100 text-gray-700 font-bold py-4 rounded-xl uppercase tracking-widest text-xs transition-colors"
               >
                 <img
                   src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -196,7 +196,7 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
                 });
                 setShowPassword(!showPassword);
                }}
-              className="text-xs font-bold text-teal-600 dark:text-teal-500 hover:underline underline-offset-4"
+              className="text-xs font-bold text-teal-600 hover:underline underline-offset-4"
             >
               {view === 'login' ? "Don't have an account? Sign Up" : "Already have an account? Login"}
             </button>
