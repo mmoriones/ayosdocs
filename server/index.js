@@ -5,12 +5,12 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(cors({
-  origin: [ process.env.FRONTEND_URL,
-      "https://www.ayosdocs.com",
-    "https://ayosdocs.com"
-  ]
-}));
+// app.use(cors({
+//   origin: [ process.env.FRONTEND_URL,
+//       "https://www.ayosdocs.com",
+//     "https://ayosdocs.com"
+//   ]
+// }));
 
 app.use(cors({ origin: '*' }));
 
