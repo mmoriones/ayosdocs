@@ -1,5 +1,6 @@
 import { Sun, Menu, User, LogOut, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; 
 import AuthModal from '../features/auth/AuthModal';
 
 const Navbar = () => {
@@ -19,7 +20,7 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
-    window.location.reload(); // Refresh to update UI
+    window.location.reload();
   };
 
   return (
@@ -41,18 +42,36 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden lg:flex items-center gap-6 text-[11px] font-bold uppercase tracking-wider">
-            <a href="/" className="bg-white/20 px-3 py-1 rounded hover:bg-white/30 transition-all border border-white/50">Home</a>
+            
+            {/* Home */}
+            <Link 
+              to="/" 
+              className="bg-white/20 px-3 py-1 rounded hover:bg-white/30 transition-all border border-white/50"
+            >
+              Home
+            </Link>
+
             <div className="relative group cursor-pointer flex items-center gap-1 hover:text-teal-100">
               Guides <ChevronDown size={12} />
             </div>
             
-            {/* Conditional Link: Only show if logged in */}
+            {/* My Progress */}
             {user && (
-              <a href="/my-progress" className="hover:text-teal-100 transition-colors">My Progress</a>
+              <Link 
+                to="/my-progress" 
+                className="hover:text-teal-100 transition-colors"
+              >
+                My Progress
+              </Link>
             )}
             
-            <a href="#" className="hover:text-teal-100 transition-colors">Resources</a>
-            <a href="#" className="hover:text-teal-100 transition-colors">About</a>
+            <span className="hover:text-teal-100 transition-colors cursor-pointer">
+              Resources
+            </span>
+
+            <span className="hover:text-teal-100 transition-colors cursor-pointer">
+              About
+            </span>
             
             {/* User Auth Section */}
             {!user ? (
@@ -77,9 +96,15 @@ const Navbar = () => {
                 {/* Profile Dropdown */}
                 {isProfileOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-[#242729] rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 py-2 z-50">
-                    <a href="/profile" className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-colors">
+                    
+                    {/* Profile */}
+                    <Link 
+                      to="/profile" 
+                      className="flex items-center gap-2 px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-colors"
+                    >
                       <User size={14} /> Profile Settings
-                    </a>
+                    </Link>
+
                     <button 
                       onClick={handleLogout}
                       className="w-full flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
