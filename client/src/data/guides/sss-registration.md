@@ -4,7 +4,7 @@
   lastUpdated: 2026-04-01
   checklist: 
     - Register Online
-    - Get SS Number"
+    - Get SS Number
     - Verify Email and Create My.SSS Account
     - Prepare Required Documents
     - Submit Documents

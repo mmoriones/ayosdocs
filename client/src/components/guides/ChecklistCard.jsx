@@ -2,37 +2,46 @@ import { CheckSquare, Square, ArrowRight, Save, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthModal from '../auth/AuthModal';
+import { useAuth } from '../auth/AuthContext';
 
 const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
-  const navigate = useNavigate();
+  const { user, isLoggedIn } = useAuth();
 
   const [steps, setSteps] = useState(initialSteps || []);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  // Sync initial steps when guide changes
+  useEffect(() => {
+    if (initialSteps) setSteps(initialSteps);
+  }, [initialSteps]);
+
+  // Fetch saved progress
   useEffect(() => {
     const fetchSavedProgress = async () => {
-      // Only fetch if logged in, slug exists, and it's not the default getting-started
-      if (!isLoggedIn || !slug || slug === 'getting-started') return;
-
-      const storedUser = JSON.parse(localStorage.getItem("user"));
+      if (!isLoggedIn || !slug || slug === "getting-started" || !user?.token) return;
 
       try {
         const response = await fetch(`${API_URL}/api/user/get-progress/${slug}`, {
-          headers: { 'Authorization': `Bearer ${storedUser.token}` }
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
         });
 
         if (response.ok) {
           const data = await response.json();
-          // data.completedTasks is a string like "0,1,3"
-          const completedIndices = data.completedTasks.split(',').map(Number);
 
-          setSteps(prevSteps => prevSteps.map((step, index) => ({
-            ...step,
-            completed: completedIndices.includes(index)
-          })));
+          const completedIndices = data.completedTasks
+            ? data.completedTasks.split(",").map(Number)
+            : [];
+
+          setSteps((prevSteps) =>
+            prevSteps.map((step, index) => ({
+              ...step,
+              completed: completedIndices.includes(index),
+            }))
+          );
         }
       } catch (error) {
         console.error("Error fetching saved progress:", error);
@@ -40,63 +49,47 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
     };
 
     fetchSavedProgress();
-  }, [isLoggedIn, slug, initialSteps]);
+  }, [isLoggedIn, slug, user]);
 
-  useEffect(() => {
-    if (initialSteps) setSteps(initialSteps);
-    const user = localStorage.getItem("user");
-    if (user) setIsLoggedIn(true);
-  }, [initialSteps]);
-
-  // Checkbox Logic
+  // Toggle step
   const handleToggleStep = (index) => {
-    const updatedSteps = [...steps];
-    updatedSteps[index].completed = !updatedSteps[index].completed;
-    setSteps(updatedSteps);
+    setSteps((prevSteps) =>
+      prevSteps.map((step, i) =>
+        i === index ? { ...step, completed: !step.completed } : step
+      )
+    );
   };
 
-  // Database Update Logic
+  // Save progress
   const handleSaveProgress = async () => {
-    const storedUser = localStorage.getItem("user");
-
-    if (!storedUser) {
-      alert("Please log in to save your progress.");
+    if (!isLoggedIn || !user?.token) {
       setIsAuthModalOpen(true);
       return;
     }
 
-    const user = JSON.parse(storedUser);
-
-    if (!user.token) {
-      console.error("Token not found in local storage.");
-      return;
-    }
-
     setIsSaving(true);
+
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
       const completedTaskIndices = steps
         .map((s, i) => (s.completed ? i : null))
         .filter((i) => i !== null)
         .join(",");
 
       const response = await fetch(`${API_URL}/api/user/update-progress`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user.token}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify({
           guideSlug: slug,
-          completedTasks: completedTaskIndices
+          completedTasks: completedTaskIndices,
         }),
       });
 
-      if (response.ok) {
-        alert("Progress saved successfully!");
-      } else {
+      if (!response.ok) {
         const errorData = await response.json();
-        alert(`Error: ${errorData.message}`);
+        console.error("Save error:", errorData.message);
       }
     } catch (error) {
       console.error("Failed to save:", error);
@@ -105,13 +98,18 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
     }
   };
 
-  const progress = Math.round((steps.filter(s => s.completed).length / steps.length) * 100);
+  // Progress calculation (safe)
+  const progress = steps.length
+    ? Math.round(
+      (steps.filter((s) => s.completed).length / steps.length) * 100
+    )
+    : 0;
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-6">
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
 
       {/* HEADER */}
-      <div>
+      <div className="space-y-2">
         <h3 className="text-lg font-semibold text-gray-800">
           {isFullPage
             ? "Requirements List"
@@ -119,40 +117,47 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
               ? "Continue your progress"
               : title}
         </h3>
-        <div className="h-px bg-gray-100 mt-3" />
+        <div className="h-px bg-gray-100" />
       </div>
 
       {/* STEPS */}
-      <div className="space-y-4">
-        {steps.map((step, index) => (
-          <div
-            key={`${slug}-${step.id || index}`}
-            onClick={() => handleToggleStep(index)}
-            className="flex items-start gap-3 cursor-pointer group"
-          >
-            {/* NUMBER / CHECK */}
-            <div
-              className={`w-6 h-6 flex items-center justify-center rounded-full text-xs font-semibold shrink-0
-          ${step.completed
-                  ? "bg-teal-600 text-white"
-                  : "bg-gray-100 text-gray-500"
-                }`}
-            >
-              {step.completed ? "✓" : index + 1}
-            </div>
+      <div className="relative">
+        {/* vertical line */}
+        <div className="absolute left-[10px] top-[10px] bottom-[10px] w-px bg-gray-200"></div>
 
-            {/* TEXT */}
-            <p
-              className={`text-sm transition-colors
-          ${step.completed
-                  ? "text-gray-800 line-through"
-                  : "text-gray-600 group-hover:text-gray-800"
-                }`}
+        <div className="space-y-2">
+          {steps.map((step, index) => (
+            <div
+              key={`${slug}-${step.id || index}`}
+              onClick={() => handleToggleStep(index)}
+              className="flex items-center gap-3 cursor-pointer group 
+                   py-1.5 px-1 -mx-1 rounded-md
+                   active:bg-gray-100 relative"
             >
-              {step.task}
-            </p>
-          </div>
-        ))}
+              {/* NUMBER / CHECK */}
+              <div
+                className={`z-10 w-5 h-5 flex items-center justify-center rounded-full text-[10px] font-medium shrink-0
+          ${step.completed
+                    ? "bg-teal-600 text-white"
+                    : "bg-gray-100 text-gray-500"
+                  }`}
+              >
+                {step.completed ? "✓" : index + 1}
+              </div>
+
+              {/* TEXT */}
+              <p
+                className={`text-sm leading-snug transition-colors
+          ${step.completed
+                    ? "text-gray-800 line-through"
+                    : "text-gray-600 group-hover:text-gray-800"
+                  }`}
+              >
+                {step.task}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* PROGRESS */}

@@ -4,22 +4,18 @@ import { useNavigate } from "react-router-dom";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import AuthModal from "../auth/AuthModal";
+import { useAuth } from "../auth/AuthContext";
 
 const Navbar = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [user, setUser] = useState(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const { user, isLoggedIn, logout } = useAuth();  
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) setUser(JSON.parse(savedUser));
-  }, []);
-
   const handleLogout = () => {
-    localStorage.clear();
-    setUser(null);
+    logout();
     navigate("/");
   };
 

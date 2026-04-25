@@ -4,43 +4,36 @@ import TrendingGuides from '../components/guides/TrendingGuides';
 import ChecklistCard from '../components/guides/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
 import WhySignUp from '../components/guides/WhySignUp';
+import TipsCard from '../components/guides/TipsCard';
+import GettingStarted from '../components/guides/GettingStarted';
 import { guidesMap } from '../utils/loadGuides';
-
+import { useAuth } from '../components/auth/AuthContext'
 
 const Home = ({ activeSlug, setActiveSlug }) => {
+  const { isLoggedIn } = useAuth();
+  const [checklistData, setChecklistData] = useState({ title: "", steps: [] });
+  useEffect(() => {
+    if (!activeSlug || activeSlug === 'getting-started') return;
 
-  const [checklistData, setChecklistData] = useState({
-    title: "Getting Started",
-    steps: [
-      { id: 1, task: 'Find your specific guide', completed: false },
-      { id: 2, task: 'Read step-by-step process', completed: false },
-      { id: 3, task: 'Prepare requirements', completed: false },
-      { id: 4, task: 'Sign up to save progress', completed: false },
-    ]
-  });
+    const guide = guidesMap[activeSlug];
 
-    useEffect(() => {
-      if (!activeSlug || activeSlug === 'getting-started') return;
-
-      const guide = guidesMap[activeSlug];
-
-      if (guide) {
-        setChecklistData({
-          title: guide.title,
-          steps: guide.checklist?.map(task => ({
-            task,
-            completed: false
-          })) || []
-        });
-      }
-    }, [activeSlug]);
+    if (guide) {
+      setChecklistData({
+        title: guide.title,
+        steps: guide.checklist?.map(task => ({
+          task,
+          completed: false
+        })) || []
+      });
+    }
+  }, [activeSlug]);
 
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 px-6 lg:px-10 py-6">
-      
+
       <div className="flex flex-col lg:flex-row gap-8 items-start">
-        
+
         {/* LEFT SIDE */}
         <div className="flex-1 w-full space-y-8">
 
@@ -77,13 +70,17 @@ const Home = ({ activeSlug, setActiveSlug }) => {
         {/* RIGHT SIDE */}
         <div className="w-full lg:w-96 space-y-6 sticky top-8">
 
-          <ChecklistCard
-            title={checklistData.title}
-            initialSteps={checklistData.steps}
-            slug={activeSlug}
-          />
+          {activeSlug === 'getting-started' ? (
+            <GettingStarted />
+          ) : (
+            <ChecklistCard
+              title={checklistData.title}
+              initialSteps={checklistData.steps}
+              slug={activeSlug}
+            />
+          )}
 
-          <WhySignUp />
+          {isLoggedIn ? <TipsCard /> : <WhySignUp />}
 
           {/* Adsense placeholder */}
 
