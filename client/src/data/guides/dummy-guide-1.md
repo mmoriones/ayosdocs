@@ -1,7 +1,15 @@
-module.exports = {
-  title: "Dummy Guide for Search Testing",
-  slug: "dummy-guide-2",
-  content: `
+---
+  title: Dummy Guide for Search Testing 1
+  slug: dummy-guide-1
+  lastUpdated: 2026-04-01
+  checklist: 
+   - Read the introduction
+   - Prepare documents
+   - Register account
+   - Submit application
+   - Wait for processing
+   - Receive result
+---
 
 ## Introduction
 
@@ -143,14 +151,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non augue sed erat 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed augue vel turpis fermentum interdum.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec feugiat justo non massa facilisis, sed feugiat ipsum varius.
-
-`,
-  checklist: [
-    { task: "Read the introduction" },
-    { task: "Prepare documents" },
-    { task: "Register account" },
-    { task: "Submit application" },
-    { task: "Wait for processing" },
-    { task: "Receive result" }
-  ]
-};

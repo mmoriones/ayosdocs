@@ -1,7 +1,16 @@
-module.exports = {
-  title: "UMID Card Application",
-  slug: "umid-card",
-  content: `
+---
+  title: UMID Card Application
+  slug: umid-application
+  lastUpdated: 2026-04-01
+  checklist: 
+      - Fill Application Form
+      - Prepare Required Documents
+      - Submit Documents
+      - Biometrics
+      - Wait for Processing
+      - Receive Card
+---
+
 ## 1. Understand What the UMID Card Is
 
 The Unified Multi-Purpose ID (UMID) card is a government-issued identification card used by several Philippine government agencies. It combines multiple identification systems into a single card, making it easier for citizens to access various government services.
@@ -136,13 +145,3 @@ The UMID card can be used for:
 Keep your card safe and avoid sharing your personal information with unauthorized individuals.
 
 Properly maintaining your UMID card will help ensure smooth transactions with government agencies.
-`,
-  checklist: [
-    { task: "Fill Application Form" },
-    { task: "Prepare Required Documents" },
-    { task: "Submit Documents" },
-    { task: "Biometrics" },
-    { task: "Wait for Processing" },
-    { task: "Receive Card" }
-  ]
-};

@@ -1,7 +1,15 @@
-module.exports = {
-  title: "Passport Appointment",
-  slug: "passport-appointment",
-  content: `
+---
+  title: Passport Appointment
+  slug: passport-appointment
+  lastUpdated: 2026-04-01
+  checklist: 
+     - Register Online Account
+     - Set Appointment
+     - Pay Fee
+     - Attend Appointment
+     - Claim Passport
+---
+
 ## 1. Create an Online Account
 Visit the official Department of Foreign Affairs (DFA) Passport Appointment website and create an account using your email address. 
 You will be asked to provide personal information such as your full name, birthdate, contact details, and valid email address.
@@ -61,13 +69,3 @@ You may choose:
 Processing usually takes several days depending on the processing type you selected.
 
 Make sure to keep your claim stub or tracking number so you can monitor the status of your passport.
-`,
-  checklist: [
-    { task: "Register Online Account" },
-    { task: "Set Appointment" },
-    { task: "Pay Fee" },
-    { task: "Prepare Required Documents" },
-    { task: "Attend Appointment" },
-    { task: "Claim Passport" }
-  ]
-};

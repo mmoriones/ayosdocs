@@ -1,35 +1,37 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Search, X } from "lucide-react";
+import { searchGuides } from '../../utils/searchGuides'
 
 const SearchBar = () => {
-  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
 
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchResults = async () => {
-      if (query.length < 2) {
-        setResults([]);
-        return;
-      }
-
-      try {
-        const res = await axios.get(
-          `${API_URL}/api/guides/search?q=${query}`
-        );
-        setResults(res.data);
-      } catch (err) {
-        console.error(err);
-      }
+  const debounce = (fn, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => fn(...args), delay);
     };
+  };
 
-    fetchResults();
-  }, [query]);
+    useEffect(() => {
+      const debouncedSearch = debounce((q) => {
+        if (q.length < 2) {
+          setResults([]);
+          return;
+        }
+
+        setResults(searchGuides(q));
+      }, 300);
+
+      debouncedSearch(query);
+    }, [query]);
+
+
 
   const handleSelect = (slug) => {
     setResults([]);

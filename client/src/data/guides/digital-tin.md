@@ -1,7 +1,14 @@
-module.exports = {
-  title: "Digital TIN ID Application",
-  slug: "tin-id",
-  content: `
+---
+  title: Digital TIN ID Application
+  slug: digital-tin
+  lastUpdated: 2026-04-01
+  checklist: 
+     - Apply for TIN
+     - Prepare Required Documents
+     - Submit BIR Application Form
+     - Receive TIN Number
+     - Access Digital TIN ID
+---
 ## 1. What is a TIN (Tax Identification Number)?
 
 A **Tax Identification Number (TIN)** is a unique number issued by the Bureau of Internal Revenue (BIR) to identify taxpayers in the Philippines. It is required for most financial and employment-related activities, including employment, opening bank accounts, filing taxes, and conducting business.
@@ -171,12 +178,3 @@ Yes. You can update your information through the BIR office where your TIN is re
 Applying for a Digital TIN ID involves several steps including registration, submission of documents, and verification by the BIR. By preparing the required documents and carefully completing the application process, you can obtain your TIN efficiently.
 
 Always remember that each individual should have **only one TIN**, and it must be used for all tax-related transactions throughout your lifetime.
-`,
-  checklist: [
-    { task: "Apply for TIN" },
-    { task: "Prepare Required Documents" },
-    { task: "Submit BIR Application Form" },
-    { task: "Receive TIN Number" },
-    { task: "Access Digital TIN ID" }
-  ]
-}

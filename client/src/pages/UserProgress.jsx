@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProgressCard from '../components/guides/ProgressCard';
-import axios from 'axios';
 import { Bookmark } from 'lucide-react';
+import { guidesMap } from "../utils/loadGuides";
 
 const UserProgress = () => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
@@ -28,37 +28,29 @@ const UserProgress = () => {
         const result = await response.json();
         const savedItems = result.savedProgress || [];
 
-        const detailedProgress = await Promise.all(
-          savedItems.map(async (item) => {
-            try {
-              const guideRes = await axios.get(
-                `${API_URL}/api/guides/${item.guideSlug}`
-              );
+        const detailedProgress = savedItems
+          .map((item) => {
+            const guide = guidesMap[item.guideSlug];
+            if (!guide) return null;
 
-              const completedIndices = item.completedTasks
-                .split(',')
-                .map(Number);
+            const completedIndices = item.completedTasks
+              .split(',')
+              .map(Number);
 
-              const stepsWithProgress = guideRes.data.checklist.map(
-                (step, idx) => ({
-                  ...step,
-                  completed: completedIndices.includes(idx)
-                })
-              );
+            const steps = (guide.checklist || []).map((task, idx) => ({
+              task,
+              completed: completedIndices.includes(idx)
+            }));
 
-              return {
-                title: guideRes.data.title,
-                slug: item.guideSlug,
-                steps: stepsWithProgress
-              };
-            } catch (err) {
-              console.error(`Error fetching guide ${item.guideSlug}`, err);
-              return null;
-            }
+            return {
+              title: guide.title,
+              slug: item.guideSlug,
+              steps
+            };
           })
-        );
+          .filter(Boolean);
 
-        setProgressList(detailedProgress.filter(Boolean));
+        setProgressList(detailedProgress);
       } catch (err) {
         console.error("Fetch error:", err);
       } finally {
@@ -68,6 +60,7 @@ const UserProgress = () => {
 
     fetchAllProgress();
   }, []);
+
 
   if (loading) {
     return (

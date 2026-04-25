@@ -1,7 +1,17 @@
-module.exports = {
-  title: "SSS Registration (New Member)",
-  slug: "sss-registration",
-  content: `
+---
+  title: SSS Registration (New Member)
+  slug: sss-registration
+  lastUpdated: 2026-04-01
+  checklist: 
+    - Register Online
+    - Get SS Number"
+    - Verify Email and Create My.SSS Account
+    - Prepare Required Documents
+    - Submit Documents
+    - Activate Account
+    - Start Contributions
+---
+
 ## 1. Determine Eligibility
 Before registering with the Social Security System (SSS), ensure that you are eligible to become a member.
 
@@ -109,14 +119,3 @@ Through the online portal you can:
 - Update your personal information
 
 Keeping your records updated will help prevent issues when applying for benefits in the future.
-`,
-  checklist: [
-    { task: "Register Online" },
-    { task: "Get SS Number" },
-    { task: "Verify Email and Create My.SSS Account" },
-    { task: "Prepare Required Documents" },
-    { task: "Submit Documents" },
-    { task: "Activate Account" },
-    { task: "Start Contributions" }
-  ]
-};

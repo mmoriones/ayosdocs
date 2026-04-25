@@ -1,14 +1,13 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-
 import SearchBar from '../components/guides/SearchBar';
 import TrendingGuides from '../components/guides/TrendingGuides';
 import ChecklistCard from '../components/guides/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
 import WhySignUp from '../components/guides/WhySignUp';
+import { guidesMap } from '../utils/loadGuides';
+
 
 const Home = ({ activeSlug, setActiveSlug }) => {
-  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
 
   const [checklistData, setChecklistData] = useState({
     title: "Getting Started",
@@ -20,23 +19,22 @@ const Home = ({ activeSlug, setActiveSlug }) => {
     ]
   });
 
-  useEffect(() => {
-    if (activeSlug === 'getting-started') return;
+    useEffect(() => {
+      if (!activeSlug || activeSlug === 'getting-started') return;
 
-    const fetchChecklist = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/api/guides/${activeSlug}`);
+      const guide = guidesMap[activeSlug];
+
+      if (guide) {
         setChecklistData({
-          title: res.data.title,
-          steps: res.data.checklist
+          title: guide.title,
+          steps: guide.checklist?.map(task => ({
+            task,
+            completed: false
+          })) || []
         });
-      } catch (err) {
-        console.log("Error fetching checklist:", err);
       }
-    };
+    }, [activeSlug]);
 
-    fetchChecklist();
-  }, [activeSlug]);
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 px-6 lg:px-10 py-6">

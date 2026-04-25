@@ -1,7 +1,16 @@
-module.exports = {
-  title: "PhilHealth ID Application",
-  slug: "philhealth-id",
-  content: `
+---
+  title: PhilHealth ID Application
+  slug: philhealth-application
+  lastUpdated: 2026-04-01
+  checklist: 
+    - Register Membership
+    - Fill PMRF Form
+    - Prepare Required Documents
+    - Submit Requirements
+    - Get PhilHealth Number
+    - Claim ID
+---
+
 ## 1. Register as a PhilHealth Member
 To apply for a PhilHealth ID, you must first be registered as a member of the Philippine Health Insurance Corporation (PhilHealth).
 
@@ -83,13 +92,3 @@ PhilHealth helps cover part of the costs for:
 - Select outpatient services
 
 Always bring your PhilHealth number or ID when visiting accredited hospitals or clinics so your benefits can be properly applied.
-`,
-  checklist: [
-    { task: "Register Membership" },
-    { task: "Fill PMRF Form" },
-    { task: "Prepare Required Documents" },
-    { task: "Submit Requirements" },
-    { task: "Get PhilHealth Number" },
-    { task: "Claim ID" }
-  ]
-};

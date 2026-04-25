@@ -1,7 +1,15 @@
-module.exports = {
-  title: "NBI Clearance (New Applicant)",
-  slug: "nbi-clearance",
-  content: `
+---
+  title: NBI Clearance (New Applicant)
+  slug: nbi-clearance
+  lastUpdated: 2026-04-01
+  checklist: 
+     - Register Online Account
+     - Set Appointment
+     - Pay Fee
+     - Biometrics
+     - Claim Clearance
+---
+
 ## 1. What is an NBI Clearance?
 
 An **NBI Clearance** is an official document issued by the National Bureau of Investigation (NBI) in the Philippines. It certifies that the holder has no criminal record or pending cases recorded in the NBI database.
@@ -213,12 +221,3 @@ Applying for an NBI Clearance involves online registration, appointment scheduli
 By preparing the required documents and following the application steps carefully, you can complete the process quickly and efficiently.
 
 Always keep your clearance in a safe place, as it may be required for various legal and employment purposes.
-`,
-  checklist: [
-    { task: "Register Online Account" },
-    { task: "Set Appointment" },
-    { task: "Pay Fee" },
-    { task: "Biometrics" },
-    { task: "Claim Clearance" }
-  ]
-};
