@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { User, LogOut, ChevronDown } from "lucide-react";
 import { useEffect, useRef } from "react";
 
@@ -10,110 +10,128 @@ const DesktopMenu = ({
   openAuthModal,
 }) => {
   const dropdownRef = useRef(null);
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsProfileOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setIsProfileOpen]);
 
+  const navClass = (path) =>
+    `relative pb-1 transition ${isActive(path)
+      ? "text-teal-600 font-semibold"
+      : "text-gray-600 hover:text-teal-600"
+    }`;
+
   return (
-    <div className="hidden lg:flex items-center gap-6 text-[11px] font-bold uppercase tracking-wider">
-      
+    <div className="hidden lg:flex items-center gap-8 text-sm">
+
       {/* Home */}
-      <Link 
-        to="/" 
-        className="bg-white/20 px-3 py-1 rounded hover:bg-white/30 transition-all border border-white/50"
-      >
+      <Link to="/" className={navClass("/")}>
         Home
+        {isActive("/") && (
+          <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-teal-600 rounded"></span>
+        )}
       </Link>
 
       {/* Guides */}
-      <div className="relative group cursor-pointer flex items-center gap-1 hover:text-teal-100">
-        Guides <ChevronDown size={12} />
+      <div className="flex items-center gap-1 text-gray-600 hover:text-teal-600 cursor-pointer">
+        Guides <ChevronDown size={14} />
       </div>
 
       {/* My Progress */}
       {user && (
-        <Link 
-          to="/my-progress" 
-          className="hover:text-teal-100"
-        >
+        <Link to="/my-progress" className={navClass("/my-progress")}>
           My Progress
+          {isActive("/my-progress") && (
+            <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-teal-600 rounded"></span>
+          )}
         </Link>
       )}
 
       {/* Static */}
-      <span className="hover:text-teal-100 cursor-pointer">Resources</span>
-      <span className="hover:text-teal-100 cursor-pointer">About</span>
+      <span className="text-gray-600 hover:text-teal-600 cursor-pointer">
+        Resources
+      </span>
+      <span className="text-gray-600 hover:text-teal-600 cursor-pointer">
+        About
+      </span>
 
       {/* Auth */}
       {!user ? (
-        <button 
+        <button
           onClick={openAuthModal}
-          className="bg-[#006666] hover:bg-[#004d4d] px-4 py-2 rounded-md border border-teal-300 flex items-center gap-2"
+          className="ml-4 bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
         >
-          <User size={14} />
-          LOGIN / REGISTER
+          Login
         </button>
       ) : (
-        <div ref={dropdownRef} className="relative">
-          
-          {/* Profile Button */}
-          <button 
+        <div ref={dropdownRef} className="relative ml-4">
+          <button
             onClick={() => setIsProfileOpen(!isProfileOpen)}
-            className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-md border border-white/30 flex items-center gap-2"
+            className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg"
           >
-            <div className="w-5 h-5 bg-teal-800 rounded-full flex items-center justify-center text-[10px]">
+            <div className="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center text-xs">
               {user.fullName.charAt(0)}
             </div>
-            <span className="max-w-[80px] truncate">
-              {user.fullName}
-            </span>
             <ChevronDown
-              size={12}
-              className={`transition-transform ${
-                isProfileOpen ? "rotate-180" : ""
-              }`}
+              size={14}
+              className={`transition ${isProfileOpen ? "rotate-180" : ""
+                }`}
             />
           </button>
 
-          {/* Dropdown */}
           {isProfileOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
-              
-              {/* Profile */}
-              <Link 
-                to="/profile" 
-                onClick={() => setIsProfileOpen(false)}
-                className="flex items-center gap-2 px-4 py-2 text-gray-700  hover:bg-teal-50 transition-colors"
-              >
-                <User size={14} /> Profile Settings
-              </Link>
+            <div className="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden z-50">
 
-              {/* Logout */}
-              <button 
-                onClick={() => {
-                  setIsProfileOpen(false);
-                  handleLogout();
-                }}
-                className="w-full flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 transition-colors"
-              >
-                <LogOut size={14} /> Logout
-              </button>
+              {/* USER HEADER */}
+              <div className="flex items-center gap-3 px-4 py-3 bg-gray-50 border-b border-gray-100">
+                <div className="w-9 h-9 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                  {user.fullName.charAt(0)}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-gray-800 leading-tight">
+                    {user.fullName}
+                  </span>
+                  <span className="text-xs text-gray-500">
+                    Logged in
+                  </span>
+                </div>
+              </div>
+
+              {/* MENU ITEMS */}
+              <div className="py-1">
+
+                <Link
+                  to="/profile"
+                  onClick={() => setIsProfileOpen(false)}
+                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 transition"
+                >
+                  <User size={14} /> Profile Settings
+                </Link>
+
+                <button
+                  onClick={() => {
+                    setIsProfileOpen(false);
+                    handleLogout();
+                  }}
+                  className="w-full flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 transition"
+                >
+                  <LogOut size={14} /> Logout
+                </button>
+
+              </div>
             </div>
           )}
+
         </div>
       )}
     </div>
