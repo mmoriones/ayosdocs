@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { guidesMap } from "../utils/loadGuides";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -9,49 +9,23 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 import GuidePageLayout from "../components/guides/GuidePageLayout";
 
-const extractHeadings = (markdown) => {
-  const regex = /^##\s+(.*)/gm;
-  const matches = [...markdown.matchAll(regex)];
-
-  return matches.map((match) => {
-    const text = match[1];
-
-    const id = text
-      .toLowerCase()
-      .replace(/[^\w\s]/g, "")
-      .replace(/\s+/g, "-");
-
-    return { text, id };
-  });
-};
-
-const GuideDetail = () => {
-  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
+const Guide = () => {
   const { slug } = useParams();
-  const [guide, setGuide] = useState(null);
-  const [headings, setHeadings] = useState([]);
 
-  useEffect(() => {
-    const fetchGuide = async () => {
-      const res = await axios.get(
-        `${API_URL}/api/guides/${slug}`
-      );
+  const guide = guidesMap[slug];
 
-      setGuide(res.data);
-      setHeadings(extractHeadings(res.data.content));
-    };
+  if (!guide) {
+    return <div className="p-10 text-center">Guide not found</div>;
+  }
 
-    fetchGuide();
-  }, [slug]);
-
-  if (!guide) return <div className="p-10 text-center">Loading...</div>;
+  const headings = guide.headings;
 
   return (
     <GuidePageLayout
       title={guide.title}
       lastUpdated={guide.lastUpdated}
       guideName={guide.title}
-      checklistSteps={guide.checklist}
+      checklistSteps={guide.checklist?.map(task => ({ task }))}
       slug={slug}
     >
       <div className="flex gap-8 w-full">
@@ -121,4 +95,4 @@ const GuideDetail = () => {
 
 };
 
-export default GuideDetail;
+export default Guide;

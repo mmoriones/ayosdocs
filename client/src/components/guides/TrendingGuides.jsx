@@ -38,7 +38,7 @@ const guides = [
   {
     id: 4,
     name: 'UMID Card',
-    slug: 'umid-card',
+    slug: 'umid-application',
     icon: CreditCard,
     bg: 'bg-purple-50',
     color: 'text-purple-600'
@@ -46,7 +46,7 @@ const guides = [
   {
     id: 5,
     name: 'PhilHealth ID',
-    slug: 'philhealth-id',
+    slug: 'philhealth-application',
     icon: UserCircle,
     bg: 'bg-yellow-50',
     color: 'text-yellow-600'
@@ -54,7 +54,7 @@ const guides = [
   {
     id: 6,
     name: 'Digital TIN ID',
-    slug: 'tin-id',
+    slug: 'digital-tin',
     icon: ReceiptText,
     bg: 'bg-green-50',
     color: 'text-green-600'
