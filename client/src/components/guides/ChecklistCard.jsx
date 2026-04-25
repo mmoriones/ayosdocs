@@ -104,6 +104,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
       (steps.filter((s) => s.completed).length / steps.length) * 100
     )
     : 0;
+  const hasCompletedSteps = steps.some((s) => s.completed);
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
@@ -198,18 +199,22 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
           <button
             onClick={() => setIsAuthModalOpen(true)}
             className="w-full bg-teal-600 hover:bg-teal-700 
-        text-white text-sm py-2.5 rounded-lg font-medium transition"
+                text-white text-sm py-2.5 rounded-lg font-medium transition"
           >
             Sign up to save progress
           </button>
         ) : (
           <button
             onClick={handleSaveProgress}
-            disabled={isSaving}
-            className="w-full flex items-center justify-center gap-2 py-2.5 
-        text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 
-        rounded-lg transition disabled:opacity-50"
-          >
+            disabled={isSaving || !hasCompletedSteps}
+            className={`w-full flex items-center justify-center gap-2 py-2.5 
+              text-sm font-medium text-white rounded-lg transition
+              ${hasCompletedSteps
+                ? "bg-teal-600 hover:bg-teal-700"
+                : "bg-gray-300 cursor-not-allowed"
+              }
+              disabled:opacity-50`}
+            >
             {isSaving ? (
               <Loader2 className="animate-spin" size={16} />
             ) : (

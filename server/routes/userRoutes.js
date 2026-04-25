@@ -45,7 +45,7 @@ router.get('/get-progress/:slug', protect, async (req, res ) =>{
         if (progress) {
             res.status(200).json({ completedTasks: progress.completedTasks });
         } else {
-            res.status(404).json({ message: "No progress found for this guide" });
+             res.status(200).json({ completedTasks: "" });
         }
     } catch (error) {
         res.status(500).json({ message: "Server error" });
