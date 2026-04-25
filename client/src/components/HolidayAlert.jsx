@@ -1,18 +1,39 @@
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, X } from 'lucide-react';
+import { useState } from 'react';
 
 const HolidayAlert = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  if (!isVisible) return null;
+
   return (
-    <div className="mt-8 flex items-center gap-3 p-4 border rounded-lg shadow-sm transition-colors duration-300
-      bg-blue-50 border-blue-200 ">
-      
-      <AlertCircle className="text-blue-600" size={20} />
-      
-      <p className="text-sm font-semibold italic text-blue-900">
-        LOCAL HOLIDAY ALERT: 
-        <span className="font-normal ml-1 text-blue-800">
-          Offices may be closed today (April 9, Araw ng Kagitingan)
-        </span>
-      </p>
+    <div className="flex items-center justify-between gap-4 px-4 py-3 
+    rounded-xl border border-teal-100 bg-teal-50 text-teal-900">
+
+      {/* LEFT CONTENT */}
+      <div className="flex items-center gap-3">
+        <div className="p-2 rounded-full bg-teal-100">
+          <AlertCircle size={16} className="text-teal-600" />
+        </div>
+
+        <p className="text-sm">
+          <span className="font-semibold">
+            Local Holiday Alert:
+          </span>{" "}
+          Offices may be closed today{" "}
+          <span className="text-teal-700">
+            (April 9, Araw ng Kagitingan)
+          </span>
+        </p>
+      </div>
+
+      {/* CLOSE BUTTON */}
+      <button
+        onClick={() => setIsVisible(false)}
+        className="text-teal-500 hover:text-teal-700 transition"
+      >
+        <X size={16} />
+      </button>
     </div>
   );
 };

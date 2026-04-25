@@ -5,8 +5,10 @@ import { Search, X } from "lucide-react";
 
 const SearchBar = () => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
+
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,52 +43,71 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="w-full max-w-2xl transition-colors duration-300 relative">
-      <h2 className="text-xl font-bold mb-3 uppercase tracking-tight text-gray-800">
-        Find Your Guide:
-      </h2>
+    <div className="w-full max-w-2xl relative">
+      
+      {/* INPUT WRAPPER */}
+      <div className="relative flex items-center">
 
-      {/* INPUT */}
-      <div className="relative">
-
-        {/* Search Icon */}
+        {/* LEFT ICON */}
         <Search
           size={18}
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+          className="absolute left-4 text-gray-400"
         />
 
+        {/* INPUT */}
         <input
           type="text"
-          placeholder="Search for document or process... (e.g., NBI Clearance)"
+          placeholder="Search for a document or process (e.g., NBI Clearance)"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full p-4 pl-11 pr-10 border-2 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm italic transition-colors
-          bg-white border-teal-600 text-gray-800"
+          className="w-full pl-11 pr-20 py-4 rounded-xl border border-gray-200 
+          bg-white text-sm text-gray-800
+          focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
+          shadow-sm"
         />
 
-        {/* Clear button */}
+        {/* CLEAR BUTTON */}
         {query && (
           <button
             onClick={clearSearch}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-14 text-gray-400 hover:text-gray-600"
           >
             <X size={18} />
           </button>
         )}
+
+        {/* SEARCH BUTTON */}
+        <button
+          onClick={() => results[0] && handleSelect(results[0].slug)}
+          className="absolute right-2 bg-teal-600 hover:bg-teal-700 
+          text-white p-2.5 rounded-lg transition shadow-sm"
+        >
+          <Search size={16} />
+        </button>
       </div>
 
-      {/* RESULTS */}
+      {/* RESULTS DROPDOWN */}
       {results.length > 0 && (
-        <div className="absolute w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden">
-          {results.map((guide) => (
+        <div className="absolute w-full mt-2 bg-white border border-gray-100 
+        rounded-xl shadow-lg z-50 overflow-hidden">
+
+          {results.map((guide, index) => (
             <div
               key={guide.slug}
               onClick={() => handleSelect(guide.slug)}
-              className="px-4 py-3 cursor-pointer hover:bg-gray-100 transition-colors text-sm text-gray-800"
+              className={`px-4 py-3 cursor-pointer transition text-sm
+              ${index === 0 ? "bg-gray-50" : ""}
+              hover:bg-gray-100`}
             >
-              {guide.title}
+              <p className="font-medium text-gray-800">
+                {guide.title}
+              </p>
+              <p className="text-xs text-gray-500">
+                View guide
+              </p>
             </div>
           ))}
+
         </div>
       )}
     </div>

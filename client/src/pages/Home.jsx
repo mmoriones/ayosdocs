@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import SearchBar from '../components/guides/SearchBar'
+
+import SearchBar from '../components/guides/SearchBar';
 import TrendingGuides from '../components/guides/TrendingGuides';
 import ChecklistCard from '../components/guides/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
+import WhySignUp from '../components/guides/WhySignUp';
 
-const Home = ({activeSlug, setActiveSlug}) => {
+const Home = ({ activeSlug, setActiveSlug }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
+
   const [checklistData, setChecklistData] = useState({
     title: "Getting Started",
     steps: [
@@ -18,59 +21,75 @@ const Home = ({activeSlug, setActiveSlug}) => {
   });
 
   useEffect(() => {
-    if (activeSlug == 'getting-started') return;
-    
-    const fetchChecklist = async () =>{
+    if (activeSlug === 'getting-started') return;
+
+    const fetchChecklist = async () => {
       try {
         const res = await axios.get(`${API_URL}/api/guides/${activeSlug}`);
         setChecklistData({
           title: res.data.title,
           steps: res.data.checklist
         });
-      }catch (err) {
+      } catch (err) {
         console.log("Error fetching checklist:", err);
       }
-    }
+    };
+
     fetchChecklist();
   }, [activeSlug]);
 
   return (
-    // Use min-h-screen to ensure the dark color covers the whole height
-    <div className="min-h-screen flex flex-col lg:flex-row gap-8 px-8 items-start transition-colors duration-300 
-      bg-gray-50 text-gray-900">
+    <div className="min-h-screen bg-gray-50 text-gray-900 px-6 lg:px-10 py-6">
+      
+      <div className="flex flex-col lg:flex-row gap-8 items-start">
+        
+        {/* LEFT SIDE */}
+        <div className="flex-1 w-full space-y-8">
 
-      <div className="flex-1 w-full space-y-8 pt-4">
-        <section><SearchBar /></section>
+          {/* HERO */}
+          <section className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 space-y-6">
+            <div className="max-w-xl space-y-3">
+              <h1 className="text-3xl md:text-4xl font-bold leading-tight">
+                Find the right guide,{" "}
+                <span className="text-teal-600">get things done.</span>
+              </h1>
 
-        <section>
-          <TrendingGuides onSelectGuide={(slug) => setActiveSlug(slug)}/>
-        </section>
+              <p className="text-gray-600">
+                Search for government documents and follow easy steps to complete your requirements.
+              </p>
+            </div>
 
-        <section><HolidayAlert /></section>
+            <SearchBar />
+          </section>
 
-        {/* <div className="hidden lg:block h-32 w-full border border-dashed rounded-lg flex items-center justify-center text-xs
-          bg-gray-50 border-gray-300 text-gray-400">
-          Future AdSense Horizontal Banner
-        </div> */}
-      </div>
+          {/* POPULAR GUIDES */}
+          <section className="space-y-4">
+            <TrendingGuides onSelectGuide={(slug) => setActiveSlug(slug)} />
+          </section>
 
-      <div className="w-full lg:w-96 space-y-6 sticky top-8 pt-4">
-        <ChecklistCard
-          title={checklistData.title}
-          initialSteps={checklistData.steps}
-          slug={activeSlug}
-        />
+          {/* HOLIDAY ALERT */}
+          <section>
+            <HolidayAlert />
+          </section>
 
-        {/* <div className="p-4 border rounded-xl shadow-sm bg-white">
-          <p className="text-[10px] text-gray-400 mb-2 text-center uppercase font-bold tracking-widest">
-            Sponsored Ads
-          </p>
-          <div className="h-[400px] w-full border-2 border-dashed flex flex-col items-center justify-center rounded-lg text-gray-400 p-4
-            bg-gray-100 border-gray-200">
-            <p className="text-sm font-semibold">AdSense Skyscraper</p>
-            <p className="text-[10px] text-center mt-2">(High-visibility placement for manual review)</p>
-          </div>
-        </div> */}
+          {/* Adsense placeholder */}
+
+        </div>
+
+        {/* RIGHT SIDE */}
+        <div className="w-full lg:w-96 space-y-6 sticky top-8">
+
+          <ChecklistCard
+            title={checklistData.title}
+            initialSteps={checklistData.steps}
+            slug={activeSlug}
+          />
+
+          <WhySignUp />
+
+          {/* Adsense placeholder */}
+
+        </div>
       </div>
     </div>
   );
