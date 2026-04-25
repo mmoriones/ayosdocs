@@ -11,7 +11,7 @@ const GuidePageLayout = ({
   slug
 }) => {
   return (
-    <div className="px-6 lg:px-10 py-6 space-y-6">
+    <div className="px-6 lg:px-10 py-6 pb-20 space-y-6">
 
       {/* BACK BUTTON */}
       <Link
@@ -29,7 +29,7 @@ const GuidePageLayout = ({
 
           {/* HEADER CARD */}
           <div className="bg-white border border-gray-100 rounded-2xl p-6 md:p-8 shadow-sm">
-            
+
             <div className="space-y-3 max-w-2xl">
               <span className="text-xs font-medium text-teal-600 bg-teal-50 px-3 py-1 rounded-full">
                 IN PROGRESS
@@ -48,23 +48,24 @@ const GuidePageLayout = ({
 
           {/* CONTENT + TOC */}
           <div className="flex gap-8">
-
             {children}
-
           </div>
-
         </div>
 
         {/* RIGHT SIDEBAR */}
-        <div className="w-full lg:w-96 space-y-6 sticky top-8">
-          <ChecklistCard
-            title={guideName}
-            initialSteps={checklistSteps}
-            slug={slug}
-            isFullPage={true}
-          />
+        <div className="w-full lg:w-96 space-y-6 lg:sticky lg:top-8">
 
-          {/* OPTIONAL: Help Card */}
+          {/* Checklist (DESKTOP ONLY) */}
+          <div className="hidden lg:block">
+            <ChecklistCard
+              title={guideName}
+              initialSteps={checklistSteps}
+              slug={slug}
+              isFullPage={true}
+            />
+          </div>
+
+          {/* Help Card */}
           <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-800">Need help?</p>
@@ -74,9 +75,7 @@ const GuidePageLayout = ({
             </div>
             <span className="text-gray-400">→</span>
           </div>
-
         </div>
-
       </div>
     </div>
   );
