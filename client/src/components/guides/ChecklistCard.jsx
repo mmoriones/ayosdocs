@@ -7,6 +7,7 @@ import { useAuth } from '../auth/AuthContext';
 const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const { user, isLoggedIn } = useAuth();
+  const navigate = useNavigate();
 
   const [steps, setSteps] = useState(initialSteps || []);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
