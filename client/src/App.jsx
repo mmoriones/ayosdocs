@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
-import Navbar from './components/Navbar';
-import GuideDetail from './pages/GuideDetail';
+import Navbar from './components/navbar/Navbar';
+import Guide from './pages/Guide';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import UserProgress from './pages/UserProgress';
@@ -16,7 +16,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home activeSlug={activeSlug} setActiveSlug={setActiveSlug} />} />
-          <Route path="/guides/:slug" element={<GuideDetail />} />
+          <Route path="/guides/:slug" element={<Guide />} />
           <Route path="/my-progress" element={<UserProgress />} />
           <Route path="/verified" element={<Verified />} />
         </Routes>

@@ -7,7 +7,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
-import FullGuide from "../layouts/FullGuide";
+import GuidePageLayout from "../components/guides/GuidePageLayout";
 
 const extractHeadings = (markdown) => {
   const regex = /^##\s+(.*)/gm;
@@ -47,7 +47,7 @@ const GuideDetail = () => {
   if (!guide) return <div className="p-10 text-center">Loading...</div>;
 
   return (
-    <FullGuide
+    <GuidePageLayout
       title={guide.title}
       lastUpdated={guide.lastUpdated}
       guideName={guide.title}
@@ -87,7 +87,7 @@ const GuideDetail = () => {
         </article>
 
       </div>
-    </FullGuide>
+    </GuidePageLayout>
   );
 };
 

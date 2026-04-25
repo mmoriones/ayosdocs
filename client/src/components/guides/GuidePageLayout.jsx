@@ -1,7 +1,7 @@
 import React from 'react';
-import ChecklistCard from '../features/guides/ChecklistCard';
+import ChecklistCard from './ChecklistCard';
 
-const FullGuide = ({ title, lastUpdated, children, checklistSteps, guideName, slug }) => {
+const GuidePageLayout = ({ title, lastUpdated, children, checklistSteps, guideName, slug }) => {
   return (
     <div className="flex flex-col lg:flex-row gap-8 px-8 py-6 items-start animate-fadeIn transition-colors duration-300">
       
@@ -24,11 +24,8 @@ const FullGuide = ({ title, lastUpdated, children, checklistSteps, guideName, sl
           {children}
         </article>
 
-        {/* Bottom AdSense Placeholder */}
-        <div className="mt-12 p-4 border border-dashed rounded-lg text-center text-xs 
-          bg-gray-50 border-gray-300 text-gray-400">
-          In-Article AdSense Placeholder
-        </div>
+        {/* AdSense  */}
+
       </div>
 
       {/* RIGHT COLUMN: Sticky Sidebar */}
@@ -40,26 +37,9 @@ const FullGuide = ({ title, lastUpdated, children, checklistSteps, guideName, sl
           slug={slug}
           isFullPage={true}
           />
-
-        {/* Sidebar Ads */}
-        <div className="p-4 border rounded-xl shadow-sm bg-white">
-          <p className="text-[10px] mb-2 text-center uppercase font-bold tracking-widest text-gray-400">
-            Sponsored Ads
-          </p>
-          <div className="space-y-4">
-            <div className="h-64 w-full border border-dashed rounded flex items-center justify-center text-xs
-              bg-gray-100 border-gray-200 text-gray-400">
-              [ADSENSE PLACEHOLDER]
-            </div>
-            <div className="h-64 w-full border border-dashed rounded flex items-center justify-center text-xs
-              bg-gray-100 border-gray-200 text-gray-400">
-              [ADSENSE PLACEHOLDER]
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
 };
 
-export default FullGuide;
+export default GuidePageLayout;

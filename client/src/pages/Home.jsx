@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import SearchBar from '../features/guides/SearchBar';
-import TrendingGuides from '../features/guides/TrendingGuides';
-import ChecklistCard from '../features/guides/ChecklistCard';
+import SearchBar from '../components/guides/SearchBar'
+import TrendingGuides from '../components/guides/TrendingGuides';
+import ChecklistCard from '../components/guides/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
 
 const Home = ({activeSlug, setActiveSlug}) => {
@@ -48,10 +48,10 @@ const Home = ({activeSlug, setActiveSlug}) => {
 
         <section><HolidayAlert /></section>
 
-        <div className="hidden lg:block h-32 w-full border border-dashed rounded-lg flex items-center justify-center text-xs
+        {/* <div className="hidden lg:block h-32 w-full border border-dashed rounded-lg flex items-center justify-center text-xs
           bg-gray-50 border-gray-300 text-gray-400">
           Future AdSense Horizontal Banner
-        </div>
+        </div> */}
       </div>
 
       <div className="w-full lg:w-96 space-y-6 sticky top-8 pt-4">
@@ -61,7 +61,7 @@ const Home = ({activeSlug, setActiveSlug}) => {
           slug={activeSlug}
         />
 
-        <div className="p-4 border rounded-xl shadow-sm bg-white">
+        {/* <div className="p-4 border rounded-xl shadow-sm bg-white">
           <p className="text-[10px] text-gray-400 mb-2 text-center uppercase font-bold tracking-widest">
             Sponsored Ads
           </p>
@@ -70,7 +70,7 @@ const Home = ({activeSlug, setActiveSlug}) => {
             <p className="text-sm font-semibold">AdSense Skyscraper</p>
             <p className="text-[10px] text-center mt-2">(High-visibility placement for manual review)</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

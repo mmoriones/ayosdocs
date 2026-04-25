@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ProgressCard from '../features/guides/ProgressCard';
+import ProgressCard from '../components/guides/ProgressCard';
 import axios from 'axios';
 
 const UserProgress = () => {

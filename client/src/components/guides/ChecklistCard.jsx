@@ -6,6 +6,7 @@ import AuthModal from '../auth/AuthModal';
 const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const navigate = useNavigate();
+  
   const [steps, setSteps] = useState(initialSteps || []);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -109,7 +110,11 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
   return (
     <div className="transition-colors duration-300 p-6 max-w-sm rounded-2xl shadow-lg border-2 bg-white border-gray-100">
       <h3 className="text-lg font-black mb-4 border-b pb-2 uppercase text-gray-700">
-        {slug === 'getting-started' ? 'Getting Started' : `${title}`}
+        {isFullPage
+          ? "Requirements List"
+          : slug === "getting-started"
+            ? "Getting Started"
+            : title}
       </h3>
 
       <div className="space-y-4 mb-6">
