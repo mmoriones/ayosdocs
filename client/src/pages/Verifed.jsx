@@ -1,34 +1,53 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { CheckCircle } from "lucide-react";
 
 const Verified = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // auto redirect after 3s (optional)
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       navigate("/");
     }, 3000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="p-8 rounded-2xl shadow-xl border-2 bg-white border-gray-100 text-center">
-        
-        <h2 className="text-xl font-black uppercase text-gray-800 mb-2">
-          Email Verified 🎉
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+
+      <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-10 max-w-md w-full text-center">
+
+        {/* ICON */}
+        <div className="flex justify-center mb-6">
+          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-teal-100">
+            <CheckCircle className="text-teal-600" size={32} />
+          </div>
+        </div>
+
+        {/* TITLE */}
+        <h2 className="text-2xl font-semibold text-gray-900">
+          Email verified
         </h2>
 
-        <p className="text-sm text-gray-500 mb-6">
-          Your account has been successfully verified.
+        {/* DESCRIPTION */}
+        <p className="text-sm text-gray-500 mt-2 mb-6">
+          Your account has been successfully verified. You’ll be redirected shortly.
         </p>
 
+        {/* BUTTON */}
         <button
           onClick={() => navigate("/")}
-          className="bg-teal-700 hover:bg-teal-800 text-white font-bold py-3 px-6 rounded-xl text-xs uppercase tracking-widest"
+          className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-3 rounded-xl transition"
         >
           Go to Home
         </button>
+
+        {/* SMALL NOTE */}
+        <p className="text-xs text-gray-400 mt-4">
+          Redirecting in 3 seconds...
+        </p>
+
       </div>
     </div>
   );

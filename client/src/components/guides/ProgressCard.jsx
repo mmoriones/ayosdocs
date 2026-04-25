@@ -38,8 +38,14 @@ const ProgressCard = ({ title, steps, slug, onDelete }) => {
   return (
     <div
       onClick={() => navigate(`/guides/${slug}`)}
-      className="group bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between"
-    >
+      className="
+        group bg-white border border-gray-100 rounded-2xl p-5 
+        shadow-sm 
+        hover:shadow-md hover:-translate-y-0.5 
+        transition-all duration-200 ease-out
+        cursor-pointer flex flex-col justify-between
+      ">
+
       {/* TOP */}
       <div className="flex items-start justify-between mb-4">
 
