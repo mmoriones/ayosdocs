@@ -123,44 +123,47 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
       </div>
 
       {/* STEPS */}
-      <div className="relative">
-        {/* vertical line */}
-        <div className="absolute left-[10px] top-[10px] bottom-[10px] w-px bg-gray-200"></div>
+      <div className="max-h-72 overflow-y-auto pr-2">
+        <div className="relative">
+          {/* vertical line */}
+          <div className="absolute left-[21.5px] top-[10px] bottom-[10px] w-px bg-gray-200"></div>
 
-        <div className="space-y-2">
-          {steps.map((step, index) => (
-            <div
-              key={`${slug}-${step.id || index}`}
-              onClick={() => handleToggleStep(index)}
-              className="flex items-center gap-3 cursor-pointer group 
-                   py-1.5 px-1 -mx-1 rounded-md
-                   active:bg-gray-100 relative"
-            >
-              {/* NUMBER / CHECK */}
+          <div className="space-y-2">
+            {steps.map((step, index) => (
               <div
-                className={`z-10 w-5 h-5 flex items-center justify-center rounded-full text-[10px] font-medium shrink-0
-          ${step.completed
-                    ? "bg-teal-600 text-white"
-                    : "bg-gray-100 text-gray-500"
-                  }`}
+                key={`${slug}-${step.id || index}`}
+                onClick={() => handleToggleStep(index)}
+                className="flex items-center gap-3 cursor-pointer group 
+                     py-2.5 px-1 mx-2 rounded-md
+                     active:bg-gray-100 relative"
               >
-                {step.completed ? "✓" : index + 1}
-              </div>
+                {/* NUMBER / CHECK */}
+                <div
+                  className={`z-10 w-5 h-5 flex items-center justify-center rounded-full text-[10px] font-medium shrink-0
+            ${step.completed
+                      ? "bg-teal-600 text-white"
+                      : "bg-gray-100 text-gray-500"
+                    }`}
+                >
+                  {step.completed ? "✓" : index + 1}
+                </div>
 
-              {/* TEXT */}
-              <p
-                className={`text-sm leading-snug transition-colors
-          ${step.completed
-                    ? "text-gray-800 line-through"
-                    : "text-gray-600 group-hover:text-gray-800"
-                  }`}
-              >
-                {step.task}
-              </p>
-            </div>
-          ))}
+                {/* TEXT */}
+                <p
+                  className={`text-sm leading-snug transition-colors
+            ${step.completed
+                      ? "text-gray-800 line-through"
+                      : "text-gray-600 group-hover:text-gray-800"
+                    }`}
+                >
+                  {step.task}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
 
       {/* PROGRESS */}
       {slug !== "getting-started" && (
@@ -215,7 +218,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
                 : "bg-gray-300 cursor-not-allowed"
               }
               disabled:opacity-50`}
-            >
+          >
             {isSaving ? (
               <Loader2 className="animate-spin" size={16} />
             ) : (
