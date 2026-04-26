@@ -9,7 +9,7 @@ const GettingStarted = () => {
   return (
     <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
       <h3 className="text-lg font-semibold mb-4 text-gray-800">
-        Getting Started
+        Quick Guide
       </h3>
 
       <div className="relative">

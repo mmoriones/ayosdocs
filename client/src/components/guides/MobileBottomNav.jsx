@@ -1,35 +1,89 @@
-import { Home, List, CheckSquare } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Home, List, CheckSquare, X } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const MobileBottomNav = ({ onOpenTOC, onOpenChecklist }) => {
+const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpen }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const isHomeActive = location.pathname === "/" && !isTOCOpen && !isChecklistOpen;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // If modal is open, always keep the dock visible
+      if (isTOCOpen || isChecklistOpen) {
+        setIsVisible(true);
+        return;
+      }
+
+      // Show when scrolling up, hide when scrolling down
+      // Reduced threshold to 50 for better responsiveness
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY, isTOCOpen, isChecklistOpen]);
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-md z-50">
-      <div className="flex justify-around items-center py-2">
-
+    <div className={`lg:hidden fixed bottom-4 left-6 right-6 z-[100] transition-all duration-500 ease-in-out ${
+      isVisible ? "translate-y-0 opacity-100" : "translate-y-40 opacity-0 pointer-events-none"
+    }`}>
+      <div className="bg-white/95 backdrop-blur-md border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-[24px] p-2 flex items-center gap-1">
+        
+        {/* HOME */}
         <button
           onClick={() => navigate("/")}
-          className="flex flex-col items-center text-gray-600 text-xs"
+          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-2xl transition-all duration-200 active:scale-95 ${
+            isHomeActive 
+              ? "bg-teal-50 text-teal-600" 
+              : "text-gray-500 hover:bg-gray-50"
+          }`}
         >
-          <Home size={20} />
-          Home
+          <Home size={20} strokeWidth={isHomeActive ? 2.5 : 2} />
+          <span className={`text-[10px] mt-0.5 tracking-tight ${isHomeActive ? "font-bold" : "font-medium"}`}>
+            Home
+          </span>
         </button>
 
+        {/* TOC */}
         <button
           onClick={onOpenTOC}
-          className="flex flex-col items-center text-gray-600 text-xs"
+          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-2xl transition-all duration-200 active:scale-95 ${
+            isTOCOpen 
+              ? "bg-teal-50 text-teal-600" 
+              : "text-gray-500 hover:bg-gray-50"
+          }`}
         >
-          <List size={20} />
-          TOC
+          {isTOCOpen ? <X size={20} strokeWidth={2.5} /> : <List size={20} strokeWidth={isTOCOpen ? 2.5 : 2} />}
+          <span className={`text-[10px] mt-0.5 tracking-tight ${isTOCOpen ? "font-bold" : "font-medium"}`}>
+            {isTOCOpen ? "Close" : "TOC"}
+          </span>
         </button>
 
+        {/* CHECKLIST */}
         <button
           onClick={onOpenChecklist}
-          className="flex flex-col items-center text-gray-600 text-xs"
+          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-2xl transition-all duration-200 active:scale-95 ${
+            isChecklistOpen 
+              ? "bg-teal-50 text-teal-600" 
+              : "text-gray-500 hover:bg-gray-50"
+          }`}
         >
-          <CheckSquare size={20} />
-          Checklist
+          {isChecklistOpen ? <X size={20} strokeWidth={2.5} /> : <CheckSquare size={20} strokeWidth={isChecklistOpen ? 2.5 : 2} />}
+          <span className={`text-[10px] mt-0.5 tracking-tight ${isChecklistOpen ? "font-bold" : "font-medium"}`}>
+            {isChecklistOpen ? "Close" : "Checklist"}
+          </span>
         </button>
 
       </div>

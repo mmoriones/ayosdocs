@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AuthModal from '../auth/AuthModal';
 import { useAuth } from '../auth/AuthContext';
 
-const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
+const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const { user, isLoggedIn } = useAuth();
   const navigate = useNavigate();
@@ -108,12 +108,12 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
   const hasCompletedSteps = steps.some((s) => s.completed);
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5">
+    <div className={`space-y-5 ${isModal ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm p-6"}`}>
 
       {/* HEADER */}
       <div className="space-y-2">
         <h3 className="text-lg font-semibold text-gray-800">
-          {isFullPage
+          {isFullPage || isModal
             ? "Requirements List"
             : slug === "getting-started"
               ? "Continue your progress"
@@ -186,7 +186,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false }) => {
       <div className="space-y-3">
 
         {/* VIEW GUIDE */}
-        {slug !== "getting-started" && !isFullPage && (
+        {slug !== "getting-started" && !isFullPage && !isModal && (
           <button
             onClick={() => navigate(`/guides/${slug}`)}
             className="w-full flex items-center justify-center gap-2 py-2.5 

@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { guidesMap } from "../utils/loadGuides";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { X } from "lucide-react";
 
 import GuidePageLayout from "../components/guides/GuidePageLayout";
 import MobileBottomNav from "../components/guides/MobileBottomNav";
@@ -17,6 +18,27 @@ const Guide = () => {
 
   const [showTOC, setShowTOC] = useState(false);
   const [showChecklist, setShowChecklist] = useState(false);
+
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    const lockScroll = () => {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    };
+    
+    const unlockScroll = () => {
+      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'unset';
+    };
+
+    if (showTOC || showChecklist) {
+      lockScroll();
+    } else {
+      unlockScroll();
+    }
+    
+    return () => unlockScroll();
+  }, [showTOC, showChecklist]);
 
   if (!guide) {
     return <div className="p-10 text-center">Guide not found</div>;
@@ -97,61 +119,62 @@ const Guide = () => {
 
       {/* MOBILE BOTTOM NAV */}
       <MobileBottomNav
-        onOpenTOC={() => setShowTOC(true)}
-        onOpenChecklist={() => setShowChecklist(true)}
+        onOpenTOC={() => {
+          setShowTOC(!showTOC);
+          setShowChecklist(false);
+        }}
+        onOpenChecklist={() => {
+          setShowChecklist(!showChecklist);
+          setShowTOC(false);
+        }}
+        isTOCOpen={showTOC}
+        isChecklistOpen={showChecklist}
       />
 
       {/* TOC MODAL */}
       {showTOC && (
-        <div className="fixed inset-0 bg-black/30 z-50 flex items-end lg:hidden">
-          <div className="bg-white w-full rounded-t-2xl p-5 max-h-[70vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-end lg:hidden touch-none">
+          <div className="bg-white w-full rounded-t-3xl max-h-[85vh] flex flex-col animate-in slide-in-from-bottom duration-300 touch-auto">
+            
+            {/* FIXED HEADER */}
+            <div className="px-6 py-5 border-b border-gray-100">
+              <h3 className="font-bold text-lg text-gray-900">On this page</h3>
+            </div>
 
-            <h3 className="font-semibold mb-3">On this page</h3>
-
-            <ul className="space-y-2 text-sm">
-              {headings.map((h, index) => (
-                <li key={h.id}>
-                  <a
-                    href={`#${h.id}`}
-                    onClick={() => setShowTOC(false)}
-                    className="block py-2 text-gray-600"
-                  >
-                    {index + 1}. {h.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <button
-              onClick={() => setShowTOC(false)}
-              className="mt-4 w-full py-2 bg-gray-100 rounded-lg"
-            >
-              Close
-            </button>
-
+            {/* SCROLLABLE LIST */}
+            <div className="flex-1 overflow-y-auto p-6 pb-24">
+              <ul className="space-y-1">
+                {headings.map((h, index) => (
+                  <li key={h.id}>
+                    <a
+                      href={`#${h.id}`}
+                      onClick={() => setShowTOC(false)}
+                      className="block py-3 px-4 rounded-xl text-gray-600 active:bg-gray-50 active:text-teal-600 transition-colors"
+                    >
+                      <span className="text-gray-300 mr-3 text-sm font-medium">{String(index + 1).padStart(2, '0')}</span>
+                      {h.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       )}
 
       {/* CHECKLIST MODAL */}
       {showChecklist && (
-        <div className="fixed inset-0 bg-black/30 z-50 flex items-end lg:hidden">
-          <div className="bg-white w-full rounded-t-2xl p-4 max-h-[80vh] overflow-y-auto">
-
-            <ChecklistCard
-              title={guide.title}
-              initialSteps={guide.checklist?.map(task => ({ task }))}
-              slug={slug}
-              isFullPage={true}
-            />
-
-            <button
-              onClick={() => setShowChecklist(false)}
-              className="mt-3 w-full py-2 bg-gray-100 rounded-lg"
-            >
-              Close
-            </button>
-
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-end lg:hidden touch-none">
+          <div className="bg-white w-full rounded-t-3xl max-h-[90vh] flex flex-col animate-in slide-in-from-bottom duration-300 touch-auto">
+            {/* SCROLLABLE CONTENT */}
+            <div className="flex-1 overflow-y-auto p-6 pb-28">
+              <ChecklistCard
+                title={guide.title}
+                initialSteps={guide.checklist?.map(task => ({ task }))}
+                slug={slug}
+                isModal={true}
+              />
+            </div>
           </div>
         </div>
       )}
