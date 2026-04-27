@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import SearchBar from '../components/guides/SearchBar';
-import TrendingGuides from '../components/guides/TrendingGuides';
-import ChecklistCard from '../components/guides/ChecklistCard';
+import SearchBar from '../features/guides/components/discovery/SearchBar';
+import TrendingGuides from '../features/guides/components/discovery/TrendingGuides';
+import ChecklistCard from '../features/guides/components/tracking/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
-import WhySignUp from '../components/guides/WhySignUp';
-import TipsCard from '../components/guides/TipsCard';
-import GettingStarted from '../components/guides/GettingStarted';
+import WhySignUp from '../features/guides/components/callouts/WhySignUp';
+import TipsCard from '../features/guides/components/callouts/TipsCard';
+import GettingStarted from '../features/guides/components/discovery/GettingStarted';
 import { guidesMap } from '../utils/loadGuides';
-import { useAuth } from '../components/auth/AuthContext'
+import { useAuth } from '../context/AuthContext'
 
 const Home = ({ activeSlug, setActiveSlug }) => {
   const { isLoggedIn } = useAuth();

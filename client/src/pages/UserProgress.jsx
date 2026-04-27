@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ProgressCard from '../components/guides/ProgressCard';
+import ProgressCard from '../features/guides/components/tracking/ProgressCard'
 import { Bookmark } from 'lucide-react';
 import { guidesMap } from "../utils/loadGuides";
 

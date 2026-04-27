@@ -1,8 +1,8 @@
 import { CheckSquare, Square, ArrowRight, Save, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthModal from '../auth/AuthModal';
-import { useAuth } from '../auth/AuthContext';
+import AuthModal from '../../../auth/components/AuthModal';
+import { useAuth } from '../../../../context/AuthContext';
 
 const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
@@ -111,16 +111,18 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
     <div className={`space-y-5 ${isModal ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm p-6"}`}>
 
       {/* HEADER */}
-      <div className="space-y-2">
-        <h3 className="text-lg font-semibold text-gray-800">
-          {isFullPage || isModal
-            ? "Requirements List"
-            : slug === "getting-started"
-              ? "Continue your progress"
-              : title}
-        </h3>
-        <div className="h-px bg-gray-100" />
-      </div>
+      {!isModal && (
+        <div className="space-y-2">
+          <h3 className="text-lg font-semibold text-gray-800">
+            {isFullPage
+              ? "Requirements List"
+              : slug === "getting-started"
+                ? "Continue your progress"
+                : title}
+          </h3>
+          <div className="h-px bg-gray-100" />
+        </div>
+      )}
 
       {/* STEPS */}
       <div className="max-h-72 overflow-y-auto pr-2">

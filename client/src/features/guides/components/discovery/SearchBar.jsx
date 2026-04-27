@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, X } from "lucide-react";
-import { searchGuides } from '../../utils/searchGuides'
+import { searchGuides } from '../../../../utils/searchGuides'
 
 const SearchBar = () => {
 

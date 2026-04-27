@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-import AuthModal from "../auth/AuthModal";
-import { useAuth } from "../auth/AuthContext";
+import AuthModal from "../../auth/components/AuthModal";
+import { useAuth } from "../../../context/AuthContext";
 
 const Navbar = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
