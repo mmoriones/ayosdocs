@@ -9,12 +9,18 @@ import GettingStarted from '../features/guides/components/discovery/GettingStart
 import { guidesMap } from '../utils/loadGuides';
 import { useAuth } from '../context/AuthContext'
 
-const Home = ({ activeSlug, setActiveSlug }) => {
+const Home = () => {
+  const [activeSlug, setActiveSlug] = useState('getting-started');
   const { isLoggedIn } = useAuth();
   const [checklistData, setChecklistData] = useState({ title: "", steps: [] });
+
+  useEffect(() => {
+    const lastSlug = localStorage.getItem("lastGuideSlug");
+    if (lastSlug) setActiveSlug(lastSlug);
+  }, []);
+
   useEffect(() => {
     if (!activeSlug || activeSlug === 'getting-started') return;
-
     const guide = guidesMap[activeSlug];
 
     if (guide) {
@@ -55,7 +61,7 @@ const Home = ({ activeSlug, setActiveSlug }) => {
 
           {/* POPULAR GUIDES */}
           <section className="space-y-4">
-            <TrendingGuides onSelectGuide={(slug) => setActiveSlug(slug)} />
+            <TrendingGuides />
           </section>
 
           {/* HOLIDAY ALERT */}

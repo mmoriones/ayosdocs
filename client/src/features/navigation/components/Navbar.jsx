@@ -17,6 +17,7 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
     navigate("/");
+    localStorage.removeItem("lastGuideSlug");
   };
 
   return (

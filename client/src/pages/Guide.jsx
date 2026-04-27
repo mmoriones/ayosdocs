@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
 import { guidesMap } from "../utils/loadGuides";
 
 import ReactMarkdown from "react-markdown";
@@ -11,6 +12,10 @@ import GuidePageLayout from "../features/guides/components/reader/GuidePageLayou
 const Guide = () => {
   const { slug } = useParams();
   const guide = guidesMap[slug];
+
+  useEffect(() => {
+    localStorage.setItem("lastGuideSlug", slug);
+  }, [slug]);
 
   if (!guide) {
     return <div className="p-10 text-center">Guide not found</div>;

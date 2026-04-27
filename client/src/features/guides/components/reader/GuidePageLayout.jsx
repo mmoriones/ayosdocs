@@ -68,7 +68,7 @@ const GuidePageLayout = ({
         </div>
 
         {/* DESKTOP RIGHT SIDEBAR (Checklist) */}
-        <aside className="hidden lg:block w-96 space-y-6 sticky top-8 shrink-0">
+        <aside className="hidden lg:block w-96 space-y-6 sticky top-28 shrink-0">
           <ChecklistCard
             title={title}
             initialSteps={checklistSteps}

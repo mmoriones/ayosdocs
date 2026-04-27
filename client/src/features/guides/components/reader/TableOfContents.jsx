@@ -5,9 +5,23 @@ const TableOfContents = ({ headings, onItemClick, activeId }) => {
         <li key={h.id}>
           <a
             href={`#${h.id}`}
+
             onClick={(e) => {
+              e.preventDefault();
+
+              const element = document.getElementById(h.id);
+              const offset = 80;
+              
+              element && 
+                window.scrollTo({
+                  top: element.getBoundingClientRect().top + window.scrollY - offset,
+                  behavior: "smooth",
+                });
+              
+              
               if (onItemClick) onItemClick(h.id);
             }}
+
             className={`block py-2 px-3 rounded-lg text-sm transition-colors ${
               activeId === h.id
                 ? "bg-teal-50 text-teal-600 font-medium"

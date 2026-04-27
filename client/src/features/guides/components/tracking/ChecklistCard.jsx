@@ -154,8 +154,8 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
                 <p
                   className={`text-sm leading-snug transition-colors
             ${step.completed
-                      ? "text-gray-800 line-through"
-                      : "text-gray-600 group-hover:text-gray-800"
+                      ? "text-gray-500 line-through"
+                      : "text-gray-800 group-hover:text-gray-800"
                     }`}
                 >
                   {step.task}

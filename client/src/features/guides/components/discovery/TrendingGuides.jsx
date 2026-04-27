@@ -61,12 +61,11 @@ const guides = [
   },
 ];
 
-const TrendingGuides = ({ onSelectGuide }) => {
+const TrendingGuides = () => {
   const navigate = useNavigate();
 
   const handleSelection = (slug) => {
     navigate(`/guides/${slug}`);
-    onSelectGuide(slug);
   };
 
   return (
