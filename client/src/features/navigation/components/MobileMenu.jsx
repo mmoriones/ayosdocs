@@ -25,8 +25,9 @@ const MobileMenu = ({
   ];
 
   const secondaryItems = [
-    { label: "Resources", to: "/resources" },
     { label: "About", to: "/about" },
+    { label: "FAQs", to: "/faqs" },
+    { label: "Contact", to: "/contact" },
   ];
 
   const linkClass = (path) =>

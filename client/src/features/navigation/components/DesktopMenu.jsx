@@ -57,13 +57,27 @@ const DesktopMenu = ({
         </Link>
       )}
 
-      {/* Static */}
-      <span className="text-gray-600 hover:text-teal-600 cursor-pointer">
-        Resources
-      </span>
-      <span className="text-gray-600 hover:text-teal-600 cursor-pointer">
+      {/* Info Pages */}
+      <Link to="/about" className={navClass("/about")}>
         About
-      </span>
+        {isActive("/about") && (
+          <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-teal-600 rounded"></span>
+        )}
+      </Link>
+
+      <Link to="/faqs" className={navClass("/faqs")}>
+        FAQs
+        {isActive("/faqs") && (
+          <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-teal-600 rounded"></span>
+        )}
+      </Link>
+
+      <Link to="/contact" className={navClass("/contact")}>
+        Contact
+        {isActive("/contact") && (
+          <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-teal-600 rounded"></span>
+        )}
+      </Link>
 
       {/* Auth */}
       {!user ? (
