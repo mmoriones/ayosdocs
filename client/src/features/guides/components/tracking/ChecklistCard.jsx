@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthModal from '../../../auth/components/AuthModal';
 import { useAuth } from '../../../../context/AuthContext';
+import { useToast } from '../../../../context/ToastContext';
 
 const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const { user, isLoggedIn } = useAuth();
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const [steps, setSteps] = useState(initialSteps || []);
@@ -88,12 +90,28 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
         }),
       });
 
-      if (!response.ok) {
+      if (response.ok) {
+        showToast({
+          type: 'success',
+          title: 'Progress Saved',
+          message: 'Your checklist progress has been updated.'
+        });
+      } else {
         const errorData = await response.json();
         console.error("Save error:", errorData.message);
+        showToast({
+          type: 'error',
+          title: 'Save Error',
+          message: 'Failed to save progress. Please try again.'
+        });
       }
     } catch (error) {
       console.error("Failed to save:", error);
+      showToast({
+        type: 'error',
+        title: 'Network Error',
+        message: 'An error occurred while saving. Check your connection.'
+      });
     } finally {
       setIsSaving(false);
     }

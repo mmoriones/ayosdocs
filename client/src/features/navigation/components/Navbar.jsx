@@ -5,6 +5,7 @@ import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import AuthModal from "../../auth/components/AuthModal";
 import { useAuth } from "../../../context/AuthContext";
+import { useToast } from "../../../context/ToastContext";
 
 const Navbar = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -12,12 +13,18 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const { user, isLoggedIn, logout } = useAuth();  
+  const { showToast } = useToast();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate("/");
     localStorage.removeItem("lastGuideSlug");
+    showToast({
+      type: 'success',
+      title: 'Logged Out',
+      message: 'You have been successfully logged out.'
+    });
   };
 
   return (

@@ -1,17 +1,24 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle } from "lucide-react";
+import { useToast } from "../context/ToastContext";
 
 const Verified = () => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   useEffect(() => {
+    showToast({
+      type: 'success',
+      title: 'Email Verified',
+      message: 'Your account has been successfully verified.'
+    });
     const timer = setTimeout(() => {
       navigate("/");
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [navigate, showToast]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">

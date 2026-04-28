@@ -1,6 +1,19 @@
 import React from 'react';
+import { useToast } from '../../context/ToastContext';
 
 const Contact = () => {
+  const { showToast } = useToast();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    showToast({
+      type: 'success',
+      title: 'Message Sent',
+      message: "We've received your message and will get back to you soon."
+    });
+    e.target.reset();
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 px-6 lg:px-10 py-12">
       <div className="max-w-4xl mx-auto space-y-8">
@@ -30,10 +43,11 @@ const Contact = () => {
               </div>
             </div>
 
-            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                 <input
+                  required
                   type="text"
                   className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   placeholder="Your name"
@@ -42,6 +56,7 @@ const Contact = () => {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                 <input
+                  required
                   type="email"
                   className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   placeholder="your@email.com"
@@ -50,6 +65,7 @@ const Contact = () => {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
                 <textarea
+                  required
                   rows="4"
                   className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all"
                   placeholder="How can we help?"

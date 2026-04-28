@@ -2,9 +2,13 @@ import { useState, useEffect } from "react";
 import { X, Eye, EyeOff } from "lucide-react";
 import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
+import { useToast } from "../../../context/ToastContext";
+import { useAuth } from "../../../context/AuthContext";
 
 const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
+  const { showToast } = useToast();
+  const { login } = useAuth();
 
   const [view, setView] = useState(initialView);
   const [showPassword, setShowPassword] = useState(false);
@@ -34,16 +38,33 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
           token: res.data.token
         };
 
-        localStorage.setItem("user", JSON.stringify(userData));
+        login(userData);
+        
+        showToast({
+          type: 'success',
+          title: 'Welcome back!',
+          message: 'You have successfully logged in with Google.'
+        });
 
         onClose();
-        window.location.reload();
 
       } catch (err) {
+        showToast({
+          type: 'error',
+          title: 'Login Failed',
+          message: 'Google login failed. Please try again.'
+        });
         setError("Google login failed");
       }
     },
-    onError: () => setError("Google Login Failed")
+    onError: () => {
+      showToast({
+        type: 'error',
+        title: 'Login Failed',
+        message: 'Google Login Failed'
+      });
+      setError("Google Login Failed");
+    }
   });
 
 
@@ -60,17 +81,30 @@ const AuthModal = ({ isOpen, onClose, initialView = 'login' }) => {
           token: res.data.token
         };
 
-        localStorage.setItem("user", JSON.stringify(userData));
+        login(userData);
 
-        alert("Login Successful!");
+        showToast({
+          type: 'success',
+          title: 'Login Successful',
+          message: 'Welcome back to AyosDocs!'
+        });
         onClose();
-        window.location.reload();
       } else {
-        alert("Registration Successful! Please login.");
+        showToast({
+          type: 'success',
+          title: 'Account Created',
+          message: 'Registration Successful! Please login.'
+        });
         setView('login');
       }
     } catch (error) {
-      setError(error.response?.data?.message || "Something went wrong");
+      const errorMsg = error.response?.data?.message || "Something went wrong";
+      setError(errorMsg);
+      showToast({
+        type: 'error',
+        title: 'Authentication Error',
+        message: errorMsg
+      });
     }
   };
 
