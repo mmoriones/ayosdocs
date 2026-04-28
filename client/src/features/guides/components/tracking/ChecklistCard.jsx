@@ -36,7 +36,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
           const data = await response.json();
 
           const completedIndices = data.completedTasks
-            ? data.completedTasks.split(",").map(Number)
+            ? data.completedTasks.split(",").filter(s => s !== "").map(Number)
             : [];
 
           setSteps((prevSteps) =>
@@ -52,7 +52,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
     };
 
     fetchSavedProgress();
-  }, [isLoggedIn, slug, user]);
+  }, [isLoggedIn, slug, user?.token]);
 
   // Toggle step
   const handleToggleStep = (index) => {
@@ -113,7 +113,8 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
         message: 'An error occurred while saving. Check your connection.'
       });
     } finally {
-      setIsSaving(false);
+      // Add a small delay for smoother transition
+      setTimeout(() => setIsSaving(false), 500);
     }
   };
 
@@ -146,7 +147,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
       <div className="max-h-72 overflow-y-auto pr-2">
         <div className="relative">
           {/* vertical line */}
-          <div className="absolute left-[21.5px] top-[10px] bottom-[10px] w-px bg-gray-200"></div>
+          <div className="absolute left-[22px] top-[10px] bottom-[10px] w-px bg-gray-200"></div>
 
           <div className="space-y-2">
             {steps.map((step, index) => (
@@ -232,19 +233,24 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
             onClick={handleSaveProgress}
             disabled={isSaving || !hasCompletedSteps}
             className={`w-full flex items-center justify-center gap-2 py-2.5 
-              text-sm font-medium text-white rounded-lg transition
+              min-h-[44px] text-sm font-medium text-white rounded-lg transition-all duration-200
               ${hasCompletedSteps
-                ? "bg-teal-600 hover:bg-teal-700"
+                ? "bg-teal-600 hover:bg-teal-700 active:scale-[0.98]"
                 : "bg-gray-300 cursor-not-allowed"
               }
-              disabled:opacity-50`}
+              disabled:opacity-70 disabled:cursor-wait`}
           >
             {isSaving ? (
-              <Loader2 className="animate-spin" size={16} />
+              <>
+                <Loader2 className="animate-spin" size={16} />
+                <span>Saving Progress...</span>
+              </>
             ) : (
-              <Save size={16} />
+              <>
+                <Save size={16} />
+                <span>Save Guide Progress</span>
+              </>
             )}
-            {isSaving ? "Saving..." : "Save Guide Progress"}
           </button>
         )}
       </div>

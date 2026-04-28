@@ -8,7 +8,8 @@ const app = express();
 app.use(cors({
   origin: [ process.env.FRONTEND_URL,
       "https://www.ayosdocs.com",
-    "https://ayosdocs.com"
+    "https://ayosdocs.com",
+    "https://dev.ayosdocs.com"
   ]
 }));
 

@@ -7,4 +7,8 @@ export default defineConfig({
     react(),
     tailwindcss(), // [!code ++]
   ],
+  server: {
+    host: true, // or '0.0.0.0'
+    allowedHosts: ['dev.ayosdocs.com']
+  }
 })
