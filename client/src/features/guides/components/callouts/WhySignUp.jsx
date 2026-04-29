@@ -1,6 +1,6 @@
 import { Clock, FileText, Bell, UserPlus } from 'lucide-react';
 
-const WhySignUp = () => {
+const WhySignUp = ({ onSignUp }) => {
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-5">
       <h3 className="text-lg font-semibold text-gray-800">
@@ -39,7 +39,10 @@ const WhySignUp = () => {
         </div>
       </div>
 
-      <button className="w-full flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-medium py-2.5 rounded-lg transition">
+      <button 
+        onClick={onSignUp}
+        className="w-full flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-medium py-2.5 rounded-lg transition"
+      >
         <UserPlus className="w-4 h-4" />
         Create an Account
       </button>

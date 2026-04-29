@@ -6,11 +6,13 @@ import HolidayAlert from '../components/HolidayAlert';
 import WhySignUp from '../features/guides/components/callouts/WhySignUp';
 import TipsCard from '../features/guides/components/callouts/TipsCard';
 import GettingStarted from '../features/guides/components/discovery/GettingStarted';
+import AuthModal from '../features/auth/components/AuthModal';
 import { guidesMap } from '../utils/loadGuides';
 import { useAuth } from '../context/AuthContext'
 
 const Home = () => {
   const [activeSlug, setActiveSlug] = useState('getting-started');
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { isLoggedIn } = useAuth();
   const [checklistData, setChecklistData] = useState({ title: "", steps: [] });
 
@@ -86,12 +88,21 @@ const Home = () => {
             />
           )}
 
-          {isLoggedIn ? <TipsCard /> : <WhySignUp />}
+          {isLoggedIn ? (
+            <TipsCard />
+          ) : (
+            <WhySignUp onSignUp={() => setIsAuthModalOpen(true)} />
+          )}
 
           {/* Adsense placeholder */}
 
         </div>
       </div>
+
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+      />
     </div>
   );
 };
