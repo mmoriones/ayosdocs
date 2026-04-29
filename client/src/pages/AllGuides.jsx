@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FileText, ChevronLeft, ChevronRight, Search, ArrowRight } from 'lucide-react';
 import { guidesMap } from '../utils/loadGuides';
@@ -7,6 +7,10 @@ const AllGuides = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+
+  useEffect(() => {
+    document.title = "All Guides | AyosDocs";
+  }, []);
 
   // Convert guidesMap to array and sort by title
   const allGuides = Object.values(guidesMap).sort((a, b) => a.title.localeCompare(b.title));

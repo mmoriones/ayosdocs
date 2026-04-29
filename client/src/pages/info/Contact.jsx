@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useToast } from '../../context/ToastContext';
 
 const Contact = () => {
   const { showToast } = useToast();
+
+  useEffect(() => {
+    document.title = "Contact Us | AyosDocs Support";
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -5,6 +5,7 @@ import ChecklistCard from '../tracking/ChecklistCard';
 import TableOfContents from './TableOfContents';
 import MobileBottomNav from './MobileBottomNav';
 import GuideModal from './GuideModal';
+import RelatedGuides from './RelatedGuides';
 
 const GuidePageLayout = ({
   title,
@@ -12,7 +13,8 @@ const GuidePageLayout = ({
   children,
   checklistSteps,
   headings,
-  slug
+  slug,
+  category
 }) => {
   const [activeModal, setActiveModal] = useState(null); // 'toc' or 'checklist'
 
@@ -44,7 +46,7 @@ const GuidePageLayout = ({
                 {title}
               </h1>
               <p className="text-sm text-gray-500">
-                Last Updated: {lastUpdated}
+                Last Updated: {lastUpdated?.toString()}
               </p>
             </div>
           </header>
@@ -76,15 +78,11 @@ const GuidePageLayout = ({
             isFullPage={true}
           />
 
-          <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex items-center justify-between">
-            <div>
-              <p className="font-medium text-gray-800">Need help?</p>
-              <p className="text-sm text-gray-500">
-                Check our resources or FAQs
-              </p>
-            </div>
-            <span className="text-gray-400">→</span>
-          </div>
+          <RelatedGuides 
+            currentSlug={slug} 
+            category={category} 
+          />
+
         </aside>
       </div>
 

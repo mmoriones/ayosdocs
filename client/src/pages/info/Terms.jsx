@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Terms = () => {
+  useEffect(() => {
+    document.title = "Terms and Conditions | AyosDocs";
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 px-6 lg:px-10 py-12">
       <div className="max-w-4xl mx-auto space-y-8">

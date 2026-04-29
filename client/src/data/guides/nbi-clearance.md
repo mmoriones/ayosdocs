@@ -1,223 +1,196 @@
 ---
-  title: NBI Clearance (New Applicant)
-  slug: nbi-clearance
-  lastUpdated: 2026-04-01
-  checklist: 
-     - Register Online Account
-     - Set Appointment
-     - Pay Fee
-     - Biometrics
-     - Claim Clearance
+title: How to Apply for an NBI Clearance (New Applicant)
+slug: nbi-clearance
+description: A step-by-step guide for first-time applicants on how to apply for an NBI Clearance in the Philippines, including requirements, fees, and processing time.
+lastUpdated: 2026-04-01
+category: Government ID
+tags:
+- NBI Clearance
+- Background Check
+- Employment Requirements
+- Philippines
+checklist:
+- Register online account
+- Fill out application form
+- Set appointment
+- Pay clearance fee
+- Complete biometrics
+- Claim clearance
 ---
 
 ## 1. What is an NBI Clearance?
 
-An **NBI Clearance** is an official document issued by the National Bureau of Investigation (NBI) in the Philippines. It certifies that the holder has no criminal record or pending cases recorded in the NBI database.
+An **NBI Clearance** is an official document issued by the National Bureau of Investigation (NBI) in the Philippines.
 
-This document is commonly required for:
+* It certifies that the holder has no criminal record or pending cases  
+* It is used for employment, travel, and legal purposes  
+* It is issued by the National Bureau of Investigation (NBI)  
 
-- Employment applications
-- Visa processing
-- Passport applications
-- Business registrations
-- Government transactions
-
-The clearance verifies that the applicant does not have any criminal cases recorded in the national system.
+This document serves as proof of good moral standing for various transactions.
 
 ---
 
-## 2. Who Needs an NBI Clearance?
+## 2. Who Needs This?
 
-Many institutions require an NBI Clearance as proof of good standing. You may need to apply for one if you are:
+You may need an NBI Clearance if you are:
 
-- Applying for a job
-- Traveling abroad
-- Applying for government identification
-- Starting a business
-- Completing legal documentation
+- Employees applying for jobs  
+- Individuals traveling abroad  
+- Applicants for government IDs  
+- Business owners  
+- Individuals processing legal documents  
 
 First-time applicants must register online before visiting an NBI branch.
 
 ---
 
-## 3. Requirements for New Applicants
-
-Before registering for an NBI Clearance, prepare the following:
+## 3. Requirements
 
 ### Primary Requirements
 
-Bring at least **two valid government-issued IDs**.
+* At least two valid government-issued IDs:
+  * Passport  
+  * Driver's License  
+  * PhilHealth ID  
+  * UMID  
+  * Postal ID  
+  * Voter's ID  
 
-Examples include:
+### Additional Requirements (if applicable)
 
-- Passport
-- Driver's License
-- PhilHealth ID
-- UMID
-- Postal ID
-- Voter's ID
+* PSA Birth Certificate  
+* Barangay Clearance  
+* Student ID (for students)  
 
-### Additional Requirements
-
-Some applicants may also be asked to provide:
-
-- Birth Certificate (PSA)
-- Barangay Clearance
-- Student ID (for students)
-
-Always bring **original copies** of your identification documents.
+💡 Tip: Always bring original copies of your IDs.
 
 ---
 
-## 4. Step-by-Step Application Process
+## 4. Step-by-Step Process
 
-### Step 1 – Online Registration
+### Step 1 – Register an Online Account
 
-Visit the official NBI Clearance website and create an account. During registration, you will be asked to provide the following information:
+Create an account on the official NBI Clearance website.
 
-- Full name
-- Birthdate
-- Address
-- Contact details
-- Valid email address
-
-After completing the form, confirm your account using the verification link sent to your email.
+- Enter your full name, birthdate, and contact details  
+- Use a valid email address  
+- Confirm your account via email verification  
 
 ---
 
 ### Step 2 – Fill Out the Application Form
 
-Once logged in, complete the NBI Clearance application form by providing accurate personal details.
+Complete the online form carefully.
 
-Make sure that:
-
-- Your name matches your identification documents
-- Your birthdate is correct
-- Your address is complete
-
-Incorrect information may cause delays during processing.
+* Ensure your name matches your IDs  
+* Provide accurate birthdate and address  
+* Double-check all information before submission  
 
 ---
 
-### Step 3 – Schedule an Appointment
+### Step 3 – Set an Appointment
 
-Choose your preferred NBI branch and schedule a convenient appointment date.
+Choose your preferred NBI branch and schedule your visit.
 
-When selecting your appointment:
-
-- Choose a nearby branch
-- Avoid peak hours if possible
-- Make sure you are available on the selected date
-
-You will receive a confirmation of your appointment after scheduling.
+- Select a convenient date  
+- Avoid peak hours if possible  
+- Confirm your appointment details  
 
 ---
 
-### Step 4 – Payment of Clearance Fee
+### Step 4 – Pay the Clearance Fee
 
-Pay the required clearance fee through one of the available payment channels.
+Pay through available channels:
 
-Common payment options include:
+* Online banking  
+* Mobile wallets  
+* Payment centers  
+* Over-the-counter bank payments  
 
-- Online banking
-- Mobile wallets
-- Payment centers
-- Bank over-the-counter payments
-
-After payment, keep the **reference number or receipt** as proof of transaction.
+Keep your **reference number or receipt**.
 
 ---
 
 ### Step 5 – Biometrics and Verification
 
-On your appointment day, visit the selected NBI branch.
+Visit your selected branch on your appointment date.
 
-During your visit, the following procedures will take place:
-
-- Verification of your identity
-- Fingerprint scanning
-- Photo capture
-- Signature recording
-
-This process is commonly referred to as **biometrics capture**.
+- Identity verification  
+- Fingerprint scanning  
+- Photo capture  
+- Signature recording  
 
 ---
 
-## 5. NBI "Hit" Explained
+### Step 6 – Claim Your Clearance
 
-In some cases, the system may generate a **"Hit"** during the application process.
+If no issues arise:
 
-A hit occurs when your name matches someone with a record in the NBI database.
-
-This does **not automatically mean you have a criminal record**. It simply means that additional verification is required.
-
-If you receive a hit:
-
-- Your clearance may take several additional days
-- Further verification will be conducted
-- You may be asked to return to the branch
+* Clearance may be released the same day  
+* Bring your ID and reference number  
+* Verify all printed details before leaving  
 
 ---
 
-## 6. Releasing of NBI Clearance
+## 5. Fees
 
-If your application is successful and there are no issues, your clearance may be released **on the same day**.
-
-However, if a hit occurs, you may need to wait several days before claiming your clearance.
-
-When claiming your clearance:
-
-- Bring your valid ID
-- Present your reference number
-- Verify the printed information
-
-Check your personal details carefully before leaving the branch.
+| Item            | Cost      |
+| --------------- | --------- |
+| Application Fee | ₱130–₱170 |
+| Other Fees      | ₱25 (service fee, varies) |
 
 ---
 
-## 7. Validity of NBI Clearance
+## 6. Processing Time
 
-An NBI Clearance is typically **valid for one year** from the date of issuance.
-
-After expiration, you may need to renew your clearance if it is required again.
-
-Renewal applications may be processed faster if your information is already in the system.
+* Standard processing: Same day (no hit)  
+* Possible delays: 5–10 days if there is a “hit”  
 
 ---
 
-## 8. Common Mistakes to Avoid
+## 7. Common Mistakes to Avoid
 
-To avoid delays in your application, keep these tips in mind:
-
-- Double-check your personal details during registration
-- Bring the required identification documents
-- Arrive on time for your appointment
-- Keep your payment receipt
-
-Following the correct steps can make the process faster and smoother.
+- Entering incorrect personal details  
+- Forgetting required IDs  
+- Missing your appointment schedule  
+- Not keeping your payment receipt  
 
 ---
 
-## 9. Frequently Asked Questions
+## 8. Tips for Faster Processing
+
+* Register and schedule early  
+* Choose non-peak appointment times  
+* Prepare complete documents  
+* Double-check all information  
+
+---
+
+## 9. Related Guides
+
+- [How to Renew NBI Clearance](/guides/nbi-renewal)
+- [How to Apply for a Passport](/guides/passport-application)
+
+---
+
+## 10. Frequently Asked Questions
 
 ### Can I apply without an appointment?
 
-Most branches require online appointment scheduling before visiting.
+No, most NBI branches require an online appointment before visiting.
+
+### What is a “hit”?
+
+A “hit” occurs when your name matches someone in the NBI database. Additional verification will be required.
 
 ### How long does the process take?
 
-If there is no hit, the process may take **less than an hour**.
-
-### Can I renew my clearance online?
-
-Yes, some renewal services are available online depending on eligibility.
+If there is no hit, processing can take less than an hour.
 
 ---
 
-## 10. Summary
+## 11. Summary
 
-Applying for an NBI Clearance involves online registration, appointment scheduling, payment, and biometric verification.
+Applying for an NBI Clearance involves registering online, scheduling an appointment, paying the fee, and completing biometrics.
 
-By preparing the required documents and following the application steps carefully, you can complete the process quickly and efficiently.
-
-Always keep your clearance in a safe place, as it may be required for various legal and employment purposes.
+If your application has no issues, you can receive your clearance on the same day. Always ensure your documents are complete and accurate to avoid delays.

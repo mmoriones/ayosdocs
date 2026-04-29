@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const FAQs = () => {
+  useEffect(() => {
+    document.title = "Frequently Asked Questions | AyosDocs";
+  }, []);
+
   const faqs = [
     {
       question: "Is AyosDocs an official government website?",

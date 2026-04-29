@@ -32,30 +32,34 @@ const parseFrontmatter = (raw) => {
   let currentKey = null;
 
   frontmatter.split('\n').forEach(line => {
-    // detect array item
-    if (line.trim().startsWith('-')) {
-      if (!data[currentKey]) data[currentKey] = [];
-      data[currentKey].push(line.replace('-', '').trim());
+    const trimmedLine = line.trim();
+    if (!trimmedLine) return;
+
+    // Detect array item
+    if (trimmedLine.startsWith('-')) {
+      if (currentKey && Array.isArray(data[currentKey])) {
+        data[currentKey].push(trimmedLine.replace(/^-/, '').trim());
+      }
       return;
     }
 
-    const [key, ...rest] = line.split(':');
+    const colonIndex = line.indexOf(':');
+    if (colonIndex === -1) return;
 
-    if (!key) return;
+    const key = line.slice(0, colonIndex).trim();
+    const value = line.slice(colonIndex + 1).trim();
 
-    currentKey = key.trim();
-    const value = rest.join(':').trim();
-
+    currentKey = key;
+    
     if (value) {
-      data[currentKey] = value;
+      data[key] = value;
     } else {
-      data[currentKey] = []; // prepare for array
+      data[key] = []; // Initialize array for subsequent items
     }
   });
 
   return { data, content };
 };
-
 
 export const guidesMap = Object.entries(modules).reduce(
   (acc, [path, raw]) => {

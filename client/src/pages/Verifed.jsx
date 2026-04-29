@@ -8,6 +8,10 @@ const Verified = () => {
   const { showToast } = useToast();
 
   useEffect(() => {
+    document.title = "Account Verified | AyosDocs";
+  }, []);
+
+  useEffect(() => {
     showToast({
       type: 'success',
       title: 'Email Verified',

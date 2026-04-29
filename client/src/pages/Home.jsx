@@ -36,8 +36,14 @@ const Home = () => {
   }, [activeSlug]);
 
 
+  useEffect(() => {
+    document.title = "AyosDocs | Your Complete Guide to Government Documents";
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 px-6 lg:px-10 py-6">
+      <title>AyosDocs | Your Complete Guide to Government Documents</title>
+      <meta name="description" content="AyosDocs provides step-by-step guides for Philippine government documents and processes. Simplify your requirements for TIN, SSS, PhilHealth, and more." />
 
       <div className="flex flex-col lg:flex-row gap-8 items-start">
 

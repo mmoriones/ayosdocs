@@ -16,6 +16,10 @@ const UserProgress = () => {
   };
 
   useEffect(() => {
+    document.title = "My Tracked Guides | AyosDocs";
+  }, []);
+
+  useEffect(() => {
     const fetchAllProgress = async () => {
       const storedUser = JSON.parse(localStorage.getItem("user"));
       if (!storedUser?.token) return;
