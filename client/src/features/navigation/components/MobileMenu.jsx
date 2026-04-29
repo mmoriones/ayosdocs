@@ -87,21 +87,10 @@ const MobileMenu = ({
                 {user.fullName}
               </span>
               <span className="text-xs text-gray-500">
-                Logged in
+                {user.email}
               </span>
             </div>
           </div>
-        )}
-
-        {/* PROFILE */}
-        {user && (
-          <Link
-            to="/profile"
-            onClick={() => handleClick()}
-            className="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg"
-          >
-            Profile Settings
-          </Link>
         )}
 
         {/* CTA */}

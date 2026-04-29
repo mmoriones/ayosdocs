@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { User, LogOut, ChevronDown } from "lucide-react";
+import { LogOut, ChevronDown } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 const DesktopMenu = ({
@@ -115,22 +115,14 @@ const DesktopMenu = ({
                   <span className="text-sm font-semibold text-gray-800 leading-tight">
                     {user.fullName}
                   </span>
-                  <span className="text-xs text-gray-500">
-                    Logged in
+                  <span className="text-[11px] text-gray-500 truncate max-w-[140px]">
+                    {user.email}
                   </span>
                 </div>
               </div>
 
               {/* MENU ITEMS */}
               <div className="py-1">
-
-                <Link
-                  to="/profile"
-                  onClick={() => setIsProfileOpen(false)}
-                  className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 transition"
-                >
-                  <User size={14} /> Profile Settings
-                </Link>
 
                 <button
                   onClick={() => {
