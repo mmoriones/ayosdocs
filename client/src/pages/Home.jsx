@@ -13,7 +13,6 @@ import { useAuth } from '../context/AuthContext'
 const Home = () => {
   const [activeSlug, setActiveSlug] = useState('getting-started');
   const { isLoggedIn, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
-  const [checklistData, setChecklistData] = useState({ title: "", steps: [] });
 
   useEffect(() => {
     const lastSlug = localStorage.getItem("lastGuideSlug");
@@ -21,27 +20,14 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (!activeSlug || activeSlug === 'getting-started') return;
-    const guide = guidesMap[activeSlug];
-
-    if (guide) {
-      setChecklistData({
-        title: guide.title,
-        steps: guide.checklist?.map(task => ({
-          task,
-          completed: false
-        })) || []
-      });
-    }
-  }, [activeSlug]);
-
-
-  useEffect(() => {
     document.title = "AyosDocs | Your Complete Guide to Government Documents";
   }, []);
 
+  const activeGuide = activeSlug !== 'getting-started' ? guidesMap[activeSlug] : null;
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 px-6 lg:px-10 py-6">
+
       <title>AyosDocs | Your Complete Guide to Government Documents</title>
       <meta name="description" content="AyosDocs provides step-by-step guides for Philippine government documents and processes. Simplify your requirements for TIN, SSS, PhilHealth, and more." />
 
@@ -85,13 +71,13 @@ const Home = () => {
 
           {activeSlug === 'getting-started' ? (
             <GettingStarted />
-          ) : (
+          ) : activeGuide ? (
             <ChecklistCard
-              title={checklistData.title}
-              initialSteps={checklistData.steps}
+              title={activeGuide.title}
+              initialSteps={activeGuide.checklist?.map(task => ({ task }))}
               slug={activeSlug}
             />
-          )}
+          ) : null}
 
           {isLoggedIn ? (
             <TipsCard />

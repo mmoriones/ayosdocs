@@ -1,6 +1,7 @@
 import { CheckSquare, Square, ArrowRight, Save, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import AuthModal from '../../../auth/components/AuthModal';
 import { useAuth } from '../../../../context/AuthContext';
 import { useToast } from '../../../../context/ToastContext';
@@ -10,73 +11,45 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
   const { user, isLoggedIn, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const [steps, setSteps] = useState(initialSteps || []);
-  const [isSaving, setIsSaving] = useState(false);
 
-  // Sync initial steps when guide changes
+  // Use TanStack Query to fetch saved progress
+  const { data: savedData, isLoading: isLoadingProgress } = useQuery({
+    queryKey: ['progress', slug, user?.token],
+    queryFn: async () => {
+      if (!isLoggedIn || !slug || slug === "getting-started" || !user?.token) return null;
+      
+      const response = await fetch(`${API_URL}/api/user/get-progress/${slug}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      if (!response.ok) return null;
+      return response.json();
+    },
+    enabled: !!isLoggedIn && !!slug && slug !== "getting-started" && !!user?.token,
+  });
+
+  // Sync steps from initialSteps and savedData
   useEffect(() => {
-    if (initialSteps) setSteps(initialSteps);
-  }, [initialSteps]);
+    if (!initialSteps) return;
 
-  // Fetch saved progress
-  useEffect(() => {
-    const fetchSavedProgress = async () => {
-      if (!isLoggedIn || !slug || slug === "getting-started" || !user?.token) return;
+    const completedIndices = savedData?.completedTasks
+      ? savedData.completedTasks.split(",").filter(s => s !== "").map(Number)
+      : [];
 
-      try {
-        const response = await fetch(`${API_URL}/api/user/get-progress/${slug}`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+    setSteps(initialSteps.map((step, index) => ({
+      ...step,
+      completed: completedIndices.includes(index),
+    })));
+  }, [initialSteps, savedData, slug]);
 
-        if (response.ok) {
-          const data = await response.json();
-
-          const completedIndices = data.completedTasks
-            ? data.completedTasks.split(",").filter(s => s !== "").map(Number)
-            : [];
-
-          setSteps((prevSteps) =>
-            prevSteps.map((step, index) => ({
-              ...step,
-              completed: completedIndices.includes(index),
-            }))
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching saved progress:", error);
-      }
-    };
-
-    fetchSavedProgress();
-  }, [isLoggedIn, slug, user?.token]);
-
-  // Toggle step
-  const handleToggleStep = (index) => {
-    setSteps((prevSteps) =>
-      prevSteps.map((step, i) =>
-        i === index ? { ...step, completed: !step.completed } : step
-      )
-    );
-  };
-
-  // Save progress
-  const handleSaveProgress = async () => {
-    if (!isLoggedIn || !user?.token) {
-      openAuthModal();
-      return;
-    }
-
-    setIsSaving(true);
-
-    try {
-      const completedTaskIndices = steps
-        .map((s, i) => (s.completed ? i : null))
-        .filter((i) => i !== null)
-        .join(",");
-
+  // Use TanStack Query for saving progress
+  const saveMutation = useMutation({
+    mutationFn: async (completedTaskIndices) => {
       const response = await fetch(`${API_URL}/api/user/update-progress`, {
         method: "POST",
         headers: {
@@ -89,32 +62,54 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
         }),
       });
 
-      if (response.ok) {
-        showToast({
-          type: 'success',
-          title: 'Progress Saved',
-          message: 'Your checklist progress has been updated.'
-        });
-      } else {
+      if (!response.ok) {
         const errorData = await response.json();
-        console.error("Save error:", errorData.message);
-        showToast({
-          type: 'error',
-          title: 'Save Error',
-          message: 'Failed to save progress. Please try again.'
-        });
+        throw new Error(errorData.message || 'Failed to save progress');
       }
-    } catch (error) {
-      console.error("Failed to save:", error);
+      return response.json();
+    },
+    onSuccess: () => {
+      showToast({
+        type: 'success',
+        title: 'Progress Saved',
+        message: 'Your checklist progress has been updated.'
+      });
+      // Invalidate both the single guide progress and the global user data
+      queryClient.invalidateQueries({ queryKey: ['progress', slug] });
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+    },
+    onError: (error) => {
+      console.error("Save error:", error.message);
       showToast({
         type: 'error',
-        title: 'Network Error',
-        message: 'An error occurred while saving. Check your connection.'
+        title: 'Save Error',
+        message: error.message || 'Failed to save progress. Please try again.'
       });
-    } finally {
-      // Add a small delay for smoother transition
-      setTimeout(() => setIsSaving(false), 500);
     }
+  });
+
+  // Toggle step
+  const handleToggleStep = (index) => {
+    setSteps((prevSteps) =>
+      prevSteps.map((step, i) =>
+        i === index ? { ...step, completed: !step.completed } : step
+      )
+    );
+  };
+
+  // Save progress
+  const handleSaveProgress = () => {
+    if (!isLoggedIn || !user?.token) {
+      openAuthModal();
+      return;
+    }
+
+    const completedTaskIndices = steps
+      .map((s, i) => (s.completed ? i : null))
+      .filter((i) => i !== null)
+      .join(",");
+
+    saveMutation.mutate(completedTaskIndices);
   };
 
   // Progress calculation (safe)
@@ -144,44 +139,50 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
 
       {/* STEPS */}
       <div className="max-h-72 overflow-y-auto pr-2">
-        <div className="relative">
-          {/* vertical line */}
-          <div className="absolute left-[22px] top-[10px] bottom-[10px] w-px bg-gray-200"></div>
-
-          <div className="space-y-2">
-            {steps.map((step, index) => (
-              <div
-                key={`${slug}-${step.id || index}`}
-                onClick={() => handleToggleStep(index)}
-                className="flex items-center gap-3 cursor-pointer group 
-                     py-2.5 px-1 mx-2 rounded-md
-                     active:bg-gray-100 relative"
-              >
-                {/* NUMBER / CHECK */}
-                <div
-                  className={`z-10 w-5 h-5 flex items-center justify-center rounded-full text-[10px] font-medium shrink-0
-            ${step.completed
-                      ? "bg-teal-600 text-white"
-                      : "bg-gray-100 text-gray-500"
-                    }`}
-                >
-                  {step.completed ? "✓" : index + 1}
-                </div>
-
-                {/* TEXT */}
-                <p
-                  className={`text-sm leading-snug transition-colors
-            ${step.completed
-                      ? "text-gray-500 line-through"
-                      : "text-gray-800 group-hover:text-gray-800"
-                    }`}
-                >
-                  {step.task}
-                </p>
-              </div>
-            ))}
+        {isLoadingProgress ? (
+          <div className="flex items-center justify-center py-10">
+            <Loader2 className="animate-spin text-teal-600" size={24} />
           </div>
-        </div>
+        ) : (
+          <div className="relative">
+            {/* vertical line */}
+            <div className="absolute left-[22px] top-[10px] bottom-[10px] w-px bg-gray-200"></div>
+
+            <div className="space-y-2">
+              {steps.map((step, index) => (
+                <div
+                  key={`${slug}-${step.id || index}`}
+                  onClick={() => handleToggleStep(index)}
+                  className="flex items-center gap-3 cursor-pointer group 
+                       py-2.5 px-1 mx-2 rounded-md
+                       active:bg-gray-100 relative"
+                >
+                  {/* NUMBER / CHECK */}
+                  <div
+                    className={`z-10 w-5 h-5 flex items-center justify-center rounded-full text-[10px] font-medium shrink-0
+              ${step.completed
+                        ? "bg-teal-600 text-white"
+                        : "bg-gray-100 text-gray-500"
+                      }`}
+                  >
+                    {step.completed ? "✓" : index + 1}
+                  </div>
+
+                  {/* TEXT */}
+                  <p
+                    className={`text-sm leading-snug transition-colors
+              ${step.completed
+                        ? "text-gray-500 line-through"
+                        : "text-gray-800 group-hover:text-gray-800"
+                      }`}
+                  >
+                    {step.task}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
 
@@ -230,7 +231,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
         ) : (
           <button
             onClick={handleSaveProgress}
-            disabled={isSaving || !hasCompletedSteps}
+            disabled={saveMutation.isPending || !hasCompletedSteps}
             className={`w-full flex items-center justify-center gap-2 py-2.5 
               min-h-[44px] text-sm font-medium text-white rounded-lg transition-all duration-200
               ${hasCompletedSteps
@@ -239,7 +240,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
               }
               disabled:opacity-70 disabled:cursor-wait`}
           >
-            {isSaving ? (
+            {saveMutation.isPending ? (
               <>
                 <Loader2 className="animate-spin" size={16} />
                 <span>Saving Progress...</span>

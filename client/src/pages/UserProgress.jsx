@@ -1,75 +1,62 @@
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import ProgressCard from '../features/guides/components/tracking/ProgressCard'
-import { Bookmark } from 'lucide-react';
+import { Bookmark, Loader2 } from 'lucide-react';
 import { guidesMap } from "../utils/loadGuides";
+import { useEffect } from 'react';
 
 const UserProgress = () => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
-
-  const [progressList, setProgressList] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const handleRemoveFromUI = (slugToRemove) => {
-    setProgressList(prev =>
-      prev.filter(item => item.slug !== slugToRemove)
-    );
-  };
 
   useEffect(() => {
     document.title = "My Tracked Guides | AyosDocs";
   }, []);
 
-  useEffect(() => {
-    const fetchAllProgress = async () => {
+  const { data: progressList = [], isLoading } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: async () => {
       const storedUser = JSON.parse(localStorage.getItem("user"));
-      if (!storedUser?.token) return;
+      if (!storedUser?.token) return [];
 
-      try {
-        const response = await fetch(`${API_URL}/api/user/get-data`, {
-          headers: { Authorization: `Bearer ${storedUser.token}` }
-        });
+      const response = await fetch(`${API_URL}/api/user/get-data`, {
+        headers: { Authorization: `Bearer ${storedUser.token}` }
+      });
 
-        const result = await response.json();
-        const savedItems = result.savedProgress || [];
+      if (!response.ok) throw new Error('Failed to fetch progress');
+      
+      const result = await response.json();
+      const savedItems = result.savedProgress || [];
 
-        const detailedProgress = savedItems
-          .map((item) => {
-            const guide = guidesMap[item.guideSlug];
-            if (!guide) return null;
+      return savedItems
+        .map((item) => {
+          const guide = guidesMap[item.guideSlug];
+          if (!guide) return null;
 
-            const completedIndices = item.completedTasks
-              .split(',')
-              .map(Number);
+          const completedIndices = item.completedTasks
+            ? item.completedTasks.split(',').map(Number)
+            : [];
 
-            const steps = (guide.checklist || []).map((task, idx) => ({
-              task,
-              completed: completedIndices.includes(idx)
-            }));
+          const steps = (guide.checklist || []).map((task, idx) => ({
+            task,
+            completed: completedIndices.includes(idx)
+          }));
 
-            return {
-              title: guide.title,
-              slug: item.guideSlug,
-              steps
-            };
-          })
-          .filter(Boolean);
+          return {
+            title: guide.title,
+            slug: item.guideSlug,
+            steps
+          };
+        })
+        .filter(Boolean);
+    },
+    // Only run if user is logged in
+    enabled: !!localStorage.getItem("user"),
+  });
 
-        setProgressList(detailedProgress);
-      } catch (err) {
-        console.error("Fetch error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAllProgress();
-  }, []);
-
-
-  if (loading) {
+  if (isLoading) {
     return (
-      <div className="p-10 text-center text-gray-500">
-        Loading your progress...
+      <div className="min-h-[60vh] flex flex-col items-center justify-center gap-3 text-gray-500">
+        <Loader2 className="animate-spin text-teal-600" size={32} />
+        <p>Loading your progress...</p>
       </div>
     );
   }
@@ -120,7 +107,6 @@ const UserProgress = () => {
                 title={data.title}
                 steps={data.steps}
                 slug={data.slug}
-                onDelete={handleRemoveFromUI}
               />
             ))}
 

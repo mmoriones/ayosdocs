@@ -1,60 +1,57 @@
-import { Trash2, ChevronRight } from 'lucide-react';
+import { Trash2, ChevronRight, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from '../../../../context/ToastContext';
 import ConfirmModal from '../../../../components/ConfirmModal';
 
-const ProgressCard = ({ title, steps, slug, onDelete }) => {
+const ProgressCard = ({ title, steps, slug }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const queryClient = useQueryClient();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const completedCount = steps.filter(s => s.completed).length;
   const totalSteps = steps.length;
   const progress = Math.round((completedCount / totalSteps) * 100);
 
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      const response = await fetch(`${API_URL}/api/user/delete/${slug}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${storedUser.token}` }
+      });
+
+      if (!response.ok) throw new Error('Failed to remove guide');
+      return response.json();
+    },
+    onSuccess: () => {
+      showToast({
+        type: 'success',
+        title: 'Guide Removed',
+        message: `You have stopped tracking "${title}".`
+      });
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      queryClient.invalidateQueries({ queryKey: ['progress', slug] });
+    },
+    onError: (error) => {
+      showToast({
+        type: 'error',
+        title: 'Removal Failed',
+        message: error.message || 'An unexpected error occurred.'
+      });
+    }
+  });
+
   const handleDeleteClick = (e) => {
     e.stopPropagation();
     setIsConfirmOpen(true);
   };
 
-  const handleConfirmDelete = async () => {
-    try {
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-
-      const response = await fetch(
-        `${API_URL}/api/user/delete/${slug}`,
-        {
-          method: 'DELETE',
-          headers: {
-            Authorization: `Bearer ${storedUser.token}`
-          }
-        }
-      );
-
-      if (response.ok) {
-        onDelete(slug);
-        showToast({
-          type: 'success',
-          title: 'Guide Removed',
-          message: `You have stopped tracking "${title}".`
-        });
-      } else {
-        showToast({
-          type: 'error',
-          title: 'Removal Failed',
-          message: 'Failed to remove guide. Please try again.'
-        });
-      }
-    } catch (error) {
-      console.error("Delete failed:", error);
-      showToast({
-        type: 'error',
-        title: 'Error',
-        message: 'An unexpected error occurred.'
-      });
-    }
+  const handleConfirmDelete = () => {
+    deleteMutation.mutate();
   };
 
   return (
@@ -115,9 +112,14 @@ const ProgressCard = ({ title, steps, slug, onDelete }) => {
 
           <button
             onClick={handleDeleteClick}
-            className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+            disabled={deleteMutation.isPending}
+            className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors disabled:opacity-50"
           >
-            <Trash2 size={16} />
+            {deleteMutation.isPending ? (
+              <Loader2 size={16} className="animate-spin" />
+            ) : (
+              <Trash2 size={16} />
+            )}
           </button>
 
           <div className="p-2 text-gray-300 group-hover:text-teal-600 transition-colors">
