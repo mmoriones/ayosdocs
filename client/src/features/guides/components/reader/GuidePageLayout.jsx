@@ -15,6 +15,7 @@ const GuidePageLayout = ({
   slug
 }) => {
   const [activeModal, setActiveModal] = useState(null); // 'toc' or 'checklist'
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const toggleModal = (modalType) => {
     setActiveModal(prev => prev === modalType ? null : modalType);
@@ -94,6 +95,7 @@ const GuidePageLayout = ({
         onOpenChecklist={() => toggleModal('checklist')}
         isTOCOpen={activeModal === 'toc'}
         isChecklistOpen={activeModal === 'checklist'}
+        isAuthModalOpen={isAuthModalOpen}
       />
 
       <GuideModal
@@ -118,6 +120,7 @@ const GuidePageLayout = ({
           initialSteps={checklistSteps}
           slug={slug}
           isModal={true}
+          onAuthModalToggle={setIsAuthModalOpen}
         />
       </GuideModal>
     </div>

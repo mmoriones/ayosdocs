@@ -5,7 +5,7 @@ import AuthModal from '../../../auth/components/AuthModal';
 import { useAuth } from '../../../../context/AuthContext';
 import { useToast } from '../../../../context/ToastContext';
 
-const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=false }) => {
+const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=false, onAuthModalToggle }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const { user, isLoggedIn } = useAuth();
   const { showToast } = useToast();
@@ -14,6 +14,12 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
   const [steps, setSteps] = useState(initialSteps || []);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (onAuthModalToggle) {
+      onAuthModalToggle(isAuthModalOpen);
+    }
+  }, [isAuthModalOpen, onAuthModalToggle]);
 
   // Sync initial steps when guide changes
   useEffect(() => {

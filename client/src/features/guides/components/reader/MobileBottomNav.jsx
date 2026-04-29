@@ -2,7 +2,7 @@ import { Home, List, CheckSquare, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpen }) => {
+const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpen, isAuthModalOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(true);
@@ -14,14 +14,18 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // If modal is open, always keep the dock visible
+      // If any modal is open, handle visibility carefully
       if (isTOCOpen || isChecklistOpen) {
-        setIsVisible(true);
+        // If AuthModal is ALSO open inside a modal, hide the bottom nav
+        if (isAuthModalOpen) {
+          setIsVisible(false);
+        } else {
+          setIsVisible(true);
+        }
         return;
       }
 
       // Show when scrolling up, hide when scrolling down
-      // Reduced threshold to 50 for better responsiveness
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         setIsVisible(false);
       } else {
@@ -33,11 +37,11 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, isTOCOpen, isChecklistOpen]);
+  }, [lastScrollY, isTOCOpen, isChecklistOpen, isAuthModalOpen]);
 
   return (
     <div className={`lg:hidden fixed bottom-4 left-6 right-6 z-[100] transition-all duration-500 ease-in-out ${
-      isVisible ? "translate-y-0 opacity-100" : "translate-y-40 opacity-0 pointer-events-none"
+      isVisible && !isAuthModalOpen ? "translate-y-0 opacity-100" : "translate-y-40 opacity-0 pointer-events-none"
     }`}>
       <div className="bg-white/95 backdrop-blur-md border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-[24px] p-2 flex items-center gap-1">
         
