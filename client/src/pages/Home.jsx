@@ -12,8 +12,7 @@ import { useAuth } from '../context/AuthContext'
 
 const Home = () => {
   const [activeSlug, setActiveSlug] = useState('getting-started');
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
   const [checklistData, setChecklistData] = useState({ title: "", steps: [] });
 
   useEffect(() => {
@@ -91,7 +90,7 @@ const Home = () => {
           {isLoggedIn ? (
             <TipsCard />
           ) : (
-            <WhySignUp onSignUp={() => setIsAuthModalOpen(true)} />
+            <WhySignUp onSignUp={openAuthModal} />
           )}
 
           {/* Adsense placeholder */}
@@ -101,7 +100,7 @@ const Home = () => {
 
       <AuthModal
         isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
+        onClose={closeAuthModal}
       />
     </div>
   );

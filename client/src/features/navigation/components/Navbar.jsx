@@ -8,11 +8,10 @@ import { useAuth } from "../../../context/AuthContext";
 import { useToast } from "../../../context/ToastContext";
 
 const Navbar = () => {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const { user, isLoggedIn, logout } = useAuth();  
+  const { user, isLoggedIn, logout, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();  
   const { showToast } = useToast();
   const navigate = useNavigate();
 
@@ -53,7 +52,7 @@ const Navbar = () => {
           isProfileOpen={isProfileOpen}
           setIsProfileOpen={setIsProfileOpen}
           handleLogout={handleLogout}
-          openAuthModal={() => setIsAuthModalOpen(true)}
+          openAuthModal={openAuthModal}
         />
 
         {/* MOBILE */}
@@ -69,13 +68,13 @@ const Navbar = () => {
         isOpen={isMobileMenuOpen}
         closeMenu={() => setIsMobileMenuOpen(false)}
         user={user}
-        openAuthModal={() => setIsAuthModalOpen(true)}
+        openAuthModal={openAuthModal}
         handleLogout={handleLogout}
       />
 
       <AuthModal
         isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
+        onClose={closeAuthModal}
       />
     </nav>
   );

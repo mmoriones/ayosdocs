@@ -4,6 +4,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   // load user from localStorage on app start
   useEffect(() => {
@@ -25,6 +26,9 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const openAuthModal = () => setIsAuthModalOpen(true);
+  const closeAuthModal = () => setIsAuthModalOpen(false);
+
   return (
     <AuthContext.Provider
       value={{
@@ -32,6 +36,9 @@ export const AuthProvider = ({ children }) => {
         isLoggedIn: !!user,
         login,
         logout,
+        isAuthModalOpen,
+        openAuthModal,
+        closeAuthModal
       }}
     >
       {children}

@@ -5,21 +5,14 @@ import AuthModal from '../../../auth/components/AuthModal';
 import { useAuth } from '../../../../context/AuthContext';
 import { useToast } from '../../../../context/ToastContext';
 
-const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=false, onAuthModalToggle }) => {
+const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
-  const { user, isLoggedIn } = useAuth();
+  const { user, isLoggedIn, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
 
   const [steps, setSteps] = useState(initialSteps || []);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-
-  useEffect(() => {
-    if (onAuthModalToggle) {
-      onAuthModalToggle(isAuthModalOpen);
-    }
-  }, [isAuthModalOpen, onAuthModalToggle]);
 
   // Sync initial steps when guide changes
   useEffect(() => {
@@ -72,7 +65,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
   // Save progress
   const handleSaveProgress = async () => {
     if (!isLoggedIn || !user?.token) {
-      setIsAuthModalOpen(true);
+      openAuthModal();
       return;
     }
 
@@ -228,7 +221,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
         {/* AUTH / SAVE */}
         {!isLoggedIn ? (
           <button
-            onClick={() => setIsAuthModalOpen(true)}
+            onClick={openAuthModal}
             className="w-full bg-teal-600 hover:bg-teal-700 
                 text-white text-sm py-2.5 rounded-lg font-medium transition"
           >
@@ -263,7 +256,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
 
       <AuthModal
         isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
+        onClose={closeAuthModal}
       />
     </div>
 

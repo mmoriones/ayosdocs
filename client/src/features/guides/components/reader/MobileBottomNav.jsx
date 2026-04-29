@@ -1,10 +1,12 @@
 import { Home, List, CheckSquare, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useAuth } from "../../../../context/AuthContext";
 
-const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpen, isAuthModalOpen }) => {
+const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isAuthModalOpen } = useAuth();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
