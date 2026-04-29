@@ -18,50 +18,56 @@ const MobileMenu = ({
 
   const isActive = (path) => location.pathname === path;
 
-  const primaryItems = [
-    { label: "Home", to: "/" },
-    { label: "Guides", to: "/guides" },
-    ...(user ? [{ label: "My Progress", to: "/my-progress" }] : []),
-  ];
-
-  const secondaryItems = [
-    { label: "About", to: "/about" },
-    { label: "FAQs", to: "/faqs" },
-    { label: "Contact", to: "/contact" },
-  ];
-
   const linkClass = (path) =>
-    `block w-full px-3 py-2 rounded-lg transition ${
-      isActive(path)
-        ? "bg-teal-50 text-teal-600 font-semibold"
-        : "text-gray-700 hover:bg-gray-100"
+    `block w-full px-3 py-2.5 rounded-xl transition ${isActive(path)
+      ? "bg-teal-50 text-teal-600 font-semibold"
+      : "text-gray-700 hover:bg-gray-100"
     }`;
 
   return (
-    <div className="lg:hidden border-b border-gray-200 bg-white shadow-sm">
-      
-      <div className="px-6 py-4 space-y-4">
+    <div className="lg:hidden border-b border-gray-200 bg-white shadow-sm overflow-y-auto max-h-[calc(100vh-80px)]">
+
+      <div className="px-6 py-6 space-y-6">
 
         {/* PRIMARY */}
         <div className="space-y-1">
-          {primaryItems.map((item) => (
+          <Link
+            to="/"
+            onClick={() => handleClick()}
+            className={linkClass("/")}
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/guides"
+            onClick={() => handleClick()}
+            className={linkClass("/guides")}
+          >
+            Guides
+          </Link>
+
+          {user && (
             <Link
-              key={item.to}
-              to={item.to}
+              to="/my-progress"
               onClick={() => handleClick()}
-              className={linkClass(item.to)}
+              className={linkClass("/my-progress")}
             >
-              {item.label}
+              My Progress
             </Link>
-          ))}
+          )}
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-200" />
+        <div className="border-t border-gray-100" />
 
         {/* SECONDARY */}
         <div className="space-y-1">
-          {secondaryItems.map((item) => (
+          {[
+            { label: "About", to: "/about" },
+            { label: "FAQs", to: "/faqs" },
+            { label: "Contact", to: "/contact" },
+          ].map((item) => (
             <Link
               key={item.to}
               to={item.to}

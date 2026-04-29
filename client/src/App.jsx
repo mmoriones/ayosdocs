@@ -3,6 +3,7 @@ import { useState } from 'react';
 import MainLayout from './layouts/MainLayout';
 import Guide from './pages/Guide';
 import Home from './pages/Home';
+import AllGuides from './pages/AllGuides';
 import UserProgress from './pages/UserProgress';
 import Verified from './pages/Verifed';
 import About from './pages/info/About';
@@ -21,6 +22,7 @@ function App() {
           <MainLayout>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/guides" element={<AllGuides />} />
               <Route path="/guides/:slug" element={<Guide />} />
               <Route path="/my-progress" element={<UserProgress />} />
               <Route path="/verified" element={<Verified />} />

@@ -25,6 +25,11 @@ const DesktopMenu = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setIsProfileOpen]);
 
+  useEffect(() => {
+    // Close dropdowns on location change
+    setIsProfileOpen(false);
+  }, [location.pathname, setIsProfileOpen]);
+
   const navClass = (path) =>
     `relative pb-1 transition ${isActive(path)
       ? "text-teal-600 font-semibold"
@@ -43,9 +48,12 @@ const DesktopMenu = ({
       </Link>
 
       {/* Guides */}
-      <div className="flex items-center gap-1 text-gray-600 hover:text-teal-600 cursor-pointer">
-        Guides <ChevronDown size={14} />
-      </div>
+      <Link to="/guides" className={navClass("/guides")}>
+        Guides
+        {isActive("/guides") && (
+          <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-teal-600 rounded"></span>
+        )}
+      </Link>
 
       {/* My Progress */}
       {user && (

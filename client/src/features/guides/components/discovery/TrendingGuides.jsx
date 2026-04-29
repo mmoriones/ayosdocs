@@ -77,7 +77,10 @@ const TrendingGuides = () => {
           Popular Guides
         </h2>
 
-        <button className="text-sm text-teal-600 hover:underline flex items-center gap-1">
+        <button 
+          onClick={() => navigate('/guides')}
+          className="text-sm text-teal-600 hover:underline flex items-center gap-1"
+        >
           View all
           <ChevronRight className="w-4 h-4" />
         </button>
