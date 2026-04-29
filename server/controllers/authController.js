@@ -118,7 +118,7 @@ const googleLogin = async (req, res) => {
   try {
     const { access_token } = req.body;
     const userData = await authService.verifyGoogleToken(access_token);
-    const { email, name } = userData;
+    const { email, name, picture } = userData;
 
     let user = await User.findOne({ email });
 
@@ -126,10 +126,15 @@ const googleLogin = async (req, res) => {
       user = await User.create({
         fullName: name,
         email,
+        picture,
         password: null,
         googleAuth: true,
         isVerified: true
       });
+    } else if (user.googleAuth && user.picture !== picture) {
+      // Update picture if it changed
+      user.picture = picture;
+      await user.save();
     }
 
     const token = authService.generateToken(user);
@@ -139,6 +144,7 @@ const googleLogin = async (req, res) => {
         id: user._id,
         fullName: user.fullName,
         email: user.email,
+        picture: user.picture,
         isAdmin: user.isAdmin
       }
     });

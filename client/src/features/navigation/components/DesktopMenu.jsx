@@ -91,31 +91,47 @@ const DesktopMenu = ({
         <div ref={dropdownRef} className="relative ml-4">
           <button
             onClick={() => setIsProfileOpen(!isProfileOpen)}
-            className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg"
+            className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-lg transition-colors"
           >
-            <div className="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center text-xs">
-              {user.fullName.charAt(0)}
-            </div>
+            {user.picture ? (
+              <img
+                src={user.picture}
+                alt={user.fullName}
+                className="w-6 h-6 rounded-full border border-teal-600"
+              />
+            ) : (
+              <div className="w-6 h-6 bg-teal-600 text-white rounded-full flex items-center justify-center text-xs">
+                {user.fullName.charAt(0)}
+              </div>
+            )}
             <ChevronDown
               size={14}
-              className={`transition ${isProfileOpen ? "rotate-180" : ""
+              className={`transition-transform duration-200 ${isProfileOpen ? "rotate-180" : ""
                 }`}
             />
           </button>
 
           {isProfileOpen && (
-            <div className="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden z-50">
+            <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
 
               {/* USER HEADER */}
-              <div className="flex items-center gap-3 px-4 py-3 bg-gray-50 border-b border-gray-100">
-                <div className="w-9 h-9 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                  {user.fullName.charAt(0)}
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-sm font-semibold text-gray-800 leading-tight">
+              <div className="flex items-center gap-3 px-4 py-4 bg-gray-50/50 border-b border-gray-100">
+                {user.picture ? (
+                  <img
+                    src={user.picture}
+                    alt={user.fullName}
+                    className="w-10 h-10 rounded-full border border-teal-100"
+                  />
+                ) : (
+                  <div className="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                    {user.fullName.charAt(0)}
+                  </div>
+                )}
+                <div className="flex flex-col min-w-0">
+                  <span className="text-sm font-semibold text-gray-800 leading-tight truncate">
                     {user.fullName}
                   </span>
-                  <span className="text-[11px] text-gray-500 truncate max-w-[140px]">
+                  <span className="text-[11px] text-gray-500 truncate">
                     {user.email}
                   </span>
                 </div>

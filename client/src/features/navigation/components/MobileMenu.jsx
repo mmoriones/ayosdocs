@@ -78,15 +78,23 @@ const MobileMenu = ({
 
         {/* USER SECTION */}
         {user && (
-          <div className="flex items-center gap-3 px-2 py-2 bg-gray-50 rounded-lg">
-            <div className="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
-              {user.fullName.charAt(0)}
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-medium text-gray-800">
+          <div className="flex items-center gap-3 px-3 py-3 bg-gray-50 rounded-xl border border-gray-100">
+            {user.picture ? (
+              <img
+                src={user.picture}
+                alt={user.fullName}
+                className="w-10 h-10 rounded-full border border-teal-600 shadow-sm"
+              />
+            ) : (
+              <div className="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
+                {user.fullName.charAt(0)}
+              </div>
+            )}
+            <div className="flex flex-col min-w-0">
+              <span className="text-sm font-semibold text-gray-800 truncate">
                 {user.fullName}
               </span>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-gray-500 truncate">
                 {user.email}
               </span>
             </div>
