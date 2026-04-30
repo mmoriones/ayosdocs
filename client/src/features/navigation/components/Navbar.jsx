@@ -1,4 +1,4 @@
-import { Sun, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DesktopMenu from "./DesktopMenu";
@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const { user, isLoggedIn, logout, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();  
+  const { user, isLoggedIn, logout, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
 
@@ -42,20 +42,35 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
         {/* LEFT: Logo */}
-        <div className="flex items-center gap-3">
-          <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2 text-gray-800">
-            <span className="text-teal-600">Ayos</span>Docs
-            <Sun className="text-yellow-400 fill-yellow-400" size={18} />
-          </h1>
+        <div
+          onClick={() => navigate("/")}
+          className="flex items-center gap-3 cursor-pointer"
+        >
+          {/* Icon */}
+          <img
+            src="/favicon.svg"
+            alt="AyosDocs logo"
+            className="w-8 h-8 md:w-9 md:h-9 object-contain"
+          />
 
-          {/* Divider */}
-          <div className="hidden md:block h-6 w-[1px] bg-gray-300"></div>
+          {/* Brand + tagline container */}
+          <div className="flex items-center gap-3">
+            {/* Brand name */}
+            <h1 className="text-xl md:text-2xl font-bold text-gray-800 leading-none">
+              <span className="text-teal-600">Ayos</span>
+              <span className="ml-1">Docs</span>
+            </h1>
 
-          {/* Tagline */}
-          <p className="hidden md:block text-xs text-gray-500 max-w-[180px]">
-            Your guide to government documents & more
-          </p>
+            {/* Divider */}
+            <div className="hidden md:block h-5 w-px bg-gray-300"></div>
+
+            {/* Tagline */}
+            <p className="hidden md:block text-xs text-gray-500 max-w-[180px] leading-tight">
+              Your guide to government documents & more
+            </p>
+          </div>
         </div>
+
 
         {/* RIGHT */}
         <DesktopMenu
