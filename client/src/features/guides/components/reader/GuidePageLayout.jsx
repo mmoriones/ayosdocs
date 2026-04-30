@@ -65,12 +65,20 @@ const GuidePageLayout = ({
             {/* THE CONTENT (Markdown Article) */}
             <main className="flex-1 min-w-0">
               {children}
+              
+              {/* MOBILE RELATED GUIDES */}
+              <div className="lg:hidden mt-10">
+                <RelatedGuides 
+                  currentSlug={slug} 
+                  category={category} 
+                />
+              </div>
             </main>
           </div>
         </div>
 
         {/* DESKTOP RIGHT SIDEBAR (Checklist) */}
-        <aside className="hidden lg:block w-96 space-y-6 sticky top-28 shrink-0">
+        <aside className="hidden lg:block w-96 space-y-6 sticky top-28 shrink-0 max-h-[calc(100vh-120px)] overflow-y-auto pr-2 pb-4 custom-scrollbar">
           <ChecklistCard
             title={title}
             initialSteps={checklistSteps}
@@ -82,9 +90,7 @@ const GuidePageLayout = ({
             currentSlug={slug} 
             category={category} 
           />
-
-        </aside>
-      </div>
+        </aside>      </div>
 
       {/* MOBILE INTERACTIVE ELEMENTS */}
       <MobileBottomNav

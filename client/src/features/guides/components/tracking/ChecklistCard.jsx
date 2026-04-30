@@ -138,7 +138,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
       )}
 
       {/* STEPS */}
-      <div className="max-h-72 overflow-y-auto pr-2">
+      <div className={`${isFullPage || isModal ? "" : "max-h-72 overflow-y-auto"} pr-2`}>
         {isLoadingProgress ? (
           <div className="flex items-center justify-center py-10">
             <Loader2 className="animate-spin text-teal-600" size={24} />

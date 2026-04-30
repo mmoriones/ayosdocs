@@ -73,6 +73,26 @@ const Guide = () => {
             strong: ({ ...props }) => (
               <strong className="text-gray-900 font-semibold" {...props} />
             ),
+            table: ({ ...props }) => (
+              <div className="overflow-x-auto mb-8">
+                <table className="w-full border-collapse border border-gray-100 rounded-xl overflow-hidden" {...props} />
+              </div>
+            ),
+            thead: ({ ...props }) => (
+              <thead className="bg-gray-50" {...props} />
+            ),
+            th: ({ ...props }) => (
+              <th className="px-4 py-3 text-left text-sm font-semibold text-teal-700 border-b border-gray-100" {...props} />
+            ),
+            td: ({ ...props }) => (
+              <td className="px-4 py-3 text-sm text-gray-600 border-b border-gray-50" {...props} />
+            ),
+            tr: ({ ...props }) => (
+              <tr className="hover:bg-gray-50/50 transition-colors" {...props} />
+            ),
+            hr: ({ ...props }) => (
+              <hr className="my-8 border-t border-gray-200" {...props} />
+            ),
           }}
         >
           {guide.content}

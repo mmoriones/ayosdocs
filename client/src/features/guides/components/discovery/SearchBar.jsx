@@ -19,18 +19,16 @@ const SearchBar = () => {
   };
 
     useEffect(() => {
-      const debouncedSearch = debounce((q) => {
-        if (q.length < 2) {
+      const timeout = setTimeout(() => {
+        if (query.length < 2) {
           setResults([]);
           return;
         }
-
-        setResults(searchGuides(q));
+        setResults(searchGuides(query));
       }, 300);
 
-      debouncedSearch(query);
+      return () => clearTimeout(timeout);
     }, [query]);
-
 
 
   const handleSelect = (slug) => {
@@ -63,7 +61,7 @@ const SearchBar = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="w-full pl-11 pr-20 py-4 rounded-xl border border-gray-200 
-          bg-white text-sm text-gray-800
+          bg-white text-base text-gray-800
           focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
           shadow-sm"
         />

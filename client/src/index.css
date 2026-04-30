@@ -1,5 +1,24 @@
 @import "tailwindcss";
+
 body {
-  background-color: #f9fafb; /* This is Tailwind's gray-50 */
+  background-color: #f9fafb;
+  /* This is Tailwind's gray-50 */
   margin: 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e5e7eb;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #d1d5db;
 }

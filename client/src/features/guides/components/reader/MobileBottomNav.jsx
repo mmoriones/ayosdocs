@@ -16,18 +16,21 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // If any modal is open, handle visibility carefully
+      // If a GuideModal (TOC or Checklist) is open, we MUST show the bottom nav 
+      // because it contains the "Close" button for these modals.
       if (isTOCOpen || isChecklistOpen) {
-        // If AuthModal is ALSO open inside a modal, hide the bottom nav
-        if (isAuthModalOpen) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
+        setIsVisible(true);
         return;
       }
 
-      // Show when scrolling up, hide when scrolling down
+      // If the body is locked (which means MobileMenu or AuthModal is open), hide the bottom nav
+      const isBodyLocked = document.body.style.overflow === "hidden";
+      if (isBodyLocked || isAuthModalOpen) {
+        setIsVisible(false);
+        return;
+      }
+
+      // Standard scroll behavior: Show when scrolling up, hide when scrolling down
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         setIsVisible(false);
       } else {
@@ -37,8 +40,14 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
       setLastScrollY(currentScrollY);
     };
 
+    // Check periodically for body lock state or use a small delay to catch transitions
+    const intervalId = setInterval(handleScroll, 200);
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearInterval(intervalId);
+    };
   }, [lastScrollY, isTOCOpen, isChecklistOpen, isAuthModalOpen]);
 
   return (
