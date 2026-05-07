@@ -16,7 +16,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // If a GuideModal (TOC or Checklist) is open, we MUST show the bottom nav 
+      // If a ChecklistModal (TOC or Checklist) is open, we MUST show the bottom nav 
       // because it contains the "Close" button for these modals.
       if (isTOCOpen || isChecklistOpen) {
         setIsVisible(true);

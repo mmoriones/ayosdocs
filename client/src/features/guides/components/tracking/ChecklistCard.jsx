@@ -1,4 +1,20 @@
-import { CheckSquare, Square, ArrowRight, Save, Loader2 } from 'lucide-react';
+import { 
+  Check, 
+  Bookmark, 
+  BookOpen, 
+  Lock, 
+  UserPlus, 
+  ShieldCheck, 
+  ChevronRight, 
+  Save, 
+  Loader2,
+  Scan,
+  Landmark,
+  FileText,
+  CreditCard,
+  UserCircle,
+  ReceiptText
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -6,7 +22,20 @@ import AuthModal from '../../../auth/components/AuthModal';
 import { useAuth } from '../../../../context/AuthContext';
 import { useToast } from '../../../../context/ToastContext';
 
-const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=false }) => {
+// Icon mapping based on slug to match TrendingGuides.jsx
+const getGuideIcon = (slug) => {
+  const mapping = {
+    'nbi-clearance': FileText,
+    'passport-appointment': BookOpen,
+    'sss-registration': ShieldCheck,
+    'umid-application': CreditCard,
+    'philhealth-application': UserCircle,
+    'digital-tin': ReceiptText,
+  };
+  return mapping[slug] || Landmark;
+};
+
+const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal = false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const { user, isLoggedIn, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
   const { showToast } = useToast();
@@ -14,6 +43,7 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
   const queryClient = useQueryClient();
 
   const [steps, setSteps] = useState(initialSteps || []);
+  const GuideIcon = getGuideIcon(slug);
 
   // Use TanStack Query to fetch saved progress
   const { data: savedData, isLoading: isLoadingProgress } = useQuery({
@@ -88,8 +118,22 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
     }
   });
 
-  // Toggle step
-  const handleToggleStep = (index) => {
+  // Find next step and last completed step
+  const nextStepIndex = steps.findIndex((s) => !s.completed);
+  const lastCompletedIndex = nextStepIndex === -1 
+    ? (steps.length > 0 ? steps.length - 1 : -1) 
+    : nextStepIndex - 1;
+
+  const nextStep = nextStepIndex !== -1 ? steps[nextStepIndex] : null;
+
+  // Handle step completion/uncompletion sequentially
+  const handleStepAction = (index) => {
+    const isCompleted = steps[index].completed;
+    const isNext = index === nextStepIndex;
+    const isLast = index === lastCompletedIndex;
+
+    if (!isNext && !isLast) return;
+
     setSteps((prevSteps) =>
       prevSteps.map((step, i) =>
         i === index ? { ...step, completed: !step.completed } : step
@@ -112,147 +156,208 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
     saveMutation.mutate(completedTaskIndices);
   };
 
-  // Progress calculation (safe)
-  const progress = steps.length
-    ? Math.round(
-      (steps.filter((s) => s.completed).length / steps.length) * 100
-    )
-    : 0;
+  // Progress calculation
+  const completedCount = steps.filter((s) => s.completed).length;
+  const totalSteps = steps.length;
+  const progress = totalSteps ? Math.round((completedCount / totalSteps) * 100) : 0;
   const hasCompletedSteps = steps.some((s) => s.completed);
 
+  if (isLoadingProgress) {
+    return (
+      <div className={`flex items-center justify-center py-16 ${isModal ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm"}`}>
+        <Loader2 className="animate-spin text-teal-600" size={28} />
+      </div>
+    );
+  }
+
   return (
-    <div className={`space-y-5 ${isModal ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm p-6"}`}>
-
-      {/* HEADER */}
+    <div className={`flex flex-col overflow-hidden ${isModal ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm"}`}>
+      
+      {/* HEADER SECTION */}
       {!isModal && (
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold text-gray-800">
-            {isFullPage
-              ? "Requirements List"
-              : slug === "getting-started"
-                ? "Continue your progress"
-                : title}
-          </h3>
-          <div className="h-px bg-gray-100" />
-        </div>
-      )}
-
-      {/* STEPS */}
-      <div className={`${isFullPage || isModal ? "" : "max-h-72 overflow-y-auto"} pr-2`}>
-        {isLoadingProgress ? (
-          <div className="flex items-center justify-center py-10">
-            <Loader2 className="animate-spin text-teal-600" size={24} />
-          </div>
-        ) : (
-          <div className="relative">
-            {/* vertical line */}
-            <div className="absolute left-[22px] top-[10px] bottom-[10px] w-px bg-gray-200"></div>
-
-            <div className="space-y-2">
-              {steps.map((step, index) => (
-                <div
-                  key={`${slug}-${step.id || index}`}
-                  onClick={() => handleToggleStep(index)}
-                  className="flex items-center gap-3 cursor-pointer group 
-                       py-2.5 px-1 mx-2 rounded-md
-                       active:bg-gray-100 relative"
-                >
-                  {/* NUMBER / CHECK */}
-                  <div
-                    className={`z-10 w-5 h-5 flex items-center justify-center rounded-full text-[10px] font-medium shrink-0
-              ${step.completed
-                        ? "bg-teal-600 text-white"
-                        : "bg-gray-100 text-gray-500"
-                      }`}
-                  >
-                    {step.completed ? "✓" : index + 1}
-                  </div>
-
-                  {/* TEXT */}
-                  <p
-                    className={`text-sm leading-snug transition-colors
-              ${step.completed
-                        ? "text-gray-500 line-through"
-                        : "text-gray-800 group-hover:text-gray-800"
-                      }`}
-                  >
-                    {step.task}
-                  </p>
-                </div>
-              ))}
+        <div className="p-4 pb-0 flex items-start justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
+              <GuideIcon size={18} className="text-gray-600" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-sm font-bold text-gray-900 leading-tight">
+                {slug === "getting-started" ? "Continue your progress" : inGuidePage ? "Requirements List" : title}
+              </h3>
+              {isLoggedIn ? (
+                <p className="text-[11px] font-semibold text-teal-600 mt-0.5">
+                  {completedCount} of {totalSteps} steps completed
+                </p>
+              ) : (
+                <p className="text-[11px] text-gray-500 mt-0.5">
+                  Follow each requirement step-by-step.
+                </p>
+              )}
             </div>
           </div>
-        )}
-      </div>
+          
+          {isLoggedIn && (
+            <button className="p-1.5 text-gray-400 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition shrink-0">
+              <Bookmark size={18} />
+            </button>
+          )}        </div>
+      )}
 
-
-      {/* PROGRESS */}
-      {slug !== "getting-started" && (
-        <div className="space-y-2">
-          <div className="flex justify-between text-xs text-gray-500">
-            <span>Progress</span>
-            <span>{progress}%</span>
-          </div>
-
-          <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-teal-600 transition-all duration-500"
-              style={{ width: `${progress}%` }}
-            />
+      {/* PROGRESS BAR (Logged in only) */}
+      {isLoggedIn && slug !== "getting-started" && (
+        <div className="px-4 mt-4">
+          <div className="flex items-center gap-2.5">
+            <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-teal-600 rounded-full transition-all duration-500"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <span className="text-[11px] font-bold text-teal-600 shrink-0">{progress}%</span>
           </div>
         </div>
       )}
 
-      {/* ACTIONS */}
-      <div className="space-y-3">
+      {/* AUTH BANNER (Guest only) */}
+      {!isLoggedIn && (
+        <div className="px-4 mt-4">
+          <div className="bg-teal-50/50 border border-teal-100/30 rounded-xl p-3 flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-teal-600 shadow-sm shrink-0">
+              <Lock size={14} />
+            </div>
+            <p className="text-[10px] font-semibold text-teal-800 leading-tight">
+              Sign up to track <br className="hidden sm:block" /> your progress.
+            </p>
+          </div>
+        </div>
+      )}
 
-        {/* VIEW GUIDE */}
-        {slug !== "getting-started" && !isFullPage && !isModal && (
-          <button
-            onClick={() => navigate(`/guides/${slug}`)}
-            className="w-full flex items-center justify-center gap-2 py-2.5 
-        text-sm font-medium rounded-lg border border-gray-200 
-        text-gray-700 hover:bg-gray-50 transition"
-          >
-            View Full Guide
-            <ArrowRight size={16} />
-          </button>
-        )}
+      {/* CHECKLIST ITEMS */}
+      <div className={`p-4 space-y-0.5 ${inGuidePage || isModal ? "" : "max-h-[360px] overflow-y-auto custom-scrollbar"}`}>
+        {steps.map((step, index) => {
+          const isNextStep = index === nextStepIndex;
+          const isLastStep = index === lastCompletedIndex;
+          const isClickable = isNextStep || isLastStep;
 
-        {/* AUTH / SAVE */}
-        {!isLoggedIn ? (
-          <button
-            onClick={openAuthModal}
-            className="w-full bg-teal-600 hover:bg-teal-700 
-                text-white text-sm py-2.5 rounded-lg font-medium transition"
-          >
-            Sign up to save progress
-          </button>
-        ) : (
-          <button
-            onClick={handleSaveProgress}
-            disabled={saveMutation.isPending || !hasCompletedSteps}
-            className={`w-full flex items-center justify-center gap-2 py-2.5 
-              min-h-[44px] text-sm font-medium text-white rounded-lg transition-all duration-200
-              ${hasCompletedSteps
-                ? "bg-teal-600 hover:bg-teal-700 active:scale-[0.98]"
-                : "bg-gray-300 cursor-not-allowed"
+          return (
+            <div 
+              key={index}
+              onClick={() => handleStepAction(index)}
+              className={`flex items-start gap-2.5 p-2 rounded-xl transition group
+                ${isNextStep ? "bg-teal-50/40 border border-teal-100/50" : ""}
+                ${isClickable ? "cursor-pointer hover:bg-gray-50" : "cursor-default"}
+                ${!isClickable && !step.completed ? "opacity-60" : ""}
+              `}
+            >
+              <div className="shrink-0 mt-0.5">
+                {step.completed ? (
+                  <div className="w-4.5 h-4.5 rounded-full bg-teal-600 flex items-center justify-center text-white">
+                    <Check size={10} strokeWidth={3} />
+                  </div>
+                ) : isNextStep ? (
+                  <div className="w-4.5 h-4.5 rounded-full border-2 border-teal-600 flex items-center justify-center">
+                    <div className="w-1.5 h-1.5 rounded-full bg-teal-600" />
+                  </div>
+                ) : (
+                  <div className="w-4.5 h-4.5 rounded-full border border-gray-200 bg-white flex items-center justify-center text-[8px] font-bold text-gray-400">
+                    {index + 1}
+                  </div>
+                )}
+              </div>
+              
+              <div className="flex-1">
+                <p className={`text-[13px] font-medium leading-snug transition-colors
+                  ${step.completed ? "text-gray-400 line-through" : isNextStep ? "text-teal-900 font-bold" : "text-gray-700 group-hover:text-gray-900"}
+                `}>
+                  {step.task}
+                </p>
+                {isNextStep && (
+                  <p className="text-[10px] font-bold text-teal-600 mt-0.5">
+                    {index === 0 ? "First step" : index === steps.length - 1 ? "Final step" : "Next step"}
+                  </p>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* NEXT STEP HIGHLIGHT */}
+      {nextStep && (
+        <div className="px-4 mb-3">
+          <div 
+            className={`flex items-start gap-2.5 p-2 rounded-xl border transition shadow-sm bg-teal-50/40 border-teal-100/50
+              ${(!inGuidePage && !isModal) ? "cursor-pointer hover:bg-teal-100/30" : "cursor-default"}
+            `}
+            onClick={() => {
+              if (!inGuidePage && !isModal) {
+                navigate(`/guides/${slug}`);
               }
-              disabled:opacity-70 disabled:cursor-wait`}
+            }}
           >
-            {saveMutation.isPending ? (
-              <>
-                <Loader2 className="animate-spin" size={16} />
-                <span>Saving Progress...</span>
-              </>
-            ) : (
-              <>
+            <div className="shrink-0 mt-0.5">
+              <div className="w-8 h-8 rounded-lg bg-teal-600/10 flex items-center justify-center text-teal-600">
+                <Scan size={14} />
+              </div>
+            </div>
+            <div className="flex-1">
+              <p className="text-[13px] font-bold text-teal-900 line-clamp-1">{nextStep.task}</p>
+              <p className="text-[10px] font-bold text-teal-600 mt-0.5">
+                {nextStepIndex === 0 ? "First step" : nextStepIndex === steps.length - 1 ? "Final step" : "Next step"}
+              </p>
+            </div>
+            {!inGuidePage && !isModal && <ChevronRight size={14} className="text-gray-400 self-center" />}
+          </div>
+        </div>
+      )}
+
+      {/* FOOTER ACTIONS */}
+      <div className="p-4 pt-1.5 mt-auto">
+        <div className="space-y-2.5">
+          {progress === 100 && !inGuidePage && !isModal && (
+            <button 
+              onClick={() => navigate(`/guides/${slug}`)}
+              className="w-full bg-white border border-gray-200 text-gray-700 py-2.5 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 active:scale-[0.98] shadow-sm"
+            >
+              <BookOpen size={16} className="text-teal-600" />
+              View Guide
+            </button>
+          )}
+
+          {!isLoggedIn ? (
+            <>
+              <button 
+                onClick={openAuthModal}
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white py-2.5 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 active:scale-[0.98] shadow-sm shadow-teal-100"
+              >
+                <UserPlus size={16} />
+                Create Account
+              </button>
+              <div className="flex items-center justify-center gap-2 text-[9px] font-semibold text-gray-400">
+                <ShieldCheck size={10} className="text-teal-600/50" />
+                <span>Free • Secure • Quick</span>
+              </div>
+            </>
+          ) : (
+            <button 
+              onClick={handleSaveProgress}
+              disabled={saveMutation.isPending || !hasCompletedSteps}
+              className={`w-full py-2.5 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2 active:scale-[0.98]
+                ${hasCompletedSteps 
+                  ? "bg-teal-600 hover:bg-teal-700 text-white shadow-sm shadow-teal-100" 
+                  : "bg-gray-100 text-gray-400 cursor-not-allowed"}
+                disabled:opacity-70 disabled:cursor-wait
+              `}
+            >
+              {saveMutation.isPending ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
                 <Save size={16} />
-                <span>Save Guide Progress</span>
-              </>
-            )}
-          </button>
-        )}
+              )}
+              {saveMutation.isPending ? "Saving..." : "Save Progress"}
+            </button>
+          )}
+        </div>
       </div>
 
       <AuthModal
@@ -260,7 +365,6 @@ const ChecklistCard = ({ title, initialSteps, slug, isFullPage = false, isModal=
         onClose={closeAuthModal}
       />
     </div>
-
   );
 };
 

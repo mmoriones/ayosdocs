@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import { useEffect } from "react";
 
-const GuideModal = ({ isOpen, onClose, title, children, maxHeight = "85vh" }) => {
+const ChecklistModal = ({ isOpen, onClose, title, children, maxHeight = "85vh" }) => {
   // Prevent background scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -34,7 +34,7 @@ const GuideModal = ({ isOpen, onClose, title, children, maxHeight = "85vh" }) =>
         </div>
 
         {/* SCROLLABLE CONTENT */}
-        <div className="flex-1 overflow-y-auto p-6 pb-34">
+        <div className="flex-1 overflow-y-auto p-6 pb-30">
           {children}
         </div>
       </div>
@@ -42,4 +42,4 @@ const GuideModal = ({ isOpen, onClose, title, children, maxHeight = "85vh" }) =>
   );
 };
 
-export default GuideModal;
+export default ChecklistModal;

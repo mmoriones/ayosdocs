@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ChecklistCard from '../tracking/ChecklistCard';
 import TableOfContents from './TableOfContents';
 import MobileBottomNav from './MobileBottomNav';
-import GuideModal from './GuideModal';
+import ChecklistModal from './ChecklistModal';
 import RelatedGuides from './RelatedGuides';
 
 const GuidePageLayout = ({
@@ -83,7 +83,7 @@ const GuidePageLayout = ({
             title={title}
             initialSteps={checklistSteps}
             slug={slug}
-            isFullPage={true}
+            inGuidePage={true}
           />
 
           <RelatedGuides 
@@ -100,7 +100,7 @@ const GuidePageLayout = ({
         isChecklistOpen={activeModal === 'checklist'}
       />
 
-      <GuideModal
+      <ChecklistModal
         isOpen={activeModal === 'toc'}
         onClose={() => setActiveModal(null)}
         title="On this page"
@@ -109,9 +109,9 @@ const GuidePageLayout = ({
           headings={headings} 
           onItemClick={() => setActiveModal(null)} 
         />
-      </GuideModal>
+      </ChecklistModal>
 
-      <GuideModal
+      <ChecklistModal
         isOpen={activeModal === 'checklist'}
         onClose={() => setActiveModal(null)}
         title="Requirements List"
@@ -121,9 +121,10 @@ const GuidePageLayout = ({
           title={title}
           initialSteps={checklistSteps}
           slug={slug}
+          inGuidePage={true}
           isModal={true}
         />
-      </GuideModal>
+      </ChecklistModal>
     </div>
   );
 };
