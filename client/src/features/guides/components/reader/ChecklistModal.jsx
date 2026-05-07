@@ -34,7 +34,7 @@ const ChecklistModal = ({ isOpen, onClose, title, children, maxHeight = "85vh" }
         </div>
 
         {/* SCROLLABLE CONTENT */}
-        <div className="flex-1 overflow-y-auto p-6 pb-30">
+        <div className="flex-1 overflow-y-auto px-6 pt-2 pb-44 overscroll-contain custom-scrollbar">
           {children}
         </div>
       </div>

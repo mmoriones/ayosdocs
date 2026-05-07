@@ -66,8 +66,8 @@ const GuidePageLayout = ({
             <main className="flex-1 min-w-0">
               {children}
               
-              {/* MOBILE RELATED GUIDES */}
-              <div className="lg:hidden mt-10">
+              {/* RELATED GUIDES (Visible on both mobile & desktop) */}
+              <div className="mt-8 pt-6 border-t border-gray-100">
                 <RelatedGuides 
                   currentSlug={slug} 
                   category={category} 
@@ -78,17 +78,12 @@ const GuidePageLayout = ({
         </div>
 
         {/* DESKTOP RIGHT SIDEBAR (Checklist) */}
-        <aside className="hidden lg:block w-96 space-y-6 sticky top-28 shrink-0 max-h-[calc(100vh-120px)] overflow-y-auto pr-2 pb-4 custom-scrollbar">
+        <aside className="hidden lg:block w-96 sticky top-28 shrink-0 max-h-[calc(100vh-120px)] overflow-y-auto pr-2 pb-4 custom-scrollbar">
           <ChecklistCard
             title={title}
             initialSteps={checklistSteps}
             slug={slug}
             inGuidePage={true}
-          />
-
-          <RelatedGuides 
-            currentSlug={slug} 
-            category={category} 
           />
         </aside>      </div>
 
