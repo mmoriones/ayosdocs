@@ -1,51 +1,60 @@
-import { Clock, FileText, Bell, UserPlus } from 'lucide-react';
+import { CheckCircle, UserPlus } from 'lucide-react';
 
 const WhySignUp = ({ onSignUp }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-5">
-      <h3 className="text-lg font-semibold text-gray-800">
-        Why sign up?
-      </h3>
+    <div className="bg-[#F0F9F6] rounded-[32px] p-8 relative overflow-hidden">
+      
+      {/* CONTENT WRAPPER */}
+      <div className="relative z-10 flex flex-col h-full">
+        
+        {/* TEXT CONTENT */}
+        <div className="max-w-[180px]">
+          <h3 className="text-[17px] font-extrabold text-slate-900 leading-tight mb-4">
+            Create an account for a better experience
+          </h3>
 
-      <div className="space-y-4">
-        <div className="flex items-start gap-3">
-          <Clock className="w-5 h-5 text-teal-600 mt-1" />
-          <div>
-            <p className="font-medium text-gray-700">Save your progress</p>
-            <p className="text-sm text-gray-500">
-              Pick up where you left off
-            </p>
-          </div>
+          <ul className="space-y-2.5 mb-8">
+            {[
+              "Save and track your progress",
+              "Get reminders and updates",
+              "Access your guides anywhere"
+            ].map((text, i) => (
+              <li key={i} className="flex items-center gap-2">
+                <CheckCircle size={14} className="text-teal-600 shrink-0" strokeWidth={3} />
+                <span className="text-[11px] font-bold text-slate-600">{text}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="flex items-start gap-3">
-          <FileText className="w-5 h-5 text-teal-600 mt-1" />
-          <div>
-            <p className="font-medium text-gray-700">Track your applications</p>
-            <p className="text-sm text-gray-500">
-              Stay updated every step of the way
-            </p>
-          </div>
-        </div>
+        {/* CTA BUTTON */}
+        <div className="mt-auto max-w-[180px]">
+          <button 
+            onClick={onSignUp}
+            className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl transition-all shadow-md shadow-teal-100 flex items-center justify-center gap-2 active:scale-95 text-[13px]"
+          >
+            <span>Sign up for free</span>
+            <UserPlus size={16} strokeWidth={2.5} />
+          </button>
 
-        <div className="flex items-start gap-3">
-          <Bell className="w-5 h-5 text-teal-600 mt-1" />
-          <div>
-            <p className="font-medium text-gray-700">Get helpful reminders</p>
-            <p className="text-sm text-gray-500">
-              Never miss an important update
-            </p>
-          </div>
+          <p className="mt-4 text-center text-[11px] font-bold text-slate-500">
+            Already have an account? <button onClick={onSignUp} className="text-teal-600 hover:underline">Log in</button>
+          </p>
         </div>
       </div>
 
-      <button 
-        onClick={onSignUp}
-        className="w-full flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-medium py-2.5 rounded-lg transition"
-      >
-        <UserPlus className="w-4 h-4" />
-        Create an Account
-      </button>
+      {/* ILLUSTRATION */}
+      <div className="absolute -right-21 bottom-0 w-[300px] pointer-events-none z-0">
+        <img 
+          src="/person2.svg" 
+          alt="Person with phone" 
+          className="w-full h-full object-contain object-right-bottom"
+        />
+      </div>
+
+
+      {/* BACKGROUND DECO */}
+      <div className="absolute top-0 right-0 w-24 h-24 bg-teal-100/50 rounded-full blur-2xl -mr-12 -mt-12" />
     </div>
   );
 };

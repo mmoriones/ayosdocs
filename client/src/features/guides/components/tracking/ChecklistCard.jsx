@@ -171,30 +171,44 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
   }
 
   return (
-    <div className={`flex flex-col overflow-hidden ${isModal ? "" : "bg-white rounded-2xl border border-gray-100 shadow-sm"}`}>
+    <div className={`flex flex-col overflow-hidden ${isModal ? "" : "bg-white rounded-[32px] border border-slate-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"}`}>
       
       {/* HEADER SECTION */}
       {!isModal && (
         <div className="p-5 pb-0">
+          <div className="flex items-start justify-between gap-4 mb-2">
+            <h3 className="text-[15px] font-bold text-gray-900 leading-tight">
+              {inGuidePage ? (slug === "getting-started" ? "Continue your progress" : "Requirements List") : "Your Progress"}
+            </h3>
+            
+            {!inGuidePage && (
+              <button 
+                onClick={() => navigate('/my-progress')}
+                className="text-[11px] font-bold text-teal-600 hover:text-teal-700 flex items-center gap-0.5"
+              >
+                View all <ChevronRight size={12} />
+              </button>
+            )}
+          </div>
+
           <div className="flex items-start justify-between gap-4">
-            <div className="flex items-start gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100 shadow-sm">
-                <GuideIcon size={22} className="text-teal-600" />
-              </div>
+            <div className="flex items-start gap-3.5 w-full">
+              {!inGuidePage && (
+                <div className="w-11 h-11 rounded-2xl bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100 shadow-sm">
+                  <GuideIcon size={22} className="text-teal-600" />
+                </div>
+              )}
               
-              <div className="space-y-1">
+              <div className="space-y-1 flex-1">
                 {!isModal && !inGuidePage && (
-                  <div className="flex items-center gap-1.5">
-                    <span className="flex h-1.5 w-1.5 rounded-full bg-teal-500 animate-pulse" />
-                    <p className="text-[10px] font-bold text-teal-600 uppercase tracking-widest">
-                      Recent Activity
-                    </p>
-                  </div>
+                  <p className="text-[10px] text-gray-500 font-medium">
+                    Continue your last guide
+                  </p>
                 )}
                 
-                <h3 className="text-[15px] font-bold text-gray-900 leading-tight">
-                  {slug === "getting-started" ? "Continue your progress" : inGuidePage ? "Requirements List" : title}
-                </h3>
+                <h4 className="text-[14px] font-bold text-gray-800 leading-tight">
+                  {slug === "getting-started" ? "Getting Started" : title}
+                </h4>
                 
                 {isLoggedIn ? (
                   <p className="text-[11px] font-bold text-teal-600/80">
@@ -206,20 +220,20 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
                   </p>
                 )}
               </div>
+
+              {!inGuidePage && isLoggedIn && (
+                <button className="p-2 text-gray-400 hover:text-teal-600 hover:bg-teal-50 rounded-xl border border-gray-100 transition shrink-0 bg-white shadow-sm active:scale-95">
+                  <Bookmark size={18} />
+                </button>
+              )}
             </div>
-            
-            {isLoggedIn && (
-              <button className="p-2 text-gray-400 hover:text-teal-600 hover:bg-teal-50 rounded-xl border border-gray-100 transition shrink-0 bg-white shadow-sm active:scale-95">
-                <Bookmark size={18} />
-              </button>
-            )}
           </div>
         </div>
       )}
 
       {/* PROGRESS BAR (Logged in only) */}
       {isLoggedIn && slug !== "getting-started" && (
-        <div className={`${isModal ? "px-0" : "px-4"} mt-4`}>
+        <div className={`${isModal ? "px-0" : "px-5"} mt-4 mb-2`}>
           <div className="flex items-center gap-2.5">
             <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
               <div 
@@ -246,62 +260,64 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
         </div>
       )}
 
-      {/* CHECKLIST ITEMS */}
-      <div className={`${isModal ? "px-0 py-3" : "px-5 py-4"} space-y-1 ${inGuidePage || isModal ? "" : "max-h-[380px] overflow-y-auto custom-scrollbar"}`}>
-        {steps.map((step, index) => {
-          const isNextStep = index === nextStepIndex;
-          const isLastStep = index === lastCompletedIndex;
-          const isClickable = isNextStep || isLastStep;
+      {/* CHECKLIST ITEMS - Hidden in compact mode on home page */}
+      {(inGuidePage || isModal) && (
+        <div className={`${isModal ? "px-0 py-3" : "px-5 py-4"} space-y-1 ${inGuidePage || isModal ? "" : "max-h-[380px] overflow-y-auto custom-scrollbar"}`}>
+          {steps.map((step, index) => {
+            const isNextStep = index === nextStepIndex;
+            const isLastStep = index === lastCompletedIndex;
+            const isClickable = isNextStep || isLastStep;
 
-          return (
-            <div 
-              key={index}
-              onClick={() => handleStepAction(index)}
-              className={`flex items-start gap-4 p-2.5 rounded-2xl transition-all duration-200 group
-                ${isNextStep ? "bg-teal-50/50 border border-teal-100/50" : "border border-transparent"}
-                ${isClickable ? "cursor-pointer hover:bg-gray-50 hover:border-gray-100" : "cursor-default"}
-                ${!isClickable && !step.completed ? "opacity-50" : ""}
-              `}
-            >
-              <div className="shrink-0 mt-0.5">
-                {step.completed ? (
-                  <div className="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center text-white shadow-sm">
-                    <Check size={12} strokeWidth={3} />
-                  </div>
-                ) : isNextStep ? (
-                  <div className="w-5 h-5 rounded-full border-2 border-teal-600 flex items-center justify-center bg-white shadow-sm">
-                    <div className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
-                  </div>
-                ) : (
-                  <div className="w-5 h-5 rounded-full border border-gray-200 bg-white flex items-center justify-center text-[10px] font-bold text-gray-400">
-                    {index + 1}
-                  </div>
-                )}
-              </div>
-              
-              <div className="flex-1 pt-0.5">
-                <p className={`text-[13px] font-medium leading-relaxed transition-colors
-                  ${step.completed ? "text-gray-400 line-through" : isNextStep ? "text-teal-900 font-bold" : "text-gray-700 group-hover:text-gray-900"}
-                `}>
-                  {step.task}
-                </p>
-                {isNextStep && (
-                  <p className="text-[10px] font-bold text-teal-600 mt-1 flex items-center gap-1">
-                    <span className="w-1 h-1 rounded-full bg-teal-600" />
-                    {index === 0 ? "Start here" : index === steps.length - 1 ? "Final requirement" : "Next requirement"}
+            return (
+              <div 
+                key={index}
+                onClick={() => handleStepAction(index)}
+                className={`flex items-start gap-4 p-2.5 rounded-2xl transition-all duration-200 group
+                  ${isNextStep ? "bg-teal-50/50 border border-teal-100/50" : "border border-transparent"}
+                  ${isClickable ? "cursor-pointer hover:bg-gray-50 hover:border-gray-100" : "cursor-default"}
+                  ${!isClickable && !step.completed ? "opacity-50" : ""}
+                `}
+              >
+                <div className="shrink-0 mt-0.5">
+                  {step.completed ? (
+                    <div className="w-5 h-5 rounded-full bg-teal-600 flex items-center justify-center text-white shadow-sm">
+                      <Check size={12} strokeWidth={3} />
+                    </div>
+                  ) : isNextStep ? (
+                    <div className="w-5 h-5 rounded-full border-2 border-teal-600 flex items-center justify-center bg-white shadow-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
+                    </div>
+                  ) : (
+                    <div className="w-5 h-5 rounded-full border border-gray-200 bg-white flex items-center justify-center text-[10px] font-bold text-gray-400">
+                      {index + 1}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex-1 pt-0.5">
+                  <p className={`text-[13px] font-medium leading-relaxed transition-colors
+                    ${step.completed ? "text-gray-400 line-through" : isNextStep ? "text-teal-900 font-bold" : "text-gray-700 group-hover:text-gray-900"}
+                  `}>
+                    {step.task}
                   </p>
-                )}
+                  {isNextStep && (
+                    <p className="text-[10px] font-bold text-teal-600 mt-1 flex items-center gap-1">
+                      <span className="w-1 h-1 rounded-full bg-teal-600" />
+                      {index === 0 ? "Start here" : index === steps.length - 1 ? "Final requirement" : "Next requirement"}
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
 
-      {/* NEXT STEP HIGHLIGHT */}
-      {nextStep && (
-        <div className={`${isModal ? "px-0" : "px-4"} mb-3`}>
+      {/* NEXT STEP HIGHLIGHT - Only show in compact mode on home page or in guide page */}
+      {nextStep && (inGuidePage || (!isModal && !inGuidePage)) && (
+        <div className={`${isModal ? "px-0" : "px-5"} mb-5 mt-2`}>
           <div 
-            className={`flex items-start gap-2.5 p-2 rounded-xl border transition shadow-sm bg-teal-50/40 border-teal-100/50
+            className={`flex items-start gap-2.5 p-3 rounded-xl border transition shadow-sm bg-teal-50/40 border-teal-100/50
               ${(!inGuidePage && !isModal) ? "cursor-pointer hover:bg-teal-100/30" : "cursor-default"}
             `}
             onClick={() => {
@@ -326,8 +342,21 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
         </div>
       )}
 
-      {/* FOOTER ACTIONS */}
-      <div className={`${isModal ? "px-0 pb-6" : "p-4"} pt-1.5 mt-auto`}>
+      {/* FOOTER ACTIONS - Only show button to go to checklist when in compact mode on home page */}
+      {!inGuidePage && !isModal && (
+        <div className="px-5 pb-5 pt-0">
+          <button 
+            onClick={() => navigate(`/guides/${slug}`)}
+            className="w-full bg-white border border-gray-200 text-gray-700 py-3 rounded-xl font-bold text-[13px] transition flex items-center justify-center gap-2 hover:bg-gray-50 active:scale-[0.98]"
+          >
+            Go to checklist
+          </button>
+        </div>
+      )}
+
+      {/* FULL FOOTER ACTIONS - Hidden in compact mode */}
+      {(inGuidePage || isModal) && (
+        <div className={`${isModal ? "px-0 pb-6" : "p-4"} pt-1.5 mt-auto`}>
         <div className="space-y-2.5">
           {progress === 100 ? (
             <div className="bg-teal-50/50 border border-teal-100/50 rounded-2xl p-5 flex flex-col items-center text-center gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500">
@@ -411,6 +440,7 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
           )}
         </div>
       </div>
+      )}
 
       <AuthModal
         isOpen={isAuthModalOpen}

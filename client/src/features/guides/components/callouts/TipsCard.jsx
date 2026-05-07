@@ -1,50 +1,55 @@
-import { CheckCircle, FileText, AlertCircle, ExternalLink } from 'lucide-react';
+import { CheckCircle, FileText, Clock, ExternalLink } from 'lucide-react';
 
 const TipsCard = () => {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-5">
-      <h3 className="text-lg font-semibold text-gray-800">
+    <div className="bg-white rounded-[32px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 p-8 space-y-6">
+      <h3 className="text-lg font-bold text-slate-900">
         Before you proceed
       </h3>
 
-      <div className="space-y-4">
+      <div className="space-y-5">
 
         <div className="flex items-start gap-3">
-          <CheckCircle className="w-5 h-5 text-teal-600 mt-1" />
+          <div className="mt-1">
+            <CheckCircle className="w-5 h-5 text-teal-600" strokeWidth={2.5} />
+          </div>
           <div>
-            <p className="font-medium text-gray-700">Double-check your details</p>
-            <p className="text-sm text-gray-500">
+            <p className="font-bold text-slate-800 text-[14px]">Double-check your details</p>
+            <p className="text-[12px] text-slate-500 font-medium">
               Make sure names and information match your IDs
             </p>
           </div>
         </div>
 
         <div className="flex items-start gap-3">
-          <FileText className="w-5 h-5 text-teal-600 mt-1" />
+          <div className="mt-1">
+            <FileText className="w-5 h-5 text-teal-600" strokeWidth={2.5} />
+          </div>
           <div>
-            <p className="font-medium text-gray-700">Prepare all requirements</p>
-            <p className="text-sm text-gray-500">
+            <p className="font-bold text-slate-800 text-[14px]">Prepare all requirements</p>
+            <p className="text-[12px] text-slate-500 font-medium">
               Bring valid IDs and extra photocopies
             </p>
           </div>
         </div>
 
         <div className="flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-teal-600 mt-1" />
+          <div className="mt-1">
+            <Clock className="w-5 h-5 text-teal-600" strokeWidth={2.5} />
+          </div>
           <div>
-            <p className="font-medium text-gray-700">Check office availability</p>
-            <p className="text-sm text-gray-500">
+            <p className="font-bold text-slate-800 text-[14px]">Check office availability</p>
+            <p className="text-[12px] text-slate-500 font-medium">
               Confirm schedules and possible holidays
             </p>
           </div>
         </div>
       </div>
 
-      {/* OPTIONAL CTA */}
       <button className="w-full flex items-center justify-center gap-2 
-        border border-gray-200 text-gray-700 hover:bg-gray-50 
-        font-medium py-2.5 rounded-lg transition text-sm">
-        <ExternalLink className="w-4 h-4" />
+        border border-slate-200 text-slate-700 hover:bg-slate-50 
+        font-bold py-3.5 rounded-xl transition-all text-[13px] active:scale-95">
+        <ExternalLink className="w-4 h-4" strokeWidth={2.5} />
         View official resources
       </button>
     </div>

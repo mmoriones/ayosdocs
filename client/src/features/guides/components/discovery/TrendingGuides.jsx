@@ -5,7 +5,9 @@ import {
   CreditCard,
   UserCircle,
   ReceiptText,
-  ChevronRight
+  ArrowUpRight,
+  TrendingUp,
+  ArrowRight
 } from 'lucide-react';
 
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +16,7 @@ const guides = [
   {
     id: 1,
     name: 'NBI Clearance',
+    description: 'Learn how to apply for your NBI Clearance online.',
     slug: 'nbi-clearance',
     icon: FileText,
     bg: 'bg-blue-50',
@@ -22,6 +25,7 @@ const guides = [
   {
     id: 2,
     name: 'Passport Appointment',
+    description: 'Book your passport appointment in easy steps.',
     slug: 'passport-appointment',
     icon: BookOpen,
     bg: 'bg-red-50',
@@ -30,6 +34,7 @@ const guides = [
   {
     id: 3,
     name: 'SSS Registration',
+    description: 'Register for SSS and get your membership number.',
     slug: 'sss-registration',
     icon: ShieldCheck,
     bg: 'bg-indigo-50',
@@ -38,6 +43,7 @@ const guides = [
   {
     id: 4,
     name: 'UMID Card',
+    description: 'Guide to get your UMID ID in a few simple steps.',
     slug: 'umid-application',
     icon: CreditCard,
     bg: 'bg-purple-50',
@@ -46,18 +52,20 @@ const guides = [
   {
     id: 5,
     name: 'PhilHealth ID',
+    description: 'How to create and print your PhilHealth ID online.',
     slug: 'philhealth-application',
     icon: UserCircle,
-    bg: 'bg-yellow-50',
-    color: 'text-yellow-600'
+    bg: 'bg-amber-50',
+    color: 'text-amber-600'
   },
   {
     id: 6,
     name: 'Digital TIN ID',
+    description: 'Apply for a Digital TIN ID online.',
     slug: 'digital-tin',
     icon: ReceiptText,
-    bg: 'bg-green-50',
-    color: 'text-green-600'
+    bg: 'bg-emerald-50',
+    color: 'text-emerald-600'
   },
 ];
 
@@ -69,25 +77,33 @@ const TrendingGuides = () => {
   };
 
   return (
-    <div className="transition-colors duration-300">
+    <div className="w-full">
       
       {/* HEADER */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-gray-800">
-          Popular Guides
-        </h2>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+        <div>
+          <div className="flex items-center gap-2 text-emerald-600">
+            <TrendingUp size={24} strokeWidth={2.5} />
+            <h2 className="text-2xl font-bold text-slate-900">
+              Popular Guides
+            </h2>
+          </div>
+          <p className="text-slate-500 mt-1 font-medium">
+            Quick access to our most requested guides.
+          </p>
+        </div>
 
         <button 
           onClick={() => navigate('/guides')}
-          className="text-sm text-teal-600 hover:underline flex items-center gap-1"
+          className="group flex items-center gap-1.5 text-teal-700 font-bold hover:text-teal-800 transition-colors"
         >
-          View all
-          <ChevronRight className="w-4 h-4" />
+          <span>View all guides</span>
+          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </button>
       </div>
 
       {/* GRID */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {guides.map((guide) => {
           const Icon = guide.icon;
 
@@ -95,32 +111,39 @@ const TrendingGuides = () => {
             <div
               key={guide.id}
               onClick={() => handleSelection(guide.slug)}
-              className="group flex items-center justify-between p-4 rounded-2xl 
-              bg-white border border-gray-100 shadow-sm 
-              hover:shadow-md hover:-translate-y-0.5 
-              transition-all duration-200 cursor-pointer"
+              className="group relative flex flex-col p-6 rounded-[32px] 
+              bg-white border border-slate-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]
+              hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:-translate-y-1.5
+              transition-all duration-300 cursor-pointer overflow-hidden h-full"
             >
-              {/* LEFT CONTENT */}
-              <div className="flex items-center gap-4">
-                
-                {/* ICON */}
-                <div className={`p-3 rounded-xl ${guide.bg}`}>
-                  <Icon className={`w-5 h-5 ${guide.color}`} />
-                </div>
-
-                {/* TEXT */}
-                <div>
-                  <p className="font-semibold text-gray-800 text-sm">
-                    {guide.name}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    Requirements & process
-                  </p>
+              
+              {/* ICON CONTAINER */}
+              <div className="flex justify-center mb-6">
+                <div className={`p-5 rounded-2xl ${guide.bg} transition-transform duration-300 group-hover:scale-110`}>
+                  <Icon className={`w-6 h-6 ${guide.color}`} strokeWidth={2.5} />
                 </div>
               </div>
 
-              {/* ARROW */}
-              <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-teal-600 transition" />
+              {/* TEXT CONTENT */}
+              <div className="flex-1 text-center">
+                <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-teal-700 transition-colors">
+                  {guide.name}
+                </h3>
+                <p className="text-sm text-slate-500 leading-relaxed mb-6">
+                  {guide.description}
+                </p>
+              </div>
+
+              {/* ACTION LINK */}
+              <div className="mt-auto flex justify-center">
+                <div className="flex items-center gap-1.5 text-teal-600 font-bold text-[13px] group-hover:gap-2 transition-all">
+                  <span>View guide</span>
+                  <ArrowRight size={14} strokeWidth={3} />
+                </div>
+              </div>
+
+              {/* SUBTLE CARD HOVER ACCENT */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
           );
         })}

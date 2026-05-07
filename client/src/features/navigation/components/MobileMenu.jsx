@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { LogOut, UserPlus } from "lucide-react";
 
 const MobileMenu = ({
   isOpen,
@@ -19,18 +20,18 @@ const MobileMenu = ({
   const isActive = (path) => location.pathname === path;
 
   const linkClass = (path) =>
-    `block w-full px-3 py-2.5 rounded-xl transition ${isActive(path)
-      ? "bg-teal-50 text-teal-600 font-semibold"
-      : "text-gray-700 hover:bg-gray-100"
+    `block w-full px-4 py-3 rounded-2xl transition-all duration-200 text-[15px] ${isActive(path)
+      ? "bg-teal-50 text-teal-700 font-bold"
+      : "text-slate-600 font-semibold hover:bg-slate-50 hover:text-teal-600"
     }`;
 
   return (
-    <div className="lg:hidden border-b border-gray-200 bg-white shadow-sm overflow-y-auto max-h-[calc(100vh-80px)]">
+    <div className="lg:hidden border-b border-slate-100 bg-white/95 backdrop-blur-md shadow-lg overflow-y-auto max-h-[calc(100vh-80px)] animate-in slide-in-from-top duration-300">
 
-      <div className="px-6 py-6 space-y-6">
+      <div className="px-6 py-8 space-y-8">
 
-        {/* PRIMARY */}
-        <div className="space-y-1">
+        {/* PRIMARY NAV */}
+        <div className="space-y-2">
           <Link
             to="/"
             onClick={() => handleClick()}
@@ -58,11 +59,9 @@ const MobileMenu = ({
           )}
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-100" />
-
-        {/* SECONDARY */}
-        <div className="space-y-1">
+        {/* SECONDARY NAV */}
+        <div className="space-y-2">
+          <p className="px-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">Information</p>
           {[
             { label: "About", to: "/about" },
             { label: "FAQs", to: "/faqs" },
@@ -79,49 +78,47 @@ const MobileMenu = ({
           ))}
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-200" />
-
         {/* USER SECTION */}
-        {user && (
-          <div className="flex items-center gap-3 px-3 py-3 bg-gray-50 rounded-xl border border-gray-100">
-            {user.picture ? (
-              <img
-                src={user.picture}
-                alt={user.fullName}
-                className="w-10 h-10 rounded-full border border-teal-600 shadow-sm"
-              />
-            ) : (
-              <div className="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                {user.fullName.charAt(0)}
+        <div className="pt-4 border-t border-slate-100">
+          {user ? (
+            <div className="space-y-6">
+              <div className="flex items-center gap-4 px-4 py-4 bg-slate-50 rounded-3xl border border-slate-100">
+                {user.picture ? (
+                  <img
+                    src={user.picture}
+                    alt={user.fullName}
+                    className="w-12 h-12 rounded-full border-2 border-white shadow-sm"
+                  />
+                ) : (
+                  <div className="w-12 h-12 bg-teal-600 text-white rounded-full flex items-center justify-center text-lg font-bold shadow-sm">
+                    {user.fullName.charAt(0)}
+                  </div>
+                )}
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[15px] font-bold text-slate-900 truncate">
+                    {user.fullName}
+                  </span>
+                  <span className="text-[12px] font-medium text-slate-500 truncate">
+                    {user.email}
+                  </span>
+                </div>
               </div>
-            )}
-            <div className="flex flex-col min-w-0">
-              <span className="text-sm font-semibold text-gray-800 truncate">
-                {user.fullName}
-              </span>
-              <span className="text-xs text-gray-500 truncate">
-                {user.email}
-              </span>
-            </div>
-          </div>
-        )}
 
-        {/* CTA */}
-        <div className="pt-2">
-          {!user ? (
-            <button
-              onClick={() => handleClick(openAuthModal)}
-              className="w-full bg-teal-600 hover:bg-teal-700 text-white py-2.5 rounded-lg font-medium transition"
-            >
-              Login / Register
-            </button>
+              <button
+                onClick={() => handleClick(handleLogout)}
+                className="w-full flex items-center justify-center gap-2 bg-red-50 text-red-600 py-4 rounded-2xl font-bold text-[14px] transition-colors hover:bg-red-100"
+              >
+                <LogOut size={18} />
+                Logout
+              </button>
+            </div>
           ) : (
             <button
-              onClick={() => handleClick(handleLogout)}
-              className="w-full bg-red-500 hover:bg-red-600 text-white py-2.5 rounded-lg font-medium transition"
+              onClick={() => handleClick(openAuthModal)}
+              className="w-full bg-[#0D9488] hover:bg-[#0F766E] text-white py-4 rounded-2xl font-bold text-[14px] transition-all shadow-lg shadow-teal-100 flex items-center justify-center gap-2"
             >
-              Logout
+              <UserPlus size={18} />
+              Login / Register
             </button>
           )}
         </div>
