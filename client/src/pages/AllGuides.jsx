@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, ChevronLeft, ChevronRight, Search, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Search, ArrowRight } from 'lucide-react';
 import { guidesMap } from '../utils/loadGuides';
+import { getGuideIcon } from '../utils/guideIcons';
 
 const AllGuides = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -89,7 +90,11 @@ const AllGuides = () => {
               >
                 <div className="flex items-center gap-4">
                   <div className="p-3 rounded-xl bg-gray-50 group-hover:bg-teal-50 transition">
-                    <FileText className="text-gray-400 group-hover:text-teal-600" size={24} />
+                    <img 
+                      src={getGuideIcon(guide.slug)} 
+                      alt="" 
+                      className="w-8 h-8 object-contain"
+                    />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 group-hover:text-teal-700 transition">

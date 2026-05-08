@@ -1,5 +1,6 @@
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { getGuideIcon } from '../../../../utils/guideIcons';
 
 const updates = [
   {
@@ -62,9 +63,13 @@ const RecentlyUpdated = () => {
               ${index !== updates.length - 1 ? 'border-b border-slate-50' : ''}
             `}
           >
-            {/* THUMBNAIL PLACEHOLDER */}
-            <div className="shrink-0 w-24 h-16 bg-slate-100 rounded-xl flex items-center justify-center">
-              <div className="w-4 h-4 rounded-full bg-slate-200" />
+            {/* THUMBNAIL */}
+            <div className="shrink-0 w-24 h-16 bg-slate-50 rounded-xl flex items-center justify-center overflow-hidden">
+              <img 
+                src={getGuideIcon(update.slug)} 
+                alt="" 
+                className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
+              />
             </div>
 
             {/* CONTENT */}

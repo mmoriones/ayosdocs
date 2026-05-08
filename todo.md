@@ -3,7 +3,7 @@
 ## 🎨 Frontend & UI Refinements
 - [ ] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.
 - [ ] **Branding:** 
-    - [ ] Fix logo and add government agency logos.
+    - [ ] Fix logo and add government agency logos. (started)
     - [X] Add consistent SVGs/Graphics across the platform.(used webp instead)
 - [ ] **Mobile Experience:** 
     - [ ] Implement Mobile view (refer to `home_wireframe_mobile.png`).

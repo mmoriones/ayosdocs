@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, X } from "lucide-react";
 import { searchGuides } from '../../../../utils/searchGuides'
+import { getGuideIcon } from "../../../../utils/guideIcons";
 
 const SearchBar = () => {
 
@@ -98,16 +99,25 @@ const SearchBar = () => {
             <div
               key={guide.slug}
               onClick={() => handleSelect(guide.slug)}
-              className={`px-4 py-3 cursor-pointer transition text-sm
+              className={`px-4 py-3 cursor-pointer transition flex items-center gap-3
               ${index === 0 ? "bg-gray-50" : ""}
               hover:bg-gray-100`}
             >
-              <p className="font-medium text-gray-800">
-                {guide.title}
-              </p>
-              <p className="text-xs text-gray-500">
-                View guide
-              </p>
+              <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center p-1.5 shrink-0">
+                <img 
+                  src={getGuideIcon(guide.slug)} 
+                  alt="" 
+                  className="w-full h-full object-contain" 
+                />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-medium text-gray-800">
+                  {guide.title}
+                </p>
+                <p className="text-[11px] text-gray-500">
+                  View guide
+                </p>
+              </div>
             </div>
           ))}
 

@@ -1,16 +1,10 @@
 import {
-  FileText,
-  BookOpen,
-  ShieldCheck,
-  CreditCard,
-  UserCircle,
-  ReceiptText,
-  ArrowUpRight,
   TrendingUp,
   ArrowRight
 } from 'lucide-react';
 
 import { useNavigate } from 'react-router-dom';
+import { getGuideIcon } from '../../../../utils/guideIcons';
 
 const guides = [
   {
@@ -18,7 +12,6 @@ const guides = [
     name: 'NBI Clearance',
     description: 'Learn how to apply for your NBI Clearance online.',
     slug: 'nbi-clearance',
-    icon: FileText,
     bg: 'bg-blue-50',
     color: 'text-blue-600'
   },
@@ -27,7 +20,6 @@ const guides = [
     name: 'Passport Appointment',
     description: 'Book your passport appointment in easy steps.',
     slug: 'passport-appointment',
-    icon: BookOpen,
     bg: 'bg-red-50',
     color: 'text-red-600'
   },
@@ -36,7 +28,6 @@ const guides = [
     name: 'PSA Birth Certificate',
     description: 'How to get original copy of your PSA Birth Certificate.',
     slug: 'psa-birth-certificate',
-    icon: ReceiptText,
     bg: 'bg-emerald-50',
     color: 'text-emerald-600'
   },
@@ -45,7 +36,6 @@ const guides = [
     name: 'Philippine National ID',
     description: 'Guide to get your National ID in a few simple steps.',
     slug: 'national-id',
-    icon: CreditCard,
     bg: 'bg-purple-50',
     color: 'text-purple-600'
   },
@@ -54,7 +44,6 @@ const guides = [
     name: 'SSS Registration',
     description: 'Register for SSS and get your membership number.',
     slug: 'sss-registration',
-    icon: ShieldCheck,
     bg: 'bg-indigo-50',
     color: 'text-indigo-600'
   },
@@ -63,7 +52,6 @@ const guides = [
     name: 'PhilHealth ID',
     description: 'How to create and print your PhilHealth ID online.',
     slug: 'philhealth-application',
-    icon: UserCircle,
     bg: 'bg-amber-50',
     color: 'text-amber-600'
   },
@@ -105,7 +93,7 @@ const TrendingGuides = () => {
       {/* GRID */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {guides.map((guide) => {
-          const Icon = guide.icon;
+          const icon = getGuideIcon(guide.slug);
 
           return (
             <div
@@ -119,8 +107,18 @@ const TrendingGuides = () => {
               
               {/* ICON CONTAINER */}
               <div className="flex justify-center mb-6">
-                <div className={`p-5 rounded-2xl ${guide.bg} transition-transform duration-300 group-hover:scale-110`}>
-                  <Icon className={`w-6 h-6 ${guide.color}`} strokeWidth={2.5} />
+                <div className={`p-4 rounded-2xl ${guide.bg} transition-transform duration-300 group-hover:scale-110`}>
+                  {icon ? (
+                    <img 
+                      src={icon} 
+                      alt={guide.name} 
+                      className="w-10 h-10 object-contain"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 flex items-center justify-center bg-slate-200 rounded-lg">
+                      <TrendingUp className="text-slate-400" />
+                    </div>
+                  )}
                 </div>
               </div>
 

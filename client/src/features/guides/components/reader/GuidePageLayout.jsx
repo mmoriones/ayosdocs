@@ -6,6 +6,7 @@ import TableOfContents from './TableOfContents';
 import MobileBottomNav from './MobileBottomNav';
 import ChecklistModal from './ChecklistModal';
 import RelatedGuides from './RelatedGuides';
+import { getGuideIcon } from '../../../../utils/guideIcons';
 
 const GuidePageLayout = ({
   title,
@@ -62,16 +63,25 @@ const GuidePageLayout = ({
         <div className="flex-1 space-y-6">
           {/* HEADER CARD */}
           <header className="bg-white border border-gray-100 rounded-2xl p-6 md:p-8 shadow-sm">
-            <div className="space-y-3 max-w-2xl">
-              <span className="text-xs font-medium text-teal-600 bg-teal-50 px-3 py-1 rounded-full">
-                GUIDE
-              </span>
-              <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 leading-snug">
-                {title}
-              </h1>
-              <p className="text-sm text-gray-500">
-                Last Updated: {lastUpdated?.toString()}
-              </p>
+            <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <div className="p-4 rounded-2xl bg-gray-50 shrink-0 w-fit">
+                <img 
+                  src={getGuideIcon(slug)} 
+                  alt="" 
+                  className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                />
+              </div>
+              <div className="space-y-3 max-w-2xl">
+                <span className="text-xs font-medium text-teal-600 bg-teal-50 px-3 py-1 rounded-full">
+                  {category || 'GUIDE'}
+                </span>
+                <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 leading-snug">
+                  {title}
+                </h1>
+                <p className="text-sm text-gray-500">
+                  Last Updated: {lastUpdated?.toString()}
+                </p>
+              </div>
             </div>
           </header>
 

@@ -9,11 +9,6 @@ import {
   Save, 
   Loader2,
   Scan,
-  Landmark,
-  FileText,
-  CreditCard,
-  UserCircle,
-  ReceiptText
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -21,19 +16,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import AuthModal from '../../../auth/components/AuthModal';
 import { useAuth } from '../../../../context/AuthContext';
 import { useToast } from '../../../../context/ToastContext';
-
-// Icon mapping based on slug to match TrendingGuides.jsx
-const getGuideIcon = (slug) => {
-  const mapping = {
-    'nbi-clearance': FileText,
-    'passport-appointment': BookOpen,
-    'sss-registration': ShieldCheck,
-    'umid-application': CreditCard,
-    'philhealth-application': UserCircle,
-    'digital-tin': ReceiptText,
-  };
-  return mapping[slug] || Landmark;
-};
+import { getGuideIcon } from '../../../../utils/guideIcons';
 
 const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal = false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
@@ -43,7 +26,7 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
   const queryClient = useQueryClient();
 
   const [steps, setSteps] = useState(initialSteps || []);
-  const GuideIcon = getGuideIcon(slug);
+  const icon = getGuideIcon(slug);
 
   // Use TanStack Query to fetch saved progress
   const { data: savedData, isLoading: isLoadingProgress } = useQuery({
@@ -194,8 +177,8 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-start gap-3.5 w-full">
               {!inGuidePage && (
-                <div className="w-11 h-11 rounded-2xl bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100 shadow-sm">
-                  <GuideIcon size={22} className="text-teal-600" />
+                <div className="w-11 h-11 rounded-2xl bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100 shadow-sm p-2">
+                  <img src={icon} alt="" className="w-full h-full object-contain" />
                 </div>
               )}
               
@@ -359,13 +342,13 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
         <div className={`${isModal ? "px-0 pb-6" : "p-4"} pt-1.5 mt-auto`}>
         <div className="space-y-2.5">
           {progress === 100 ? (
-            <div className="bg-teal-50/50 border border-teal-100/50 rounded-2xl p-5 flex flex-col items-center text-center gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500">
-              <div className="w-12 h-12 rounded-full bg-teal-600 flex items-center justify-center text-white shadow-lg shadow-teal-200/50">
-                <Check size={24} strokeWidth={3} />
+            <div className="mt-6 bg-teal-50/50 border border-teal-100/50 rounded-3xl p-6 flex flex-col items-center text-center gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500">
+              <div className="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center text-white shadow-md shadow-teal-100">
+                <Check size={20} strokeWidth={3} />
               </div>
               <div className="space-y-1">
-                <p className="text-base font-bold text-teal-900">Requirements Complete!</p>
-                <p className="text-xs text-teal-700 font-medium px-4">
+                <p className="text-[15px] font-bold text-teal-900">Requirements Complete!</p>
+                <p className="text-[12px] text-teal-700 font-medium px-4">
                   You've successfully checked off all items for this guide.
                 </p>
               </div>
