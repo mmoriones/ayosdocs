@@ -1,5 +1,7 @@
 import SearchBar from './SearchBar';
 import { FileText, ShieldCheck, Clock, ChevronDown } from 'lucide-react';
+import homeBlob from '../../../../assets/home_blob.webp';
+import person from '../../../../assets/person.webp';
 
 const Hero = () => {
   return (
@@ -154,7 +156,7 @@ const Hero = () => {
         >
           {/* COMBINED BLOB */}
           <img
-            src="/home_blob.svg"
+            src={homeBlob}
             alt=""
             className="
               absolute
@@ -172,7 +174,7 @@ const Hero = () => {
 
           {/* MAIN ILLUSTRATION (Top-most) */}
           <img
-            src="/person.svg"
+            src={person}
             alt="Person using laptop"
             className="
               relative z-20

@@ -4,7 +4,7 @@
 - [ ] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.
 - [ ] **Branding:** 
     - [ ] Fix logo and add government agency logos.
-    - [ ] Add consistent SVGs/Graphics across the platform.(reduce file size)
+    - [X] Add consistent SVGs/Graphics across the platform.(used webp instead)
 - [ ] **Mobile Experience:** 
     - [ ] Implement Mobile view (refer to `home_wireframe_mobile.png`).
     - [ ] Add mobile press feedback (haptics/visual).
@@ -44,7 +44,7 @@
 
 ## 🐛 Bugs & Fixes
 - [ ] **AuthModal:** Fix bug where AuthModal continues to show after successful login.
-- [ ] **Clean Content:** Review and remove any legacy references in guide files.
+- [X] **Clean Content:** Review and remove any legacy references in guide files.
 
 ## 💡 Future Ideas
 - [ ] **Service Rating:** Add a rating system for government services (could be a separate app).

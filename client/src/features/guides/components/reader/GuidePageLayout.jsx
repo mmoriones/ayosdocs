@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ChecklistCard from '../tracking/ChecklistCard';
@@ -17,10 +17,34 @@ const GuidePageLayout = ({
   category
 }) => {
   const [activeModal, setActiveModal] = useState(null); // 'toc' or 'checklist'
+  const [activeId, setActiveId] = useState("");
+  const observer = useRef(null);
 
   const toggleModal = (modalType) => {
     setActiveModal(prev => prev === modalType ? null : modalType);
   };
+
+  // Track active heading on scroll
+  useEffect(() => {
+    const handleObserver = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveId(entry.target.id);
+        }
+      });
+    };
+
+    observer.current = new IntersectionObserver(handleObserver, {
+      rootMargin: "-100px 0px -60% 0px",
+    });
+
+    headings.forEach((h) => {
+      const el = document.getElementById(h.id);
+      if (el) observer.current.observe(el);
+    });
+
+    return () => observer.current?.disconnect();
+  }, [headings]);
 
   return (
     <div className="px-6 lg:px-10 py-6 pb-20 space-y-6">
@@ -35,7 +59,7 @@ const GuidePageLayout = ({
 
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         {/* MAIN CONTENT AREA */}
-        <div className="flex-1 space-y-6 w-full">
+        <div className="flex-1 space-y-6">
           {/* HEADER CARD */}
           <header className="bg-white border border-gray-100 rounded-2xl p-6 md:p-8 shadow-sm">
             <div className="space-y-3 max-w-2xl">
@@ -54,11 +78,13 @@ const GuidePageLayout = ({
           <div className="flex flex-col lg:flex-row gap-8">
             {/* DESKTOP SIDEBAR (TOC) */}
             <aside className="hidden lg:block w-64 shrink-0">
-              <div className="sticky top-28 bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
-                <h3 className="text-sm font-semibold text-gray-700 mb-4 px-3">
+              <div className="sticky top-28 z-30 bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col max-h-[calc(100vh-120px)]">
+                <h3 className="text-sm font-semibold text-gray-700 mb-4 px-3 shrink-0">
                   On this page
                 </h3>
-                <TableOfContents headings={headings} />
+                <div className="overflow-y-auto custom-scrollbar pr-1">
+                  <TableOfContents headings={headings} activeId={activeId} />
+                </div>
               </div>
             </aside>
 
@@ -78,7 +104,7 @@ const GuidePageLayout = ({
         </div>
 
         {/* DESKTOP RIGHT SIDEBAR (Checklist) */}
-        <aside className="hidden lg:block w-96 sticky top-28 shrink-0 max-h-[calc(100vh-120px)] overflow-y-auto pr-2 pb-4 custom-scrollbar">
+        <aside className="hidden lg:block w-96 sticky top-28 z-30 shrink-0 max-h-[calc(100vh-120px)] overflow-y-auto pr-2 pb-4 custom-scrollbar">
           <ChecklistCard
             title={title}
             initialSteps={checklistSteps}
@@ -103,6 +129,7 @@ const GuidePageLayout = ({
         <TableOfContents 
           headings={headings} 
           onItemClick={() => setActiveModal(null)} 
+          activeId={activeId}
         />
       </ChecklistModal>
 

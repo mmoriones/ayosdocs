@@ -12,8 +12,10 @@ const extractHeadings = (markdown) => {
 
     const id = text
       .toLowerCase()
-      .replace(/[^\w\s]/g, "")
-      .replace(/\s+/g, "-");
+      .replace(/[^\w\s-]/g, "") // Keep alphanumeric, spaces, and hyphens
+      .trim()
+      .replace(/\s+/g, "-")     // Replace spaces with hyphens
+      .replace(/-+/g, "-");     // Collapse multiple hyphens
 
     return { text, id };
   });

@@ -1,4 +1,5 @@
 import { ArrowRight, CheckCircle } from 'lucide-react';
+import notepad from '../../../../assets/notepad.webp';
 
 const OnboardingBanner = () => {
   return (
@@ -9,7 +10,7 @@ const OnboardingBanner = () => {
         {/* LEFT: ILLUSTRATION */}
         <div className="shrink-0 w-40 h-40 md:w-45 md:h-52 flex items-center justify-center">
           <img 
-            src="/notepad.svg" 
+            src={notepad} 
             alt="Notepad checklist illustration" 
             className="w-full h-full object-contain drop-shadow-md scale-110 md:scale-135"
           />

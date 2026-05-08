@@ -33,6 +33,24 @@ const guides = [
   },
   {
     id: 3,
+    name: 'PSA Birth Certificate',
+    description: 'How to get original copy of your PSA Birth Certificate.',
+    slug: 'psa-birth-certificate',
+    icon: ReceiptText,
+    bg: 'bg-emerald-50',
+    color: 'text-emerald-600'
+  },
+  {
+    id: 4,
+    name: 'Philippine National ID',
+    description: 'Guide to get your National ID in a few simple steps.',
+    slug: 'national-id',
+    icon: CreditCard,
+    bg: 'bg-purple-50',
+    color: 'text-purple-600'
+  },
+  {
+    id: 5,
     name: 'SSS Registration',
     description: 'Register for SSS and get your membership number.',
     slug: 'sss-registration',
@@ -41,31 +59,13 @@ const guides = [
     color: 'text-indigo-600'
   },
   {
-    id: 4,
-    name: 'UMID Card',
-    description: 'Guide to get your UMID ID in a few simple steps.',
-    slug: 'umid-application',
-    icon: CreditCard,
-    bg: 'bg-purple-50',
-    color: 'text-purple-600'
-  },
-  {
-    id: 5,
+    id: 6,
     name: 'PhilHealth ID',
     description: 'How to create and print your PhilHealth ID online.',
     slug: 'philhealth-application',
     icon: UserCircle,
     bg: 'bg-amber-50',
     color: 'text-amber-600'
-  },
-  {
-    id: 6,
-    name: 'Digital TIN ID',
-    description: 'Apply for a Digital TIN ID online.',
-    slug: 'digital-tin',
-    icon: ReceiptText,
-    bg: 'bg-emerald-50',
-    color: 'text-emerald-600'
   },
 ];
 

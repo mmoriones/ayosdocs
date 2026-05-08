@@ -1,4 +1,5 @@
 import { CheckCircle, UserPlus } from 'lucide-react';
+import person2 from '../../../../assets/person2.webp';
 
 const WhySignUp = ({ onSignUp }) => {
   return (
@@ -46,7 +47,7 @@ const WhySignUp = ({ onSignUp }) => {
       {/* ILLUSTRATION */}
       <div className="absolute -right-21 bottom-0 w-[300px] pointer-events-none z-0">
         <img 
-          src="/person2.svg" 
+          src={person2} 
           alt="Person with phone" 
           className="w-full h-full object-contain object-right-bottom"
         />
