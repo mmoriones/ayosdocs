@@ -4,7 +4,7 @@
 - [ ] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.
 - [ ] **Branding:** 
     - [ ] Fix logo and add government agency logos.
-    - [ ] Add consistent SVGs/Graphics across the platform.
+    - [ ] Add consistent SVGs/Graphics across the platform.(reduce file size)
 - [ ] **Mobile Experience:** 
     - [ ] Implement Mobile view (refer to `home_wireframe_mobile.png`).
     - [ ] Add mobile press feedback (haptics/visual).

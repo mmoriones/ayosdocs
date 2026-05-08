@@ -152,42 +152,30 @@ const Hero = () => {
             md:h-[520px]
           "
         >
-          {/* MAIN BLOB */}
-          <div
+          {/* COMBINED BLOB */}
+          <img
+            src="/home_blob.svg"
+            alt=""
             className="
               absolute
-              bottom-10
-              right-0
-              w-[520px]
-              h-[360px]
-              bg-[#E6F5EF]
-              rounded-[45%_55%_60%_40%/50%_40%_60%_50%]
-              z-0
+              left-1/2 -translate-x-[46%]
+              lg:left-auto lg:-right-8 lg:translate-x-0
+              bottom-0
+              w-[380px]
+              md:w-[500px]
+              lg:w-[580px]
+              object-contain
+              pointer-events-none
+              z-[5]
             "
           />
 
-          {/* SECONDARY SOFT SHAPE */}
-          <div
-            className="
-              absolute
-              bottom-20
-              right-10
-              w-[420px]
-              h-[280px]
-              bg-[#D9F0E8]
-              rounded-[60%_40%_50%_50%/50%_60%_40%_50%]
-              opacity-70
-              blur-2xl
-              z-0
-            "
-          />
-
-          {/* ILLUSTRATION */}
+          {/* MAIN ILLUSTRATION (Top-most) */}
           <img
             src="/person.svg"
             alt="Person using laptop"
             className="
-              relative z-10
+              relative z-20
               w-[340px]
               md:w-[420px]
               lg:w-[500px]
@@ -195,10 +183,35 @@ const Hero = () => {
             "
           />
 
-          {/* DECORATIVE DOTS */}
-          <div className="absolute top-10 right-20 grid grid-cols-4 gap-2 opacity-20">
+          {/* DECORATIVE DOTS - TOP LEFT (Above Blob) */}
+          <div 
+            className="
+              absolute 
+              top-20 md:top-24
+              left-12 md:left-20 
+              lg:left-30
+              grid grid-cols-4 gap-2 
+              opacity-20 z-10
+            "
+          >
             {[...Array(16)].map((_, i) => (
               <div key={i} className="w-1.5 h-1.5 rounded-full bg-teal-600" />
+            ))}
+          </div>
+
+          {/* DECORATIVE DOTS - BOTTOM RIGHT (Behind Blob) */}
+          <div 
+            className="
+              absolute 
+              bottom-12 md:bottom-16
+              right-8 md:right-12
+              lg:-right-12
+              grid grid-cols-3 gap-4 
+              opacity-15 z-0
+            "
+          >
+            {[...Array(16)].map((_, i) => (
+              <div key={i} className="w-2 h-2 rounded-full bg-teal-600" />
             ))}
           </div>
 
