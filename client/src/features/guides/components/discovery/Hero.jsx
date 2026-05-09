@@ -106,7 +106,7 @@ const Hero = () => {
                     text-slate-900
                   "
                 >
-                  How can we
+                  How can we{" "}
                   <br className="hidden sm:block" />
                   help you today?
                 </h1>

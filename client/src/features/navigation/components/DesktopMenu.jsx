@@ -135,10 +135,10 @@ const DesktopMenu = ({
             </button>
 
             {isProfileOpen && (
-              <div className="absolute right-0 mt-3 w-64 bg-white rounded-3xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.18),0_0_15px_rgba(0,0,0,0.02)] border border-slate-100 overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute right-0 mt-3.5 w-64 bg-white/95 backdrop-blur-2xl rounded-[32px] shadow-[0_25px_60px_-12px_rgba(0,0,0,0.18),0_0_20px_rgba(0,0,0,0.02)] border border-white/60 overflow-hidden z-50 animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right">
                 
                 {/* User Info */}
-                <div className="px-5 py-5 bg-slate-50/50 border-b border-slate-100">
+                <div className="px-6 py-5 bg-slate-50/50 border-b border-slate-100/50">
                   <div className="flex items-center gap-3">
                     {user.picture ? (
                       <img
@@ -163,13 +163,13 @@ const DesktopMenu = ({
                 </div>
 
                 {/* Actions */}
-                <div className="p-2">
+                <div className="p-2.5">
                   <button
                     onClick={() => {
                       setIsProfileOpen(false);
                       handleLogout();
                     }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-[13px] font-bold text-red-600 hover:bg-red-50 rounded-2xl transition-colors"
+                    className="w-full flex items-center gap-3 px-4 py-3 text-[13px] font-bold text-red-600 hover:bg-red-50 rounded-[20px] transition-all active:scale-[0.98]"
                   >
                     <LogOut size={16} /> Logout
                   </button>

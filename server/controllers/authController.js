@@ -75,7 +75,7 @@ const login = async (req, res) => {
         id: user._id,
         fullName: user.fullName,
         email: user.email,
-        isAdmin: user.isAdmin
+        onboarded: user.onboarded
       }
     });
   } catch (err) {
@@ -150,16 +150,19 @@ const googleLogin = async (req, res) => {
     const userData = await authService.verifyGoogleToken(access_token);
     const { email, name, picture } = userData;
 
+    let isNewUser = false;
     let user = await User.findOne({ email });
 
     if (!user) {
+      isNewUser = true;
       user = await User.create({
         fullName: name,
         email,
         picture,
         password: null,
         googleAuth: true,
-        isVerified: true
+        isVerified: true,
+        onboarded: false
       });
     } else if (user.googleAuth && user.picture !== picture) {
       // Update picture if it changed
@@ -170,12 +173,13 @@ const googleLogin = async (req, res) => {
     const token = authService.generateToken(user);
     res.json({
       token,
+      isNewUser,
       user: {
         id: user._id,
         fullName: user.fullName,
         email: user.email,
         picture: user.picture,
-        isAdmin: user.isAdmin
+        onboarded: user.onboarded
       }
     });
   } catch (err) {

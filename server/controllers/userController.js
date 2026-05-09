@@ -93,9 +93,31 @@ const deleteProgress = async (req, res) => {
   }
 };
 
+/**
+ * Controller to update the user's onboarding status.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
+const updateOnboarding = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { onboarded } = req.body;
+    const user = await userService.updateOnboardingStatus(userId, onboarded);
+    res.status(200).json({ message: "Onboarding status updated", onboarded: user.onboarded });
+  } catch (error) {
+    if (error.message === "User not found") {
+      return res.status(404).json({ message: error.message });
+    }
+    console.error("Update Onboarding Error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 module.exports = {
   updateProgress,
   getProgress,
   getAllData,
-  deleteProgress
+  deleteProgress,
+  updateOnboarding
 };

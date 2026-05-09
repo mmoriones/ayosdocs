@@ -2,21 +2,40 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { CheckCircle, ArrowLeft } from 'lucide-react';
+import axios from 'axios';
 
 /**
  * Temporary onboarding page.
- * Sets the onboarded state to true and provides a way to return home.
+ * Sets the onboarded state to true in both backend and local state.
  * 
  * @returns {JSX.Element} The rendered Onboarding page.
  */
 const Onboarding = () => {
-  const { setOnboarded } = useAuth();
+  const { user, updateUser } = useAuth();
   const navigate = useNavigate();
+  const API_URL = import.meta.env.VITE_BACKEND_API_URL;
 
   useEffect(() => {
-    // Setting onboarded to true immediately upon viewing this page.
-    setOnboarded(true);
-  }, [setOnboarded]);
+    /**
+     * Persists the onboarding status to the backend database.
+     */
+    const completeOnboarding = async () => {
+      if (!user) return;
+      
+      try {
+        await axios.put(`${API_URL}/api/user/onboarding`, 
+          { onboarded: true },
+          { headers: { Authorization: `Bearer ${user.token}` } }
+        );
+        // Sync the local state and localStorage with the new onboarding status.
+        updateUser({ onboarded: true });
+      } catch (error) {
+        console.error("Failed to update onboarding status:", error);
+      }
+    };
+
+    completeOnboarding();
+  }, [user, API_URL, updateUser]);
 
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
@@ -29,8 +48,8 @@ const Onboarding = () => {
       </h1>
       
       <p className="text-slate-500 max-w-md mb-10 leading-relaxed font-medium">
-        This is a temporary onboarding page. You have now been marked as "onboarded" for this session. 
-        Refreshing the browser will reset this state.
+        Welcome to AyosDocs. You have successfully completed the onboarding process.
+        Your progress will now be saved across all your devices.
       </p>
 
       <button

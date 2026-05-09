@@ -26,47 +26,67 @@ const ToastModal = ({ isOpen, type = "success", title, message, onClose }) => {
     }
   }, [isOpen, onClose]);
 
+  // Lock body scroll when the toast is open to focus user attention and prevent background actions.
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   // Mapping of notification types to specific Lucide icons and Tailwind colors.
   const icons = {
-    success: <CheckCircle className="text-teal-600" size={24} />,
-    error: <AlertCircle className="text-red-600" size={24} />,
-    info: <Info className="text-blue-600" size={24} />,
+    success: <CheckCircle className="text-teal-600" size={28} />,
+    error: <AlertCircle className="text-red-600" size={28} />,
+    info: <Info className="text-blue-600" size={28} />,
   };
 
   return (
-    <div className="fixed inset-0 z-[150] flex items-center justify-center p-4">
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 pointer-events-none">
+      {/* Backdrop - Intercepts clicks and blocks background */}
       <div 
-        className="absolute inset-0 bg-black/20 backdrop-blur-[2px] animate-fadeIn" 
+        className="absolute inset-0 bg-slate-900/10 backdrop-blur-[2px] pointer-events-auto animate-in fade-in duration-300" 
         onClick={onClose}
       />
       
-      {/* Modal Content */}
-      <div className="relative w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 animate-scaleIn">
+      {/* Modal Content - Refined Card Style */}
+      <div className="relative w-full max-w-[320px] bg-white rounded-[28px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 p-6 pointer-events-auto animate-in fade-in zoom-in-95 duration-300">
+        
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-full transition"
+          className="absolute top-4 right-4 p-1.5 text-slate-300 hover:text-slate-500 rounded-full transition-all active:scale-90"
         >
-          <X size={18} />
+          <X size={16} />
         </button>
 
         <div className="flex flex-col items-center text-center">
-          {/* Icon */}
+          {/* Icon Container */}
           <div className="mb-4">
-            {icons[type] || icons.success}
+            <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100/50 shadow-sm">
+              {icons[type] || icons.success}
+            </div>
           </div>
 
-          {/* Text */}
-          <h4 className="text-lg font-bold text-gray-900">{title}</h4>
-          <p className="text-sm text-gray-500 mt-2">{message}</p>
+          {/* Text Content */}
+          <h4 className="text-[16px] font-bold text-slate-900 tracking-tight">
+            {title}
+          </h4>
+          
+          <p className="text-[13px] font-medium text-slate-500 mt-2 leading-relaxed px-2">
+            {message}
+          </p>
 
-          {/* Action Button */}
+          {/* Action Button - Emphasized */}
           <button
             onClick={onClose}
-            className="mt-6 px-8 py-2.5 text-teal-600 font-semibold hover:bg-teal-50 rounded-xl transition-colors"
+            className="mt-6 px-12 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl transition-all active:scale-[0.98] text-[13px] shadow-sm shadow-teal-100"
           >
             Okay
           </button>

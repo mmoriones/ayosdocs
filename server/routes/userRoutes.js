@@ -12,6 +12,9 @@ router.get('/get-progress/:slug', protect, userController.getProgress);
 // GET: get all data of the user
 router.get('/get-data', protect, userController.getAllData);
 
+// PUT: update onboarding status
+router.put('/onboarding', protect, userController.updateOnboarding);
+
 // DELETE: delete progress for a specific guide by slug
 router.delete('/delete/:slug', protect, userController.deleteProgress);
 

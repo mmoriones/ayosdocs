@@ -8,7 +8,6 @@ import TipsCard from '../features/guides/components/callouts/TipsCard';
 import GettingStarted from '../features/guides/components/discovery/GettingStarted';
 import OnboardingBanner from '../features/guides/components/discovery/OnboardingBanner';
 import RecentlyUpdated from '../features/guides/components/discovery/RecentlyUpdated';
-import AuthModal from '../features/auth/components/AuthModal';
 import { guidesMap } from '../utils/loadGuides';
 import { useAuth } from '../context/AuthContext'
 
@@ -20,7 +19,7 @@ import { useAuth } from '../context/AuthContext'
  */
 const Home = () => {
   const [activeSlug, setActiveSlug] = useState('getting-started');
-  const { isLoggedIn, isAuthModalOpen, openAuthModal, closeAuthModal, onboarded } = useAuth();
+  const { isLoggedIn, openAuthModal, onboarded } = useAuth();
   const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
 
   // Initialization of page state from local storage.
@@ -166,11 +165,6 @@ const Home = () => {
 
         </div>
       </div>
-
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={closeAuthModal}
-      />
     </div>
   );
 };

@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
  * 
  * @property {string} fullName - The user's full name.
  * @property {string} [picture] - URL to the user's profile picture.
- * @property {boolean} [isAdmin=false] - Whether the user has administrative privileges.
  * @property {string} email - The user's email address (unique).
  * @property {string} [password] - Hashed password for email/password auth.
  * @property {string} [verificationToken] - Token for email verification.
@@ -18,7 +17,6 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     fullName: { type: String, required: true },
     picture: { type: String },
-    isAdmin: { type: Boolean, default : false },
     email: { type: String, required: true, unique: true },
     password: {type: String, required: false },
     verificationToken: String,
@@ -26,8 +24,9 @@ const userSchema = new mongoose.Schema({
     googleAuth: {
         type: Boolean,
         default: false
-        },
+    },
     isVerified: { type: Boolean, default: false },
+    onboarded: { type: Boolean, default: false },
     savedProgress: [
         {
             guideSlug: String,

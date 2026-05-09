@@ -2,8 +2,6 @@ import { Menu } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DesktopMenu from "./DesktopMenu";
-import MobileMenu from "./MobileMenu";
-import AuthModal from "../../auth/components/AuthModal";
 import { useAuth } from "../../../context/AuthContext";
 import { useToast } from "../../../context/ToastContext";
 
@@ -15,9 +13,10 @@ import { useToast } from "../../../context/ToastContext";
  */
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const { user, isLoggedIn, logout, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
+  const { 
+    user, logout, openAuthModal, 
+    isMobileMenuOpen, toggleMobileMenu 
+  } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
 
@@ -50,8 +49,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+    <nav className="w-full sticky top-0 z-[60] bg-white/70 backdrop-blur-xl border-b border-slate-100/50 transition-all duration-300">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3.5">
 
         {/* LEFT: Logo */}
         <div
@@ -95,25 +94,17 @@ const Navbar = () => {
 
         {/* MOBILE */}
         <button
-          className="lg:hidden p-2 text-slate-600 hover:bg-slate-50 rounded-xl transition-colors"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className={`lg:hidden p-2.5 rounded-2xl transition-all duration-300 ${
+            isMobileMenuOpen 
+              ? "bg-teal-50 text-teal-600 shadow-inner" 
+              : "text-slate-600 hover:bg-slate-50"
+          }`}
+          onClick={() => toggleMobileMenu()}
+          aria-label="Toggle menu"
         >
-          <Menu size={26} />
+          <Menu size={24} className={`transition-transform duration-300 ${isMobileMenuOpen ? "rotate-90" : ""}`} />
         </button>
       </div>
-
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        closeMenu={() => setIsMobileMenuOpen(false)}
-        user={user}
-        openAuthModal={openAuthModal}
-        handleLogout={handleLogout}
-      />
-
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={closeAuthModal}
-      />
     </nav>
   );
 };

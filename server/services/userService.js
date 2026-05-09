@@ -75,9 +75,27 @@ const deleteProgressBySlug = async (userId, slug) => {
   return user.savedProgress;
 };
 
+/**
+ * Updates the user's onboarding status.
+ * 
+ * @param {string} userId - The unique identifier of the user.
+ * @param {boolean} status - The new onboarding status.
+ * @returns {Promise<Object>} The updated user object.
+ * @throws {Error} If the user is not found.
+ */
+const updateOnboardingStatus = async (userId, status) => {
+  const user = await User.findById(userId);
+  if (!user) throw new Error("User not found");
+
+  user.onboarded = status;
+  await user.save();
+  return user;
+};
+
 module.exports = {
   updateProgress,
   getProgressBySlug,
   getAllProgress,
-  deleteProgressBySlug
+  deleteProgressBySlug,
+  updateOnboardingStatus
 };

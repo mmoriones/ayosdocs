@@ -13,7 +13,6 @@ import {
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import AuthModal from '../../../auth/components/AuthModal';
 import { useAuth } from '../../../../context/AuthContext';
 import { useToast } from '../../../../context/ToastContext';
 import { getGuideIcon } from '../../../../utils/guideIcons';
@@ -32,7 +31,7 @@ import { getGuideIcon } from '../../../../utils/guideIcons';
  */
 const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal = false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
-  const { user, isLoggedIn, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
+  const { user, isLoggedIn, openAuthModal } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -451,10 +450,6 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
       </div>
       )}
 
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={closeAuthModal}
-      />
     </div>
   );
 };

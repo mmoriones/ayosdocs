@@ -3,25 +3,29 @@
 ## 🎨 Frontend & UI Refinements
 - [ ] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.
 - [ ] **Branding:** 
-    - [ ] Fix logo and add government agency logos. (started)
-    - [X] Add consistent SVGs/Graphics across the platform.(used webp instead)
+    - [-] Fix logo and add government agency logos. (started)
+    - ~~[X] Add consistent SVGs/Graphics across the platform.(used webp instead)~~
 - [ ] **Mobile Experience:** 
-    - [ ] Implement Mobile view (refer to `home_wireframe_mobile.png`).
+    - ~~[X] Implement Home page Mobile view (refer to `home_wireframe_mobile.png`).~~
+        - ~~[X] Spcaing on H1 on Hero section (no spacing between "we" & "help")~~
+    - ~~[ ] Modernize Mobile Menu to match new design~~
     - [ ] Add mobile press feedback (haptics/visual).
 - [ ] **Components:**
     - [ ] **Skeleton Loading:** Implement for all data-fetching sections.
     - [ ] **Breadcrumbs:** Add navigation breadcrumbs (remove "back to my progress" links).
     - [ ] **Adsense:** Create Adsense component with eligibility context (hidden by default).
-    - [ ] **ToastModal:** Optimize styles and add specific text for first-time login.
+    - ~~[X] **ToastModal:** Optimize styles and add specific text for first-time login.~~
+        - ~~[X] Scroll actions still available when toast modal is open~~
 
 ## ✨ Features & Logic
 - [ ] **Recently Updated:**
-    - [ ] Replace dummy data in `RecentlyUpdated.jsx` with real content.
+    - [-] Replace dummy data in `RecentlyUpdated.jsx` with real content.
     - [ ] Implement "View all updates" page/logic.
     - [ ] Connect to backend endpoint for update tracking.
 - [ ] **Onboarding:**
-    - [ ] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").
-- [ ] **Popular Guides:** Replace UMID Card and Digital TIN ID with PSA Birth Cert and National ID.
+    - ~~[X] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").~~
+- [ ] Implement user login using email and email verification
+- ~~[X] **Popular Guides:** Replace UMID Card and Digital TIN ID with PSA Birth Cert and National ID.~~
 - [ ] **Holiday Alert:** Connect to real holiday data.
 - [ ] **ChecklistCard:** Disable "Save Progress" button when no changes are made.
 
@@ -35,7 +39,7 @@
 - [ ] **API Endpoints:**
     - [ ] `/api/guides/recently-updated`
     - [ ] `/api/contact` (Contact form submission)
-- [ ] **Guide Management:** Remove "Related Guides" section from `.md` files (handle dynamically).
+- ~~[X] **Guide Management:** Remove "Related Guides" section from `.md` files (handle dynamically).~~
 - [ ] **Versioning:** Track guide update dates in frontmatter or database.
 - [ ] **Mail:** Integrate **Zoho Mail** for communications.
 - [ ] **Deployment:**
@@ -43,8 +47,8 @@
     - [ ] Setup CI/CD pipelines.
 
 ## 🐛 Bugs & Fixes
-- [ ] **AuthModal:** Fix bug where AuthModal continues to show after successful login.
-- [X] **Clean Content:** Review and remove any legacy references in guide files.
+- ~~[X] **AuthModal:** Fix bug where AuthModal continues to show after successful login.~~
+- ~~[X] **Clean Content:** Review and remove any legacy references in guide files.~~
 
 ## 💡 Future Ideas
 - [ ] **Service Rating:** Add a rating system for government services (could be a separate app).
