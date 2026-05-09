@@ -2,14 +2,26 @@ import { Link } from "react-router-dom";
 import { guidesMap } from "../../../../utils/loadGuides";
 import { getGuideIcon } from "../../../../utils/guideIcons";
 
+/**
+ * Component for displaying a list of guides related to the current one.
+ * Filtering is based on the category of the current guide.
+ * 
+ * @param {Object} props - Component props.
+ * @param {string} props.currentSlug - The slug of the guide currently being viewed.
+ * @param {string} props.category - The category of the current guide for finding related matches.
+ * @returns {JSX.Element|null} The rendered RelatedGuides component or null.
+ */
 const RelatedGuides = ({ currentSlug, category }) => {
   const guides = Object.values(guidesMap);
 
-    const related = guides
+  // Discovery of related guides by matching categories while excluding the current guide.
+  // Limiting the output to 4 items maintains a clean layout.
+  const related = guides
     .filter(g => g.slug !== currentSlug)
     .filter(g => g.category === category || !category)
     .slice(0, 4);
 
+  // If no related guides are found, the component renders nothing to avoid empty space.
   if (related.length === 0) return null;
 
   return (

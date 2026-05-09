@@ -4,6 +4,11 @@ import { ChevronLeft, ChevronRight, Search, ArrowRight } from 'lucide-react';
 import { guidesMap } from '../utils/loadGuides';
 import { getGuideIcon } from '../utils/guideIcons';
 
+/**
+ * Page component that displays a searchable and paginated list of all available guides.
+ * 
+ * @returns {JSX.Element} The rendered AllGuides page.
+ */
 const AllGuides = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,22 +18,30 @@ const AllGuides = () => {
     document.title = "All Guides | AyosDocs";
   }, []);
 
-  // Convert guidesMap to array and sort by title
+  // Conversion of the guidesMap object into an array for easier sorting and filtering.
+  // Sorting is done alphabetically by title.
   const allGuides = Object.values(guidesMap).sort((a, b) => a.title.localeCompare(b.title));
 
-  // Filter based on search
+  // Filtering of the guides list based on the user's search query.
+  // Both title and description are checked for matches.
   const filteredGuides = allGuides.filter(guide => 
     guide.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     (guide.description && guide.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
-  // Pagination logic
+  // Pagination logic: calculation of total pages and slicing the array for the current view.
   const totalPages = Math.ceil(filteredGuides.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentGuides = filteredGuides.slice(startIndex, startIndex + itemsPerPage);
 
+  /**
+   * Updates the current page and resets scroll position.
+   * 
+   * @param {number} newPage - The page number to navigate to.
+   */
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+    // Returning the user to the top of the page ensures they see the start of the new list.
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

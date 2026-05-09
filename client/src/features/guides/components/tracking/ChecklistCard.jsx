@@ -18,6 +18,18 @@ import { useAuth } from '../../../../context/AuthContext';
 import { useToast } from '../../../../context/ToastContext';
 import { getGuideIcon } from '../../../../utils/guideIcons';
 
+/**
+ * Component for rendering and managing a guide's checklist.
+ * Handles progress fetching, local state tracking, and saving updates to the server.
+ * 
+ * @param {Object} props - Component props.
+ * @param {string} props.title - The title of the guide.
+ * @param {Array<{task: string}>} props.initialSteps - The raw list of tasks from the guide data.
+ * @param {string} props.slug - The unique identifier for the guide.
+ * @param {boolean} [props.inGuidePage=false] - Whether the card is displayed within a full guide page.
+ * @param {boolean} [props.isModal=false] - Whether the card is rendered inside a mobile modal.
+ * @returns {JSX.Element} The rendered ChecklistCard component.
+ */
 const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal = false }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const { user, isLoggedIn, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
@@ -25,10 +37,12 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  // Local state manages the checked/unchecked status of steps before saving.
   const [steps, setSteps] = useState(initialSteps || []);
   const icon = getGuideIcon(slug);
 
-  // Use TanStack Query to fetch saved progress
+  // TanStack Query handles fetching the user's saved progress from the backend.
+  // Using a query key ensures data is cached and invalidated correctly across components.
   const { data: savedData, isLoading: isLoadingProgress } = useQuery({
     queryKey: ['progress', slug, user?.token],
     queryFn: async () => {
@@ -46,7 +60,8 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
     enabled: !!isLoggedIn && !!slug && slug !== "getting-started" && !!user?.token,
   });
 
-  // Sync steps from initialSteps and savedData
+  // Synchronization of the local checklist state with the data fetched from the server.
+  // Indices are parsed from a comma-separated string stored in the database.
   useEffect(() => {
     if (!initialSteps) return;
 
@@ -60,7 +75,8 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
     })));
   }, [initialSteps, savedData, slug]);
 
-  // Use TanStack Query for saving progress
+  // Mutation for persisting checklist changes to the database.
+  // Success triggers a toast notification and invalidates relevant queries to refresh data.
   const saveMutation = useMutation({
     mutationFn: async (completedTaskIndices) => {
       const response = await fetch(`${API_URL}/api/user/update-progress`, {
@@ -87,7 +103,7 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
         title: 'Progress Saved',
         message: 'Your checklist progress has been updated.'
       });
-      // Invalidate both the single guide progress and the global user data
+      // Invalidation of queries ensures that other parts of the UI (like dashboards) reflect the update.
       queryClient.invalidateQueries({ queryKey: ['progress', slug] });
       queryClient.invalidateQueries({ queryKey: ['user-data'] });
     },
@@ -101,7 +117,8 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
     }
   });
 
-  // Find next step and last completed step
+  // Calculation of indices helps enforce a sequential completion workflow.
+  // Users are encouraged to complete tasks in order.
   const nextStepIndex = steps.findIndex((s) => !s.completed);
   const lastCompletedIndex = nextStepIndex === -1 
     ? (steps.length > 0 ? steps.length - 1 : -1) 
@@ -109,12 +126,17 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
 
   const nextStep = nextStepIndex !== -1 ? steps[nextStepIndex] : null;
 
-  // Handle step completion/uncompletion sequentially
+  /**
+   * Toggles the completion status of a step.
+   * Logic restricts actions to the current "next" step or the "last" completed step.
+   * 
+   * @param {number} index - The index of the step being toggled.
+   */
   const handleStepAction = (index) => {
-    const isCompleted = steps[index].completed;
     const isNext = index === nextStepIndex;
     const isLast = index === lastCompletedIndex;
 
+    // Enforcing sequential progression by ignoring clicks on non-adjacent steps.
     if (!isNext && !isLast) return;
 
     setSteps((prevSteps) =>
@@ -124,13 +146,17 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
     );
   };
 
-  // Save progress
+  /**
+   * Prepares and sends the current checklist state to the backend.
+   * Prompts the user to login if a session is not active.
+   */
   const handleSaveProgress = () => {
     if (!isLoggedIn || !user?.token) {
       openAuthModal();
       return;
     }
 
+    // Mapping indices of completed steps into a string format for storage.
     const completedTaskIndices = steps
       .map((s, i) => (s.completed ? i : null))
       .filter((i) => i !== null)

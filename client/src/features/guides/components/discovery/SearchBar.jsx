@@ -4,6 +4,12 @@ import { Search, X } from "lucide-react";
 import { searchGuides } from '../../../../utils/searchGuides'
 import { getGuideIcon } from "../../../../utils/guideIcons";
 
+/**
+ * Search input component for finding government guides.
+ * Implements debouncing and a minimum character threshold to optimize performance.
+ * 
+ * @returns {JSX.Element} The rendered SearchBar component.
+ */
 const SearchBar = () => {
 
   const [query, setQuery] = useState("");
@@ -11,27 +17,31 @@ const SearchBar = () => {
 
   const navigate = useNavigate();
 
-  const debounce = (fn, delay) => {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => fn(...args), delay);
-    };
-  };
+  // Execution of search logic happens within an effect that watches the query state.
+  useEffect(() => {
+    // Implementation of a debounce timer (300ms).
+    // Delaying the search prevents excessive utility calls while the user is still typing.
+    const timeout = setTimeout(() => {
+      // Threshold check: queries shorter than 2 characters are ignored to reduce noise.
+      if (query.length < 2) {
+        setResults([]);
+        return;
+      }
+      // Results are fetched from the local guidesMap utility.
+      setResults(searchGuides(query));
+    }, 300);
 
-    useEffect(() => {
-      const timeout = setTimeout(() => {
-        if (query.length < 2) {
-          setResults([]);
-          return;
-        }
-        setResults(searchGuides(query));
-      }, 300);
-
-      return () => clearTimeout(timeout);
-    }, [query]);
+    // Cleanup clears the timeout if the query changes again before 300ms have passed.
+    return () => clearTimeout(timeout);
+  }, [query]);
 
 
+  /**
+   * Handles selection of a search result.
+   * Clears state and navigates to the guide's dedicated page.
+   * 
+   * @param {string} slug - The unique identifier of the selected guide.
+   */
   const handleSelect = (slug) => {
     setResults([]);
     setQuery("");

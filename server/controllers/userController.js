@@ -1,5 +1,11 @@
 const userService = require('../services/userService');
 
+/**
+ * Controller to handle progress updates for a guide.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
 const updateProgress = async (req, res) => {
   try {
     const { guideSlug, completedTasks } = req.body;
@@ -15,6 +21,12 @@ const updateProgress = async (req, res) => {
   }
 };
 
+/**
+ * Controller to retrieve progress for a specific guide.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
 const getProgress = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -29,6 +41,12 @@ const getProgress = async (req, res) => {
   }
 };
 
+/**
+ * Controller to retrieve all progress data for the authenticated user.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
 const getAllData = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -54,6 +72,12 @@ const getAllData = async (req, res) => {
   }
 };
 
+/**
+ * Controller to delete progress for a specific guide.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
 const deleteProgress = async (req, res) => {
   try {
     const userId = req.user.id;

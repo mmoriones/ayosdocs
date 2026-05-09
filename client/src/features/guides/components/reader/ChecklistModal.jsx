@@ -1,8 +1,21 @@
 import { X } from "lucide-react";
 import { useEffect } from "react";
 
+/**
+ * Modal component used for mobile-specific views of the checklist and table of contents.
+ * Slides up from the bottom of the screen.
+ * 
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isOpen - Whether the modal is currently visible.
+ * @param {Function} props.onClose - Callback function to close the modal.
+ * @param {string} props.title - The title displayed in the modal header.
+ * @param {React.ReactNode} props.children - The content to be rendered inside the modal.
+ * @param {string} [props.maxHeight="85vh"] - The maximum height of the modal.
+ * @returns {JSX.Element|null} The rendered ChecklistModal component or null.
+ */
 const ChecklistModal = ({ isOpen, onClose, title, children, maxHeight = "85vh" }) => {
-  // Prevent background scroll when modal is open
+  // Prevention of background scrolling when the modal is active.
+  // This is a common UX pattern to ensure the user stays focused on the modal content.
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -11,6 +24,7 @@ const ChecklistModal = ({ isOpen, onClose, title, children, maxHeight = "85vh" }
       document.body.style.overflow = 'unset';
       document.documentElement.style.overflow = 'unset';
     }
+    // Cleanup resets the overflow styles when the component is unmounted.
     return () => {
       document.body.style.overflow = 'unset';
       document.documentElement.style.overflow = 'unset';

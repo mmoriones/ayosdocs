@@ -8,6 +8,21 @@ import ChecklistModal from './ChecklistModal';
 import RelatedGuides from './RelatedGuides';
 import { getGuideIcon } from '../../../../utils/guideIcons';
 
+/**
+ * Layout component for the Guide Page.
+ * Manages the main content area, desktop sidebars (TOC and Checklist),
+ * and mobile navigation/modals.
+ * 
+ * @param {Object} props - The component props.
+ * @param {string} props.title - The title of the guide.
+ * @param {Date|string} props.lastUpdated - The last updated date of the guide.
+ * @param {React.ReactNode} props.children - The rendered markdown content.
+ * @param {Array<string>} props.checklistSteps - The initial checklist steps for the guide.
+ * @param {Array<{text: string, id: string}>} props.headings - The headings extracted for the TOC.
+ * @param {string} props.slug - The unique slug for the guide.
+ * @param {string} props.category - The category of the guide.
+ * @returns {JSX.Element} The rendered GuidePageLayout component.
+ */
 const GuidePageLayout = ({
   title,
   lastUpdated,
@@ -25,25 +40,31 @@ const GuidePageLayout = ({
     setActiveModal(prev => prev === modalType ? null : modalType);
   };
 
-  // Track active heading on scroll
+  // Tracking of the active heading during scrolling.
+  // IntersectionObserver detects when a heading element enters the viewport.
   useEffect(() => {
     const handleObserver = (entries) => {
       entries.forEach((entry) => {
+        // Verification that the heading is visible to the user.
         if (entry.isIntersecting) {
+          // Update state with the ID of the visible heading to highlight it in the TOC.
           setActiveId(entry.target.id);
         }
       });
     };
 
+    // Configuration of the observer with specific margins for better detection timing.
     observer.current = new IntersectionObserver(handleObserver, {
       rootMargin: "-100px 0px -60% 0px",
     });
 
+    // Attachment of the observer to each heading element.
     headings.forEach((h) => {
       const el = document.getElementById(h.id);
       if (el) observer.current.observe(el);
     });
 
+    // Cleanup ensures observers are disconnected when the component unmounts.
     return () => observer.current?.disconnect();
   }, [headings]);
 

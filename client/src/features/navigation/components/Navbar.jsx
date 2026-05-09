@@ -7,6 +7,12 @@ import AuthModal from "../../auth/components/AuthModal";
 import { useAuth } from "../../../context/AuthContext";
 import { useToast } from "../../../context/ToastContext";
 
+/**
+ * Primary navigation bar component for the application.
+ * Manages both desktop and mobile menu states and orchestrates authentication actions.
+ * 
+ * @returns {JSX.Element} The rendered Navbar component.
+ */
 const Navbar = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -15,6 +21,8 @@ const Navbar = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
 
+  // Management of body scrolling when the mobile menu is active.
+  // Preventing scroll ensures the menu remains functional and usable on small screens.
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -26,6 +34,10 @@ const Navbar = () => {
     };
   }, [isMobileMenuOpen]);
 
+  /**
+   * Handles user logout by performing state cleanup and redirecting to the home page.
+   * Removal of specific local storage keys ensures a fresh start for the next session.
+   */
   const handleLogout = () => {
     logout();
     navigate("/");

@@ -1,14 +1,28 @@
 import { useEffect, useRef } from 'react';
 
+/**
+ * Component for rendering a navigation list of headings within a guide.
+ * Highlights the active section and provides smooth scrolling to anchors.
+ * 
+ * @param {Object} props - Component props.
+ * @param {Array<{id: string, text: string}>} props.headings - The list of headings extracted from markdown.
+ * @param {Function} props.onItemClick - Callback for when a TOC item is clicked (used to close mobile modals).
+ * @param {string} props.activeId - The ID of the heading currently visible in the viewport.
+ * @returns {JSX.Element} The rendered TableOfContents component.
+ */
 const TableOfContents = ({ headings, onItemClick, activeId }) => {
   const listRef = useRef(null);
 
+  // Synchronization of the TOC scroll position with the active section.
+  // This ensures the highlighted item is always visible within the sidebar if the list is long.
   useEffect(() => {
     if (activeId && listRef.current) {
+      // Searching for the link element that matches the currently active section ID.
       const activeElement = Array.from(listRef.current.querySelectorAll('a'))
         .find(a => a.getAttribute('href') === `#${activeId}`);
         
       if (activeElement) {
+        // Smooth scrolling of the link element into the TOC's viewable area.
         activeElement.scrollIntoView({
           behavior: 'smooth',
           block: 'nearest',

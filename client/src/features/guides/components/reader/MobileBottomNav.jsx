@@ -3,6 +3,17 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../../../context/AuthContext";
 
+/**
+ * Navigation component for mobile users, fixed at the bottom of the screen.
+ * Provides quick access to Home, Table of Contents, and Requirements Checklist.
+ * 
+ * @param {Object} props - Component props.
+ * @param {Function} props.onOpenTOC - Function to toggle the Table of Contents modal.
+ * @param {Function} props.onOpenChecklist - Function to toggle the Checklist modal.
+ * @param {boolean} props.isTOCOpen - State indicating if the TOC modal is open.
+ * @param {boolean} props.isChecklistOpen - State indicating if the Checklist modal is open.
+ * @returns {JSX.Element} The rendered MobileBottomNav component.
+ */
 const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpen }) => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -12,25 +23,26 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
 
   const isHomeActive = location.pathname === "/" && !isTOCOpen && !isChecklistOpen;
 
+  // Implementation of "smart" visibility logic based on scroll direction and modal state.
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // If a ChecklistModal (TOC or Checklist) is open, we MUST show the bottom nav 
-      // because it contains the "Close" button for these modals.
+      // If a modal is open, visibility is forced to true so the user can access "Close" buttons.
       if (isTOCOpen || isChecklistOpen) {
         setIsVisible(true);
         return;
       }
 
-      // If the body is locked (which means MobileMenu or AuthModal is open), hide the bottom nav
+      // Hiding the navigation when other high-priority overlays (like AuthModal) are active.
       const isBodyLocked = document.body.style.overflow === "hidden";
       if (isBodyLocked || isAuthModalOpen) {
         setIsVisible(false);
         return;
       }
 
-      // Standard scroll behavior: Show when scrolling up, hide when scrolling down
+      // Detection of scroll direction: scrolling down hides the nav, scrolling up shows it.
+      // A minimum threshold of 50px prevents jittering on small movements.
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         setIsVisible(false);
       } else {
@@ -40,7 +52,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
       setLastScrollY(currentScrollY);
     };
 
-    // Check periodically for body lock state or use a small delay to catch transitions
+    // A periodic check handles cases where state transitions might not trigger a scroll event.
     const intervalId = setInterval(handleScroll, 200);
 
     window.addEventListener("scroll", handleScroll, { passive: true });

@@ -1,5 +1,12 @@
 import { guidesMap } from "./loadGuides";
 
+/**
+ * Searches for guides based on a query string.
+ * Filters by title, slug, and category.
+ * 
+ * @param {string} query - The search query.
+ * @returns {Array<{title: string, slug: string, category: string}>} An array of matched guide summaries.
+ */
 export const searchGuides = (query) => {
   if (!query || query.length < 2) return [];
 

@@ -5,6 +5,8 @@ require('dotenv').config();
 
 const app = express();
 
+// Configuration of Cross-Origin Resource Sharing (CORS).
+// Restricted access to specific trusted domains ensures better security.
 app.use(cors({
   origin: [ process.env.FRONTEND_URL,
       "https://www.ayosdocs.com",
@@ -13,16 +15,16 @@ app.use(cors({
   ]
 }));
 
-//app.use(cors({ origin: '*' }));
-
+// Parsing of incoming JSON and URL-encoded request bodies.
 app.use(express.json());
 app.use(express.urlencoded( {extended: true }));
 
-// Routes
+// Registration of API routes.
+// Logic is delegated to separate route files for better organization.
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/user', require('./routes/userRoutes'));
 
-// Database Connection
+// Establishment of connection to MongoDB.
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('Connection error:', err));

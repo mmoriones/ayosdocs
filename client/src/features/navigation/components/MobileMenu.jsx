@@ -1,6 +1,18 @@
 import { Link, useLocation } from "react-router-dom";
 import { LogOut, UserPlus } from "lucide-react";
 
+/**
+ * Component for the mobile version of the navigation menu.
+ * Full-screen overlay providing access to all site sections on smaller devices.
+ * 
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isOpen - State for menu visibility.
+ * @param {Function} props.closeMenu - Function to close the mobile menu.
+ * @param {Object|null} props.user - The currently authenticated user object.
+ * @param {Function} props.openAuthModal - Function to trigger the authentication modal.
+ * @param {Function} props.handleLogout - Callback for user logout.
+ * @returns {JSX.Element|null} The rendered MobileMenu component or null.
+ */
 const MobileMenu = ({
   isOpen,
   closeMenu,
@@ -12,6 +24,12 @@ const MobileMenu = ({
 
   if (!isOpen) return null;
 
+  /**
+   * Universal handler for menu interactions.
+   * Executes a provided action and ensures the menu closes afterwards.
+   * 
+   * @param {Function} [action] - Optional action to execute (e.g., logout).
+   */
   const handleClick = (action) => {
     if (action) action();
     closeMenu();

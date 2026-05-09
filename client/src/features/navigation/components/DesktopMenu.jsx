@@ -2,6 +2,18 @@ import { Link, useLocation } from "react-router-dom";
 import { LogOut, ChevronDown, UserCircle } from "lucide-react";
 import { useEffect, useRef } from "react";
 
+/**
+ * Component for the desktop version of the navigation menu.
+ * Displays navigation links and user profile/auth actions.
+ * 
+ * @param {Object} props - Component props.
+ * @param {Object|null} props.user - The currently authenticated user object.
+ * @param {boolean} props.isProfileOpen - State for the profile dropdown visibility.
+ * @param {Function} props.setIsProfileOpen - Function to toggle the profile dropdown.
+ * @param {Function} props.handleLogout - Callback for user logout.
+ * @param {Function} props.openAuthModal - Callback to open the login modal.
+ * @returns {JSX.Element} The rendered DesktopMenu component.
+ */
 const DesktopMenu = ({
   user,
   isProfileOpen,
@@ -14,17 +26,22 @@ const DesktopMenu = ({
 
   const isActive = (path) => location.pathname === path;
 
+  // Implementation of a "click outside" listener for the profile dropdown.
+  // This is a standard way to handle closing UI elements when interacting elsewhere.
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Verification that the click occurred outside of the dropdown container.
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsProfileOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+    // Cleanup ensures the listener is removed when the component unmounts to prevent memory leaks.
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [setIsProfileOpen]);
 
+  // Automatic closure of the dropdown whenever the route changes.
   useEffect(() => {
     setIsProfileOpen(false);
   }, [location.pathname, setIsProfileOpen]);

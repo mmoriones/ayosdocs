@@ -9,13 +9,24 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 import GuidePageLayout from "../features/guides/components/reader/GuidePageLayout";
 
+/**
+ * Page component that renders a specific government guide.
+ * Handles markdown parsing and dynamically injects meta tags for SEO.
+ * 
+ * @returns {JSX.Element} The rendered Guide page.
+ */
 const Guide = () => {
   const { slug } = useParams();
   const guide = guidesMap[slug];
 
+  // Execution of side effects for tracking and metadata.
   useEffect(() => {
     if (typeof window !== "undefined") {
+      // Storage of the last viewed guide slug in localStorage.
+      // This allows the Home page to suggest "Continue where you left off".
       localStorage.setItem("lastGuideSlug", slug);
+      
+      // Update of the document title based on the guide's specific title.
       if (guide?.title) {
         document.title = `${guide.title} | AyosDocs`;
       }
@@ -28,6 +39,7 @@ const Guide = () => {
 
   return (
     <>
+      {/* Dynamic injection of meta tags for better SEO and social sharing (Open Graph). */}
       <title>{guide.title} | AyosDocs</title>
       <meta name="description" content={guide.description} />
 
@@ -42,15 +54,18 @@ const Guide = () => {
       <GuidePageLayout
       title={guide.title}
       lastUpdated={guide.lastUpdated}
+      // Mapping the flat checklist array from markdown frontmatter into the object structure required by the card.
       checklistSteps={guide.checklist?.map(task => ({ task }))}
       headings={guide.headings}
       slug={slug}
       category={guide.category}
     >
       <article className="bg-white border border-gray-100 rounded-2xl p-6 md:p-8 shadow-sm prose prose-teal max-w-none">
+        {/* ReactMarkdown converts the raw markdown content into stylized React components. */}
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings]}
+          // Custom mapping of markdown elements to Tailwind-styled components for consistent look.
           components={{
             h2: ({ ...props }) => (
               <h2 className="text-xl font-semibold text-teal-700 mt-8 mb-3" {...props} />

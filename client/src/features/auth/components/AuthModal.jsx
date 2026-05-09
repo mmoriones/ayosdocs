@@ -5,15 +5,28 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useToast } from "../../../context/ToastContext";
 import { useAuth } from "../../../context/AuthContext";
 
+/**
+ * Modal component for user authentication via Google OAuth.
+ * Orchestrates the login flow and synchronizes the session with the backend server.
+ * 
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isOpen - Whether the modal is visible.
+ * @param {Function} props.onClose - Callback to close the modal.
+ * @returns {JSX.Element|null} The rendered AuthModal component or null.
+ */
 const AuthModal = ({ isOpen, onClose }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const { showToast } = useToast();
   const { login } = useAuth();
 
+  // Integration with Google OAuth using the @react-oauth/google library.
+  // The 'implicit' flow is used to obtain an access token directly from Google.
   const googleLogin = useGoogleLogin({
     flow: 'implicit',
     onSuccess: async (tokenResponse) => {
       try {
+        // Exchange the Google access token for a JWT from the application's backend.
+        // This ensures the user is registered or logged in within the local database.
         const res = await axios.post(`${API_URL}/api/auth/google`, {
           access_token: tokenResponse.access_token
         });
@@ -23,6 +36,7 @@ const AuthModal = ({ isOpen, onClose }) => {
           token: res.data.token
         };
 
+        // Saving the user session to global state and local storage.
         login(userData);
         
         showToast({
@@ -50,6 +64,7 @@ const AuthModal = ({ isOpen, onClose }) => {
     }
   });
 
+  // Lock scrolling of the underlying page when the authentication modal is active.
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';

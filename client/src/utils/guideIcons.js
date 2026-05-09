@@ -14,6 +14,13 @@ const iconMap = {
   'philhealth-application': philhealthLogo,
 };
 
+/**
+ * Retrieves the appropriate icon for a guide based on its slug.
+ * Falls back to a default notepad icon if no specific logo is found.
+ * 
+ * @param {string} slug - The slug of the guide.
+ * @returns {string} The path or URL to the icon image.
+ */
 export const getGuideIcon = (slug) => {
   return iconMap[slug] || notepadLogo;
 };

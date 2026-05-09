@@ -1,11 +1,26 @@
 import React, { useEffect } from "react";
 import { CheckCircle, X, AlertCircle, Info } from "lucide-react";
 
+/**
+ * Singleton modal component used for displaying non-blocking notifications.
+ * Managed by the ToastProvider and rendered at the root level of the application.
+ * 
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isOpen - Whether the notification is visible.
+ * @param {'success'|'error'|'info'} [props.type="success"] - The visual style and icon variant.
+ * @param {string} props.title - Heading text for the notification.
+ * @param {string} props.message - Descriptive body text.
+ * @param {Function} props.onClose - Callback to dismiss the notification.
+ * @returns {JSX.Element|null} The rendered ToastModal component or null.
+ */
 const ToastModal = ({ isOpen, type = "success", title, message, onClose }) => {
+  // Implementation of an optional auto-hide timer.
+  // Standard toast behavior often involves automatic dismissal after a set duration.
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => {
-        // onClose(); // Uncomment to auto-hide
+        // Auto-dismissal is currently disabled to ensure the user acknowledges the message.
+        // onClose(); 
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -13,6 +28,7 @@ const ToastModal = ({ isOpen, type = "success", title, message, onClose }) => {
 
   if (!isOpen) return null;
 
+  // Mapping of notification types to specific Lucide icons and Tailwind colors.
   const icons = {
     success: <CheckCircle className="text-teal-600" size={24} />,
     error: <AlertCircle className="text-red-600" size={24} />,

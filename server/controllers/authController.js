@@ -3,6 +3,12 @@ const crypto = require('crypto');
 const authService = require('../services/authService');
 const emailService = require('../services/emailService');
 
+/**
+ * Controller to handle user registration.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
 const register = async (req, res) => {
   try {
     const { fullName, email, password } = req.body;
@@ -38,6 +44,12 @@ const register = async (req, res) => {
   }
 };
 
+/**
+ * Controller to handle user login.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -71,6 +83,12 @@ const login = async (req, res) => {
   }
 };
 
+/**
+ * Controller to handle email verification.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
 const verifyEmail = async (req, res) => {
   try {
     const user = await User.findOne({
@@ -93,6 +111,12 @@ const verifyEmail = async (req, res) => {
   }
 };
 
+/**
+ * Controller to resend verification email.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
 const resendVerification = async (req, res) => {
   try {
     const { email } = req.body;
@@ -114,6 +138,12 @@ const resendVerification = async (req, res) => {
   }
 };
 
+/**
+ * Controller to handle Google OAuth login.
+ * 
+ * @param {import('express').Request} req - The express request object.
+ * @param {import('express').Response} res - The express response object.
+ */
 const googleLogin = async (req, res) => {
   try {
     const { access_token } = req.body;

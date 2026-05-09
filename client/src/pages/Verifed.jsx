@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { CheckCircle } from "lucide-react";
 import { useToast } from "../context/ToastContext";
 
+/**
+ * Page component rendered after a successful email verification.
+ * Confirms verification via a toast and automatically redirects the user to the Home page.
+ * 
+ * @returns {JSX.Element} The rendered Verified confirmation page.
+ */
 const Verified = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
@@ -11,16 +17,21 @@ const Verified = () => {
     document.title = "Account Verified | AyosDocs";
   }, []);
 
+  // Execution of the verification confirmation and redirection logic.
   useEffect(() => {
     showToast({
       type: 'success',
       title: 'Email Verified',
       message: 'Your account has been successfully verified.'
     });
+
+    // Implementation of an automatic redirection after a 3-second delay.
+    // This allows the user time to read the confirmation message.
     const timer = setTimeout(() => {
       navigate("/");
     }, 3000);
 
+    // Cleanup ensures the timer is cleared if the user manually navigates away.
     return () => clearTimeout(timer);
   }, [navigate, showToast]);
 

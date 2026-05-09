@@ -6,6 +6,16 @@ import { useToast } from '../../../../context/ToastContext';
 import ConfirmModal from '../../../../components/ConfirmModal';
 import { getGuideIcon } from '../../../../utils/guideIcons';
 
+/**
+ * Card component for displaying a summary of the user's progress on a specific guide.
+ * Used primarily in the dashboard/tracked guides page.
+ * 
+ * @param {Object} props - Component props.
+ * @param {string} props.title - The title of the guide.
+ * @param {Array<{task: string, completed: boolean}>} props.steps - The list of tasks with their completion status.
+ * @param {string} props.slug - The unique identifier for the guide.
+ * @returns {JSX.Element} The rendered ProgressCard component.
+ */
 const ProgressCard = ({ title, steps, slug }) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const navigate = useNavigate();
@@ -14,13 +24,21 @@ const ProgressCard = ({ title, steps, slug }) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
+  // Calculation of progress percentage based on completed tasks.
   const completedCount = steps.filter(s => s.completed).length;
   const totalSteps = steps.length;
   const progress = totalSteps === 0 ? 0 : Math.round((completedCount / totalSteps) * 100);
 
+  // Identification of the next task to be completed for highlighting.
   const nextStepIndex = steps.findIndex((s) => !s.completed);
   const nextStep = nextStepIndex !== -1 ? steps[nextStepIndex] : null;
 
+  /**
+   * Determines the status label and visual style based on progress.
+   * 
+   * @param {number} progress - The completion percentage.
+   * @returns {{label: string, style: string}} The status metadata.
+   */
   const getStatus = (progress) => {
     if (progress === 100)
       return { label: "Completed", style: "bg-emerald-50 text-emerald-700 border-emerald-100" };
@@ -29,6 +47,8 @@ const ProgressCard = ({ title, steps, slug }) => {
 
   const status = getStatus(progress);
 
+  // Mutation for removing a tracked guide from the user's profile.
+  // Invalidation of queries ensures the dashboard list is updated immediately.
   const deleteMutation = useMutation({
     mutationFn: async () => {
       const storedUser = JSON.parse(localStorage.getItem("user"));

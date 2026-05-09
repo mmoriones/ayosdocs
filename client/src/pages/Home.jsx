@@ -12,15 +12,24 @@ import AuthModal from '../features/auth/components/AuthModal';
 import { guidesMap } from '../utils/loadGuides';
 import { useAuth } from '../context/AuthContext'
 
+/**
+ * Main landing page component.
+ * Orchestrates the hero section, guide discovery features, and sidebars.
+ * 
+ * @returns {JSX.Element} The rendered Home page.
+ */
 const Home = () => {
   const [activeSlug, setActiveSlug] = useState('getting-started');
   const [isOnboarded, setIsOnboarded] = useState(false);
   const { isLoggedIn, isAuthModalOpen, openAuthModal, closeAuthModal } = useAuth();
 
+  // Initialization of page state from local storage.
   useEffect(() => {
+    // Retrieval of the last viewed guide to provide a personalized "Continue" experience.
     const lastSlug = localStorage.getItem("lastGuideSlug");
     if (lastSlug) setActiveSlug(lastSlug);
 
+    // Determination of whether the user has seen the onboarding flow.
     const onboarded = localStorage.getItem("onboarded") === "true";
     setIsOnboarded(onboarded);
   }, []);
@@ -29,6 +38,7 @@ const Home = () => {
     document.title = "AyosDocs | Your Complete Guide to Government Documents";
   }, []);
 
+  // Selection of the guide data to display in the sidebar progress card.
   const activeGuide = activeSlug !== 'getting-started' ? guidesMap[activeSlug] : null;
 
   return (

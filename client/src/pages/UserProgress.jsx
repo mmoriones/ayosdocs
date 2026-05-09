@@ -4,6 +4,12 @@ import { Bookmark, Loader2 } from 'lucide-react';
 import { guidesMap } from "../utils/loadGuides";
 import { useEffect } from 'react';
 
+/**
+ * Page component that displays all guides currently being tracked by the user.
+ * Performs complex data transformations to merge backend progress data with local guide metadata.
+ * 
+ * @returns {JSX.Element} The rendered UserProgress page.
+ */
 const UserProgress = () => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
 
@@ -11,9 +17,11 @@ const UserProgress = () => {
     document.title = "My Tracked Guides | AyosDocs";
   }, []);
 
+  // TanStack Query handles fetching the global progress data for the authenticated user.
   const { data: progressList = [], isLoading } = useQuery({
     queryKey: ['user-data'],
     queryFn: async () => {
+      // Retrieval of user credentials from local storage.
       const storedUser = JSON.parse(localStorage.getItem("user"));
       if (!storedUser?.token) return [];
 
@@ -26,15 +34,19 @@ const UserProgress = () => {
       const result = await response.json();
       const savedItems = result.savedProgress || [];
 
+      // Transformation of raw backend data into a format suitable for the UI cards.
       return savedItems
         .map((item) => {
+          // Cross-referencing backend slugs with locally available guide data.
           const guide = guidesMap[item.guideSlug];
           if (!guide) return null;
 
+          // Parsing the stored completion string into a list of indices.
           const completedIndices = item.completedTasks
             ? item.completedTasks.split(',').map(Number)
             : [];
 
+          // Construction of the final steps array used by the ProgressCard component.
           const steps = (guide.checklist || []).map((task, idx) => ({
             task,
             completed: completedIndices.includes(idx)
@@ -46,9 +58,9 @@ const UserProgress = () => {
             steps
           };
         })
-        .filter(Boolean);
+        .filter(Boolean); // Exclusion of items where matching guide metadata was not found.
     },
-    // Only run if user is logged in
+    // Execution of the query is restricted to logged-in users.
     enabled: !!localStorage.getItem("user"),
   });
 

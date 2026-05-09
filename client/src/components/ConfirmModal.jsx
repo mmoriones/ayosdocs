@@ -1,6 +1,21 @@
 import React, { useEffect } from 'react';
 import { AlertCircle, X } from 'lucide-react';
 
+/**
+ * Reusable modal for confirming destructive or critical actions.
+ * Supports different visual variants (danger, warning, info) for varying severity levels.
+ * 
+ * @param {Object} props - Component props.
+ * @param {boolean} props.isOpen - Whether the modal is visible.
+ * @param {Function} props.onClose - Callback to cancel and close the modal.
+ * @param {Function} props.onConfirm - Callback to execute the confirmed action.
+ * @param {string} [props.title="Are you sure?"] - Heading text.
+ * @param {string} [props.message="This action cannot be undone."] - Descriptive message.
+ * @param {string} [props.confirmText="Confirm"] - Text for the confirmation button.
+ * @param {string} [props.cancelText="Cancel"] - Text for the cancellation button.
+ * @param {'danger'|'warning'|'info'} [props.variant="danger"] - Visual theme of the modal.
+ * @returns {JSX.Element|null} The rendered ConfirmModal component or null.
+ */
 const ConfirmModal = ({ 
   isOpen, 
   onClose, 
@@ -12,6 +27,7 @@ const ConfirmModal = ({
   variant = "danger" // danger, warning, info
 }) => {
   
+  // Prevention of background scrolling ensures focus remains on the confirmation action.
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -22,6 +38,7 @@ const ConfirmModal = ({
 
   if (!isOpen) return null;
 
+  // Mapping of logical variants to specific CSS classes for consistent styling.
   const variantStyles = {
     danger: "bg-red-50 text-red-600 hover:bg-red-100 focus:ring-red-50",
     warning: "bg-yellow-50 text-yellow-600 hover:bg-yellow-100 focus:ring-yellow-50",
