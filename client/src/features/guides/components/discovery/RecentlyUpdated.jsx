@@ -5,27 +5,27 @@ import { getGuideIcon } from '../../../../utils/guideIcons';
 const updates = [
   {
     id: 1,
-    title: 'PSA Birth Certificate Online Requests',
-    type: 'New guide',
-    date: 'Apr 6, 2026',
-    description: 'Step-by-step process for requesting PSA Birth Certificate online.',
+    title: 'PSA Birth Certificate',
+    type: 'Updated',
+    date: 'May 8, 2026',
+    description: 'Updated guide for online and walk-in applications.',
     slug: 'psa-birth-certificate'
   },
   {
     id: 2,
-    title: 'Pag-IBIG MP2 Registration',
-    type: 'Updated',
-    date: 'Apr 5, 2026',
-    description: 'Updated requirements and instructions for MP2 registration.',
-    slug: 'pag-ibig-mp2'
+    title: 'NBI Clearance (New Applicant)',
+    type: 'New guide',
+    date: 'May 7, 2026',
+    description: 'Learn how to register and book your appointment online.',
+    slug: 'nbi-clearance'
   },
   {
     id: 3,
-    title: 'OWWA Membership Guide',
-    type: 'New guide',
-    date: 'Apr 4, 2026',
-    description: 'Learn how to apply and renew your OWWA membership.',
-    slug: 'owwa-membership'
+    title: 'Philippine National ID',
+    type: 'Updated',
+    date: 'May 6, 2026',
+    description: 'A complete guide on how to register for your PhilSys ID.',
+    slug: 'national-id'
   }
 ];
 

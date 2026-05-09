@@ -1,29 +1,19 @@
 import SearchBar from './SearchBar';
-import { FileText, ShieldCheck, Clock, ChevronDown } from 'lucide-react';
+import {
+  FileText,
+  ShieldCheck,
+  Clock,
+  ChevronDown
+} from 'lucide-react';
+
 import homeBlob from '../../../../assets/home_blob.webp';
 import person from '../../../../assets/person.webp';
 
 const Hero = () => {
   return (
-    <section
-      className="
-        relative
-        min-h-[calc(100vh-80px)]
-        flex items-center
-        max-w-7xl
-        mx-auto
-        overflow-hidden
-        px-6 lg:px-8
-      "
-    >
+    <section className="relative w-full overflow-hidden bg-white lg:min-h-[calc(100vh-80px)] flex flex-col lg:justify-center pt-2 lg:pt-0">
       {/* BACKGROUND GLOW */}
-      <div
-        className="
-          absolute
-          inset-0
-          pointer-events-none
-        "
-      >
+      <div className="absolute inset-0 pointer-events-none">
         <div
           className="
             absolute
@@ -31,8 +21,8 @@ const Hero = () => {
             right-[-120px]
             w-[600px]
             h-[600px]
-            bg-teal-50
             rounded-full
+            bg-teal-50
             blur-3xl
             opacity-70
           "
@@ -42,211 +32,384 @@ const Hero = () => {
       <div
         className="
           relative z-10
-          grid
-          grid-cols-1
-          lg:grid-cols-2
-          items-center
-          gap-16 lg:gap-8
+          max-w-7xl
+          mx-auto
+          px-6 lg:px-8
           w-full
-          pt-12 lg:pt-0
           pb-24 lg:pb-0
-          lg:-mt-20
         "
       >
-        {/* LEFT SIDE */}
-        <div className="max-w-2xl">
-          {/* GREETING */}
-          <div className="mb-6">
-            <span
-              className="
-                inline-flex items-center gap-2
-                rounded-full
-                border border-teal-100
-                bg-teal-50
-                px-4 py-2
-                text-sm font-semibold
-                text-teal-700
-              "
-            >
-              Hi there! 👋
-            </span>
-          </div>
-
-          {/* TITLE */}
-          <h1
-            className="
-              text-[40px]
-              md:text-[54px]
-              lg:text-[64px]
-              font-black
-              tracking-[-0.05em]
-              leading-[1.02]
-              text-slate-900
-            "
-          >
-            How can we help
-            <br />
-            you today?
-          </h1>
-
-          {/* DESCRIPTION */}
-          <p
-            className="
-              mt-7
-              max-w-xl
-              text-lg md:text-xl
-              leading-relaxed
-              text-slate-500
-            "
-          >
-            Find step-by-step guides for Philippine government
-            documents and official processes.
-          </p>
-
-          {/* SEARCH */}
-          <div className="mt-10 max-w-3xl">
-            <SearchBar />
-          </div>
-
-          {/* FEATURES */}
-          <div className="mt-12 flex flex-wrap md:flex-nowrap items-center gap-x-10 gap-y-6 text-slate-600">
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="p-2.5 rounded-lg bg-teal-50 text-teal-600">
-                <FileText size={20} />
-              </div>
-              <div>
-                <p className="font-bold text-sm text-slate-800">Step-by-step guides</p>
-                <p className="text-[13px] text-slate-500">Easy to follow</p>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="p-2.5 rounded-lg bg-blue-50 text-blue-600">
-                <ShieldCheck size={20} />
-              </div>
-              <div>
-                <p className="font-bold text-sm text-slate-800">Official processes</p>
-                <p className="text-[13px] text-slate-500">Trusted information</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 shrink-0">
-              <div className="p-2.5 rounded-lg bg-amber-50 text-amber-600">
-                <Clock size={20} />
-              </div>
-              <div>
-                <p className="font-bold text-sm text-slate-800">Track your progress</p>
-                <p className="text-[13px] text-slate-500">Stay on top</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT SIDE */}
         <div
           className="
-            relative
-            flex
-            justify-center
-            lg:justify-end
-            items-end
-            h-[420px]
-            md:h-[520px]
+            grid
+            grid-cols-1
+            lg:grid-cols-[1.05fr_0.95fr]
+            items-center
+            gap-8 lg:gap-6
+            w-full
+            pt-4 lg:pt-0
+            lg:min-h-[600px]
+            lg:-mt-12
           "
         >
-          {/* COMBINED BLOB */}
-          <img
-            src={homeBlob}
-            alt=""
-            className="
-              absolute
-              left-1/2 -translate-x-[46%]
-              lg:left-auto lg:-right-8 lg:translate-x-0
-              bottom-0
-              w-[380px]
-              md:w-[500px]
-              lg:w-[580px]
-              object-contain
-              pointer-events-none
-              z-[5]
-            "
-          />
+          {/* LEFT SIDE */}
+          <div className="max-w-[620px]">
+            {/* GREETING */}
+            <div className="mb-4 sm:mb-6">
+              <span
+                className="
+                  inline-flex items-center gap-2
+                  rounded-full
+                  border border-teal-100
+                  bg-teal-50
+                  px-4 py-2
+                  text-xs sm:text-sm
+                  font-semibold
+                  text-teal-700
+                "
+              >
+                Hi there! 👋
+              </span>
+            </div>
 
-          {/* MAIN ILLUSTRATION (Top-most) */}
-          <img
-            src={person}
-            alt="Person using laptop"
-            className="
-              relative z-20
-              w-[340px]
-              md:w-[420px]
-              lg:w-[500px]
-              object-contain
-            "
-          />
+            {/* TITLE + MOBILE ILLUSTRATION */}
+            <div className="relative lg:block min-h-[160px] sm:min-h-[280px] lg:min-h-0">
+              {/* MOBILE BLOB */}
+              <img
+                src={homeBlob}
+                alt=""
+                className="
+                  lg:hidden
+                  absolute
+                  right-[-60px]
+                  top-[-10px]
+                  w-[260px]
+                  sm:w-[420px]
+                  max-w-none
+                  opacity-40
+                  pointer-events-none
+                  z-0
+                "
+              />
 
-          {/* DECORATIVE DOTS - TOP LEFT (Above Blob) */}
-          <div 
-            className="
-              absolute 
-              top-20 md:top-24
-              left-12 md:left-20 
-              lg:left-30
-              grid grid-cols-4 gap-2 
-              opacity-20 z-10
-            "
-          >
-            {[...Array(16)].map((_, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-full bg-teal-600" />
-            ))}
+              {/* TEXT */}
+              <div className="relative z-10 max-w-[65%] sm:max-w-[70%] lg:max-w-none">
+                <h1
+                  className="
+                    text-[30px]
+                    sm:text-[44px]
+                    md:text-[54px]
+                    lg:text-[62px]
+                    font-extrabold
+                    tracking-[-0.04em]
+                    leading-[1.05]
+                    text-slate-900
+                  "
+                >
+                  How can we
+                  <br className="hidden sm:block" />
+                  help you today?
+                </h1>
+
+                {/* DESCRIPTION */}
+                <p
+                  className="
+                    mt-3 lg:mt-8
+                    max-w-[240px] sm:max-w-xl lg:max-w-2xl
+                    text-[13px] sm:text-base md:text-lg
+                    leading-relaxed
+                    text-slate-500
+                    font-medium
+                  "
+                >
+                  Find step-by-step guides for Philippine government
+                  documents and official processes.
+                </p>
+              </div>
+
+              {/* MOBILE ILLUSTRATION */}
+              <div
+                className="
+                  lg:hidden
+                  absolute
+                  right-[-10px]
+                  top-[-10px]
+                  w-40 sm:w-64
+                  h-40 sm:h-64
+                  z-10
+                "
+              >
+                <img
+                  src={person}
+                  alt="Person using laptop"
+                  className="
+                    w-full
+                    h-full
+                    object-contain
+                    scale-110
+                  "
+                />
+
+                {/* DOTS */}
+                <div
+                  className="
+                    absolute
+                    top-3
+                    left-2
+                    grid grid-cols-4 gap-1
+                    opacity-20
+                  "
+                >
+                  {[...Array(12)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="w-1 h-1 rounded-full bg-teal-600"
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* SEARCH */}
+            <div className="mt-6 lg:mt-12 max-w-3xl relative z-20">
+              <SearchBar />
+            </div>
+
+            {/* FEATURES */}
+            <div
+              className="
+                mt-8 lg:mt-12
+                grid grid-cols-3
+                gap-3 sm:gap-6 lg:gap-8
+                text-slate-600
+              "
+            >
+              {/* FEATURE 1 */}
+              <div className="flex flex-col items-center sm:items-start gap-2">
+                <div
+                  className="
+                    p-2.5
+                    rounded-xl
+                    bg-teal-50
+                    text-teal-600
+                  "
+                >
+                  <FileText size={18} />
+                </div>
+
+                <div className="text-center sm:text-left">
+                  <p
+                    className="
+                      font-bold
+                      text-[10px] sm:text-sm
+                      text-slate-800
+                      leading-tight
+                    "
+                  >
+                    Step-by-step guides
+                  </p>
+
+                  <p
+                    className="
+                      text-[9px] sm:text-xs
+                      text-slate-500
+                      mt-1
+                    "
+                  >
+                    Easy to follow
+                  </p>
+                </div>
+              </div>
+
+              {/* FEATURE 2 */}
+              <div className="flex flex-col items-center sm:items-start gap-2">
+                <div
+                  className="
+                    p-2.5
+                    rounded-xl
+                    bg-violet-50
+                    text-violet-600
+                  "
+                >
+                  <ShieldCheck size={18} />
+                </div>
+
+                <div className="text-center sm:text-left">
+                  <p
+                    className="
+                      font-bold
+                      text-[10px] sm:text-sm
+                      text-slate-800
+                      leading-tight
+                    "
+                  >
+                    Official processes
+                  </p>
+
+                  <p
+                    className="
+                      text-[9px] sm:text-xs
+                      text-slate-500
+                      mt-1
+                    "
+                  >
+                    Trusted info
+                  </p>
+                </div>
+              </div>
+
+              {/* FEATURE 3 */}
+              <div className="flex flex-col items-center sm:items-start gap-2">
+                <div
+                  className="
+                    p-2.5
+                    rounded-xl
+                    bg-amber-50
+                    text-amber-600
+                  "
+                >
+                  <Clock size={18} />
+                </div>
+
+                <div className="text-center sm:text-left">
+                  <p
+                    className="
+                      font-bold
+                      text-[10px] sm:text-sm
+                      text-slate-800
+                      leading-tight
+                    "
+                  >
+                    Track your progress
+                  </p>
+
+                  <p
+                    className="
+                      text-[9px] sm:text-xs
+                      text-slate-500
+                      mt-1
+                    "
+                  >
+                    Stay on top
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* DECORATIVE DOTS - BOTTOM RIGHT (Behind Blob) */}
-          <div 
-            className="
-              absolute 
-              bottom-12 md:bottom-16
-              right-8 md:right-12
-              lg:-right-12
-              grid grid-cols-3 gap-4 
-              opacity-15 z-0
-            "
-          >
-            {[...Array(16)].map((_, i) => (
-              <div key={i} className="w-2 h-2 rounded-full bg-teal-600" />
-            ))}
-          </div>
-
-          {/* FLOOR LINE */}
+          {/* RIGHT SIDE DESKTOP */}
           <div
             className="
-              absolute
-              bottom-8
-              w-[90%]
-              h-[3px]
-              rounded-full
-              bg-teal-700/20
+              hidden lg:flex
+              relative
+              items-center
+              justify-center
+              h-[520px]
             "
-          />
+          >
+            {/* MAIN COMPOSITION */}
+            <div className="relative w-full max-w-[560px] h-[520px]">
+              {/* BLOB */}
+              <img
+                src={homeBlob}
+                alt=""
+                className="
+                  absolute
+                  inset-0
+                  w-full
+                  h-full
+                  object-contain
+                  opacity-95
+                "
+              />
+
+              {/* TOP LEFT DOTS */}
+              <div
+                className="
+                  absolute
+                  top-16
+                  left-10
+                  grid grid-cols-4
+                  gap-2
+                  opacity-20
+                "
+              >
+                {[...Array(16)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-1.5 h-1.5 rounded-full bg-teal-600"
+                  />
+                ))}
+              </div>
+
+              {/* PERSON */}
+              <img
+                src={person}
+                alt="Person using laptop"
+                className="
+                  absolute
+                  bottom-10
+                  left-1/2
+                  -translate-x-1/2
+                  w-[460px]
+                  object-contain
+                  z-20
+                "
+              />
+
+              {/* FLOOR LINE */}
+              <div
+                className="
+                  absolute
+                  bottom-12
+                  left-1/2
+                  -translate-x-1/2
+                  w-[78%]
+                  h-[2px]
+                  rounded-full
+                  bg-teal-700/20
+                "
+              />
+
+              {/* BOTTOM RIGHT DOTS */}
+              <div
+                className="
+                  absolute
+                  bottom-20
+                  right-4
+                  grid grid-cols-4
+                  gap-3
+                  opacity-15
+                "
+              >
+                {[...Array(12)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="w-1.5 h-1.5 rounded-full bg-teal-600"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* SCROLL INDICATOR */}
+      {/* EXPLORE GUIDES */}
       <div
         className="
           absolute
-          bottom-8
+          bottom-6 lg:bottom-10
           left-1/2
           -translate-x-1/2
-          hidden xl:flex
-          flex-col items-center
-          gap-2
+          flex flex-col items-center
+          gap-1
           text-teal-600
+          z-20
         "
       >
         <span
           className="
-            text-[11px]
+            text-[10px] lg:text-[11px]
             font-extrabold
             uppercase
             tracking-[0.2em]

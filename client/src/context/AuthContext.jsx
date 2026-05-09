@@ -12,6 +12,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [onboarded, setOnboarded] = useState(false);
 
   // Execution of this effect occurs once upon component mounting.
   // Checking localStorage determines if a user session was previously active.
@@ -63,7 +64,9 @@ export const AuthProvider = ({ children }) => {
         logout,
         isAuthModalOpen,
         openAuthModal,
-        closeAuthModal
+        closeAuthModal,
+        onboarded,
+        setOnboarded
       }}
     >
       {children}

@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import AllGuides from './pages/AllGuides';
 import UserProgress from './pages/UserProgress';
 import Verified from './pages/Verifed';
+import Onboarding from './pages/Onboarding';
 import About from './pages/info/About';
 import Contact from './pages/info/Contact';
 import FAQs from './pages/info/FAQs';
@@ -21,6 +22,7 @@ function App() {
           <MainLayout>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/onboarding" element={<Onboarding />} />
               <Route path="/guides" element={<AllGuides />} />
               <Route path="/guides/:slug" element={<Guide />} />
               <Route path="/my-progress" element={<UserProgress />} />

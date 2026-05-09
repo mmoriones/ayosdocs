@@ -3,10 +3,10 @@ import person2 from '../../../../assets/person2.webp';
 
 const WhySignUp = ({ onSignUp }) => {
   return (
-    <div className="bg-[#F0F9F6] rounded-[32px] p-8 relative overflow-hidden">
+    <div className="bg-[#F0F9F6] rounded-[32px] p-8 relative overflow-hidden h-[320px] lg:h-auto lg:min-h-0 flex flex-col">
       
       {/* CONTENT WRAPPER */}
-      <div className="relative z-10 flex flex-col h-full">
+      <div className="relative z-10 flex flex-col h-full flex-1">
         
         {/* TEXT CONTENT */}
         <div className="max-w-[180px]">
@@ -45,11 +45,11 @@ const WhySignUp = ({ onSignUp }) => {
       </div>
 
       {/* ILLUSTRATION */}
-      <div className="absolute -right-21 bottom-0 w-[300px] pointer-events-none z-0">
+      <div className="absolute -right-6 lg:-right-20 bottom-0 w-40 sm:w-64 lg:w-[300px] pointer-events-none z-0">
         <img 
           src={person2} 
           alt="Person with phone" 
-          className="w-full h-full object-contain object-right-bottom"
+          className="w-full h-full object-contain object-right-bottom scale-110"
         />
       </div>
 

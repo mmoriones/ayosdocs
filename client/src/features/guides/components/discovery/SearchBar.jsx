@@ -48,6 +48,16 @@ const SearchBar = () => {
     navigate(`/guides/${slug}`);
   };
 
+  /**
+   * Triggers navigation to the first search result, if any.
+   * This is used by both the search button and the Enter key.
+   */
+  const handleSearchAction = () => {
+    if (results[0]) {
+      handleSelect(results[0].slug);
+    }
+  };
+
   const clearSearch = () => {
     setQuery("");
     setResults([]);
@@ -61,18 +71,19 @@ const SearchBar = () => {
 
         {/* LEFT ICON */}
         <Search
-          size={20}
-          className="absolute left-6 text-slate-400"
+          size={18}
+          className="absolute left-4 sm:left-6 text-slate-400"
         />
 
         {/* INPUT */}
         <input
           type="text"
-          placeholder="Search for document or process... (e.g., NBI Clearance)"
+          placeholder="Search (e.g., NBI Clearance)"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full pl-14 pr-36 py-5 rounded-full border border-slate-200 
-          bg-white text-[15.5px] text-slate-800 placeholder:text-slate-400
+          onKeyDown={(e) => e.key === "Enter" && handleSearchAction()}
+          className="w-full pl-11 sm:pl-14 pr-11 sm:pr-36 py-3.5 sm:py-5 rounded-full border border-slate-200 
+          bg-white text-base text-slate-800 placeholder:text-slate-400
           focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500
           shadow-[0_4px_20px_-5px_rgba(0,0,0,0.08),0_8px_15px_-5px_rgba(0,0,0,0.05)]
           transition-all duration-200"
@@ -82,7 +93,7 @@ const SearchBar = () => {
         {query && (
           <button
             onClick={clearSearch}
-            className="absolute right-36 text-slate-400 hover:text-slate-600 transition-colors"
+            className="absolute right-3.5 sm:right-36 text-slate-400 hover:text-slate-600 transition-colors"
           >
             <X size={18} />
           </button>
@@ -90,10 +101,10 @@ const SearchBar = () => {
 
         {/* SEARCH BUTTON */}
         <button
-          onClick={() => results[0] && handleSelect(results[0].slug)}
-          className="absolute right-2 bg-[#0D9488] hover:bg-[#0F766E] 
-          text-white px-7 py-3.5 rounded-full transition-all duration-200 
-          shadow-md hover:shadow-lg flex items-center gap-2 active:scale-95"
+          onClick={handleSearchAction}
+          className="absolute right-2 hidden sm:flex bg-[#0D9488] hover:bg-[#0F766E] 
+          text-white px-5 sm:px-7 py-3 rounded-full transition-all duration-200 
+          shadow-md hover:shadow-lg items-center gap-2 active:scale-95"
         >
           <Search size={18} strokeWidth={2.5} />
           <span className="font-bold text-[15px]">Search</span>
@@ -102,18 +113,18 @@ const SearchBar = () => {
 
       {/* RESULTS DROPDOWN */}
       {results.length > 0 && (
-        <div className="absolute w-full mt-2 bg-white border border-gray-100 
-        rounded-xl shadow-lg z-50 overflow-hidden">
+        <div className="absolute w-full mt-2 bg-white border border-slate-100 
+        rounded-2xl shadow-xl z-50 overflow-hidden ring-1 ring-black/5">
 
           {results.map((guide, index) => (
             <div
               key={guide.slug}
               onClick={() => handleSelect(guide.slug)}
-              className={`px-4 py-3 cursor-pointer transition flex items-center gap-3
-              ${index === 0 ? "bg-gray-50" : ""}
-              hover:bg-gray-100`}
+              className={`px-5 py-3.5 cursor-pointer transition flex items-center gap-3.5
+              ${index === 0 ? "bg-slate-50/50" : ""}
+              hover:bg-slate-50 active:bg-slate-100`}
             >
-              <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center p-1.5 shrink-0">
+              <div className="w-9 h-9 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-2 shrink-0 shadow-sm">
                 <img 
                   src={getGuideIcon(guide.slug)} 
                   alt="" 
@@ -121,11 +132,11 @@ const SearchBar = () => {
                 />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-medium text-gray-800">
+                <p className="text-[14.5px] font-semibold text-slate-800 leading-tight">
                   {guide.title}
                 </p>
-                <p className="text-[11px] text-gray-500">
-                  View guide
+                <p className="text-[11px] text-slate-500 mt-0.5 font-medium">
+                  View step-by-step guide
                 </p>
               </div>
             </div>
