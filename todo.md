@@ -12,6 +12,7 @@
     - [ ] Add mobile press feedback (haptics/visual).
 - [ ] **Components:**
     - [ ] **Skeleton Loading:** Implement for all data-fetching sections.
+    - [ ] **UI:** Create reusable components for tips badges, close button, etc
     - [ ] **Breadcrumbs:** Add navigation breadcrumbs (remove "back to my progress" links).
     - [ ] **Adsense:** Create Adsense component with eligibility context (hidden by default).
     - ~~[X] **ToastModal:** Optimize styles and add specific text for first-time login.~~
