@@ -4,6 +4,10 @@ slug: national-id
 description: A complete guide on how to register for the Philippine National ID (PhilSys ID), including eligibility, requirements, registration steps, biometric capture, delivery, and digital ID access.
 lastUpdated: 2026-04-01
 category: Government ID
+agency: PSA
+difficulty: Easy
+estimatedTime: 1-3 Days
+costRange: Free
 tags:
 - National ID
 - PhilSys

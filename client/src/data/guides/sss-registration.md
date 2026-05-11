@@ -4,6 +4,10 @@ slug: sss-registration
 description: A complete step-by-step guide on how to register as a new SSS member in the Philippines, obtain your permanent SS Number, create your My.SSS account, submit requirements, and begin contributing for future benefits.
 lastUpdated: 2026-04-01
 category: Government ID
+agency: SSS
+difficulty: Easy
+estimatedTime: 1-3 Days
+costRange: Free
 tags:
 - SSS
 - Employment

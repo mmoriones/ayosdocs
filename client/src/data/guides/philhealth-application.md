@@ -4,6 +4,10 @@ slug: philhealth-application
 description: A complete step-by-step guide on how to register for PhilHealth membership, obtain your PhilHealth Identification Number (PIN), and claim your PhilHealth ID in the Philippines, including requirements, membership categories, fees, and processing time.
 lastUpdated: 2026-04-01
 category: Government ID
+agency: PhilHealth
+difficulty: Easy
+estimatedTime: 1-3 Days
+costRange: Free
 tags:
 - PhilHealth
 - Healthcare

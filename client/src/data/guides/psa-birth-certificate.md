@@ -4,6 +4,10 @@ slug: psa-birth-certificate
 description: A complete step-by-step guide on how to request and obtain a PSA Birth Certificate in the Philippines, including walk-in and online application methods, requirements, fees, delivery options, and processing times.
 lastUpdated: 2026-04-01
 category: Government Documents
+agency: PSA
+difficulty: Easy
+estimatedTime: 3-7 Days
+costRange: Under ₱500
 tags:
 - PSA
 - Birth Certificate

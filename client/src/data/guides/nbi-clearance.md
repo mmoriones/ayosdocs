@@ -4,6 +4,10 @@ slug: nbi-clearance
 description: A complete step-by-step guide for first-time applicants on how to apply for an NBI Clearance in the Philippines, including online registration, appointment booking, payment methods, biometrics, claiming procedures, fees, and processing time.
 lastUpdated: 2026-04-01
 category: Government ID
+agency: NBI
+difficulty: Moderate
+estimatedTime: 1-3 Days
+costRange: Under ₱500
 tags:
 - NBI Clearance
 - Background Check

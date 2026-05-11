@@ -4,6 +4,10 @@ slug: passport-appointment
 description: A complete step-by-step guide on how to book a DFA passport appointment in the Philippines, including online registration, appointment scheduling, payment methods, required documents, biometrics, passport claiming, and processing timelines.
 lastUpdated: 2026-04-01
 category: Government ID
+agency: DFA
+difficulty: Moderate
+estimatedTime: 1-3 Days
+costRange: ₱500–₱2000
 tags:
 - Passport
 - DFA
