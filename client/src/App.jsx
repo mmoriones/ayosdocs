@@ -6,6 +6,8 @@ import AllGuides from './pages/AllGuides';
 import UserProgress from './pages/UserProgress';
 import Verified from './pages/Verifed';
 import Onboarding from './pages/Onboarding';
+import Rate from './pages/Rate';
+import Offices from './pages/Offices';
 import About from './pages/info/About';
 import Contact from './pages/info/Contact';
 import FAQs from './pages/info/FAQs';
@@ -26,6 +28,8 @@ function App() {
               <Route path="/guides" element={<AllGuides />} />
               <Route path="/guides/:slug" element={<Guide />} />
               <Route path="/my-progress" element={<UserProgress />} />
+              <Route path="/rate" element={<Rate />} />
+              <Route path="/offices" element={<Offices />} />
               <Route path="/verified" element={<Verified />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

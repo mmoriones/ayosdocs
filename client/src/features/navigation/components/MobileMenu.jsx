@@ -115,6 +115,22 @@ const MobileMenu = ({
               Guides
             </Link>
 
+            <Link
+              to="/offices"
+              onClick={() => handleClick()}
+              className={linkClass("/offices")}
+            >
+              Offices
+            </Link>
+
+            <Link
+              to="/rate"
+              onClick={() => handleClick()}
+              className={linkClass("/rate")}
+            >
+              Rate
+            </Link>
+
             {user && (
               <Link
                 to="/my-progress"

@@ -71,6 +71,20 @@ const DesktopMenu = ({
           )}
         </Link>
 
+        <Link to="/offices" className={navClass("/offices")}>
+          Offices
+          {isActive("/offices") && (
+            <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
+          )}
+        </Link>
+
+        <Link to="/rate" className={navClass("/rate")}>
+          Rate
+          {isActive("/rate") && (
+            <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
+          )}
+        </Link>
+
         {user && (
           <Link to="/my-progress" className={navClass("/my-progress")}>
             My Progress
@@ -79,27 +93,6 @@ const DesktopMenu = ({
             )}
           </Link>
         )}
-
-        <Link to="/about" className={navClass("/about")}>
-          About
-          {isActive("/about") && (
-            <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
-          )}
-        </Link>
-
-        <Link to="/faqs" className={navClass("/faqs")}>
-          FAQs
-          {isActive("/faqs") && (
-            <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
-          )}
-        </Link>
-
-        <Link to="/contact" className={navClass("/contact")}>
-          Contact
-          {isActive("/contact") && (
-            <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
-          )}
-        </Link>
       </div>
 
       {/* Auth Section */}

@@ -32,7 +32,8 @@ import { getGuideIcon } from '../utils/guideIcons';
 const AllGuides = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('Most Popular');
-  const [viewMode, setViewMode] = useState('list'); // 'grid' or 'list'
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const navigate = useNavigate();
   
   // State for collapsible filter sections
   const [expandedFilters, setExpandedFilters] = useState({
@@ -454,7 +455,7 @@ const AllGuides = () => {
                       <h2 className="text-base font-bold text-gray-900 leading-none">Community Insights</h2>
                       <p className="text-gray-400 text-[10px] mt-1.5">Real experiences from the community (anonymous)</p>
                     </div>
-                    <Link to="#" className="text-[10px] font-bold text-teal-600 hover:underline flex items-center gap-1 uppercase tracking-wider">
+                    <Link to="/offices" className="text-[10px] font-bold text-teal-600 hover:underline flex items-center gap-1 uppercase tracking-wider">
                       View all offices
                       <ArrowRight size={12} />
                     </Link>
@@ -517,7 +518,9 @@ const AllGuides = () => {
                   </div>
 
                   <div className="relative z-10 mt-6 flex justify-end">
-                    <button className="px-5 py-2.5 bg-white text-teal-600 border border-teal-600/30 rounded-xl font-bold text-[11px] shadow-sm hover:shadow-md hover:border-teal-600 transition-all flex items-center justify-center gap-1.5 active:scale-95">
+                    <button 
+                      onClick={() => navigate('/rate')}
+                      className="px-5 py-2.5 bg-white text-teal-600 border border-teal-600/30 rounded-xl font-bold text-[11px] shadow-sm hover:shadow-md hover:border-teal-600 transition-all flex items-center justify-center gap-1.5 active:scale-95">
                       <Star size={14} className="text-teal-500 fill-teal-500/10" />
                       Rate an Office
                     </button>
