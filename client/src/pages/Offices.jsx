@@ -193,7 +193,10 @@ const Offices = () => {
                 ))}
               </div>
               
-              <button className="w-full mt-8 py-3 bg-gray-50 text-gray-500 rounded-xl text-xs font-bold hover:bg-gray-100 transition-all uppercase tracking-widest">
+              <button 
+                onClick={() => navigate('/coming-soon')}
+                className="w-full mt-8 py-3 bg-gray-50 text-gray-500 rounded-xl text-xs font-bold hover:bg-gray-100 transition-all uppercase tracking-widest"
+              >
                 View Full Rankings
               </button>
             </section>
@@ -343,7 +346,7 @@ const OfficeCard = ({ office, navigate }) => {
           <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">3 Recent reports today</span>
         </div>
         <button 
-          onClick={() => navigate(`/offices/${office.id}`)}
+          onClick={() => navigate('/coming-soon')}
           className="text-teal-600 font-bold text-xs flex items-center gap-1.5 hover:gap-2.5 transition-all"
         >
           View detailed insights
