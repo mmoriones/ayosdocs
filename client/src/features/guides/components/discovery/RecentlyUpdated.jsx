@@ -1,4 +1,4 @@
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, ArrowRight, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { getGuideIcon } from '../../../../utils/guideIcons';
 
@@ -35,36 +35,33 @@ const RecentlyUpdated = () => {
   return (
     <div className="w-full">
       {/* HEADER */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <h2 className="text-[18px] font-bold text-slate-900">
-            New & Updated Guides
-          </h2>
-          <span className="bg-slate-100 text-slate-500 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
-            New
-          </span>
+      <div className="flex justify-between items-end gap-4 mb-6">
+        <div>
+          <h2 className="text-lg font-bold text-gray-900 leading-none">New & Updated</h2>
+          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-2">Stay informed with the latest guide updates and additions.</p>
         </div>
         
         <button 
           onClick={() => navigate('/guides')}
-          className="text-[13px] font-bold text-slate-500 hover:text-slate-800 flex items-center gap-1 transition-colors"
+          className="group flex items-center gap-1 text-teal-700 font-bold hover:text-teal-800 transition-colors text-[11px] uppercase tracking-wider whitespace-nowrap"
         >
-          View all updates <ChevronRight size={14} />
+          <span>View all updates</span>
+          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
         </button>
       </div>
 
       {/* LIST CONTAINER */}
-      <div className="bg-white border border-slate-100 rounded-3xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] overflow-hidden">
+      <div className="bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
         {updates.map((update, index) => (
           <div 
             key={update.id}
             onClick={() => navigate(`/guides/${update.slug}`)}
-            className={`group flex items-center gap-5 p-6 cursor-pointer transition-colors hover:bg-slate-50/50
-              ${index !== updates.length - 1 ? 'border-b border-slate-50' : ''}
+            className={`group flex items-center gap-5 p-6 cursor-pointer transition-colors hover:bg-gray-50/50
+              ${index !== updates.length - 1 ? 'border-b border-gray-50' : ''}
             `}
           >
             {/* THUMBNAIL */}
-            <div className="shrink-0 w-24 h-16 bg-slate-50 rounded-xl flex items-center justify-center overflow-hidden">
+            <div className="shrink-0 w-24 h-16 bg-gray-50 rounded-2xl flex items-center justify-center overflow-hidden">
               <img 
                 src={getGuideIcon(update.slug)} 
                 alt="" 
@@ -74,25 +71,25 @@ const RecentlyUpdated = () => {
 
             {/* CONTENT */}
             <div className="flex-1 min-w-0">
-              <h3 className="text-[15px] font-bold text-slate-800 truncate group-hover:text-teal-700 transition-colors">
+              <h3 className="text-[15px] font-bold text-gray-800 truncate group-hover:text-teal-700 transition-colors leading-tight">
                 {update.title}
               </h3>
-              <div className="flex items-center gap-2 mt-0.5">
-                <span className="text-[11px] font-bold text-slate-400">
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-[10px] font-bold text-teal-600/70 uppercase tracking-wider">
                   {update.type}
                 </span>
-                <span className="text-[11px] text-slate-300">•</span>
-                <span className="text-[11px] font-medium text-slate-400">
+                <span className="text-[10px] text-gray-300">•</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
                   {update.date}
                 </span>
               </div>
-              <p className="text-[12px] text-slate-500 mt-1 line-clamp-1">
+              <p className="text-sm text-gray-500 mt-2 line-clamp-1 leading-relaxed">
                 {update.description}
               </p>
             </div>
 
             {/* ACTION */}
-            <div className="shrink-0 text-slate-300 group-hover:text-slate-400 transition-colors">
+            <div className="shrink-0 text-gray-300 group-hover:text-gray-400 transition-colors">
               <ChevronRight size={18} />
             </div>
           </div>

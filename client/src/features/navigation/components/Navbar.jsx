@@ -50,7 +50,7 @@ const Navbar = () => {
 
   return (
     <nav className="w-full sticky top-0 z-[60] bg-white/70 backdrop-blur-xl border-b border-slate-100/50 transition-all duration-300">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3.5">
+      <div className="max-w-[1600px] mx-auto flex items-center justify-between px-6 lg:px-10 py-3.5">
 
         {/* LEFT: Logo */}
         <div

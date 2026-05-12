@@ -2,73 +2,69 @@ import { ArrowRight, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import notepad from '../../../../assets/notepad.webp';
 
+/**
+ * OnboardingBanner component.
+ * Prompts new users to see how the platform works.
+ * Matches the styling of the WhySignUp card for visual consistency.
+ * 
+ * @returns {JSX.Element} The rendered OnboardingBanner.
+ */
 const OnboardingBanner = () => {
   const navigate = useNavigate();
   return (
-    <div className="relative bg-[#F4F9F8] rounded-[32px] p-8 md:p-10 overflow-hidden border border-teal-50 h-[320px] lg:h-auto lg:min-h-0 flex flex-col">
+    <div className="relative bg-[#F0F9F6] rounded-3xl p-6 overflow-hidden h-[320px] lg:h-auto lg:min-h-0 flex flex-col border border-teal-100/50 shadow-sm transition-all group">
       
-      <div className="relative z-10 flex flex-col h-full flex-1 md:flex-row md:items-center md:gap-10">
+      {/* CONTENT WRAPPER */}
+      <div className="relative z-10 flex flex-col h-full flex-1">
         
-        {/* DESKTOP ILLUSTRATION */}
-        <div className="hidden md:flex shrink-0 w-48 h-48 items-center justify-center">
-          <img 
-            src={notepad} 
-            alt="Notepad checklist illustration" 
-            className="w-full h-full object-contain drop-shadow-md scale-135"
-          />
+        {/* TEXT CONTENT */}
+        <div className="max-w-[220px] md:max-w-[280px]">
+          <h3 className="text-[11px] font-bold text-teal-700/60 uppercase tracking-widest leading-none mb-6">
+            Getting Started
+          </h3>
+          
+          <h4 className="text-[18px] md:text-[22px] font-extrabold text-gray-900 leading-tight mb-5">
+            New to AyosDocs? Let's help you get started.
+          </h4>
+
+          <ul className="space-y-3 mb-8">
+            {[
+              "Find the right guide in seconds",
+              "Follow step-by-step instructions",
+              "Track your progress easily"
+            ].map((text, i) => (
+              <li key={i} className="flex items-center gap-2.5">
+                <CheckCircle size={14} className="text-teal-600 shrink-0" strokeWidth={3} />
+                <span className="text-[11px] md:text-[12px] font-bold text-gray-600">{text}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* CONTENT */}
-        <div className="flex-1 flex flex-col h-full md:h-auto max-w-[190px] md:max-w-none">
-          <div className="space-y-4 md:space-y-5">
-            <div className="space-y-1">
-              <h3 className="text-[18px] md:text-[22px] font-extrabold text-slate-900 leading-tight">
-                New to AyosDocs?
-              </h3>
-              <p className="text-slate-500 font-medium text-[13px] md:text-[15px]">
-                Let us help you get started with confidence.
-              </p>
-            </div>
-
-            <ul className="space-y-2.5">
-              {[
-                "Find the right guide in seconds",
-                "Follow step-by-step instructions",
-                "Track your progress easily"
-              ].map((text, i) => (
-                <li key={i} className="flex items-center gap-2.5">
-                  <CheckCircle size={16} className="text-teal-600 shrink-0" strokeWidth={3} />
-                  <span className="text-[12px] md:text-[13px] font-bold text-slate-700">{text}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-auto md:mt-8 md:self-end">
-            <button 
-              onClick={() => navigate('/onboarding')}
-              className="bg-[#0D9488] hover:bg-[#0F766E] text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-teal-100 flex items-center gap-2 active:scale-95 text-[14px] whitespace-nowrap"
-            >
-              <span>See how it works</span>
-              <ArrowRight size={18} strokeWidth={2.5} />
-            </button>
-          </div>
+        {/* CTA BUTTON */}
+        <div className="mt-auto max-w-[200px]">
+          <button 
+            onClick={() => navigate('/onboarding')}
+            className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-teal-100/50 flex items-center justify-center gap-2 active:scale-95 text-[12px] uppercase tracking-wider whitespace-nowrap"
+          >
+            <span>See how it works</span>
+            <ArrowRight size={16} strokeWidth={2.5} />
+          </button>
         </div>
       </div>
 
-      {/* MOBILE ILLUSTRATION (Absolute) */}
-      <div className="md:hidden pr-4 absolute -right-6 bottom-0 w-34 h-34 pointer-events-none z-0">
+      {/* ILLUSTRATION */}
+      <div className="absolute -right-10 md:-right-12 bottom-0 w-36 md:w-52 pointer-events-none z-0">
         <img 
           src={notepad} 
-          alt="" 
-          className="w-full h-full object-contain drop-shadow-md scale-110"
+          alt="Notepad checklist illustration" 
+          className="w-full h-full object-contain object-right-bottom scale-90 group-hover:scale-95 transition-transform duration-700 drop-shadow-sm"
         />
       </div>
 
       {/* BACKGROUND DECO */}
-      <div className="absolute -top-10 -left-10 w-40 h-40 bg-teal-100/30 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-teal-100/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-32 h-32 bg-teal-100/40 rounded-full blur-3xl -mr-16 -mt-16" />
+      <div className="absolute bottom-0 left-0 w-24 h-24 bg-teal-100/20 rounded-full blur-2xl -ml-12 -mb-12" />
     </div>
   );
 };

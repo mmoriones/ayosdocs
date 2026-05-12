@@ -28,6 +28,7 @@ This is the frontend of the AyosDocs application, built with React, Vite, and Ta
    ```env
    VITE_BACKEND_API_URL=http://localhost:5000
    VITE_GOOGLE_CLIENT_ID=your_google_client_id
+   VITE_ADSENSE_ENABLED=true
    ```
 
 ### Running the App

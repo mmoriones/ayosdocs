@@ -40,6 +40,7 @@
 - [ ] **API Endpoints:**
     - [ ] `/api/guides/recently-updated`
     - [ ] `/api/contact` (Contact form submission)
+    - [ ] `/api/rate` (office rating submission)
 - ~~[X] **Guide Management:** Remove "Related Guides" section from `.md` files (handle dynamically).~~
 - [ ] **Versioning:** Track guide update dates in frontmatter or database.
 - [ ] **Mail:** Integrate **Zoho Mail** for communications.

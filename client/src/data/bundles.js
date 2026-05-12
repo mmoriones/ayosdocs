@@ -42,5 +42,29 @@ export const bundles = [
       // 'sss-maternity', // Future guide
     ],
     category: 'Civil Documents'
+  },
+  {
+    id: 'travel',
+    title: 'Traveling Abroad',
+    description: 'Passport and travel documents.',
+    icon: '✈️',
+    guides: [
+      'passport-appointment',
+      'national-id',
+      'psa-birth-certificate'
+    ],
+    category: 'Travel'
+  },
+  {
+    id: 'business',
+    title: 'Starting a Business',
+    description: 'Business registration essentials.',
+    icon: '🏢',
+    guides: [
+      'national-id',
+      // 'dti-registration', // Future guide
+      // 'mayor-permit' // Future guide
+    ],
+    category: 'Business'
   }
 ];

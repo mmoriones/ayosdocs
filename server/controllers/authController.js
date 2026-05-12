@@ -71,6 +71,7 @@ const login = async (req, res) => {
     const token = authService.generateToken(user);
     res.json({
       token,
+      isNewUser: false,
       user: {
         id: user._id,
         fullName: user.fullName,

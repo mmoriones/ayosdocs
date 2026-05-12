@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import Hero from '../features/guides/components/discovery/Hero';
 import TrendingGuides from '../features/guides/components/discovery/TrendingGuides';
+import StartWithGoal from '../features/guides/components/discovery/StartWithGoal';
+import RecentExperiences from '../features/guides/components/discovery/RecentExperiences';
 import ChecklistCard from '../features/guides/components/tracking/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
 import WhySignUp from '../features/guides/components/callouts/WhySignUp';
 import TipsCard from '../features/guides/components/callouts/TipsCard';
+import Adsense from '../components/Adsense';
 import GettingStarted from '../features/guides/components/discovery/GettingStarted';
 import OnboardingBanner from '../features/guides/components/discovery/OnboardingBanner';
 import RecentlyUpdated from '../features/guides/components/discovery/RecentlyUpdated';
@@ -19,7 +22,7 @@ import { useAuth } from '../context/AuthContext'
  */
 const Home = () => {
   const [activeSlug, setActiveSlug] = useState('getting-started');
-  const { isLoggedIn, openAuthModal, onboarded } = useAuth();
+  const { isLoggedIn, user, openAuthModal, onboarded } = useAuth();
   const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
 
   // Initialization of page state from local storage.
@@ -58,25 +61,47 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
 
       <title>AyosDocs | Your Complete Guide to Government Documents</title>
       <meta name="description" content="AyosDocs provides step-by-step guides for Philippine government documents and processes. Simplify your requirements for TIN, SSS, PhilHealth, and more." />
 
       <Hero />
 
-      <div className="px-6 sm:px-8 lg:px-10 py-6 flex flex-col lg:flex-row gap-10 items-start max-w-7xl mx-auto">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10 flex flex-col lg:flex-row gap-12 items-start">
 
         {/* MAIN CONTENT AREA */}
-        <div className="flex-1 w-full space-y-10">
+        <div className="flex-1 min-w-0 space-y-10">
 
-          {/* POPULAR GUIDES */}
-          <section className="space-y-6">
+          {/* SYSTEM STATUS / NOTIFICATIONS */}
+          <section>
+            <HolidayAlert />
+          </section>
+
+          {/* USER CONTEXT - COMPLEMENTS HERO PERSONALIZATION */}
+          {isLoggedIn && user && onboarded && (
+            <section className="mb-10">
+              <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+                Continue your progress
+              </h2>
+              <p className="text-gray-500 text-sm mt-1 font-medium">
+                Pick up where you left off or explore new goals below.
+              </p>
+            </section>
+          )}
+
+          {/* START WITH A GOAL - VALUE PROPOSITION / WORKFLOWS */}
+          <section>
+            <StartWithGoal />
+          </section>
+
+          {/* POPULAR GUIDES - THE PRODUCT LIBRARY */}
+          <section>
             <TrendingGuides />
           </section>
 
-          {/* PROGRESS / GETTING STARTED - MOBILE VIEW (Below Trending) */}
-          <section className="lg:hidden space-y-6">
+          {/* PROGRESS / GETTING STARTED - MOBILE VIEW (Below Primary Discovery) */}
+          <section className="lg:hidden">
             {activeSlug === 'getting-started' ? (
               <GettingStarted />
             ) : activeGuide ? (
@@ -90,14 +115,14 @@ const Home = () => {
             ) : null}
           </section>
 
-          {/* RECENTLY UPDATED */}
+          {/* RECENT EXPERIENCES - SOCIAL PROOF / COMMUNITY INTELLIGENCE */}
           <section>
-            <RecentlyUpdated />
+            <RecentExperiences />
           </section>
 
-          {/* HOLIDAY ALERT */}
+          {/* RECENTLY UPDATED - NEWS & CONTENT UPDATES */}
           <section>
-            <HolidayAlert />
+            <RecentlyUpdated />
           </section>
 
           {/* CALLOUTS HORIZONTAL SCROLL - MOBILE VIEW */}
@@ -133,36 +158,46 @@ const Home = () => {
             </div>
           </section>
 
-          {/* ONBOARDING BANNER - DESKTOP VIEW */}
-          {!onboarded && (
-            <section className="hidden lg:block">
-              <OnboardingBanner />
-            </section>
-          )}
+          {/* HORIZONTAL ADSENSE - MAIN CONTENT BOTTOM */}
+          <section>
+            <Adsense variant="article" />
+          </section>
 
         </div>
 
-        {/* SIDEBAR - DESKTOP ONLY */}
-        <div className="hidden lg:block w-full lg:w-96 space-y-8 sticky top-8">
+        {/* SIDEBAR - DASHBOARD UTILITIES */}
+        <div className="hidden lg:block lg:w-96 shrink-0">
+          <div className="sticky top-10 space-y-10">
 
-          <TipsCard />
+            {/* 1. USER CONTEXT / PROGRESS (Highest Importance) */}
+            {activeSlug === 'getting-started' ? (
+              <GettingStarted />
+            ) : activeGuide ? (
+              <ChecklistCard
+                title={activeGuide.title}
+                initialSteps={activeGuide.checklist?.map(task => ({ task }))}
+                slug={activeSlug}
+                inGuidePage={false}
+                isModal={false}
+              />
+            ) : null}
 
-          {activeSlug === 'getting-started' ? (
-            <GettingStarted />
-          ) : activeGuide ? (
-            <ChecklistCard
-              title={activeGuide.title}
-              initialSteps={activeGuide.checklist?.map(task => ({ task }))}
-              slug={activeSlug}
-              inGuidePage={false}
-              isModal={false}
-            />
-          ) : null}
+            {/* 2. ACCOUNT ACTIONS (Onboarding or Sign Up) */}
+            {!onboarded && (
+              <OnboardingBanner />
+            )}
 
-          {!isLoggedIn && (
-            <WhySignUp onSignUp={openAuthModal} />
-          )}
+            {!isLoggedIn && (
+              <WhySignUp onSignUp={openAuthModal} />
+            )}
 
+            {/* 3. MONETIZATION (High Visibility) */}
+            <Adsense variant="skyscraper" />
+
+            {/* 4. KNOWLEDGE / TIPS (Supplemental) */}
+            <TipsCard />
+
+          </div>
         </div>
       </div>
     </div>

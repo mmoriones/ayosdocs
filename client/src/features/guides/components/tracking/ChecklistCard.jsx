@@ -179,58 +179,58 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
   }
 
   return (
-    <div className={`flex flex-col overflow-hidden ${isModal ? "" : "bg-white rounded-[32px] border border-slate-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"}`}>
+    <div className={`flex flex-col overflow-hidden ${isModal ? "" : "bg-white rounded-3xl border border-gray-100 shadow-sm transition-all"}`}>
       
       {/* HEADER SECTION */}
       {!isModal && (
-        <div className="p-5 pb-0">
-          <div className="flex items-start justify-between gap-4 mb-2">
-            <h3 className="text-[15px] font-bold text-gray-900 leading-tight">
-              {inGuidePage ? (slug === "getting-started" ? "Continue your progress" : "Requirements List") : "Your Progress"}
+        <div className="p-6 pb-0">
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none">
+              {inGuidePage ? (slug === "getting-started" ? "Your journey" : "Requirements List") : "Your Progress"}
             </h3>
             
             {!inGuidePage && (
               <button 
                 onClick={() => navigate('/my-progress')}
-                className="text-[11px] font-bold text-teal-600 hover:text-teal-700 flex items-center gap-0.5"
+                className="text-[10px] font-bold text-teal-600 hover:text-teal-700 flex items-center gap-0.5 uppercase tracking-tighter"
               >
-                View all <ChevronRight size={12} />
+                Dashboard <ChevronRight size={12} />
               </button>
             )}
           </div>
 
           <div className="flex items-start justify-between gap-4">
-            <div className="flex items-start gap-3.5 w-full">
+            <div className="flex items-start gap-4 w-full">
               {!inGuidePage && (
-                <div className="w-11 h-11 rounded-2xl bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100 shadow-sm p-2">
+                <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center shrink-0 border border-gray-100 shadow-xs p-2.5">
                   <img src={icon} alt="" className="w-full h-full object-contain" />
                 </div>
               )}
               
               <div className="space-y-1 flex-1">
                 {!isModal && !inGuidePage && (
-                  <p className="text-[10px] text-gray-500 font-medium">
+                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">
                     Continue your last guide
                   </p>
                 )}
                 
-                <h4 className="text-[14px] font-bold text-gray-800 leading-tight">
+                <h4 className="text-[15px] font-bold text-gray-900 leading-tight">
                   {slug === "getting-started" ? "Getting Started" : title}
                 </h4>
                 
                 {isLoggedIn ? (
-                  <p className="text-[11px] font-bold text-teal-600/80">
+                  <p className="text-[11px] font-bold text-teal-600">
                     {completedCount} of {totalSteps} steps completed
                   </p>
                 ) : (
-                  <p className="text-[11px] text-gray-500 font-medium">
+                  <p className="text-[11px] text-gray-400 font-medium">
                     Follow each requirement step-by-step.
                   </p>
                 )}
               </div>
 
               {!inGuidePage && isLoggedIn && (
-                <button className="p-2 text-gray-400 hover:text-teal-600 hover:bg-teal-50 rounded-xl border border-gray-100 transition shrink-0 bg-white shadow-sm active:scale-95">
+                <button className="p-2 text-gray-300 hover:text-teal-600 hover:bg-teal-50 rounded-xl border border-gray-100 transition shrink-0 bg-white shadow-xs active:scale-95">
                   <Bookmark size={18} />
                 </button>
               )}

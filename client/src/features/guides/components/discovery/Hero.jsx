@@ -5,13 +5,16 @@ import {
   Clock,
   ChevronDown
 } from 'lucide-react';
+import { useAuth } from '../../../../context/AuthContext';
 
 import homeBlob from '../../../../assets/home_blob.webp';
 import person from '../../../../assets/person.webp';
 
 const Hero = () => {
+  const { isLoggedIn, user } = useAuth();
+
   return (
-    <section className="relative w-full overflow-hidden bg-white lg:min-h-[calc(100vh-80px)] flex flex-col lg:justify-center pt-2 lg:pt-0">
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-white to-gray-50 lg:min-h-[calc(100vh-80px)] flex flex-col lg:justify-center pt-2 lg:pt-0">
       {/* BACKGROUND GLOW */}
       <div className="absolute inset-0 pointer-events-none">
         <div
@@ -32,9 +35,9 @@ const Hero = () => {
       <div
         className="
           relative z-10
-          max-w-7xl
+          max-w-[1600px]
           mx-auto
-          px-6 lg:px-8
+          px-6 lg:px-10
           w-full
           pb-24 lg:pb-0
         "
@@ -45,7 +48,7 @@ const Hero = () => {
             grid-cols-1
             lg:grid-cols-[1.05fr_0.95fr]
             items-center
-            gap-8 lg:gap-6
+            gap-8 lg:gap-12
             w-full
             pt-4 lg:pt-0
             lg:min-h-[600px]
@@ -68,7 +71,13 @@ const Hero = () => {
                   text-teal-700
                 "
               >
-                Hi there! 👋
+                {isLoggedIn && user ? (
+                  <>
+                    {user.isNewUser ? 'Welcome to AyosDocs' : 'Welcome back'}, {user.fullName?.split(' ')[0] || 'User'}! 👋
+                  </>
+                ) : (
+                  'Hi there! 👋'
+                )}
               </span>
             </div>
 
@@ -415,7 +424,7 @@ const Hero = () => {
             tracking-[0.2em]
           "
         >
-          Explore Guides
+          Accomplish Your Goals
         </span>
 
         <div className="animate-bounce">

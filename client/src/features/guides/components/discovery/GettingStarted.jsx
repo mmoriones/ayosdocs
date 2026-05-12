@@ -7,8 +7,8 @@ const steps = [
 
 const GettingStarted = () => {
   return (
-    <div className="bg-white border border-slate-100 rounded-[32px] p-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
-      <h3 className="text-lg font-bold mb-6 text-slate-900">
+    <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+      <h3 className="text-lg font-bold mb-6 text-gray-900 leading-none">
         Quick Guide
       </h3>
 
@@ -30,7 +30,7 @@ const GettingStarted = () => {
                 <p className="text-[14px] font-bold text-slate-800 leading-tight">
                   {step.title}
                 </p>
-                <p className="text-[12px] text-slate-500 font-medium leading-snug">
+                <p className="text-[12px] text-gray-500 font-medium leading-snug">
                   {step.desc}
                 </p>
               </div>

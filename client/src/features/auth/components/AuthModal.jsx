@@ -43,15 +43,16 @@ const AuthModal = ({ isOpen, onClose }) => {
 
         const userData = {
           ...res.data.user,
-          token: res.data.token
+          token: res.data.token,
+          isNewUser: res.data.isNewUser
         };
 
         // Saving the user session to global state and local storage.
         login(userData);
         
-        // Determination of the welcome message is based on the user's onboarding status.
-        // Users who haven't completed onboarding are greeted with a "Welcome" message.
-        const isFirstTime = !res.data.user.onboarded;
+        // Determination of the welcome message is based on whether the user is new.
+        // Returning users are greeted with "Welcome back!", even if they haven't finished onboarding.
+        const isFirstTime = res.data.isNewUser;
 
         showToast({
           type: 'success',

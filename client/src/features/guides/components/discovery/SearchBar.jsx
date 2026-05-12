@@ -72,7 +72,7 @@ const SearchBar = () => {
         {/* LEFT ICON */}
         <Search
           size={18}
-          className="absolute left-4 sm:left-6 text-slate-400"
+          className="absolute left-4 sm:left-6 text-gray-400"
         />
 
         {/* INPUT */}
@@ -82,8 +82,8 @@ const SearchBar = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearchAction()}
-          className="w-full pl-11 sm:pl-14 pr-11 sm:pr-36 py-3.5 sm:py-5 rounded-full border border-slate-200 
-          bg-white text-base text-slate-800 placeholder:text-slate-400
+          className="w-full pl-11 sm:pl-14 pr-11 sm:pr-36 py-3.5 sm:py-5 rounded-full border border-gray-200 
+          bg-white text-base text-gray-800 placeholder:text-gray-400
           focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500
           shadow-[0_4px_20px_-5px_rgba(0,0,0,0.08),0_8px_15px_-5px_rgba(0,0,0,0.05)]
           transition-all duration-200"
@@ -93,7 +93,7 @@ const SearchBar = () => {
         {query && (
           <button
             onClick={clearSearch}
-            className="absolute right-3.5 sm:right-36 text-slate-400 hover:text-slate-600 transition-colors"
+            className="absolute right-3.5 sm:right-36 text-gray-400 hover:text-gray-600 transition-colors"
           >
             <X size={18} />
           </button>
@@ -113,7 +113,7 @@ const SearchBar = () => {
 
       {/* RESULTS DROPDOWN */}
       {results.length > 0 && (
-        <div className="absolute w-full mt-2 bg-white border border-slate-100 
+        <div className="absolute w-full mt-2 bg-white border border-gray-100 
         rounded-2xl shadow-xl z-50 overflow-hidden ring-1 ring-black/5">
 
           {results.map((guide, index) => (
@@ -121,10 +121,10 @@ const SearchBar = () => {
               key={guide.slug}
               onClick={() => handleSelect(guide.slug)}
               className={`px-5 py-3.5 cursor-pointer transition flex items-center gap-3.5
-              ${index === 0 ? "bg-slate-50/50" : ""}
-              hover:bg-slate-50 active:bg-slate-100`}
+              ${index === 0 ? "bg-gray-50/50" : ""}
+              hover:bg-gray-50 active:bg-gray-100`}
             >
-              <div className="w-9 h-9 rounded-xl bg-white border border-slate-100 flex items-center justify-center p-2 shrink-0 shadow-sm">
+              <div className="w-9 h-9 rounded-xl bg-white border border-gray-100 flex items-center justify-center p-2 shrink-0 shadow-sm">
                 <img 
                   src={getGuideIcon(guide.slug)} 
                   alt="" 
@@ -132,10 +132,10 @@ const SearchBar = () => {
                 />
               </div>
               <div className="flex-1">
-                <p className="text-[14.5px] font-semibold text-slate-800 leading-tight">
+                <p className="text-[14.5px] font-semibold text-gray-800 leading-tight">
                   {guide.title}
                 </p>
-                <p className="text-[11px] text-slate-500 mt-0.5 font-medium">
+                <p className="text-[11px] text-gray-500 mt-0.5 font-medium">
                   View step-by-step guide
                 </p>
               </div>

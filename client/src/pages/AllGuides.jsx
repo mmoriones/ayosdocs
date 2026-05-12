@@ -19,11 +19,13 @@ import {
   Star,
   FileText,
   Building2,
-  Calendar
+  Calendar,
+  Info
 } from 'lucide-react';
 import personImg from '../assets/person.webp';
 import { guidesMap } from '../utils/loadGuides';
 import { getGuideIcon } from '../utils/guideIcons';
+import Banner from '../components/ui/Banner';
 
 /**
  * AllGuides Page Component
@@ -33,6 +35,7 @@ const AllGuides = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('Most Popular');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [showTip, setShowTip] = useState(true);
   const navigate = useNavigate();
   
   // State for collapsible filter sections
@@ -110,12 +113,12 @@ const AllGuides = () => {
               </div>
 
               {/* Roadmap Utility: Holiday Status (Sync placeholder) */}
-              <div className="hidden sm:flex items-center gap-2 bg-orange-50/50 px-3 py-1.5 rounded-full border border-orange-100 shadow-xs group cursor-help transition-all hover:bg-orange-50">
-                <Calendar size={10} className="text-orange-600" />
-                <span className="text-[10px] text-orange-700 font-bold uppercase tracking-tighter">
-                  Regular Hours
+              <div className="hidden sm:flex items-center gap-2 bg-teal-50/50 px-3 py-1.5 rounded-full border border-teal-100/50 shadow-xs group cursor-help transition-all hover:bg-teal-50">
+                <Calendar size={10} className="text-teal-600" />
+                <span className="text-[10px] text-teal-700 font-bold uppercase tracking-tighter">
+                  Offices Open
                 </span>
-                <div className="w-1 h-1 rounded-full bg-orange-400" />
+                <div className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
               </div>
 
               {/* Roadmap Utility: Trending Ticker */}
@@ -335,17 +338,17 @@ const AllGuides = () => {
                 </div>
               </div>
 
-              <div className="bg-teal-50/50 border border-teal-100 rounded-2xl p-4 flex items-start gap-3 mb-8">
-                <div className="w-6 h-6 rounded-full bg-teal-100 flex items-center justify-center text-teal-600 mt-0.5 flex-shrink-0">
-                  <Bookmark size={14} />
-                </div>
-                <p className="text-sm text-teal-800 leading-relaxed flex-1">
-                  <span className="font-bold">Tip:</span> Bookmark guides you need and track your progress in My Progress.
-                </p>
-                <button className="text-teal-400 hover:text-teal-600">
-                  <X size={16} />
-                </button>
-              </div>
+              {showTip && (
+                <Banner
+                  variant="teal"
+                  icon={Bookmark}
+                  title="Tip"
+                  onClose={() => setShowTip(false)}
+                  className="mb-8"
+                >
+                  Bookmark guides you need and track your progress in My Progress.
+                </Banner>
+              )}
 
               {filteredGuides.length > 0 ? (
                 <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3' : 'grid-cols-1'}`}>

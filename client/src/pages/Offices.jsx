@@ -18,6 +18,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { getGuideIcon } from '../utils/guideIcons';
+import Banner from '../components/ui/Banner';
 
 /**
  * Offices Page Component
@@ -328,12 +329,13 @@ const OfficeCard = ({ office, navigate }) => {
 
             {/* Pro Tip */}
             {office.proTip && (
-              <div className="bg-orange-50/50 border border-orange-100 rounded-2xl p-4 flex items-start gap-3">
-                <Info size={16} className="text-orange-500 shrink-0 mt-0.5" />
-                <p className="text-xs text-orange-800 leading-relaxed italic">
-                  <span className="font-bold not-italic">Community Pro-Tip:</span> "{office.proTip}"
-                </p>
-              </div>
+              <Banner
+                variant="orange"
+                icon={Info}
+                title="Community Pro-Tip"
+              >
+                <span className="italic">"{office.proTip}"</span>
+              </Banner>
             )}
           </div>
         </div>
