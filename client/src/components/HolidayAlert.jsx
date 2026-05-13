@@ -15,7 +15,7 @@ const HolidayAlert = () => {
       onClose={() => setIsVisible(false)}
     >
       Offices may be closed today{" "}
-      <span className="text-orange-600 font-bold">
+      <span className="text-ctp-peach font-bold">
         (April 9, Araw ng Kagitingan)
       </span>
     </Banner>

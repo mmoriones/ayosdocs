@@ -20,24 +20,24 @@ const Banner = ({
   className = "" 
 }) => {
   const variants = {
-    teal: "bg-teal-50/50 border-teal-100 text-teal-800",
-    orange: "bg-orange-50/50 border-orange-100 text-orange-800",
-    blue: "bg-blue-50/50 border-blue-100 text-blue-800",
-    white: "bg-white border-gray-100 text-gray-800 shadow-sm",
+    teal: "bg-ctp-green/10 border-ctp-green/20 text-ctp-green",
+    orange: "bg-ctp-peach/10 border-ctp-peach/20 text-ctp-peach",
+    blue: "bg-ctp-sapphire/10 border-ctp-sapphire/20 text-ctp-sapphire",
+    white: "bg-ctp-mantle border-ctp-surface0 text-ctp-text shadow-sm",
   };
 
   const iconBgVariants = {
-    teal: "bg-teal-100 text-teal-600",
-    orange: "bg-orange-100 text-orange-600",
-    blue: "bg-blue-100 text-blue-600",
-    white: "bg-gray-50 text-gray-400",
+    teal: "bg-ctp-green/20 text-ctp-green",
+    orange: "bg-ctp-peach/20 text-ctp-peach",
+    blue: "bg-ctp-sapphire/20 text-ctp-sapphire",
+    white: "bg-ctp-surface0 text-ctp-subtext1",
   };
 
   const closeButtonVariants = {
-    teal: "text-teal-400 hover:text-teal-600",
-    orange: "text-orange-400 hover:text-orange-600",
-    blue: "text-blue-400 hover:text-blue-600",
-    white: "text-gray-400 hover:text-gray-600",
+    teal: "text-ctp-green/50 hover:text-ctp-green",
+    orange: "text-ctp-peach/50 hover:text-ctp-peach",
+    blue: "text-ctp-sapphire/50 hover:text-ctp-sapphire",
+    white: "text-ctp-subtext0 hover:text-ctp-text",
   };
 
   return (
@@ -47,7 +47,7 @@ const Banner = ({
           <Icon size={14} />
         </div>
       )}
-      <div className="flex-1 text-sm leading-relaxed">
+      <div className="flex-1 text-[14px] leading-relaxed">
         {title && <span className="font-bold mr-1">{title}:</span>}
         {children}
       </div>

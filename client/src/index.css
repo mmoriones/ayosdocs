@@ -1,9 +1,27 @@
 @import "tailwindcss";
+@plugin "@catppuccin/tailwindcss";
 
-body {
-  background-color: #f9fafb;
-  /* This is Tailwind's gray-50 */
-  margin: 0;
+@theme {
+  /* Spacing Standards */
+  --spacing-xs: 0.5rem;   /* 8px */
+  --spacing-sm: 1rem;     /* 16px */
+  --spacing-md: 1.5rem;   /* 24px */
+  --spacing-lg: 2rem;     /* 32px */
+  --spacing-xl: 3rem;     /* 48px */
+
+  /* Typography Standards */
+  --font-size-caption: 0.875rem; /* 14px */
+  --font-size-body: 1.125rem;    /* 18px */
+  --font-size-heading: 2rem;     /* 32px */
+  --font-size-display: 3rem;     /* 48px */
+}
+
+@layer base {
+  body {
+    @apply bg-ctp-base text-ctp-text font-sans;
+    margin: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -15,12 +33,12 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #e5e7eb;
+  @apply bg-ctp-surface1;
   border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #d1d5db;
+  @apply bg-ctp-surface2;
 }
 
 @layer utilities {

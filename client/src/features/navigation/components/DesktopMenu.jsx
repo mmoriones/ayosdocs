@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { LogOut, ChevronDown, UserCircle } from "lucide-react";
+import { LogOut, ChevronDown, UserCircle, Sun, Moon } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useTheme } from "../../../context/ThemeContext";
 
 /**
  * Component for the desktop version of the navigation menu.
@@ -23,6 +24,7 @@ const DesktopMenu = ({
 }) => {
   const dropdownRef = useRef(null);
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const isActive = (path) => location.pathname === path;
 
@@ -47,41 +49,41 @@ const DesktopMenu = ({
   }, [location.pathname, setIsProfileOpen]);
 
   const navClass = (path) =>
-    `relative py-1 transition-all duration-200 text-[14px] ${isActive(path)
-      ? "text-teal-600 font-bold"
-      : "text-slate-600 font-semibold hover:text-teal-600"
+    `relative py-1 transition-all duration-200 text-lg ${isActive(path)
+      ? "text-ctp-green font-bold"
+      : "text-ctp-subtext0 font-semibold hover:text-ctp-green"
     }`;
 
   return (
     <div className="hidden lg:flex items-center gap-8">
 
       {/* Nav Links */}
-      <div className="flex items-center gap-7">
+      <div className="flex items-center gap-8">
         <Link to="/" className={navClass("/")}>
           Home
           {isActive("/") && (
-            <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
+            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
           )}
         </Link>
 
         <Link to="/guides" className={navClass("/guides")}>
           Guides
           {isActive("/guides") && (
-            <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
+            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
           )}
         </Link>
 
         <Link to="/offices" className={navClass("/offices")}>
           Offices
           {isActive("/offices") && (
-            <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
+            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
           )}
         </Link>
 
         <Link to="/rate" className={navClass("/rate")}>
           Rate
           {isActive("/rate") && (
-            <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
+            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
           )}
         </Link>
 
@@ -89,18 +91,26 @@ const DesktopMenu = ({
           <Link to="/my-progress" className={navClass("/my-progress")}>
             My Progress
             {isActive("/my-progress") && (
-              <span className="absolute left-1/2 -bottom-1 w-1 h-1 bg-teal-600 rounded-full -translate-x-1/2"></span>
+              <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
             )}
           </Link>
         )}
       </div>
 
-      {/* Auth Section */}
-      <div className="flex items-center border-l border-slate-100 pl-8 ml-2">
+      {/* Theme Toggle & Auth Section */}
+      <div className="flex items-center border-l border-ctp-surface0 pl-8 ml-2 gap-4">
+        <button
+          onClick={toggleTheme}
+          className="p-2.5 rounded-xl bg-ctp-surface0 hover:bg-ctp-surface1 text-ctp-text transition-all active:scale-95 shadow-sm border border-ctp-surface1"
+          aria-label="Toggle theme"
+        >
+          {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+        </button>
+
         {!user ? (
           <button
             onClick={openAuthModal}
-            className="bg-[#0D9488] hover:bg-[#0F766E] text-white px-6 py-2.5 rounded-xl text-[13px] font-bold transition-all active:scale-95 shadow-md shadow-teal-100"
+            className="bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base px-6 py-2.5 rounded-xl text-lg font-bold transition-all active:scale-95 shadow-lg"
           >
             Login
           </button>
@@ -108,47 +118,47 @@ const DesktopMenu = ({
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="flex items-center gap-2 bg-slate-50 hover:bg-slate-100 p-1.5 pr-3 rounded-full border border-slate-100 transition-all active:scale-95"
+              className="flex items-center gap-2 bg-ctp-mantle hover:bg-ctp-surface0 p-1.5 pr-3 rounded-full border border-ctp-surface0 transition-all active:scale-95"
             >
               {user.picture ? (
                 <img
                   src={user.picture}
                   alt={user.fullName}
-                  className="w-8 h-8 rounded-full border border-white shadow-sm"
+                  className="w-8 h-8 rounded-full border border-ctp-base shadow-sm"
                 />
               ) : (
-                <div className="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
+                <div className="w-8 h-8 bg-ctp-green text-ctp-base rounded-full flex items-center justify-center text-xs font-bold">
                   {user.fullName.charAt(0)}
                 </div>
               )}
               <ChevronDown
                 size={14}
-                className={`text-slate-500 transition-transform duration-300 ${isProfileOpen ? "rotate-180" : ""}`}
+                className={`text-ctp-subtext0 transition-transform duration-300 ${isProfileOpen ? "rotate-180" : ""}`}
               />
             </button>
 
             {isProfileOpen && (
-              <div className="absolute right-0 mt-3.5 w-64 bg-white/95 backdrop-blur-2xl rounded-[32px] shadow-[0_25px_60px_-12px_rgba(0,0,0,0.18),0_0_20px_rgba(0,0,0,0.02)] border border-white/60 overflow-hidden z-50 animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right">
+              <div className="absolute right-0 mt-4 w-72 bg-ctp-mantle/95 backdrop-blur-2xl rounded-[2rem] shadow-2xl border border-ctp-surface0 overflow-hidden z-50 animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right">
                 
                 {/* User Info */}
-                <div className="px-6 py-5 bg-slate-50/50 border-b border-slate-100/50">
-                  <div className="flex items-center gap-3">
+                <div className="px-6 py-6 bg-ctp-surface0/30 border-b border-ctp-surface0">
+                  <div className="flex items-center gap-4">
                     {user.picture ? (
                       <img
                         src={user.picture}
                         alt={user.fullName}
-                        className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
+                        className="w-10 h-10 rounded-full border-2 border-ctp-base shadow-sm"
                       />
                     ) : (
-                      <div className="w-10 h-10 bg-teal-600 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-sm">
+                      <div className="w-10 h-10 bg-ctp-green text-ctp-base rounded-full flex items-center justify-center text-lg font-bold shadow-sm">
                         {user.fullName.charAt(0)}
                       </div>
                     )}
                     <div className="flex flex-col min-w-0">
-                      <span className="text-[14px] font-bold text-slate-900 truncate">
+                      <span className="text-lg font-bold text-ctp-text truncate">
                         {user.fullName}
                       </span>
-                      <span className="text-[11px] font-medium text-slate-500 truncate">
+                      <span className="text-sm font-medium text-ctp-subtext1 truncate">
                         {user.email}
                       </span>
                     </div>
@@ -162,9 +172,9 @@ const DesktopMenu = ({
                       setIsProfileOpen(false);
                       handleLogout();
                     }}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-[13px] font-bold text-red-600 hover:bg-red-50 rounded-[20px] transition-all active:scale-[0.98]"
+                    className="w-full flex items-center gap-3 px-4 py-3 text-lg font-bold text-ctp-red hover:bg-ctp-red/10 rounded-2xl transition-all active:scale-[0.98]"
                   >
-                    <LogOut size={16} /> Logout
+                    <LogOut size={20} /> Logout
                   </button>
                 </div>
               </div>

@@ -28,10 +28,10 @@ const MainLayout = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen transition-colors duration-300 bg-gray-50">
+    <div className="min-h-screen flex flex-col transition-colors duration-300 bg-ctp-base">
       <ScrollToTop />
       <Navbar />
-      <main>
+      <main className="flex-1">
         {children}
       </main>
       <Footer />

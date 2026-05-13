@@ -16,33 +16,36 @@ import Privacy from './pages/info/Privacy';
 import Terms from './pages/info/Terms';
 import { AuthProvider } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
-    <ToastProvider>
-      <AuthProvider>
-        <Router>
-          <MainLayout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/onboarding" element={<Onboarding />} />
-              <Route path="/guides" element={<AllGuides />} />
-              <Route path="/guides/:slug" element={<Guide />} />
-              <Route path="/my-progress" element={<UserProgress />} />
-              <Route path="/rate" element={<Rate />} />
-              <Route path="/offices" element={<Offices />} />
-              <Route path="/coming-soon" element={<ComingSoon />} />
-              <Route path="/verified" element={<Verified />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/faqs" element={<FAQs />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-            </Routes>
-          </MainLayout>
-        </Router>
-      </AuthProvider>
-    </ToastProvider>
+    <ThemeProvider>
+      <ToastProvider>
+        <AuthProvider>
+          <Router>
+            <MainLayout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/onboarding" element={<Onboarding />} />
+                <Route path="/guides" element={<AllGuides />} />
+                <Route path="/guides/:slug" element={<Guide />} />
+                <Route path="/my-progress" element={<UserProgress />} />
+                <Route path="/rate" element={<Rate />} />
+                <Route path="/offices" element={<Offices />} />
+                <Route path="/coming-soon" element={<ComingSoon />} />
+                <Route path="/verified" element={<Verified />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/faqs" element={<FAQs />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+              </Routes>
+            </MainLayout>
+          </Router>
+        </AuthProvider>
+      </ToastProvider>
+    </ThemeProvider>
   );
 }
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Hero from '../features/guides/components/discovery/Hero';
 import TrendingGuides from '../features/guides/components/discovery/TrendingGuides';
 import StartWithGoal from '../features/guides/components/discovery/StartWithGoal';
@@ -6,199 +7,293 @@ import RecentExperiences from '../features/guides/components/discovery/RecentExp
 import ChecklistCard from '../features/guides/components/tracking/ChecklistCard';
 import HolidayAlert from '../components/HolidayAlert';
 import WhySignUp from '../features/guides/components/callouts/WhySignUp';
-import TipsCard from '../features/guides/components/callouts/TipsCard';
 import Adsense from '../components/Adsense';
-import GettingStarted from '../features/guides/components/discovery/GettingStarted';
 import OnboardingBanner from '../features/guides/components/discovery/OnboardingBanner';
 import RecentlyUpdated from '../features/guides/components/discovery/RecentlyUpdated';
 import { guidesMap } from '../utils/loadGuides';
 import { useAuth } from '../context/AuthContext'
+import { ArrowRight, MapPin, Clock, Sparkles, MessageSquare } from 'lucide-react';
 
 /**
  * Main landing page component.
- * Orchestrates the hero section, guide discovery features, and sidebars.
+ * Orchestrates the hero section, guide discovery features, and interactive rows.
  * 
  * @returns {JSX.Element} The rendered Home page.
  */
 const Home = () => {
   const [activeSlug, setActiveSlug] = useState('getting-started');
   const { isLoggedIn, user, openAuthModal, onboarded } = useAuth();
-  const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
+  const navigate = useNavigate();
 
-  // Initialization of page state from local storage.
   useEffect(() => {
-    // Retrieval of the last viewed guide to provide a personalized "Continue" experience.
     const lastSlug = localStorage.getItem("lastGuideSlug");
     if (lastSlug) setActiveSlug(lastSlug);
-  }, []);
-
-  useEffect(() => {
     document.title = "AyosDocs | Your Complete Guide to Government Documents";
   }, []);
 
-  // Selection of the guide data to display in the sidebar progress card.
   const activeGuide = activeSlug !== 'getting-started' ? guidesMap[activeSlug] : null;
 
-  // Carousel items definition for dynamic dots and rendering
-  const carouselItems = [
-    { id: 'tips', component: <TipsCard /> },
-    ...(!isLoggedIn ? [{ id: 'signup', component: <WhySignUp onSignUp={openAuthModal} /> }] : []),
-    ...(!onboarded ? [{ id: 'onboarding', component: <OnboardingBanner /> }] : [])
-  ];
-
-  /**
-   * Tracks the horizontal scroll position to update pagination dots.
-   */
-  const handleScroll = (e) => {
-    const container = e.target;
-    const scrollPosition = container.scrollLeft;
-    const itemWidth = container.offsetWidth * 0.85; // Based on 85vw
-    const index = Math.round(scrollPosition / itemWidth);
-    
-    if (index !== activeCarouselIndex && index >= 0 && index < carouselItems.length) {
-      setActiveCarouselIndex(index);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
-
-      <title>AyosDocs | Your Complete Guide to Government Documents</title>
+    <div className="bg-ctp-base font-sans text-ctp-text">
       <meta name="description" content="AyosDocs provides step-by-step guides for Philippine government documents and processes. Simplify your requirements for TIN, SSS, PhilHealth, and more." />
 
+      {/* 1. HERO SECTION (Includes Search) */}
       <Hero />
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10 flex flex-col lg:flex-row gap-12 items-start">
+      {/* MAIN CONTAINER */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-12 space-y-12">
+        
+        {/* 2. NOTIFICATIONS & ALERTS */}
+        <section className="-mt-6 relative z-20">
+          <HolidayAlert />
+        </section>
 
-        {/* MAIN CONTENT AREA */}
-        <div className="flex-1 min-w-0 space-y-10">
+        {/* 3. ADSENSE HORIZONTAL TOP */}
+        <section className="py-4 border-y border-ctp-surface0">
+          <Adsense variant="article" />
+        </section>
 
-          {/* SYSTEM STATUS / NOTIFICATIONS */}
-          <section>
-            <HolidayAlert />
-          </section>
-
-          {/* USER CONTEXT - COMPLEMENTS HERO PERSONALIZATION */}
-          {isLoggedIn && user && onboarded && (
-            <section className="mb-10">
-              <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
-                Continue your progress
-              </h2>
-              <p className="text-gray-500 text-sm mt-1 font-medium">
-                Pick up where you left off or explore new goals below.
-              </p>
-            </section>
-          )}
-
-          {/* START WITH A GOAL - VALUE PROPOSITION / WORKFLOWS */}
-          <section>
-            <StartWithGoal />
-          </section>
-
-          {/* POPULAR GUIDES - THE PRODUCT LIBRARY */}
-          <section>
-            <TrendingGuides />
-          </section>
-
-          {/* PROGRESS / GETTING STARTED - MOBILE VIEW (Below Primary Discovery) */}
-          <section className="lg:hidden">
-            {activeSlug === 'getting-started' ? (
-              <GettingStarted />
-            ) : activeGuide ? (
-              <ChecklistCard
-                title={activeGuide.title}
-                initialSteps={activeGuide.checklist?.map(task => ({ task }))}
-                slug={activeSlug}
-                inGuidePage={false}
-                isModal={false}
-              />
-            ) : null}
-          </section>
-
-          {/* RECENT EXPERIENCES - SOCIAL PROOF / COMMUNITY INTELLIGENCE */}
-          <section>
-            <RecentExperiences />
-          </section>
-
-          {/* RECENTLY UPDATED - NEWS & CONTENT UPDATES */}
-          <section>
-            <RecentlyUpdated />
-          </section>
-
-          {/* CALLOUTS HORIZONTAL SCROLL - MOBILE VIEW */}
-          <section className="lg:hidden w-full overflow-hidden">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-[18px] font-bold text-slate-900">Recommended for you</h2>
-              <div className="flex gap-1.5 items-center">
-                {carouselItems.map((_, index) => (
-                  <div 
-                    key={index}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      index === activeCarouselIndex ? "bg-teal-600 w-4" : "bg-slate-200 w-1.5"
-                    }`}
-                  />
-                ))}
-              </div>
+        {/* 4. ACTIVITY & PROGRESS FLOW */}
+        <section className="max-w-4xl mx-auto space-y-8">
+          
+          {/* Section Header */}
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center gap-2 text-ctp-green">
+              <ArrowRight size={20} className="-rotate-45" />
+              <span className="text-[14px] font-black uppercase tracking-[0.3em]">Next Steps</span>
             </div>
-            
-            <div 
-              onScroll={handleScroll}
-              className="
-                flex overflow-x-auto pb-6 -mx-6 px-6 
-                gap-4 snap-x snap-mandatory 
-                scrollbar-hide
-                items-stretch
-              "
-            >
-              {carouselItems.map((item) => (
-                <div key={item.id} className="flex-shrink-0 w-[85vw] snap-center h-auto">
-                  {item.component}
+            <h2 className="text-[32px] font-extrabold text-ctp-text tracking-tight leading-tight">
+              {isLoggedIn && user ? "Your Application Progress" : "Plan your government journey"}
+            </h2>
+            <p className="text-ctp-subtext1 font-medium max-w-xl mx-auto text-[18px]">
+              Follow our guided workflows to complete your requirements efficiently.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {/* A. ACTIVE PROGRESS (If exists) */}
+            {activeGuide && (
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 pl-4">
+                  <div className="w-8 h-8 rounded-lg bg-ctp-surface0 text-ctp-green flex items-center justify-center">
+                    <Clock size={16} />
+                  </div>
+                  <h3 className="text-[14px] font-bold text-ctp-subtext0 uppercase tracking-widest">Continue where you left off</h3>
                 </div>
-              ))}
+                <ChecklistCard
+                  title={activeGuide.title}
+                  initialSteps={activeGuide.checklist?.map(task => ({ task }))}
+                  slug={activeSlug}
+                  inGuidePage={false}
+                  isModal={false}
+                />
+              </div>
+            )}
+
+            {/* B. START TRACKING BANNER (If no active guide) */}
+            {!activeGuide && (
+              <div className="bg-ctp-mantle rounded-[2rem] p-8 flex flex-col lg:flex-row items-center gap-6 relative overflow-hidden group border border-ctp-surface0">
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-ctp-green/10 -skew-x-12 translate-x-1/4 pointer-events-none" />
+                
+                <div className="w-16 h-16 rounded-full bg-ctp-green-600 flex items-center justify-center text-ctp-base shadow-xl shrink-0">
+                  <ArrowRight size={28} strokeWidth={3} />
+                </div>
+
+                <div className="flex-1 text-center lg:text-left space-y-1">
+                  <h3 className="text-[32px] font-extrabold text-ctp-text tracking-tight">Start Tracking Your Progress</h3>
+                  <p className="text-ctp-subtext1 text-[18px] font-medium leading-relaxed max-w-md mx-auto lg:mx-0">
+                    Pick a guide and start checking off requirements to keep your application on schedule.
+                  </p>
+                </div>
+
+                <button 
+                  onClick={() => navigate('/guides')}
+                  className="w-full lg:w-auto px-8 py-4 bg-ctp-green-600 text-ctp-base rounded-xl font-extrabold hover:bg-ctp-green-500 transition-all active:scale-95 shadow-lg whitespace-nowrap text-[18px]"
+                >
+                  Browse All Guides
+                </button>
+              </div>
+            )}
+
+            {/* C. LIFE EVENT BUNDLES (StartWithGoal) */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 pl-4">
+                <div className="w-8 h-8 rounded-lg bg-ctp-surface0 text-ctp-green flex items-center justify-center">
+                  <MapPin size={16} />
+                </div>
+                <h3 className="text-[14px] font-bold text-ctp-subtext0 uppercase tracking-widest">Choose a Life Event Goal</h3>
+              </div>
+              <StartWithGoal />
             </div>
-          </section>
 
-          {/* HORIZONTAL ADSENSE - MAIN CONTENT BOTTOM */}
-          <section>
-            <Adsense variant="article" />
-          </section>
-
-        </div>
-
-        {/* SIDEBAR - DASHBOARD UTILITIES */}
-        <div className="hidden lg:block lg:w-96 shrink-0">
-          <div className="sticky top-10 space-y-10">
-
-            {/* 1. USER CONTEXT / PROGRESS (Highest Importance) */}
-            {activeSlug === 'getting-started' ? (
-              <GettingStarted />
-            ) : activeGuide ? (
-              <ChecklistCard
-                title={activeGuide.title}
-                initialSteps={activeGuide.checklist?.map(task => ({ task }))}
-                slug={activeSlug}
-                inGuidePage={false}
-                isModal={false}
-              />
-            ) : null}
-
-            {/* 2. ACCOUNT ACTIONS (Onboarding or Sign Up) */}
+            {/* D. ONBOARDING BANNER (For New/Unonboarded Users) */}
             {!onboarded && (
               <OnboardingBanner />
             )}
 
-            {!isLoggedIn && (
-              <WhySignUp onSignUp={openAuthModal} />
-            )}
+          </div>
 
-            {/* 3. MONETIZATION (High Visibility) */}
-            <Adsense variant="skyscraper" />
+          {/* Full-width Horizontal Ad */}
+          <div className="pt-8 border-t border-ctp-surface0">
+            <Adsense variant="article" />
+          </div>
+        </section>
 
-            {/* 4. KNOWLEDGE / TIPS (Supplemental) */}
-            <TipsCard />
+        {/* 5. POPULAR GUIDES GRID */}
+        <section className="space-y-8">
+          <div className="flex justify-between items-end gap-4">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-ctp-green">
+                <ArrowRight size={24} className="-rotate-45" />
+                <h2 className="text-[32px] font-extrabold text-ctp-text tracking-tight">Popular Guides</h2>
+              </div>
+              <p className="text-[14px] text-ctp-subtext0 font-black uppercase tracking-[0.2em] pl-1">Quick access to our most requested guides.</p>
+            </div>
+            
+            <button 
+              onClick={() => navigate('/guides')}
+              className="group flex items-center gap-2 text-ctp-green font-black hover:text-ctp-green-500 transition-colors text-[14px] uppercase tracking-[0.2em] mb-2"
+            >
+              <span>View all guides</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </button>
+          </div>
+          <TrendingGuides />
+        </section>
+
+        {/* 6. INTELLIGENCE ROW (3 Columns) */}
+        <section className="pt-12 border-t border-ctp-surface0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {/* Government Offices Search/Preview */}
+            <div className="space-y-6 flex flex-col">
+              <div className="flex justify-between items-end gap-4">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-ctp-mauve">
+                    <MapPin size={24} />
+                    <h3 className="text-[32px] font-extrabold text-ctp-text tracking-tight">Find an Office</h3>
+                  </div>
+                  <p className="text-[14px] text-ctp-green font-black uppercase tracking-[0.2em] pl-1">Locate branches and wait times</p>
+                </div>
+                <button 
+                  onClick={() => navigate('/offices')}
+                  className="group flex items-center gap-2 text-ctp-green font-black hover:text-ctp-green-500 transition-colors text-[14px] uppercase tracking-[0.2em] mb-2"
+                >
+                  <span>All Offices</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+
+              <div className="bg-ctp-mantle rounded-[2rem] p-6 border border-ctp-surface0 space-y-6 overflow-hidden relative group flex-1 flex flex-col justify-between shadow-sm">
+                <div>
+                  {/* Decorative Map Illustration Area */}
+                  <div className="h-40 -mx-6 -mt-6 mb-6 bg-ctp-surface0 relative overflow-hidden flex items-center justify-center">
+                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#a6e3a1_1px,transparent_1px)] [background-size:16px_16px]" />
+                    <div className="relative w-20 h-20 rounded-full bg-ctp-base shadow-xl flex items-center justify-center text-ctp-green animate-pulse">
+                      <MapPin size={40} />
+                    </div>
+                  </div>
+
+                  <p className="text-[18px] text-ctp-subtext1 font-medium leading-relaxed">
+                    Locate government branches near you and check community-reported wait times.
+                  </p>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="relative">
+                    <input 
+                      type="text" 
+                      placeholder="City or Agency name..." 
+                      className="w-full pl-5 pr-12 py-3 rounded-xl border border-ctp-surface0 text-[18px] font-medium focus:ring-4 focus:ring-ctp-green/10 focus:border-ctp-green transition-all bg-ctp-base text-ctp-text placeholder:text-ctp-surface2"
+                    />
+                    <ArrowRight size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-ctp-surface2" />
+                  </div>
+                  <button className="w-full py-4 bg-ctp-surface1 text-ctp-text rounded-xl text-[14px] font-black uppercase tracking-[0.2em] hover:bg-ctp-surface2 transition-all shadow-xl active:scale-[0.98]">
+                    Search Offices
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Recently Updated */}
+            <div className="space-y-6 flex flex-col">
+              <div className="flex justify-between items-end gap-4">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-ctp-green">
+                    <Sparkles size={24} />
+                    <h3 className="text-[32px] font-extrabold text-ctp-text tracking-tight">Latest Updates</h3>
+                  </div>
+                  <p className="text-[14px] text-ctp-green font-black uppercase tracking-[0.2em] pl-1">New requirements and processes</p>
+                </div>
+                <button 
+                  onClick={() => navigate('/guides')}
+                  className="group flex items-center gap-2 text-ctp-green font-black hover:text-ctp-green-500 transition-colors text-[14px] uppercase tracking-[0.2em] mb-2"
+                >
+                  <span>All Updates</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+              <RecentlyUpdated className="flex-1" />
+            </div>
+
+            {/* Recent Experiences */}
+            <div className="space-y-6 flex flex-col">
+              <div className="flex justify-between items-end gap-4">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-ctp-yellow">
+                    <MessageSquare size={24} />
+                    <h3 className="text-[32px] font-extrabold text-ctp-text tracking-tight">Community Reports</h3>
+                  </div>
+                  <p className="text-[14px] text-ctp-green font-black uppercase tracking-[0.2em] pl-1">Latest wait times and ratings</p>
+                </div>
+                <button 
+                  onClick={() => navigate('/offices')}
+                  className="group flex items-center gap-2 text-ctp-green font-black hover:text-ctp-green-500 transition-colors text-[14px] uppercase tracking-[0.2em] mb-2"
+                >
+                  <span>All Offices</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+              <RecentExperiences className="flex-1" />
+            </div>
 
           </div>
-        </div>
+        </section>
+
+        {/* 7. VALUE PROP BANNER */}
+        <section className="pt-6">
+          <WhySignUp onSignUp={openAuthModal} />
+        </section>
+
+        {/* 8. BOTTOM CTA BANNER (Row 8 Wireframe) */}
+        <section className="pt-6">
+          <div className="bg-ctp-mantle rounded-[2rem] p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 border border-ctp-surface0">
+            <div className="flex flex-col lg:flex-row items-center gap-6 text-center lg:text-left">
+              <div className="w-20 h-20 rounded-full bg-ctp-base shadow-xl flex items-center justify-center text-ctp-green shrink-0 border-4 border-ctp-surface0">
+                <span className="text-[32px] font-black">AD</span>
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-[32px] font-extrabold text-ctp-text tracking-tight">Need more help with your documents?</h3>
+                <p className="text-ctp-subtext1 font-medium text-[18px]">Join our community or contact support for personalized assistance.</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <button className="px-8 py-4 bg-ctp-surface1 border border-ctp-surface0 rounded-xl text-ctp-text font-bold hover:bg-ctp-surface2 transition-all active:scale-95 shadow-sm text-[18px]">
+                Help Center
+              </button>
+              <button className="px-8 py-4 bg-ctp-green-600 text-ctp-base rounded-xl font-bold hover:bg-ctp-green-500 transition-all active:scale-95 shadow-lg text-[18px]">
+                Contact Us
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* 9. ADSENSE HORIZONTAL BOTTOM */}
+        <section className="py-4 border-y border-ctp-surface0">
+          <Adsense variant="article" />
+        </section>
+
+
       </div>
     </div>
   );

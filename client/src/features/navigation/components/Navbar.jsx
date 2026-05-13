@@ -49,13 +49,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full sticky top-0 z-[60] bg-white/70 backdrop-blur-xl border-b border-slate-100/50 transition-all duration-300">
-      <div className="max-w-[1600px] mx-auto flex items-center justify-between px-6 lg:px-10 py-3.5">
+    <nav className="w-full sticky top-0 z-[60] bg-ctp-base/80 backdrop-blur-xl border-b border-ctp-surface0 transition-all duration-300">
+      <div className="max-w-[1600px] mx-auto flex items-center justify-between px-6 lg:px-8 py-4">
 
         {/* LEFT: Logo */}
         <div
           onClick={() => navigate("/")}
-          className="flex items-center gap-3 cursor-pointer group"
+          className="flex items-center gap-2 cursor-pointer group"
         >
           {/* Icon */}
           <img
@@ -67,16 +67,16 @@ const Navbar = () => {
           {/* Brand + tagline container */}
           <div className="flex items-center gap-4">
             {/* Brand name */}
-            <h1 className="text-xl md:text-2xl font-bold text-slate-900 leading-none tracking-tight">
-              <span className="text-teal-600">Ayos</span>
+            <h1 className="text-2xl font-bold text-ctp-text leading-none tracking-tight">
+              <span className="text-ctp-green">Ayos</span>
               <span className="ml-1">Docs</span>
             </h1>
 
             {/* Divider */}
-            <div className="hidden md:block h-6 w-px bg-slate-200"></div>
+            <div className="hidden md:block h-6 w-px bg-ctp-surface1"></div>
 
             {/* Tagline */}
-            <p className="hidden md:block text-[11px] font-medium text-slate-500 max-w-[180px] leading-tight">
+            <p className="hidden md:block text-sm font-medium text-ctp-subtext1 max-w-[200px] leading-tight">
               Your guide to government documents & more
             </p>
           </div>
@@ -96,8 +96,8 @@ const Navbar = () => {
         <button
           className={`lg:hidden p-2.5 rounded-2xl transition-all duration-300 ${
             isMobileMenuOpen 
-              ? "bg-teal-50 text-teal-600 shadow-inner" 
-              : "text-slate-600 hover:bg-slate-50"
+              ? "bg-ctp-surface0 text-ctp-green shadow-inner" 
+              : "text-ctp-subtext1 hover:bg-ctp-surface0"
           }`}
           onClick={() => toggleMobileMenu()}
           aria-label="Toggle menu"

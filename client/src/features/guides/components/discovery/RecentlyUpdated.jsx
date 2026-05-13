@@ -7,89 +7,75 @@ const updates = [
     id: 1,
     title: 'PSA Birth Certificate',
     type: 'Updated',
-    date: 'May 8, 2026',
-    description: 'Updated guide for online and walk-in applications.',
+    date: 'May 8',
     slug: 'psa-birth-certificate'
   },
   {
     id: 2,
-    title: 'NBI Clearance (New Applicant)',
+    title: 'NBI Clearance (New)',
     type: 'New guide',
-    date: 'May 7, 2026',
-    description: 'Learn how to register and book your appointment online.',
+    date: 'May 7',
     slug: 'nbi-clearance'
   },
   {
     id: 3,
     title: 'Philippine National ID',
     type: 'Updated',
-    date: 'May 6, 2026',
-    description: 'A complete guide on how to register for your PhilSys ID.',
+    date: 'May 6',
     slug: 'national-id'
+  },
+  {
+    id: 4,
+    title: 'SSS Registration',
+    type: 'Updated',
+    date: 'May 5',
+    slug: 'sss-registration'
   }
 ];
 
-const RecentlyUpdated = () => {
+const RecentlyUpdated = ({ className = "" }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full">
-      {/* HEADER */}
-      <div className="flex justify-between items-end gap-4 mb-6">
-        <div>
-          <h2 className="text-lg font-bold text-gray-900 leading-none">New & Updated</h2>
-          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-2">Stay informed with the latest guide updates and additions.</p>
-        </div>
-        
-        <button 
-          onClick={() => navigate('/guides')}
-          className="group flex items-center gap-1 text-teal-700 font-bold hover:text-teal-800 transition-colors text-[11px] uppercase tracking-wider whitespace-nowrap"
-        >
-          <span>View all updates</span>
-          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-        </button>
-      </div>
-
+    <div className={`w-full flex flex-col ${className}`}>
       {/* LIST CONTAINER */}
-      <div className="bg-white border border-gray-100 rounded-3xl shadow-sm overflow-hidden">
+      <div className="flex-1 bg-ctp-mantle border border-ctp-surface0 rounded-[2rem] shadow-sm overflow-hidden flex flex-col">
         {updates.map((update, index) => (
           <div 
             key={update.id}
             onClick={() => navigate(`/guides/${update.slug}`)}
-            className={`group flex items-center gap-5 p-6 cursor-pointer transition-colors hover:bg-gray-50/50
-              ${index !== updates.length - 1 ? 'border-b border-gray-50' : ''}
+            className={`
+              group flex items-center gap-4 p-5 cursor-pointer transition-colors hover:bg-ctp-surface0 flex-1
+              ${index !== updates.length - 1 ? 'border-b border-ctp-surface0' : ''}
             `}
           >
-            {/* THUMBNAIL */}
-            <div className="shrink-0 w-24 h-16 bg-gray-50 rounded-2xl flex items-center justify-center overflow-hidden">
+            {/* ICON */}
+            <div className="w-12 h-12 rounded-2xl bg-ctp-base flex items-center justify-center p-2.5 group-hover:bg-ctp-surface0 transition-colors shrink-0">
               <img 
                 src={getGuideIcon(update.slug)} 
                 alt="" 
-                className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
+                className="w-full h-full object-contain"
               />
             </div>
 
             {/* CONTENT */}
             <div className="flex-1 min-w-0">
-              <h3 className="text-[15px] font-bold text-gray-800 truncate group-hover:text-teal-700 transition-colors leading-tight">
+              <h3 className="text-[18px] font-bold text-ctp-text truncate group-hover:text-ctp-green transition-colors leading-tight">
                 {update.title}
               </h3>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-[10px] font-bold text-teal-600/70 uppercase tracking-wider">
+              <div className="flex items-center gap-2 mt-1.5">
+                <span className="text-[14px] font-bold text-ctp-green uppercase tracking-wider">
                   {update.type}
                 </span>
-                <span className="text-[10px] text-gray-300">•</span>
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                <span className="text-[14px] text-ctp-surface2">•</span>
+                <span className="text-[14px] font-bold text-ctp-subtext0 uppercase tracking-tight">
                   {update.date}
                 </span>
               </div>
-              <p className="text-sm text-gray-500 mt-2 line-clamp-1 leading-relaxed">
-                {update.description}
-              </p>
             </div>
 
             {/* ACTION */}
-            <div className="shrink-0 text-gray-300 group-hover:text-gray-400 transition-colors">
+            <div className="shrink-0 text-ctp-surface2 group-hover:text-ctp-green transition-colors">
               <ChevronRight size={18} />
             </div>
           </div>

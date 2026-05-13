@@ -1,434 +1,135 @@
-import SearchBar from './SearchBar';
 import {
   FileText,
   ShieldCheck,
   Clock,
-  ChevronDown
+  ChevronDown,
+  LayoutGrid,
+  ArrowRight
 } from 'lucide-react';
 import { useAuth } from '../../../../context/AuthContext';
+import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
-import homeBlob from '../../../../assets/home_blob.webp';
 import person from '../../../../assets/person.webp';
+import psa from '../../../../assets/psa.webp';
+import nbi from '../../../../assets/nbi.webp';
+import dfa from '../../../../assets/dfa.webp';
+import philhealth from '../../../../assets/philhealth.webp';
+import sss from '../../../../assets/sss.webp';
 
 const Hero = () => {
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn, user, openAuthModal } = useAuth();
 
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-white to-gray-50 lg:min-h-[calc(100vh-80px)] flex flex-col lg:justify-center pt-2 lg:pt-0">
-      {/* BACKGROUND GLOW */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="
-            absolute
-            top-[-120px]
-            right-[-120px]
-            w-[600px]
-            h-[600px]
-            rounded-full
-            bg-teal-50
-            blur-3xl
-            opacity-70
-          "
-        />
-      </div>
-
-      <div
-        className="
-          relative z-10
-          max-w-[1600px]
-          mx-auto
-          px-6 lg:px-10
-          w-full
-          pb-24 lg:pb-0
-        "
-      >
-        <div
-          className="
-            grid
-            grid-cols-1
-            lg:grid-cols-[1.05fr_0.95fr]
-            items-center
-            gap-8 lg:gap-12
-            w-full
-            pt-4 lg:pt-0
-            lg:min-h-[600px]
-            lg:-mt-12
-          "
-        >
-          {/* LEFT SIDE */}
-          <div className="max-w-[620px]">
-            {/* GREETING */}
-            <div className="mb-4 sm:mb-6">
-              <span
-                className="
-                  inline-flex items-center gap-2
-                  rounded-full
-                  border border-teal-100
-                  bg-teal-50
-                  px-4 py-2
-                  text-xs sm:text-sm
-                  font-semibold
-                  text-teal-700
-                "
-              >
+    <section className="relative w-full overflow-hidden bg-ctp-base pt-12 pb-12 lg:pt-20 lg:pb-20">
+      {/* Background Decorations */}
+      <div className="absolute top-0 right-0 w-2/3 h-full bg-ctp-green/5 -skew-x-12 translate-x-1/4 pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-64 h-64 bg-ctp-green/10 rounded-full blur-[100px] -z-10" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-ctp-teal/10 rounded-full blur-[120px] -z-10" />
+      
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          
+          {/* LEFT CONTENT: Text & Search */}
+          <div className="flex-1 text-center lg:text-left space-y-8">
+            {/* Greeting Pill */}
+            <div className="flex justify-center lg:justify-start">
+              <span className="inline-flex items-center gap-2 rounded-full border border-ctp-green/20 bg-ctp-surface0 px-5 py-2 text-[14px] font-bold text-ctp-green shadow-sm">
                 {isLoggedIn && user ? (
-                  <>
-                    {user.isNewUser ? 'Welcome to AyosDocs' : 'Welcome back'}, {user.fullName?.split(' ')[0] || 'User'}! 👋
-                  </>
+                  <>Welcome back, {user.fullName?.split(' ')[0] || 'User'}! 👋</>
                 ) : (
-                  'Hi there! 👋'
+                  'Empowering your government journey 👋'
                 )}
               </span>
             </div>
 
-            {/* TITLE + MOBILE ILLUSTRATION */}
-            <div className="relative lg:block min-h-[160px] sm:min-h-[280px] lg:min-h-0">
-              {/* MOBILE BLOB */}
-              <img
-                src={homeBlob}
-                alt=""
-                className="
-                  lg:hidden
-                  absolute
-                  right-[-60px]
-                  top-[-10px]
-                  w-[260px]
-                  sm:w-[420px]
-                  max-w-none
-                  opacity-40
-                  pointer-events-none
-                  z-0
-                "
-              />
+            {/* Main Headline */}
+            <h1 className="text-[48px] font-extrabold tracking-tight leading-tight text-ctp-text max-w-3xl mx-auto lg:mx-0">
+              <span className="text-ctp-green">How can we help</span> you today?
+            </h1>
 
-              {/* TEXT */}
-              <div className="relative z-10 max-w-[65%] sm:max-w-[70%] lg:max-w-none">
-                <h1
-                  className="
-                    text-[30px]
-                    sm:text-[44px]
-                    md:text-[54px]
-                    lg:text-[62px]
-                    font-extrabold
-                    tracking-[-0.04em]
-                    leading-[1.05]
-                    text-slate-900
-                  "
-                >
-                  How can we{" "}
-                  <br className="hidden sm:block" />
-                  help you today?
-                </h1>
+            {/* Description */}
+            <p className="max-w-xl mx-auto lg:mx-0 text-ctp-subtext1 text-[18px] font-medium leading-relaxed">
+              Find step-by-step guides for Philippine government documents 
+              and official processes, all in one place.
+            </p>
 
-                {/* DESCRIPTION */}
-                <p
-                  className="
-                    mt-3 lg:mt-8
-                    max-w-[240px] sm:max-w-xl lg:max-w-2xl
-                    text-[13px] sm:text-base md:text-lg
-                    leading-relaxed
-                    text-slate-500
-                    font-medium
-                  "
-                >
-                  Find step-by-step guides for Philippine government
-                  documents and official processes.
-                </p>
-              </div>
-
-              {/* MOBILE ILLUSTRATION */}
-              <div
-                className="
-                  lg:hidden
-                  absolute
-                  right-[-10px]
-                  top-[-10px]
-                  w-40 sm:w-64
-                  h-40 sm:h-64
-                  z-10
-                "
-              >
-                <img
-                  src={person}
-                  alt="Person using laptop"
-                  className="
-                    w-full
-                    h-full
-                    object-contain
-                    scale-110
-                  "
-                />
-
-                {/* DOTS */}
-                <div
-                  className="
-                    absolute
-                    top-3
-                    left-2
-                    grid grid-cols-4 gap-1
-                    opacity-20
-                  "
-                >
-                  {[...Array(12)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="w-1 h-1 rounded-full bg-teal-600"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* SEARCH */}
-            <div className="mt-6 lg:mt-12 max-w-3xl relative z-20">
+            {/* Integrated Search Bar */}
+            <div className="max-w-2xl mx-auto lg:mx-0">
               <SearchBar />
             </div>
 
-            {/* FEATURES */}
-            <div
-              className="
-                mt-8 lg:mt-12
-                grid grid-cols-3
-                gap-3 sm:gap-6 lg:gap-8
-                text-slate-600
-              "
-            >
-              {/* FEATURE 1 */}
-              <div className="flex flex-col items-center sm:items-start gap-2">
-                <div
-                  className="
-                    p-2.5
-                    rounded-xl
-                    bg-teal-50
-                    text-teal-600
-                  "
+            {/* Secondary CTA / Onboarding */}
+            {!isLoggedIn && (
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-4">
+                <button 
+                  onClick={openAuthModal}
+                  className="flex items-center gap-2 text-ctp-text font-bold hover:text-ctp-green transition-all group text-[18px]"
                 >
-                  <FileText size={18} />
-                </div>
-
-                <div className="text-center sm:text-left">
-                  <p
-                    className="
-                      font-bold
-                      text-[10px] sm:text-sm
-                      text-slate-800
-                      leading-tight
-                    "
-                  >
-                    Step-by-step guides
-                  </p>
-
-                  <p
-                    className="
-                      text-[9px] sm:text-xs
-                      text-slate-500
-                      mt-1
-                    "
-                  >
-                    Easy to follow
-                  </p>
-                </div>
+                  <span className="border-b-2 border-ctp-surface1 group-hover:border-ctp-green pb-1">Create free account</span>
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+                <div className="hidden sm:block h-1.5 w-1.5 rounded-full bg-ctp-surface2" />
+                <Link to="/guides" className="text-ctp-subtext1 font-bold hover:text-ctp-text transition-colors text-[18px]">
+                  Browse all guides
+                </Link>
               </div>
-
-              {/* FEATURE 2 */}
-              <div className="flex flex-col items-center sm:items-start gap-2">
-                <div
-                  className="
-                    p-2.5
-                    rounded-xl
-                    bg-violet-50
-                    text-violet-600
-                  "
-                >
-                  <ShieldCheck size={18} />
-                </div>
-
-                <div className="text-center sm:text-left">
-                  <p
-                    className="
-                      font-bold
-                      text-[10px] sm:text-sm
-                      text-slate-800
-                      leading-tight
-                    "
-                  >
-                    Official processes
-                  </p>
-
-                  <p
-                    className="
-                      text-[9px] sm:text-xs
-                      text-slate-500
-                      mt-1
-                    "
-                  >
-                    Trusted info
-                  </p>
-                </div>
-              </div>
-
-              {/* FEATURE 3 */}
-              <div className="flex flex-col items-center sm:items-start gap-2">
-                <div
-                  className="
-                    p-2.5
-                    rounded-xl
-                    bg-amber-50
-                    text-amber-600
-                  "
-                >
-                  <Clock size={18} />
-                </div>
-
-                <div className="text-center sm:text-left">
-                  <p
-                    className="
-                      font-bold
-                      text-[10px] sm:text-sm
-                      text-slate-800
-                      leading-tight
-                    "
-                  >
-                    Track your progress
-                  </p>
-
-                  <p
-                    className="
-                      text-[9px] sm:text-xs
-                      text-slate-500
-                      mt-1
-                    "
-                  >
-                    Stay on top
-                  </p>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
 
-          {/* RIGHT SIDE DESKTOP */}
-          <div
-            className="
-              hidden lg:flex
-              relative
-              items-center
-              justify-center
-              h-[520px]
-            "
-          >
-            {/* MAIN COMPOSITION */}
-            <div className="relative w-full max-w-[560px] h-[520px]">
-              {/* BLOB */}
-              <img
-                src={homeBlob}
-                alt=""
-                className="
-                  absolute
-                  inset-0
-                  w-full
-                  h-full
-                  object-contain
-                  opacity-95
-                "
-              />
-
-              {/* TOP LEFT DOTS */}
-              <div
-                className="
-                  absolute
-                  top-16
-                  left-10
-                  grid grid-cols-4
-                  gap-2
-                  opacity-20
-                "
-              >
-                {[...Array(16)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-1.5 h-1.5 rounded-full bg-teal-600"
-                  />
-                ))}
-              </div>
-
-              {/* PERSON */}
+          {/* RIGHT CONTENT: Illustration */}
+          <div className="flex-1 relative w-full max-w-lg lg:max-w-none flex items-center justify-center">
+            {/* Organic Blob Background */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-ctp-green/10 rounded-[40%_60%_70%_30%/_40%_50%_60%_50%] blur-3xl animate-blob" />
+            
+            <div className="relative z-10 w-full aspect-square flex items-center justify-center p-6">
               <img
                 src={person}
-                alt="Person using laptop"
-                className="
-                  absolute
-                  bottom-10
-                  left-1/2
-                  -translate-x-1/2
-                  w-[460px]
-                  object-contain
-                  z-20
-                "
+                alt="AyosDocs Hero"
+                className="relative z-10 w-full h-full object-contain hover:scale-105 transition-transform duration-1000"
               />
-
-              {/* FLOOR LINE */}
-              <div
-                className="
-                  absolute
-                  bottom-12
-                  left-1/2
-                  -translate-x-1/2
-                  w-[78%]
-                  h-[2px]
-                  rounded-full
-                  bg-teal-700/20
-                "
-              />
-
-              {/* BOTTOM RIGHT DOTS */}
-              <div
-                className="
-                  absolute
-                  bottom-20
-                  right-4
-                  grid grid-cols-4
-                  gap-3
-                  opacity-15
-                "
-              >
-                {[...Array(12)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-1.5 h-1.5 rounded-full bg-teal-600"
-                  />
-                ))}
-              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* EXPLORE GUIDES */}
-      <div
-        className="
-          absolute
-          bottom-6 lg:bottom-10
-          left-1/2
-          -translate-x-1/2
-          flex flex-col items-center
-          gap-1
-          text-teal-600
-          z-20
-        "
-      >
-        <span
-          className="
-            text-[10px] lg:text-[11px]
-            font-extrabold
-            uppercase
-            tracking-[0.2em]
-          "
-        >
-          Accomplish Your Goals
-        </span>
+      {/* TRUST BAR / FEATURE ROW */}
+      <div className="w-full max-w-7xl mx-auto px-6 lg:px-8 mt-12 lg:mt-20 pt-8 border-t border-ctp-surface0">
+        
+        {/* TOP ROW: Core Features */}
+        <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 lg:gap-12 mb-12">
+          <div className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl bg-ctp-surface0 text-ctp-green flex items-center justify-center transition-all duration-300">
+              <FileText size={20} />
+            </div>
+            <span className="font-extrabold text-[14px] lg:text-[18px] text-ctp-text tracking-tight">Step-by-step guides</span>
+          </div>
+          <div className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl bg-ctp-surface0 text-ctp-mauve flex items-center justify-center transition-all duration-300">
+              <ShieldCheck size={20} />
+            </div>
+            <span className="font-extrabold text-[14px] lg:text-[18px] text-ctp-text tracking-tight">Official processes</span>
+          </div>
+          <div className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl bg-ctp-surface0 text-ctp-yellow flex items-center justify-center transition-all duration-300">
+              <Clock size={20} />
+            </div>
+            <span className="font-extrabold text-[14px] lg:text-[18px] text-ctp-text tracking-tight">Track your progress</span>
+          </div>
+        </div>
 
-        <div className="animate-bounce">
-          <ChevronDown size={20} strokeWidth={3} />
+        {/* BOTTOM ROW: Agency Logos (Trust Bar) */}
+        <div className="space-y-6">
+          <p className="text-left text-[14px] font-black text-ctp-subtext0 uppercase tracking-[0.3em]">
+            Guides for primary government agencies:
+          </p>
+          <div className="flex flex-wrap justify-between items-center gap-8 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+            <img src={psa} alt="PSA" className="h-6 lg:h-8 object-contain" />
+            <img src={nbi} alt="NBI" className="h-6 lg:h-8 object-contain" />
+            <img src={dfa} alt="DFA" className="h-6 lg:h-8 object-contain" />
+            <img src={philhealth} alt="PhilHealth" className="h-8 lg:h-10 object-contain" />
+            <img src={sss} alt="SSS" className="h-6 lg:h-8 object-contain" />
+          </div>
         </div>
       </div>
     </section>
