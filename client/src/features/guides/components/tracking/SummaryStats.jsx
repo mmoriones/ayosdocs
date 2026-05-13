@@ -11,8 +11,8 @@ const SummaryStats = ({ stats }) => {
       value: stats.inProgress || 0, 
       sub: 'Keep going!', 
       icon: LayoutGrid, 
-      color: 'text-teal-600', 
-      bg: 'bg-teal-50',
+      color: 'text-ctp-green', 
+      bg: 'bg-ctp-green/10',
       progress: 65 // Visual placeholder
     },
     { 
@@ -20,8 +20,8 @@ const SummaryStats = ({ stats }) => {
       value: stats.completed || 0, 
       sub: 'Great job!', 
       icon: CheckCircle2, 
-      color: 'text-purple-600', 
-      bg: 'bg-purple-50',
+      color: 'text-ctp-mauve', 
+      bg: 'bg-ctp-mauve/10',
       progress: 100
     },
     { 
@@ -29,8 +29,8 @@ const SummaryStats = ({ stats }) => {
       value: stats.favorites || 0, 
       sub: 'Saved guides', 
       icon: Star, 
-      color: 'text-orange-500', 
-      bg: 'bg-orange-50',
+      color: 'text-ctp-peach', 
+      bg: 'bg-ctp-peach/10',
       progress: 0
     },
     { 
@@ -38,8 +38,8 @@ const SummaryStats = ({ stats }) => {
       value: stats.expiring || 0, 
       sub: 'Take action soon', 
       icon: Clock, 
-      color: 'text-blue-500', 
-      bg: 'bg-blue-50',
+      color: 'text-ctp-blue', 
+      bg: 'bg-ctp-blue/10',
       progress: 20
     }
   ];
@@ -47,21 +47,21 @@ const SummaryStats = ({ stats }) => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {statItems.map((item) => (
-        <div key={item.label} className="bg-white rounded-3xl p-5 border border-gray-100 shadow-sm group hover:shadow-md transition-all">
+        <div key={item.label} className="bg-ctp-mantle rounded-3xl p-6 border border-ctp-surface0 shadow-sm group hover:shadow-md transition-all">
           <div className="flex items-start justify-between mb-4">
-            <div className={`p-2.5 rounded-2xl ${item.bg} ${item.color}`}>
-              <item.icon size={20} />
+            <div className={`p-3 rounded-2xl ${item.bg} ${item.color}`}>
+              <item.icon size={20} strokeWidth={2.5} />
             </div>
-            <span className="text-2xl font-black text-gray-900">{item.value}</span>
+            <span className="text-3xl font-black text-ctp-text tracking-tight">{item.value}</span>
           </div>
           <div>
-            <h4 className="text-xs font-bold text-gray-900">{item.label}</h4>
-            <p className="text-[10px] text-gray-400 font-medium uppercase tracking-tight mt-0.5">{item.sub}</p>
+            <h4 className="text-[11px] font-black text-ctp-text uppercase tracking-widest">{item.label}</h4>
+            <p className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-1 opacity-80">{item.sub}</p>
           </div>
           {item.progress > 0 && (
-            <div className="mt-4 h-1 w-full bg-gray-50 rounded-full overflow-hidden">
+            <div className="mt-5 h-1.5 w-full bg-ctp-base rounded-full overflow-hidden shadow-inner">
               <div 
-                className={`h-full ${item.color.replace('text', 'bg')} transition-all duration-1000`} 
+                className={`h-full ${item.color.replace('text', 'bg')} transition-all duration-1000 ease-out shadow-[0_0_8px_rgba(0,0,0,0.1)]`} 
                 style={{ width: `${item.progress}%` }}
               />
             </div>

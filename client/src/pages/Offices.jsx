@@ -90,52 +90,59 @@ const Offices = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans pb-20">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-10">
-        
-        {/* Header Section */}
-        <header className="mb-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div className="min-h-screen bg-ctp-base font-sans flex flex-col transition-colors duration-300">
+      
+      {/* HEADER SECTION - Standardized Sticky Header */}
+      <div className="bg-ctp-mantle border-b border-ctp-surface0 sticky top-[73px] z-50">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          
+          <div className="flex items-center gap-5 flex-1">
+            <div className="p-4 rounded-2xl bg-ctp-green/10 shrink-0 border border-ctp-green/20 shadow-sm">
+              <Building2 className="text-ctp-green" size={24} />
+            </div>
             <div>
-              <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-3">
-                Government Office Insights
+              <h1 className="text-2xl font-black text-ctp-text tracking-tight uppercase">
+                Office Insights
               </h1>
-              <p className="text-gray-500 text-base max-w-2xl">
-                Research the best locations for your government tasks. Real-time community data on wait times, staff friendliness, and processing speed.
+              <p className="text-ctp-subtext1 text-sm font-medium mt-1">
+                Real-time community data on government branches and wait times.
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="bg-white border border-gray-100 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-xs font-bold text-gray-700 uppercase tracking-tight">5,402 Reports this month</span>
-              </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4 shrink-0">
+            <div className="bg-ctp-base/50 backdrop-blur-sm px-5 py-2.5 rounded-full border border-ctp-surface0 shadow-sm flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-ctp-green animate-pulse shadow-[0_0_8px_rgba(166,227,161,0.5)]" />
+              <span className="text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em]">5,402 Reports this month</span>
             </div>
           </div>
-        </header>
+        </div>
+      </div>
 
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10 w-full">
         <div className="flex flex-col lg:flex-row gap-12">
           
           {/* Main Content - Left Column */}
-          <div className="flex-1 space-y-8">
+          <div className="flex-1 space-y-10">
             
-            {/* Search and Filters */}
-            <section className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm space-y-6">
-              <div className="flex flex-col md:flex-row gap-4">
+            {/* Search and Filters - High Density style */}
+            <section className="bg-ctp-mantle rounded-[2.5rem] p-8 border border-ctp-surface0 shadow-sm space-y-8">
+              <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-1 relative">
-                  <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                  <Search size={20} className="absolute left-5 top-1/2 -translate-y-1/2 text-ctp-subtext0" />
                   <input 
                     type="text"
                     placeholder="Search by office name, city, or province..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 bg-gray-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-teal-500/20 transition-all"
+                    className="w-full pl-14 pr-6 py-4 bg-ctp-base border border-ctp-surface0 rounded-2xl text-[16px] focus:ring-4 focus:ring-ctp-green/10 focus:border-ctp-green transition-all text-ctp-text placeholder:text-ctp-subtext0 font-medium"
                   />
                 </div>
-                <div className="relative">
+                <div className="relative min-w-[220px]">
                   <select 
                     value={selectedAgency}
                     onChange={(e) => setSelectedAgency(e.target.value)}
-                    className="appearance-none bg-gray-50 border-none rounded-2xl pl-4 pr-10 py-3 text-sm font-bold text-gray-700 cursor-pointer focus:ring-2 focus:ring-teal-500/20 transition-all"
+                    className="appearance-none w-full bg-ctp-base border border-ctp-surface0 rounded-2xl pl-6 pr-12 py-4 text-[13px] font-black uppercase tracking-widest text-ctp-subtext1 cursor-pointer focus:ring-4 focus:ring-ctp-green/10 transition-all shadow-sm"
                   >
                     <option>All Agencies</option>
                     <option>DFA</option>
@@ -144,51 +151,51 @@ const Offices = () => {
                     <option>LTO</option>
                     <option>SSS</option>
                   </select>
-                  <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                  <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-ctp-subtext0 pointer-events-none" />
                 </div>
               </div>
             </section>
 
             {/* Results Grid */}
-            <div className="grid grid-cols-1 gap-6">
+            <div className="space-y-6">
               {filteredOffices.length > 0 ? (
                 filteredOffices.map((office) => (
                   <OfficeCard key={office.id} office={office} navigate={navigate} />
                 ))
               ) : (
-                <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-gray-200">
-                  <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300">
-                    <Building2 size={32} />
+                <div className="text-center py-24 bg-ctp-mantle rounded-[3rem] border-2 border-dashed border-ctp-surface0">
+                  <div className="w-16 h-16 bg-ctp-base rounded-2xl flex items-center justify-center mx-auto mb-6 border border-ctp-surface0 shadow-inner">
+                    <Search size={32} className="text-ctp-subtext0" />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900">No offices found</h3>
-                  <p className="text-gray-500 text-sm mt-1">Try adjusting your search or filters.</p>
+                  <h3 className="text-xl font-black text-ctp-text uppercase tracking-tight">No offices found</h3>
+                  <p className="text-ctp-subtext1 font-medium mt-2">Try adjusting your search or filters.</p>
                 </div>
               )}
             </div>
           </div>
 
           {/* Sidebar - Right Column */}
-          <aside className="w-full lg:w-[380px] shrink-0 space-y-8">
+          <aside className="w-full lg:w-[380px] shrink-0 space-y-10">
             
             {/* Leaderboard/Best Performing */}
-            <section className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
-              <div className="flex items-center gap-2 mb-6">
-                <TrendingUp size={20} className="text-teal-600" />
-                <h3 className="text-base font-bold text-gray-900">Best Performing</h3>
+            <section className="bg-ctp-mantle rounded-[2.5rem] p-8 border border-ctp-surface0 shadow-sm">
+              <div className="flex items-center gap-3 mb-8">
+                <TrendingUp size={20} className="text-ctp-green" />
+                <h3 className="text-[13px] font-black text-ctp-text uppercase tracking-widest">Best Performing</h3>
               </div>
               
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {offices.slice(0, 3).map((office, i) => (
-                  <div key={office.id} className="flex items-center gap-4 group cursor-pointer">
-                    <div className="w-8 h-8 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center text-xs font-black">
+                  <div key={office.id} className="flex items-center gap-5 group cursor-pointer">
+                    <div className="w-10 h-10 rounded-xl bg-ctp-green/10 text-ctp-green flex items-center justify-center text-xs font-black border border-ctp-green/20 shadow-sm">
                       {i + 1}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-xs font-bold text-gray-900 truncate group-hover:text-teal-600 transition-colors">{office.name}</h4>
-                      <p className="text-[10px] text-gray-400 font-medium uppercase tracking-tighter mt-0.5">{office.agency} • {office.rating} rating</p>
+                      <h4 className="text-[13px] font-black text-ctp-text truncate group-hover:text-ctp-green transition-colors uppercase tracking-tight">{office.name}</h4>
+                      <p className="text-[10px] text-ctp-subtext0 font-black uppercase tracking-widest mt-1 opacity-80">{office.agency} • {office.rating} rating</p>
                     </div>
                     <div className="text-right">
-                      <span className="text-[10px] font-black text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full uppercase tracking-tighter">Fast</span>
+                      <span className="text-[9px] font-black text-ctp-green bg-ctp-green/10 border border-ctp-green/20 px-2 py-0.5 rounded-full uppercase tracking-widest">Fast</span>
                     </div>
                   </div>
                 ))}
@@ -196,21 +203,21 @@ const Offices = () => {
               
               <button 
                 onClick={() => navigate('/coming-soon')}
-                className="w-full mt-8 py-3 bg-gray-50 text-gray-500 rounded-xl text-xs font-bold hover:bg-gray-100 transition-all uppercase tracking-widest"
+                className="w-full mt-10 py-4 bg-ctp-base border border-ctp-surface0 text-ctp-subtext1 rounded-xl text-[11px] font-black uppercase tracking-[0.2em] hover:bg-ctp-surface0 hover:text-ctp-text transition-all shadow-sm active:scale-95"
               >
                 View Full Rankings
               </button>
             </section>
 
             {/* Why it works */}
-            <section className="bg-teal-900 rounded-3xl p-6 text-white relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-teal-800 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110 duration-700" />
+            <section className="bg-ctp-green rounded-[2.5rem] p-8 text-ctp-base relative overflow-hidden group border border-ctp-green/20 shadow-xl shadow-ctp-green/10">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-ctp-mantle/10 rounded-full -mr-20 -mt-20 transition-transform group-hover:scale-125 duration-700 blur-2xl" />
               
               <div className="relative z-10">
-                <ShieldCheck size={28} className="text-teal-400 mb-4" />
-                <h3 className="text-lg font-bold mb-2">Community Intelligence</h3>
-                <p className="text-teal-100/80 text-xs leading-relaxed mb-6">
-                  Our insights are powered by real people sharing their actual experiences. All reports are moderated to ensure accuracy and prevent misinformation.
+                <ShieldCheck size={32} className="mb-6 opacity-90" strokeWidth={2.5} />
+                <h3 className="text-[20px] font-black mb-3 uppercase tracking-tight">Community Insights</h3>
+                <p className="text-ctp-base/80 text-[12px] leading-relaxed mb-8 font-medium">
+                  Our data is powered by real people sharing their actual experiences. All reports are moderated to ensure accuracy.
                 </p>
                 
                 <div className="space-y-4">
@@ -220,8 +227,8 @@ const Offices = () => {
                     "Real-time wait updates"
                   ].map((text, i) => (
                     <div key={i} className="flex items-center gap-3">
-                      <CheckCircle2 size={14} className="text-teal-400" />
-                      <span className="text-xs font-medium">{text}</span>
+                      <CheckCircle2 size={16} className="text-ctp-base" strokeWidth={3} />
+                      <span className="text-[10px] font-black uppercase tracking-widest">{text}</span>
                     </div>
                   ))}
                 </div>
@@ -229,17 +236,17 @@ const Offices = () => {
             </section>
 
             {/* Help/Contribute */}
-            <section className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-500 mb-4">
-                <Zap size={32} className="fill-orange-500/10" />
+            <section className="bg-ctp-mantle rounded-[2.5rem] p-8 border border-ctp-surface0 shadow-sm flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-ctp-peach/10 border border-ctp-peach/20 rounded-2xl flex items-center justify-center text-ctp-peach mb-6 shadow-sm">
+                <Zap size={32} className="fill-ctp-peach/10" strokeWidth={2.5} />
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-2">Recently visited an office?</h3>
-              <p className="text-xs text-gray-500 leading-relaxed mb-6">
+              <h3 className="text-[18px] font-black text-ctp-text mb-2 uppercase tracking-tight">Recently visited?</h3>
+              <p className="text-[12px] text-ctp-subtext1 leading-relaxed mb-8 font-medium">
                 Your experience helps thousands of others plan their visits better.
               </p>
               <button 
                 onClick={() => navigate('/rate')}
-                className="w-full py-3 bg-teal-600 text-white rounded-xl font-bold text-xs shadow-md shadow-teal-600/20 hover:bg-teal-700 transition-all active:scale-95"
+                className="w-full py-4 bg-ctp-green text-ctp-base rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] shadow-lg shadow-ctp-green/20 hover:bg-ctp-green-500 transition-all active:scale-95"
               >
                 Share Your Experience
               </button>
@@ -254,105 +261,106 @@ const Offices = () => {
 
 /**
  * OfficeCard Component
- * High-density information card for government offices.
+ * Refined to match AllGuides.jsx high-density style.
  */
 const OfficeCard = ({ office, navigate }) => {
   return (
-    <div className="group bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all overflow-hidden">
-      <div className="p-6 md:p-8">
-        <div className="flex flex-col md:flex-row gap-6 md:items-start">
-          
-          {/* Office Icon & Agency */}
-          <div className="flex md:flex-col items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center p-3 group-hover:bg-teal-50 transition-colors">
-              <img src={office.icon} alt="" className="w-full h-full object-contain" />
-            </div>
-            <span className="px-3 py-1 rounded-full bg-gray-100 text-[10px] font-black text-gray-500 uppercase tracking-tighter">
-              {office.agency}
-            </span>
+    <div className="group bg-ctp-mantle rounded-[2.5rem] p-8 border border-ctp-surface0 shadow-sm hover:shadow-2xl hover:border-ctp-green/30 transition-all relative overflow-hidden flex flex-col h-full">
+      <div className="flex flex-col md:flex-row gap-8 md:items-start">
+        
+        {/* Office Icon & Agency */}
+        <div className="flex md:flex-col items-center gap-6">
+          <div className="w-16 h-16 rounded-[1.25rem] bg-ctp-base flex items-center justify-center p-4 group-hover:bg-ctp-green/10 transition-colors shadow-inner border border-ctp-surface0 shrink-0">
+            <img src={office.icon} alt="" className="w-full h-full object-contain" />
           </div>
+          <span className="px-4 py-1.5 rounded-full bg-ctp-surface0 text-ctp-mauve text-[9px] font-black uppercase tracking-[0.2em] border border-ctp-surface0">
+            {office.agency}
+          </span>
+        </div>
 
-          {/* Main Info */}
-          <div className="flex-1 space-y-4">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-teal-700 transition-colors leading-tight">
-                  {office.name}
-                </h3>
-                <div className="flex items-center gap-2 mt-1.5 text-gray-400">
-                  <MapPin size={12} />
-                  <span className="text-xs font-medium">{office.location}</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-4">
-                <div className="text-right">
-                  <div className="flex items-center gap-1 justify-end">
-                    <Star size={14} className="fill-yellow-400 text-yellow-400" />
-                    <span className="text-sm font-bold text-gray-900">{office.rating}</span>
-                  </div>
-                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{office.reviews} reports</p>
-                </div>
-                <div className="h-10 w-px bg-gray-100 hidden md:block" />
-                <div className="bg-teal-50 px-4 py-2 rounded-2xl border border-teal-100 flex flex-col items-center">
-                  <span className="text-[10px] font-black text-teal-600 uppercase tracking-tighter">Avg. Wait</span>
-                  <span className="text-xs font-bold text-teal-700">{office.waitTime}</span>
-                </div>
+        {/* Main Info */}
+        <div className="flex-1 space-y-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+              <h3 className="text-[22px] font-black text-ctp-text group-hover:text-ctp-green transition-colors leading-tight uppercase tracking-tight">
+                {office.name}
+              </h3>
+              <div className="flex items-center gap-2 mt-2 text-ctp-subtext0">
+                <MapPin size={14} className="text-ctp-green" />
+                <span className="text-[12px] font-bold uppercase tracking-widest">{office.location}</span>
               </div>
             </div>
-
-            {/* Sentiment Sparklines */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-2">
-              {[
-                { label: 'Speed', value: office.speed, icon: Zap },
-                { label: 'Staff', value: office.friendliness, icon: Users },
-                { label: 'Queue', value: office.queue, icon: Clock },
-                { label: 'Facility', value: 85, icon: Building2 }
-              ].map((stat) => (
-                <div key={stat.label} className="space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1">
-                      <stat.icon size={10} className="text-teal-500" />
-                      {stat.label}
-                    </span>
-                    <span className="text-[10px] font-bold text-gray-700">{stat.value}%</span>
-                  </div>
-                  <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-teal-500 rounded-full" 
-                      style={{ width: `${stat.value}%` }}
-                    />
-                  </div>
+            
+            <div className="flex items-center gap-6">
+              <div className="text-right">
+                <div className="flex items-center gap-2 justify-end">
+                  <Star size={16} className="fill-ctp-yellow text-ctp-yellow shadow-sm" />
+                  <span className="text-[18px] font-black text-ctp-text">{office.rating}</span>
                 </div>
-              ))}
+                <p className="text-[10px] text-ctp-subtext0 font-black uppercase tracking-widest mt-0.5">{office.reviews} reports</p>
+              </div>
+              <div className="h-12 w-px bg-ctp-surface1 hidden md:block" />
+              <div className="bg-ctp-green/10 px-5 py-2.5 rounded-2xl border border-ctp-green/20 flex flex-col items-center shadow-sm">
+                <span className="text-[9px] font-black text-ctp-green uppercase tracking-[0.2em] mb-0.5 opacity-80">Avg. Wait</span>
+                <span className="text-[14px] font-black text-ctp-green uppercase tracking-tight">{office.waitTime}</span>
+              </div>
             </div>
-
-            {/* Pro Tip */}
-            {office.proTip && (
-              <Banner
-                variant="orange"
-                icon={Info}
-                title="Community Pro-Tip"
-              >
-                <span className="italic">"{office.proTip}"</span>
-              </Banner>
-            )}
           </div>
+
+          {/* Sentiment Sparklines - Updated with consistent styling */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-4 border-y border-ctp-surface0/30">
+            {[
+              { label: 'Speed', value: office.speed, icon: Zap, color: 'ctp-green' },
+              { label: 'Staff', value: office.friendliness, icon: Users, color: 'ctp-mauve' },
+              { label: 'Queue', value: office.queue, icon: Clock, color: 'ctp-peach' },
+              { label: 'Facility', value: 85, icon: Building2, color: 'ctp-blue' }
+            ].map((stat) => (
+              <div key={stat.label} className="space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-black text-ctp-subtext0 uppercase tracking-widest flex items-center gap-1.5">
+                    <stat.icon size={12} className={`text-${stat.color}`} strokeWidth={2.5} />
+                    {stat.label}
+                  </span>
+                  <span className="text-[11px] font-black text-ctp-text">{stat.value}%</span>
+                </div>
+                <div className="h-1.5 w-full bg-ctp-surface0 rounded-full overflow-hidden shadow-inner">
+                  <div 
+                    className={`h-full bg-${stat.color} rounded-full shadow-[0_0_8px_rgba(0,0,0,0.1)]`} 
+                    style={{ width: `${stat.value}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Pro Tip */}
+          {office.proTip && (
+            <div className="bg-ctp-peach/5 border border-ctp-peach/20 rounded-2xl p-5 flex items-start gap-4 shadow-sm">
+              <div className="w-9 h-9 rounded-xl bg-ctp-base border border-ctp-peach/20 flex items-center justify-center text-ctp-peach shadow-sm shrink-0">
+                <Info size={18} strokeWidth={2.5} />
+              </div>
+              <p className="text-[13px] text-ctp-subtext1 font-bold leading-relaxed italic">
+                "{office.proTip}"
+              </p>
+            </div>
+          )}
         </div>
       </div>
       
-      {/* Card Footer */}
-      <div className="px-8 py-4 bg-gray-50/50 border-t border-gray-100 flex items-center justify-between mt-2">
-        <div className="flex items-center gap-2">
-          <MessageSquare size={14} className="text-gray-400" />
-          <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">3 Recent reports today</span>
+      {/* Card Footer - Refined bar */}
+      <div className="mt-8 pt-6 border-t border-ctp-surface0/30 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-lg bg-ctp-base border border-ctp-surface0 shadow-xs">
+            <MessageSquare size={16} className="text-ctp-subtext0" />
+          </div>
+          <span className="text-[10px] font-black text-ctp-subtext0 uppercase tracking-[0.2em]">3 Recent reports today</span>
         </div>
         <button 
           onClick={() => navigate('/coming-soon')}
-          className="text-teal-600 font-bold text-xs flex items-center gap-1.5 hover:gap-2.5 transition-all"
+          className="group flex items-center gap-2 text-ctp-green font-black text-[11px] uppercase tracking-widest hover:text-ctp-green-500 transition-all"
         >
           View detailed insights
-          <ArrowRight size={14} />
+          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
         </button>
       </div>
     </div>

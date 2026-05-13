@@ -101,7 +101,7 @@ const DesktopMenu = ({
       <div className="flex items-center border-l border-ctp-surface0 pl-8 ml-2 gap-4">
         <button
           onClick={toggleTheme}
-          className="p-2.5 rounded-xl bg-ctp-surface0 hover:bg-ctp-surface1 text-ctp-text transition-all active:scale-95 shadow-sm border border-ctp-surface1"
+          className="p-2.5 rounded-xl bg-ctp-mantle hover:bg-ctp-surface1 text-ctp-text transition-all active:scale-95 shadow-sm border border-ctp-surface0"
           aria-label="Toggle theme"
         >
           {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
@@ -118,7 +118,7 @@ const DesktopMenu = ({
           <div ref={dropdownRef} className="relative">
             <button
               onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="flex items-center gap-2 bg-ctp-mantle hover:bg-ctp-surface0 p-1.5 pr-3 rounded-full border border-ctp-surface0 transition-all active:scale-95"
+              className="flex items-center gap-2 bg-ctp-mantle hover:bg-ctp-mantle p-1.5 pr-3 rounded-full border border-ctp-surface0 transition-all active:scale-95"
             >
               {user.picture ? (
                 <img
@@ -141,7 +141,7 @@ const DesktopMenu = ({
               <div className="absolute right-0 mt-4 w-72 bg-ctp-mantle/95 backdrop-blur-2xl rounded-[2rem] shadow-2xl border border-ctp-surface0 overflow-hidden z-50 animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right">
                 
                 {/* User Info */}
-                <div className="px-6 py-6 bg-ctp-surface0/30 border-b border-ctp-surface0">
+                <div className="px-6 py-6 bg-ctp-mantle/30 border-b border-ctp-surface0">
                   <div className="flex items-center gap-4">
                     {user.picture ? (
                       <img

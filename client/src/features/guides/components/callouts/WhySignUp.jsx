@@ -48,7 +48,7 @@ const WhySignUp = ({ onSignUp }) => {
             { title: "Mobile Access", desc: "Check your status on the go." },
             { title: "Smart Reminders", desc: "Get notified of next steps." }
           ].map((feature, i) => (
-            <div key={i} className="bg-ctp-surface0/50 backdrop-blur-sm border border-ctp-surface1 p-5 rounded-2xl space-y-2 hover:bg-ctp-surface0 transition-colors">
+            <div key={i} className="bg-ctp-mantle/50 backdrop-blur-sm border border-ctp-surface0 p-5 rounded-2xl space-y-2 hover:bg-ctp-mantle transition-colors">
               <div className="flex items-center gap-3">
                 <CheckCircle size={18} className="text-ctp-green" strokeWidth={3} />
                 <span className="text-ctp-text font-bold text-[14px] uppercase tracking-wide">{feature.title}</span>

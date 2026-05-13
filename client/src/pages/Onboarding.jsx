@@ -38,23 +38,23 @@ const Onboarding = () => {
   }, [user, API_URL, updateUser]);
 
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
-      <div className="w-20 h-20 bg-teal-50 text-teal-600 rounded-full flex items-center justify-center mb-6">
+    <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center bg-ctp-base">
+      <div className="w-20 h-20 bg-ctp-green/10 text-ctp-green rounded-full flex items-center justify-center mb-6">
         <CheckCircle size={40} strokeWidth={2.5} />
       </div>
       
-      <h1 className="text-3xl font-extrabold text-slate-900 mb-4">
+      <h1 className="text-3xl font-extrabold text-ctp-text mb-4">
         You're all set!
       </h1>
       
-      <p className="text-slate-500 max-w-md mb-10 leading-relaxed font-medium">
+      <p className="text-ctp-subtext1 max-w-md mb-10 leading-relaxed font-medium">
         Welcome to AyosDocs. You have successfully completed the onboarding process.
         Your progress will now be saved across all your devices.
       </p>
 
       <button
         onClick={() => navigate('/')}
-        className="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-8 py-3.5 rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-teal-100"
+        className="flex items-center gap-2 bg-ctp-green hover:bg-ctp-green/90 text-ctp-base px-8 py-3.5 rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-ctp-green/10"
       >
         <ArrowLeft size={18} strokeWidth={2.5} />
         <span>Return Home</span>

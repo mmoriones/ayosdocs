@@ -25,9 +25,9 @@ const RelatedGuides = ({ currentSlug, category }) => {
   if (related.length === 0) return null;
 
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-700 mb-4">
-        Related Guides
+    <div className="bg-ctp-mantle border border-ctp-surface0 rounded-[2rem] p-8 shadow-sm">
+      <h3 className="text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] mb-6">
+        Recommended for you
       </h3>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -35,16 +35,16 @@ const RelatedGuides = ({ currentSlug, category }) => {
           <Link
             key={g.slug}
             to={`/guides/${g.slug}`}
-            className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100 group"
+            className="flex items-center gap-4 p-4 rounded-2xl hover:bg-ctp-base transition-all border border-transparent hover:border-ctp-surface0 group shadow-sm"
           >
-            <div className="w-10 h-10 shrink-0 bg-gray-50 rounded-lg p-2 flex items-center justify-center group-hover:bg-white transition-colors">
+            <div className="w-12 h-12 shrink-0 bg-ctp-base rounded-xl p-2.5 flex items-center justify-center group-hover:bg-ctp-mantle transition-colors border border-ctp-surface0/50">
               <img 
                 src={getGuideIcon(g.slug)} 
                 alt="" 
                 className="w-full h-full object-contain" 
               />
             </div>
-            <span className="text-teal-600 text-sm font-medium group-hover:text-teal-700 line-clamp-2">
+            <span className="text-ctp-text text-sm font-bold group-hover:text-ctp-green line-clamp-2 uppercase tracking-tight">
               {g.title}
             </span>
           </Link>

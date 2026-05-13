@@ -27,9 +27,17 @@ import { getGuideIcon } from '../../../../utils/guideIcons';
  * @param {string} props.slug - The unique identifier for the guide.
  * @param {boolean} [props.inGuidePage=false] - Whether the card is displayed within a full guide page.
  * @param {boolean} [props.isModal=false] - Whether the card is rendered inside a mobile modal.
+ * @param {boolean} [props.isBare=false] - Whether to remove card-like container and styling.
  * @returns {JSX.Element} The rendered ChecklistCard component.
  */
-const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal = false }) => {
+const ChecklistCard = ({ 
+  title, 
+  initialSteps, 
+  slug, 
+  inGuidePage = false, 
+  isModal = false,
+  isBare = false 
+}) => {
   const API_URL = import.meta.env.VITE_BACKEND_API_URL;
   const { user, isLoggedIn, openAuthModal } = useAuth();
   const { showToast } = useToast();
@@ -170,107 +178,123 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
   const progress = totalSteps ? Math.round((completedCount / totalSteps) * 100) : 0;
   const hasCompletedSteps = steps.some((s) => s.completed);
 
+  // Dynamic Content based on purpose
+  const cardLabel = inGuidePage 
+    ? (slug === "getting-started" ? "Your Journey" : "Requirements Tracker") 
+    : "Your Progress";
+
   if (isLoadingProgress) {
     return (
-      <div className={`flex items-center justify-center py-12 ${isModal ? "" : "bg-ctp-base rounded-2xl border border-ctp-surface0 shadow-sm"}`}>
+      <div className={`flex items-center justify-center py-12 ${isModal || isBare ? "" : "bg-ctp-mantle rounded-[2rem] border border-ctp-surface0 shadow-sm"}`}>
         <Loader2 className="animate-spin text-ctp-green" size={28} />
       </div>
     );
   }
 
   return (
-    <div className={`flex flex-col overflow-hidden ${isModal ? "" : "bg-ctp-mantle rounded-[2rem] border border-ctp-surface0 shadow-sm transition-all"}`}>
+    <div className={`flex flex-col overflow-hidden transition-all duration-300 ${
+      (isModal || isBare) ? "" : "bg-ctp-mantle rounded-[2.5rem] border border-ctp-surface0 shadow-sm"
+    }`}>
       
       {/* HEADER SECTION */}
-      {!isModal && (
-        <div className="p-6 pb-0">
-          <div className="flex items-start justify-between gap-4 mb-4">
-            <h3 className="text-[14px] font-bold text-ctp-subtext0 uppercase tracking-widest leading-none">
-              {inGuidePage ? (slug === "getting-started" ? "Your journey" : "Requirements List") : "Your Progress"}
+      {!isModal && !isBare && (
+        <div className="p-8 pb-0">
+          <div className="flex items-start justify-between gap-4 mb-6">
+            <h3 className="text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] leading-none">
+              {cardLabel}
             </h3>
             
             {!inGuidePage && (
               <button 
                 onClick={() => navigate('/my-progress')}
-                className="text-[14px] font-bold text-ctp-green hover:text-ctp-green-500 flex items-center gap-0.5 uppercase tracking-tighter"
+                className="text-[11px] font-black text-ctp-green hover:text-ctp-green-500 flex items-center gap-1 uppercase tracking-widest transition-colors"
               >
-                Dashboard <ChevronRight size={12} />
+                Dashboard <ChevronRight size={14} strokeWidth={3} />
               </button>
             )}
           </div>
 
           <div className="flex items-start justify-between gap-4">
-            <div className="flex items-start gap-4 w-full">
+            <div className="flex items-start gap-5 w-full">
+              {/* Agency Icon: Hide in guide page to avoid redundancy */}
               {!inGuidePage && (
-                <div className="w-12 h-12 rounded-xl bg-ctp-base flex items-center justify-center shrink-0 border border-ctp-surface0 shadow-xs p-2.5">
+                <div className="w-14 h-14 rounded-[1.25rem] bg-ctp-base flex items-center justify-center shrink-0 border border-ctp-surface0 shadow-sm p-3">
                   <img src={icon} alt="" className="w-full h-full object-contain" />
                 </div>
               )}
               
-              <div className="space-y-1 flex-1">
+              <div className="space-y-2 flex-1">
                 {!isModal && !inGuidePage && (
-                  <p className="text-[14px] text-ctp-subtext0 font-bold uppercase tracking-tighter">
-                    Continue your last guide
+                  <p className="text-[11px] text-ctp-subtext0 font-black uppercase tracking-widest">
+                    Continue where you left off
                   </p>
                 )}
                 
-                <h4 className="text-[18px] font-bold text-ctp-text leading-tight">
-                  {slug === "getting-started" ? "Getting Started" : title}
-                </h4>
+                {/* Title: Only show if NOT in a guide page (Home view) or if in a Modal (context for mobile) */}
+                {(!inGuidePage || isModal) && (
+                  <h4 className="font-black text-ctp-text leading-tight uppercase tracking-tight text-[20px]">
+                    {slug === "getting-started" ? "Getting Started" : title}
+                  </h4>
+                )}
                 
                 {isLoggedIn ? (
-                  <p className="text-[14px] font-bold text-ctp-green">
+                  <p className={`font-black text-ctp-green uppercase tracking-tight ${inGuidePage && !isModal ? "text-[16px]" : "text-[13px]"}`}>
                     {completedCount} of {totalSteps} steps completed
                   </p>
                 ) : (
-                  <p className="text-[14px] text-ctp-subtext1 font-medium">
+                  <p className="text-[13px] text-ctp-subtext1 font-bold uppercase tracking-tight">
                     Follow each requirement step-by-step.
                   </p>
                 )}
               </div>
 
+              {/* Bookmark Toggle: Hide in guide page as it's in the page header */}
               {!inGuidePage && isLoggedIn && (
-                <button className="p-2 text-ctp-subtext0 hover:text-ctp-green hover:bg-ctp-surface0 rounded-xl border border-ctp-surface0 transition shrink-0 bg-ctp-base shadow-xs active:scale-95">
-                  <Bookmark size={18} />
+                <button className="p-2.5 text-ctp-subtext1 hover:text-ctp-green hover:bg-ctp-mantle rounded-xl border border-ctp-surface0 transition-all shrink-0 bg-ctp-base shadow-sm active:scale-95">
+                  <Bookmark size={20} />
                 </button>
               )}
             </div>
           </div>
         </div>
       )}
-
-      {/* PROGRESS BAR (Logged in only) */}
-      {isLoggedIn && slug !== "getting-started" && (
-        <div className={`${isModal ? "px-0" : "px-6"} mt-4 mb-2`}>
-          <div className="flex items-center gap-2.5">
-            <div className="flex-1 h-2 bg-ctp-surface0 rounded-full overflow-hidden">
+{/* PROGRESS BAR (Logged in only) */}
+{isLoggedIn && slug !== "getting-started" && (
+  <div className={`${(isModal || isBare) ? "px-0" : "px-8"} mt-6 mb-2`}>
+    <div className="flex items-center gap-3">
+      <div className="flex-1 h-2.5 bg-ctp-mantle rounded-full overflow-hidden shadow-inner">
+...
               <div 
-                className="h-full bg-ctp-green rounded-full transition-all duration-500"
+                className="h-full bg-ctp-green rounded-full transition-all duration-700 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <span className="text-[14px] font-bold text-ctp-green shrink-0">{progress}%</span>
+            <span className="text-[13px] font-black text-ctp-green shrink-0 tracking-widest">{progress}%</span>
           </div>
         </div>
       )}
 
       {/* AUTH BANNER (Guest only) */}
       {!isLoggedIn && (
-        <div className={`${isModal ? "px-0" : "px-4"} mt-4`}>
-          <div className="bg-ctp-green/10 border border-ctp-green/20 rounded-xl p-4 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-green shadow-sm shrink-0">
-              <Lock size={14} />
+        <div className={`${(isModal || isBare) ? "px-0" : "px-8"} mt-6`}>
+          <div className="bg-ctp-green/5 border border-ctp-green/10 rounded-2xl p-5 flex items-center gap-4 group cursor-pointer hover:bg-ctp-green/10 transition-all" onClick={openAuthModal}>
+            <div className="w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-green shadow-sm shrink-0 border border-ctp-surface0">
+              <Lock size={16} strokeWidth={3} />
             </div>
-            <p className="text-[14px] font-semibold text-ctp-green leading-tight">
-              Sign up to track <br className="hidden sm:block" /> your progress.
+            <p className="text-[13px] font-black text-ctp-green leading-tight uppercase tracking-tight">
+              Sign up to track <br /> your progress
             </p>
           </div>
         </div>
       )}
 
-      {/* CHECKLIST ITEMS - Hidden in compact mode on home page */}
-      {(inGuidePage || isModal) && (
-        <div className={`${isModal ? "px-0 py-4" : "px-6 py-6"} space-y-2 ${inGuidePage || isModal ? "" : "max-h-[380px] overflow-y-auto custom-scrollbar"}`}>
+      {/* CHECKLIST ITEMS - Only show in guide, modal, or bare mode */}
+      {(inGuidePage || isModal || isBare) && (
+        <div className={`
+          ${(isModal || isBare) ? "px-0 py-6" : "px-8 py-8"} 
+          space-y-2 
+          ${(inGuidePage && !isBare) ? "lg:max-h-[420px] overflow-y-auto custom-scrollbar" : ""}
+        `}>
           {steps.map((step, index) => {
             const isNextStep = index === nextStepIndex;
             const isLastStep = index === lastCompletedIndex;
@@ -280,38 +304,38 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
               <div 
                 key={index}
                 onClick={() => handleStepAction(index)}
-                className={`flex items-start gap-4 p-3 rounded-2xl transition-all duration-200 group
-                  ${isNextStep ? "bg-ctp-green/5 border border-ctp-green/20" : "border border-transparent"}
-                  ${isClickable ? "cursor-pointer hover:bg-ctp-surface0" : "cursor-default"}
+                className={`flex items-start gap-4 p-4 rounded-2xl transition-all duration-200 group border
+                  ${isNextStep ? "bg-ctp-green/5 border-ctp-green/20" : "border-transparent"}
+                  ${isClickable ? "cursor-pointer hover:bg-ctp-mantle" : "cursor-default"}
                   ${!isClickable && !step.completed ? "opacity-50" : ""}
                 `}
               >
-                <div className="shrink-0 mt-0.5">
+                <div className="shrink-0 mt-1">
                   {step.completed ? (
                     <div className="w-6 h-6 rounded-full bg-ctp-green flex items-center justify-center text-ctp-base shadow-sm">
-                      <Check size={14} strokeWidth={3} />
+                      <Check size={14} strokeWidth={4} />
                     </div>
                   ) : isNextStep ? (
                     <div className="w-6 h-6 rounded-full border-2 border-ctp-green flex items-center justify-center bg-ctp-base shadow-sm">
                       <div className="w-2 h-2 rounded-full bg-ctp-green animate-pulse" />
                     </div>
                   ) : (
-                    <div className="w-6 h-6 rounded-full border border-ctp-surface1 bg-ctp-base flex items-center justify-center text-[14px] font-bold text-ctp-subtext0">
+                    <div className="w-6 h-6 rounded-full border border-ctp-surface0 bg-ctp-base flex items-center justify-center text-[11px] font-black text-ctp-subtext0">
                       {index + 1}
                     </div>
                   )}
                 </div>
                 
-                <div className="flex-1 pt-0.5">
-                  <p className={`text-[18px] font-medium leading-relaxed transition-colors
-                    ${step.completed ? "text-ctp-subtext1 line-through" : isNextStep ? "text-ctp-text font-bold" : "text-ctp-text group-hover:text-ctp-green"}
+                <div className="flex-1">
+                  <p className={`text-[15px] font-bold leading-relaxed transition-colors tracking-tight
+                    ${step.completed ? "text-ctp-subtext1 line-through" : "text-ctp-text group-hover:text-ctp-green"}
                   `}>
                     {step.task}
                   </p>
                   {isNextStep && (
-                    <p className="text-[14px] font-bold text-ctp-green mt-1 flex items-center gap-1">
+                    <p className="text-[11px] font-black text-ctp-green mt-1 uppercase tracking-widest flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-ctp-green" />
-                      {index === 0 ? "Start here" : index === steps.length - 1 ? "Final requirement" : "Next requirement"}
+                      {index === 0 ? "Start here" : index === steps.length - 1 ? "Final step" : "Next step"}
                     </p>
                   )}
                 </div>
@@ -321,130 +345,121 @@ const ChecklistCard = ({ title, initialSteps, slug, inGuidePage = false, isModal
         </div>
       )}
 
-      {/* NEXT STEP HIGHLIGHT - Only show in compact mode on home page or in guide page */}
-      {nextStep && (inGuidePage || (!isModal && !inGuidePage)) && (
-        <div className={`${isModal ? "px-0" : "px-6"} mb-6 mt-2`}>
+      {/* NEXT STEP HIGHLIGHT - Only show in Home View */}
+      {nextStep && !inGuidePage && !isModal && (
+        <div className="px-8 mb-8 mt-2">
           <div 
-            className={`flex items-start gap-3 p-4 rounded-xl border transition shadow-sm bg-ctp-green/5 border-ctp-green/20
-              ${(!inGuidePage && !isModal) ? "cursor-pointer hover:bg-ctp-green/10" : "cursor-default"}
-            `}
-            onClick={() => {
-              if (!inGuidePage && !isModal) {
-                navigate(`/guides/${slug}`);
-              }
-            }}
+            className="flex items-start gap-4 p-5 rounded-2xl border bg-ctp-green/5 border-ctp-green/20 cursor-pointer hover:bg-ctp-green/10 transition-all shadow-sm group"
+            onClick={() => navigate(`/guides/${slug}`)}
           >
             <div className="shrink-0 mt-0.5">
-              <div className="w-10 h-10 rounded-lg bg-ctp-green/10 flex items-center justify-center text-ctp-green">
-                <Scan size={18} />
+              <div className="w-10 h-10 rounded-xl bg-ctp-base border border-ctp-surface0 flex items-center justify-center text-ctp-green shadow-sm group-hover:scale-110 transition-transform">
+                <Scan size={20} strokeWidth={3} />
               </div>
             </div>
             <div className="flex-1">
-              <p className="text-[18px] font-bold text-ctp-text line-clamp-1">{nextStep.task}</p>
-              <p className="text-[14px] font-bold text-ctp-green mt-0.5">
+              <p className="text-[15px] font-black text-ctp-text line-clamp-1 uppercase tracking-tight">{nextStep.task}</p>
+              <p className="text-[11px] font-black text-ctp-green mt-1 uppercase tracking-widest flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-ctp-green" />
                 {nextStepIndex === 0 ? "First step" : nextStepIndex === steps.length - 1 ? "Final step" : "Next step"}
               </p>
             </div>
-            {!inGuidePage && !isModal && <ChevronRight size={18} className="text-ctp-subtext0 self-center" />}
+            <ChevronRight size={18} className="text-ctp-subtext1 self-center group-hover:translate-x-1 transition-transform" strokeWidth={3} />
           </div>
         </div>
       )}
 
-      {/* FOOTER ACTIONS - Only show button to go to checklist when in compact mode on home page */}
+      {/* FOOTER ACTIONS - Home View Only */}
       {!inGuidePage && !isModal && (
-        <div className="px-6 pb-6 pt-0">
+        <div className="px-8 pb-8 pt-0">
           <button 
             onClick={() => navigate(`/guides/${slug}`)}
-            className="w-full bg-ctp-base border border-ctp-surface0 text-ctp-text py-4 rounded-xl font-bold text-[18px] transition flex items-center justify-center gap-2 hover:bg-ctp-surface0 active:scale-[0.98]"
+            className="w-full bg-ctp-base border border-ctp-surface0 text-ctp-text py-4 rounded-xl font-black text-[11px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 hover:bg-ctp-mantle active:scale-[0.98] shadow-sm"
           >
-            Go to checklist
+            Open Tracker
           </button>
         </div>
       )}
 
-      {/* FULL FOOTER ACTIONS - Hidden in compact mode */}
-      {(inGuidePage || isModal) && (
-        <div className={`${isModal ? "px-0 pb-8" : "p-6"} pt-2 mt-auto`}>
+      {/* FULL FOOTER ACTIONS - Guide Page, Modal, or Bare */}
+      {(inGuidePage || isModal || isBare) && (
+        <div className={`${(isModal || isBare) ? "px-0 pb-8" : "p-8"} pt-2 mt-auto`}>
         <div className="space-y-4">
           {progress === 100 ? (
-            <div className="mt-8 bg-ctp-green/5 border border-ctp-green/20 rounded-[2rem] p-8 flex flex-col items-center text-center gap-4 animate-in fade-in slide-in-from-bottom-2 duration-500">
-              <div className="w-12 h-12 rounded-full bg-ctp-green flex items-center justify-center text-ctp-base shadow-md">
-                <Check size={24} strokeWidth={3} />
+            <div className="bg-ctp-green/5 border border-ctp-green/10 rounded-[2rem] p-8 flex flex-col items-center text-center gap-5 animate-in fade-in slide-in-from-bottom-2 duration-500 shadow-inner">
+              <div className="w-14 h-14 rounded-full bg-ctp-green flex items-center justify-center text-ctp-base shadow-lg shadow-ctp-green/20">
+                <Check size={28} strokeWidth={4} />
               </div>
-              <div className="space-y-1">
-                <p className="text-[18px] font-bold text-ctp-text">Requirements Complete!</p>
-                <p className="text-[14px] text-ctp-subtext1 font-medium px-4">
-                  You've successfully checked off all items for this guide.
-                </p>
+              <div className="space-y-2">
+                <p className="text-[18px] font-black text-ctp-text uppercase tracking-tight">Mission Accomplished!</p>
+                {isLoggedIn ? (
+                  <p className="text-[13px] text-ctp-subtext1 font-bold uppercase tracking-tight px-4 leading-relaxed">
+                    You've successfully completed all requirements for this guide.
+                  </p>
+                ) : (
+                  <p className="text-[13px] text-ctp-mauve font-black uppercase tracking-tight px-2 leading-relaxed">
+                    Excellent work! Sign up now to permanently save your progress.
+                  </p>
+                )}
               </div>
               
-              <div className="w-full pt-2 space-y-3">
+              <div className="w-full pt-2">
                 {isLoggedIn ? (
                   <button 
                     onClick={handleSaveProgress}
                     disabled={saveMutation.isPending}
-                    className="w-full bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base py-4 rounded-xl font-bold text-[18px] transition flex items-center justify-center gap-2 active:scale-[0.95] shadow-lg"
+                    className="w-full bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base py-4 rounded-xl font-black text-[13px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 active:scale-[0.95] shadow-lg shadow-ctp-green/20"
                   >
-                    {saveMutation.isPending ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} />}
-                    {saveMutation.isPending ? "Saving..." : "Save Progress"}
+                    {saveMutation.isPending ? <Loader2 size={20} className="animate-spin" /> : <Save size={20} strokeWidth={3} />}
+                    {saveMutation.isPending ? "Syncing..." : "Update Progress"}
                   </button>
                 ) : (
                   <button 
                     onClick={openAuthModal}
-                    className="w-full bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base py-4 rounded-xl font-bold text-[18px] transition flex items-center justify-center gap-2 active:scale-[0.95] shadow-lg"
+                    className="w-full bg-ctp-mauve hover:bg-ctp-mauve/90 text-ctp-base py-4 rounded-xl font-black text-[13px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 active:scale-[0.95] shadow-lg shadow-ctp-mauve/20"
                   >
-                    <UserPlus size={20} />
-                    Sign up to track this
-                  </button>
-                )}
-
-                {!inGuidePage && (
-                  <button 
-                    onClick={() => navigate(`/guides/${slug}`)}
-                    className="w-full bg-ctp-base border border-ctp-green/20 text-ctp-green py-4 rounded-xl font-bold text-[18px] transition flex items-center justify-center gap-2 active:scale-[0.95]"
-                  >
-                    <BookOpen size={20} />
-                    Open Guide
+                    <UserPlus size={20} strokeWidth={3} />
+                    Sign up to Save
                   </button>
                 )}
               </div>
             </div>
           ) : (
-            <>
+            <div className="space-y-4">
               {!isLoggedIn ? (
                 <>
                   <button 
                     onClick={openAuthModal}
-                    className="w-full bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base py-4 rounded-xl font-bold text-[18px] transition flex items-center justify-center gap-2 active:scale-[0.98] shadow-lg"
+                    className="w-full bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base py-4 rounded-xl font-black text-[13px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 active:scale-[0.98] shadow-lg shadow-ctp-green/20"
                   >
-                    <UserPlus size={20} />
+                    <UserPlus size={20} strokeWidth={3} />
                     Create Account
                   </button>
-                  <div className="flex items-center justify-center gap-2 text-[14px] font-semibold text-ctp-subtext0">
-                    <ShieldCheck size={14} className="text-ctp-green/50" />
-                    <span>Free • Secure • Quick</span>
+                  <div className="flex items-center justify-center gap-2 text-[10px] font-black text-ctp-subtext0 uppercase tracking-[0.2em]">
+                    <ShieldCheck size={12} className="text-ctp-green" strokeWidth={3} />
+                    <span>Sync with Cloud</span>
                   </div>
                 </>
               ) : (
                 <button 
                   onClick={handleSaveProgress}
                   disabled={saveMutation.isPending || !hasCompletedSteps}
-                  className={`w-full py-4 rounded-xl font-bold text-[18px] transition flex items-center justify-center gap-2 active:scale-[0.98]
+                  className={`w-full py-4 rounded-xl font-black text-[13px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 active:scale-[0.98] shadow-lg
                     ${hasCompletedSteps 
-                      ? "bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base shadow-lg" 
-                      : "bg-ctp-surface0 text-ctp-subtext0 cursor-not-allowed"}
+                      ? "bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base shadow-ctp-green/20" 
+                      : "bg-ctp-mantle text-ctp-subtext0 cursor-not-allowed shadow-none"}
                     disabled:opacity-70 disabled:cursor-wait
                   `}
                 >
                   {saveMutation.isPending ? (
                     <Loader2 size={20} className="animate-spin" />
                   ) : (
-                    <Save size={20} />
+                    <Save size={20} strokeWidth={3} />
                   )}
-                  {saveMutation.isPending ? "Saving..." : "Save Progress"}
+                  {saveMutation.isPending ? "Syncing..." : "Update Progress"}
                 </button>
               )}
-            </>
+            </div>
           )}
         </div>
       </div>

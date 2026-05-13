@@ -49,7 +49,7 @@ const TrendingGuides = () => {
             >
               
               {/* TOP-LEFT ICON */}
-              <div className="w-12 h-12 rounded-xl bg-ctp-base flex items-center justify-center p-2.5 mb-6 group-hover:bg-ctp-surface0 transition-colors shrink-0 border border-ctp-surface0">
+              <div className="w-12 h-12 rounded-xl bg-ctp-base flex items-center justify-center p-2.5 mb-6 group-hover:bg-ctp-mantle transition-colors shrink-0 border border-ctp-surface0">
                 {icon ? (
                   <img 
                     src={icon} 

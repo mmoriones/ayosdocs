@@ -34,21 +34,24 @@ const ChecklistModal = ({ isOpen, onClose, title, children, maxHeight = "85vh" }
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-end lg:hidden touch-none">
+    <div className="fixed inset-0 bg-ctp-crust/60 backdrop-blur-[6px] z-[200] flex items-end lg:hidden touch-none">
       <div 
-        className="bg-white w-full rounded-t-3xl flex flex-col animate-in slide-in-from-bottom duration-300 touch-auto"
+        className="bg-ctp-mantle w-full rounded-t-[3rem] flex flex-col animate-in slide-in-from-bottom duration-500 ease-out touch-auto border-t border-ctp-surface0"
         style={{ maxHeight }}
       >
         {/* HEADER */}
-        <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
-          <h3 className="font-bold text-lg text-gray-900">{title}</h3>
-          <button onClick={onClose} className="p-2 -mr-2 text-gray-400 hover:text-gray-600">
-            <X size={20} />
+        <div className="px-8 py-8 border-b border-ctp-surface0 flex items-center justify-between">
+          <h3 className="font-black text-[20px] text-ctp-text uppercase tracking-tight">{title}</h3>
+          <button 
+            onClick={onClose} 
+            className="p-3 -mr-3 rounded-full bg-ctp-base text-ctp-subtext1 hover:text-ctp-text transition-colors shadow-sm"
+          >
+            <X size={20} strokeWidth={3} />
           </button>
         </div>
 
         {/* SCROLLABLE CONTENT */}
-        <div className="flex-1 overflow-y-auto px-6 pt-2 pb-44 overscroll-contain custom-scrollbar">
+        <div className="flex-1 overflow-y-auto px-8 pt-6 pb-48 overscroll-contain custom-scrollbar">
           {children}
         </div>
       </div>

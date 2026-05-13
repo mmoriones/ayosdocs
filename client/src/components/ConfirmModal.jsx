@@ -43,32 +43,32 @@ const ConfirmModal = ({
 
   // Mapping of logical variants to specific CSS classes for consistent styling.
   const variantStyles = {
-    danger: "bg-red-600 hover:bg-red-700 text-white shadow-sm shadow-red-100",
-    warning: "bg-amber-500 hover:bg-amber-600 text-white shadow-sm shadow-amber-100",
-    info: "bg-teal-600 hover:bg-teal-700 text-white shadow-sm shadow-teal-100"
+    danger: "bg-ctp-red hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-red/20",
+    warning: "bg-ctp-peach hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-peach/20",
+    info: "bg-ctp-green hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-green/20"
   };
 
   const iconStyles = {
-    danger: "text-red-600 bg-red-50 border-red-100/50",
-    warning: "text-amber-600 bg-amber-50 border-amber-100/50",
-    info: "text-teal-600 bg-teal-50 border-teal-100/50"
+    danger: "text-ctp-red bg-ctp-red/10 border-ctp-red/20",
+    warning: "text-ctp-peach bg-ctp-peach/10 border-ctp-peach/20",
+    info: "text-ctp-green bg-ctp-green/10 border-ctp-green/20"
   };
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 pointer-events-none">
       {/* BACKDROP */}
       <div 
-        className="absolute inset-0 bg-slate-900/10 backdrop-blur-[2px] pointer-events-auto animate-in fade-in duration-300" 
+        className="absolute inset-0 bg-ctp-crust/20 backdrop-blur-[2px] pointer-events-auto animate-in fade-in duration-300" 
         onClick={onClose} 
       />
 
       {/* MODAL */}
-      <div className="relative w-full max-w-[340px] bg-white rounded-[28px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 p-7 pointer-events-auto animate-in fade-in zoom-in-95 duration-300">
+      <div className="relative w-full max-w-[340px] bg-ctp-mantle rounded-[28px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-ctp-surface0 p-7 pointer-events-auto animate-in fade-in zoom-in-95 duration-300">
         
         {/* CLOSE BUTTON */}
         <button 
           onClick={onClose}
-          className="absolute top-5 right-5 p-1.5 text-slate-300 hover:text-slate-500 rounded-full transition-all active:scale-90"
+          className="absolute top-5 right-5 p-1.5 text-ctp-subtext0 hover:text-ctp-subtext1 rounded-full transition-all active:scale-90"
         >
           <X size={18} />
         </button>
@@ -82,10 +82,10 @@ const ConfirmModal = ({
           </div>
 
           {/* TEXT */}
-          <h3 className="text-[18px] font-bold text-slate-900 tracking-tight leading-tight mb-2">
+          <h3 className="text-[18px] font-bold text-ctp-text tracking-tight leading-tight mb-2">
             {title}
           </h3>
-          <p className="text-[13px] font-medium text-slate-500 mb-8 leading-relaxed px-2">
+          <p className="text-[13px] font-medium text-ctp-subtext1 mb-8 leading-relaxed px-2">
             {message}
           </p>
 
@@ -93,7 +93,7 @@ const ConfirmModal = ({
           <div className="flex items-center gap-3 w-full">
             <button
               onClick={onClose}
-              className="flex-1 py-3 rounded-xl text-[13px] font-bold text-slate-500 bg-slate-50 hover:bg-slate-100 transition-all active:scale-[0.98] border border-slate-100"
+              className="flex-1 py-3 rounded-xl text-[13px] font-bold text-ctp-subtext1 bg-ctp-base hover:bg-ctp-surface0 transition-all active:scale-[0.98] border border-ctp-surface0"
             >
               {cancelText}
             </button>

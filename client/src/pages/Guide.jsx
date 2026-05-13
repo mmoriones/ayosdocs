@@ -8,6 +8,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 import GuidePageLayout from "../features/guides/components/reader/GuidePageLayout";
+import Adsense from "../components/Adsense";
 
 /**
  * Page component that renders a specific government guide.
@@ -59,8 +60,13 @@ const Guide = () => {
       headings={guide.headings}
       slug={slug}
       category={guide.category}
+      difficulty={guide.difficulty}
+      readTime={guide.estimatedTime}
     >
-      <article className="bg-white border border-gray-100 rounded-2xl p-6 md:p-8 shadow-sm prose prose-teal max-w-none">
+      <div className="mb-8 animate-in fade-in slide-in-from-top-2 duration-1000">
+        <Adsense variant="article" />
+      </div>
+      <article className="prose prose-teal max-w-none prose-headings:text-ctp-text prose-p:text-ctp-subtext1 prose-strong:text-ctp-text prose-li:text-ctp-subtext1 prose-table:border-ctp-surface0 prose-th:text-ctp-green prose-td:text-ctp-subtext1">
         {/* ReactMarkdown converts the raw markdown content into stylized React components. */}
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
@@ -68,45 +74,55 @@ const Guide = () => {
           // Custom mapping of markdown elements to Tailwind-styled components for consistent look.
           components={{
             h2: ({ ...props }) => (
-              <h2 className="text-xl font-semibold text-teal-700 mt-8 mb-3" {...props} />
+              <h2 className="text-3xl font-black text-ctp-green mt-16 mb-8 tracking-tight" {...props} />
             ),
             h3: ({ ...props }) => (
-              <h3 className="text-lg font-semibold text-gray-800 mt-6 mb-2" {...props} />
+              <h3 className="text-2xl font-bold text-ctp-text mt-12 mb-6 tracking-tight" {...props} />
             ),
             p: ({ ...props }) => (
-              <p className="text-gray-700 leading-relaxed mb-4" {...props} />
+              <p className="text-[18px] text-ctp-subtext1 font-medium leading-relaxed mb-8" {...props} />
             ),
             ul: ({ ...props }) => (
-              <ul className="list-disc pl-5 space-y-2 mb-4 text-gray-700" {...props} />
+              <ul className="list-disc pl-8 space-y-4 mb-8 text-ctp-subtext1" {...props} />
             ),
             ol: ({ ...props }) => (
-              <ol className="list-decimal pl-5 space-y-2 mb-4 text-gray-700" {...props} />
+              <ol className="list-decimal pl-8 space-y-4 mb-8 text-ctp-subtext1" {...props} />
             ),
             li: ({ ...props }) => (
-              <li className="marker:text-teal-600" {...props} />
+              <li className="marker:text-ctp-green font-medium text-[18px]" {...props} />
+            ),
+            blockquote: ({ ...props }) => (
+              <div className="my-10 bg-ctp-green/5 border-l-4 border-ctp-green rounded-2xl p-8 shadow-sm">
+                <div className="flex gap-4">
+                  <div className="w-10 h-10 rounded-full bg-ctp-base flex items-center justify-center text-ctp-green shrink-0 shadow-sm border border-ctp-green/10">
+                    <Sparkles size={20} />
+                  </div>
+                  <div className="prose-p:mb-0 prose-p:text-ctp-text prose-p:font-bold italic" {...props} />
+                </div>
+              </div>
             ),
             strong: ({ ...props }) => (
-              <strong className="text-gray-900 font-semibold" {...props} />
+              <strong className="text-ctp-text font-black" {...props} />
             ),
             table: ({ ...props }) => (
-              <div className="overflow-x-auto mb-8">
-                <table className="w-full border-collapse border border-gray-100 rounded-xl overflow-hidden" {...props} />
+              <div className="overflow-x-auto mb-10 rounded-2xl border border-ctp-surface0">
+                <table className="w-full border-collapse" {...props} />
               </div>
             ),
             thead: ({ ...props }) => (
-              <thead className="bg-gray-50" {...props} />
+              <thead className="bg-ctp-base" {...props} />
             ),
             th: ({ ...props }) => (
-              <th className="px-4 py-3 text-left text-sm font-semibold text-teal-700 border-b border-gray-100" {...props} />
+              <th className="px-6 py-4 text-left text-xs font-black text-ctp-green uppercase tracking-[0.2em] border-b border-ctp-surface0" {...props} />
             ),
             td: ({ ...props }) => (
-              <td className="px-4 py-3 text-sm text-gray-600 border-b border-gray-50" {...props} />
+              <td className="px-6 py-4 text-[14px] text-ctp-subtext1 border-b border-ctp-surface0 font-medium" {...props} />
             ),
             tr: ({ ...props }) => (
-              <tr className="hover:bg-gray-50/50 transition-colors" {...props} />
+              <tr className="hover:bg-ctp-base/30 transition-colors last:prose-td:border-b-0" {...props} />
             ),
             hr: ({ ...props }) => (
-              <hr className="my-8 border-t border-gray-200" {...props} />
+              <hr className="my-12 border-t border-ctp-surface0" {...props} />
             ),
           }}
         >

@@ -96,8 +96,8 @@ const Navbar = () => {
         <button
           className={`lg:hidden p-2.5 rounded-2xl transition-all duration-300 ${
             isMobileMenuOpen 
-              ? "bg-ctp-surface0 text-ctp-green shadow-inner" 
-              : "text-ctp-subtext1 hover:bg-ctp-surface0"
+              ? "bg-ctp-mantle text-ctp-green shadow-inner" 
+              : "text-ctp-subtext1 hover:bg-ctp-mantle"
           }`}
           onClick={() => toggleMobileMenu()}
           aria-label="Toggle menu"

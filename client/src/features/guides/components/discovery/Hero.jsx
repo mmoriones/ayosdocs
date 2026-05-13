@@ -25,7 +25,7 @@ const Hero = () => {
       {/* Background Decorations */}
       <div className="absolute top-0 right-0 w-2/3 h-full bg-ctp-green/5 -skew-x-12 translate-x-1/4 pointer-events-none" />
       <div className="absolute top-1/4 left-0 w-64 h-64 bg-ctp-green/10 rounded-full blur-[100px] -z-10" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-ctp-teal/10 rounded-full blur-[120px] -z-10" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-ctp-green/10 rounded-full blur-[120px] -z-10" />
       
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -34,7 +34,7 @@ const Hero = () => {
           <div className="flex-1 text-center lg:text-left space-y-8">
             {/* Greeting Pill */}
             <div className="flex justify-center lg:justify-start">
-              <span className="inline-flex items-center gap-2 rounded-full border border-ctp-green/20 bg-ctp-surface0 px-5 py-2 text-[14px] font-bold text-ctp-green shadow-sm">
+              <span className="inline-flex items-center gap-2 rounded-full border border-ctp-green/20 bg-ctp-mantle px-5 py-2 text-[14px] font-bold text-ctp-green shadow-sm">
                 {isLoggedIn && user ? (
                   <>Welcome back, {user.fullName?.split(' ')[0] || 'User'}! 👋</>
                 ) : (
@@ -66,7 +66,7 @@ const Hero = () => {
                   onClick={openAuthModal}
                   className="flex items-center gap-2 text-ctp-text font-bold hover:text-ctp-green transition-all group text-[18px]"
                 >
-                  <span className="border-b-2 border-ctp-surface1 group-hover:border-ctp-green pb-1">Create free account</span>
+                  <span className="border-b-2 border-ctp-surface0 group-hover:border-ctp-green pb-1">Create free account</span>
                   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </button>
                 <div className="hidden sm:block h-1.5 w-1.5 rounded-full bg-ctp-surface2" />
@@ -99,19 +99,19 @@ const Hero = () => {
         {/* TOP ROW: Core Features */}
         <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 lg:gap-12 mb-12">
           <div className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-ctp-surface0 text-ctp-green flex items-center justify-center transition-all duration-300">
+            <div className="w-10 h-10 rounded-xl bg-ctp-mantle text-ctp-green flex items-center justify-center transition-all duration-300">
               <FileText size={20} />
             </div>
             <span className="font-extrabold text-[14px] lg:text-[18px] text-ctp-text tracking-tight">Step-by-step guides</span>
           </div>
           <div className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-ctp-surface0 text-ctp-mauve flex items-center justify-center transition-all duration-300">
+            <div className="w-10 h-10 rounded-xl bg-ctp-mantle text-ctp-mauve flex items-center justify-center transition-all duration-300">
               <ShieldCheck size={20} />
             </div>
             <span className="font-extrabold text-[14px] lg:text-[18px] text-ctp-text tracking-tight">Official processes</span>
           </div>
           <div className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-ctp-surface0 text-ctp-yellow flex items-center justify-center transition-all duration-300">
+            <div className="w-10 h-10 rounded-xl bg-ctp-mantle text-ctp-yellow flex items-center justify-center transition-all duration-300">
               <Clock size={20} />
             </div>
             <span className="font-extrabold text-[14px] lg:text-[18px] text-ctp-text tracking-tight">Track your progress</span>

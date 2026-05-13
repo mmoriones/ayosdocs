@@ -36,37 +36,37 @@ const Verified = () => {
   }, [navigate, showToast]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-ctp-base px-4">
 
-      <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-10 max-w-md w-full text-center">
+      <div className="bg-ctp-mantle border border-ctp-surface0 rounded-2xl shadow-sm p-10 max-w-md w-full text-center">
 
         {/* ICON */}
         <div className="flex justify-center mb-6">
-          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-teal-100">
-            <CheckCircle className="text-teal-600" size={32} />
+          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-ctp-green/10">
+            <CheckCircle className="text-ctp-green" size={32} />
           </div>
         </div>
 
         {/* TITLE */}
-        <h2 className="text-2xl font-semibold text-gray-900">
+        <h2 className="text-2xl font-semibold text-ctp-text">
           Email verified
         </h2>
 
         {/* DESCRIPTION */}
-        <p className="text-sm text-gray-500 mt-2 mb-6">
+        <p className="text-sm text-ctp-subtext0 mt-2 mb-6">
           Your account has been successfully verified. You’ll be redirected shortly.
         </p>
 
         {/* BUTTON */}
         <button
           onClick={() => navigate("/")}
-          className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-3 rounded-xl transition"
+          className="w-full bg-ctp-green hover:bg-ctp-green/90 text-ctp-base font-medium py-3 rounded-xl transition shadow-sm"
         >
           Go to Home
         </button>
 
         {/* SMALL NOTE */}
-        <p className="text-xs text-gray-400 mt-4">
+        <p className="text-xs text-ctp-subtext0 mt-4">
           Redirecting in 3 seconds...
         </p>
 

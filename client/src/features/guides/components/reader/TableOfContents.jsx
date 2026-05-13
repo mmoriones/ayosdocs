@@ -52,14 +52,14 @@ const TableOfContents = ({ headings, onItemClick, activeId }) => {
               
               if (onItemClick) onItemClick(h.id);
             }}
-            className={`block py-2 px-3 rounded-lg text-sm transition-colors ${
+            className={`block py-2.5 px-4 rounded-xl text-xs transition-all uppercase tracking-widest ${
               activeId === h.id
-                ? "bg-teal-50 text-teal-600 font-medium"
-                : "text-gray-600 hover:bg-gray-50 hover:text-teal-600"
+                ? "bg-ctp-green/10 text-ctp-green font-black border border-ctp-green/20 shadow-sm"
+                : "text-ctp-subtext0 font-bold hover:bg-ctp-mantle hover:text-ctp-green"
             }`}
           >
-            <span className={`mr-2 font-medium transition-colors ${
-              activeId === h.id ? "text-teal-400" : "text-gray-300"
+            <span className={`mr-3 font-black transition-colors ${
+              activeId === h.id ? "text-ctp-green" : "text-ctp-surface2"
             }`}>
               {String(index + 1).padStart(2, '0')}
             </span>

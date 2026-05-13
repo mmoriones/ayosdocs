@@ -42,26 +42,26 @@ const ToastModal = ({ isOpen, type = "success", title, message, onClose }) => {
 
   // Mapping of notification types to specific Lucide icons and Tailwind colors.
   const icons = {
-    success: <CheckCircle className="text-teal-600" size={28} />,
-    error: <AlertCircle className="text-red-600" size={28} />,
-    info: <Info className="text-blue-600" size={28} />,
+    success: <CheckCircle className="text-ctp-green" size={28} />,
+    error: <AlertCircle className="text-ctp-red" size={28} />,
+    info: <Info className="text-ctp-blue" size={28} />,
   };
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 pointer-events-none">
       {/* Backdrop - Intercepts clicks and blocks background */}
       <div 
-        className="absolute inset-0 bg-slate-900/10 backdrop-blur-[2px] pointer-events-auto animate-in fade-in duration-300" 
+        className="absolute inset-0 bg-ctp-crust/20 backdrop-blur-[2px] pointer-events-auto animate-in fade-in duration-300" 
         onClick={onClose}
       />
       
       {/* Modal Content - Refined Card Style */}
-      <div className="relative w-full max-w-[320px] bg-white rounded-[28px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-slate-100 p-6 pointer-events-auto animate-in fade-in zoom-in-95 duration-300">
+      <div className="relative w-full max-w-[320px] bg-ctp-mantle rounded-[28px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-ctp-surface0 p-6 pointer-events-auto animate-in fade-in zoom-in-95 duration-300">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 text-slate-300 hover:text-slate-500 rounded-full transition-all active:scale-90"
+          className="absolute top-4 right-4 p-1.5 text-ctp-subtext0 hover:text-ctp-subtext1 rounded-full transition-all active:scale-90"
         >
           <X size={16} />
         </button>
@@ -69,24 +69,24 @@ const ToastModal = ({ isOpen, type = "success", title, message, onClose }) => {
         <div className="flex flex-col items-center text-center">
           {/* Icon Container */}
           <div className="mb-4">
-            <div className="p-3 bg-slate-50 rounded-2xl border border-slate-100/50 shadow-sm">
+            <div className="p-3 bg-ctp-base rounded-2xl border border-ctp-surface0/50 shadow-sm">
               {icons[type] || icons.success}
             </div>
           </div>
 
           {/* Text Content */}
-          <h4 className="text-[16px] font-bold text-slate-900 tracking-tight">
+          <h4 className="text-[16px] font-bold text-ctp-text tracking-tight">
             {title}
           </h4>
           
-          <p className="text-[13px] font-medium text-slate-500 mt-2 leading-relaxed px-2">
+          <p className="text-[13px] font-medium text-ctp-subtext1 mt-2 leading-relaxed px-2">
             {message}
           </p>
 
           {/* Action Button - Emphasized */}
           <button
             onClick={onClose}
-            className="mt-6 px-12 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl transition-all active:scale-[0.98] text-[13px] shadow-sm shadow-teal-100"
+            className="mt-6 px-12 py-2.5 bg-ctp-green hover:opacity-90 text-ctp-base font-bold rounded-xl transition-all active:scale-[0.98] text-[13px] shadow-sm shadow-ctp-green/20"
           >
             Okay
           </button>

@@ -63,22 +63,22 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
   }, [lastScrollY, isTOCOpen, isChecklistOpen, isAuthModalOpen]);
 
   return (
-    <div className={`lg:hidden fixed bottom-4 left-6 right-6 z-[100] transition-all duration-500 ease-in-out ${
+    <div className={`lg:hidden fixed bottom-6 left-6 right-6 z-[100] transition-all duration-500 ease-in-out ${
       isVisible && !isAuthModalOpen ? "translate-y-0 opacity-100" : "translate-y-40 opacity-0 pointer-events-none"
     }`}>
-      <div className="bg-white/95 backdrop-blur-md border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-[24px] p-2 flex items-center gap-1">
+      <div className="bg-ctp-mantle/95 backdrop-blur-xl border border-ctp-surface0 shadow-2xl rounded-[2rem] p-2 flex items-center gap-2">
         
         {/* HOME */}
         <button
           onClick={() => navigate("/")}
-          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-2xl transition-all duration-200 active:scale-95 ${
+          className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all duration-200 active:scale-95 ${
             isHomeActive 
-              ? "bg-teal-50 text-teal-600" 
-              : "text-gray-500 hover:bg-gray-50"
+              ? "bg-ctp-green text-ctp-base shadow-lg shadow-ctp-green/20" 
+              : "text-ctp-subtext1 hover:bg-ctp-mantle"
           }`}
         >
-          <Home size={20} strokeWidth={isHomeActive ? 2.5 : 2} />
-          <span className={`text-[10px] mt-0.5 tracking-tight ${isHomeActive ? "font-bold" : "font-medium"}`}>
+          <Home size={20} strokeWidth={isHomeActive ? 3 : 2} />
+          <span className={`text-[10px] mt-1 uppercase tracking-widest ${isHomeActive ? "font-black" : "font-bold"}`}>
             Home
           </span>
         </button>
@@ -86,14 +86,14 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
         {/* TOC */}
         <button
           onClick={onOpenTOC}
-          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-2xl transition-all duration-200 active:scale-95 ${
+          className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all duration-200 active:scale-95 ${
             isTOCOpen 
-              ? "bg-teal-50 text-teal-600" 
-              : "text-gray-500 hover:bg-gray-50"
+              ? "bg-ctp-green text-ctp-base shadow-lg shadow-ctp-green/20" 
+              : "text-ctp-subtext1 hover:bg-ctp-mantle"
           }`}
         >
-          {isTOCOpen ? <X size={20} strokeWidth={2.5} /> : <List size={20} strokeWidth={isTOCOpen ? 2.5 : 2} />}
-          <span className={`text-[10px] mt-0.5 tracking-tight ${isTOCOpen ? "font-bold" : "font-medium"}`}>
+          {isTOCOpen ? <X size={20} strokeWidth={3} /> : <List size={20} strokeWidth={2} />}
+          <span className={`text-[10px] mt-1 uppercase tracking-widest ${isTOCOpen ? "font-black" : "font-bold"}`}>
             {isTOCOpen ? "Close" : "TOC"}
           </span>
         </button>
@@ -101,14 +101,14 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
         {/* CHECKLIST */}
         <button
           onClick={onOpenChecklist}
-          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-2xl transition-all duration-200 active:scale-95 ${
+          className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all duration-200 active:scale-95 ${
             isChecklistOpen 
-              ? "bg-teal-50 text-teal-600" 
-              : "text-gray-500 hover:bg-gray-50"
+              ? "bg-ctp-green text-ctp-base shadow-lg shadow-ctp-green/20" 
+              : "text-ctp-subtext1 hover:bg-ctp-mantle"
           }`}
         >
-          {isChecklistOpen ? <X size={20} strokeWidth={2.5} /> : <CheckSquare size={20} strokeWidth={isChecklistOpen ? 2.5 : 2} />}
-          <span className={`text-[10px] mt-0.5 tracking-tight ${isChecklistOpen ? "font-bold" : "font-medium"}`}>
+          {isChecklistOpen ? <X size={20} strokeWidth={3} /> : <CheckSquare size={20} strokeWidth={2} />}
+          <span className={`text-[10px] mt-1 uppercase tracking-widest ${isChecklistOpen ? "font-black" : "font-bold"}`}>
             {isChecklistOpen ? "Close" : "Checklist"}
           </span>
         </button>

@@ -7,30 +7,30 @@ const steps = [
 
 const GettingStarted = () => {
   return (
-    <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
-      <h3 className="text-lg font-bold mb-6 text-gray-900 leading-none">
+    <div className="bg-ctp-mantle border border-ctp-surface0 rounded-3xl p-6 shadow-sm">
+      <h3 className="text-lg font-bold mb-6 text-ctp-text leading-none">
         Quick Guide
       </h3>
 
       <div className="relative">
         {/* vertical line */}
-        <div className="absolute left-[10px] top-[10px] bottom-[15px] w-px bg-slate-100"></div>
+        <div className="absolute left-[10px] top-[10px] bottom-[15px] w-px bg-ctp-surface1"></div>
 
         <div className="space-y-6">
           {steps.map((step) => (
             <div key={step.id} className="flex items-start gap-3 relative">
               
               {/* circle */}
-              <div className="z-10 flex items-center justify-center w-5 h-5 mt-[3px] rounded-full bg-teal-600 text-white text-[10px] font-bold">
+              <div className="z-10 flex items-center justify-center w-5 h-5 mt-[3px] rounded-full bg-ctp-green text-ctp-base text-[10px] font-bold">
                 {step.id}
               </div>
 
               {/* content */}
               <div className="space-y-0.5">
-                <p className="text-[14px] font-bold text-slate-800 leading-tight">
+                <p className="text-[14px] font-bold text-ctp-text leading-tight">
                   {step.title}
                 </p>
-                <p className="text-[12px] text-gray-500 font-medium leading-snug">
+                <p className="text-[12px] text-ctp-subtext1 font-medium leading-snug">
                   {step.desc}
                 </p>
               </div>

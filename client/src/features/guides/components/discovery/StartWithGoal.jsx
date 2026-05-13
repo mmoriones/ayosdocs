@@ -23,7 +23,7 @@ const StartWithGoal = () => {
           "
         >
           {/* ICON */}
-          <div className="w-14 h-14 rounded-2xl bg-ctp-base flex items-center justify-center text-3xl shrink-0 group-hover:bg-ctp-surface0 transition-all duration-500">
+          <div className="w-14 h-14 rounded-2xl bg-ctp-base flex items-center justify-center text-3xl shrink-0 group-hover:bg-ctp-mantle transition-all duration-500">
             {bundle.icon}
           </div>
 

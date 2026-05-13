@@ -18,7 +18,7 @@ const OnboardingBanner = () => {
         
         {/* TEXT CONTENT */}
         <div className="flex-1 space-y-6 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ctp-surface0 border border-ctp-surface1 text-ctp-green text-[14px] font-bold uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ctp-mantle border border-ctp-surface0 text-ctp-green text-[14px] font-bold uppercase tracking-widest">
             <HelpCircle size={14} />
             <span>New to AyosDocs?</span>
           </div>

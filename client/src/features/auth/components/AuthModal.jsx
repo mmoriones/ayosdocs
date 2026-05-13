@@ -106,18 +106,18 @@ const AuthModal = ({ isOpen, onClose }) => {
 
       {/* BACKDROP */}
       <div
-        className="absolute inset-0 bg-slate-900/20 backdrop-blur-md animate-in fade-in duration-500 pointer-events-auto"
+        className="absolute inset-0 bg-ctp-crust/40 backdrop-blur-md animate-in fade-in duration-500 pointer-events-auto"
         onClick={onClose}
       />
 
       {/* MODAL */}
-      <div className="relative w-full max-w-md bg-white/95 backdrop-blur-2xl rounded-[32px] shadow-[0_25px_60px_-12px_rgba(0,0,0,0.2),0_0_20px_rgba(0,0,0,0.05)] border border-white/60 overflow-hidden animate-in fade-in zoom-in-95 duration-300 pointer-events-auto">
+      <div className="relative w-full max-w-md bg-ctp-mantle/95 backdrop-blur-2xl rounded-[32px] shadow-[0_25px_60px_-12px_rgba(0,0,0,0.2),0_0_20px_rgba(0,0,0,0.05)] border border-ctp-surface0/60 overflow-hidden animate-in fade-in zoom-in-95 duration-300 pointer-events-auto">
 
         {/* CLOSE */}
         <button
           onClick={onClose}
           disabled={isExchanging}
-          className="absolute top-6 right-6 z-50 p-2.5 rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-all active:scale-90 disabled:opacity-50 cursor-pointer"
+          className="absolute top-6 right-6 z-50 p-2.5 rounded-full text-ctp-subtext0 hover:bg-ctp-surface1 hover:text-ctp-subtext1 transition-all active:scale-90 disabled:opacity-50 cursor-pointer"
           aria-label="Close modal"
         >
           <X size={20} />
@@ -128,22 +128,22 @@ const AuthModal = ({ isOpen, onClose }) => {
           
           {/* LOADING OVERLAY */}
           {isExchanging && (
-            <div className="absolute inset-0 z-20 bg-white/80 backdrop-blur-[2px] flex flex-col items-center justify-center animate-in fade-in duration-300">
+            <div className="absolute inset-0 z-20 bg-ctp-mantle/80 backdrop-blur-[2px] flex flex-col items-center justify-center animate-in fade-in duration-300">
               <div className="flex flex-col items-center">
-                <Loader2 className="w-10 h-10 animate-spin text-teal-600 mb-4" strokeWidth={2.5} />
-                <h3 className="text-lg font-bold text-slate-900 tracking-tight">Signing you in...</h3>
-                <p className="text-[13px] font-medium text-slate-500 mt-1.5">Please wait a moment</p>
+                <Loader2 className="w-10 h-10 animate-spin text-ctp-green mb-4" strokeWidth={2.5} />
+                <h3 className="text-lg font-bold text-ctp-text tracking-tight">Signing you in...</h3>
+                <p className="text-[13px] font-medium text-ctp-subtext1 mt-1.5">Please wait a moment</p>
               </div>
             </div>
           )}
 
           {/* HEADER */}
           <div className="mb-8 text-center">
-            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
+            <h2 className="text-2xl font-bold text-ctp-text tracking-tight">
               Sign in to AyosDocs
             </h2>
 
-            <p className="text-[14px] font-medium text-slate-500 mt-2.5 leading-relaxed">
+            <p className="text-[14px] font-medium text-ctp-subtext1 mt-2.5 leading-relaxed">
               Save your progress and access your checklists across all your devices.
             </p>
           </div>
@@ -153,7 +153,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             onClick={() => !isExchanging && googleLogin()}
             type="button"
             disabled={isExchanging}
-            className="w-full flex items-center justify-center gap-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold py-4 rounded-[20px] transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex items-center justify-center gap-3 bg-ctp-mantle border border-ctp-surface2 hover:bg-ctp-surface1 text-ctp-text font-bold py-4 rounded-[20px] transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <img
               src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -163,8 +163,8 @@ const AuthModal = ({ isOpen, onClose }) => {
             Continue with Google
           </button>
 
-          <p className="mt-8 text-center text-[11px] font-medium text-slate-400 leading-relaxed px-4">
-            By continuing, you agree to our <span className="text-slate-500 underline decoration-slate-200 cursor-pointer">Terms of Service</span> and <span className="text-slate-500 underline decoration-slate-200 cursor-pointer">Privacy Policy</span>.
+          <p className="mt-8 text-center text-[11px] font-medium text-ctp-subtext0 leading-relaxed px-4">
+            By continuing, you agree to our <span className="text-ctp-subtext1 underline decoration-ctp-surface2 cursor-pointer">Terms of Service</span> and <span className="text-ctp-subtext1 underline decoration-ctp-surface2 cursor-pointer">Privacy Policy</span>.
           </p>
 
         </div>

@@ -43,7 +43,7 @@ const MobileMenu = ({
     `block w-full px-6 py-4 rounded-xl transition-all duration-200 text-lg ${
       isActive(path)
         ? "bg-ctp-green/10 text-ctp-green font-bold"
-        : "text-ctp-subtext0 font-semibold hover:bg-ctp-surface0 hover:text-ctp-green"
+        : "text-ctp-subtext0 font-semibold hover:bg-ctp-mantle hover:text-ctp-green"
     }`;
 
   return (

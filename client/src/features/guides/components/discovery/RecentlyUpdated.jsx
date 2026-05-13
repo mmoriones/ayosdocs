@@ -45,12 +45,12 @@ const RecentlyUpdated = ({ className = "" }) => {
             key={update.id}
             onClick={() => navigate(`/guides/${update.slug}`)}
             className={`
-              group flex items-center gap-4 p-5 cursor-pointer transition-colors hover:bg-ctp-surface0 flex-1
+              group flex items-center gap-4 p-5 cursor-pointer transition-colors hover:bg-ctp-mantle flex-1
               ${index !== updates.length - 1 ? 'border-b border-ctp-surface0' : ''}
             `}
           >
             {/* ICON */}
-            <div className="w-12 h-12 rounded-2xl bg-ctp-base flex items-center justify-center p-2.5 group-hover:bg-ctp-surface0 transition-colors shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-ctp-base flex items-center justify-center p-2.5 group-hover:bg-ctp-mantle transition-colors shrink-0">
               <img 
                 src={getGuideIcon(update.slug)} 
                 alt="" 

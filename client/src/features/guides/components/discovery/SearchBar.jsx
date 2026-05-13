@@ -121,8 +121,8 @@ const SearchBar = () => {
               key={guide.slug}
               onClick={() => handleSelect(guide.slug)}
               className={`px-5 py-4 cursor-pointer transition flex items-center gap-3.5
-              ${index === 0 ? "bg-ctp-surface0/50" : ""}
-              hover:bg-ctp-surface0 active:bg-ctp-surface1`}
+              ${index === 0 ? "bg-ctp-mantle/50" : ""}
+              hover:bg-ctp-mantle active:bg-ctp-surface1`}
             >
               <div className="w-9 h-9 rounded-xl bg-ctp-base border border-ctp-surface0 flex items-center justify-center p-2 shrink-0 shadow-sm">
                 <img 
