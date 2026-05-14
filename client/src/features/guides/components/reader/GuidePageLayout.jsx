@@ -35,6 +35,7 @@ const GuidePageLayout = ({
   checklistSteps,
   headings,
   slug,
+  agency,
   category,
   difficulty = "Beginner Friendly",
   readTime = "10-15 mins"
@@ -166,6 +167,7 @@ const GuidePageLayout = ({
                       title={title}
                       initialSteps={checklistSteps}
                       slug={slug}
+                      agency={agency}
                       inGuidePage={true}
                       isBare={true}
                     />
@@ -209,7 +211,7 @@ const GuidePageLayout = ({
                 <div className="flex flex-col md:flex-row md:items-center gap-8 relative z-10">
                   <div className="p-6 rounded-[2rem] bg-ctp-base shrink-0 w-fit shadow-inner border border-ctp-surface0">
                     <img 
-                      src={getGuideIcon(slug)} 
+                      src={getGuideIcon(slug, agency)} 
                       alt="" 
                       className="w-14 h-14 md:w-20 md:h-20 object-contain"
                     />
@@ -327,6 +329,7 @@ const GuidePageLayout = ({
           title={title}
           initialSteps={checklistSteps}
           slug={slug}
+          agency={agency}
           inGuidePage={true}
           isModal={true}
         />

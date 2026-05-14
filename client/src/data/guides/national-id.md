@@ -14,6 +14,11 @@ tags:
 - PSA
 - Government ID
 - PhilID
+aliases:
+- PhilSys
+- PhilID
+- National ID Online
+- Digital ID
 checklist:
 - Check Eligibility
 - Prepare Required Documents

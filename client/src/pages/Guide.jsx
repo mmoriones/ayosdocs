@@ -59,6 +59,7 @@ const Guide = () => {
       checklistSteps={guide.checklist?.map(task => ({ task }))}
       headings={guide.headings}
       slug={slug}
+      agency={guide.agency}
       category={guide.category}
       difficulty={guide.difficulty}
       readTime={guide.estimatedTime}

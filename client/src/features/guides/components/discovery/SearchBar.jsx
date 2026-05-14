@@ -126,7 +126,7 @@ const SearchBar = () => {
             >
               <div className="w-10 h-10 rounded-xl bg-ctp-mantle border border-ctp-surface0 flex items-center justify-center p-2 shrink-0 shadow-sm">
                 <img 
-                  src={getGuideIcon(guide.slug)} 
+                  src={getGuideIcon(guide.slug, guide.agency)} 
                   alt="" 
                   className="w-full h-full object-contain" 
                 />

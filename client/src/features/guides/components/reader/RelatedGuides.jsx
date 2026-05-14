@@ -39,7 +39,7 @@ const RelatedGuides = ({ currentSlug, category }) => {
           >
             <div className="w-12 h-12 shrink-0 bg-ctp-base rounded-xl p-2.5 flex items-center justify-center group-hover:bg-ctp-mantle transition-colors border border-ctp-surface0/50">
               <img 
-                src={getGuideIcon(g.slug)} 
+                src={getGuideIcon(g.slug, g.agency)} 
                 alt="" 
                 className="w-full h-full object-contain" 
               />

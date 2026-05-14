@@ -37,7 +37,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete }) => {
       <div className="flex items-center gap-8">
         {/* Guide Icon */}
         <div className="w-16 h-16 rounded-2xl bg-ctp-mantle flex items-center justify-center p-4 group-hover:scale-110 transition-transform shadow-sm border border-ctp-surface0">
-          <img src={getGuideIcon(guide.slug)} alt="" className="w-full h-full object-contain" />
+          <img src={getGuideIcon(guide.slug, guide.agency)} alt="" className="w-full h-full object-contain" />
         </div>
         
         {/* Title and Status/Next Step */}

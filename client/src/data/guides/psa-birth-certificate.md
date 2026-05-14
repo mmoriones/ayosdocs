@@ -3,7 +3,7 @@ title: PSA Birth Certificate
 slug: psa-birth-certificate
 description: A complete step-by-step guide on how to request and obtain a PSA Birth Certificate in the Philippines, including walk-in and online application methods, requirements, fees, delivery options, and processing times.
 lastUpdated: 2026-04-01
-category: Government Documents
+category: Civil Registry
 agency: PSA
 difficulty: Easy
 estimatedTime: 3-7 Days
@@ -14,6 +14,11 @@ tags:
 - Civil Registry
 - Philippines
 - Government Document
+aliases:
+- BC
+- Birth Cert
+- NSO Birth Certificate
+- PSA Online
 checklist:
 - Determine application method
 - Prepare valid IDs and information

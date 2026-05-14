@@ -34,6 +34,7 @@ const ChecklistCard = ({
   title, 
   initialSteps, 
   slug, 
+  agency,
   inGuidePage = false, 
   isModal = false,
   isBare = false 
@@ -46,7 +47,7 @@ const ChecklistCard = ({
 
   // Local state manages the checked/unchecked status of steps before saving.
   const [steps, setSteps] = useState(initialSteps || []);
-  const icon = getGuideIcon(slug);
+  const icon = getGuideIcon(slug, agency);
 
   // TanStack Query handles fetching the user's saved progress from the backend.
   // Using a query key ensures data is cached and invalidated correctly across components.

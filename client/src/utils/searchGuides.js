@@ -17,7 +17,9 @@ export const searchGuides = (query) => {
       return (
         guide.title?.toLowerCase().includes(q) ||
         guide.slug?.toLowerCase().includes(q) ||
-        guide.category?.toLowerCase().includes(q)
+        guide.category?.toLowerCase().includes(q) ||
+        guide.tags?.some(tag => tag.toLowerCase().includes(q)) ||
+        guide.aliases?.some(alias => alias.toLowerCase().includes(q))
       );
     })
     .slice(0, 5) // limit results

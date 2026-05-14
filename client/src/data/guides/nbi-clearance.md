@@ -3,7 +3,7 @@ title: How to Apply for an NBI Clearance (New Applicant)
 slug: nbi-clearance
 description: A complete step-by-step guide for first-time applicants on how to apply for an NBI Clearance in the Philippines, including online registration, appointment booking, payment methods, biometrics, claiming procedures, fees, and processing time.
 lastUpdated: 2026-04-01
-category: Government ID
+category: Government Clearance
 agency: NBI
 difficulty: Moderate
 estimatedTime: 1-3 Days
@@ -14,6 +14,10 @@ tags:
 - Employment Requirements
 - Philippines
 - Government Document
+aliases:
+- Police Clearance
+- NBI Online
+- Background Check
 checklist:
 - Register online account
 - Fill out application form

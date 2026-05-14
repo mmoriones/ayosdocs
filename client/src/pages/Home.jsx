@@ -85,6 +85,7 @@ const Home = () => {
                     title={activeGuide.title}
                     initialSteps={activeGuide.checklist?.map(task => ({ task }))}
                     slug={activeSlug}
+                    agency={activeGuide.agency}
                     inGuidePage={false}
                     isModal={false}
                   />
