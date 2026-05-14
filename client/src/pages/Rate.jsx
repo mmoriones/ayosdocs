@@ -69,7 +69,7 @@ const Rate = () => {
   const StarRating = ({ category, label, icon: Icon }) => {
     return (
       <div className="bg-ctp-mantle border border-ctp-surface0 rounded-3xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow">
-        <div className="w-12 h-12 rounded-2xl bg-ctp-sapphire/10 flex items-center justify-center text-ctp-sapphire mb-4">
+        <div className="w-12 h-12 rounded-2xl bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 mb-4">
           <Icon size={24} />
         </div>
         <h4 className="text-sm font-bold text-ctp-text mb-4">{label}</h4>
@@ -114,9 +114,9 @@ const Rate = () => {
                 value={option.value}
                 checked={value === option.value}
                 onChange={(e) => onChange(e.target.value)}
-                className="peer appearance-none w-5 h-5 rounded-full border-2 border-ctp-surface0 checked:border-ctp-sapphire transition-all cursor-pointer bg-ctp-base"
+                className="peer appearance-none w-5 h-5 rounded-full border-2 border-ctp-surface0 checked:border-ctp-sky-800 transition-all cursor-pointer bg-ctp-base"
               />
-              <div className="absolute w-2.5 h-2.5 rounded-full bg-ctp-sapphire opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+              <div className="absolute w-2.5 h-2.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
             </div>
             <span className={`text-sm font-medium transition-colors ${value === option.value ? 'text-ctp-text' : 'text-ctp-subtext1 group-hover:text-ctp-text'}`}>
               {option.label}
@@ -134,7 +134,7 @@ const Rate = () => {
         {/* Navigation */}
         <Link 
           to="/guides" 
-          className="inline-flex items-center gap-2 text-ctp-sapphire font-bold text-xs hover:gap-3 transition-all mb-6"
+          className="inline-flex items-center gap-2 text-ctp-sky-800 font-bold text-xs hover:gap-3 transition-all mb-6"
         >
           <ArrowLeft size={14} />
           Back to All Guides
@@ -156,8 +156,8 @@ const Rate = () => {
             </header>
 
             {/* Info Banner */}
-            <div className="bg-ctp-sapphire/5 border border-ctp-sapphire/10 rounded-2xl p-5 flex items-start gap-4">
-              <div className="w-9 h-9 rounded-xl bg-ctp-mantle border border-ctp-sapphire/20 flex items-center justify-center text-ctp-sapphire shrink-0">
+            <div className="bg-ctp-sky-800/5 border border-ctp-sky-800/10 rounded-2xl p-5 flex items-start gap-4">
+              <div className="w-9 h-9 rounded-xl bg-ctp-mantle border border-ctp-sky-800/20 flex items-center justify-center text-ctp-sky-800 shrink-0">
                 <ShieldCheck size={18} />
               </div>
               <div>
@@ -169,7 +169,7 @@ const Rate = () => {
             {/* Step 1: Select Office */}
             <section className="space-y-5">
               <div className="flex items-center gap-3">
-                <div className="w-7 h-7 rounded-full bg-ctp-sapphire text-ctp-base flex items-center justify-center text-xs font-black">1</div>
+                <div className="w-7 h-7 rounded-full bg-ctp-sky-800 text-ctp-base flex items-center justify-center text-xs font-black">1</div>
                 <h2 className="text-lg font-bold text-ctp-text">Select the government office</h2>
               </div>
               <p className="text-xs text-ctp-subtext0 pl-10">Choose the office where you availed the service.</p>
@@ -178,7 +178,7 @@ const Rate = () => {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-widest pl-0.5">Agency</label>
                   <div className="relative">
-                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire transition-all text-xs font-medium cursor-pointer">
+                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-xs font-medium cursor-pointer">
                       <option>Select agency</option>
                       <option>DFA</option>
                       <option>PSA</option>
@@ -190,7 +190,7 @@ const Rate = () => {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-widest pl-0.5">Region</label>
                   <div className="relative">
-                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire transition-all text-xs font-medium cursor-pointer">
+                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-xs font-medium cursor-pointer">
                       <option>Select region</option>
                       <option>NCR</option>
                     </select>
@@ -200,7 +200,7 @@ const Rate = () => {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-widest pl-0.5">Province</label>
                   <div className="relative">
-                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire transition-all text-xs font-medium cursor-pointer">
+                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-xs font-medium cursor-pointer">
                       <option>Select province</option>
                       <option>Metro Manila</option>
                     </select>
@@ -213,7 +213,7 @@ const Rate = () => {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-widest pl-0.5">City / Municipality</label>
                   <div className="relative">
-                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire transition-all text-xs font-medium cursor-pointer">
+                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-xs font-medium cursor-pointer">
                       <option>Select city or municipality</option>
                     </select>
                     <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-ctp-subtext0 pointer-events-none" />
@@ -222,7 +222,7 @@ const Rate = () => {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-widest pl-0.5">Office / Branch</label>
                   <div className="relative">
-                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire transition-all text-xs font-medium cursor-pointer">
+                    <select className="w-full appearance-none bg-ctp-base border border-ctp-surface0 rounded-xl px-3.5 py-2.5 pr-10 text-ctp-subtext1 focus:outline-none focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-xs font-medium cursor-pointer">
                       <option>Select office or branch</option>
                     </select>
                     <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-ctp-subtext0 pointer-events-none" />
@@ -234,7 +234,7 @@ const Rate = () => {
             {/* Step 2: Rate Experience */}
             <section className="space-y-5">
               <div className="flex items-center gap-3">
-                <div className="w-7 h-7 rounded-full bg-ctp-sapphire text-ctp-base flex items-center justify-center text-xs font-black">2</div>
+                <div className="w-7 h-7 rounded-full bg-ctp-sky-800 text-ctp-base flex items-center justify-center text-xs font-black">2</div>
                 <h2 className="text-lg font-bold text-ctp-text">Rate your experience</h2>
               </div>
               <p className="text-xs text-ctp-subtext0 pl-10">Rate the following aspects of your visit.</p>
@@ -250,7 +250,7 @@ const Rate = () => {
             {/* Step 3: Answer Questions */}
             <section className="space-y-5">
               <div className="flex items-center gap-3">
-                <div className="w-7 h-7 rounded-full bg-ctp-sapphire text-ctp-base flex items-center justify-center text-xs font-black">3</div>
+                <div className="w-7 h-7 rounded-full bg-ctp-sky-800 text-ctp-base flex items-center justify-center text-xs font-black">3</div>
                 <h2 className="text-lg font-bold text-ctp-text">Answer a few questions</h2>
               </div>
               <p className="text-xs text-ctp-subtext0 pl-10">Your answers will help others prepare better.</p>
@@ -308,7 +308,7 @@ const Rate = () => {
             {/* Step 4: Additional Feedback */}
             <section className="space-y-5">
               <div className="flex items-center gap-3">
-                <div className="w-7 h-7 rounded-full bg-ctp-sapphire text-ctp-base flex items-center justify-center text-xs font-black">4</div>
+                <div className="w-7 h-7 rounded-full bg-ctp-sky-800 text-ctp-base flex items-center justify-center text-xs font-black">4</div>
                 <h2 className="text-lg font-bold text-ctp-text">Additional feedback (optional)</h2>
               </div>
               <p className="text-xs text-ctp-subtext0 pl-10">Share any additional details that may help others. Keep it short and helpful.</p>
@@ -320,7 +320,7 @@ const Rate = () => {
                     onChange={(e) => setFormData(prev => ({ ...prev, feedback: e.target.value }))}
                     placeholder="Write your feedback here..."
                     maxLength={500}
-                    className="w-full min-h-[140px] bg-ctp-base border border-ctp-surface0 rounded-2xl p-5 text-xs text-ctp-text placeholder:text-ctp-subtext0 focus:outline-none focus:ring-2 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire transition-all resize-none shadow-sm"
+                    className="w-full min-h-[140px] bg-ctp-base border border-ctp-surface0 rounded-2xl p-5 text-xs text-ctp-text placeholder:text-ctp-subtext0 focus:outline-none focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all resize-none shadow-sm"
                   />
                   <div className="absolute bottom-5 right-5 text-[9px] font-bold text-ctp-subtext0 uppercase tracking-widest">
                     {formData.feedback.length} / 500 characters
@@ -347,13 +347,13 @@ const Rate = () => {
                   <span className="text-[10px] font-bold uppercase tracking-widest">Login required to submit</span>
                 </div>
                 {user ? (
-                  <button className="w-full sm:w-auto px-8 py-2.5 bg-ctp-sapphire text-ctp-base rounded-full font-bold text-xs hover:bg-ctp-sapphire/90 transition-all shadow-md shadow-ctp-sapphire/20 active:scale-95">
+                  <button className="w-full sm:w-auto px-8 py-2.5 bg-ctp-sky-800 text-ctp-base rounded-full font-bold text-xs hover:bg-ctp-sky-800/90 transition-all shadow-md shadow-ctp-sky-800/20 active:scale-95">
                     Submit Experience
                   </button>
                 ) : (
                   <button 
                     onClick={openAuthModal}
-                    className="w-full sm:w-auto px-8 py-2.5 bg-ctp-sapphire text-ctp-base rounded-full font-bold text-xs hover:bg-ctp-sapphire/90 transition-all shadow-md shadow-ctp-sapphire/20 active:scale-95"
+                    className="w-full sm:w-auto px-8 py-2.5 bg-ctp-sky-800 text-ctp-base rounded-full font-bold text-xs hover:bg-ctp-sky-800/90 transition-all shadow-md shadow-ctp-sky-800/20 active:scale-95"
                   >
                     Log in to submit
                   </button>
@@ -371,7 +371,7 @@ const Rate = () => {
               <h3 className="text-base font-bold text-ctp-text mb-6 relative z-10">Why your feedback matters</h3>
               
               <div className="relative mb-6 flex justify-center">
-                <div className="absolute inset-0 bg-ctp-sapphire/5 rounded-full scale-150 blur-3xl opacity-50" />
+                <div className="absolute inset-0 bg-ctp-sky-800/5 rounded-full scale-150 blur-3xl opacity-50" />
                 <img src={personImg} alt="" className="h-36 w-auto object-contain relative z-10 transition-transform group-hover:scale-105 duration-500" />
               </div>
 
@@ -382,8 +382,8 @@ const Rate = () => {
                   { text: "Promotes transparency and accountability" }
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <div className="w-4 h-4 rounded-full bg-ctp-sapphire/10 flex items-center justify-center shrink-0 mt-0.5">
-                      <CheckCircle2 size={12} className="text-ctp-sapphire" />
+                    <div className="w-4 h-4 rounded-full bg-ctp-sky-800/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <CheckCircle2 size={12} className="text-ctp-sky-800" />
                     </div>
                     <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed">{item.text}</p>
                   </div>
@@ -415,7 +415,7 @@ const Rate = () => {
 
             {/* What happens next? */}
             <section className="bg-ctp-mantle rounded-3xl p-6 border border-ctp-surface0 shadow-sm">
-              <h3 className="text-base font-bold text-ctp-sapphire mb-6">What happens next?</h3>
+              <h3 className="text-base font-bold text-ctp-sky-800 mb-6">What happens next?</h3>
               <div className="space-y-6">
                 {[
                   { step: 1, title: "You submit your report", text: "Your feedback is anonymous and securely submitted." },
@@ -423,7 +423,7 @@ const Rate = () => {
                   { step: 3, title: "It becomes part of insights", text: "Your report helps build better community insights." }
                 ].map((step, i) => (
                   <div key={i} className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-ctp-sapphire text-ctp-base flex items-center justify-center text-[10px] font-black shrink-0">
+                    <div className="w-6 h-6 rounded-full bg-ctp-sky-800 text-ctp-base flex items-center justify-center text-[10px] font-black shrink-0">
                       {step.step}
                     </div>
                     <div>
@@ -434,7 +434,7 @@ const Rate = () => {
                 ))}
                 
                 <div className="pt-2 flex items-start gap-3">
-                  <div className="text-ctp-sapphire shrink-0">
+                  <div className="text-ctp-sky-800 shrink-0">
                     <ShieldCheck size={18} />
                   </div>
                   <p className="text-[10px] text-ctp-subtext0 font-medium leading-relaxed uppercase tracking-tighter">All reports are moderated to ensure quality and safety.</p>

@@ -17,7 +17,7 @@ const DashboardSidebar = () => {
           <h3 className="text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em]">Upcoming Reminders</h3>
           <button 
             onClick={() => navigate('/coming-soon')}
-            className="text-[10px] font-black text-ctp-sapphire hover:underline uppercase tracking-widest transition-all"
+            className="text-[10px] font-black text-ctp-sky-800 hover:underline uppercase tracking-widest transition-all"
           >
             View all
           </button>
@@ -25,7 +25,7 @@ const DashboardSidebar = () => {
         
         <div className="space-y-8">
           <div className="flex items-start gap-5 group cursor-pointer">
-            <div className="w-12 h-12 rounded-2xl bg-ctp-base border border-ctp-surface0 flex items-center justify-center text-ctp-subtext1 group-hover:bg-ctp-sapphire/10 group-hover:text-ctp-sapphire transition-all shadow-sm shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-ctp-base border border-ctp-surface0 flex items-center justify-center text-ctp-subtext1 group-hover:bg-ctp-sky-800/10 group-hover:text-ctp-sky-800 transition-all shadow-sm shrink-0">
               <Calendar size={20} />
             </div>
             <div className="min-w-0">
@@ -58,21 +58,21 @@ const DashboardSidebar = () => {
             { title: 'Check requirements', sub: 'PhilHealth ID', icon: ListChecks },
           ].map((step, i) => (
             <div key={i} className="flex items-center gap-4 p-4 rounded-2xl hover:bg-ctp-base border border-transparent hover:border-ctp-surface0 transition-all cursor-pointer group">
-              <div className="w-10 h-10 rounded-xl bg-ctp-sapphire/10 border border-ctp-sapphire/20 flex items-center justify-center text-ctp-sapphire shadow-sm shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-ctp-sky-800/10 border border-ctp-sky-800/20 flex items-center justify-center text-ctp-sky-800 shadow-sm shrink-0">
                 <step.icon size={18} strokeWidth={2.5} />
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="text-[13px] font-black text-ctp-text truncate uppercase tracking-tight">{step.title}</h4>
                 <p className="text-[10px] text-ctp-subtext1 mt-1 truncate font-bold uppercase tracking-widest opacity-70">{step.sub}</p>
               </div>
-              <ChevronRight size={16} className="text-ctp-subtext1 group-hover:text-ctp-sapphire transition-all group-hover:translate-x-1" />
+              <ChevronRight size={16} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-all group-hover:translate-x-1" />
             </div>
           ))}
         </div>
         
         <button 
           onClick={() => navigate('/coming-soon')}
-          className="w-full mt-8 py-4 text-[11px] font-black text-ctp-sapphire border border-ctp-sapphire/20 rounded-2xl hover:bg-ctp-sapphire/5 transition-all uppercase tracking-[0.2em] active:scale-[0.98] shadow-sm"
+          className="w-full mt-8 py-4 text-[11px] font-black text-ctp-sky-800 border border-ctp-sky-800/20 rounded-2xl hover:bg-ctp-sky-800/5 transition-all uppercase tracking-[0.2em] active:scale-[0.98] shadow-sm"
         >
           View recommendations
         </button>
@@ -82,7 +82,7 @@ const DashboardSidebar = () => {
       <section className="bg-ctp-mantle rounded-[2rem] p-8 border border-ctp-surface0 shadow-sm">
         <div className="flex items-center justify-between mb-8">
           <h3 className="text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em]">Activity</h3>
-          <select className="text-[10px] font-black text-ctp-sapphire bg-ctp-base border border-ctp-surface0 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-ctp-sapphire/20 transition-all cursor-pointer uppercase tracking-widest shadow-sm">
+          <select className="text-[10px] font-black text-ctp-sky-800 bg-ctp-base border border-ctp-surface0 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-ctp-sky-800/20 transition-all cursor-pointer uppercase tracking-widest shadow-sm">
             <option>This month</option>
             <option>Last month</option>
           </select>
@@ -116,7 +116,7 @@ const DashboardSidebar = () => {
       </section>
 
       {/* Motivation Widget */}
-      <section className="bg-ctp-sapphire rounded-[2rem] p-8 text-ctp-base relative overflow-hidden group border border-ctp-sapphire/20 shadow-xl shadow-ctp-sapphire/10">
+      <section className="bg-ctp-sky-800 rounded-[2rem] p-8 text-ctp-base relative overflow-hidden group border border-ctp-sky-800/20 shadow-xl shadow-ctp-sky-800/10">
         <div className="absolute top-0 right-0 w-40 h-40 bg-ctp-mantle/10 rounded-full -mr-20 -mt-20 transition-transform group-hover:scale-125 duration-700 blur-2xl" />
         
         <div className="relative z-10 flex flex-col items-center text-center">
@@ -128,7 +128,7 @@ const DashboardSidebar = () => {
           <p className="text-ctp-base/90 text-[12px] leading-relaxed mb-8 max-w-[200px] font-medium">
             Small steps today lead to big accomplishments tomorrow.
           </p>
-          <button className="w-full py-4 bg-ctp-base text-ctp-sapphire rounded-2xl font-black text-[11px] shadow-2xl hover:opacity-95 transition-all uppercase tracking-[0.2em] active:scale-95">
+          <button className="w-full py-4 bg-ctp-base text-ctp-sky-800 rounded-2xl font-black text-[11px] shadow-2xl hover:opacity-95 transition-all uppercase tracking-[0.2em] active:scale-95">
             Explore guides
           </button>
         </div>

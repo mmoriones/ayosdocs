@@ -60,11 +60,11 @@ const RecentlyUpdated = ({ className = "" }) => {
 
             {/* CONTENT */}
             <div className="flex-1 min-w-0">
-              <h3 className="text-[18px] font-black text-ctp-text truncate group-hover:text-ctp-sapphire transition-colors leading-tight tracking-tight uppercase">
+              <h3 className="text-[18px] font-black text-ctp-text truncate group-hover:text-ctp-green transition-colors leading-tight tracking-tight uppercase">
                 {update.title}
               </h3>
               <div className="flex items-center gap-3 mt-2">
-                <span className="text-[11px] font-black text-ctp-sapphire bg-ctp-sapphire/10 px-3 py-1 rounded-full uppercase tracking-widest border border-ctp-sapphire/20 shadow-sm">
+                <span className="text-[11px] font-black text-ctp-green bg-ctp-green/10 px-3 py-1 rounded-full uppercase tracking-widest border border-ctp-green/20 shadow-sm">
                   {update.type}
                 </span>
                 <span className="text-[12px] text-ctp-overlay1 font-black">•</span>
@@ -75,7 +75,7 @@ const RecentlyUpdated = ({ className = "" }) => {
             </div>
 
             {/* ACTION */}
-            <div className="shrink-0 text-ctp-surface2 group-hover:text-ctp-sapphire transition-all transform group-hover:translate-x-1">
+            <div className="shrink-0 text-ctp-surface2 group-hover:text-ctp-green transition-all transform group-hover:translate-x-1">
               <ChevronRight size={20} strokeWidth={3} />
             </div>
           </div>

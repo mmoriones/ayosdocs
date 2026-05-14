@@ -73,7 +73,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
           onClick={() => navigate("/")}
           className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all duration-200 active:scale-95 ${
             isHomeActive 
-              ? "bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20" 
+              ? "bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20" 
               : "text-ctp-subtext1 hover:bg-ctp-mantle"
           }`}
         >
@@ -88,7 +88,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
           onClick={onOpenTOC}
           className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all duration-200 active:scale-95 ${
             isTOCOpen 
-              ? "bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20" 
+              ? "bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20" 
               : "text-ctp-subtext1 hover:bg-ctp-mantle"
           }`}
         >
@@ -103,7 +103,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
           onClick={onOpenChecklist}
           className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all duration-200 active:scale-95 ${
             isChecklistOpen 
-              ? "bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20" 
+              ? "bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20" 
               : "text-ctp-subtext1 hover:bg-ctp-mantle"
           }`}
         >

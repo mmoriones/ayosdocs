@@ -60,7 +60,7 @@ const RecentExperiences = ({ className = "" }) => {
 
             {/* CONTENT */}
             <div className="flex-1 min-w-0">
-              <h3 className="text-[18px] font-black text-ctp-text truncate group-hover:text-ctp-sapphire transition-colors leading-tight tracking-tight uppercase">
+              <h3 className="text-[18px] font-black text-ctp-text truncate group-hover:text-ctp-yellow transition-colors leading-tight tracking-tight uppercase">
                 {office.name}
               </h3>
               <div className="flex items-center gap-4 mt-1.5">
@@ -70,8 +70,8 @@ const RecentExperiences = ({ className = "" }) => {
                 </div>
                 <span className="text-[12px] text-ctp-surface2">•</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-black text-ctp-sky uppercase tracking-widest opacity-80">Wait:</span>
-                  <span className="text-[14px] font-black text-ctp-sky uppercase tracking-tight">
+                  <span className="text-[11px] font-black text-ctp-sky-800 uppercase tracking-widest opacity-80">Wait:</span>
+                  <span className="text-[14px] font-black text-ctp-sky-800 uppercase tracking-tight">
                     {office.waitTime}
                   </span>
                 </div>
@@ -79,7 +79,7 @@ const RecentExperiences = ({ className = "" }) => {
             </div>
 
             {/* ACTION */}
-            <div className="shrink-0 text-ctp-surface2 group-hover:text-ctp-sapphire transition-all transform group-hover:translate-x-1">
+            <div className="shrink-0 text-ctp-surface2 group-hover:text-ctp-yellow transition-all transform group-hover:translate-x-1">
               <ChevronRight size={20} strokeWidth={3} />
             </div>
           </div>

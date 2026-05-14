@@ -34,7 +34,7 @@ const FAQs = () => {
         <section className="bg-ctp-mantle rounded-2xl p-8 md:p-12 shadow-sm border border-ctp-surface0 space-y-8">
           <div className="text-center space-y-3">
             <h1 className="text-3xl md:text-4xl font-bold text-ctp-text">
-              Frequently Asked <span className="text-ctp-sapphire">Questions</span>
+              Frequently Asked <span className="text-ctp-sky-800">Questions</span>
             </h1>
             <p className="text-ctp-subtext1 max-w-2xl mx-auto">
               Got a question? We're here to help. If you can't find what you're looking for, feel free to contact us.
@@ -53,7 +53,7 @@ const FAQs = () => {
 
         <div className="text-center">
           <p className="text-ctp-subtext0">
-            Still have questions? <span className="text-ctp-sapphire font-medium cursor-pointer hover:underline">Email contact@ayosdocs.com</span>
+            Still have questions? <span className="text-ctp-sky-800 font-medium cursor-pointer hover:underline">Email contact@ayosdocs.com</span>
           </p>
         </div>
       </div>

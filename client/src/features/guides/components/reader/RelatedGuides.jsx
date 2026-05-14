@@ -44,7 +44,7 @@ const RelatedGuides = ({ currentSlug, category }) => {
                 className="w-full h-full object-contain" 
               />
             </div>
-            <span className="text-ctp-text text-sm font-bold group-hover:text-ctp-sapphire line-clamp-2 uppercase tracking-tight">
+            <span className="text-ctp-text text-sm font-bold group-hover:text-ctp-sky-800 line-clamp-2 uppercase tracking-tight">
               {g.title}
             </span>
           </Link>

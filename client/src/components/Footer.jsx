@@ -21,7 +21,7 @@ const Footer = () => {
                 className="w-8 h-8 object-contain"
               />
               <h1 className="text-2xl font-bold text-ctp-text leading-none">
-                <span className="text-ctp-sapphire">Ayos</span>
+                <span className="text-ctp-sky-800">Ayos</span>
                 <span className="ml-1">Docs</span>
               </h1>
             </div>
@@ -32,16 +32,16 @@ const Footer = () => {
 
             {/* SOCIALS */}
             <div className="flex items-center gap-6 text-ctp-subtext0">
-              <a href="#" className="hover:text-ctp-blue transition-colors">
+              <a href="#" className="hover:text-ctp-sky-800 transition-colors">
                 <FaFacebook size={20} />
               </a>
-              <a href="#" className="hover:text-ctp-blue transition-colors">
+              <a href="#" className="hover:text-ctp-sky-800 transition-colors">
                 <FaXTwitter size={20} />
               </a>
-              <a href="#" className="hover:text-ctp-blue transition-colors">
+              <a href="#" className="hover:text-ctp-sky-800 transition-colors">
                 <FaInstagram size={20} />
               </a>
-              <a href="#" className="hover:text-ctp-blue transition-colors">
+              <a href="#" className="hover:text-ctp-sky-800 transition-colors">
                 <FaYoutube size={20} />
               </a>
             </div>
@@ -51,8 +51,8 @@ const Footer = () => {
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-lg font-bold text-ctp-text">Company</h4>
             <div className="flex flex-col gap-3 text-sm">
-              <Link to="/about" className="text-ctp-subtext1 hover:text-ctp-blue font-medium transition-colors">About</Link>
-              <Link to="/contact" className="text-ctp-subtext1 hover:text-ctp-blue font-medium transition-colors">Contact</Link>
+              <Link to="/about" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-colors">About</Link>
+              <Link to="/contact" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-colors">Contact</Link>
             </div>
           </div>
 
@@ -60,8 +60,8 @@ const Footer = () => {
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-lg font-bold text-ctp-text">Legal</h4>
             <div className="flex flex-col gap-3 text-sm">
-              <Link to="/terms" className="text-ctp-subtext1 hover:text-ctp-blue font-medium transition-colors">Terms</Link>
-              <Link to="/privacy" className="text-ctp-subtext1 hover:text-ctp-blue font-medium transition-colors">Privacy</Link>
+              <Link to="/terms" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-colors">Terms</Link>
+              <Link to="/privacy" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-colors">Privacy</Link>
             </div>
           </div>
 
@@ -69,8 +69,8 @@ const Footer = () => {
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-lg font-bold text-ctp-text">Support</h4>
             <div className="flex flex-col gap-3 text-sm">
-              <Link to="/faqs" className="text-ctp-subtext1 hover:text-ctp-blue font-medium transition-colors">FAQs</Link>
-              <Link to="/contact" className="text-ctp-subtext1 hover:text-ctp-blue font-medium transition-colors">Help Center</Link>
+              <Link to="/faqs" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-colors">FAQs</Link>
+              <Link to="/contact" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-colors">Help Center</Link>
             </div>
           </div>
 

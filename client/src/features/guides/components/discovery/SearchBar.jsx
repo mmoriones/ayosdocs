@@ -84,7 +84,7 @@ const SearchBar = () => {
           onKeyDown={(e) => e.key === "Enter" && handleSearchAction()}
           className="w-full pl-11 sm:pl-14 pr-11 sm:pr-36 py-4 sm:py-5 rounded-full border border-ctp-surface0 
           bg-ctp-base text-[18px] text-ctp-text placeholder:text-ctp-subtext1
-          focus:outline-none focus:ring-4 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire
+          focus:outline-none focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800
           shadow-xl
           transition-all duration-200"
         />
@@ -102,7 +102,7 @@ const SearchBar = () => {
         {/* SEARCH BUTTON */}
         <button
           onClick={handleSearchAction}
-          className="absolute right-2 hidden sm:flex bg-ctp-sapphire hover:bg-ctp-blue 
+          className="absolute right-2 hidden sm:flex bg-ctp-sky-800 hover:opacity-90 
           text-ctp-base px-5 sm:px-7 py-3 rounded-full transition-all duration-200 
           shadow-md hover:shadow-lg items-center gap-2 active:scale-95"
         >

@@ -3,31 +3,37 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-accent-200: var(--sapphire-200);
-  --color-accent-500: var(--sapphire-500);
-  --color-accent-800: var(--sapphire-800);
-  --color-accent: var(--sapphire-500);
+  --color-accent-50: var(--sky-50);
+  --color-accent-300: var(--sky-300);
+  --color-accent-800: var(--sky-800);
+  --color-accent: var(--sky-800);
 
-  /* Brand Colors - Mapped to Sapphire for the clean blue look */
-  --color-brand-200: var(--sapphire-200);
-  --color-brand-500: var(--sapphire-500);
-  --color-brand-800: var(--sapphire-800);
-  --color-brand: var(--sapphire-500);
+  /* Brand Colors - Mapped to Sky for the new clean look */
+  --color-brand-50: var(--sky-50);
+  --color-brand-300: var(--sky-300);
+  --color-brand-800: var(--sky-800);
+  --color-brand: var(--sky-800);
 
-  --color-ctp-sapphire-200: var(--sapphire-200);
-  --color-ctp-sapphire-500: var(--sapphire-500);
-  --color-ctp-sapphire-800: var(--sapphire-800);
-  --color-ctp-sapphire: var(--sapphire-500);
-
-  --color-ctp-blue-200: var(--blue-200);
-  --color-ctp-blue-500: var(--blue-500);
-  --color-ctp-blue-800: var(--blue-800);
-  --color-ctp-blue: var(--blue-500);
-
-  --color-ctp-sky-200: var(--sky-200);
-  --color-ctp-sky-500: var(--sky-500);
+  --color-ctp-sky-10: var(--sky-10);
+  --color-ctp-sky-50: var(--sky-50);
+  --color-ctp-sky-300: var(--sky-300);
   --color-ctp-sky-800: var(--sky-800);
-  --color-ctp-sky: var(--sky-500);
+  --color-ctp-sky: var(--sky-800);
+
+  --color-ctp-green: var(--green);
+  --color-ctp-yellow: var(--yellow);
+  --color-ctp-orange: var(--orange);
+
+  /* Legacy mappings for backward compatibility if needed */
+  --color-ctp-sapphire-200: var(--sky-50);
+  --color-ctp-sapphire-500: var(--sky-300);
+  --color-ctp-sapphire-800: var(--sky-800);
+  --color-ctp-sapphire: var(--sky-800);
+
+  --color-ctp-blue-200: var(--sky-50);
+  --color-ctp-blue-500: var(--sky-300);
+  --color-ctp-blue-800: var(--sky-800);
+  --color-ctp-blue: var(--sky-800);
 
   /* Animation */
   --animate-blob: blob 7s infinite;
@@ -58,9 +64,14 @@
     --blue-500: #1e66f5;
     --blue-800: #1754cc;
 
-    --sky-200: #9dd8f1;
-    --sky-500: #04a5e5;
-    --sky-800: #0384b7;
+    --sky-10: #e1f2fa;
+    --sky-50: #c6e2f8;
+    --sky-300: #8cc9db;
+    --sky-800: #2d97ba;
+
+    --green: #40a02b;
+    --yellow: #df8e1d;
+    --orange: #fe640b;
   }
 
   .mocha, .dark {
@@ -73,9 +84,14 @@
     --blue-500: #89b4fa;
     --blue-800: #6b8fd1;
 
-    --sky-200: #c0edf5;
-    --sky-500: #89dceb;
-    --sky-800: #6eb0bc;
+    --sky-10: #1e2e3e;
+    --sky-50: #2d4f67;
+    --sky-300: #89dceb;
+    --sky-800: #74c7ec;
+
+    --green: #a6e3a1;
+    --yellow: #f9e2af;
+    --orange: #fab387;
   }
 
   body {

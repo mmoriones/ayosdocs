@@ -43,7 +43,7 @@ const TrendingGuides = () => {
               className="
                 group relative flex flex-col p-6 rounded-[2.5rem] 
                 bg-ctp-base border border-ctp-surface0 soft-shadow
-                hover:border-ctp-sapphire/30 hover:-translate-y-2
+                hover:border-ctp-sky-800/30 hover:-translate-y-2
                 transition-all duration-500 cursor-pointer overflow-hidden
               "
             >
@@ -57,13 +57,13 @@ const TrendingGuides = () => {
                     className="w-full h-full object-contain"
                   />
                 ) : (
-                  <TrendingUp className="text-ctp-sapphire" size={28} />
+                  <TrendingUp className="text-ctp-sky-800" size={28} />
                 )}
               </div>
 
               {/* TITLE & DESC */}
               <div className="space-y-2 mb-6">
-                <h3 className="text-[20px] font-black text-ctp-text group-hover:text-ctp-sapphire transition-colors leading-tight line-clamp-2 min-h-[3rem] tracking-tight">
+                <h3 className="text-[20px] font-black text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight line-clamp-2 min-h-[3rem] tracking-tight">
                   {guide.title}
                 </h3>
                 <p className="text-[14px] text-ctp-subtext1 font-medium leading-relaxed line-clamp-2 opacity-80">
@@ -74,11 +74,11 @@ const TrendingGuides = () => {
               {/* METADATA & ARROW (Bottom Row) */}
               <div className="mt-auto flex items-center justify-between pt-5 border-t border-ctp-surface0/50">
                 <div className="flex items-center gap-2 text-[12px] font-black text-ctp-subtext0 uppercase tracking-widest">
-                  <Clock size={16} className="text-ctp-sapphire" />
+                  <Clock size={16} className="text-ctp-sky-800" />
                   <span>{guide.estimatedTime || "1-3 days"}</span>
                 </div>
                 
-                <div className="w-10 h-10 rounded-xl bg-ctp-mantle flex items-center justify-center text-ctp-sapphire group-hover:bg-ctp-sapphire group-hover:text-ctp-base transition-all transform group-hover:rotate-[-45deg] shadow-sm border border-ctp-surface0">
+                <div className="w-10 h-10 rounded-xl bg-ctp-mantle flex items-center justify-center text-ctp-sky-800 group-hover:bg-ctp-sky-800 group-hover:text-ctp-base transition-all transform group-hover:rotate-[-45deg] shadow-sm border border-ctp-surface0">
                   <ArrowRight size={18} strokeWidth={3} />
                 </div>
               </div>

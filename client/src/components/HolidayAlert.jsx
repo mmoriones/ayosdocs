@@ -9,13 +9,13 @@ const HolidayAlert = () => {
 
   return (
     <Banner
-      variant="sapphire"
+      variant="sky"
       icon={Info}
       title="Local Holiday Alert"
       onClose={() => setIsVisible(false)}
     >
       Offices may be closed today{" "}
-      <span className="text-ctp-sapphire font-bold">
+      <span className="text-ctp-sky-800 font-bold">
         (April 9, Araw ng Kagitingan)
       </span>
     </Banner>

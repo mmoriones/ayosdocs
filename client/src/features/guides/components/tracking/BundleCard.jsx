@@ -14,7 +14,7 @@ const BundleCard = ({ bundle, progress }) => {
           <div className="w-20 h-20 rounded-2xl bg-ctp-mantle flex items-center justify-center text-4xl group-hover:scale-110 transition-transform shadow-sm border border-ctp-surface0">
             {bundle.icon}
           </div>
-          <div className="text-ctp-subtext1 group-hover:text-ctp-sapphire transition-colors">
+          <div className="text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-colors">
             <ChevronRight size={24} strokeWidth={3} />
           </div>
         </div>
@@ -24,7 +24,7 @@ const BundleCard = ({ bundle, progress }) => {
             <span className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-[0.2em] border ${
               percentage === 100 
                 ? 'bg-ctp-mauve/10 text-ctp-mauve border-ctp-mauve/20' 
-                : 'bg-ctp-sapphire/10 text-ctp-sapphire border-ctp-sapphire/20'
+                : 'bg-ctp-sky-800/10 text-ctp-sky-800 border-ctp-sky-800/20'
             }`}>
               {percentage === 100 ? 'Completed' : 'In Progress'}
             </span>
@@ -35,12 +35,12 @@ const BundleCard = ({ bundle, progress }) => {
           <div className="space-y-3 pt-2">
             <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-widest">
               <span className="text-ctp-subtext1 opacity-60">{progress.completed} of {progress.total} completed</span>
-              <span className="text-ctp-sapphire">{percentage}%</span>
+              <span className="text-ctp-sky-800">{percentage}%</span>
             </div>
             <div className="h-2.5 w-full bg-ctp-mantle rounded-full overflow-hidden shadow-inner border border-ctp-surface0">
               <div 
                 className={`h-full transition-all duration-1000 ease-out ${
-                  percentage === 100 ? 'bg-ctp-mauve shadow-[0_0_12px_rgba(136,57,239,0.2)]' : 'bg-ctp-sapphire'
+                  percentage === 100 ? 'bg-ctp-mauve shadow-[0_0_12px_rgba(136,57,239,0.2)]' : 'bg-ctp-sky-800'
                 }`} 
                 style={{ width: `${percentage}%` }}
               />

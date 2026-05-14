@@ -42,8 +42,8 @@ const MobileMenu = ({
   const linkClass = (path) =>
     `block w-full px-6 py-4 rounded-xl transition-all duration-200 text-lg ${
       isActive(path)
-        ? "bg-ctp-sapphire/10 text-ctp-sapphire font-bold"
-        : "text-ctp-subtext0 font-semibold hover:bg-ctp-mantle hover:text-ctp-sapphire"
+        ? "bg-ctp-sky-800/10 text-ctp-sky-800 font-bold"
+        : "text-ctp-subtext0 font-semibold hover:bg-ctp-mantle hover:text-ctp-sky-800"
     }`;
 
   return (
@@ -68,7 +68,7 @@ const MobileMenu = ({
                   className="w-10 h-10 rounded-full border border-ctp-surface0"
                 />
               ) : (
-                <div className="w-10 h-10 bg-ctp-sapphire text-ctp-base rounded-full flex items-center justify-center text-sm font-bold">
+                <div className="w-10 h-10 bg-ctp-sky-800 text-ctp-base rounded-full flex items-center justify-center text-sm font-bold">
                   {user.fullName.charAt(0)}
                 </div>
               )}
@@ -185,7 +185,7 @@ const MobileMenu = ({
             ) : (
               <button
                 onClick={() => handleClick(openAuthModal)}
-                className="w-full bg-ctp-sapphire-800 text-ctp-base py-4 rounded-xl font-bold text-lg transition-all active:scale-[0.98] shadow-lg flex items-center justify-center gap-2"
+                className="w-full bg-ctp-sky-800 hover:opacity-90 text-ctp-base py-4 rounded-xl font-bold text-lg transition-all active:scale-[0.98] shadow-lg flex items-center justify-center gap-2"
               >
                 <UserPlus size={20} />
                 Login / Register

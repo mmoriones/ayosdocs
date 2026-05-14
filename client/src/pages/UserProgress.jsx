@@ -183,7 +183,7 @@ const UserProgress = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-ctp-base">
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="animate-spin text-ctp-sapphire" size={40} />
+          <Loader2 className="animate-spin text-ctp-sky-800" size={40} />
           <p className="text-ctp-subtext1 font-medium">Loading your dashboard...</p>
         </div>
       </div>
@@ -197,14 +197,14 @@ const UserProgress = () => {
         {/* Header Area - Sophisticated style */}
         <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 text-ctp-sapphire">
+            <div className="inline-flex items-center gap-2 text-ctp-sky-800">
               <ArrowRight size={20} className="-rotate-45" />
               <span className="text-[14px] font-black uppercase tracking-[0.3em]">Dashboard</span>
             </div>
             <h1 className="text-[40px] font-black text-ctp-text tracking-tight uppercase leading-none">My Progress</h1>
             <p className="text-ctp-subtext1 text-[18px] font-medium max-w-xl">Track your government journey, check milestones, and complete goals.</p>
           </div>
-          <button className="flex items-center gap-3 px-8 py-4 bg-ctp-mantle border border-ctp-sapphire/30 text-ctp-sapphire rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-lg hover:shadow-xl hover:border-ctp-sapphire transition-all active:scale-95">
+          <button className="flex items-center gap-3 px-8 py-4 bg-ctp-mantle border border-ctp-sky-800/30 text-ctp-sky-800 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-lg hover:shadow-xl hover:border-ctp-sky-800 transition-all active:scale-95">
             <Plus size={20} strokeWidth={3} />
             New Requirement Bundle
           </button>
@@ -228,7 +228,7 @@ const UserProgress = () => {
                       onClick={() => setActiveTab(tab)}
                       className={`px-8 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${
                         activeTab === tab 
-                          ? 'bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20' 
+                          ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' 
                           : 'text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-surface0'
                       }`}
                     >
@@ -242,7 +242,7 @@ const UserProgress = () => {
                     <select 
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
-                      className="appearance-none bg-ctp-mantle border border-ctp-surface0 rounded-2xl px-6 py-3.5 pr-12 text-[11px] font-black uppercase tracking-widest text-ctp-subtext1 focus:ring-4 focus:ring-ctp-sapphire/10 transition-all cursor-pointer shadow-sm"
+                      className="appearance-none bg-ctp-mantle border border-ctp-surface0 rounded-2xl px-6 py-3.5 pr-12 text-[11px] font-black uppercase tracking-widest text-ctp-subtext1 focus:ring-4 focus:ring-ctp-sky-800/10 transition-all cursor-pointer shadow-sm"
                     >
                       <option>Recently updated</option>
                       <option>Alphabetical</option>
@@ -257,13 +257,13 @@ const UserProgress = () => {
               </div>
 
               <div className="relative group">
-                <Search size={20} className="absolute left-5 top-1/2 -translate-y-1/2 text-ctp-subtext1 transition-colors group-focus-within:text-ctp-sapphire" />
+                <Search size={20} className="absolute left-5 top-1/2 -translate-y-1/2 text-ctp-subtext1 transition-colors group-focus-within:text-ctp-sky-800" />
                 <input 
                   type="text"
                   placeholder="Search your tracked guides and goals..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-14 pr-6 py-5 bg-ctp-mantle border border-ctp-surface0 rounded-[2rem] text-[18px] shadow-sm focus:ring-4 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire transition-all text-ctp-text placeholder:text-ctp-subtext0 font-medium"
+                  className="w-full pl-14 pr-6 py-5 bg-ctp-mantle border border-ctp-surface0 rounded-[2rem] text-[18px] shadow-sm focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-ctp-text placeholder:text-ctp-subtext0 font-medium"
                 />
               </div>
             </div>
@@ -277,7 +277,7 @@ const UserProgress = () => {
                 </div>
                 <button 
                   onClick={() => navigate('/coming-soon')}
-                  className="group flex items-center gap-2 text-ctp-sapphire font-black text-[11px] uppercase tracking-widest hover:text-ctp-sapphire-500 transition-colors mb-1"
+                  className="group flex items-center gap-2 text-ctp-sky-800 font-black text-[11px] uppercase tracking-widest hover:text-ctp-sky-300 transition-colors mb-1"
                 >
                   View Library <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </button>
@@ -294,10 +294,10 @@ const UserProgress = () => {
 
                 <button 
                   onClick={() => navigate('/coming-soon')}
-                  className="w-full py-10 bg-ctp-mantle border-2 border-dashed border-ctp-surface0 rounded-[2.5rem] text-ctp-subtext0 hover:text-ctp-sapphire hover:border-ctp-sapphire/30 hover:bg-ctp-sapphire/5 transition-all flex flex-col items-center justify-center gap-4 group"
+                  className="w-full py-10 bg-ctp-mantle border-2 border-dashed border-ctp-surface0 rounded-[2.5rem] text-ctp-subtext0 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-sky-800/5 transition-all flex flex-col items-center justify-center gap-4 group"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-ctp-base border border-ctp-surface0 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-                    <Plus size={28} className="text-ctp-subtext0 group-hover:text-ctp-sapphire" strokeWidth={3} />
+                    <Plus size={28} className="text-ctp-subtext0 group-hover:text-ctp-sky-800" strokeWidth={3} />
                   </div>
                   <span className="text-[13px] font-black uppercase tracking-[0.2em]">Explore life event bundles</span>
                 </button>
@@ -311,7 +311,7 @@ const UserProgress = () => {
                   <h2 className="text-[24px] font-black text-ctp-text uppercase tracking-tight">Tracked Procedures</h2>
                   <p className="text-[10px] text-ctp-subtext0 font-black uppercase tracking-[0.2em] mt-3">Individual documentation requirements.</p>
                 </div>
-                <Link to="/guides" className="group flex items-center gap-2 text-ctp-sapphire font-black text-[11px] uppercase tracking-widest hover:text-ctp-sapphire-500 transition-colors mb-1">
+                <Link to="/guides" className="group flex items-center gap-2 text-ctp-sky-800 font-black text-[11px] uppercase tracking-widest hover:text-ctp-sky-300 transition-colors mb-1">
                   Knowledge Base <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
@@ -334,7 +334,7 @@ const UserProgress = () => {
                     </div>
                     <h3 className="text-xl font-black text-ctp-text uppercase tracking-tight">No guides found</h3>
                     <p className="text-ctp-subtext1 font-medium mt-2">Try adjusting your filters or section.</p>
-                    <Link to="/guides" className="mt-8 inline-block px-8 py-4 bg-ctp-sapphire text-ctp-base rounded-xl font-black uppercase tracking-widest shadow-lg active:scale-95 transition-all">Explore all guides</Link>
+                    <Link to="/guides" className="mt-8 inline-block px-8 py-4 bg-ctp-sky-800 text-ctp-base rounded-xl font-black uppercase tracking-widest shadow-lg active:scale-95 transition-all">Explore all guides</Link>
                   </div>
                 )}
                 

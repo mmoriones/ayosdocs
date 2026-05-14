@@ -1,7 +1,7 @@
 const VerifyEmailModal = () => (
-  <div className="relative w-full max-w-sm p-8 text-center rounded-2xl bg-ctp-mantle border-2 border-ctp-sapphire/30 shadow-2xl">
-    <div className="mx-auto w-16 h-16 bg-ctp-sapphire/10 rounded-full flex items-center justify-center mb-6">
-      <Mail className="text-ctp-sapphire" size={32} />
+  <div className="relative w-full max-w-sm p-8 text-center rounded-2xl bg-ctp-mantle border-2 border-ctp-sky-800/30 shadow-2xl">
+    <div className="mx-auto w-16 h-16 bg-ctp-sky-800/10 rounded-full flex items-center justify-center mb-6">
+      <Mail className="text-ctp-sky-800" size={32} />
     </div>
     
     <h3 className="text-xl font-black uppercase text-ctp-text mb-2">Check your mail</h3>

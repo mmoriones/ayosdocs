@@ -12,7 +12,7 @@ import { X } from 'lucide-react';
  * @param {string} [props.className] - Additional CSS classes.
  */
 const Banner = ({ 
-  variant = 'teal', 
+  variant = 'sky', 
   icon: Icon, 
   title, 
   children, 
@@ -20,26 +20,29 @@ const Banner = ({
   className = "" 
 }) => {
   const variants = {
-    teal: "bg-ctp-sapphire/10 border-ctp-sapphire/20 text-ctp-sapphire",
-    sapphire: "bg-ctp-sapphire/10 border-ctp-sapphire/20 text-ctp-sapphire",
-    green: "bg-ctp-sapphire/10 border-ctp-sapphire/20 text-ctp-sapphire",
-    orange: "bg-ctp-peach/10 border-ctp-peach/20 text-ctp-peach",
+    sky: "bg-ctp-sky-50/50 border-ctp-sky-300/20 text-ctp-sky-800",
+    teal: "bg-ctp-sky-50/50 border-ctp-sky-300/20 text-ctp-sky-800",
+    sapphire: "bg-ctp-sky-50/50 border-ctp-sky-300/20 text-ctp-sky-800",
+    green: "bg-ctp-green/10 border-ctp-green/20 text-ctp-green",
+    orange: "bg-ctp-orange/10 border-ctp-orange/20 text-ctp-orange",
     white: "bg-ctp-mantle border-ctp-surface0 text-ctp-text shadow-sm",
   };
 
   const iconBgVariants = {
-    teal: "bg-ctp-sapphire/20 text-ctp-sapphire",
-    sapphire: "bg-ctp-sapphire/20 text-ctp-sapphire",
-    green: "bg-ctp-sapphire/20 text-ctp-sapphire",
-    orange: "bg-ctp-peach/20 text-ctp-peach",
+    sky: "bg-ctp-sky-50 text-ctp-sky-800",
+    teal: "bg-ctp-sky-50 text-ctp-sky-800",
+    sapphire: "bg-ctp-sky-50 text-ctp-sky-800",
+    green: "bg-ctp-green/20 text-ctp-green",
+    orange: "bg-ctp-orange/20 text-ctp-orange",
     white: "bg-ctp-surface0 text-ctp-subtext1",
   };
 
   const closeButtonVariants = {
-    teal: "text-ctp-sapphire/50 hover:text-ctp-sapphire",
-    sapphire: "text-ctp-sapphire/50 hover:text-ctp-sapphire",
-    green: "text-ctp-sapphire/50 hover:text-ctp-sapphire",
-    orange: "text-ctp-peach/50 hover:text-ctp-peach",
+    sky: "text-ctp-sky-800/50 hover:text-ctp-sky-800",
+    teal: "text-ctp-sky-800/50 hover:text-ctp-sky-800",
+    sapphire: "text-ctp-sky-800/50 hover:text-ctp-sky-800",
+    green: "text-ctp-green/50 hover:text-ctp-green",
+    orange: "text-ctp-orange/50 hover:text-ctp-orange",
     white: "text-ctp-subtext0 hover:text-ctp-text",
   };
 

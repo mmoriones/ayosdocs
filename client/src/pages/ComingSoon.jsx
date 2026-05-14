@@ -20,10 +20,10 @@ const ComingSoon = () => {
         
         {/* Animated Icon Section */}
         <div className="relative">
-          <div className="absolute inset-0 bg-ctp-sapphire/20 blur-3xl rounded-full scale-150 animate-pulse" />
+          <div className="absolute inset-0 bg-ctp-sky-800/20 blur-3xl rounded-full scale-150 animate-pulse" />
           <div className="relative flex justify-center">
-            <div className="w-24 h-24 bg-ctp-mantle rounded-3xl shadow-xl shadow-ctp-sapphire/10 flex items-center justify-center text-ctp-sapphire border border-ctp-surface0 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-ctp-sapphire/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full" />
+            <div className="w-24 h-24 bg-ctp-mantle rounded-3xl shadow-xl shadow-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 border border-ctp-surface0 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-ctp-sky-800/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full" />
               <Rocket size={48} className="relative z-10 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
             </div>
             
@@ -39,12 +39,12 @@ const ComingSoon = () => {
 
         {/* Text Content */}
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-ctp-sapphire/10 border border-ctp-sapphire/20 rounded-full text-ctp-sapphire text-xs font-bold uppercase tracking-widest mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-full text-ctp-sky-800 text-xs font-bold uppercase tracking-widest mb-4">
             <Construction size={14} />
             Feature in Development
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-ctp-text tracking-tight leading-tight">
-            We're building something <span className="text-ctp-sapphire">amazing.</span>
+            We're building something <span className="text-ctp-sky-800">amazing.</span>
           </h1>
           <p className="text-ctp-subtext0 text-lg max-w-lg mx-auto leading-relaxed font-medium">
             Our team is working hard to bring you more powerful features to make your government transactions even easier. 
@@ -54,7 +54,7 @@ const ComingSoon = () => {
         {/* Feature Teasers */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto text-left">
           <div className="bg-ctp-mantle p-5 rounded-3xl border border-ctp-surface0 shadow-sm flex items-start gap-4">
-            <div className="w-10 h-10 rounded-2xl bg-ctp-sapphire/10 flex items-center justify-center text-ctp-sapphire shrink-0">
+            <div className="w-10 h-10 rounded-2xl bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shrink-0">
                <ShieldCheck size={20} />
             </div>
             <div>

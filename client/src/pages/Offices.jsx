@@ -97,8 +97,8 @@ const Offices = () => {
         <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
           
           <div className="flex items-center gap-5 flex-1">
-            <div className="p-4 rounded-2xl bg-ctp-sapphire/10 shrink-0 border border-ctp-sapphire/20 shadow-sm">
-              <Building2 className="text-ctp-sapphire" size={24} />
+            <div className="p-4 rounded-2xl bg-ctp-sky-800/10 shrink-0 border border-ctp-sky-800/20 shadow-sm">
+              <Building2 className="text-ctp-sky-800" size={24} />
             </div>
             <div>
               <h1 className="text-2xl font-black text-ctp-text tracking-tight uppercase">
@@ -112,7 +112,7 @@ const Offices = () => {
 
           <div className="flex flex-wrap items-center gap-4 shrink-0">
             <div className="bg-ctp-base/50 backdrop-blur-sm px-5 py-2.5 rounded-full border border-ctp-surface0 shadow-sm flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-ctp-sapphire animate-pulse shadow-[0_0_8px_rgba(32,159,181,0.5)]" />
+              <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_rgba(32,159,181,0.5)]" />
               <span className="text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em]">5,402 Reports this month</span>
             </div>
           </div>
@@ -135,14 +135,14 @@ const Offices = () => {
                     placeholder="Search by office name, city, or province..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-14 pr-6 py-4 bg-ctp-base border border-ctp-surface0 rounded-2xl text-[16px] focus:ring-4 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire transition-all text-ctp-text placeholder:text-ctp-subtext0 font-medium"
+                    className="w-full pl-14 pr-6 py-4 bg-ctp-base border border-ctp-surface0 rounded-2xl text-[16px] focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-ctp-text placeholder:text-ctp-subtext0 font-medium"
                   />
                 </div>
                 <div className="relative min-w-[220px]">
                   <select 
                     value={selectedAgency}
                     onChange={(e) => setSelectedAgency(e.target.value)}
-                    className="appearance-none w-full bg-ctp-base border border-ctp-surface0 rounded-2xl pl-6 pr-12 py-4 text-[13px] font-black uppercase tracking-widest text-ctp-subtext1 cursor-pointer focus:ring-4 focus:ring-ctp-sapphire/10 transition-all shadow-sm"
+                    className="appearance-none w-full bg-ctp-base border border-ctp-surface0 rounded-2xl pl-6 pr-12 py-4 text-[13px] font-black uppercase tracking-widest text-ctp-subtext1 cursor-pointer focus:ring-4 focus:ring-ctp-sky-800/10 transition-all shadow-sm"
                   >
                     <option>All Agencies</option>
                     <option>DFA</option>
@@ -180,22 +180,22 @@ const Offices = () => {
             {/* Leaderboard/Best Performing */}
             <section className="bg-ctp-mantle rounded-[2.5rem] p-8 border border-ctp-surface0 shadow-sm">
               <div className="flex items-center gap-3 mb-8">
-                <TrendingUp size={20} className="text-ctp-sapphire" />
+                <TrendingUp size={20} className="text-ctp-sky-800" />
                 <h3 className="text-[13px] font-black text-ctp-text uppercase tracking-widest">Best Performing</h3>
               </div>
               
               <div className="space-y-8">
                 {offices.slice(0, 3).map((office, i) => (
                   <div key={office.id} className="flex items-center gap-5 group cursor-pointer">
-                    <div className="w-10 h-10 rounded-xl bg-ctp-sapphire/10 text-ctp-sapphire flex items-center justify-center text-xs font-black border border-ctp-sapphire/20 shadow-sm">
+                    <div className="w-10 h-10 rounded-xl bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center text-xs font-black border border-ctp-sky-800/20 shadow-sm">
                       {i + 1}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-[13px] font-black text-ctp-text truncate group-hover:text-ctp-sapphire transition-colors uppercase tracking-tight">{office.name}</h4>
+                      <h4 className="text-[13px] font-black text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight">{office.name}</h4>
                       <p className="text-[10px] text-ctp-subtext0 font-black uppercase tracking-widest mt-1 opacity-80">{office.agency} • {office.rating} rating</p>
                     </div>
                     <div className="text-right">
-                      <span className="text-[9px] font-black text-ctp-sapphire bg-ctp-sapphire/10 border border-ctp-sapphire/20 px-2 py-0.5 rounded-full uppercase tracking-widest">Fast</span>
+                      <span className="text-[9px] font-black text-ctp-sky-800 bg-ctp-sky-800/10 border border-ctp-sky-800/20 px-2 py-0.5 rounded-full uppercase tracking-widest">Fast</span>
                     </div>
                   </div>
                 ))}
@@ -210,7 +210,7 @@ const Offices = () => {
             </section>
 
             {/* Why it works */}
-            <section className="bg-ctp-sapphire rounded-[2.5rem] p-8 text-ctp-base relative overflow-hidden group border border-ctp-sapphire/20 shadow-xl shadow-ctp-sapphire/10">
+            <section className="bg-ctp-sky-800 rounded-[2.5rem] p-8 text-ctp-base relative overflow-hidden group border border-ctp-sky-800/20 shadow-xl shadow-ctp-sky-800/10">
               <div className="absolute top-0 right-0 w-40 h-40 bg-ctp-mantle/10 rounded-full -mr-20 -mt-20 transition-transform group-hover:scale-125 duration-700 blur-2xl" />
               
               <div className="relative z-10">
@@ -246,7 +246,7 @@ const Offices = () => {
               </p>
               <button 
                 onClick={() => navigate('/rate')}
-                className="w-full py-4 bg-ctp-sapphire text-ctp-base rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] shadow-lg shadow-ctp-sapphire/20 hover:bg-ctp-sapphire-500 transition-all active:scale-95"
+                className="w-full py-4 bg-ctp-sky-800 text-ctp-base rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] shadow-lg shadow-ctp-sky-800/20 hover:opacity-90 transition-all active:scale-95"
               >
                 Share Your Experience
               </button>
@@ -265,12 +265,12 @@ const Offices = () => {
  */
 const OfficeCard = ({ office, navigate }) => {
   return (
-    <div className="group bg-ctp-mantle rounded-[2.5rem] p-8 border border-ctp-surface0 shadow-sm hover:shadow-2xl hover:border-ctp-sapphire/30 transition-all relative overflow-hidden flex flex-col h-full">
+    <div className="group bg-ctp-mantle rounded-[2.5rem] p-8 border border-ctp-surface0 shadow-sm hover:shadow-2xl hover:border-ctp-sky-800/30 transition-all relative overflow-hidden flex flex-col h-full">
       <div className="flex flex-col md:flex-row gap-8 md:items-start">
         
         {/* Office Icon & Agency */}
         <div className="flex md:flex-col items-center gap-6">
-          <div className="w-16 h-16 rounded-[1.25rem] bg-ctp-base flex items-center justify-center p-4 group-hover:bg-ctp-sapphire/10 transition-colors shadow-inner border border-ctp-surface0 shrink-0">
+          <div className="w-16 h-16 rounded-[1.25rem] bg-ctp-base flex items-center justify-center p-4 group-hover:bg-ctp-sky-800/10 transition-colors shadow-inner border border-ctp-surface0 shrink-0">
             <img src={office.icon} alt="" className="w-full h-full object-contain" />
           </div>
           <span className="px-4 py-1.5 rounded-full bg-ctp-surface0 text-ctp-mauve text-[9px] font-black uppercase tracking-[0.2em] border border-ctp-surface0">
@@ -282,11 +282,11 @@ const OfficeCard = ({ office, navigate }) => {
         <div className="flex-1 space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h3 className="text-[22px] font-black text-ctp-text group-hover:text-ctp-sapphire transition-colors leading-tight uppercase tracking-tight">
+              <h3 className="text-[22px] font-black text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight uppercase tracking-tight">
                 {office.name}
               </h3>
               <div className="flex items-center gap-2 mt-2 text-ctp-subtext0">
-                <MapPin size={14} className="text-ctp-sapphire" />
+                <MapPin size={14} className="text-ctp-sky-800" />
                 <span className="text-[12px] font-bold uppercase tracking-widest">{office.location}</span>
               </div>
             </div>
@@ -300,9 +300,9 @@ const OfficeCard = ({ office, navigate }) => {
                 <p className="text-[10px] text-ctp-subtext0 font-black uppercase tracking-widest mt-0.5">{office.reviews} reports</p>
               </div>
               <div className="h-12 w-px bg-ctp-surface1 hidden md:block" />
-              <div className="bg-ctp-sapphire/10 px-5 py-2.5 rounded-2xl border border-ctp-sapphire/20 flex flex-col items-center shadow-sm">
-                <span className="text-[9px] font-black text-ctp-sapphire uppercase tracking-[0.2em] mb-0.5 opacity-80">Avg. Wait</span>
-                <span className="text-[14px] font-black text-ctp-sapphire uppercase tracking-tight">{office.waitTime}</span>
+              <div className="bg-ctp-sky-800/10 px-5 py-2.5 rounded-2xl border border-ctp-sky-800/20 flex flex-col items-center shadow-sm">
+                <span className="text-[9px] font-black text-ctp-sky-800 uppercase tracking-[0.2em] mb-0.5 opacity-80">Avg. Wait</span>
+                <span className="text-[14px] font-black text-ctp-sky-800 uppercase tracking-tight">{office.waitTime}</span>
               </div>
             </div>
           </div>
@@ -310,10 +310,10 @@ const OfficeCard = ({ office, navigate }) => {
           {/* Sentiment Sparklines - Updated with consistent styling */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-4 border-y border-ctp-surface0/30">
             {[
-              { label: 'Speed', value: office.speed, icon: Zap, color: 'ctp-sapphire' },
+              { label: 'Speed', value: office.speed, icon: Zap, color: 'ctp-sky-800' },
               { label: 'Staff', value: office.friendliness, icon: Users, color: 'ctp-mauve' },
               { label: 'Queue', value: office.queue, icon: Clock, color: 'ctp-peach' },
-              { label: 'Facility', value: 85, icon: Building2, color: 'ctp-blue' }
+              { label: 'Facility', value: 85, icon: Building2, color: 'ctp-green' }
             ].map((stat) => (
               <div key={stat.label} className="space-y-2.5">
                 <div className="flex items-center justify-between">
@@ -357,7 +357,7 @@ const OfficeCard = ({ office, navigate }) => {
         </div>
         <button 
           onClick={() => navigate('/coming-soon')}
-          className="group flex items-center gap-2 text-ctp-sapphire font-black text-[11px] uppercase tracking-widest hover:text-ctp-sapphire-500 transition-all"
+          className="group flex items-center gap-2 text-ctp-sky-800 font-black text-[11px] uppercase tracking-widest hover:text-ctp-sky-300 transition-all"
         >
           View detailed insights
           <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" strokeWidth={2.5} />

@@ -11,8 +11,8 @@ const SummaryStats = ({ stats }) => {
       value: stats.inProgress || 0, 
       sub: 'Keep going!', 
       icon: LayoutGrid, 
-      color: 'text-ctp-sapphire', 
-      bg: 'bg-ctp-sapphire/10',
+      color: 'text-ctp-sky-800', 
+      bg: 'bg-ctp-sky-800/10',
       progress: 65 // Visual placeholder
     },
     { 
@@ -29,8 +29,8 @@ const SummaryStats = ({ stats }) => {
       value: stats.favorites || 0, 
       sub: 'Saved guides', 
       icon: Star, 
-      color: 'text-ctp-peach', 
-      bg: 'bg-ctp-peach/10',
+      color: 'text-ctp-orange', 
+      bg: 'bg-ctp-orange/10',
       progress: 0
     },
     { 
@@ -38,8 +38,8 @@ const SummaryStats = ({ stats }) => {
       value: stats.expiring || 0, 
       sub: 'Take action soon', 
       icon: Clock, 
-      color: 'text-ctp-blue', 
-      bg: 'bg-ctp-blue/10',
+      color: 'text-ctp-green', 
+      bg: 'bg-ctp-green/10',
       progress: 20
     }
   ];

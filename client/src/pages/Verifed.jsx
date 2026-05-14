@@ -42,8 +42,8 @@ const Verified = () => {
 
         {/* ICON */}
         <div className="flex justify-center mb-6">
-          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-ctp-sapphire/10">
-            <CheckCircle className="text-ctp-sapphire" size={32} />
+          <div className="w-16 h-16 flex items-center justify-center rounded-full bg-ctp-sky-800/10">
+            <CheckCircle className="text-ctp-sky-800" size={32} />
           </div>
         </div>
 
@@ -60,7 +60,7 @@ const Verified = () => {
         {/* BUTTON */}
         <button
           onClick={() => navigate("/")}
-          className="w-full bg-ctp-sapphire hover:bg-ctp-sapphire/90 text-ctp-base font-medium py-3 rounded-xl transition shadow-sm"
+          className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-ctp-base font-medium py-3 rounded-xl transition shadow-sm"
         >
           Go to Home
         </button>

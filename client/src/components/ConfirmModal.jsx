@@ -44,15 +44,15 @@ const ConfirmModal = ({
   // Mapping of logical variants to specific CSS classes for consistent styling.
   const variantStyles = {
     danger: "bg-ctp-red hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-red/20",
-    warning: "bg-ctp-peach hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-peach/20",
-    info: "bg-ctp-sapphire hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-sapphire/20"
-  };
+    warning: "bg-ctp-orange hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-orange/20",
+    info: "bg-ctp-sky-800 hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-sky-800/20"
+    };
 
-  const iconStyles = {
+    const iconVariants = {
     danger: "text-ctp-red bg-ctp-red/10 border-ctp-red/20",
-    warning: "text-ctp-peach bg-ctp-peach/10 border-ctp-peach/20",
-    info: "text-ctp-sapphire bg-ctp-sapphire/10 border-ctp-sapphire/20"
-  };
+    warning: "text-ctp-orange bg-ctp-orange/10 border-ctp-orange/20",
+    info: "text-ctp-sky-800 bg-ctp-sky-800/10 border-ctp-sky-800/20"
+    };
 
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 pointer-events-none">
@@ -76,7 +76,7 @@ const ConfirmModal = ({
         <div className="flex flex-col items-center text-center">
           {/* ICON */}
           <div className="mb-5">
-            <div className={`p-4 rounded-2xl border shadow-sm ${iconStyles[variant]}`}>
+            <div className={`p-4 rounded-2xl border shadow-sm ${iconVariants[variant]}`}>
               <AlertCircle size={28} />
             </div>
           </div>

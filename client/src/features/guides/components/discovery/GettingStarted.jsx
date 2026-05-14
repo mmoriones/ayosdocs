@@ -21,7 +21,7 @@ const GettingStarted = () => {
             <div key={step.id} className="flex items-start gap-3 relative">
               
               {/* circle */}
-              <div className="z-10 flex items-center justify-center w-5 h-5 mt-[3px] rounded-full bg-ctp-sapphire text-ctp-base text-[10px] font-bold">
+              <div className="z-10 flex items-center justify-center w-5 h-5 mt-[3px] rounded-full bg-ctp-sky-800 text-ctp-base text-[10px] font-bold">
                 {step.id}
               </div>
 

@@ -58,7 +58,7 @@ const Home = () => {
           
           {/* Section Header */}
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center gap-2 text-ctp-sapphire">
+            <div className="inline-flex items-center gap-2 text-ctp-sky-800">
               <Sparkles size={20} className="animate-pulse" />
               <span className="text-[14px] font-black uppercase tracking-[0.3em]">Next Steps</span>
             </div>
@@ -75,7 +75,7 @@ const Home = () => {
             {activeGuide && (
               <div className="space-y-5">
                 <div className="flex items-center gap-2 pl-4">
-                  <div className="w-9 h-9 rounded-xl bg-ctp-mantle text-ctp-sapphire flex items-center justify-center border border-ctp-surface0 shadow-sm">
+                  <div className="w-9 h-9 rounded-xl bg-ctp-sky-50 text-ctp-sky-800 flex items-center justify-center border border-ctp-sky-300/30 shadow-sm">
                     <Clock size={18} />
                   </div>
                   <h3 className="text-[14px] font-bold text-ctp-subtext0 uppercase tracking-widest">Continue where you left off</h3>
@@ -95,10 +95,10 @@ const Home = () => {
 
             {/* B. START TRACKING BANNER (If no active guide) */}
             {!activeGuide && (
-              <div className="bg-ctp-base rounded-[2.5rem] p-10 flex flex-col lg:flex-row items-center gap-10 relative overflow-hidden group border border-ctp-surface0 soft-shadow">
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-ctp-sapphire/5 -skew-x-12 translate-x-1/4 pointer-events-none" />
+              <div className="bg-ctp-base rounded-[2.5rem] p-10 flex flex-col lg:flex-row items-center gap-10 relative overflow-hidden group border border-ctp-sky-300/20 soft-shadow">
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-ctp-sky-800/5 -skew-x-12 translate-x-1/4 pointer-events-none" />
                 
-                <div className="w-20 h-20 rounded-3xl bg-ctp-sapphire text-ctp-base flex items-center justify-center shadow-xl shrink-0 group-hover:scale-110 transition-transform duration-500">
+                <div className="w-20 h-20 rounded-3xl bg-ctp-sky-800 text-ctp-base flex items-center justify-center shadow-xl shrink-0 group-hover:scale-110 transition-transform duration-500">
                   <ArrowRight size={32} strokeWidth={3} />
                 </div>
 
@@ -111,7 +111,7 @@ const Home = () => {
 
                 <button 
                   onClick={() => navigate('/guides')}
-                  className="w-full lg:w-auto px-10 py-5 bg-ctp-sapphire text-ctp-base rounded-2xl font-black hover:bg-ctp-blue transition-all active:scale-95 shadow-xl whitespace-nowrap text-[18px] uppercase tracking-widest"
+                  className="w-full lg:w-auto px-10 py-5 bg-ctp-sky-800 text-ctp-base rounded-2xl font-black hover:opacity-90 transition-all active:scale-95 shadow-xl whitespace-nowrap text-[18px] uppercase tracking-widest"
                 >
                   Browse All Guides
                 </button>
@@ -121,7 +121,7 @@ const Home = () => {
             {/* C. LIFE EVENT BUNDLES (StartWithGoal) */}
             <div className="space-y-5">
               <div className="flex items-center gap-2 pl-4">
-                <div className="w-9 h-9 rounded-xl bg-ctp-mantle text-ctp-sapphire flex items-center justify-center border border-ctp-surface0 shadow-sm">
+                <div className="w-9 h-9 rounded-xl bg-ctp-sky-50 text-ctp-sky-800 flex items-center justify-center border border-ctp-sky-300/30 shadow-sm">
                   <MapPin size={18} />
                 </div>
                 <h3 className="text-[14px] font-bold text-ctp-subtext0 uppercase tracking-widest">Choose a Life Event Goal</h3>
@@ -146,7 +146,7 @@ const Home = () => {
         <section className="space-y-10">
           <div className="flex justify-between items-end gap-4 border-b border-ctp-surface0/50 pb-6">
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-ctp-sapphire">
+              <div className="flex items-center gap-2 text-ctp-sky-800">
                 <Sparkles size={28} />
                 <h2 className="text-[36px] font-black text-ctp-text tracking-tight">Popular Guides</h2>
               </div>
@@ -155,7 +155,7 @@ const Home = () => {
             
             <button 
               onClick={() => navigate('/guides')}
-              className="group flex items-center gap-2 text-ctp-sapphire font-black hover:text-ctp-blue transition-colors text-[14px] uppercase tracking-[0.2em] mb-2"
+              className="group flex items-center gap-2 text-ctp-sky-800/70 font-black hover:text-ctp-sky-800 transition-colors text-[14px] uppercase tracking-[0.2em] mb-2"
             >
               <span>View all guides</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -172,20 +172,20 @@ const Home = () => {
             <div className="space-y-8 flex flex-col">
               <div className="flex justify-between items-end gap-4">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-ctp-sapphire">
+                  <div className="flex items-center gap-2 text-ctp-sky-800">
                     <MapPin size={24} />
                     <h3 className="text-[28px] lg:text-[32px] font-black text-ctp-text tracking-tight">Find an Office</h3>
                   </div>
-                  <p className="text-[12px] text-ctp-sapphire font-black uppercase tracking-[0.2em] pl-1">Locate branches and wait times</p>
+                  <p className="text-[12px] text-ctp-sky-800 font-black uppercase tracking-[0.2em] pl-1">Locate branches and wait times</p>
                 </div>
               </div>
 
-              <div className="bg-ctp-base rounded-[2.5rem] p-8 border border-ctp-surface0 space-y-8 overflow-hidden relative group flex-1 flex flex-col justify-between soft-shadow">
+              <div className="bg-ctp-base rounded-[2.5rem] p-8 border border-ctp-sky-300/20 space-y-8 overflow-hidden relative group flex-1 flex flex-col justify-between soft-shadow">
                 <div>
                   {/* Decorative Map Illustration Area */}
-                  <div className="h-44 -mx-8 -mt-8 mb-8 bg-ctp-mantle/50 relative overflow-hidden flex items-center justify-center">
-                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#209fb5_1px,transparent_1px)] [background-size:20px_20px]" />
-                    <div className="relative w-24 h-24 rounded-3xl bg-ctp-base shadow-2xl flex items-center justify-center text-ctp-sapphire animate-float border border-ctp-surface0">
+                  <div className="h-44 -mx-8 -mt-8 mb-8 bg-ctp-sky-10/50 relative overflow-hidden flex items-center justify-center">
+                    <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#2d97ba_1px,transparent_1px)] [background-size:20px_20px]" />
+                    <div className="relative w-24 h-24 rounded-3xl bg-ctp-base shadow-2xl flex items-center justify-center text-ctp-sky-800 animate-float border border-ctp-sky-300/20">
                       <MapPin size={48} />
                     </div>
                   </div>
@@ -200,11 +200,11 @@ const Home = () => {
                     <input 
                       type="text" 
                       placeholder="City or Agency name..." 
-                      className="w-full pl-6 pr-14 py-4 rounded-2xl border border-ctp-surface0 text-[18px] font-medium focus:ring-4 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire transition-all bg-ctp-base text-ctp-text placeholder:text-ctp-surface2"
+                      className="w-full pl-6 pr-14 py-4 rounded-2xl border border-ctp-surface0 text-[18px] font-medium focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all bg-ctp-base text-ctp-text placeholder:text-ctp-surface2"
                     />
                     <ArrowRight size={20} className="absolute right-5 top-1/2 -translate-y-1/2 text-ctp-surface2" />
                   </div>
-                  <button className="w-full py-5 bg-ctp-mantle text-ctp-text border border-ctp-surface0 rounded-2xl text-[14px] font-black uppercase tracking-[0.2em] hover:bg-ctp-surface0 transition-all shadow-sm active:scale-[0.98]">
+                  <button className="w-full py-5 bg-ctp-sky-50 text-ctp-sky-800 border border-ctp-sky-300/20 rounded-2xl text-[14px] font-black uppercase tracking-[0.2em] hover:bg-ctp-sky-100/50 transition-all shadow-sm active:scale-[0.98]">
                     Search Offices
                   </button>
                 </div>
@@ -215,11 +215,11 @@ const Home = () => {
             <div className="space-y-8 flex flex-col">
               <div className="flex justify-between items-end gap-4">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-ctp-blue">
+                  <div className="flex items-center gap-2 text-ctp-green">
                     <Sparkles size={24} />
                     <h3 className="text-[28px] lg:text-[32px] font-black text-ctp-text tracking-tight">Latest Updates</h3>
                   </div>
-                  <p className="text-[12px] text-ctp-blue font-black uppercase tracking-[0.2em] pl-1">New requirements and processes</p>
+                  <p className="text-[12px] text-ctp-green font-black uppercase tracking-[0.2em] pl-1">New requirements and processes</p>
                 </div>
               </div>
               <RecentlyUpdated className="flex-1" />
@@ -229,11 +229,11 @@ const Home = () => {
             <div className="space-y-8 flex flex-col">
               <div className="flex justify-between items-end gap-4">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-ctp-sky">
+                  <div className="flex items-center gap-2 text-ctp-yellow">
                     <MessageSquare size={24} />
                     <h3 className="text-[28px] lg:text-[32px] font-black text-ctp-text tracking-tight">Community Reports</h3>
                   </div>
-                  <p className="text-[12px] text-ctp-sky font-black uppercase tracking-[0.2em] pl-1">Latest wait times and ratings</p>
+                  <p className="text-[12px] text-ctp-yellow font-black uppercase tracking-[0.2em] pl-1">Latest wait times and ratings</p>
                 </div>
               </div>
               <RecentExperiences className="flex-1" />
@@ -249,10 +249,10 @@ const Home = () => {
 
         {/* 8. BOTTOM CTA BANNER */}
         <section className="pt-8">
-          <div className="bg-ctp-base rounded-[3rem] p-10 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-12 border border-ctp-surface0 soft-shadow relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-ctp-sapphire/[0.02] pointer-events-none" />
+          <div className="bg-ctp-base rounded-[3rem] p-10 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-12 border border-ctp-sky-300/20 soft-shadow relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-full bg-ctp-sky-800/[0.02] pointer-events-none" />
             <div className="flex flex-col lg:flex-row items-center gap-10 text-center lg:text-left relative z-10">
-              <div className="w-24 h-24 rounded-3xl bg-ctp-mantle shadow-2xl flex items-center justify-center text-ctp-sapphire shrink-0 border border-ctp-surface0">
+              <div className="w-24 h-24 rounded-3xl bg-ctp-sky-50 shadow-2xl flex items-center justify-center text-ctp-sky-800 shrink-0 border border-ctp-sky-300/20">
                 <span className="text-[40px] font-black">AD</span>
               </div>
               <div className="space-y-2">
@@ -261,10 +261,10 @@ const Home = () => {
               </div>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-6 relative z-10">
-              <button className="px-10 py-5 bg-ctp-mantle border border-ctp-surface0 rounded-2xl text-ctp-text font-black uppercase tracking-widest hover:bg-ctp-surface0 transition-all active:scale-95 shadow-sm text-[16px]">
+              <button className="px-10 py-5 bg-ctp-sky-50 border border-ctp-sky-300/20 rounded-2xl text-ctp-sky-800 font-black uppercase tracking-widest hover:bg-ctp-sky-100/50 transition-all active:scale-95 shadow-sm text-[16px]">
                 Help Center
               </button>
-              <button className="px-10 py-5 bg-ctp-sapphire text-ctp-base rounded-2xl font-black uppercase tracking-widest hover:bg-ctp-blue transition-all active:scale-95 shadow-xl text-[16px]">
+              <button className="px-10 py-5 bg-ctp-sky-800 text-ctp-base rounded-2xl font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl text-[16px]">
                 Contact Us
               </button>
             </div>

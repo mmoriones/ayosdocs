@@ -43,13 +43,13 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete }) => {
         {/* Title and Status/Next Step */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-4 mb-2">
-            <h3 className="text-[18px] font-black text-ctp-text truncate group-hover:text-ctp-sapphire transition-colors tracking-tight">
+            <h3 className="text-[18px] font-black text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors tracking-tight">
               {guide.title}
             </h3>
             <span className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-[0.2em] border ${
               status === 'Completed' 
                 ? 'bg-ctp-mauve/10 text-ctp-mauve border-ctp-mauve/20' 
-                : 'bg-ctp-sapphire/10 text-ctp-sapphire border-ctp-sapphire/20'
+                : 'bg-ctp-sky-800/10 text-ctp-sky-800 border-ctp-sky-800/20'
             }`}>
               {status}
             </span>
@@ -63,7 +63,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete }) => {
             </div>
           ) : nextStep ? (
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-black text-ctp-sapphire uppercase tracking-widest">Next Step:</span>
+              <span className="text-[11px] font-black text-ctp-sky-800 uppercase tracking-widest">Next Step:</span>
               <p className="text-[14px] text-ctp-subtext1 truncate font-bold">{nextStep.task}</p>
             </div>
           ) : (
@@ -83,7 +83,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete }) => {
             <div className="h-2.5 w-full bg-ctp-mantle rounded-full overflow-hidden shadow-inner border border-ctp-surface0">
               <div 
                 className={`h-full transition-all duration-1000 ease-out ${
-                  status === 'Completed' ? 'bg-ctp-mauve shadow-[0_0_12px_rgba(136,57,239,0.3)]' : 'bg-ctp-sapphire shadow-[0_0_12px_rgba(32,159,181,0.3)]'
+                  status === 'Completed' ? 'bg-ctp-mauve shadow-[0_0_12px_rgba(136,57,239,0.3)]' : 'bg-ctp-sky-800 shadow-[0_0_12px_rgba(32,159,181,0.3)]'
                 }`} 
                 style={{ width: `${percentage}%` }}
               />
@@ -108,7 +108,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete }) => {
               onClick={(e) => {
                 e.stopPropagation();
               }}
-              className="w-11 h-11 rounded-xl bg-ctp-base border border-ctp-surface0 text-ctp-subtext1 hover:text-ctp-sapphire hover:bg-ctp-sapphire/10 transition-all flex items-center justify-center active:scale-90 shadow-sm"
+              className="w-11 h-11 rounded-xl bg-ctp-base border border-ctp-surface0 text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/10 transition-all flex items-center justify-center active:scale-90 shadow-sm"
             >
               <Bookmark size={20} strokeWidth={2.5} />
             </button>

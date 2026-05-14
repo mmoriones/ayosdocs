@@ -182,8 +182,8 @@ const AllGuides = () => {
           
           {/* Left: Icon + Title Area */}
           <div className="flex items-center gap-5 flex-1">
-            <div className="p-4 rounded-2xl bg-ctp-sapphire/10 shrink-0 border border-ctp-sapphire/20">
-              <FileText className="text-ctp-sapphire" size={24} />
+            <div className="p-4 rounded-2xl bg-ctp-sky-800/10 shrink-0 border border-ctp-sky-800/20">
+              <FileText className="text-ctp-sky-800" size={24} />
             </div>
             
             <div>
@@ -200,7 +200,7 @@ const AllGuides = () => {
           <div className="flex flex-wrap items-center gap-4 md:gap-6 shrink-0">
             <div className="hidden xl:flex items-center gap-4 text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] border-r border-ctp-surface0 pr-6">
               <span className="flex items-center gap-2">
-                <FileText size={14} className="text-ctp-sapphire" />
+                <FileText size={14} className="text-ctp-sky-800" />
                 {allGuides.length} Guides
               </span>
               <span className="flex items-center gap-2">
@@ -210,7 +210,7 @@ const AllGuides = () => {
             </div>
 
             <div className="flex items-center gap-2 bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-full border border-ctp-surface0 shadow-sm">
-              <TrendingUp size={14} className="text-ctp-sapphire" />
+              <TrendingUp size={14} className="text-ctp-sky-800" />
               <span className="text-[11px] text-ctp-subtext0 font-black uppercase tracking-widest">
                 Trending:
               </span>
@@ -235,8 +235,8 @@ const AllGuides = () => {
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-widest transition-all whitespace-nowrap border ${
                 selectedCategory === cat
-                  ? 'bg-ctp-sapphire text-ctp-base border-ctp-sapphire shadow-lg shadow-ctp-sapphire/20'
-                  : 'bg-ctp-mantle text-ctp-subtext0 border-ctp-surface0 hover:border-ctp-sapphire hover:text-ctp-sapphire'
+                  ? 'bg-ctp-sky-800 text-ctp-base border-ctp-sky-800 shadow-lg shadow-ctp-sky-800/20'
+                  : 'bg-ctp-mantle text-ctp-subtext0 border-ctp-surface0 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
               }`}
             >
               {cat}
@@ -257,7 +257,7 @@ const AllGuides = () => {
                   <h2 className="text-sm font-black text-ctp-text uppercase tracking-widest">Filters</h2>
                   <button 
                     onClick={resetFilters}
-                    className="text-[10px] text-ctp-sapphire font-black uppercase tracking-widest hover:text-ctp-sapphire-500 transition-colors"
+                    className="text-[10px] text-ctp-sky-800 font-black uppercase tracking-widest hover:text-ctp-sky-300 transition-colors"
                   >
                     Reset
                   </button>
@@ -301,7 +301,7 @@ const AllGuides = () => {
                               type="checkbox" 
                               checked={selectedDifficulties.includes(level)}
                               onChange={() => handleDifficultyChange(level)}
-                              className="peer appearance-none w-5 h-5 rounded-lg border border-ctp-surface0 bg-ctp-base checked:bg-ctp-sapphire checked:border-ctp-sapphire transition-all cursor-pointer" 
+                              className="peer appearance-none w-5 h-5 rounded-lg border border-ctp-surface0 bg-ctp-base checked:bg-ctp-sky-800 checked:border-ctp-sky-800 transition-all cursor-pointer" 
                             />
                             <X className="absolute w-3 h-3 text-ctp-base opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
                           </div>
@@ -332,9 +332,9 @@ const AllGuides = () => {
                               name="cost" 
                               checked={selectedCost === cost}
                               onChange={() => setSelectedCost(cost)}
-                              className="peer appearance-none w-5 h-5 rounded-full border border-ctp-surface0 bg-ctp-base checked:border-ctp-sapphire transition-all cursor-pointer" 
+                              className="peer appearance-none w-5 h-5 rounded-full border border-ctp-surface0 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer" 
                             />
-                            <div className="absolute w-2.5 h-2.5 rounded-full bg-ctp-sapphire opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+                            <div className="absolute w-2.5 h-2.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
                           </div>
                           <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-bold uppercase tracking-tight">{cost}</span>
                         </label>
@@ -347,15 +347,15 @@ const AllGuides = () => {
               {/* Popular Sidebar Sections Relocated Here */}
               <div className="bg-ctp-mantle rounded-[2rem] p-6 border border-ctp-surface0 shadow-sm space-y-6">
                 <div className="flex items-center gap-2">
-                  <TrendingUp size={16} className="text-ctp-sapphire" />
+                  <TrendingUp size={16} className="text-ctp-sky-800" />
                   <h3 className="text-sm font-black text-ctp-text uppercase tracking-widest">Trending</h3>
                 </div>
                 <div className="space-y-5">
                   {allGuides.slice(0, 3).map((guide, index) => (
                     <Link key={guide.slug} to={`/guides/${guide.slug}`} className="flex items-start gap-3 group">
-                      <span className="text-xs font-black text-ctp-surface1 group-hover:text-ctp-sapphire transition-colors mt-0.5">{index + 1}</span>
+                      <span className="text-xs font-black text-ctp-surface1 group-hover:text-ctp-sky-800 transition-colors mt-0.5">{index + 1}</span>
                       <div className="flex-1">
-                        <p className="text-[11px] font-bold text-ctp-text group-hover:text-ctp-sapphire transition-colors line-clamp-2 leading-snug uppercase">{guide.title}</p>
+                        <p className="text-[11px] font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors line-clamp-2 leading-snug uppercase">{guide.title}</p>
                         <p className="text-[9px] text-ctp-subtext0 mt-1 uppercase font-black tracking-widest">4.8k views</p>
                       </div>
                     </Link>
@@ -387,7 +387,7 @@ const AllGuides = () => {
                 placeholder="Search for documents, processes, or agencies..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-14 pr-12 py-4 rounded-2xl border border-ctp-surface0 bg-ctp-mantle text-[18px] text-ctp-text placeholder:text-ctp-subtext1 focus:outline-none focus:ring-4 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire shadow-sm transition-all font-medium"
+                className="w-full pl-14 pr-12 py-4 rounded-2xl border border-ctp-surface0 bg-ctp-mantle text-[18px] text-ctp-text placeholder:text-ctp-subtext1 focus:outline-none focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 shadow-sm transition-all font-medium"
                 />
                 {searchQuery && (
                 <button
@@ -403,10 +403,10 @@ const AllGuides = () => {
                 <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
 
                 <div className="flex items-center bg-ctp-mantle border border-ctp-surface0 p-1.5 rounded-xl shadow-sm">
-                <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
+                <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
                   <LayoutGrid size={18} />
                 </button>
-                <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
+                <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
                   <List size={18} />
                 </button>
                 </div>
@@ -415,7 +415,7 @@ const AllGuides = () => {
 
                 {showTip && (
                 <Banner
-                variant="sapphire"
+                variant="sky"
                 icon={Bookmark}
                 title="Tip"
                 onClose={() => setShowTip(false)}
@@ -438,7 +438,7 @@ const AllGuides = () => {
                 </div>
                 <h3 className="text-xl font-bold text-ctp-text uppercase">No guides found</h3>
                 <p className="text-ctp-subtext1 font-medium mt-2">Try adjusting your filters or search keywords.</p>
-                <button onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }} className="mt-8 px-8 py-3 bg-ctp-sapphire text-ctp-base rounded-xl font-black uppercase tracking-widest shadow-lg active:scale-95 transition-all">Clear all</button>
+                <button onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }} className="mt-8 px-8 py-3 bg-ctp-sky-800 text-ctp-base rounded-xl font-black uppercase tracking-widest shadow-lg active:scale-95 transition-all">Clear all</button>
                 </div>
                 )}
 
@@ -446,7 +446,7 @@ const AllGuides = () => {
                   <div className="mt-16 text-center pb-12">
                   <button 
                     onClick={handleLoadMore}
-                    className="px-8 py-4 bg-ctp-mantle border border-ctp-surface0 rounded-2xl font-black text-xs text-ctp-text uppercase tracking-widest hover:border-ctp-sapphire hover:text-ctp-sapphire transition-all flex items-center gap-3 mx-auto shadow-sm active:scale-95"
+                    className="px-8 py-4 bg-ctp-mantle border border-ctp-surface0 rounded-2xl font-black text-xs text-ctp-text uppercase tracking-widest hover:border-ctp-sky-800 hover:text-ctp-sky-800 transition-all flex items-center gap-3 mx-auto shadow-sm active:scale-95"
                   >
                     Load more guides
                     <ChevronDown size={16} />
@@ -471,7 +471,7 @@ const AllGuides = () => {
                     <h2 className="text-2xl font-black text-ctp-text uppercase tracking-tight">Community Insights</h2>
                     <p className="text-ctp-subtext1 text-sm font-medium mt-1">Real experiences from the community (anonymous)</p>
                   </div>
-                  <Link to="/offices" className="group flex items-center gap-2 text-ctp-sapphire font-black uppercase tracking-[0.2em] text-[11px] hover:text-ctp-sapphire-500 transition-colors">
+                  <Link to="/offices" className="group flex items-center gap-2 text-ctp-sky-800 font-black uppercase tracking-[0.2em] text-[11px] hover:text-ctp-sky-300 transition-colors">
                     View all offices
                     <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                   </Link>
@@ -483,7 +483,7 @@ const AllGuides = () => {
                     { name: 'PSA Quezon City Main Office', rating: 4.5, reviews: 156, waitTime: '1-2 hrs', peak: 'Most users report smooth processing this week.', icon: getGuideIcon('psa-birth-certificate'), tip: true },
                     { name: 'LTO East Avenue District Office', rating: 4.1, reviews: 98, waitTime: '2-4 hrs', peak: 'Peak hours: 11AM - 2PM', icon: getGuideIcon('nbi-clearance') },
                   ].map((office, i) => (
-                    <div key={i} className="flex-1 bg-ctp-base/50 rounded-[2rem] p-6 border border-ctp-surface0/50 hover:border-ctp-sapphire/30 transition-all hover:shadow-lg">
+                    <div key={i} className="flex-1 bg-ctp-base/50 rounded-[2rem] p-6 border border-ctp-surface0/50 hover:border-ctp-sky-800/30 transition-all hover:shadow-lg">
                       <div className="flex items-center gap-4 mb-6">
                         <div className="w-12 h-12 rounded-2xl bg-ctp-mantle flex items-center justify-center p-2.5 shrink-0 shadow-sm">
                           <img src={office.icon} alt="" className="w-full h-full object-contain" />
@@ -501,11 +501,11 @@ const AllGuides = () => {
                       <div className="space-y-4">
                         <div className="space-y-2">
                           <p className="text-[10px] font-black text-ctp-subtext0 uppercase tracking-widest">Wait Time Today</p>
-                          <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-ctp-sapphire/10 text-ctp-sapphire text-xs font-black uppercase tracking-widest border border-ctp-sapphire/20">
+                          <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-ctp-sky-800/10 text-ctp-sky-800 text-xs font-black uppercase tracking-widest border border-ctp-sky-800/20">
                             {office.waitTime}
                           </span>
                         </div>
-                        <p className={`text-xs ${office.tip ? 'text-ctp-sapphire font-black' : 'text-ctp-subtext1'} leading-relaxed line-clamp-2`}>
+                        <p className={`text-xs ${office.tip ? 'text-ctp-sky-800 font-black' : 'text-ctp-subtext1'} leading-relaxed line-clamp-2`}>
                           {office.peak}
                         </p>
                       </div>
@@ -518,7 +518,7 @@ const AllGuides = () => {
             <div className="col-span-12 lg:col-span-3">
               <div className="bg-ctp-mantle rounded-[3rem] p-10 flex flex-col justify-between h-full relative overflow-hidden group border border-ctp-surface0 shadow-sm">
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-black text-ctp-sapphire leading-tight uppercase tracking-tight">Share Your Experience</h3>
+                  <h3 className="text-2xl font-black text-ctp-sky-800 leading-tight uppercase tracking-tight">Share Your Experience</h3>
                   <p className="text-ctp-subtext1 text-sm font-medium leading-relaxed mt-4">
                     Help others by sharing your experience at a government office.
                   </p>
@@ -527,7 +527,7 @@ const AllGuides = () => {
                 <div className="relative z-10 mt-10">
                   <button 
                     onClick={() => navigate('/rate')}
-                    className="w-full px-6 py-4 bg-ctp-sapphire text-ctp-base rounded-xl font-black uppercase tracking-widest text-xs shadow-lg shadow-ctp-sapphire/20 hover:bg-ctp-sapphire-500 transition-all flex items-center justify-center gap-2 active:scale-95">
+                    className="w-full px-6 py-4 bg-ctp-sky-800 text-ctp-base rounded-xl font-black uppercase tracking-widest text-xs shadow-lg shadow-ctp-sky-800/20 hover:bg-ctp-sky-300 transition-all flex items-center justify-center gap-2 active:scale-95">
                     <Star size={16} className="fill-ctp-base" />
                     Rate an Office
                   </button>
@@ -555,8 +555,8 @@ const GuideCard = ({ guide, viewMode = 'grid' }) => {
 
   if (isList) {
     return (
-      <div className="group bg-ctp-mantle rounded-[1.5rem] p-5 border border-ctp-surface0 shadow-sm hover:shadow-xl hover:border-ctp-sapphire/30 transition-all relative overflow-hidden flex items-center gap-6">
-        <div className="w-16 h-16 rounded-2xl bg-ctp-base flex items-center justify-center p-3 group-hover:bg-ctp-sapphire/10 transition-colors shadow-inner border border-ctp-surface0 shrink-0">
+      <div className="group bg-ctp-mantle rounded-[1.5rem] p-5 border border-ctp-surface0 shadow-sm hover:shadow-xl hover:border-ctp-sky-800/30 transition-all relative overflow-hidden flex items-center gap-6">
+        <div className="w-16 h-16 rounded-2xl bg-ctp-base flex items-center justify-center p-3 group-hover:bg-ctp-sky-800/10 transition-colors shadow-inner border border-ctp-surface0 shrink-0">
           <img 
             src={getGuideIcon(guide.slug, guide.agency)} 
             alt="" 
@@ -566,13 +566,13 @@ const GuideCard = ({ guide, viewMode = 'grid' }) => {
 
         <div className="flex-1 min-w-0 py-1">
           <div className="flex items-center gap-3 mb-1">
-            <span className="text-[8px] font-black text-ctp-mauve uppercase tracking-[0.2em] bg-ctp-surface0 px-2 py-0.5 rounded-full">
+            <span className="text-[8px] font-black text-ctp-green uppercase tracking-[0.2em] bg-ctp-green/10 px-2 py-0.5 rounded-full border border-ctp-green/20">
               {Array.isArray(guide.agency) ? guide.agency.join(', ') : (guide.agency || "Official")}
             </span>
             <span className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60">Updated {guide.lastUpdated || "May 8, 2026"}</span>
           </div>
           
-          <h3 className="text-[18px] font-black text-ctp-text group-hover:text-ctp-sapphire transition-colors leading-tight uppercase tracking-tight truncate">
+          <h3 className="text-[18px] font-black text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight uppercase tracking-tight truncate">
             {guide.title}
           </h3>
           
@@ -584,27 +584,27 @@ const GuideCard = ({ guide, viewMode = 'grid' }) => {
         <div className="hidden md:flex flex-col items-end gap-2 shrink-0 border-l border-ctp-surface0 pl-6 h-12 justify-center">
           <div className="flex items-center gap-4 text-[9px] font-black text-ctp-subtext0 uppercase tracking-widest">
             <div className="flex items-center gap-1.5">
-              <Clock size={12} className="text-ctp-sapphire" />
+              <Clock size={12} className="text-ctp-sky-800" />
               <span>{guide.estimatedTime || "1-3 days"}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <DollarSign size={12} className="text-ctp-sapphire" />
+              <DollarSign size={12} className="text-ctp-sky-800" />
               <span>{guide.costRange || "Free"}</span>
             </div>
           </div>
           <div className="flex items-center gap-1.5 text-[9px] font-black text-ctp-subtext0 uppercase tracking-widest">
-            <BarChart3 size={12} className="text-ctp-sapphire" />
+            <BarChart3 size={12} className="text-ctp-sky-800" />
             <span>{guide.difficulty || "Easy"}</span>
           </div>
         </div>
 
         <div className="shrink-0 ml-4 flex items-center gap-4">
-          <button className="p-3 text-ctp-subtext1 hover:text-ctp-sapphire transition-all bg-ctp-base rounded-xl border border-ctp-surface0 shadow-sm active:scale-90">
+          <button className="p-3 text-ctp-subtext1 hover:text-ctp-sky-800 transition-all bg-ctp-base rounded-xl border border-ctp-surface0 shadow-sm active:scale-90">
             <Bookmark size={18} />
           </button>
           <Link 
             to={`/guides/${guide.slug}`}
-            className="w-10 h-10 rounded-xl bg-ctp-sapphire text-ctp-base flex items-center justify-center shadow-lg shadow-ctp-sapphire/20 active:scale-95 transition-all"
+            className="w-10 h-10 rounded-xl bg-ctp-sky-800 text-ctp-base flex items-center justify-center shadow-lg shadow-ctp-sky-800/20 active:scale-95 transition-all"
           >
             <ArrowRight size={18} />
           </Link>
@@ -614,12 +614,12 @@ const GuideCard = ({ guide, viewMode = 'grid' }) => {
   }
 
   return (
-    <div className="group bg-ctp-mantle rounded-[2rem] p-7 border border-ctp-surface0 shadow-sm hover:shadow-xl hover:border-ctp-sapphire/30 transition-all relative overflow-hidden flex flex-col h-full">
-      <button className="absolute top-6 right-6 p-2.5 text-ctp-subtext1 hover:text-ctp-sapphire transition-all bg-ctp-base rounded-full shadow-sm z-10 active:scale-90 border border-ctp-surface0">
+    <div className="group bg-ctp-mantle rounded-[2rem] p-7 border border-ctp-surface0 shadow-sm hover:shadow-xl hover:border-ctp-sky-800/30 transition-all relative overflow-hidden flex flex-col h-full">
+      <button className="absolute top-6 right-6 p-2.5 text-ctp-subtext1 hover:text-ctp-sky-800 transition-all bg-ctp-base rounded-full shadow-sm z-10 active:scale-90 border border-ctp-surface0">
         <Bookmark size={18} />
       </button>
 
-      <div className="mb-6 w-14 h-14 rounded-[1rem] bg-ctp-base flex items-center justify-center p-3 group-hover:bg-ctp-sapphire/10 transition-colors shadow-inner border border-ctp-surface0">
+      <div className="mb-6 w-14 h-14 rounded-[1rem] bg-ctp-base flex items-center justify-center p-3 group-hover:bg-ctp-sky-800/10 transition-colors shadow-inner border border-ctp-surface0">
         <img 
           src={getGuideIcon(guide.slug, guide.agency)} 
           alt="" 
@@ -628,10 +628,10 @@ const GuideCard = ({ guide, viewMode = 'grid' }) => {
       </div>
 
       <div className="flex-1">
-        <div className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-ctp-surface0 text-ctp-mauve text-[8px] font-black uppercase tracking-[0.2em] mb-3">
+        <div className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-ctp-green/10 text-ctp-green text-[8px] font-black uppercase tracking-[0.2em] mb-3 border border-ctp-green/20">
           {Array.isArray(guide.agency) ? guide.agency.join(', ') : (guide.agency || "Official")}
         </div>
-        <h3 className="text-[18px] font-black text-ctp-text group-hover:text-ctp-sapphire transition-colors leading-tight mb-3 uppercase tracking-tight">
+        <h3 className="text-[18px] font-black text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight mb-3 uppercase tracking-tight">
           {guide.title}
         </h3>
         <p className="text-[13px] text-ctp-subtext1 line-clamp-2 mb-6 font-medium leading-relaxed">
@@ -641,16 +641,16 @@ const GuideCard = ({ guide, viewMode = 'grid' }) => {
         <div className="space-y-3 mb-6">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[9px] font-black text-ctp-subtext0 uppercase tracking-widest">
             <div className="flex items-center gap-1.5 min-w-0">
-              <Clock size={12} className="text-ctp-sapphire shrink-0" />
+              <Clock size={12} className="text-ctp-sky-800 shrink-0" />
               <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>
             </div>
             <div className="flex items-center gap-1.5 min-w-0">
-              <DollarSign size={12} className="text-ctp-sapphire shrink-0" />
+              <DollarSign size={12} className="text-ctp-sky-800 shrink-0" />
               <span className="truncate">{guide.costRange || "Free"}</span>
             </div>
           </div>
           <div className="flex items-center gap-1.5 text-[9px] font-black text-ctp-subtext0 uppercase tracking-widest">
-            <BarChart3 size={12} className="text-ctp-sapphire shrink-0" />
+            <BarChart3 size={12} className="text-ctp-sky-800 shrink-0" />
             <span>{guide.difficulty || "Easy"}</span>
           </div>
         </div>
@@ -660,7 +660,7 @@ const GuideCard = ({ guide, viewMode = 'grid' }) => {
         <span className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest">Updated {guide.lastUpdated || "May 8, 2026"}</span>
         <Link 
           to={`/guides/${guide.slug}`}
-          className="group/link text-ctp-sapphire font-black text-[10px] uppercase tracking-widest flex items-center gap-1.5 hover:gap-2 transition-all"
+          className="group/link text-ctp-sky-800 font-black text-[10px] uppercase tracking-widest flex items-center gap-1.5 hover:gap-2 transition-all"
         >
           View guide
           <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-1" />
@@ -693,7 +693,7 @@ const SidebarDropdown = ({ value, onChange, options }) => {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between gap-3 bg-ctp-base border rounded-xl px-4 py-3 text-[12px] font-bold text-ctp-text transition-all active:scale-[0.98] ${
-          isOpen ? 'border-ctp-sapphire ring-4 ring-ctp-sapphire/10' : 'border-ctp-surface0 hover:border-ctp-sapphire shadow-sm'
+          isOpen ? 'border-ctp-sky-800 ring-4 ring-ctp-sky-800/10' : 'border-ctp-surface0 hover:border-ctp-sky-800 shadow-sm'
         }`}
       >
         <span className="truncate">{value}</span>
@@ -712,7 +712,7 @@ const SidebarDropdown = ({ value, onChange, options }) => {
                 }}
                 className={`w-full text-left px-4 py-2.5 rounded-lg text-[11px] font-bold transition-all ${
                   value === option 
-                    ? 'bg-ctp-sapphire text-ctp-base shadow-md shadow-ctp-sapphire/20' 
+                    ? 'bg-ctp-sky-800 text-ctp-base shadow-md shadow-ctp-sky-800/20' 
                     : 'text-ctp-subtext1 hover:bg-ctp-surface0 hover:text-ctp-text'
                 }`}
               >
@@ -756,7 +756,7 @@ const SortDropdown = ({ sortBy, setSortBy }) => {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center gap-3 bg-ctp-mantle border rounded-xl px-5 py-2.5 text-[11px] font-black uppercase tracking-widest text-ctp-text transition-all shadow-sm active:scale-95 ${
-          isOpen ? 'border-ctp-sapphire ring-4 ring-ctp-sapphire/10' : 'border-ctp-surface0 hover:border-ctp-sapphire'
+          isOpen ? 'border-ctp-sky-800 ring-4 ring-ctp-sky-800/10' : 'border-ctp-surface0 hover:border-ctp-sky-800'
         }`}
       >
         <span className="text-ctp-subtext1">Sort:</span>
@@ -776,7 +776,7 @@ const SortDropdown = ({ sortBy, setSortBy }) => {
                 }}
                 className={`w-full text-left px-4 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all ${
                   sortBy === option.value 
-                    ? 'bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20' 
+                    ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' 
                     : 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text'
                 }`}
               >
