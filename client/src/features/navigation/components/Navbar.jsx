@@ -68,7 +68,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             {/* Brand name */}
             <h1 className="text-2xl font-bold text-ctp-text leading-none tracking-tight">
-              <span className="text-ctp-green">Ayos</span>
+              <span className="text-ctp-sapphire">Ayos</span>
               <span className="ml-1">Docs</span>
             </h1>
 
@@ -96,7 +96,7 @@ const Navbar = () => {
         <button
           className={`lg:hidden p-2.5 rounded-2xl transition-all duration-300 ${
             isMobileMenuOpen 
-              ? "bg-ctp-mantle text-ctp-green shadow-inner" 
+              ? "bg-ctp-mantle text-ctp-sapphire shadow-inner" 
               : "text-ctp-subtext1 hover:bg-ctp-mantle"
           }`}
           onClick={() => toggleMobileMenu()}

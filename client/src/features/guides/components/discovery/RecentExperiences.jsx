@@ -43,41 +43,44 @@ const RecentExperiences = ({ className = "" }) => {
   return (
     <div className={`w-full flex flex-col ${className}`}>
       {/* LIST CONTAINER */}
-      <div className="flex-1 bg-ctp-mantle border border-ctp-surface0 rounded-[2rem] shadow-sm overflow-hidden flex flex-col">
+      <div className="flex-1 bg-ctp-base border border-ctp-surface0 rounded-[2.5rem] soft-shadow overflow-hidden flex flex-col">
         {experiences.map((office, i) => (
           <div
             key={i}
             onClick={() => navigate('/offices')}
             className={`
-              group flex items-center gap-4 p-5 cursor-pointer transition-colors hover:bg-ctp-mantle flex-1
-              ${i !== experiences.length - 1 ? 'border-b border-ctp-surface0' : ''}
+              group flex items-center gap-6 p-6 cursor-pointer transition-colors hover:bg-ctp-mantle flex-1
+              ${i !== experiences.length - 1 ? 'border-b border-ctp-surface0/50' : ''}
             `}
           >
             {/* ICON */}
-            <div className="w-12 h-12 rounded-2xl bg-ctp-base flex items-center justify-center p-2.5 group-hover:bg-ctp-mantle transition-colors shrink-0">
+            <div className="w-14 h-14 rounded-2xl bg-ctp-mantle flex items-center justify-center p-3 group-hover:scale-110 transition-transform shrink-0 border border-ctp-surface0 shadow-sm">
               <img src={getGuideIcon(office.slug)} alt="" className="w-full h-full object-contain" />
             </div>
 
             {/* CONTENT */}
             <div className="flex-1 min-w-0">
-              <h3 className="text-[18px] font-bold text-ctp-text truncate group-hover:text-ctp-green transition-colors leading-tight">
+              <h3 className="text-[18px] font-black text-ctp-text truncate group-hover:text-ctp-sapphire transition-colors leading-tight tracking-tight uppercase">
                 {office.name}
               </h3>
-              <div className="flex items-center gap-3 mt-1.5">
-                <div className="flex items-center gap-1">
-                  <Star size={10} className="fill-ctp-yellow text-ctp-yellow" />
-                  <span className="text-[14px] font-bold text-ctp-subtext0">{office.rating}</span>
+              <div className="flex items-center gap-4 mt-1.5">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-lg bg-ctp-yellow/10 border border-ctp-yellow/20">
+                  <Star size={12} className="fill-ctp-yellow text-ctp-yellow" />
+                  <span className="text-[12px] font-black text-ctp-yellow tracking-widest">{office.rating}</span>
                 </div>
-                <span className="text-[14px] text-ctp-surface2">•</span>
-                <span className="text-[14px] font-bold text-ctp-green uppercase tracking-tight">
-                  {office.waitTime}
-                </span>
+                <span className="text-[12px] text-ctp-surface2">•</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-black text-ctp-sky uppercase tracking-widest opacity-80">Wait:</span>
+                  <span className="text-[14px] font-black text-ctp-sky uppercase tracking-tight">
+                    {office.waitTime}
+                  </span>
+                </div>
               </div>
             </div>
 
             {/* ACTION */}
-            <div className="shrink-0 text-ctp-surface2 group-hover:text-ctp-green transition-colors">
-              <ChevronRight size={18} />
+            <div className="shrink-0 text-ctp-surface2 group-hover:text-ctp-sapphire transition-all transform group-hover:translate-x-1">
+              <ChevronRight size={20} strokeWidth={3} />
             </div>
           </div>
         ))}

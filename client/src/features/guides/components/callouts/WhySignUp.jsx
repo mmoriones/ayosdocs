@@ -3,57 +3,57 @@ import person2 from '../../../../assets/person2.webp';
 
 const WhySignUp = ({ onSignUp }) => {
   return (
-    <div className="w-full bg-ctp-mantle rounded-[3rem] overflow-hidden relative group border border-ctp-surface0">
+    <div className="w-full bg-ctp-base rounded-[3rem] overflow-hidden relative group border border-ctp-surface0 soft-shadow">
       {/* Background Decorations */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-ctp-green/10 -skew-x-12 translate-x-1/4 pointer-events-none" />
-      <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-ctp-green/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-ctp-sapphire/5 -skew-x-12 translate-x-1/4 pointer-events-none" />
+      <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-ctp-sapphire/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 px-8 py-12 lg:px-12 lg:py-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      <div className="relative z-10 px-8 py-12 lg:px-16 lg:py-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
         
         {/* TEXT CONTENT */}
-        <div className="flex-1 text-center lg:text-left space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ctp-green/10 border border-ctp-green/20 text-ctp-green text-[14px] font-bold uppercase tracking-widest">
-            <UserPlus size={14} />
+        <div className="flex-1 text-center lg:text-left space-y-8">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-ctp-mantle border border-ctp-surface0 text-ctp-sapphire text-[14px] font-black uppercase tracking-widest shadow-sm">
+            <UserPlus size={16} />
             <span>Join AyosDocs</span>
           </div>
 
-          <h2 className="text-[32px] font-extrabold text-ctp-text leading-tight tracking-tight">
-            Stop losing track of your <span className="text-ctp-green">government requirements.</span>
+          <h2 className="text-[40px] lg:text-[48px] font-black text-ctp-text leading-[1.1] tracking-tight">
+            Stop losing track of your <span className="text-ctp-sapphire">government requirements.</span>
           </h2>
 
-          <p className="text-ctp-subtext1 text-[18px] font-medium max-w-xl mx-auto lg:mx-0">
+          <p className="text-ctp-subtext1 text-[20px] font-medium max-w-xl mx-auto lg:mx-0 opacity-80 leading-relaxed">
             Create a free account to save guides, track your progress, 
             and get reminders for your applications.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 pt-4">
             <button 
               onClick={onSignUp}
-              className="w-full sm:w-auto bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base font-extrabold px-8 py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 active:scale-95 text-[18px]"
+              className="w-full sm:w-auto bg-ctp-sapphire hover:bg-ctp-blue text-ctp-base font-black px-10 py-5 rounded-2xl transition-all shadow-xl flex items-center justify-center gap-2 active:scale-95 text-[18px] uppercase tracking-widest"
             >
               <span>Sign up for free</span>
-              <ArrowRight size={20} />
+              <ArrowRight size={22} />
             </button>
             <p className="text-ctp-subtext0 text-[14px] font-bold">
-              Already have an account? <button onClick={onSignUp} className="text-ctp-green hover:underline">Log in</button>
+              Already have an account? <button onClick={onSignUp} className="text-ctp-sapphire hover:underline font-black">Log in</button>
             </p>
           </div>
         </div>
 
         {/* FEATURES GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-auto shrink-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full lg:w-auto shrink-0">
           {[
-            { title: "Progress Tracking", desc: "Never forget where you left off." },
-            { title: "Personalized Checklist", desc: "Requirements tailored for you." },
-            { title: "Mobile Access", desc: "Check your status on the go." },
-            { title: "Smart Reminders", desc: "Get notified of next steps." }
+            { title: "Progress Tracking", desc: "Never forget where you left off.", color: "text-ctp-sapphire" },
+            { title: "Personalized Checklist", desc: "Requirements tailored for you.", color: "text-ctp-blue" },
+            { title: "Mobile Access", desc: "Check your status on the go.", color: "text-ctp-sky" },
+            { title: "Smart Reminders", desc: "Get notified of next steps.", color: "text-ctp-mauve" }
           ].map((feature, i) => (
-            <div key={i} className="bg-ctp-mantle/50 backdrop-blur-sm border border-ctp-surface0 p-5 rounded-2xl space-y-2 hover:bg-ctp-mantle transition-colors">
+            <div key={i} className="bg-ctp-mantle/30 backdrop-blur-sm border border-ctp-surface0 p-6 rounded-3xl space-y-2 hover:bg-ctp-mantle transition-colors soft-shadow-hover group/item">
               <div className="flex items-center gap-3">
-                <CheckCircle size={18} className="text-ctp-green" strokeWidth={3} />
-                <span className="text-ctp-text font-bold text-[14px] uppercase tracking-wide">{feature.title}</span>
+                <CheckCircle size={20} className={`${feature.color} group-hover/item:scale-110 transition-transform`} strokeWidth={3} />
+                <span className="text-ctp-text font-black text-[14px] uppercase tracking-wide">{feature.title}</span>
               </div>
-              <p className="text-ctp-subtext1 text-[14px] font-medium leading-relaxed pl-7">
+              <p className="text-ctp-subtext1 text-[15px] font-medium leading-relaxed pl-8 opacity-70">
                 {feature.desc}
               </p>
             </div>

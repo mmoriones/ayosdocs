@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
  * Reusable Banner component for tips, alerts, and information.
  * 
  * @param {Object} props
- * @param {'teal' | 'orange' | 'blue' | 'white'} props.variant - The color theme of the banner.
+ * @param {'teal' | 'sapphire' | 'green' | 'orange' | 'white'} props.variant - The color theme of the banner.
  * @param {import('lucide-react').LucideIcon} props.icon - The icon to display on the left.
  * @param {string} [props.title] - Optional bold title prefix.
  * @param {React.ReactNode} props.children - The main content of the banner.
@@ -20,23 +20,26 @@ const Banner = ({
   className = "" 
 }) => {
   const variants = {
-    teal: "bg-ctp-green/10 border-ctp-green/20 text-ctp-green",
+    teal: "bg-ctp-sapphire/10 border-ctp-sapphire/20 text-ctp-sapphire",
+    sapphire: "bg-ctp-sapphire/10 border-ctp-sapphire/20 text-ctp-sapphire",
+    green: "bg-ctp-sapphire/10 border-ctp-sapphire/20 text-ctp-sapphire",
     orange: "bg-ctp-peach/10 border-ctp-peach/20 text-ctp-peach",
-    blue: "bg-ctp-sapphire/10 border-ctp-sapphire/20 text-ctp-sapphire",
     white: "bg-ctp-mantle border-ctp-surface0 text-ctp-text shadow-sm",
   };
 
   const iconBgVariants = {
-    teal: "bg-ctp-green/20 text-ctp-green",
+    teal: "bg-ctp-sapphire/20 text-ctp-sapphire",
+    sapphire: "bg-ctp-sapphire/20 text-ctp-sapphire",
+    green: "bg-ctp-sapphire/20 text-ctp-sapphire",
     orange: "bg-ctp-peach/20 text-ctp-peach",
-    blue: "bg-ctp-sapphire/20 text-ctp-sapphire",
     white: "bg-ctp-surface0 text-ctp-subtext1",
   };
 
   const closeButtonVariants = {
-    teal: "text-ctp-green/50 hover:text-ctp-green",
+    teal: "text-ctp-sapphire/50 hover:text-ctp-sapphire",
+    sapphire: "text-ctp-sapphire/50 hover:text-ctp-sapphire",
+    green: "text-ctp-sapphire/50 hover:text-ctp-sapphire",
     orange: "text-ctp-peach/50 hover:text-ctp-peach",
-    blue: "text-ctp-sapphire/50 hover:text-ctp-sapphire",
     white: "text-ctp-subtext0 hover:text-ctp-text",
   };
 

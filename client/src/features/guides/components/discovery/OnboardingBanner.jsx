@@ -10,53 +10,53 @@ import notepad from '../../../../assets/notepad.webp';
 const OnboardingBanner = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-full bg-ctp-mantle rounded-[3rem] overflow-hidden relative group border border-ctp-surface0 shadow-sm">
+    <div className="w-full bg-ctp-base rounded-[3rem] overflow-hidden relative group border border-ctp-surface0 soft-shadow">
       {/* Background Decorations */}
-      <div className="absolute top-0 right-0 w-1/4 h-full bg-ctp-green/5 -skew-x-12 translate-x-1/4 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/4 h-full bg-ctp-sapphire/5 -skew-x-12 translate-x-1/4 pointer-events-none" />
 
-      <div className="relative z-10 px-8 py-10 lg:px-12 lg:py-12 flex flex-col lg:flex-row items-center gap-10">
+      <div className="relative z-10 px-8 py-10 lg:px-12 lg:py-14 flex flex-col lg:flex-row items-center gap-12">
         
         {/* TEXT CONTENT */}
-        <div className="flex-1 space-y-6 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-ctp-mantle border border-ctp-surface0 text-ctp-green text-[14px] font-bold uppercase tracking-widest">
-            <HelpCircle size={14} />
+        <div className="flex-1 space-y-8 text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-ctp-mantle border border-ctp-surface0 text-ctp-sapphire text-[14px] font-black uppercase tracking-widest shadow-sm">
+            <HelpCircle size={16} />
             <span>New to AyosDocs?</span>
           </div>
 
-          <h2 className="text-[32px] font-extrabold text-ctp-text leading-tight tracking-tight">
-            Let's help you get started with <span className="text-ctp-green">your first application.</span>
+          <h2 className="text-[36px] lg:text-[42px] font-black text-ctp-text leading-[1.1] tracking-tight">
+            Let's help you get started with <span className="text-ctp-sapphire">your first application.</span>
           </h2>
 
-          <div className="flex flex-wrap justify-center lg:justify-start gap-4 lg:gap-8">
+          <div className="flex flex-wrap justify-center lg:justify-start gap-6 lg:gap-10">
             {[
               "Find the right guide",
               "Follow step-by-step",
               "Track your progress"
             ].map((text, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <CheckCircle size={16} className="text-ctp-green" strokeWidth={3} />
-                <span className="text-[14px] font-bold text-ctp-subtext1 uppercase tracking-tight">{text}</span>
+              <div key={i} className="flex items-center gap-3 group/item">
+                <CheckCircle size={20} className="text-ctp-sapphire group-hover/item:scale-110 transition-transform" strokeWidth={3} />
+                <span className="text-[14px] font-black text-ctp-subtext1 uppercase tracking-tight opacity-80">{text}</span>
               </div>
             ))}
           </div>
 
-          <div className="pt-2">
+          <div className="pt-4">
             <button 
               onClick={() => navigate('/onboarding')}
-              className="w-full sm:w-auto bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base font-extrabold px-8 py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 active:scale-95 text-[18px]"
+              className="w-full sm:w-auto bg-ctp-sapphire hover:bg-ctp-blue text-ctp-base font-black px-10 py-5 rounded-2xl transition-all shadow-xl flex items-center justify-center gap-3 active:scale-95 text-[18px] uppercase tracking-widest"
             >
               <span>See how it works</span>
-              <ArrowRight size={20} />
+              <ArrowRight size={22} />
             </button>
           </div>
         </div>
 
         {/* ILLUSTRATION */}
-        <div className="hidden lg:block shrink-0 w-48 pointer-events-none">
+        <div className="hidden lg:block shrink-0 w-56 pointer-events-none p-4">
           <img 
             src={notepad} 
             alt="Checklist illustration" 
-            className="w-full h-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-700"
+            className="w-full h-auto object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700 -rotate-6"
           />
         </div>
       </div>

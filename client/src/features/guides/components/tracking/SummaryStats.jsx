@@ -11,8 +11,8 @@ const SummaryStats = ({ stats }) => {
       value: stats.inProgress || 0, 
       sub: 'Keep going!', 
       icon: LayoutGrid, 
-      color: 'text-ctp-green', 
-      bg: 'bg-ctp-green/10',
+      color: 'text-ctp-sapphire', 
+      bg: 'bg-ctp-sapphire/10',
       progress: 65 // Visual placeholder
     },
     { 

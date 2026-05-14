@@ -54,12 +54,12 @@ const TableOfContents = ({ headings, onItemClick, activeId }) => {
             }}
             className={`block py-2.5 px-4 rounded-xl text-xs transition-all uppercase tracking-widest ${
               activeId === h.id
-                ? "bg-ctp-green/10 text-ctp-green font-black border border-ctp-green/20 shadow-sm"
-                : "text-ctp-subtext0 font-bold hover:bg-ctp-mantle hover:text-ctp-green"
+                ? "bg-ctp-sapphire/10 text-ctp-sapphire font-black border border-ctp-sapphire/20 shadow-sm"
+                : "text-ctp-subtext0 font-bold hover:bg-ctp-mantle hover:text-ctp-sapphire"
             }`}
           >
             <span className={`mr-3 font-black transition-colors ${
-              activeId === h.id ? "text-ctp-green" : "text-ctp-surface2"
+              activeId === h.id ? "text-ctp-sapphire" : "text-ctp-surface2"
             }`}>
               {String(index + 1).padStart(2, '0')}
             </span>

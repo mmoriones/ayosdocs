@@ -41,15 +41,15 @@ const TrendingGuides = () => {
               key={guide.slug}
               onClick={() => handleSelection(guide.slug)}
               className="
-                group relative flex flex-col p-6 rounded-[2rem] 
-                bg-ctp-mantle border border-ctp-surface0 shadow-xl
-                hover:border-ctp-green/30 hover:-translate-y-2
+                group relative flex flex-col p-6 rounded-[2.5rem] 
+                bg-ctp-base border border-ctp-surface0 soft-shadow
+                hover:border-ctp-sapphire/30 hover:-translate-y-2
                 transition-all duration-500 cursor-pointer overflow-hidden
               "
             >
               
               {/* TOP-LEFT ICON */}
-              <div className="w-12 h-12 rounded-xl bg-ctp-base flex items-center justify-center p-2.5 mb-6 group-hover:bg-ctp-mantle transition-colors shrink-0 border border-ctp-surface0">
+              <div className="w-14 h-14 rounded-2xl bg-ctp-mantle flex items-center justify-center p-3 mb-6 group-hover:scale-110 transition-transform shrink-0 border border-ctp-surface0">
                 {icon ? (
                   <img 
                     src={icon} 
@@ -57,29 +57,29 @@ const TrendingGuides = () => {
                     className="w-full h-full object-contain"
                   />
                 ) : (
-                  <TrendingUp className="text-ctp-green" size={24} />
+                  <TrendingUp className="text-ctp-sapphire" size={28} />
                 )}
               </div>
 
               {/* TITLE & DESC */}
               <div className="space-y-2 mb-6">
-                <h3 className="text-[18px] font-extrabold text-ctp-text group-hover:text-ctp-green transition-colors leading-tight line-clamp-2 min-h-[2.5rem]">
+                <h3 className="text-[20px] font-black text-ctp-text group-hover:text-ctp-sapphire transition-colors leading-tight line-clamp-2 min-h-[3rem] tracking-tight">
                   {guide.title}
                 </h3>
-                <p className="text-[14px] text-ctp-subtext1 font-medium leading-relaxed line-clamp-2">
+                <p className="text-[14px] text-ctp-subtext1 font-medium leading-relaxed line-clamp-2 opacity-80">
                   {guide.description || "Step-by-step requirements and procedures."}
                 </p>
               </div>
 
               {/* METADATA & ARROW (Bottom Row) */}
-              <div className="mt-auto flex items-center justify-between pt-4 border-t border-ctp-surface0">
-                <div className="flex items-center gap-2 text-[14px] font-extrabold text-ctp-subtext1 uppercase tracking-wider">
-                  <Clock size={14} className="text-ctp-green" />
+              <div className="mt-auto flex items-center justify-between pt-5 border-t border-ctp-surface0/50">
+                <div className="flex items-center gap-2 text-[12px] font-black text-ctp-subtext0 uppercase tracking-widest">
+                  <Clock size={16} className="text-ctp-sapphire" />
                   <span>{guide.estimatedTime || "1-3 days"}</span>
                 </div>
                 
-                <div className="w-8 h-8 rounded-full bg-ctp-base flex items-center justify-center text-ctp-green group-hover:bg-ctp-green group-hover:text-ctp-base transition-all transform group-hover:rotate-[-45deg] shadow-sm">
-                  <ArrowRight size={16} strokeWidth={3} />
+                <div className="w-10 h-10 rounded-xl bg-ctp-mantle flex items-center justify-center text-ctp-sapphire group-hover:bg-ctp-sapphire group-hover:text-ctp-base transition-all transform group-hover:rotate-[-45deg] shadow-sm border border-ctp-surface0">
+                  <ArrowRight size={18} strokeWidth={3} />
                 </div>
               </div>
             </div>

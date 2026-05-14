@@ -16,36 +16,36 @@ const StartWithGoal = () => {
           key={bundle.id}
           onClick={() => navigate('/coming-soon')}
           className="
-            group p-6 rounded-[2rem] 
-            bg-ctp-mantle border border-ctp-surface0 shadow-sm
-            hover:shadow-xl hover:border-ctp-green/20 transition-all duration-300 cursor-pointer 
-            flex items-center gap-6
+            group p-8 rounded-[2.5rem] 
+            bg-ctp-base border border-ctp-surface0 soft-shadow
+            hover:shadow-2xl hover:border-ctp-sapphire/20 transition-all duration-500 cursor-pointer 
+            flex flex-col md:flex-row items-center gap-8
           "
         >
           {/* ICON */}
-          <div className="w-14 h-14 rounded-2xl bg-ctp-base flex items-center justify-center text-3xl shrink-0 group-hover:bg-ctp-mantle transition-all duration-500">
+          <div className="w-16 h-16 rounded-2xl bg-ctp-mantle flex items-center justify-center text-4xl shrink-0 group-hover:scale-110 transition-transform duration-500 border border-ctp-surface0 shadow-sm">
             {bundle.icon}
           </div>
 
           {/* CONTENT */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-[14px] font-bold text-ctp-green uppercase tracking-widest">Life Event</span>
-              <span className="text-[14px] text-ctp-surface2">•</span>
-              <span className="text-[14px] font-bold text-ctp-subtext0 uppercase tracking-widest">{bundle.category}</span>
+          <div className="flex-1 text-center md:text-left min-w-0">
+            <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
+              <span className="text-[12px] font-black text-ctp-sapphire uppercase tracking-widest">Life Event Workflow</span>
+              <span className="text-[12px] text-ctp-surface1">•</span>
+              <span className="text-[12px] font-black text-ctp-subtext0 uppercase tracking-widest">{bundle.category}</span>
             </div>
-            <h3 className="text-[18px] font-extrabold text-ctp-text group-hover:text-ctp-green transition-colors truncate">
+            <h3 className="text-[24px] font-black text-ctp-text group-hover:text-ctp-sapphire transition-colors tracking-tight mb-1">
               {bundle.title}
             </h3>
-            <p className="text-[14px] text-ctp-subtext1 font-medium leading-relaxed truncate">
+            <p className="text-[16px] text-ctp-subtext1 font-medium leading-relaxed opacity-80">
               {bundle.description}
             </p>
           </div>
 
           {/* ACTION INDICATOR */}
           <div className="shrink-0">
-            <div className="w-10 h-10 rounded-full bg-ctp-base flex items-center justify-center text-ctp-green group-hover:bg-ctp-green group-hover:text-ctp-base transition-all shadow-xs">
-              <ArrowRight size={18} strokeWidth={3} />
+            <div className="w-12 h-12 rounded-full bg-ctp-mantle flex items-center justify-center text-ctp-sapphire group-hover:bg-ctp-sapphire group-hover:text-ctp-base transition-all shadow-sm border border-ctp-surface0">
+              <ArrowRight size={22} strokeWidth={3} />
             </div>
           </div>
         </div>

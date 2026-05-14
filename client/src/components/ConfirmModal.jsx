@@ -45,13 +45,13 @@ const ConfirmModal = ({
   const variantStyles = {
     danger: "bg-ctp-red hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-red/20",
     warning: "bg-ctp-peach hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-peach/20",
-    info: "bg-ctp-green hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-green/20"
+    info: "bg-ctp-sapphire hover:opacity-90 text-ctp-base shadow-sm shadow-ctp-sapphire/20"
   };
 
   const iconStyles = {
     danger: "text-ctp-red bg-ctp-red/10 border-ctp-red/20",
     warning: "text-ctp-peach bg-ctp-peach/10 border-ctp-peach/20",
-    info: "text-ctp-green bg-ctp-green/10 border-ctp-green/20"
+    info: "text-ctp-sapphire bg-ctp-sapphire/10 border-ctp-sapphire/20"
   };
 
   return (

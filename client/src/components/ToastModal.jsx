@@ -42,7 +42,7 @@ const ToastModal = ({ isOpen, type = "success", title, message, onClose }) => {
 
   // Mapping of notification types to specific Lucide icons and Tailwind colors.
   const icons = {
-    success: <CheckCircle className="text-ctp-green" size={28} />,
+    success: <CheckCircle className="text-ctp-sapphire" size={28} />,
     error: <AlertCircle className="text-ctp-red" size={28} />,
     info: <Info className="text-ctp-blue" size={28} />,
   };
@@ -86,7 +86,7 @@ const ToastModal = ({ isOpen, type = "success", title, message, onClose }) => {
           {/* Action Button - Emphasized */}
           <button
             onClick={onClose}
-            className="mt-6 px-12 py-2.5 bg-ctp-green hover:opacity-90 text-ctp-base font-bold rounded-xl transition-all active:scale-[0.98] text-[13px] shadow-sm shadow-ctp-green/20"
+            className="mt-6 px-12 py-2.5 bg-ctp-sapphire hover:opacity-90 text-ctp-base font-bold rounded-xl transition-all active:scale-[0.98] text-[13px] shadow-sm shadow-ctp-sapphire/20"
           >
             Okay
           </button>

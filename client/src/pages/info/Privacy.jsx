@@ -10,7 +10,7 @@ const Privacy = () => {
       <div className="max-w-4xl mx-auto space-y-8">
         <section className="bg-ctp-mantle rounded-2xl p-8 md:p-12 shadow-sm border border-ctp-surface0 space-y-6">
           <h1 className="text-3xl md:text-4xl font-bold text-ctp-text">
-            Privacy <span className="text-ctp-green">Policy</span>
+            Privacy <span className="text-ctp-sapphire">Policy</span>
           </h1>
           <p className="text-ctp-subtext0 italic">Last Updated: April 28, 2026</p>
 

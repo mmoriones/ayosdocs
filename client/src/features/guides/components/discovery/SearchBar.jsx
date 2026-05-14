@@ -84,7 +84,7 @@ const SearchBar = () => {
           onKeyDown={(e) => e.key === "Enter" && handleSearchAction()}
           className="w-full pl-11 sm:pl-14 pr-11 sm:pr-36 py-4 sm:py-5 rounded-full border border-ctp-surface0 
           bg-ctp-base text-[18px] text-ctp-text placeholder:text-ctp-subtext1
-          focus:outline-none focus:ring-4 focus:ring-ctp-green/10 focus:border-ctp-green
+          focus:outline-none focus:ring-4 focus:ring-ctp-sapphire/10 focus:border-ctp-sapphire
           shadow-xl
           transition-all duration-200"
         />
@@ -102,7 +102,7 @@ const SearchBar = () => {
         {/* SEARCH BUTTON */}
         <button
           onClick={handleSearchAction}
-          className="absolute right-2 hidden sm:flex bg-ctp-green-600 hover:bg-ctp-green-500 
+          className="absolute right-2 hidden sm:flex bg-ctp-sapphire hover:bg-ctp-blue 
           text-ctp-base px-5 sm:px-7 py-3 rounded-full transition-all duration-200 
           shadow-md hover:shadow-lg items-center gap-2 active:scale-95"
         >
@@ -113,18 +113,18 @@ const SearchBar = () => {
 
       {/* RESULTS DROPDOWN */}
       {results.length > 0 && (
-        <div className="absolute w-full mt-2 bg-ctp-mantle border border-ctp-surface0 
+        <div className="absolute w-full mt-2 bg-ctp-base border border-ctp-surface0 
         rounded-2xl shadow-xl z-50 overflow-hidden ring-1 ring-black/5">
 
           {results.map((guide, index) => (
             <div
               key={guide.slug}
               onClick={() => handleSelect(guide.slug)}
-              className={`px-5 py-4 cursor-pointer transition flex items-center gap-3.5
+              className={`px-5 py-4 cursor-pointer transition flex items-center gap-4
               ${index === 0 ? "bg-ctp-mantle/50" : ""}
               hover:bg-ctp-mantle active:bg-ctp-surface1`}
             >
-              <div className="w-9 h-9 rounded-xl bg-ctp-base border border-ctp-surface0 flex items-center justify-center p-2 shrink-0 shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-ctp-mantle border border-ctp-surface0 flex items-center justify-center p-2 shrink-0 shadow-sm">
                 <img 
                   src={getGuideIcon(guide.slug)} 
                   alt="" 
@@ -132,11 +132,11 @@ const SearchBar = () => {
                 />
               </div>
               <div className="flex-1">
-                <p className="text-[14px] font-semibold text-ctp-text leading-tight">
+                <p className="text-[14px] font-black text-ctp-text leading-tight uppercase tracking-tight">
                   {guide.title}
                 </p>
-                <p className="text-[14px] text-ctp-subtext1 mt-0.5 font-medium">
-                  View step-by-step guide
+                <p className="text-[14px] text-ctp-subtext1 mt-0.5 font-bold uppercase tracking-widest opacity-60">
+                  Step-by-step guide
                 </p>
               </div>
             </div>

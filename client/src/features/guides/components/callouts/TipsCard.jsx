@@ -10,7 +10,7 @@ const TipsCard = () => {
 
         {/* MOBILE ICON BUTTON */}
         <button 
-          className="lg:hidden p-2.5 rounded-xl border border-ctp-surface0 text-ctp-subtext1 hover:text-ctp-green hover:bg-ctp-mantle transition-all active:scale-95 shrink-0 bg-ctp-base shadow-xs"
+          className="lg:hidden p-2.5 rounded-xl border border-ctp-surface0 text-ctp-subtext1 hover:text-ctp-sapphire hover:bg-ctp-mantle transition-all active:scale-95 shrink-0 bg-ctp-base shadow-xs"
           title="View official resources"
         >
           <ExternalLink className="w-4 h-4" strokeWidth={3} />
@@ -20,7 +20,7 @@ const TipsCard = () => {
       <div className="space-y-6 flex-1">
         {/* ITEM 1 */}
         <div className="flex items-start gap-5 group">
-          <div className="mt-1 w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-green shrink-0 transition-transform group-hover:scale-110 border border-ctp-surface0 shadow-xs">
+          <div className="mt-1 w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-sapphire shrink-0 transition-transform group-hover:scale-110 border border-ctp-surface0 shadow-xs">
             <CheckCircle className="w-5 h-5" strokeWidth={3} />
           </div>
           <div>
@@ -33,7 +33,7 @@ const TipsCard = () => {
 
         {/* ITEM 2 */}
         <div className="flex items-start gap-5 group">
-          <div className="mt-1 w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-green shrink-0 transition-transform group-hover:scale-110 border border-ctp-surface0 shadow-xs">
+          <div className="mt-1 w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-sapphire shrink-0 transition-transform group-hover:scale-110 border border-ctp-surface0 shadow-xs">
             <FileText className="w-5 h-5" strokeWidth={3} />
           </div>
           <div>
@@ -46,7 +46,7 @@ const TipsCard = () => {
 
         {/* ITEM 3 */}
         <div className="flex items-start gap-5 group">
-          <div className="mt-1 w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-green shrink-0 transition-transform group-hover:scale-110 border border-ctp-surface0 shadow-xs">
+          <div className="mt-1 w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-sapphire shrink-0 transition-transform group-hover:scale-110 border border-ctp-surface0 shadow-xs">
             <Clock className="w-5 h-5" strokeWidth={3} />
           </div>
           <div>

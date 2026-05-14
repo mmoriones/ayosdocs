@@ -10,7 +10,7 @@ const About = () => {
       <div className="max-w-4xl mx-auto space-y-8">
         <section className="bg-ctp-mantle rounded-2xl p-8 md:p-12 shadow-sm border border-ctp-surface0 space-y-6">
           <h1 className="text-3xl md:text-4xl font-bold text-ctp-text">
-            About <span className="text-ctp-green">AyosDocs</span>
+            About <span className="text-ctp-sapphire">AyosDocs</span>
           </h1>
           <p className="text-lg text-ctp-subtext1 leading-relaxed">
             AyosDocs is your comprehensive companion for navigating government processes and essential document applications in the Philippines. Our mission is to simplify the often complex and confusing world of bureaucracy, providing clear, step-by-step guides to help you get things done efficiently.

@@ -50,8 +50,8 @@ const DesktopMenu = ({
 
   const navClass = (path) =>
     `relative py-1 transition-all duration-200 text-lg ${isActive(path)
-      ? "text-ctp-green font-bold"
-      : "text-ctp-subtext0 font-semibold hover:text-ctp-green"
+      ? "text-ctp-sapphire font-bold"
+      : "text-ctp-subtext0 font-semibold hover:text-ctp-sapphire"
     }`;
 
   return (
@@ -62,28 +62,28 @@ const DesktopMenu = ({
         <Link to="/" className={navClass("/")}>
           Home
           {isActive("/") && (
-            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
+            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-sapphire rounded-full -translate-x-1/2"></span>
           )}
         </Link>
 
         <Link to="/guides" className={navClass("/guides")}>
           Guides
           {isActive("/guides") && (
-            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
+            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-sapphire rounded-full -translate-x-1/2"></span>
           )}
         </Link>
 
         <Link to="/offices" className={navClass("/offices")}>
           Offices
           {isActive("/offices") && (
-            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
+            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-sapphire rounded-full -translate-x-1/2"></span>
           )}
         </Link>
 
         <Link to="/rate" className={navClass("/rate")}>
           Rate
           {isActive("/rate") && (
-            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
+            <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-sapphire rounded-full -translate-x-1/2"></span>
           )}
         </Link>
 
@@ -91,7 +91,7 @@ const DesktopMenu = ({
           <Link to="/my-progress" className={navClass("/my-progress")}>
             My Progress
             {isActive("/my-progress") && (
-              <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-green rounded-full -translate-x-1/2"></span>
+              <span className="absolute left-1/2 -bottom-1 w-1.5 h-1.5 bg-ctp-sapphire rounded-full -translate-x-1/2"></span>
             )}
           </Link>
         )}
@@ -110,7 +110,7 @@ const DesktopMenu = ({
         {!user ? (
           <button
             onClick={openAuthModal}
-            className="bg-ctp-green-600 hover:bg-ctp-green-500 text-ctp-base px-6 py-2.5 rounded-xl text-lg font-bold transition-all active:scale-95 shadow-lg"
+            className="bg-ctp-sapphire-800 hover:bg-ctp-sapphire-500 text-ctp-base px-6 py-2.5 rounded-xl text-lg font-bold transition-all active:scale-95 shadow-lg"
           >
             Login
           </button>
@@ -127,7 +127,7 @@ const DesktopMenu = ({
                   className="w-8 h-8 rounded-full border border-ctp-base shadow-sm"
                 />
               ) : (
-                <div className="w-8 h-8 bg-ctp-green text-ctp-base rounded-full flex items-center justify-center text-xs font-bold">
+                <div className="w-8 h-8 bg-ctp-sapphire text-ctp-base rounded-full flex items-center justify-center text-xs font-bold">
                   {user.fullName.charAt(0)}
                 </div>
               )}
@@ -150,7 +150,7 @@ const DesktopMenu = ({
                         className="w-10 h-10 rounded-full border-2 border-ctp-base shadow-sm"
                       />
                     ) : (
-                      <div className="w-10 h-10 bg-ctp-green text-ctp-base rounded-full flex items-center justify-center text-lg font-bold shadow-sm">
+                      <div className="w-10 h-10 bg-ctp-sapphire text-ctp-base rounded-full flex items-center justify-center text-lg font-bold shadow-sm">
                         {user.fullName.charAt(0)}
                       </div>
                     )}

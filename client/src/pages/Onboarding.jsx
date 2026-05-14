@@ -39,7 +39,7 @@ const Onboarding = () => {
 
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center bg-ctp-base">
-      <div className="w-20 h-20 bg-ctp-green/10 text-ctp-green rounded-full flex items-center justify-center mb-6">
+      <div className="w-20 h-20 bg-ctp-sapphire/10 text-ctp-sapphire rounded-full flex items-center justify-center mb-6">
         <CheckCircle size={40} strokeWidth={2.5} />
       </div>
       
@@ -54,7 +54,7 @@ const Onboarding = () => {
 
       <button
         onClick={() => navigate('/')}
-        className="flex items-center gap-2 bg-ctp-green hover:bg-ctp-green/90 text-ctp-base px-8 py-3.5 rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-ctp-green/10"
+        className="flex items-center gap-2 bg-ctp-sapphire hover:bg-ctp-sapphire/90 text-ctp-base px-8 py-3.5 rounded-2xl font-bold transition-all active:scale-95 shadow-lg shadow-ctp-sapphire/10"
       >
         <ArrowLeft size={18} strokeWidth={2.5} />
         <span>Return Home</span>

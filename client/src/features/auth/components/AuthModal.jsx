@@ -130,7 +130,7 @@ const AuthModal = ({ isOpen, onClose }) => {
           {isExchanging && (
             <div className="absolute inset-0 z-20 bg-ctp-mantle/80 backdrop-blur-[2px] flex flex-col items-center justify-center animate-in fade-in duration-300">
               <div className="flex flex-col items-center">
-                <Loader2 className="w-10 h-10 animate-spin text-ctp-green mb-4" strokeWidth={2.5} />
+                <Loader2 className="w-10 h-10 animate-spin text-ctp-sapphire mb-4" strokeWidth={2.5} />
                 <h3 className="text-lg font-bold text-ctp-text tracking-tight">Signing you in...</h3>
                 <p className="text-[13px] font-medium text-ctp-subtext1 mt-1.5">Please wait a moment</p>
               </div>

@@ -78,9 +78,9 @@ const GuidePageLayout = ({
       <div className="flex items-center justify-between">
         <Link
           to="/guides"
-          className="group inline-flex items-center gap-4 text-[11px] font-black text-ctp-green uppercase tracking-[0.2em] hover:text-ctp-green-500 transition-colors"
+          className="group inline-flex items-center gap-4 text-[11px] font-black text-ctp-sapphire uppercase tracking-[0.2em] hover:text-ctp-sapphire-500 transition-colors"
         >
-          <div className="w-10 h-10 rounded-full bg-ctp-green/10 flex items-center justify-center transition-transform group-hover:-translate-x-1">
+          <div className="w-10 h-10 rounded-full bg-ctp-sapphire/10 flex items-center justify-center transition-transform group-hover:-translate-x-1">
             <ArrowLeft size={18} />
           </div>
           Back to Knowledge Base
@@ -115,19 +115,18 @@ const GuidePageLayout = ({
 
               {isSidebarCollapsed && (
                 <div className="flex flex-col gap-4 mt-4 items-center">
-                   <button 
+                   <button
                     onClick={() => { setIsSidebarCollapsed(false); setActiveTab('checklist'); }}
-                    className={`p-3 rounded-xl transition-all ${activeTab === 'checklist' ? 'bg-ctp-green text-ctp-base shadow-lg shadow-ctp-green/20' : 'text-ctp-subtext1 hover:bg-ctp-mantle'}`}
+                    className={`p-3 rounded-xl transition-all ${activeTab === 'checklist' ? 'bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20' : 'text-ctp-subtext1 hover:bg-ctp-mantle'}`}
                    >
                      <CheckSquare size={20} />
                    </button>
-                   <button 
+                   <button
                     onClick={() => { setIsSidebarCollapsed(false); setActiveTab('toc'); }}
-                    className={`p-3 rounded-xl transition-all ${activeTab === 'toc' ? 'bg-ctp-green text-ctp-base shadow-lg shadow-ctp-green/20' : 'text-ctp-subtext1 hover:bg-ctp-mantle'}`}
+                    className={`p-3 rounded-xl transition-all ${activeTab === 'toc' ? 'bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20' : 'text-ctp-subtext1 hover:bg-ctp-mantle'}`}
                    >
                      <List size={20} />
-                   </button>
-                </div>
+                   </button>                </div>
               )}
 
               {!isSidebarCollapsed && (
@@ -136,7 +135,7 @@ const GuidePageLayout = ({
                     onClick={() => setActiveTab('checklist')}
                     className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
                       activeTab === 'checklist' 
-                        ? 'bg-ctp-green text-ctp-base shadow-lg shadow-ctp-green/20' 
+                        ? 'bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20' 
                         : 'text-ctp-subtext1 hover:text-ctp-text'
                     }`}
                   >
@@ -147,7 +146,7 @@ const GuidePageLayout = ({
                     onClick={() => setActiveTab('toc')}
                     className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
                       activeTab === 'toc' 
-                        ? 'bg-ctp-green text-ctp-base shadow-lg shadow-ctp-green/20' 
+                        ? 'bg-ctp-sapphire text-ctp-base shadow-lg shadow-ctp-sapphire/20' 
                         : 'text-ctp-subtext1 hover:text-ctp-text'
                     }`}
                   >
@@ -184,9 +183,9 @@ const GuidePageLayout = ({
           </div>
 
           {!isSidebarCollapsed && (
-            <div className="bg-ctp-green/5 border border-ctp-green/10 rounded-[2rem] p-6 flex flex-col gap-4 group cursor-pointer hover:bg-ctp-green/10 transition-all shadow-sm">
+            <div className="bg-ctp-sapphire/5 border border-ctp-sapphire/10 rounded-[2rem] p-6 flex flex-col gap-4 group cursor-pointer hover:bg-ctp-sapphire/10 transition-all shadow-sm">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-green shadow-xs border border-ctp-surface0 transition-transform group-hover:scale-110">
+                <div className="w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-sapphire shadow-xs border border-ctp-surface0 transition-transform group-hover:scale-110">
                   <Bookmark size={20} />
                 </div>
                 <div className="min-w-0">
@@ -205,7 +204,7 @@ const GuidePageLayout = ({
             <div className="bg-ctp-mantle border border-ctp-surface0 rounded-[3rem] shadow-sm overflow-hidden">
               {/* HEADER SECTION */}
               <header className="p-8 md:p-12 border-b border-ctp-surface0 relative overflow-hidden group bg-ctp-crust/30">
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-ctp-green/5 -skew-x-12 translate-x-1/4 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-ctp-sapphire/5 -skew-x-12 translate-x-1/4 pointer-events-none" />
                 
                 <div className="flex flex-col md:flex-row md:items-center gap-8 relative z-10">
                   <div className="p-6 rounded-[2rem] bg-ctp-base shrink-0 w-fit shadow-inner border border-ctp-surface0">
@@ -218,11 +217,11 @@ const GuidePageLayout = ({
                   
                   <div className="space-y-4 flex-1">
                     <div className="flex items-center justify-between gap-4">
-                      <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-ctp-green/10 text-ctp-green text-[10px] font-black uppercase tracking-[0.2em] border border-ctp-green/20">
+                      <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-ctp-sapphire/10 text-ctp-sapphire text-[10px] font-black uppercase tracking-[0.2em] border border-ctp-sapphire/20">
                         {category || 'GUIDE'}
                       </span>
                       <div className="flex items-center gap-2">
-                        <button className="p-2.5 rounded-xl bg-ctp-base border border-ctp-surface0 text-ctp-subtext1 hover:text-ctp-green transition-all shadow-xs active:scale-95">
+                        <button className="p-2.5 rounded-xl bg-ctp-base border border-ctp-surface0 text-ctp-subtext1 hover:text-ctp-sapphire transition-all shadow-xs active:scale-95">
                           <Bookmark size={18} />
                         </button>
                         <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-ctp-base border border-ctp-surface0 text-ctp-text hover:bg-ctp-mantle transition-all shadow-xs active:scale-95 font-black text-[11px] uppercase tracking-widest">
@@ -238,14 +237,14 @@ const GuidePageLayout = ({
 
                     <div className="flex flex-wrap items-center gap-6">
                       <div className="flex items-center gap-2 text-ctp-subtext0 font-black text-[10px] uppercase tracking-widest">
-                        <History size={14} className="text-ctp-green" />
+                        <History size={14} className="text-ctp-sapphire" />
                         Updated: {lastUpdated?.toString()}
                       </div>
                       <div className="flex items-center gap-2 text-ctp-subtext0 font-black text-[10px] uppercase tracking-widest">
-                        <Clock size={14} className="text-ctp-green" />
+                        <Clock size={14} className="text-ctp-sapphire" />
                         {readTime}
                       </div>
-                      <div className="flex items-center gap-2 text-ctp-green font-black text-[10px] uppercase tracking-widest bg-ctp-green/5 px-3 py-1 rounded-full border border-ctp-green/10">
+                      <div className="flex items-center gap-2 text-ctp-sapphire font-black text-[10px] uppercase tracking-widest bg-ctp-sapphire/5 px-3 py-1 rounded-full border border-ctp-sapphire/10">
                         <Sparkles size={14} />
                         {difficulty}
                       </div>
@@ -258,7 +257,7 @@ const GuidePageLayout = ({
                 {/* TIP BANNER */}
                 {showTip && (
                   <Banner
-                    variant="teal"
+                    variant="sapphire"
                     icon={Info}
                     title="Tip"
                     onClose={() => setShowTip(false)}
