@@ -1,0 +1,89 @@
+'use client';
+
+import {
+  TrendingUp,
+  ArrowRight,
+  Clock
+} from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { getGuideIcon } from '@/lib/guideIcons';
+import Image from 'next/image';
+
+const popularSlugs = [
+  'passport-appointment',
+  'nbi-clearance',
+  'sss-registration',
+  'psa-birth-certificate',
+  'national-id'
+];
+
+const TrendingGuides = ({ allGuides }) => {
+  const router = useRouter();
+
+  const handleSelection = (slug) => {
+    router.push(`/guides/${slug}`);
+  };
+
+  const trendingGuides = popularSlugs
+    .map(slug => allGuides.find(g => g.slug === slug))
+    .filter(Boolean);
+
+  return (
+    <div className="w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {trendingGuides.map((guide) => {
+          const icon = getGuideIcon(guide.slug, guide.agency);
+
+          return (
+            <div
+              key={guide.slug}
+              onClick={() => handleSelection(guide.slug)}
+              className="
+                group relative flex flex-col p-6 rounded-[2.5rem] 
+                bg-ctp-base border border-ctp-surface0 soft-shadow
+                hover:border-ctp-sky-800/30 hover:-translate-y-2
+                transition-all duration-500 cursor-pointer overflow-hidden
+              "
+            >
+              <div className="w-14 h-14 rounded-2xl bg-ctp-mantle flex items-center justify-center p-3 mb-6 group-hover:scale-110 transition-transform shrink-0 border border-ctp-surface0">
+                {icon ? (
+                  <Image 
+                    src={icon} 
+                    alt={guide.title} 
+                    width={40}
+                    height={40}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <TrendingUp className="text-ctp-sky-800" size={28} />
+                )}
+              </div>
+
+              <div className="space-y-2 mb-6">
+                <h3 className="text-[20px] font-black text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight line-clamp-2 min-h-[3rem] tracking-tight">
+                  {guide.title}
+                </h3>
+                <p className="text-[14px] text-ctp-subtext1 font-medium leading-relaxed line-clamp-2 opacity-80">
+                  {guide.description || "Step-by-step requirements and procedures."}
+                </p>
+              </div>
+
+              <div className="mt-auto flex items-center justify-between pt-5 border-t border-ctp-surface0/50">
+                <div className="flex items-center gap-2 text-[12px] font-black text-ctp-subtext0 uppercase tracking-widest">
+                  <Clock size={16} className="text-ctp-sky-800" />
+                  <span>{guide.estimatedTime || "1-3 days"}</span>
+                </div>
+                
+                <div className="w-10 h-10 rounded-xl bg-ctp-mantle flex items-center justify-center text-ctp-sky-800 group-hover:bg-ctp-sky-800 group-hover:text-ctp-base transition-all transform group-hover:rotate-[-45deg] shadow-sm border border-ctp-surface0">
+                  <ArrowRight size={18} strokeWidth={3} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default TrendingGuides;

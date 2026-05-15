@@ -1,0 +1,30 @@
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../../auth/[...nextauth]/route";
+import connectDB from "@/lib/mongodb";
+import User from "@/models/User";
+import { NextResponse } from "next/server";
+
+export async function DELETE(request, { params }) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const { slug } = await params;
+    await connectDB();
+
+    const user = await User.findOne({ email: session.user.email });
+    if (!user) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+
+    user.savedProgress = user.savedProgress.filter(p => p.guideSlug !== slug);
+    await user.save();
+
+    return NextResponse.json({ message: "Progress deleted successfully", savedProgress: user.savedProgress });
+  } catch (error) {
+    console.error("Delete Progress Error:", error);
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+  }
+}
