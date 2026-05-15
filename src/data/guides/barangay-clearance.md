@@ -1,7 +1,8 @@
 ---
 title: How to Get a Barangay Clearance in the Philippines
+shortTitle: Barangay Clearance
 slug: barangay-clearance
-description: A complete step-by-step guide on how to obtain a Barangay Clearance in the Philippines, including requirements, application procedures, fees, processing time, common uses, and important reminders for first-time applicants.
+description: Get your residency certification for employment, business, and other local government transactions.
 lastUpdated: 2026-05-14
 category: Government Clearance
 agency: LGU

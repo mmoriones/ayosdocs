@@ -1,7 +1,8 @@
 ---
-title: PSA CENOMAR (Certificate of No Marriage Record) in the Philippines
+title: How to Get a PSA CENOMAR (Certificate of No Marriage)
+shortTitle: PSA CENOMAR
 slug: psa-cenomar
-description: Learn how to get a PSA CENOMAR (Certificate of No Marriage Record) in the Philippines, including requirements, fees, online application, walk-in process, and processing times.
+description: Obtain proof of single status required for marriage licenses and visa applications.
 lastUpdated: 2026-05-14
 category: Civil Registry
 agency: PSA

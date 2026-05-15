@@ -1,7 +1,8 @@
 ---
-title: Marriage License Application in the Philippines
+title: How to Apply for a Marriage License in the Philippines
+shortTitle: Marriage License
 slug: marriage-license
-description: Complete guide on how to apply for a Marriage License in the Philippines, including requirements, fees, seminars, processing time, and step-by-step application procedures at your Local Government Unit (LGU).
+description: Essential legal requirements and procedures for couples planning to marry in the Philippines.
 lastUpdated: 2026-05-14
 category: Civil Registry
 agency: LGU

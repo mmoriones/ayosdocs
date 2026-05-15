@@ -1,7 +1,8 @@
 ---
-title: Mayor's Permit / Business Permit in the Philippines
+title: How to Apply for a Mayor's Permit / Business Permit
+shortTitle: Mayor's Permit
 slug: mayors-permit
-description: Complete guide on how to apply for a Mayor's Permit or Business Permit in the Philippines, including requirements, fees, renewal process, and step-by-step procedures for businesses and sole proprietors.
+description: Secure your local license to operate a business within your city or municipality.
 lastUpdated: 2026-05-14
 category: Business Registration
 agency: LGU

@@ -1,7 +1,8 @@
 ---
 title: How to Get a PSA Marriage Certificate in the Philippines
+shortTitle: PSA Marriage Certificate
 slug: psa-marriage-certificate
-description: A complete step-by-step guide on how to request and obtain a PSA Marriage Certificate in the Philippines, including online requests, walk-in applications, requirements, fees, processing time, common problems, and important reminders for newly married couples.
+description: Secure your official marriage record for name changes and spousal benefits.
 lastUpdated: 2026-05-14
 category: Civil Registry
 agency: PSA

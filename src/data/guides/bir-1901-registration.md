@@ -1,7 +1,8 @@
 ---
-title: BIR Business Registration (BIR Form 1901) in the Philippines
+title: How to Register for BIR Business Registration (Form 1901)
+shortTitle: BIR Form 1901
 slug: bir-1901-registration
-description: Complete guide on how to register a sole proprietorship business with the Bureau of Internal Revenue (BIR) using BIR Form 1901, including requirements, fees, books of accounts, invoicing, and COR issuance.
+description: Official tax registration for sole proprietors, freelancers, and self-employed professionals.
 lastUpdated: 2026-05-14
 category: Business Registration
 agency: BIR

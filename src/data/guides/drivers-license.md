@@ -1,7 +1,8 @@
 ---
-title: How to Apply for a Driver’s License in the Philippines (First-Time Applicant)
+title: How to Apply for a Driver’s License in the Philippines
+shortTitle: Driver’s License
 slug: drivers-license
-description: A complete step-by-step guide for first-time applicants on how to get a Driver’s License in the Philippines, including Student Permit application, Theoretical Driving Course (TDC), Practical Driving Course (PDC), LTO exams, requirements, fees, restrictions, and license claiming procedures.
+description: Complete guide to student permits, non-pro, and professional license applications.
 lastUpdated: 2026-05-14
 category: Government ID
 agency: LTO

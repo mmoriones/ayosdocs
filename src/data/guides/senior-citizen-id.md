@@ -1,7 +1,8 @@
 ---
-title: Senior Citizen ID Application in the Philippines
+title: How to Apply for a Senior Citizen ID in the Philippines
+shortTitle: Senior Citizen ID
 slug: senior-citizen-id
-description: Complete guide on how to apply for a Senior Citizen ID in the Philippines, including eligibility, requirements, benefits, discounts, and step-by-step procedures through the Office for Senior Citizens Affairs (OSCA).
+description: Avail of discounts, VAT exemptions, and social benefits for Filipinos aged 60 and above.
 lastUpdated: 2026-05-14
 category: Government ID
 agency: LGU

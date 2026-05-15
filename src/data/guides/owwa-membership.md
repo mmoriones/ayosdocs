@@ -1,7 +1,8 @@
 ---
-title: How to Apply for an OWWA Membership and OWWA e-Card in the Philippines
+title: How to Apply for OWWA Membership and OWWA e-Card
+shortTitle: OWWA Membership
 slug: owwa-membership
-description: A complete step-by-step guide on how Overseas Filipino Workers (OFWs) can apply for or renew OWWA membership and obtain the OWWA e-Card, including requirements, fees, online appointment procedures, benefits, processing time, and claiming methods.
+description: Access welfare benefits and assistance programs for Overseas Filipino Workers (OFWs).
 lastUpdated: 2026-05-14
 category: Government ID
 agency: OWWA

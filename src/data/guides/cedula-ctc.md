@@ -1,7 +1,8 @@
 ---
-title: How to Get a Community Tax Certificate (Cedula) in the Philippines
+title: How to Get a Community Tax Certificate (Cedula)
+shortTitle: Cedula
 slug: cedula-ctc
-description: A complete step-by-step guide on how to obtain a Community Tax Certificate (Cedula) in the Philippines, including qualifications, requirements, fees, processing time, validity, common uses, and important reminders for individuals and businesses.
+description: Obtain your annual community tax certificate required for notarization and government permits.
 lastUpdated: 2026-05-14
 category: Essential Documents
 agency: LGU

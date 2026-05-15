@@ -1,7 +1,8 @@
 ---
-title: How to Apply for an NBI Clearance (New Applicant)
+title: How to Apply for an NBI Clearance in the Philippines
+shortTitle: NBI Clearance
 slug: nbi-clearance
-description: A complete step-by-step guide for first-time applicants on how to apply for an NBI Clearance in the Philippines, including online registration, appointment booking, payment methods, biometrics, claiming procedures, fees, and processing time.
+description: Secure your official background clearance for employment and travel requirements.
 lastUpdated: 2026-04-01
 category: Government Clearance
 agency: NBI

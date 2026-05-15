@@ -1,7 +1,8 @@
 ---
 title: How to Apply for a Postal ID in the Philippines (PHLPost)
+shortTitle: Postal ID
 slug: postal-id
-description: A complete step-by-step guide on how to apply for a Postal ID in the Philippines through PHLPost, including updated requirements, application procedures, fees, rush and regular processing, validity, delivery process, and common problems encountered by applicants.
+description: Apply for an accessible government ID that serves as reliable proof of identity and address.
 lastUpdated: 2026-05-14
 category: Government ID
 agency: PHLPost

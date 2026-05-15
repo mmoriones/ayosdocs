@@ -20,6 +20,7 @@ import {
   Filter
 } from 'lucide-react';
 import { getGuideIcon } from '@/lib/guideIcons';
+import GuideCard from '@/features/guides/components/GuideCard';
 import Banner from '@/components/ui/Banner';
 import Adsense from '@/components/Adsense';
 import Image from 'next/image';
@@ -31,7 +32,7 @@ import Image from 'next/image';
 export default function GuidesClient({ initialGuides }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('Most Popular');
-  const [viewMode, setViewMode] = useState('grid');
+  const [viewMode, setViewMode] = useState('grid'); // Default to grid for hydration consistency
   const [showTip, setShowTip] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedDifficulties, setSelectedDifficulties] = useState(['All Levels']);
@@ -46,6 +47,20 @@ export default function GuidesClient({ initialGuides }) {
     costRange: true,
     agency: true
   });
+
+  // Load viewMode from localStorage on mount
+  useEffect(() => {
+    const savedMode = localStorage.getItem('guidesViewMode');
+    if (savedMode && (savedMode === 'grid' || savedMode === 'list')) {
+      setViewMode(savedMode);
+    }
+  }, []);
+
+  // Save viewMode to localStorage when it changes
+  const handleViewModeChange = (mode) => {
+    setViewMode(mode);
+    localStorage.setItem('guidesViewMode', mode);
+  };
 
   const toggleFilterSection = (section) => {
     setExpandedFilters(prev => ({
@@ -333,10 +348,10 @@ export default function GuidesClient({ initialGuides }) {
               <div className="flex items-center justify-between gap-4">
                 <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
                 <div className="flex items-center bg-ctp-mantle border border-ctp-surface0 p-1.5 rounded-xl shadow-sm">
-                  <button onClick={() => setViewMode('grid')} className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
+                  <button onClick={() => handleViewModeChange('grid')} className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
                     <LayoutGrid size={18} />
                   </button>
-                  <button onClick={() => setViewMode('list')} className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
+                  <button onClick={() => handleViewModeChange('list')} className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
                     <List size={18} />
                   </button>
                 </div>
@@ -352,7 +367,13 @@ export default function GuidesClient({ initialGuides }) {
             {filteredGuides.length > 0 ? (
               <div className={`grid gap-8 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3' : 'grid-cols-1'}`}>
                 {filteredGuides.slice(0, visibleCount).map((guide) => (
-                  <GuideCard key={guide.slug} guide={guide} viewMode={viewMode} />
+                  <GuideCard 
+                    key={guide.slug} 
+                    guide={guide} 
+                    viewMode={viewMode} 
+                    showAgency={true}
+                    showBookmark={true}
+                  />
                 ))}
               </div>
             ) : (
@@ -383,111 +404,6 @@ export default function GuidesClient({ initialGuides }) {
     </div>
   );
 }
-
-const GuideCard = ({ guide, viewMode = 'grid' }) => {
-  const isList = viewMode === 'list';
-  const iconSrc = getGuideIcon(guide.slug, guide.agency);
-
-  if (isList) {
-    return (
-      <div className="group bg-ctp-mantle rounded-[1.5rem] p-5 border border-ctp-surface0 shadow-sm hover:shadow-xl hover:border-ctp-sky-800/30 transition-all relative overflow-hidden flex items-center gap-6">
-        <div className="w-16 h-16 rounded-2xl bg-ctp-base flex items-center justify-center p-3 group-hover:bg-ctp-sky-800/10 transition-colors shadow-inner border border-ctp-surface0 shrink-0">
-          <Image src={iconSrc} alt={guide.title} width={40} height={40} className="w-full h-full object-contain" />
-        </div>
-
-        <div className="flex-1 min-w-0 py-1">
-          <div className="flex items-center gap-3 mb-1">
-            <span className="text-[8px] font-black text-ctp-green uppercase tracking-[0.2em] bg-ctp-green/10 px-2 py-0.5 rounded-full border border-ctp-green/20">
-              {Array.isArray(guide.agency) ? guide.agency.join(', ') : (guide.agency || "Official")}
-            </span>
-            <span className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60">Updated {guide.lastUpdated || "May 8, 2026"}</span>
-          </div>
-          <h3 className="text-[18px] font-black text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight uppercase tracking-tight truncate">
-            {guide.title}
-          </h3>
-          <p className="text-[12px] text-ctp-subtext1 line-clamp-1 font-medium leading-relaxed opacity-80">
-            {guide.description || "Step-by-step requirements and procedures for this government process."}
-          </p>
-        </div>
-
-        <div className="hidden md:flex flex-col items-end gap-2 shrink-0 border-l border-ctp-surface0 pl-6 h-12 justify-center">
-          <div className="flex items-center gap-4 text-[9px] font-black text-ctp-subtext0 uppercase tracking-widest">
-            <div className="flex items-center gap-1.5">
-              <Clock size={12} className="text-ctp-sky-800" />
-              <span>{guide.estimatedTime || "1-3 days"}</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <DollarSign size={12} className="text-ctp-sky-800" />
-              <span>{guide.costRange || "Free"}</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-1.5 text-[9px] font-black text-ctp-subtext0 uppercase tracking-widest">
-            <BarChart3 size={12} className="text-ctp-sky-800" />
-            <span>{guide.difficulty || "Easy"}</span>
-          </div>
-        </div>
-
-        <div className="shrink-0 ml-4 flex items-center gap-4">
-          <button className="p-3 text-ctp-subtext1 hover:text-ctp-sky-800 transition-all bg-ctp-base rounded-xl border border-ctp-surface0 shadow-sm active:scale-90">
-            <Bookmark size={18} />
-          </button>
-          <Link href={`/guides/${guide.slug}`} className="w-10 h-10 rounded-xl bg-ctp-sky-800 text-ctp-base flex items-center justify-center shadow-lg shadow-ctp-sky-800/20 active:scale-95 transition-all">
-            <ArrowRight size={18} />
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="group bg-ctp-mantle rounded-[2rem] p-7 border border-ctp-surface0 shadow-sm hover:shadow-xl hover:border-ctp-sky-800/30 transition-all relative overflow-hidden flex flex-col h-full">
-      <button className="absolute top-6 right-6 p-2.5 text-ctp-subtext1 hover:text-ctp-sky-800 transition-all bg-ctp-base rounded-full shadow-sm z-10 active:scale-90 border border-ctp-surface0">
-        <Bookmark size={18} />
-      </button>
-
-      <div className="mb-6 w-14 h-14 rounded-[1rem] bg-ctp-base flex items-center justify-center p-3 group-hover:bg-ctp-sky-800/10 transition-colors shadow-inner border border-ctp-surface0">
-        <Image src={iconSrc} alt={guide.title} width={40} height={40} className="w-full h-full object-contain" />
-      </div>
-
-      <div className="flex-1">
-        <div className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-ctp-green/10 text-ctp-green text-[8px] font-black uppercase tracking-[0.2em] mb-3 border border-ctp-green/20">
-          {Array.isArray(guide.agency) ? guide.agency.join(', ') : (guide.agency || "Official")}
-        </div>
-        <h3 className="text-[18px] font-black text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight mb-3 uppercase tracking-tight">
-          {guide.title}
-        </h3>
-        <p className="text-[13px] text-ctp-subtext1 line-clamp-2 mb-6 font-medium leading-relaxed">
-          {guide.description || "Step-by-step requirements and procedures for this government process."}
-        </p>
-
-        <div className="space-y-3 mb-6">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[9px] font-black text-ctp-subtext0 uppercase tracking-widest">
-            <div className="flex items-center gap-1.5 min-w-0">
-              <Clock size={12} className="text-ctp-sky-800 shrink-0" />
-              <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>
-            </div>
-            <div className="flex items-center gap-1.5 min-w-0">
-              <DollarSign size={12} className="text-ctp-sky-800 shrink-0" />
-              <span className="truncate">{guide.costRange || "Free"}</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-1.5 text-[9px] font-black text-ctp-subtext0 uppercase tracking-widest">
-            <BarChart3 size={12} className="text-ctp-sky-800 shrink-0" />
-            <span>{guide.difficulty || "Easy"}</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="pt-6 border-t border-ctp-surface0/50 flex items-center justify-between mt-auto">
-        <span className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest">Updated {guide.lastUpdated || "May 8, 2026"}</span>
-        <Link href={`/guides/${guide.slug}`} className="group/link text-ctp-sky-800 font-black text-[10px] uppercase tracking-widest flex items-center gap-1.5 hover:gap-2 transition-all">
-          View guide
-          <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-1" />
-        </Link>
-      </div>
-    </div>
-  );
-};
 
 const SidebarDropdown = ({ value, onChange, options }) => {
   const [isOpen, setIsOpen] = useState(false);

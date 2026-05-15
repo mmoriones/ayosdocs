@@ -1,7 +1,8 @@
 ---
 title: How to Apply for a National Police Clearance in the Philippines
+shortTitle: Police Clearance
 slug: police-clearance
-description: A complete step-by-step guide on how to apply for a National Police Clearance in the Philippines through the Philippine National Police (PNP) National Police Clearance System (NPCS), including online registration, appointment scheduling, requirements, fees, biometrics, validity, and common issues applicants may encounter.
+description: Obtain a nationwide criminal record check through the NPCS for employment and permits.
 lastUpdated: 2026-05-14
 category: Government Clearance
 agency: PNP

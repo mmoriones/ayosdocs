@@ -181,10 +181,11 @@ const DesktopMenu = ({ variant = 'all' }) => {
                 <button
                   onClick={() => {
                     setIsProfileOpen(false);
-                    signOut();
+                    signOut({ callbackUrl: '/' });
                   }}
                   className="w-full flex items-center gap-3 px-4 py-3 text-lg font-bold text-red-500 hover:bg-red-500/10 rounded-2xl transition-all active:scale-[0.98]"
                 >
+
                   <LogOut size={20} /> Logout
                 </button>
               </div>

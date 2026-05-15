@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Hero from '@/features/guides/components/discovery/Hero';
-import TrendingGuides from '@/features/guides/components/discovery/TrendingGuides';
 import StartWithGoal from '@/features/guides/components/discovery/StartWithGoal';
 import RecentExperiences from '@/features/guides/components/discovery/RecentExperiences';
 import ChecklistCard from '@/features/guides/components/tracking/ChecklistCard';
@@ -16,6 +15,8 @@ import RecentlyUpdated from '@/features/guides/components/discovery/RecentlyUpda
 import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';
 import { ArrowRight, MapPin, Clock, Sparkles, MessageSquare } from 'lucide-react';
+import GuideCard from '@/features/guides/components/GuideCard';
+import TrendingWidget from '@/features/guides/components/discovery/TrendingWidget';
 
 export default function HomeClient({ allGuides }) {
   const [activeSlug, setActiveSlug] = useState('getting-started');
@@ -23,6 +24,19 @@ export default function HomeClient({ allGuides }) {
   const isLoggedIn = status === 'authenticated';
   const { openAuthModal } = useAuthUI();
   const router = useRouter();
+
+  // Popular guides logic moved from TrendingGuides
+  const popularSlugs = [
+    'passport-appointment',
+    'nbi-clearance',
+    'sss-registration',
+    'psa-birth-certificate',
+    'national-id'
+  ];
+
+  const popularGuides = popularSlugs
+    .map(slug => allGuides.find(g => g.slug === slug))
+    .filter(Boolean);
 
   // Onboarding status usually comes from user profile in DB. 
   // For now, let's assume false if not logged in.
@@ -111,11 +125,20 @@ export default function HomeClient({ allGuides }) {
             )}
 
             <div className="space-y-5">
-              <div className="flex items-center gap-2 pl-4">
-                <div className="w-9 h-9 rounded-xl bg-ctp-sky-50 text-ctp-sky-800 flex items-center justify-center border border-ctp-sky-300/30 shadow-sm">
-                  <MapPin size={18} />
+              <div className="flex items-center justify-between gap-4 pl-4 pr-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-9 h-9 rounded-xl bg-ctp-sky-50 text-ctp-sky-800 flex items-center justify-center border border-ctp-sky-300/30 shadow-sm">
+                    <MapPin size={18} />
+                  </div>
+                  <h3 className="text-[14px] font-bold text-ctp-subtext0 uppercase tracking-widest">Choose a Life Event Goal</h3>
                 </div>
-                <h3 className="text-[14px] font-bold text-ctp-subtext0 uppercase tracking-widest">Choose a Life Event Goal</h3>
+                <button 
+                  onClick={() => router.push('/bundles')}
+                  className="group flex items-center gap-1.5 text-ctp-sky-800/70 font-black hover:text-ctp-sky-800 transition-colors text-[11px] uppercase tracking-widest"
+                >
+                  <span>View all bundles</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                </button>
               </div>
               <StartWithGoal />
             </div>
@@ -148,7 +171,19 @@ export default function HomeClient({ allGuides }) {
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
-          <TrendingGuides allGuides={allGuides} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            {popularGuides.map((guide, idx) => {
+              const colors = ['orange', 'green', 'yellow', 'mauve', 'teal'];
+              return (
+                <TrendingWidget 
+                  key={guide.slug} 
+                  guide={guide} 
+                  stats={{ views: `${(5.2 - idx * 0.8).toFixed(1)}k` }}
+                  color={colors[idx % colors.length]}
+                />
+              );
+            })}
+          </div>
         </section>
 
         <section className="pt-16 border-t border-ctp-surface0/50">

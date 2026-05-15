@@ -1,7 +1,8 @@
 ---
-title: DFA Apostille Authentication in the Philippines
+title: How to Get a DFA Apostille Authentication
+shortTitle: DFA Apostille
 slug: dfa-apostille
-description: Complete guide on how to get DFA Apostille authentication in the Philippines, including requirements, fees, appointment booking, processing time, and document authentication procedures for international use.
+description: Authenticate your Philippine documents for legal use in foreign countries and embassies.
 lastUpdated: 2026-05-14
 category: Essential Documents
 agency: DFA

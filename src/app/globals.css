@@ -23,6 +23,8 @@
   --color-ctp-green: var(--green);
   --color-ctp-yellow: var(--yellow);
   --color-ctp-orange: var(--orange);
+  --color-ctp-mauve: var(--mauve);
+  --color-ctp-teal: var(--teal);
 
   /* Legacy mappings for backward compatibility if needed */
   --color-ctp-sapphire-200: var(--sky-50);
@@ -78,6 +80,8 @@
     --green: #40a02b;
     --yellow: #df8e1d;
     --orange: #fe640b;
+    --mauve: #8839ef;
+    --teal: #179287;
   }
 
   .mocha, .dark {
@@ -98,6 +102,8 @@
     --green: #a6e3a1;
     --yellow: #f9e2af;
     --orange: #fab387;
+    --mauve: #cba6f7;
+    --teal: #94e2d5;
   }
 
   body {

@@ -23,9 +23,18 @@ export const authOptions = {
             googleAuth: true,
             isVerified: true,
           });
+          user.isNewUser = true;
+        } else {
+          user.isNewUser = false;
         }
       }
       return true;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.isNewUser = user.isNewUser;
+      }
+      return token;
     },
     async session({ session, token }) {
       await connectDB();
@@ -33,6 +42,7 @@ export const authOptions = {
       if (dbUser) {
         session.user.id = dbUser._id.toString();
         session.user.onboarded = dbUser.onboarded;
+        session.user.isNewUser = token.isNewUser;
       }
       return session;
     },

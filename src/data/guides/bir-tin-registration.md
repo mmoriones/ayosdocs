@@ -1,7 +1,8 @@
 ---
 title: How to Register for a BIR TIN in the Philippines
+shortTitle: BIR TIN
 slug: bir-tin-registration
-description: A complete step-by-step guide on how to register for a Taxpayer Identification Number (TIN) with the Bureau of Internal Revenue (BIR) in the Philippines, including employee registration, self-employed registration, online application methods, requirements, fees, and common problems encountered during processing.
+description: Secure your permanent Taxpayer Identification Number for employment and business compliance.
 lastUpdated: 2026-05-14
 category: Government ID
 agency: BIR

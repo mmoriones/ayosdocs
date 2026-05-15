@@ -17,6 +17,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { getGuideIcon } from '@/lib/guideIcons';
+import GuideCard from '@/features/guides/components/GuideCard';
 import { startBundleAction, stopBundleAction } from '@/app/actions/user';
 import { useToast } from '@/context/ToastContext';
 import { useRouter } from 'next/navigation';
@@ -208,56 +209,16 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           {step.guides.map((guideSlug) => {
                             const guide = allGuides.find(g => g.slug === guideSlug);
-                            const iconSrc = getGuideIcon(guideSlug, guide?.agency);
                             const progress = getGuideProgress(guideSlug);
                             
                             return (
-                              <Link 
+                              <GuideCard 
                                 key={guideSlug}
-                                href={`/guides/${guideSlug}`}
-                                className={`bg-ctp-mantle rounded-3xl p-6 border transition-all group/card flex flex-col h-full relative overflow-hidden ${
-                                  progress.completed 
-                                    ? 'border-ctp-green/30 hover:border-ctp-green shadow-sm hover:shadow-lg' 
-                                    : 'border-ctp-surface0 shadow-sm hover:shadow-xl hover:border-ctp-sky-800/30'
-                                }`}
-                              >
-                                {progress.tracked && (
-                                  <div className="absolute top-0 right-0 p-2">
-                                    <div className={`px-2 py-1 rounded-bl-xl rounded-tr-xl text-[8px] font-black uppercase tracking-widest ${
-                                      progress.completed ? 'bg-ctp-green text-ctp-base' : 'bg-ctp-sky-800/10 text-ctp-sky-800 border border-ctp-sky-800/20'
-                                    }`}>
-                                      {progress.completed ? 'Done' : `${progress.percentage}%`}
-                                    </div>
-                                  </div>
-                                )}
-
-                                <div className="flex items-start justify-between mb-6">
-                                  <div className="w-12 h-12 rounded-xl bg-ctp-base p-2 border border-ctp-surface0 shadow-inner group-hover/card:scale-110 transition-transform">
-                                    <Image src={iconSrc} alt={guideSlug} width={40} height={40} className="w-full h-full object-contain" />
-                                  </div>
-                                  <div className="p-2 text-ctp-subtext1 group-hover/card:text-ctp-sky-800 transition-colors">
-                                    <ChevronRight size={18} />
-                                  </div>
-                                </div>
-                                <div className="flex-1">
-                                  <h4 className="text-[15px] font-black text-ctp-text uppercase tracking-tight mb-2 group-hover/card:text-ctp-sky-800 transition-colors line-clamp-1">
-                                    {guide?.title || guideSlug.replace(/-/g, ' ')}
-                                  </h4>
-                                  <p className="text-[11px] text-ctp-subtext1 font-medium line-clamp-2">
-                                    {guide?.description || "Requirement for this workflow stage."}
-                                  </p>
-                                </div>
-                                <div className="mt-6 pt-4 border-t border-ctp-surface0/50 flex items-center justify-between text-[9px] font-black text-ctp-subtext0 uppercase tracking-widest">
-                                  <div className="flex items-center gap-1.5">
-                                    <Clock size={12} className="text-ctp-sky-800" />
-                                    <span>{guide?.estimatedTime || "1-3 days"}</span>
-                                  </div>
-                                  <div className="flex items-center gap-1.5">
-                                    <DollarSign size={12} className="text-ctp-sky-800" />
-                                    <span>{guide?.costRange || "Free"}</span>
-                                  </div>
-                                </div>
-                              </Link>
+                                guide={guide || { slug: guideSlug, title: guideSlug.replace(/-/g, ' ') }}
+                                progress={progress}
+                                showAgency={true}
+                                showBookmark={true}
+                              />
                             );
                           })}
                         </div>

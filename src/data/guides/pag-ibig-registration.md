@@ -1,7 +1,8 @@
 ---
 title: How to Register for a PAG-IBIG Membership in the Philippines
+shortTitle: PAG-IBIG Membership
 slug: pag-ibig-registration
-description: A complete step-by-step guide on how to register as a PAG-IBIG member in the Philippines, including online registration, MID number application, membership requirements, contribution details, fees, benefits, and claiming your PAG-IBIG Membership ID (MID).
+description: Register for HDMF savings and qualify for affordable housing and multi-purpose loans.
 lastUpdated: 2026-05-14
 category: Government ID
 agency: PAG-IBIG

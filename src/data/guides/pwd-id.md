@@ -1,7 +1,8 @@
 ---
 title: How to Apply for a PWD ID in the Philippines
+shortTitle: PWD ID
 slug: pwd-id
-description: A complete step-by-step guide on how to apply for a Person with Disability (PWD) ID in the Philippines, including qualifications, requirements, medical certifications, application procedures, benefits, discounts, processing time, and common problems encountered during registration.
+description: Access mandated discounts and government assistance for persons with disabilities.
 lastUpdated: 2026-05-14
 category: Government ID
 agency: LGU

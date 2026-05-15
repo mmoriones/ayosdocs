@@ -1,7 +1,8 @@
 ---
 title: How to Register as a Voter in the Philippines
+shortTitle: Voter Registration
 slug: voter-registration
-description: A complete step-by-step guide on how to register as a voter in the Philippines, including qualifications, COMELEC requirements, biometrics capture, transfer of registration, reactivation, processing timelines, and important reminders for first-time voters.
+description: Register with COMELEC to participate in national and local elections.
 lastUpdated: 2026-05-14
 category: Government ID
 agency: COMELEC

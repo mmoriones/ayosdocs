@@ -35,7 +35,9 @@ const Hero = ({ guides }) => {
             <div className="flex justify-center lg:justify-start">
               <span className="inline-flex items-center gap-2 rounded-full bg-ctp-sky-50 border border-ctp-sky-300/30 px-5 py-2 text-[14px] font-bold text-ctp-sky-800 shadow-sm">
                 {isLoggedIn && session?.user ? (
-                  <>Welcome back, {session.user.name?.split(' ')[0] || 'User'}! 👋</>
+                  <>
+                    {session.user.isNewUser ? 'Welcome to AyosDocs' : 'Welcome back'}, {session.user.name?.split(' ')[0] || 'User'}! 👋
+                  </>
                 ) : (
                   'Empowering your government journey 👋'
                 )}

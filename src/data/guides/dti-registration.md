@@ -1,7 +1,8 @@
 ---
-title: DTI Business Name Registration in the Philippines
+title: How to Register for DTI Business Name Registration
+shortTitle: DTI Registration
 slug: dti-registration
-description: Complete guide on how to register a business name with the Department of Trade and Industry (DTI) in the Philippines, including requirements, fees, online registration, and renewal procedures.
+description: Register your business name and secure legal rights for your sole proprietorship.
 lastUpdated: 2026-05-14
 category: Business Registration
 agency: DTI

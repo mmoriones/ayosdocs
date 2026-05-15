@@ -1,7 +1,8 @@
 ---
-title: Philippine National ID
+title: How to Register for the Philippine National ID (PhilSys)
+shortTitle: National ID
 slug: national-id
-description: A complete guide on how to register for the Philippine National ID (PhilSys ID), including eligibility, requirements, registration steps, biometric capture, delivery, and digital ID access.
+description: Register for the PhilSys National ID to simplify your identity verification nationwide.
 lastUpdated: 2026-04-01
 category: Government ID
 agency: PSA

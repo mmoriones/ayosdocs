@@ -167,7 +167,7 @@ const MobileMenu = () => {
           <div className="pt-6 border-t border-ctp-surface0 pb-2">
             {user ? (
               <button
-                onClick={() => handleClick(() => signOut())}
+                onClick={() => handleClick(() => signOut({ callbackUrl: '/' }))}
                 className="w-full flex items-center justify-center gap-2 bg-red-500/10 text-red-500 py-3.5 rounded-xl font-bold text-lg transition-all active:scale-[0.98]"
               >
                 <LogOut size={20} />

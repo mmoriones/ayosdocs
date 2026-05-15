@@ -1,7 +1,8 @@
 ---
-title: Solo Parent ID Application in the Philippines
+title: How to Apply for a Solo Parent ID in the Philippines
+shortTitle: Solo Parent ID
 slug: solo-parent-id
-description: Complete guide on how to apply for a Solo Parent ID in the Philippines, including eligibility, requirements, benefits, discounts, and step-by-step application procedures through the local government unit.
+description: Access parental leave and social welfare benefits for qualified single parents.
 lastUpdated: 2026-05-14
 category: Government ID
 agency: LGU

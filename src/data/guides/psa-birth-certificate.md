@@ -1,7 +1,8 @@
 ---
-title: PSA Birth Certificate
+title: How to Get a PSA Birth Certificate in the Philippines
+shortTitle: PSA Birth Certificate
 slug: psa-birth-certificate
-description: A complete step-by-step guide on how to request and obtain a PSA Birth Certificate in the Philippines, including walk-in and online application methods, requirements, fees, delivery options, and processing times.
+description: Request your official birth record for school, IDs, and other legal documentation.
 lastUpdated: 2026-04-01
 category: Civil Registry
 agency: PSA

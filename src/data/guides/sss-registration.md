@@ -1,7 +1,8 @@
 ---
-title: SSS Registration in the Philippines (New Member)
+title: How to Register for SSS Membership in the Philippines
+shortTitle: SSS Membership
 slug: sss-registration
-description: A complete step-by-step guide on how to register as a new SSS member in the Philippines, obtain your permanent SS Number, create your My.SSS account, submit requirements, and begin contributing for future benefits.
+description: Build your social security records for retirement, maternity, and sickness benefits.
 lastUpdated: 2026-04-01
 category: Government ID
 agency: SSS

@@ -1,7 +1,8 @@
 ---
-title: PhilHealth ID Application
+title: How to Apply for PhilHealth Membership and ID
+shortTitle: PhilHealth ID
 slug: philhealth-registration
-description: A complete step-by-step guide on how to register for PhilHealth membership, obtain your PhilHealth Identification Number (PIN), and claim your PhilHealth ID in the Philippines, including requirements, membership categories, fees, and processing time.
+description: Secure health insurance coverage and access medical benefits for you and your family.
 lastUpdated: 2026-04-01
 category: Government ID
 agency: PhilHealth
