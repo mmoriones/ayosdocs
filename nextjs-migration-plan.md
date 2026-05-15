@@ -33,7 +33,7 @@ This plan outlines the process of migrating the AyosDocs project from a decouple
 - [x] **Home Page:** Migrate `Home.jsx` to `app/page.jsx`.
 - [x] **All Guides:** Migrate `AllGuides.jsx` to `app/guides/page.jsx`.
 - [x] **Guide Detail:** Migrate `Guide.jsx` to `app/guides/[slug]/page.jsx`.
-- [x] **My Progress:** Migrate `UserProgress.jsx` to `app/my-progress/page.jsx`.
+- [x] **My Docs:** Migrate `UserProgress.jsx` to `app/my-docs/page.jsx`.
 - [x] **Offices Page:** Port community-driven directory and ratings.
 - [x] **Rate Page:** Migrate the experience sharing form.
 - [x] **Static Pages:** Migrate About, Contact, FAQ, Privacy, Terms.

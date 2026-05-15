@@ -3,7 +3,7 @@ export default function robots() {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/my-progress/", "/onboarding/"],
+      disallow: ["/api/", "/my-docs/", "/onboarding/"],
     },
     sitemap: "https://ayosdocs.com/sitemap.xml",
   };

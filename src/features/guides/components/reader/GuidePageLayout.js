@@ -259,7 +259,7 @@ const GuidePageLayout = ({
                     onClose={() => setShowTip(false)}
                     className="mb-4"
                   >
-                    Bookmark guides you need and track your progress in <Link href="/my-progress" className="underline font-black">My Progress</Link>.
+                    Bookmark guides you need and track your progress in <Link href="/my-docs" className="underline font-black">My Docs</Link>.
                   </Banner>
                 )}
 

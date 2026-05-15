@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
@@ -24,6 +24,7 @@ export async function POST(request) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
+    if (!user.savedProgress) user.savedProgress = [];
     const progressIndex = user.savedProgress.findIndex(p => p.guideSlug === guideSlug);
 
     if (progressIndex > -1) {

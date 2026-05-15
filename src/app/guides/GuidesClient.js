@@ -345,7 +345,7 @@ export default function GuidesClient({ initialGuides }) {
 
             {showTip && (
               <Banner variant="sky" icon={Bookmark} title="Tip" onClose={() => setShowTip(false)} className="mb-8">
-                Bookmark guides you need and track your progress in My Progress.
+                Bookmark guides you need and track your progress in My Docs.
               </Banner>
             )}
 

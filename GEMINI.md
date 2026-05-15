@@ -13,7 +13,7 @@ AyosDocs is evolving from a collection of guides into a **workflow platform** th
 
 ## Feature Specifications (v1.0)
 
-### 1. My Progress Page
+### 1. My Docs Page
 A personal dashboard for tracking government tasks.
 -   **Stats:** Active Guides, Completed Guides, Favorites.
 -   **Tabs:**

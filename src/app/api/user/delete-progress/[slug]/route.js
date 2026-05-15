@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
@@ -19,6 +19,7 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
+    if (!user.savedProgress) user.savedProgress = [];
     user.savedProgress = user.savedProgress.filter(p => p.guideSlug !== slug);
     await user.save();
 

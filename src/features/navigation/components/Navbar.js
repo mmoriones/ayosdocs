@@ -30,7 +30,7 @@ const Navbar = () => {
         {/* LEFT: Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 cursor-pointer group"
+          className="flex items-center gap-2 cursor-pointer group shrink-0"
         >
           <Image
             src="/favicon.svg"
@@ -40,35 +40,34 @@ const Navbar = () => {
             className="object-contain transition-transform group-hover:scale-110"
           />
 
-          <div className="flex items-center gap-4">
-            <h1 className="text-2xl font-bold text-ctp-text leading-none tracking-tight">
-              <span className="text-ctp-sky-800">Ayos</span>
-              <span className="ml-1">Docs</span>
-            </h1>
-
-            <div className="hidden md:block h-6 w-px bg-ctp-surface1"></div>
-
-            <p className="hidden md:block text-sm font-medium text-ctp-subtext1 max-w-[200px] leading-tight">
-              Your guide to government documents & more
-            </p>
-          </div>
+          <h1 className="text-2xl font-bold text-ctp-text leading-none tracking-tight">
+            <span className="text-ctp-sky-800">Ayos</span>
+            <span className="ml-1">Docs</span>
+          </h1>
         </Link>
 
-        {/* RIGHT */}
-        <DesktopMenu />
+        {/* CENTER: Discovery Links (Desktop Only) */}
+        <div className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2">
+          <DesktopMenu variant="discovery" />
+        </div>
 
-        {/* MOBILE TOGGLE */}
-        <button
-          className={`lg:hidden p-2.5 rounded-2xl transition-all duration-300 ${
-            isMobileMenuOpen 
-              ? "bg-ctp-mantle text-ctp-sky-800 shadow-inner" 
-              : "text-ctp-subtext1 hover:bg-ctp-mantle"
-          }`}
-          onClick={() => toggleMobileMenu()}
-          aria-label="Toggle menu"
-        >
-          <Menu size={24} className={`transition-transform duration-300 ${isMobileMenuOpen ? "rotate-90" : ""}`} />
-        </button>
+        {/* RIGHT: Tools & Toggle */}
+        <div className="flex items-center gap-4">
+          <DesktopMenu variant="tools" />
+
+          {/* MOBILE TOGGLE */}
+          <button
+            className={`lg:hidden p-2.5 rounded-2xl transition-all duration-300 ${
+              isMobileMenuOpen 
+                ? "bg-ctp-mantle text-ctp-sky-800 shadow-inner" 
+                : "text-ctp-subtext1 hover:bg-ctp-mantle"
+            }`}
+            onClick={() => toggleMobileMenu()}
+            aria-label="Toggle menu"
+          >
+            <Menu size={24} className={`transition-transform duration-300 ${isMobileMenuOpen ? "rotate-90" : ""}`} />
+          </button>
+        </div>
       </div>
     </nav>
   );

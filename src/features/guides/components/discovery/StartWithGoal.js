@@ -16,7 +16,7 @@ const StartWithGoal = () => {
       {bundles.slice(0, 3).map((bundle) => (
         <div
           key={bundle.id}
-          onClick={() => router.push('/coming-soon')}
+          onClick={() => router.push(`/bundles/${bundle.id}`)}
           className="
             group p-8 rounded-[2.5rem] 
             bg-ctp-base border border-ctp-surface0 soft-shadow

@@ -7,6 +7,15 @@ import { LayoutGrid, CheckCircle2, Star, Clock } from 'lucide-react';
 const SummaryStats = ({ stats }) => {
   const statItems = [
     { 
+      label: 'Active Bundles', 
+      value: stats.activeBundles || 0, 
+      sub: 'Workflows active', 
+      icon: Clock, 
+      color: 'text-ctp-green', 
+      bg: 'bg-ctp-green/10',
+      progress: 0
+    },
+    { 
       label: 'In Progress', 
       value: stats.inProgress || 0, 
       sub: 'Keep going!', 
@@ -32,15 +41,6 @@ const SummaryStats = ({ stats }) => {
       color: 'text-ctp-orange', 
       bg: 'bg-ctp-orange/10',
       progress: 0
-    },
-    { 
-      label: 'Expiring Soon', 
-      value: stats.expiring || 0, 
-      sub: 'Take action soon', 
-      icon: Clock, 
-      color: 'text-ctp-green', 
-      bg: 'bg-ctp-green/10',
-      progress: 20
     }
   ];
 

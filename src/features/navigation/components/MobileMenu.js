@@ -2,7 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LogOut, UserPlus, X, Sun, Moon } from "lucide-react";
+import { 
+  LogOut, 
+  UserPlus, 
+  X, 
+  Sun, 
+  Moon, 
+  Home, 
+  FileText, 
+  LayoutGrid, 
+  Building2 
+} from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { useSession, signOut } from "next-auth/react";
 import { useAuthUI } from "@/components/Providers";
@@ -23,7 +33,10 @@ const MobileMenu = () => {
     toggleMobileMenu(false);
   };
 
-  const isActive = (path) => pathname === path;
+  const isActive = (path) => {
+    if (path === '/') return pathname === '/';
+    return pathname === path || pathname.startsWith(path + '/');
+  };
 
   const linkClass = (path) =>
     `block w-full px-6 py-4 rounded-xl transition-all duration-200 text-lg ${
@@ -89,29 +102,52 @@ const MobileMenu = () => {
           </div>
         </div>
 
-        <div className="overflow-y-auto px-6 py-6 space-y-6">
+        <div className="overflow-y-auto px-6 py-6 space-y-8">
+          {/* PRIMARY NAV */}
           <div className="space-y-0.5">
+            <p className="px-6 text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] mb-3">Explore</p>
             <Link href="/" onClick={() => handleClick()} className={linkClass("/")}>
-              Home
+              <div className="flex items-center gap-3">
+                <Home size={20} strokeWidth={isActive("/") ? 2.5 : 2} />
+                Home
+              </div>
             </Link>
             <Link href="/guides" onClick={() => handleClick()} className={linkClass("/guides")}>
-              Guides
+              <div className="flex items-center gap-3">
+                <FileText size={20} strokeWidth={isActive("/guides") ? 2.5 : 2} />
+                Guides
+              </div>
+            </Link>
+            <Link href="/bundles" onClick={() => handleClick()} className={linkClass("/bundles")}>
+              <div className="flex items-center gap-3">
+                <LayoutGrid size={20} strokeWidth={isActive("/bundles") ? 2.5 : 2} />
+                Bundles
+              </div>
             </Link>
             <Link href="/offices" onClick={() => handleClick()} className={linkClass("/offices")}>
-              Offices
+              <div className="flex items-center gap-3">
+                <Building2 size={20} strokeWidth={isActive("/offices") ? 2.5 : 2} />
+                Offices
+              </div>
             </Link>
-            <Link href="/rate" onClick={() => handleClick()} className={linkClass("/rate")}>
-              Rate
-            </Link>
-            {user && (
-              <Link href="/my-progress" onClick={() => handleClick()} className={linkClass("/my-progress")}>
-                My Progress
-              </Link>
-            )}
           </div>
 
+          {/* USER WORKSPACE */}
+          {user && (
+            <div className="space-y-0.5">
+              <p className="px-6 text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] mb-3">Personal Workspace</p>
+              <Link href="/my-docs" onClick={() => handleClick()} className={linkClass("/my-docs")}>
+                <div className="flex items-center gap-3">
+                  <Image src="/favicon.svg" alt="" width={20} height={20} />
+                  My Docs
+                </div>
+              </Link>
+            </div>
+          )}
+
+          {/* INFORMATION */}
           <div className="space-y-0.5">
-            <p className="px-6 text-sm font-bold text-ctp-subtext0 uppercase tracking-widest mb-1">Information</p>
+            <p className="px-6 text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] mb-3">Information</p>
             {[
               { label: "About", href: "/about" },
               { label: "FAQs", href: "/faqs" },

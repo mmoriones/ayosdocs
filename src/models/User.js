@@ -19,6 +19,12 @@ const userSchema = new mongoose.Schema({
             completedTasks: String
         }
     ],
+    trackedBundles: [
+        {
+            bundleId: String,
+            startedAt: { type: Date, default: Date.now }
+        }
+    ],
     createdAt: { type: Date, default: Date.now }
 });
 

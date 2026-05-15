@@ -35,6 +35,7 @@ export default function ProgressClient({ allGuides }) {
   const [sortBy, setSortBy] = useState('Recently updated');
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [selectedSlug, setSelectedSlug] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(5);
   const queryClient = useQueryClient();
   const { showToast } = useToast();
 
@@ -113,29 +114,47 @@ export default function ProgressClient({ allGuides }) {
     const total = processedGuides.length;
     const completed = processedGuides.filter(g => g.progress.completedCount === g.progress.totalCount).length;
     const inProgress = total - completed;
+    const activeBundles = userData.trackedBundles?.length || 0;
     
     return {
       total,
       completed,
       inProgress,
       favorites: 0,
-      expiring: 0 
+      activeBundles
     };
-  }, [processedGuides]);
+  }, [processedGuides, userData]);
 
   const bundleProgress = useMemo(() => {
-    return bundles.map(bundle => {
-      const relatedGuides = processedGuides.filter(pg => 
-        bundle.guides.includes(pg.guide.slug)
-      );
-      
-      return {
-        bundle,
-        completed: relatedGuides.filter(g => g.progress.completedCount === g.progress.totalCount).length,
-        total: bundle.guides.length
-      };
-    });
-  }, [processedGuides]);
+    const trackedIds = userData.trackedBundles?.map(b => b.bundleId) || [];
+
+    return bundles
+      .filter(bundle => trackedIds.includes(bundle.id))
+      .map(bundle => {
+        const allBundleGuides = bundle.flow.flatMap(f => f.guides);
+        const relatedGuides = processedGuides.filter(pg => 
+          allBundleGuides.includes(pg.guide.slug)
+        );
+
+        return {
+          bundle,
+          completed: relatedGuides.filter(g => g.progress.completedCount === g.progress.totalCount).length,
+          total: allBundleGuides.length
+        };
+      })
+      .filter(item => {
+        if (searchQuery && !item.bundle.title.toLowerCase().includes(searchQuery.toLowerCase())) {
+          return false;
+        }
+
+        const isCompleted = item.completed === item.total && item.total > 0;
+        if (activeTab === 'In Progress') return !isCompleted;
+        if (activeTab === 'Completed') return isCompleted;
+        if (activeTab === 'Favorites') return false; // Bundles don't have favorites yet
+        
+        return true;
+      });
+  }, [userData, processedGuides, searchQuery, activeTab]);
 
   const filteredGuides = useMemo(() => {
     let result = processedGuides;
@@ -157,6 +176,13 @@ export default function ProgressClient({ allGuides }) {
     return result;
   }, [processedGuides, searchQuery, activeTab]);
 
+  const displayedGuides = useMemo(() => {
+    if (activeTab === 'All' && !searchQuery) {
+      return filteredGuides.slice(0, visibleCount);
+    }
+    return filteredGuides;
+  }, [filteredGuides, activeTab, searchQuery, visibleCount]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-ctp-base">
@@ -171,20 +197,16 @@ export default function ProgressClient({ allGuides }) {
   return (
     <div className="min-h-screen bg-ctp-base font-sans pb-20">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10">
-        
+
         <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 text-ctp-sky-800">
               <ArrowRight size={20} className="-rotate-45" />
-              <span className="text-[14px] font-black uppercase tracking-[0.3em]">Dashboard</span>
+              <span className="text-[14px] font-black uppercase tracking-[0.3em]">My Docs</span>
             </div>
-            <h1 className="text-[40px] font-black text-ctp-text tracking-tight uppercase leading-none">My Progress</h1>
+            <h1 className="text-[40px] font-black text-ctp-text tracking-tight uppercase leading-none">My Docs</h1>
             <p className="text-ctp-subtext1 text-[18px] font-medium max-w-xl">Track your government journey, check milestones, and complete goals.</p>
           </div>
-          <button className="flex items-center gap-3 px-8 py-4 bg-ctp-mantle border border-ctp-sky-800/30 text-ctp-sky-800 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-lg hover:shadow-xl hover:border-ctp-sky-800 transition-all active:scale-95">
-            <Plus size={20} strokeWidth={3} />
-            New Requirement Bundle
-          </button>
         </header>
 
         <div className="flex flex-col lg:flex-row gap-14">
@@ -247,7 +269,7 @@ export default function ProgressClient({ allGuides }) {
                   <p className="text-[10px] text-ctp-subtext0 font-black uppercase tracking-[0.2em] mt-3">Multi-requirement tracking at scale.</p>
                 </div>
                 <button 
-                  onClick={() => router.push('/coming-soon')}
+                  onClick={() => router.push('/bundles')}
                   className="group flex items-center gap-2 text-ctp-sky-800 font-black text-[11px] uppercase tracking-widest hover:text-ctp-sky-300 transition-colors mb-1"
                 >
                   View Library <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
@@ -264,7 +286,7 @@ export default function ProgressClient({ allGuides }) {
                 ))}
 
                 <button 
-                  onClick={() => router.push('/coming-soon')}
+                  onClick={() => router.push('/bundles')}
                   className="w-full py-10 bg-ctp-mantle border-2 border-dashed border-ctp-surface0 rounded-[2.5rem] text-ctp-subtext0 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-sky-800/5 transition-all flex flex-col items-center justify-center gap-4 group"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-ctp-base border border-ctp-surface0 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
@@ -274,7 +296,6 @@ export default function ProgressClient({ allGuides }) {
                 </button>
               </div>
             </section>
-
             <section className="space-y-10">
               <div className="flex items-end justify-between border-b border-ctp-surface0 pb-6">
                 <div>
@@ -287,8 +308,8 @@ export default function ProgressClient({ allGuides }) {
               </div>
 
               <div className="grid grid-cols-1 gap-6">
-                {filteredGuides.length > 0 ? (
-                  filteredGuides.map((item) => (
+                {displayedGuides.length > 0 ? (
+                  displayedGuides.map((item) => (
                     <GuideRowCard 
                       key={item.guide.slug} 
                       guide={item.guide} 
@@ -308,8 +329,11 @@ export default function ProgressClient({ allGuides }) {
                   </div>
                 )}
                 
-                {filteredGuides.length > 0 && (
-                  <button className="w-full py-6 text-[11px] font-black text-ctp-subtext0 hover:text-ctp-subtext1 uppercase tracking-[0.3em] transition-colors">
+                {filteredGuides.length > displayedGuides.length && (
+                  <button 
+                    onClick={() => setVisibleCount(prev => prev + 5)}
+                    className="w-full py-6 text-[11px] font-black text-ctp-sky-800 hover:text-ctp-sky-300 uppercase tracking-[0.3em] transition-colors border-2 border-dashed border-ctp-surface0 rounded-[2rem] bg-ctp-mantle/50 hover:bg-ctp-mantle shadow-sm active:scale-[0.99]"
+                  >
                     Load more items
                   </button>
                 )}

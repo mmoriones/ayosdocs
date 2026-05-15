@@ -161,7 +161,7 @@ const ChecklistCard = ({
             
             {!inGuidePage && (
               <button 
-                onClick={() => router.push('/my-progress')}
+                onClick={() => router.push('/my-docs')}
                 className="text-[11px] font-black text-ctp-sky-800 hover:opacity-80 flex items-center gap-1 uppercase tracking-widest transition-colors"
               >
                 Dashboard <ChevronRight size={14} strokeWidth={3} />

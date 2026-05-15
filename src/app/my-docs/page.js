@@ -2,7 +2,7 @@ import { getAllGuides } from '@/lib/guides';
 import ProgressClient from './ProgressClient';
 
 export const metadata = {
-  title: 'My Progress | AyosDocs',
+  title: 'My Docs | AyosDocs',
   description: 'Track your Philippine government requirements and application progress.',
 };
 

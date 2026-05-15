@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
@@ -19,7 +19,8 @@ export async function GET() {
 
     return NextResponse.json({
       message: "Progress data retrieved successfully",
-      savedProgress: user.savedProgress
+      savedProgress: user.savedProgress || [],
+      trackedBundles: user.trackedBundles || []
     });
   } catch (error) {
     console.error("All Data Error:", error);
