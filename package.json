@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:tunnel": "env-cmd -f .env.tunnel next build",
     "start": "next start",
+    "start:tunnel": "env-cmd -f .env.tunnel next start",
     "lint": "eslint --quiet"
   },
   "dependencies": {
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.0",
+    "env-cmd": "^11.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "tailwindcss": "^4"

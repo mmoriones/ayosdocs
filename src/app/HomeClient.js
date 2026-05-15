@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Hero from '@/features/guides/components/discovery/Hero';
 import TrendingGuides from '@/features/guides/components/discovery/TrendingGuides';
 import StartWithGoal from '@/features/guides/components/discovery/StartWithGoal';
@@ -238,12 +239,12 @@ export default function HomeClient({ allGuides }) {
               </div>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-6 relative z-10">
-              <button className="px-10 py-5 bg-ctp-sky-50 border border-ctp-sky-300/20 rounded-2xl text-ctp-sky-800 font-black uppercase tracking-widest hover:bg-ctp-sky-100/50 transition-all active:scale-95 shadow-sm text-[16px]">
+              <Link href="/contact" className="px-10 py-5 bg-ctp-sky-50 border border-ctp-sky-300/20 rounded-2xl text-ctp-sky-800 font-black uppercase tracking-widest hover:bg-ctp-sky-100/50 transition-all active:scale-95 shadow-sm text-[16px]">
                 Help Center
-              </button>
-              <button className="px-10 py-5 bg-ctp-sky-800 text-ctp-base rounded-2xl font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl text-[16px]">
+              </Link>
+              <Link href="/contact" className="px-10 py-5 bg-ctp-sky-800 text-ctp-base rounded-2xl font-black uppercase tracking-widest hover:opacity-90 transition-all active:scale-95 shadow-xl text-[16px]">
                 Contact Us
-              </button>
+              </Link>
             </div>
           </div>
         </section>
