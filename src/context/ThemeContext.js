@@ -9,14 +9,14 @@ export const ThemeProvider = ({ children }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme && savedTheme !== theme) {
+    if (savedTheme) {
       setTheme(savedTheme);
-    } else if (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches && theme !== 'dark') {
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setTheme('dark');
     }
-  }, [theme]);
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!mounted) return;
