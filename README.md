@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AyosDocs
 
-## Getting Started
+AyosDocs is a full-stack web application designed to help Filipinos navigate government documentation and applications through interactive, step-by-step guides.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Interactive Guides:** Comprehensive requirements, fees, and procedures for major government documents (Passport, NBI, SSS, etc.).
+- **Personal Progress Tracker:** Save your progress and track completed requirements.
+- **Requirement Bundles:** Grouped guides for specific life events like "Starting a Business" or "Getting Married".
+- **Office Directory & Ratings:** Crowdsourced insights on government office waiting times and service quality.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** Tailwind CSS 4
+- **Database:** MongoDB (Mongoose)
+- **Authentication:** NextAuth.js (Google Provider)
+- **State Management:** TanStack React Query
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+
+- MongoDB instance (Local or Atlas)
+- Google OAuth credentials
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/ayosdocs.git
+   cd ayosdocs
+   ```
 
-## Deploy on Vercel
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Configure Environment Variables:**
+   Create a `.env.local` file in the root directory:
+   ```env
+   MONGO_URI=your_mongodb_uri
+   NEXTAUTH_SECRET=your_nextauth_secret
+   NEXTAUTH_URL=http://localhost:3000
+   GOOGLE_CLIENT_ID=your_google_client_id
+   GOOGLE_CLIENT_SECRET=your_google_client_secret
+   NEXT_PUBLIC_ADSENSE_ENABLED=false
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```

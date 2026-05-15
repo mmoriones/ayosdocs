@@ -84,6 +84,7 @@ The project is a unified full-stack application built with **Next.js (App Router
     NEXTAUTH_URL=http://localhost:3000
     GOOGLE_CLIENT_ID=your_google_client_id
     GOOGLE_CLIENT_SECRET=your_google_client_secret
+    NEXT_PUBLIC_ADSENSE_ENABLED=false
     ```
 
 ### Running the Project
