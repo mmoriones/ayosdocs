@@ -9,5 +9,8 @@
     "build": "npm run build -w app",
     "start": "npm run start -w app",
     "lint": "npm run lint -w app"
+  },
+  "overrides": {
+    "picomatch": "^4.0.4"
   }
 }
