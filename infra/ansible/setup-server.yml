@@ -6,6 +6,9 @@
   vars_files:
     - vars/secrets.yml
 
+  vars:
+    repo_url: "https://github.com/mmoriones/ayosdocs.git"
+
   handlers:
     - name: Restart SSH
       systemd:
@@ -31,7 +34,16 @@
           - ca-certificates
         state: present
 
-    # 2. Server Hardening
+    # 2. Source Control
+    - name: Ensure project directory exists and is up to date
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ project_path }}"
+        version: master
+        force: yes
+      become: no
+
+    # 3. Server Hardening
     - name: Install UFW and Fail2Ban
       apt:
         name:
@@ -83,7 +95,7 @@
         line: 'PermitRootLogin prohibit-password'
       notify: Restart SSH
 
-    # 3. Docker & Docker Compose Setup
+    # 4. Docker & Docker Compose Setup
     - name: Create directory for Docker GPG key
       file:
         path: /etc/apt/keyrings
@@ -128,7 +140,7 @@
     - name: Reset connection to apply group changes
       meta: reset_connection
 
-    # 3. Cloudflare Tunnel Configuration
+    # 5. Cloudflare Tunnel Configuration
     - name: Create cloudflared config directory
       file:
         path: /etc/cloudflared
@@ -146,9 +158,15 @@
       copy:
         content: "{{ vault_creds_json_content }}"
         dest: /etc/cloudflared/creds.json
-        mode: '0400'
+        mode: '0644'
 
-    # 4. Secrets & Env Configuration
+    # 6. Secrets & Env Configuration
+    - name: Create .env file in project root
+      copy:
+        content: "{{ vault_env_content }}"
+        dest: "{{ project_path }}/app/.env"
+        mode: '0600'
+        owner: "{{ ansible_user }}"
 
     - name: Create rclone config for backups
       copy:
@@ -157,7 +175,7 @@
         mode: '0600'
         owner: "{{ ansible_user }}"
 
-    # 5. Final Verification
+    # 7. Final Verification
     - name: Verify Docker Compose is accessible
       command: docker compose version
       register: compose_version

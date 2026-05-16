@@ -82,6 +82,7 @@ For detailed instructions on how to provision a fresh server and deploy the appl
    ```bash
    ansible-playbook -i infra/ansible/inventory.ini infra/ansible/setup-server.yml --ask-vault-pass
    ```
+   *Note: This will automatically clone and sync the repository on your server.*
 
 ## 🛠️ Development & Deployment
 

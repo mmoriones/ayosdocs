@@ -44,14 +44,7 @@ This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubun
     ssh ubuntu@your_server_ip
     ```
 
-2.  **Clone the Repository (Remote):**
-    The Ansible playbook expects the repository to exist on the server to create configuration links.
-    ```bash
-    git clone https://github.com/your-username/ayosdocs.git
-    ```
-    *Note the path (e.g., `/home/ubuntu/ayosdocs`) as you'll need it for the inventory.*
-
-3.  **Configure Passwordless Sudo:**
+2.  **Configure Passwordless Sudo:**
     To allow Ansible to run administrative tasks without being prompted for a password, run the following command on the server (replace `ubuntu` with your `ansible_user`):
     ```bash
     echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ayosdocs-ansible
@@ -61,6 +54,8 @@ This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubun
 
 ## 🤖 Step 3: Automated Provisioning
 
+The Ansible playbook now automates the entire setup, including **cloning and updating the repository** on the remote server.
+
 1.  **Configure Inventory (Local):**
     Edit `infra/ansible/inventory.ini` on your local machine with the server IP and the **Remote** project path:
     ```ini
@@ -68,8 +63,11 @@ This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubun
     your_server_ip ansible_user=ubuntu project_path=/home/ubuntu/ayosdocs
     ```
 
-2.  **Run the Master Setup (Local):**
-    This command will install Docker, Cloudflared, and deploy your encrypted secrets to the server.
+2.  **Configure Repo URL (Local):**
+    If you are using a fork, ensure the `repo_url` in `infra/ansible/setup-server.yml` points to your repository.
+
+3.  **Run the Master Setup (Local):**
+    This command will install Docker, sync your repository, configure Cloudflared, and deploy your encrypted secrets to the server.
     ```bash
     ansible-playbook -i infra/ansible/inventory.ini infra/ansible/setup-server.yml --ask-vault-pass
     ```
@@ -78,7 +76,7 @@ This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubun
 
 ## 🚢 Step 4: Launch Application
 
-Once the playbook finishes, the server is ready. The application is now deployed using Docker images from **GitHub Container Registry (GHCR)**.
+Once the playbook finishes, the server is ready with the latest code and configuration. 
 
 1.  **Configure Image Name (Local):**
     Ensure your `.env` (managed via Ansible Vault) includes the `IMAGE_NAME` variable pointing to your GHCR repository.
