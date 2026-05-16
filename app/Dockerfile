@@ -2,21 +2,18 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-# Copy root package files
-COPY package.json package-lock.json ./
-# Copy app package files
-COPY app/package.json ./app/
-
 # Install dependencies for the workspace
+COPY package.json package-lock.json ./
+COPY app/package.json ./app/
 RUN npm ci
 
 # Copy the rest of the application code
-COPY app/ ./app/
+COPY . .
 
 # Build the application
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build -w app
+WORKDIR /app/app
+RUN npm run build
 
 # Stage 2: Runner
 FROM node:20-alpine AS runner
@@ -30,11 +27,15 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy necessary files from builder
-# Note: Next.js standalone build puts files in app/.next/standalone
-# Since we are building from root, the path is ./app/.next/standalone
-COPY --from=builder /app/app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/app/.next/standalone/app ./
-COPY --from=builder --chown=nextjs:nodejs /app/app/.next/standalone/node_modules ./node_modules
+# Next.js standalone build structure for workspaces:
+# .next/standalone/
+#   node_modules/
+#   app/
+#     server.js
+#     package.json
+
+COPY --from=builder /app/app/public ./app/public
+COPY --from=builder --chown=nextjs:nodejs /app/app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/app/.next/static ./app/.next/static
 
 USER nextjs
@@ -44,4 +45,6 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
+# We need to run the server from the app workspace folder in standalone
+WORKDIR /app/app
 CMD ["node", "server.js"]
