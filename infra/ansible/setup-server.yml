@@ -84,15 +84,24 @@
       notify: Restart SSH
 
     # 3. Docker & Docker Compose Setup
+    - name: Create directory for Docker GPG key
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+
     - name: Add Docker GPG apt Key
-      apt_key:
+      get_url:
         url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
+        force: yes
 
     - name: Add Docker Repository
       apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        repo: "deb [arch={{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
         state: present
+        filename: docker
 
     - name: Install Docker Engine
       apt:
@@ -115,6 +124,9 @@
         name: "{{ ansible_user }}"
         groups: docker
         append: yes
+
+    - name: Reset connection to apply group changes
+      meta: reset_connection
 
     # 3. Cloudflare Tunnel Setup
     - name: Download cloudflared
@@ -144,7 +156,7 @@
     - name: Create .env file in project root
       copy:
         content: "{{ vault_env_content }}"
-        dest: "{{ project_path }}/.env"
+        dest: "{{ project_path }}/app/.env"
         mode: '0600'
         owner: "{{ ansible_user }}"
 

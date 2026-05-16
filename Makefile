@@ -10,10 +10,10 @@ start:
 	npm run start
 
 docker-up:
-	docker compose -f docker/compose/docker-compose.yml up -d
+	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d
 
 docker-down:
-	docker compose -f docker/compose/docker-compose.yml down
+	docker compose --env-file app/.env -f docker/compose/docker-compose.yml down
 
 infra-up:
 	cd infra/terraform && terraform apply

@@ -16,6 +16,11 @@ This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubun
 2.  **Install Ansible (Local):**
     **Ubuntu/Debian:** `sudo apt install ansible`
 
+    **Install Required Collections:**
+    ```bash
+    ansible-galaxy collection install community.general
+    ```
+
 3.  **Secrets Management (Ansible Vault):**
     Open `infra/ansible/vars/secrets.yml` and fill in your real credentials.
 
@@ -44,6 +49,12 @@ This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubun
     git clone https://github.com/your-username/ayosdocs.git
     ```
     *Note the path (e.g., `/home/ubuntu/ayosdocs`) as you'll need it for the inventory.*
+
+3.  **Configure Passwordless Sudo:**
+    To allow Ansible to run administrative tasks without being prompted for a password, run the following command on the server (replace `ubuntu` with your `ansible_user`):
+    ```bash
+    echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ayosdocs-ansible
+    ```
 
 ---
 
