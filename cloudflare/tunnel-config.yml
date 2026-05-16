@@ -3,7 +3,7 @@ credentials-file: /etc/cloudflared/creds.json
 
 ingress:
   - hostname: test.ayosdocs.com
-    service: http://localhost:80
+    service: http://nginx:80
   - hostname: ayosdocs.com
-    service: http://localhost:80
+    service: http://nginx:80
   - service: http_status:404

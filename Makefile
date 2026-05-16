@@ -15,6 +15,9 @@ docker-up:
 docker-down:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml down
 
+backup:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.yml exec backup /scripts/backup.sh
+
 infra-up:
 	cd infra/terraform && terraform apply
 

@@ -102,7 +102,7 @@ The application includes an automated backup service that runs every day at 3:00
 2.  **Manual Test**:
     To run a backup manually:
     ```bash
-    docker compose -f docker/compose/docker-compose.yml exec backup /scripts/backup.sh
+    docker exec ayosdocs-backup /scripts/backup.sh
     ```
 
 ---
@@ -118,6 +118,6 @@ The application includes an automated backup service that runs every day at 3:00
 
 ## 🔍 Troubleshooting
 
-- **Check Tunnel Status:** `journalctl -u cloudflared -f`
+- **Check Tunnel Status:** `docker compose -f docker/compose/docker-compose.yml logs -f tunnel`
 - **Check Docker Logs:** `docker compose -f docker/compose/docker-compose.yml logs -f`
-- **Nginx Config:** `docker exec -it ayosdocs-nginx-1 nginx -t`
+- **Nginx Config:** `docker exec -it ayosdocs-nginx nginx -t`

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Configuration
 DB_NAME="ayosdocs"
@@ -9,8 +9,8 @@ REMOTE_PATH="r2-backups:ayosdocs-backup"
 echo "Starting backup: ${BACKUP_NAME}"
 
 # 1. Run mongodump
-# We use 'mongodb' as the host because it's the service name in our docker network
-mongodump --host mongodb --db ${DB_NAME} --archive=${BACKUP_PATH} --gzip
+# We use 'ayosdocs-db' as the host because it's the container name in our docker network
+mongodump --host ayosdocs-db --db ${DB_NAME} --archive=${BACKUP_PATH} --gzip
 
 if [ $? -eq 0 ]; then
     echo "Database dump successful."

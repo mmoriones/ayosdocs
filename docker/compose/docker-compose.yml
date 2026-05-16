@@ -1,9 +1,7 @@
 services:
   app:
+    container_name: ayosdocs-app
     image: ${IMAGE_NAME:-ghcr.io/mmoriones/ayosdocs}:latest
-    # build:
-    #   context: ../../app
-    #   dockerfile: Dockerfile
     restart: always
     environment:
       - MONGO_URI=${MONGO_URI}
@@ -14,18 +12,24 @@ services:
       - NEXT_PUBLIC_ADSENSE_ENABLED=false
     depends_on:
       - mongodb
+    networks:
+      - ayosdocs-network
 
   watchtower:
+    container_name: ayosdocs-watchtower
     image: containrrr/watchtower
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_POLL_INTERVAL=300 # Check every 5 minutes
+      - WATCHTOWER_POLL_INTERVAL=300
     command: --interval 300 --cleanup
+    networks:
+      - ayosdocs-network
 
   nginx:
+    container_name: ayosdocs-nginx
     image: nginx:alpine
     restart: always
     ports:
@@ -34,14 +38,32 @@ services:
       - ../nginx/conf.d:/etc/nginx/conf.d:ro
     depends_on:
       - app
+    networks:
+      - ayosdocs-network
+
+  tunnel:
+    container_name: ayosdocs-tunnel
+    image: cloudflare/cloudflared:latest
+    restart: always
+    command: tunnel run
+    volumes:
+      - /etc/cloudflared:/etc/cloudflared:ro
+    depends_on:
+      - nginx
+    networks:
+      - ayosdocs-network
 
   mongodb:
+    container_name: ayosdocs-db
     image: mongo:latest
     restart: always
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - ayosdocs-network
 
   backup:
+    container_name: ayosdocs-backup
     image: alpine:latest
     restart: always
     depends_on:
@@ -50,7 +72,13 @@ services:
       - ../../scripts:/scripts:ro
       - ../../backups:/backups
       - ../../docker/monitoring/rclone.conf:/root/.config/rclone/rclone.conf:ro
-    entrypoint: ["sh", "-c", "apk add --no-cache mongodb-tools rclone && echo '0 3 * * * /scripts/backup.sh' > /etc/crontabs/root && crond -f"]
+    entrypoint: ["sh", "-c", "apk add --no-cache mongodb-tools rclone bash && echo '0 3 * * * /scripts/backup.sh' > /etc/crontabs/root && crond -f"]
+    networks:
+      - ayosdocs-network
+
+networks:
+  ayosdocs-network:
+    driver: bridge
 
 volumes:
   mongodb_data:

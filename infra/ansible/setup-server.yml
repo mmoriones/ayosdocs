@@ -128,17 +128,7 @@
     - name: Reset connection to apply group changes
       meta: reset_connection
 
-    # 3. Cloudflare Tunnel Setup
-    - name: Download cloudflared
-      get_url:
-        url: https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
-        dest: /tmp/cloudflared.deb
-
-    - name: Install cloudflared
-      apt:
-        deb: /tmp/cloudflared.deb
-        state: present
-
+    # 3. Cloudflare Tunnel Configuration
     - name: Create cloudflared config directory
       file:
         path: /etc/cloudflared
