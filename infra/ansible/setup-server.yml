@@ -135,26 +135,20 @@
         state: directory
         mode: '0755'
 
-    - name: Copy tunnel config from project (Hard Link)
-      file:
+    - name: Copy tunnel config from project repo
+      copy:
         src: "{{ project_path }}/cloudflare/tunnel-config.yml"
         dest: /etc/cloudflared/config.yml
-        state: hard
-        force: yes
-
-    # 4. Secrets & Env Configuration
-    - name: Create .env file in project root
-      copy:
-        content: "{{ vault_env_content }}"
-        dest: "{{ project_path }}/app/.env"
-        mode: '0600'
-        owner: "{{ ansible_user }}"
+        mode: '0644'
+        remote_src: yes
 
     - name: Create cloudflared creds.json
       copy:
         content: "{{ vault_creds_json_content }}"
         dest: /etc/cloudflared/creds.json
         mode: '0400'
+
+    # 4. Secrets & Env Configuration
 
     - name: Create rclone config for backups
       copy:
