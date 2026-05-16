@@ -11,8 +11,8 @@
     "lint": "npm run lint -w app"
   },
   "overrides": {
-    "picomatch": "^4.0.4",
-    "postcss": "^8.5.14",
-    "nodemailer": "^8.0.7"
+    "picomatch": "4.0.4",
+    "postcss": "8.5.14",
+    "nodemailer": "8.0.7"
   }
 }
