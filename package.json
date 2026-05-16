@@ -1,41 +1,13 @@
 {
-  "name": "temp-next",
-  "version": "0.1.0",
+  "name": "ayosdocs-root",
   "private": true,
+  "workspaces": [
+    "app"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "build:tunnel": "env-cmd -f .env.tunnel next build",
-    "start": "next start",
-    "start:tunnel": "env-cmd -f .env.tunnel next start",
-    "lint": "eslint --quiet"
-  },
-  "dependencies": {
-    "@catppuccin/tailwindcss": "^1.0.0",
-    "@tailwindcss/typography": "^0.5.19",
-    "@tanstack/react-query": "^5.100.10",
-    "axios": "^1.16.1",
-    "google-auth-library": "^10.6.2",
-    "gray-matter": "^4.0.3",
-    "jsonwebtoken": "^9.0.3",
-    "lucide-react": "^1.16.0",
-    "mongoose": "^9.6.2",
-    "next": "16.2.6",
-    "next-auth": "^4.24.14",
-    "nodemailer": "^7.0.13",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "react-icons": "^5.6.0",
-    "react-markdown": "^10.1.0",
-    "rehype-autolink-headings": "^7.1.0",
-    "rehype-slug": "^6.0.0",
-    "remark-gfm": "^4.0.1"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.0",
-    "env-cmd": "^11.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.6",
-    "tailwindcss": "^4"
+    "dev": "npm run dev -w app",
+    "build": "npm run build -w app",
+    "start": "npm run start -w app",
+    "lint": "npm run lint -w app"
   }
 }

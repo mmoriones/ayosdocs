@@ -1,0 +1,56 @@
+services:
+  app:
+    image: ${IMAGE_NAME:-ghcr.io/mmoriones/ayosdocs}:latest
+    # build:
+    #   context: ../../app
+    #   dockerfile: Dockerfile
+    restart: always
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - NEXT_PUBLIC_ADSENSE_ENABLED=false
+    depends_on:
+      - mongodb
+
+  watchtower:
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=300 # Check every 5 minutes
+    command: --interval 300 --cleanup
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ../nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - app
+
+  mongodb:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+
+  backup:
+    image: alpine:latest
+    restart: always
+    depends_on:
+      - mongodb
+    volumes:
+      - ../../scripts:/scripts:ro
+      - ../../backups:/backups
+      - ../../docker/monitoring/rclone.conf:/root/.config/rclone/rclone.conf:ro
+    entrypoint: ["sh", "-c", "apk add --no-cache mongodb-tools rclone && echo '0 3 * * * /scripts/backup.sh' > /etc/crontabs/root && crond -f"]
+
+volumes:
+  mongodb_data:

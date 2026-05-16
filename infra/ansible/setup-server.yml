@@ -1,0 +1,172 @@
+---
+- name: Full Server Setup for AyosDocs
+  hosts: webservers
+  become: yes
+  
+  vars_files:
+    - vars/secrets.yml
+
+  handlers:
+    - name: Restart SSH
+      systemd:
+        name: ssh
+        state: restarted
+
+  tasks:
+    # 1. System Prep
+    - name: Update apt cache and upgrade packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+        autoremove: yes
+
+    - name: Install prerequisite packages
+      apt:
+        name:
+          - curl
+          - git
+          - make
+          - software-properties-common
+          - apt-transport-https
+          - ca-certificates
+        state: present
+
+    # 2. Server Hardening
+    - name: Install UFW and Fail2Ban
+      apt:
+        name:
+          - ufw
+          - fail2ban
+        state: present
+
+    - name: Configure UFW - Allow SSH
+      ufw:
+        rule: allow
+        port: '22'
+        proto: tcp
+
+    - name: Configure UFW - Allow HTTP
+      ufw:
+        rule: allow
+        port: '80'
+        proto: tcp
+
+    - name: Configure UFW - Allow HTTPS
+      ufw:
+        rule: allow
+        port: '443'
+        proto: tcp
+
+    - name: Configure UFW - Deny all other incoming
+      ufw:
+        state: enabled
+        policy: deny
+        direction: incoming
+
+    - name: Ensure Fail2Ban is running
+      systemd:
+        name: fail2ban
+        state: started
+        enabled: yes
+
+    - name: Harden SSH - Disable password authentication
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+      notify: Restart SSH
+
+    - name: Harden SSH - Disable root login
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin'
+        line: 'PermitRootLogin prohibit-password'
+      notify: Restart SSH
+
+    # 3. Docker & Docker Compose Setup
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Install Docker Engine
+      apt:
+        name: 
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    - name: Ensure Docker service is running
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add current user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    # 3. Cloudflare Tunnel Setup
+    - name: Download cloudflared
+      get_url:
+        url: https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+        dest: /tmp/cloudflared.deb
+
+    - name: Install cloudflared
+      apt:
+        deb: /tmp/cloudflared.deb
+        state: present
+
+    - name: Create cloudflared config directory
+      file:
+        path: /etc/cloudflared
+        state: directory
+        mode: '0755'
+
+    - name: Link tunnel config from project
+      file:
+        src: "{{ project_path }}/cloudflare/tunnel-config.yml"
+        dest: /etc/cloudflared/config.yml
+        state: link
+        force: yes
+
+    # 4. Secrets & Env Configuration
+    - name: Create .env file in project root
+      copy:
+        content: "{{ vault_env_content }}"
+        dest: "{{ project_path }}/.env"
+        mode: '0600'
+        owner: "{{ ansible_user }}"
+
+    - name: Create cloudflared creds.json
+      copy:
+        content: "{{ vault_creds_json_content }}"
+        dest: /etc/cloudflared/creds.json
+        mode: '0400'
+
+    - name: Create rclone config for backups
+      copy:
+        content: "{{ vault_rclone_conf_content }}"
+        dest: "{{ project_path }}/docker/monitoring/rclone.conf"
+        mode: '0600'
+        owner: "{{ ansible_user }}"
+
+    # 5. Final Verification
+    - name: Verify Docker Compose is accessible
+      command: docker compose version
+      register: compose_version
+      changed_when: false
+
+    - name: Print Compose version
+      debug:
+        msg: "Docker Compose version: {{ compose_version.stdout }}"

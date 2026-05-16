@@ -40,19 +40,23 @@ Structured community insights to avoid misinformation.
 
 ## Architecture
 
-The project is a unified full-stack application built with **Next.js (App Router)**.
+The project is structured as a monorepo-style workspace to separate application logic from infrastructure and documentation.
 
--   **Frontend:** React 19 components using Server and Client components. Styling is powered by **Tailwind CSS 4**.
--   **Backend:** Next.js API Routes and **Server Actions** handle business logic and database interactions.
--   **Content Management:** Guides are authored in Markdown and stored in `src/data/guides/`. They are parsed server-side and rendered using React Markdown.
--   **Database:** MongoDB (via Mongoose) stores user profiles and their progress.
--   **Authentication:** NextAuth.js with Google Provider managed through `src/app/api/auth/`.
--   **State Management:** React Context (Theme, Toasts) and TanStack React Query for client-side data synchronization.
+- **Root Workspace:** Managed via `package.json` workspaces.
+- **Application (`/app`):** The unified full-stack application built with **Next.js (App Router)**.
+  - **Frontend:** React 19 components using Server and Client components. Styling is powered by **Tailwind CSS 4**.
+  - **Backend:** Next.js API Routes and **Server Actions** handle business logic and database interactions.
+  - **Content Management:** Guides are authored in Markdown and stored in `app/src/data/guides/`. They are parsed server-side and rendered using React Markdown.
+  - **Database:** MongoDB (via Mongoose) stores user profiles and their progress.
+  - **Authentication:** NextAuth.js with Google Provider managed through `app/src/app/api/auth/`.
+- **Documentation (`/docs`):** Project-wide documentation, architecture diagrams, and runbooks.
+- **Infrastructure (`/infra`):** Terraform and Ansible configurations (Planned).
+- **Docker (`/docker`):** Orchestration and monitoring configurations (Planned).
 
 ## Core Technologies
 
 ### Stack
--   **Framework:** Next.js 15+ (App Router)
+-   **Framework:** Next.js 16+ (App Router)
 -   **Runtime:** Node.js
 -   **Styling:** Tailwind CSS 4
 -   **Database:** MongoDB (Mongoose)
@@ -69,15 +73,15 @@ The project is a unified full-stack application built with **Next.js (App Router
 
 ### Installation
 
-1.  **Install dependencies:**
+1.  **Install dependencies (from root):**
     ```bash
     npm install
     ```
 
 2.  **Environment Setup:**
-    Create a `.env.local` file in the root directory.
+    Create a `.env.local` file in the `app/` directory.
 
-    **`.env.local`**
+    **`app/.env.local`**
     ```env
     MONGO_URI=your_mongodb_uri
     NEXTAUTH_SECRET=your_nextauth_secret
@@ -89,14 +93,13 @@ The project is a unified full-stack application built with **Next.js (App Router
 
 ### Running the Project
 
--   **Development mode:**
+-   **Development mode (from root):**
     ```bash
     npm run dev
     ```
--   **Production build:**
+-   **Production build (from root):**
     ```bash
     npm run build
-    npm start
     ```
 
 ## Development Conventions
