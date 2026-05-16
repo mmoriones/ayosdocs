@@ -135,11 +135,11 @@
         state: directory
         mode: '0755'
 
-    - name: Link tunnel config from project
+    - name: Copy tunnel config from project (Hard Link)
       file:
         src: "{{ project_path }}/cloudflare/tunnel-config.yml"
         dest: /etc/cloudflared/config.yml
-        state: link
+        state: hard
         force: yes
 
     # 4. Secrets & Env Configuration

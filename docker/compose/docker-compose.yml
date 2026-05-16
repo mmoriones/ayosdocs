@@ -45,7 +45,7 @@ services:
     container_name: ayosdocs-tunnel
     image: cloudflare/cloudflared:latest
     restart: always
-    command: tunnel run
+    command: tunnel --config /etc/cloudflared/config.yml run
     volumes:
       - /etc/cloudflared:/etc/cloudflared:ro
     depends_on:

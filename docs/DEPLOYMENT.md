@@ -22,7 +22,8 @@ This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubun
     ```
 
 3.  **Secrets Management (Ansible Vault):**
-    Open `infra/ansible/vars/secrets.yml` and fill in your real credentials.
+    Open `infra/ansible/vars/secrets.yml` and fill in your real credentials. 
+    **Note:** Ensure `MONGO_URI` in `vault_env_content` uses the new container name: `mongodb://ayosdocs-db:27017/ayosdocs`.
 
     **To encrypt for the first time:**
     ```bash
