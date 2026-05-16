@@ -370,13 +370,3 @@ You may request a replacement, subject to verification and applicable replacemen
 ### Can I use the National ID for banking?
 
 Yes. Many banks and financial institutions accept the National ID as valid proof of identity.
-
----
-
-## 15. Summary
-
-The Philippine National ID is a unified government-issued identification system designed to simplify identity verification and improve access to services.
-
-To apply, prepare your documents, visit a registration center, complete biometric capture, verify your details, and wait for card delivery or digital ID activation.
-
-The National ID can be used for government services, banking, employment, education, and everyday identity verification across the Philippines.

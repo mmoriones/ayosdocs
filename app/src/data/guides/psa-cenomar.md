@@ -224,9 +224,3 @@ Yes. PSA now offers e-Certificate services for eligible applicants.
 
 ### What happens if I previously had a marriage record?
 Instead of a CENOMAR, PSA may issue an Advisory on Marriage.
-
----
-
-## 15. Summary
-
-The PSA CENOMAR is an important civil registry document proving that a person has no registered marriage record in the Philippines. It is commonly required for marriage licenses, visa processing, and other legal transactions. Applicants may obtain it through PSA walk-in outlets, authorized online services, or PSA e-Certificate platforms. Preparing accurate information and applying early can help avoid delays and processing problems.

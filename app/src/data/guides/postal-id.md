@@ -33,7 +33,7 @@ checklist:
 
 ## 1. What is a Postal ID?
 
-A **Postal ID** is an official government-issued identification card issued by the Philippine Postal Corporation (PHLPost). It is widely accepted by government agencies, banks, and private institutions as proof of identity and address. :contentReference[oaicite:0]{index=0}
+A **Postal ID** is an official government-issued identification card issued by the Philippine Postal Corporation (PHLPost). It is widely accepted by government agencies, banks, and private institutions as proof of identity and address.
 
 The Postal ID is primarily used for:
 
@@ -45,9 +45,9 @@ The Postal ID is primarily used for:
 * Employment requirements
 * SIM registration and financial services
 
-PHLPost officially resumed Postal ID issuance nationwide on October 15, 2024 after a temporary suspension. :contentReference[oaicite:1]{index=1}
+PHLPost officially resumed Postal ID issuance nationwide on October 15, 2024 after a temporary suspension.
 
-The Postal ID is also referred to by PHLPost as a “Postal Functional Card.” :contentReference[oaicite:2]{index=2}
+The Postal ID is also referred to by PHLPost as a “Postal Functional Card.”
 
 ---
 
@@ -62,7 +62,7 @@ You may apply for a Postal ID if you:
 - Need supporting identification for passport applications
 - Require a valid ID for employment or government transactions
 
-The Postal ID is commonly recommended for first-time applicants because requirements are generally more accessible compared to some other government IDs. :contentReference[oaicite:3]{index=3}
+The Postal ID is a common choice for first-time applicants because requirements are usually more accessible compared to other government IDs.
 
 ---
 
@@ -70,15 +70,15 @@ The Postal ID is commonly recommended for first-time applicants because requirem
 
 ### Widely Accepted Government ID
 
-The Postal ID is recognized by many government agencies and private institutions. :contentReference[oaicite:4]{index=4}
+The Postal ID is recognized by many government agencies and private institutions.
 
 ### Proof of Address
 
-The ID functions as an address verification system because cards are delivered to the applicant’s declared address. :contentReference[oaicite:5]{index=5}
+The ID functions as an address verification system because cards are delivered to the applicant’s declared address.
 
 ### Useful for Passport Applications
 
-PHLPost states that the Postal ID may be used as a primary document in passport applications with the DFA. :contentReference[oaicite:6]{index=6}
+PHLPost states that the Postal ID may be used as a primary document in passport applications with the DFA.
 
 ### Easier Access to Financial Services
 
@@ -94,7 +94,7 @@ Compared to some IDs, Postal ID requirements are relatively straightforward.
 
 ### Postal ID Applications Resumed
 
-PHLPost resumed nationwide Postal ID applications beginning October 15, 2024 after suspension due to system upgrades and security improvements. :contentReference[oaicite:7]{index=7}
+PHLPost resumed nationwide Postal ID applications beginning October 15, 2024 after suspension due to system upgrades and security improvements.
 
 ### Personal Appearance is Required
 
@@ -104,11 +104,11 @@ Applicants must personally appear at Postal ID capturing sites for:
 * Fingerprint scanning
 * Signature capture
 
-:contentReference[oaicite:8]{index=8}
+
 
 ### Beware of Scams
 
-PHLPost warns applicants against unofficial Facebook pages and social media scammers offering Postal ID assistance. Applications should only be processed directly through official PHLPost offices. :contentReference[oaicite:9]{index=9}
+PHLPost warns applicants against unofficial Facebook pages and social media scammers offering Postal ID assistance. Applications should only be processed directly through official PHLPost offices.
 
 ---
 
@@ -122,7 +122,7 @@ Applicants are generally required to submit:
 * One proof of identity
 * One proof of address
 
-:contentReference[oaicite:10]{index=10}
+
 
 ---
 
@@ -138,9 +138,9 @@ Examples may include:
 * PRC ID
 * Other government-issued IDs with photo and signature
 
-:contentReference[oaicite:11]{index=11}
 
-Some branches may still implement stricter interpretation of requirements, so applicants are advised to confirm directly with their target branch before visiting. :contentReference[oaicite:12]{index=12}
+
+Some branches may still implement stricter interpretation of requirements, so applicants are advised to confirm directly with their target branch before visiting.
 
 ---
 
@@ -157,7 +157,7 @@ Examples may include:
 * Land title
 * Real property tax receipt
 
-:contentReference[oaicite:13]{index=13}
+
 
 ---
 
@@ -173,7 +173,7 @@ Certain applicants may also need:
 | Divorced applicants | Divorce Decree |
 | Naturalized Filipinos | Naturalization Certificate |
 
-:contentReference[oaicite:14]{index=14}
+
 
 ---
 
@@ -187,7 +187,7 @@ Applicants may apply at:
 - Government service centers
 - Mobile enrollment events in some barangays and organizations
 
-PHLPost maintains designated Postal ID registration and capturing sites nationwide. :contentReference[oaicite:15]{index=15}
+PHLPost maintains designated Postal ID registration and capturing sites nationwide.
 
 ---
 
@@ -210,7 +210,7 @@ Bring both original copies and photocopies when required.
 
 Proceed to your selected PHLPost branch or capturing center.
 
-Applicants are required to appear personally for biometrics capture. :contentReference[oaicite:16]{index=16}
+Applicants are required to appear personally for biometrics capture.
 
 ---
 
@@ -234,7 +234,7 @@ Applicants will usually undergo:
 * Fingerprint scanning
 * Signature recording
 
-This process is performed onsite at the post office. :contentReference[oaicite:17]{index=17}
+This process is performed onsite at the post office.
 
 ---
 
@@ -261,7 +261,7 @@ Delivery timelines vary depending on:
 * Rush or regular processing
 * System availability
 
-PHLPost states that delivery also functions as address verification for the applicant. :contentReference[oaicite:18]{index=18}
+PHLPost states that delivery also functions as address verification for the applicant.
 
 ---
 
@@ -272,9 +272,9 @@ PHLPost states that delivery also functions as address verification for the appl
 | Regular Processing | ₱550 |
 | Rush Processing | ₱650 |
 
-:contentReference[oaicite:19]{index=19}
 
-Rush processing availability may vary depending on system maintenance and branch operations. Some applicants reported temporary suspension of rush processing during certain periods in 2026. :contentReference[oaicite:20]{index=20}
+
+Rush processing availability may vary depending on system maintenance and branch operations. Some applicants reported temporary suspension of rush processing during certain periods in 2026.
 
 ---
 
@@ -288,9 +288,9 @@ Typical processing timelines may include:
 | Rush Processing | Several working days |
 | Regular Processing | Around 15–30 working days |
 
-In April 2026, PHLPost announced same-day Postal ID release at the Government Express Center in SM Manila for qualified applications submitted before cutoff time. :contentReference[oaicite:21]{index=21}
+In April 2026, PHLPost announced same-day Postal ID release at the Government Express Center in SM Manila for qualified applications submitted before cutoff time.
 
-Some applicants online reported waiting several weeks for delivery depending on branch operations and temporary suspensions. :contentReference[oaicite:22]{index=22}
+Some applicants online reported waiting several weeks for delivery depending on branch operations and temporary suspensions.
 
 ---
 
@@ -303,7 +303,7 @@ Postal IDs are generally valid for:
 | Filipino Citizens | 3 years |
 | Foreign Residents | Subject to visa validity |
 
-PHLPost states that the Postal ID is honored during its three-year validity period. :contentReference[oaicite:23]{index=23}
+PHLPost states that the Postal ID is honored during its three-year validity period.
 
 ---
 
@@ -319,7 +319,7 @@ Applicants may experience:
 - System maintenance interruptions
 - Delayed card printing
 
-Some applicants online reported needing to personally follow up with post offices for delayed releases. :contentReference[oaicite:24]{index=24}
+Some applicants online reported needing to personally follow up with post offices for delayed releases.
 
 ---
 
@@ -332,7 +332,7 @@ Some applicants online reported needing to personally follow up with post office
 - Providing inconsistent names or addresses
 - Failing to verify details before printing
 
-Applicants are strongly advised to use only official PHLPost channels. :contentReference[oaicite:25]{index=25}
+Applicants are strongly advised to use only official PHLPost channels.
 
 ---
 
@@ -345,7 +345,7 @@ Applicants are strongly advised to use only official PHLPost channels. :contentR
 * Keep digital copies of receipts
 * Follow up directly with the post office for delays
 
-Some applicants recommend checking PHLPost Facebook advisories regularly because processing schedules and rush availability may change temporarily. :contentReference[oaicite:26]{index=26}
+Some applicants recommend checking PHLPost Facebook advisories regularly because processing schedules and rush availability may change temporarily.
 
 ---
 
@@ -353,34 +353,24 @@ Some applicants recommend checking PHLPost Facebook advisories regularly because
 
 ### Is the Postal ID currently available again?
 
-Yes. PHLPost resumed Postal ID issuance nationwide starting October 15, 2024. :contentReference[oaicite:27]{index=27}
+Yes. PHLPost resumed Postal ID issuance nationwide starting October 15, 2024.
 
 ### Is personal appearance required?
 
-Yes. Applicants must personally appear for biometrics capture. :contentReference[oaicite:28]{index=28}
+Yes. Applicants must personally appear for biometrics capture.
 
 ### Is the Postal ID accepted as a valid government ID?
 
-Yes. The Postal ID is widely accepted by many public and private institutions. :contentReference[oaicite:29]{index=29}
+Yes. The Postal ID is widely accepted by many public and private institutions.
 
 ### Can I apply without a National ID?
 
-Yes. Other accepted proof of identity documents may be used. :contentReference[oaicite:30]{index=30}
+Yes. Other accepted proof of identity documents may be used.
 
 ### How is the Postal ID delivered?
 
-The ID is commonly delivered to the applicant’s declared address. :contentReference[oaicite:31]{index=31}
+The ID is commonly delivered to the applicant’s declared address.
 
 ### Is rush processing always available?
 
-Not always. Some branches may temporarily suspend rush processing depending on system conditions. :contentReference[oaicite:32]{index=32}
-
----
-
-## 15. Summary
-
-The Postal ID is a widely accepted government-issued identification card provided by PHLPost for identity and address verification purposes.
-
-Applicants generally need one proof of identity, one proof of address, and personal appearance for biometrics capture at designated Postal ID capturing sites.
-
-After the nationwide resumption of Postal ID issuance in October 2024, applicants may again process regular and, in some areas, rush applications through official PHLPost offices and authorized registration centers.
+Not always. Some branches may temporarily suspend rush processing depending on system conditions.

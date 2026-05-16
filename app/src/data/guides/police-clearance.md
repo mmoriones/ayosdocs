@@ -34,9 +34,9 @@ checklist:
 
 ## 1. What is a National Police Clearance?
 
-A **National Police Clearance** is an official document issued by the Philippine National Police (PNP) through the National Police Clearance System (NPCS). It certifies whether an applicant has a criminal record or derogatory information in the PNP database. :contentReference[oaicite:0]{index=0}
+A **National Police Clearance** is an official document issued by the Philippine National Police (PNP) through the National Police Clearance System (NPCS). It certifies whether an applicant has a criminal record or derogatory information in the PNP database.
 
-Unlike older local police clearances that only covered a specific city or municipality, the National Police Clearance system performs nationwide database verification. :contentReference[oaicite:1]{index=1}
+Unlike older local police clearances that only covered a specific city or municipality, the National Police Clearance system performs nationwide database verification.
 
 The clearance is commonly required for:
 
@@ -49,7 +49,7 @@ The clearance is commonly required for:
 * School requirements
 * Legal documentation
 
-The clearance is processed through the online **National Police Clearance System (NPCS)**. :contentReference[oaicite:2]{index=2}
+The clearance is processed through the online **National Police Clearance System (NPCS)**.
 
 ---
 
@@ -66,7 +66,7 @@ You may need a National Police Clearance if you are:
 - Completing school requirements
 - Verifying criminal record status
 
-Both first-time applicants and renewals may process applications through the NPCS online system. :contentReference[oaicite:3]{index=3}
+Both first-time applicants and renewals may process applications through the NPCS online system.
 
 ---
 
@@ -74,7 +74,7 @@ Both first-time applicants and renewals may process applications through the NPC
 
 ### Nationwide Criminal Record Verification
 
-The National Police Clearance checks records through the centralized PNP database. :contentReference[oaicite:4]{index=4}
+The National Police Clearance checks records through the centralized PNP database.
 
 ### Widely Accepted Document
 
@@ -89,7 +89,7 @@ The NPCS online system allows applicants to:
 * Pay online
 * Monitor application status
 
-:contentReference[oaicite:5]{index=5}
+
 
 ### Useful for Employment and Government Transactions
 
@@ -107,17 +107,17 @@ Applicants are generally required to:
 * Book an appointment
 * Visit the selected police station personally
 
-:contentReference[oaicite:6]{index=6}
+
 
 ### Non-Appearance Renewal May Be Available
 
-PNP states that certain applicants may renew without appearance for up to three years from their last personal appearance, subject to system verification requirements. :contentReference[oaicite:7]{index=7}
+PNP states that certain applicants may renew without appearance for up to three years from their last personal appearance, subject to system verification requirements.
 
-However, some applicants online reported system issues with non-appearance renewal features in 2026. :contentReference[oaicite:8]{index=8}
+However, some applicants online reported system issues with non-appearance renewal features in 2026.
 
 ### First Time Job Seekers May Qualify for Free Clearance
 
-Under the First Time Jobseekers Assistance Act, qualified first-time job seekers may receive free police clearance processing upon presentation of the required certification. :contentReference[oaicite:9]{index=9}
+Under the First Time Jobseekers Assistance Act, qualified first-time job seekers may receive free police clearance processing upon presentation of the required certification.
 
 ---
 
@@ -132,7 +132,7 @@ Applicants commonly need:
 * Payment confirmation
 * One valid government-issued ID
 
-:contentReference[oaicite:10]{index=10}
+
 
 ---
 
@@ -155,7 +155,7 @@ The PNP lists the following as accepted IDs:
 * TIN ID
 * Barangay Residency Certification (if no ID available)
 
-:contentReference[oaicite:11]{index=11}
+
 
 IDs should generally be:
 
@@ -164,7 +164,7 @@ IDs should generally be:
 * With clear photo and signature
 * Bearing the applicant’s complete name
 
-:contentReference[oaicite:12]{index=12}
+
 
 ---
 
@@ -176,7 +176,7 @@ Applicants may process National Police Clearance through:
 - Selected police stations nationwide
 - PNP clearance processing centers
 
-Applicants may usually choose their preferred police station during online appointment scheduling. :contentReference[oaicite:13]{index=13}
+Applicants may usually choose their preferred police station during online appointment scheduling.
 
 ---
 
@@ -194,7 +194,7 @@ Applicants commonly provide:
 * Mobile number
 * Password
 
-:contentReference[oaicite:14]{index=14}
+
 
 Use an active email account because verification messages may be sent there.
 
@@ -215,7 +215,7 @@ Details may include:
 * Educational background
 * Family information
 
-:contentReference[oaicite:15]{index=15}
+
 
 Ensure all information matches your IDs and official records.
 
@@ -229,7 +229,7 @@ Select:
 * Appointment date
 * Time slot
 
-Available slots depend on station capacity and scheduling availability. :contentReference[oaicite:16]{index=16}
+Available slots depend on station capacity and scheduling availability.
 
 ---
 
@@ -244,7 +244,7 @@ Proceed with payment through available channels which may include:
 * Cebuana Lhuillier
 * Online banking
 
-:contentReference[oaicite:17]{index=17}
+
 
 Keep:
 
@@ -265,7 +265,7 @@ Bring:
 * Appointment details
 * Payment confirmation
 
-Some applicants online report that screenshots of payment confirmations are sometimes accepted, although policies may vary by station. :contentReference[oaicite:18]{index=18}
+Some applicants online report that screenshots of payment confirmations are sometimes accepted, although policies may vary by station.
 
 ---
 
@@ -277,7 +277,7 @@ At the station, applicants commonly undergo:
 * Photograph capture
 * Identity verification
 
-:contentReference[oaicite:19]{index=19}
+
 
 The process usually takes only a few minutes if requirements are complete.
 
@@ -290,7 +290,7 @@ Possible outcomes include:
 * **No Hit** — clearance may be released the same day
 * **With Hit** — additional verification is required
 
-A “hit” does not automatically mean the applicant has a criminal case. It may simply indicate a name match in the system. :contentReference[oaicite:20]{index=20}
+A “hit” does not automatically mean the applicant has a criminal case. It may simply indicate a name match in the system.
 
 ---
 
@@ -302,7 +302,7 @@ If approved:
 * Report errors immediately
 * Keep the clearance secure
 
-Applicants with “No Hit” status commonly receive clearance on the same day. :contentReference[oaicite:21]{index=21}
+Applicants with “No Hit” status commonly receive clearance on the same day.
 
 ---
 
@@ -314,15 +314,15 @@ Applicants with “No Hit” status commonly receive clearance on the same day. 
 | Convenience Fee | ₱10–₱30 |
 | Total Estimated Cost | Around ₱160–₱180 |
 
-Fees may vary depending on payment channels and system updates. :contentReference[oaicite:22]{index=22}
+Fees may vary depending on payment channels and system updates.
 
-Qualified first-time job seekers may receive free processing under applicable laws. :contentReference[oaicite:23]{index=23}
+Qualified first-time job seekers may receive free processing under applicable laws.
 
 ---
 
 ## 9. Validity
 
-The PNP states that National Police Clearance is generally valid for six months from the date of issuance. :contentReference[oaicite:24]{index=24}
+The PNP states that National Police Clearance is generally valid for six months from the date of issuance.
 
 Some employers or agencies may require newer clearances depending on their policies.
 
@@ -346,7 +346,7 @@ Processing times may vary depending on:
 * Name matches
 * System availability
 
-:contentReference[oaicite:25]{index=25}
+
 
 ---
 
@@ -362,7 +362,7 @@ Applicants may experience:
 - Appointment slot shortages
 - Payment confirmation delays
 
-Some applicants online reported recurring errors with the non-appearance renewal feature in 2026. :contentReference[oaicite:26]{index=26}
+Some applicants online reported recurring errors with the non-appearance renewal feature in 2026.
 
 ---
 
@@ -388,7 +388,7 @@ Always review your application details before final submission.
 * Save digital and printed payment receipts
 * Avoid peak application days when possible
 
-Some applicants recommend morning appointments for faster processing. :contentReference[oaicite:27]{index=27}
+Some applicants recommend morning appointments for faster processing.
 
 ---
 
@@ -396,34 +396,24 @@ Some applicants recommend morning appointments for faster processing. :contentRe
 
 ### Is online appointment required?
 
-Yes. National Police Clearance applications are generally processed through the NPCS online appointment system. :contentReference[oaicite:28]{index=28}
+Yes. National Police Clearance applications are generally processed through the NPCS online appointment system.
 
 ### How long is Police Clearance valid?
 
-The PNP states that the clearance is generally valid for six months. :contentReference[oaicite:29]{index=29}
+The PNP states that the clearance is generally valid for six months.
 
 ### What does “With Hit” mean?
 
-A “hit” means your name matches a record in the PNP database and requires additional verification. :contentReference[oaicite:30]{index=30}
+A “hit” means your name matches a record in the PNP database and requires additional verification.
 
 ### Can I apply at any police station?
 
-Applicants may generally select available police stations during online scheduling. :contentReference[oaicite:31]{index=31}
+Applicants may generally select available police stations during online scheduling.
 
 ### Is Barangay Clearance required?
 
-Many applicants report that valid ID and payment confirmation are usually sufficient, although requirements may vary by station. :contentReference[oaicite:32]{index=32}
+Many applicants report that valid ID and payment confirmation are usually sufficient, although requirements may vary by station.
 
 ### Is digital National ID accepted?
 
-Some applicants reported that digital National IDs were accepted at certain stations, although acceptance may vary. :contentReference[oaicite:33]{index=33}
-
----
-
-## 15. Summary
-
-The National Police Clearance is an official PNP-issued document used for employment, government transactions, permits, travel requirements, and criminal record verification.
-
-Applicants generally complete online registration through the National Police Clearance System (NPCS), schedule an appointment, pay the required fee, and personally appear at a selected police station for biometrics and verification.
-
-Most “No Hit” applications are released on the same day, while applications with possible record matches may require additional verification before release.
+Some applicants reported that digital National IDs were accepted at certain stations, although acceptance may vary.

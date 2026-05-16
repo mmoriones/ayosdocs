@@ -21,7 +21,7 @@ import Banner from '@/components/ui/Banner';
 export default function BundlesClient({ initialBundles }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [sortBy, setSortBy] = useState('Recommended');
+  const [sortBy, setSortBy] = useState('Default');
 
   const categories = useMemo(() => 
     ['All', ...new Set(initialBundles.map(b => b.category))], 
@@ -120,7 +120,7 @@ export default function BundlesClient({ initialBundles }) {
               onChange={(e) => setSortBy(e.target.value)}
               className="bg-transparent text-[11px] font-black text-ctp-text uppercase tracking-widest focus:outline-none cursor-pointer"
             >
-              <option>Recommended</option>
+              <option>Default</option>
               <option>Alphabetical</option>
             </select>
           </div>

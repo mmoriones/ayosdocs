@@ -422,13 +422,3 @@ No. The Loyalty Card Plus is optional but provides additional features and conve
 ### Can OFWs register online?
 
 Yes. OFWs may register using Virtual PAG-IBIG and other online services.
-
----
-
-## 17. Summary
-
-PAG-IBIG membership allows Filipinos to build savings and access housing loans, cash loans, and other government-backed financial benefits.
-
-Applicants may register online or through PAG-IBIG branches by providing valid identification and accurate personal information.
-
-After registration, members receive a MID number used for contributions, loan applications, and future PAG-IBIG transactions.

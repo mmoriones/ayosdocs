@@ -161,9 +161,3 @@ Always review your application before final submission.
 
 ### [Question 2]?
 [Answer 2]
-
----
-
-## 15. Summary
-
-[Final wrap-up of the guide, emphasizing the key takeaway and the document's importance.]

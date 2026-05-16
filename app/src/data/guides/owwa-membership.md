@@ -403,13 +403,3 @@ Applicants generally need active OWWA membership before applying for the e-Card.
 ### Is the OWWA e-Card a valid government ID?
 
 The card may be accepted for certain government and OFW-related transactions, although acceptance policies may vary by institution.
-
----
-
-## 16. Summary
-
-OWWA membership provides Overseas Filipino Workers access to welfare assistance, scholarships, livelihood support, insurance-related benefits, and reintegration programs.
-
-Qualified OFWs may also apply for an OWWA e-Card, which serves as proof of active membership and simplifies access to OWWA services.
-
-Applicants should prepare valid passports, employment documents, and active membership records before applying through official OWWA offices or authorized online systems.

@@ -337,13 +337,3 @@ Yes. Students commonly request Barangay Clearances for scholarships, school requ
 ### Do I need a cedula?
 
 Some barangays may require a Community Tax Certificate (Cedula) depending on local rules and application purpose.
-
----
-
-## 14. Summary
-
-A Barangay Clearance is a commonly required local government document used for employment, permits, government transactions, and proof of residency.
-
-Applicants usually need valid identification, residency verification, and completed application forms before applying at their barangay hall.
-
-Processing is often completed on the same day, although requirements and fees may vary depending on barangay policies and the purpose of the request.

@@ -254,9 +254,3 @@ Generally yes, although authorized representatives may process applications with
 
 ### Are Apostille documents accepted worldwide?
 Only countries that are members of the Apostille Convention generally recognize Apostille certificates.
-
----
-
-## 15. Summary
-
-DFA Apostille Authentication allows Philippine public documents to be recognized internationally in Apostille Convention member countries. The process involves verifying document eligibility, booking a DFA appointment, submitting requirements, and paying authentication fees. Preparing complete documents and securing appointments early can help avoid delays, especially for overseas deadlines and immigration requirements.

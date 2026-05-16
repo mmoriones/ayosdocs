@@ -235,9 +235,3 @@ Applications are usually filed where either applicant resides, depending on LGU 
 
 ### Is the 10-day waiting period mandatory?
 Yes. The publication period is required by Philippine law for most marriage license applications.
-
----
-
-## 15. Summary
-
-A Marriage License is an essential legal requirement for most marriages in the Philippines. Couples must secure PSA documents, attend mandatory seminars, submit their application to the Local Civil Registrar, and wait for the mandatory publication period before the license is issued. Preparing documents early and verifying LGU-specific requirements can help ensure a smooth and timely wedding process.

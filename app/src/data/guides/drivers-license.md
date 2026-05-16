@@ -68,7 +68,7 @@ This applies to individuals who:
 - Work in delivery, transport, or logistics services
 - Need a valid government-issued ID
 
-First-time applicants are generally required to begin with a Student Permit before applying for a Non-Professional or Professional License. :contentReference[oaicite:0]{index=0}
+First-time applicants are generally required to begin with a Student Permit before applying for a Non-Professional or Professional License.
 
 ---
 
@@ -78,13 +78,13 @@ First-time applicants are generally required to begin with a Student Permit befo
 
 A Student Permit allows new drivers to practice driving under the supervision of a licensed driver.
 
-It is the first step before applying for a full license. :contentReference[oaicite:1]{index=1}
+It is the first step before applying for a full license.
 
 ### Non-Professional Driver’s License
 
 A Non-Professional License allows holders to drive private vehicles for personal use only.
 
-This is the most common type for regular drivers. :contentReference[oaicite:2]{index=2}
+This is the most common type for regular drivers.
 
 ### Professional Driver’s License
 
@@ -96,7 +96,7 @@ A Professional License is required for individuals driving vehicles for paid or 
 * Truck drivers
 * Public utility vehicle operators
 
-:contentReference[oaicite:3]{index=3}
+
 
 ---
 
@@ -134,7 +134,7 @@ Applicants must generally:
 * Be physically and mentally fit to drive
 * Be able to read and write Filipino or English
 
-Minors may require parental consent. :contentReference[oaicite:4]{index=4}
+Minors may require parental consent.
 
 ### Non-Professional License Qualifications
 
@@ -145,7 +145,7 @@ Applicants must:
 * Complete Practical Driving Course (PDC)
 * Pass written and practical examinations
 
-:contentReference[oaicite:5]{index=5}
+
 
 ### Professional License Qualifications
 
@@ -176,7 +176,7 @@ Applicants are usually required to complete:
 * Theoretical Driving Course (TDC)
 * Practical Driving Course (PDC)
 
-Certificates are issued after completion. :contentReference[oaicite:6]{index=6}
+Certificates are issued after completion.
 
 ### Additional Documents (if applicable)
 
@@ -208,7 +208,7 @@ Some applicants may also prepare:
 | Non-Professional License Fee | ₱585+ |
 | Vehicle Rental for Practical Exam | ₱250–₱500 |
 
-Costs may vary depending on driving schools and LTO branches. :contentReference[oaicite:7]{index=7}
+Costs may vary depending on driving schools and LTO branches.
 
 ---
 
@@ -228,7 +228,7 @@ The course typically covers:
 * Road safety
 * Basic vehicle operation
 
-After completion, applicants receive a TDC Certificate. :contentReference[oaicite:8]{index=8}
+After completion, applicants receive a TDC Certificate.
 
 ---
 
@@ -242,7 +242,7 @@ The examination may include:
 * Hearing test
 * Physical evaluation
 
-Medical certificates are electronically transmitted to the LTO system. :contentReference[oaicite:9]{index=9}
+Medical certificates are electronically transmitted to the LTO system.
 
 ---
 
@@ -280,7 +280,7 @@ Once approved:
 * Review all printed details carefully
 * Report any errors immediately
 
-Student Permits are generally valid for one year. :contentReference[oaicite:10]{index=10}
+Student Permits are generally valid for one year.
 
 ---
 
@@ -298,7 +298,7 @@ Training may include:
 * Traffic compliance
 * Emergency handling
 
-A PDC Certificate will be issued afterward. :contentReference[oaicite:11]{index=11}
+A PDC Certificate will be issued afterward.
 
 ---
 
@@ -306,7 +306,7 @@ A PDC Certificate will be issued afterward. :contentReference[oaicite:11]{index=
 
 Student Permit holders are generally required to wait before becoming eligible for a Non-Professional License application.
 
-Some applicants report waiting at least one month and one day before applying. :contentReference[oaicite:12]{index=12}
+Some applicants report waiting at least one month and one day before applying.
 
 ---
 
@@ -334,7 +334,7 @@ Topics may include:
 * Driving etiquette
 * Penalties and violations
 
-Reviewers and preparation materials are highly recommended.
+Reviewers and preparation materials are helpful for passing the exam.
 
 ---
 
@@ -388,7 +388,7 @@ Examples include:
 | Light Vehicles | Cars and SUVs |
 | Heavy Vehicles | Trucks and buses |
 
-Restriction codes depend on the vehicle type used during training and exams. :contentReference[oaicite:13]{index=13}
+Restriction codes depend on the vehicle type used during training and exams.
 
 ---
 
@@ -415,7 +415,7 @@ Typical processing times may include:
 
 Branch volume and system availability may affect waiting times.
 
-Some applicants report completing the process within 2–4 hours at certain branches. :contentReference[oaicite:14]{index=14}
+Some applicants report completing the process within 2–4 hours at certain branches.
 
 ---
 
@@ -432,7 +432,7 @@ Applicants may experience:
 - Plastic card shortages
 - Missing appointment slots
 
-Some issues may require revisiting the branch or correcting records. :contentReference[oaicite:15]{index=15}
+Some issues may require revisiting the branch or correcting records.
 
 ---
 
@@ -458,7 +458,7 @@ Always review your documents before submission.
 * Avoid fixers and unofficial transactions
 * Use LTO-accredited driving schools only
 
-Some applicants recommend arriving before opening hours to reduce waiting times. :contentReference[oaicite:16]{index=16}
+Some applicants recommend arriving before opening hours to reduce waiting times.
 
 ---
 
@@ -466,11 +466,11 @@ Some applicants recommend arriving before opening hours to reduce waiting times.
 
 ### Can I drive alone with a Student Permit?
 
-No. Student Permit holders must be accompanied by a licensed driver. :contentReference[oaicite:17]{index=17}
+No. Student Permit holders must be accompanied by a licensed driver.
 
 ### How long is a Student Permit valid?
 
-Student Permits are generally valid for one year. :contentReference[oaicite:18]{index=18}
+Student Permits are generally valid for one year.
 
 ### Can I apply directly for a Non-Professional License?
 
@@ -487,13 +487,3 @@ Some branches allow applicants to use personal vehicles provided documents are c
 ### Is a Driver’s License accepted as a valid ID?
 
 Yes. The Driver’s License is widely accepted as a primary government-issued ID.
-
----
-
-## 16. Summary
-
-Getting a Driver’s License in the Philippines typically involves completing driving courses, obtaining a Student Permit, passing LTO written and practical examinations, and paying the required fees.
-
-Applicants should prepare valid documents, review traffic rules carefully, and complete both theoretical and practical training before applying.
-
-Once approved, the Driver’s License serves as both legal authorization to drive and a widely accepted government-issued identification document.

@@ -244,9 +244,3 @@ Yes. Eligible employees may receive solo parent leave benefits under Philippine 
 
 ### Are there discounts available for solo parents?
 Qualified solo parents may receive discounts on selected baby and child-related products and services under current laws and regulations.
-
----
-
-## 15. Summary
-
-The Solo Parent ID helps qualified solo parents access legal benefits, government assistance, and social welfare programs in the Philippines. Issued through local social welfare offices, the ID requires supporting documents proving solo parent status, residency, and child relationship. Preparing complete documents and coordinating directly with the LGU can help speed up approval and issuance.

@@ -7,23 +7,23 @@ export default function FAQsPage() {
   const faqs = [
     {
       question: "Is AyosDocs an official government website?",
-      answer: "No, AyosDocs is an independent platform. We are not affiliated with any government agency. We consolidate information from official sources to provide easy-to-follow guides."
+      answer: "No, we're an independent team. AyosDocs isn't affiliated with any government agency—we simply gather info from official sources and organize it into guides that are easier to follow."
     },
     {
       question: "Is it free to use AyosDocs?",
-      answer: "Yes, all our guides and progress tracking features are completely free for everyone."
+      answer: "Absolutely. All our guides and tracking tools are free for everyone to use."
     },
     {
       question: "How often are the guides updated?",
-      answer: "We strive to update our content as soon as new information becomes available from official government announcements."
+      answer: "We keep a close eye on official announcements and update our content as soon as requirements or processes change."
     },
     {
       question: "Do I need an account to view guides?",
-      answer: "No, you can view all guides without an account. However, creating an account allows you to save your progress and access personalized features."
+      answer: "Nope. You can browse every guide without an account. However, signing up lets you save your progress and keep track of where you are in a process."
     },
     {
       question: "Can I apply for documents directly through AyosDocs?",
-      answer: "No, AyosDocs only provides instructions and links to official portals. All actual applications must be done through the respective government agencies."
+      answer: "No. AyosDocs is a guide, not a filing service. We provide the instructions and links, but the actual application happens through the official government portals or offices."
     }
   ];
 

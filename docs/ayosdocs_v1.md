@@ -1,53 +1,36 @@
-# AyosDocs v1.0 — Finalized Features & Future Roadmap
+# AyosDocs Roadmap & Vision
 
-> Internal product and development notes for AyosDocs
-> Intended for maintainers, contributors, and future planning.
+> Internal product notes for maintainers and contributors.
 
 ---
 
 # Vision
 
-AyosDocs is not just a collection of government guides.
+AyosDocs isn't just a list of links. We want to build a platform that actually helps Filipinos get their government tasks done. 
 
-The long-term direction is to become:
-
-> A workflow platform that helps Filipinos successfully accomplish government processes and life-event requirements.
-
-The platform should reduce confusion, simplify bureaucracy, and provide actionable guidance with real community insights.
+The goal is to go from "here's what you need" to "here's exactly how you get it finished," with real community tips to help avoid the common headaches of Philippine bureaucracy.
 
 ---
 
-# Core Product Direction
+# The Roadmap
 
-AyosDocs evolves in layers:
+We're building this in four main stages:
 
-## Layer 1 — Government Guide Platform
+## Stage 1: The Knowledge Base
+* Solid, step-by-step guides for all major docs.
+* Accurate requirements, fees, and office locations.
 
-* Step-by-step guides
-* Requirements
-* Fees
-* Office information
-* Processing tips
+## Stage 2: Personal Tracking
+* Checklists that users can actually save.
+* A dashboard to see what's done and what's left.
 
-## Layer 2 — Personal Progress Tracker
+## Stage 3: Life Event Bundles
+* Grouping guides for big goals (e.g., "Starting a Business" or "Getting Married").
+* Tracking progress for the whole bundle at once.
 
-* Checklist system
-* Guide tracking
-* Saved/favorite guides
-* Completion history
-
-## Layer 3 — Life Event Workflow System
-
-* Bundled requirements
-* Multi-step processes
-* Progress across related documents
-
-## Layer 4 — Community Intelligence Platform
-
-* Office ratings
-* Processing experiences
-* Crowdsourced wait times
-* Government office insights
+## Stage 4: Community Insights
+* Real ratings for specific offices (speed, staff, etc.).
+* Crowdsourced info like "best time to visit" or "actual wait times."
 
 ---
 
@@ -67,7 +50,7 @@ The page should feel like:
 
 ---
 
-## Recommended Structure
+## Dashboard Structure
 
 ### Dashboard Summary Cards
 
@@ -124,11 +107,9 @@ Guide is:
 
 ## Recently Updated Guides
 
-Optional but highly recommended.
+Optional but useful for building trust.
 
 Purpose:
-
-* Build trust
 * Inform users about requirement changes
 
 Example:
@@ -152,14 +133,14 @@ into:
 
 ---
 
-## Naming Recommendation
+## Naming Options
 
 Avoid generic terms like:
 
 * Groups
 * Collections
 
-Recommended names:
+Proposed names:
 
 * Requirement Bundles
 * Life Event Bundles
@@ -361,7 +342,7 @@ Examples:
 
 ---
 
-## Recommended Sections
+## Key Sections
 
 ### Trending Guides
 
@@ -407,7 +388,7 @@ Unstructured reviews lead to:
 
 ---
 
-# Recommended Approach — Structured Experience Reports
+# Our Approach — Structured Experience Reports
 
 Instead of:
 
@@ -458,7 +439,7 @@ For a DFA office:
 
 ## Optional Text Feedback
 
-Recommended limit:
+Character limit:
 
 * 300–500 characters
 
@@ -491,7 +472,7 @@ Because:
 
 ---
 
-# Recommended Display Strategy
+# Display Strategy
 
 Instead of prioritizing raw comments:
 focus on aggregate insights.
@@ -623,7 +604,7 @@ Examples:
 
 ## Personalized Dashboard
 
-* Suggested next steps
+* Next step recommendations
 * Recently viewed guides
 * Frequently needed services
 
@@ -718,7 +699,7 @@ Advanced AI/community systems can come later.
 
 ---
 
-# Recommended Immediate Priorities
+# Immediate Priorities
 
 ## Must Finish Before Public Scaling
 

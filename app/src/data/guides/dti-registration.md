@@ -247,9 +247,3 @@ No. DTI registration only registers the business name. You still need:
 
 ### Can online sellers register with DTI?
 Yes. Many online businesses and sellers register their business names with DTI.
-
----
-
-## 15. Summary
-
-DTI Business Name Registration is an important first step for sole proprietors operating businesses in the Philippines. It grants legal use of a business name and is commonly required before securing local permits and BIR registration. Applicants may register online or through DTI offices, with processing often completed within the same day. Preparing accurate business information and backup business names can help avoid delays and application rejection.

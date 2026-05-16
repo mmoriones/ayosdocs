@@ -385,13 +385,3 @@ Yes. Individuals may apply as voluntary members even without formal employment.
 ### Can I use the PhilHealth ID as a valid ID?
 
 The PhilHealth ID may be accepted in some transactions, but acceptance depends on the institution or agency involved.
-
----
-
-## 15. Summary
-
-Applying for a PhilHealth ID involves registering as a PhilHealth member, completing the PMRF, submitting valid documents, and receiving your permanent PhilHealth Identification Number.
-
-Once registered, members may access healthcare benefits and medical assistance from accredited healthcare providers nationwide.
-
-Applicants should ensure all records are accurate and updated to avoid delays in claims and future transactions.

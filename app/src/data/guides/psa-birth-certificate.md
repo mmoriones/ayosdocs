@@ -391,13 +391,3 @@ You may need to file a correction or amendment request through the PSA or local 
 ### Is the PSA Birth Certificate different from the Local Civil Registrar copy?
 
 Yes. The PSA-issued copy is the nationally authenticated version commonly required for official transactions.
-
----
-
-## 15. Summary
-
-A PSA Birth Certificate is an important civil registry document used for identification, legal transactions, government applications, and personal records.
-
-Applicants may request the document through walk-in or online methods by preparing valid IDs, completing the request form, paying the required fees, and waiting for processing or delivery.
-
-Carefully reviewing all information and keeping transaction records can help avoid delays and processing issues.

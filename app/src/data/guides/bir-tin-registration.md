@@ -442,13 +442,3 @@ Yes. Certain services are available through the ORUS online system. ([orus.bir.g
 ### What happens if I lose my TIN?
 
 You may request verification or replacement assistance from the BIR.
-
----
-
-## 17. Summary
-
-A Taxpayer Identification Number (TIN) is a permanent identification number issued by the BIR for tax compliance, employment, business registration, and financial transactions in the Philippines.
-
-Applicants may register as employees, self-employed individuals, professionals, or corporations through BIR Revenue District Offices or selected online systems such as ORUS.
-
-Because each taxpayer is only allowed one TIN for life, applicants should verify existing records carefully before applying for a new registration.

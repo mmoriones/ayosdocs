@@ -392,13 +392,3 @@ You may apply for reactivation during official registration periods.
 ### Can students register?
 
 Yes, provided they meet age and residency requirements.
-
----
-
-## 16. Summary
-
-Voter registration allows eligible Filipino citizens to participate in national and local elections through official enrollment with COMELEC.
-
-Applicants typically need valid identification, biometrics capture, and properly completed registration forms.
-
-Although physical Voter’s IDs are no longer widely issued, registered voters may still access voter certifications and official voter records for election-related verification and certain supporting identification purposes.

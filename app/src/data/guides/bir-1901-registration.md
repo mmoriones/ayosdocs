@@ -260,9 +260,3 @@ Some registrations may be processed through BIR ORUS depending on eligibility an
 
 ### What is BIR Form 2303?
 BIR Form 2303 is the Certificate of Registration (COR) issued after successful business registration.
-
----
-
-## 15. Summary
-
-BIR Business Registration using Form 1901 is an important step for sole proprietors, freelancers, and self-employed individuals operating legally in the Philippines. Registration allows taxpayers to comply with tax laws, issue official invoices or receipts, and secure a Certificate of Registration. Preparing complete requirements, registering books of accounts properly, and understanding tax obligations early can help avoid compliance issues and penalties.

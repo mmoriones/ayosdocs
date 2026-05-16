@@ -2,9 +2,11 @@
 
 AyosDocs is a full-stack web application designed to help Filipinos navigate government documentation and applications through interactive, step-by-step guides.
 
+**Visit the live site: [ayosdocs.com](https://ayosdocs.com)**
+
 ## 🚀 Features
 
-- **Interactive Guides:** Comprehensive requirements, fees, and procedures for major government documents (Passport, NBI, SSS, etc.).
+- **Interactive Guides:** Step-by-step requirements, fees, and procedures for major government documents (Passport, NBI, SSS, etc.).
 - **Personal Progress Tracker:** Save your progress and track completed requirements.
 - **Requirement Bundles:** Grouped guides for specific life events like "Starting a Business" or "Getting Married".
 - **Office Directory & Ratings:** Crowdsourced insights on government office waiting times and service quality.

@@ -32,7 +32,7 @@ checklist:
 
 ## 1. What is a Community Tax Certificate (Cedula)?
 
-A **Community Tax Certificate (CTC)**, commonly called a **Cedula**, is an official document issued by the local government after payment of the community tax. It serves as proof that an individual or corporation has paid the required community tax for the year. :contentReference[oaicite:0]{index=0}
+A **Community Tax Certificate (CTC)**, commonly called a **Cedula**, is an official document issued by the local government after payment of the community tax. It serves as proof that an individual or corporation has paid the required community tax for the year.
 
 The Cedula is commonly used for:
 
@@ -51,7 +51,7 @@ The document is usually issued by the:
 * Municipal Treasurer’s Office
 * Barangay office in some areas
 
-:contentReference[oaicite:1]{index=1}
+
 
 ---
 
@@ -68,7 +68,7 @@ You may need a Cedula if you are:
 - Required to file income tax returns
 - Processing local government transactions
 
-Individuals aged 18 years old and above who are employed, engaged in business, own property, or are legally required to file taxes may generally obtain a Cedula. :contentReference[oaicite:2]{index=2}
+Individuals aged 18 years old and above who are employed, engaged in business, own property, or are legally required to file taxes may generally obtain a Cedula.
 
 ---
 
@@ -107,7 +107,7 @@ Individuals who may apply commonly include:
 * Property owners
 * Adults aged 18 and above with taxable income or obligations
 
-Corporations and juridical entities may also secure separate Community Tax Certificates. :contentReference[oaicite:3]{index=3}
+Corporations and juridical entities may also secure separate Community Tax Certificates.
 
 ---
 
@@ -142,7 +142,7 @@ Some offices may request:
 * Certificate of Employment
 * Business permit
 
-:contentReference[oaicite:4]{index=4}
+
 
 ### Additional Requirements
 
@@ -168,7 +168,7 @@ Applicants may usually apply at:
 - Barangay Hall in some areas
 - Business Permit and Licensing Offices
 
-:contentReference[oaicite:5]{index=5}
+
 
 Some LGUs may allow processing through satellite offices or mall government service centers.
 
@@ -211,7 +211,7 @@ Provide accurate details including:
 * Occupation
 * Gross annual income
 
-:contentReference[oaicite:6]{index=6}
+
 
 Ensure all information matches your official records.
 
@@ -236,7 +236,7 @@ The Cedula fee generally includes:
 * Basic community tax
 * Additional income-based tax
 
-The amount depends on declared income, business activity, or corporate classification. :contentReference[oaicite:7]{index=7}
+The amount depends on declared income, business activity, or corporate classification.
 
 ---
 
@@ -261,9 +261,9 @@ Most applications are completed within minutes if requirements are complete.
 | Maximum Additional Tax (Individual) | Up to ₱5,000 |
 | Corporation Community Tax | Higher rates apply |
 
-:contentReference[oaicite:8]{index=8}
 
-Some LGUs may impose penalties for late payment after February. :contentReference[oaicite:9]{index=9}
+
+Some LGUs may impose penalties for late payment after February.
 
 ---
 
@@ -271,7 +271,7 @@ Some LGUs may impose penalties for late payment after February. :contentReferenc
 
 Cedulas are generally valid for the current calendar year only.
 
-Applicants usually renew annually. :contentReference[oaicite:10]{index=10}
+Applicants usually renew annually.
 
 ---
 
@@ -285,7 +285,7 @@ Typical processing timelines include:
 | Payment Processing | 5–15 minutes |
 | Cedula Issuance | Same day |
 
-Some LGUs process Cedulas within only a few minutes if requirements are complete. :contentReference[oaicite:11]{index=11}
+Some LGUs process Cedulas within only a few minutes if requirements are complete.
 
 ---
 
@@ -301,7 +301,7 @@ Applicants may experience:
 - Inconsistent LGU requirements
 - Missing TIN entries
 
-Some applicants online report confusion regarding income computation and local office practices. :contentReference[oaicite:12]{index=12}
+Some applicants online report confusion regarding income computation and local office practices.
 
 ---
 
@@ -327,7 +327,7 @@ Always verify your LGU’s current requirements before visiting.
 * Keep digital copies of receipts
 * Confirm requirements with your LGU before visiting
 
-Some applicants report shorter waiting times at barangay offices compared to city halls in certain areas. :contentReference[oaicite:13]{index=13}
+Some applicants report shorter waiting times at barangay offices compared to city halls in certain areas.
 
 ---
 
@@ -335,7 +335,7 @@ Some applicants report shorter waiting times at barangay offices compared to cit
 
 ### Is a Cedula required for employment?
 
-Many employers and local permit offices still request Cedulas as part of employment or permit requirements. :contentReference[oaicite:14]{index=14}
+Many employers and local permit offices still request Cedulas as part of employment or permit requirements.
 
 ### Can I get a Cedula online?
 
@@ -343,11 +343,11 @@ Most LGUs still require in-person processing, although some cities may offer par
 
 ### How long is a Cedula valid?
 
-Cedulas are generally valid for one calendar year only. :contentReference[oaicite:15]{index=15}
+Cedulas are generally valid for one calendar year only.
 
 ### Where should I get my Cedula?
 
-You may usually obtain it from the city or municipality where you reside or where your transaction is being processed. :contentReference[oaicite:16]{index=16}
+You may usually obtain it from the city or municipality where you reside or where your transaction is being processed.
 
 ### Is Cedula the same as Barangay Clearance?
 
@@ -355,14 +355,4 @@ No. A Cedula is proof of community tax payment, while Barangay Clearance certifi
 
 ### Can students get a Cedula?
 
-Yes, depending on the purpose and local government requirements. :contentReference[oaicite:17]{index=17}
-
----
-
-## 15. Summary
-
-A Community Tax Certificate (Cedula) is a commonly required local government document used for employment, permits, notarization, and various official transactions.
-
-Applicants usually need valid identification and income information before applying at the city or municipal treasurer’s office or other authorized issuing offices.
-
-Most Cedulas are issued on the same day after payment of the community tax and are generally valid for the current calendar year only.
+Yes, depending on the purpose and local government requirements.

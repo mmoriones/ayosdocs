@@ -12,19 +12,19 @@ export default function AboutPage() {
             About <span className="text-ctp-sky-800">AyosDocs</span>
           </h1>
           <p className="text-[20px] text-ctp-subtext1 leading-relaxed font-medium opacity-90">
-            AyosDocs is your comprehensive companion for navigating government processes and essential document applications in the Philippines. Our mission is to simplify the often complex and confusing world of bureaucracy, providing clear, step-by-step guides to help you get things done efficiently.
+            AyosDocs is here to help you navigate Philippine government requirements without the headache. Our mission is to simplify the complex world of permits and IDs, providing easy-to-follow guides so you can spend less time in line and more time on what matters.
           </p>
           <div className="grid md:grid-cols-2 gap-10 pt-8 border-t border-ctp-surface0">
             <div className="space-y-4">
               <h2 className="text-2xl font-black text-ctp-text uppercase tracking-tight">Our Mission</h2>
               <p className="text-[16px] text-ctp-subtext1 font-medium leading-relaxed">
-                To empower Filipinos by providing accessible, up-to-date, and easy-to-understand information about government requirements and procedures.
+                To empower Filipinos with clear, up-to-date, and practical information about government requirements, making public services accessible to everyone.
               </p>
             </div>
             <div className="space-y-4">
               <h2 className="text-2xl font-black text-ctp-text uppercase tracking-tight">Our Vision</h2>
               <p className="text-[16px] text-ctp-subtext1 font-medium leading-relaxed">
-                A Philippines where every citizen can easily navigate public services without stress or confusion, utilizing digital tools for better accessibility.
+                A Philippines where navigating government offices is stress-free, powered by digital tools that put the right information in the hands of every citizen.
               </p>
             </div>
           </div>
@@ -33,7 +33,7 @@ export default function AboutPage() {
         <section className="bg-ctp-mantle rounded-[2rem] p-10 shadow-sm border border-ctp-surface0 space-y-6">
           <h2 className="text-3xl font-black text-ctp-text uppercase tracking-tight">Why AyosDocs?</h2>
           <p className="text-[18px] text-ctp-subtext1 leading-relaxed font-medium opacity-90">
-            Applying for a passport, NBI clearance, or SSS registration shouldn&apos;t feel like a maze. We curate the latest information from official sources and break them down into manageable steps. With our built-in progress tracking, you can keep track of your requirements and never miss a step.
+            Applying for a passport or NBI clearance shouldn&apos;t feel like a maze. We gather the latest info from official sources and break it down into simple, manageable steps. With our progress tracking, you can stay on top of your requirements and check them off as you go.
           </p>
         </section>
       </div>

@@ -248,9 +248,3 @@ Yes. Corporations and partnerships generally require SEC registration and additi
 
 ### What happens if I renew late?
 Late renewal may result in penalties, surcharges, and additional interest charges.
-
----
-
-## 15. Summary
-
-A Mayor's Permit or Business Permit is a mandatory requirement for legally operating a business in the Philippines. Issued by the local government unit, it confirms compliance with local business regulations, taxes, safety inspections, and zoning requirements. Businesses should prepare complete requirements, coordinate with the BPLO, and renew permits annually to avoid penalties and operational delays.

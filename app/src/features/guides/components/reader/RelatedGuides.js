@@ -16,7 +16,7 @@ const RelatedGuides = ({ currentSlug, category, allGuides }) => {
   return (
     <div className="bg-ctp-mantle border border-ctp-surface0 rounded-[2rem] p-8 shadow-sm">
       <h3 className="text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] mb-6">
-        Recommended for you
+        You might also need
       </h3>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

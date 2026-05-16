@@ -410,13 +410,3 @@ Yes. Individuals may register as voluntary members even without current employme
 ### When should I start contributing?
 
 You may begin contributing once your membership is active and verified.
-
----
-
-## 15. Summary
-
-SSS registration allows individuals to access important social security benefits and government services in the Philippines.
-
-The process includes online registration, obtaining your permanent SS Number, verifying your account, submitting documents if required, and activating your membership.
-
-After activation, members may begin contributing regularly to qualify for future benefits such as retirement, loans, maternity assistance, sickness benefits, and pensions.

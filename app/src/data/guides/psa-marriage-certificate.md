@@ -31,7 +31,7 @@ checklist:
 
 ## 1. What is a PSA Marriage Certificate?
 
-A **PSA Marriage Certificate** is an official civil registry document issued by the Philippine Statistics Authority (PSA) that serves as proof that a marriage has been legally registered in the Philippines. :contentReference[oaicite:0]{index=0}
+A **PSA Marriage Certificate** is an official civil registry document issued by the Philippine Statistics Authority (PSA) that serves as proof that a marriage has been legally registered in the Philippines.
 
 It contains important information such as:
 
@@ -53,7 +53,7 @@ The document is commonly required for:
 * Legal proceedings
 * Spousal benefits claims
 
-Many Filipinos also refer to this document as a “Marriage Contract.” :contentReference[oaicite:1]{index=1}
+Many Filipinos also refer to this document as a “Marriage Contract.”
 
 ---
 
@@ -71,7 +71,7 @@ You may need a PSA Marriage Certificate if you are:
 - Updating government records
 - Applying for loans or joint accounts
 
-The PSA-issued copy is the version most commonly required by government agencies and foreign embassies. :contentReference[oaicite:2]{index=2}
+The PSA-issued copy is the version most commonly required by government agencies and foreign embassies.
 
 ---
 
@@ -112,7 +112,7 @@ When requesting a copy, prepare the following details:
 * Purpose of request
 * Number of copies needed
 
-:contentReference[oaicite:3]{index=3}
+
 
 ### Valid IDs
 
@@ -157,13 +157,13 @@ This may be useful if:
 * PSA records are not yet available
 * Corrections are needed
 
-:contentReference[oaicite:4]{index=4}
+
 
 ### Digital PSA E-Certificate
 
 The PSA also offers digital e-certificates through selected online services.
 
-Digital copies may include QR verification and downloadable PDF access. :contentReference[oaicite:5]{index=5}
+Digital copies may include QR verification and downloadable PDF access.
 
 ---
 
@@ -308,7 +308,7 @@ Some branches release documents on the same day.
 | Online Request with Delivery | ₱330–₱500 |
 | Additional Copies | Additional fees apply |
 
-Fees may vary depending on delivery location and service providers. :contentReference[oaicite:6]{index=6}
+Fees may vary depending on delivery location and service providers.
 
 ---
 
@@ -323,9 +323,9 @@ Typical processing timelines include:
 | Provincial Delivery | 3–10 working days |
 | Newly Registered Marriages | Several weeks to months |
 
-Newly married couples may need to wait before the PSA copy becomes available because the marriage record must first be endorsed by the Local Civil Registry Office to the PSA. :contentReference[oaicite:7]{index=7}
+Newly married couples may need to wait before the PSA copy becomes available because the marriage record must first be endorsed by the Local Civil Registry Office to the PSA.
 
-Some couples report waiting around 2–6 months before PSA records become available. :contentReference[oaicite:8]{index=8}
+Some couples report waiting around 2–6 months before PSA records become available.
 
 ---
 
@@ -341,7 +341,7 @@ Applicants may experience:
 - Encoding errors
 - Website payment issues
 
-Recently married couples commonly experience delays because records may not yet be transmitted to the PSA database. :contentReference[oaicite:9]{index=9}
+Recently married couples commonly experience delays because records may not yet be transmitted to the PSA database.
 
 ---
 
@@ -367,7 +367,7 @@ Always double-check all encoded information before submission.
 * Follow up with the Local Civil Registry if records are unavailable
 * Use authorized PSA request services only
 
-Some couples report faster availability when the Local Civil Registry performs early endorsement to PSA. :contentReference[oaicite:10]{index=10}
+Some couples report faster availability when the Local Civil Registry performs early endorsement to PSA.
 
 ---
 
@@ -375,11 +375,11 @@ Some couples report faster availability when the Local Civil Registry performs e
 
 ### Is a Marriage Certificate the same as a Marriage Contract?
 
-Yes. In the Philippines, people commonly use the terms interchangeably. :contentReference[oaicite:11]{index=11}
+Yes. In the Philippines, people commonly use the terms interchangeably.
 
 ### How long before a PSA Marriage Certificate becomes available?
 
-Availability may take several weeks to several months after the wedding depending on local registry endorsement and PSA processing. :contentReference[oaicite:12]{index=12}
+Availability may take several weeks to several months after the wedding depending on local registry endorsement and PSA processing.
 
 ### Can I request online?
 
@@ -391,18 +391,8 @@ Yes, provided they have authorization documents and valid identification.
 
 ### What happens if PSA has no record of my marriage?
 
-You may need to coordinate with the Local Civil Registry Office where the marriage was registered for endorsement or correction. :contentReference[oaicite:13]{index=13}
+You may need to coordinate with the Local Civil Registry Office where the marriage was registered for endorsement or correction.
 
 ### Is the PSA digital e-certificate valid?
 
-Yes. PSA digital e-certificates include verification systems and are legally recognized. :contentReference[oaicite:14]{index=14}
-
----
-
-## 14. Summary
-
-A PSA Marriage Certificate is an important civil registry document used for government transactions, legal matters, immigration processing, and civil status updates.
-
-Applicants may request copies online or through PSA service centers by providing accurate marriage details and valid identification.
-
-Recently registered marriages may take time before appearing in PSA records because the Local Civil Registry must first transmit the marriage documents for national registration and processing.
+Yes. PSA digital e-certificates include verification systems and are legally recognized.

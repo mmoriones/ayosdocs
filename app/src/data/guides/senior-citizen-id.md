@@ -238,9 +238,3 @@ Qualified seniors may receive:
 
 ### Can the Senior Citizen ID be used nationwide?
 Yes. The ID and privileges are generally recognized nationwide.
-
----
-
-## 15. Summary
-
-The Senior Citizen ID is an important government-issued identification card granting Filipino senior citizens access to discounts, VAT exemptions, and social benefits under Philippine law. Applications are processed through the Office for Senior Citizens Affairs (OSCA) of the applicant's local government unit. Preparing complete requirements and verifying local procedures can help ensure faster approval and issuance.

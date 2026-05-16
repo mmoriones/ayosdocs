@@ -410,13 +410,3 @@ You may need to book a new schedule depending on DFA policies.
 ### Is courier delivery required?
 
 No. Applicants may choose either courier delivery or office pickup when available.
-
----
-
-## 15. Summary
-
-A DFA passport appointment is required before applying for or renewing a Philippine passport.
-
-The process includes online appointment booking, payment of fees, preparation of requirements, biometric capture, and passport claiming or delivery.
-
-Applicants should carefully prepare documents, verify personal information, and secure appointment slots early to avoid delays and processing issues.

@@ -373,13 +373,3 @@ Yes, provided authorization and supporting documents are submitted.
 ### Does the PWD ID expire?
 
 Policies vary by LGU. Some IDs may require periodic renewal or record updates.
-
----
-
-## 14. Summary
-
-A PWD ID allows qualified Persons with Disability in the Philippines to access discounts, VAT exemptions, priority services, and government assistance programs.
-
-Applicants usually need a medical certificate, proof of residency, and valid identification before applying through their local PDAO or LGU office.
-
-Processing times and requirements may vary depending on the city or municipality, so applicants are encouraged to verify local procedures before applying.

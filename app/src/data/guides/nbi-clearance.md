@@ -400,13 +400,3 @@ Yes. Students may apply using acceptable valid IDs and supporting documents.
 ### What happens if I miss my appointment?
 
 You may need to log in again and reschedule depending on branch rules and appointment availability.
-
----
-
-## 15. Summary
-
-Applying for an NBI Clearance involves online registration, appointment scheduling, fee payment, biometric capture, and verification at an NBI branch.
-
-First-time applicants should prepare valid IDs, carefully review their personal information, and keep payment and appointment details secure.
-
-If there are no verification issues, the clearance may be released on the same day. Applications with a “hit” may require additional processing time before release.
