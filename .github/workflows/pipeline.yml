@@ -20,13 +20,11 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: app/package-lock.json
+          cache-dependency-path: package-lock.json
       - name: Install dependencies
         run: npm ci
-        working-directory: app
       - name: Run Lint
         run: npm run lint
-        working-directory: app
 
   build-and-push:
     needs: lint
@@ -62,7 +60,8 @@ jobs:
       - name: Build Docker image (locally for scanning)
         uses: docker/build-push-action@v5
         with:
-          context: ./app
+          context: .
+          file: ./app/Dockerfile
           load: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test
           cache-from: type=gha
@@ -81,7 +80,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./app
+          context: .
+          file: ./app/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
