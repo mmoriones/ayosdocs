@@ -10,6 +10,9 @@
     "start": "npm run start -w app",
     "lint": "npm run lint -w app"
   },
+  "dependencies": {
+    "picomatch": "4.0.4"
+  },
   "overrides": {
     "picomatch": "4.0.4",
     "postcss": "8.5.14",
