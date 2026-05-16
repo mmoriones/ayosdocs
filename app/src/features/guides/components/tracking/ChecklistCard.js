@@ -67,10 +67,12 @@ const ChecklistCard = ({
     }));
 
     // Only update if steps actually changed
-    setSteps(prev => {
-      const isSame = JSON.stringify(prev) === JSON.stringify(nextSteps);
-      return isSame ? prev : nextSteps;
-    });
+    setTimeout(() => {
+      setSteps(prev => {
+        const isSame = JSON.stringify(prev) === JSON.stringify(nextSteps);
+        return isSame ? prev : nextSteps;
+      });
+    }, 0);
   }, [initialSteps, savedData, slug]);
 
   const saveMutation = useMutation({

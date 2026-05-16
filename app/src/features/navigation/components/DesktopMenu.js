@@ -48,7 +48,9 @@ const DesktopMenu = ({ variant = 'all' }) => {
   }, []);
 
   useEffect(() => {
-    setIsProfileOpen(prev => prev ? false : prev);
+    setTimeout(() => {
+      setIsProfileOpen(prev => prev ? false : prev);
+    }, 0);
   }, [pathname]);
 
   const navClass = (path) =>

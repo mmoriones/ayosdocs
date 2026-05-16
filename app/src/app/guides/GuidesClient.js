@@ -52,7 +52,7 @@ export default function GuidesClient({ initialGuides }) {
   useEffect(() => {
     const savedMode = localStorage.getItem('guidesViewMode');
     if (savedMode && (savedMode === 'grid' || savedMode === 'list')) {
-      setViewMode(savedMode);
+      setTimeout(() => setViewMode(savedMode), 0);
     }
   }, []);
 
@@ -71,7 +71,9 @@ export default function GuidesClient({ initialGuides }) {
 
   useEffect(() => {
     // Only reset if it's not already 6
-    setVisibleCount(prev => prev !== 6 ? 6 : prev);
+    setTimeout(() => {
+      setVisibleCount(prev => prev !== 6 ? 6 : prev);
+    }, 0);
   }, [searchQuery, selectedCategory, selectedAgency, selectedDifficulties, selectedTime, selectedCost, sortBy]);
 
   const categories = useMemo(() => ['All', ...new Set(initialGuides.map(g => g.category).filter(Boolean))], [initialGuides]);

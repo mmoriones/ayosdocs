@@ -64,7 +64,7 @@ export default function BundlesClient({ initialBundles }) {
                 Requirement <span className="text-ctp-sky-800">Bundles</span>
               </h1>
               <p className="text-lg md:text-xl text-ctp-subtext1 font-medium max-w-xl leading-relaxed">
-                Stop guessing which documents you need. We've grouped everything by life goal so you can focus on what matters.
+                Stop guessing which documents you need. We&apos;ve grouped everything by life goal so you can focus on what matters.
               </p>
             </div>
 
@@ -161,7 +161,7 @@ export default function BundlesClient({ initialBundles }) {
             </div>
             <h3 className="text-2xl font-black text-ctp-text uppercase">No bundles matched your search</h3>
             <p className="text-ctp-subtext1 font-medium mt-4 max-w-md mx-auto">
-              We're constantly adding new workflows. Try a broader search or browse by category.
+              We&apos;re constantly adding new workflows. Try a broader search or browse by category.
             </p>
             <button 
               onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}

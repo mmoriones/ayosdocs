@@ -45,7 +45,7 @@ export default function HomeClient({ allGuides }) {
   useEffect(() => {
     const lastSlug = localStorage.getItem("lastGuideSlug");
     if (lastSlug && lastSlug !== activeSlug) {
-      setActiveSlug(lastSlug);
+      setTimeout(() => setActiveSlug(lastSlug), 0);
     }
   }, [activeSlug]);
 
