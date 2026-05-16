@@ -12,6 +12,10 @@ COPY . .
 
 # Build the application
 ENV NEXT_TELEMETRY_DISABLED=1
+# Provide dummy values for build-time validation
+ENV MONGO_URI=mongodb://localhost:27017/dummy
+ENV NEXTAUTH_SECRET=dummy_secret
+ENV NEXTAUTH_URL=http://localhost:3000
 WORKDIR /app/app
 RUN npm run build
 
