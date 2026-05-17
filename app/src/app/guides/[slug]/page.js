@@ -68,55 +68,55 @@ export default async function GuidePage({ params }) {
           rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings]}
           components={{
             h2: ({ ...props }) => (
-              <h2 className="text-3xl font-black text-ctp-sky-800 mt-16 mb-8 tracking-tight" {...props} />
+              <h2 className="text-2xl font-bold text-ctp-text mt-12 mb-6 tracking-tight border-b border-ctp-surface1 pb-2" {...props} />
             ),
             h3: ({ ...props }) => (
-              <h3 className="text-2xl font-bold text-ctp-text mt-12 mb-6 tracking-tight" {...props} />
+              <h3 className="text-xl font-bold text-ctp-text mt-10 mb-4 tracking-tight" {...props} />
             ),
             p: ({ ...props }) => (
-              <p className="text-[18px] text-ctp-subtext1 font-medium leading-relaxed mb-8" {...props} />
+              <p className="text-base text-ctp-subtext1 font-medium leading-relaxed mb-6" {...props} />
             ),
             ul: ({ ...props }) => (
-              <ul className="list-disc pl-8 space-y-4 mb-8 text-ctp-subtext1" {...props} />
+              <ul className="list-disc pl-8 space-y-3 mb-6 text-ctp-subtext1" {...props} />
             ),
             ol: ({ ...props }) => (
-              <ol className="list-decimal pl-8 space-y-4 mb-8 text-ctp-subtext1" {...props} />
+              <ol className="list-decimal pl-8 space-y-3 mb-6 text-ctp-subtext1" {...props} />
             ),
             li: ({ ...props }) => (
-              <li className="marker:text-ctp-sky-800 font-medium text-[18px]" {...props} />
+              <li className="marker:text-ctp-sky-800 font-medium text-base" {...props} />
             ),
             blockquote: ({ ...props }) => (
-              <div className="my-10 bg-ctp-sky-800/5 border-l-4 border-ctp-sky-800 rounded-2xl p-8 shadow-sm">
+              <div className="my-8 bg-ctp-mantle border-l-4 border-ctp-sky-800 rounded-r-xl p-6 shadow-sm">
                 <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-full bg-ctp-base flex items-center justify-center text-ctp-sky-800 shrink-0 shadow-sm border border-ctp-sky-800/10">
-                    <Sparkles size={20} />
+                  <div className="w-8 h-8 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-sky-800 shrink-0 shadow-sm border border-ctp-surface1">
+                    <Sparkles size={16} />
                   </div>
-                  <div className="prose-p:mb-0 prose-p:text-ctp-text prose-p:font-bold italic" {...props} />
+                  <div className="prose-p:mb-0 prose-p:text-ctp-text prose-p:font-semibold italic" {...props} />
                 </div>
               </div>
             ),
             strong: ({ ...props }) => (
-              <strong className="text-ctp-text font-black" {...props} />
+              <strong className="text-ctp-text font-bold" {...props} />
             ),
             table: ({ ...props }) => (
-              <div className="overflow-x-auto mb-10 rounded-2xl border border-ctp-surface0">
+              <div className="overflow-x-auto mb-8 rounded-xl border border-ctp-surface1">
                 <table className="w-full border-collapse" {...props} />
               </div>
             ),
             thead: ({ ...props }) => (
-              <thead className="bg-ctp-base" {...props} />
+              <thead className="bg-ctp-mantle" {...props} />
             ),
             th: ({ ...props }) => (
-              <th className="px-6 py-4 text-left text-xs font-black text-ctp-sky-800 uppercase tracking-[0.2em] border-b border-ctp-surface0" {...props} />
+              <th className="px-6 py-3 text-left text-xs font-bold text-ctp-sky-800 uppercase tracking-widest border-b border-ctp-surface1" {...props} />
             ),
             td: ({ ...props }) => (
-              <td className="px-6 py-4 text-[14px] text-ctp-subtext1 border-b border-ctp-surface0 font-medium" {...props} />
+              <td className="px-6 py-4 text-sm text-ctp-subtext1 border-b border-ctp-surface1 font-medium" {...props} />
             ),
             tr: ({ ...props }) => (
-              <tr className="hover:bg-ctp-base/30 transition-colors last:prose-td:border-b-0" {...props} />
+              <tr className="hover:bg-ctp-base/50 transition-colors last:prose-td:border-b-0" {...props} />
             ),
             hr: ({ ...props }) => (
-              <hr className="my-12 border-t border-ctp-surface0" {...props} />
+              <hr className="my-10 border-t border-ctp-surface1" {...props} />
             ),
           }}
         >

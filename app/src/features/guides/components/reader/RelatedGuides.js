@@ -14,8 +14,8 @@ const RelatedGuides = ({ currentSlug, category, allGuides }) => {
   if (related.length === 0) return null;
 
   return (
-    <div className="bg-ctp-mantle border border-ctp-surface0 rounded-[2rem] p-8 shadow-sm">
-      <h3 className="text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] mb-6">
+    <div className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-6 shadow-sm">
+      <h3 className="text-xs font-bold text-ctp-subtext1 uppercase tracking-wider mb-5">
         You might also need
       </h3>
 
@@ -24,9 +24,9 @@ const RelatedGuides = ({ currentSlug, category, allGuides }) => {
           <Link
             key={g.slug}
             href={`/guides/${g.slug}`}
-            className="flex items-center gap-4 p-4 rounded-2xl hover:bg-ctp-base transition-all border border-transparent hover:border-ctp-surface0 group shadow-sm"
+            className="flex items-center gap-4 p-4 rounded-xl hover:bg-ctp-base transition-all border border-transparent hover:border-ctp-surface1 group shadow-sm"
           >
-            <div className="w-12 h-12 shrink-0 bg-ctp-base rounded-xl p-2.5 flex items-center justify-center group-hover:bg-ctp-mantle transition-colors border border-ctp-surface0/50">
+            <div className="w-10 h-10 shrink-0 bg-ctp-base rounded-lg p-2 flex items-center justify-center group-hover:bg-ctp-mantle transition-colors border border-ctp-surface1">
               <Image 
                 src={getGuideIcon(g.slug, g.agency)} 
                 alt={g.title}
@@ -35,7 +35,7 @@ const RelatedGuides = ({ currentSlug, category, allGuides }) => {
                 className="w-full h-full object-contain" 
               />
             </div>
-            <span className="text-ctp-text text-sm font-bold group-hover:text-ctp-sky-800 line-clamp-2 uppercase tracking-tight">
+            <span className="text-ctp-text text-sm font-semibold group-hover:text-ctp-sky-800 line-clamp-2 tracking-tight">
               {g.title}
             </span>
           </Link>

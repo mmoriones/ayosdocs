@@ -34,24 +34,24 @@ export default function OnboardingClient() {
 
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center bg-ctp-base text-ctp-text">
-      <div className="w-24 h-24 bg-ctp-sky-800/10 text-ctp-sky-800 rounded-full flex items-center justify-center mb-8 shadow-inner border border-ctp-sky-800/20">
-        <CheckCircle size={48} strokeWidth={3} />
+      <div className="w-20 h-20 bg-ctp-sky-10 text-ctp-sky-800 rounded-2xl flex items-center justify-center mb-6 border border-ctp-surface1 shadow-sm">
+        <CheckCircle size={40} strokeWidth={2.5} />
       </div>
       
-      <h1 className="text-4xl font-black text-ctp-text mb-4 uppercase tracking-tight">
+      <h1 className="text-3xl font-bold text-ctp-text mb-3 tracking-tight">
         You&apos;re all set!
       </h1>
       
-      <p className="text-ctp-subtext1 max-w-md mb-12 leading-relaxed font-bold text-lg opacity-80 uppercase tracking-tight">
+      <p className="text-ctp-subtext1 max-w-sm mb-10 leading-relaxed font-medium text-lg">
         Welcome to AyosDocs. You have successfully completed the onboarding process.
         Your progress will now be saved securely in the cloud.
       </p>
 
       <button
         onClick={() => router.push('/')}
-        className="flex items-center gap-3 bg-ctp-sky-800 hover:opacity-90 text-ctp-base px-10 py-5 rounded-2xl font-black transition-all active:scale-95 shadow-xl shadow-ctp-sky-800/20 text-[14px] uppercase tracking-[0.2em]"
+        className="flex items-center gap-2.5 bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white px-8 py-4 rounded-xl font-bold transition-all active:scale-95 shadow-md text-sm uppercase tracking-widest"
       >
-        <ArrowLeft size={20} strokeWidth={3} />
+        <ArrowLeft size={18} strokeWidth={2.5} />
         <span>Return Home</span>
       </button>
     </div>

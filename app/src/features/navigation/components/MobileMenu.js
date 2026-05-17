@@ -52,81 +52,81 @@ const MobileMenu = () => {
         onClick={() => toggleMobileMenu(false)}
       />
       
-      <div className="relative mx-4 bg-ctp-mantle rounded-[2rem] shadow-2xl border border-ctp-surface0 flex flex-col overflow-hidden pointer-events-auto max-h-[80vh] animate-slide-down">
-        <div className="flex items-center justify-between px-6 py-6 border-b border-ctp-surface0 shrink-0">
+      <div className="relative mx-4 bg-ctp-mantle rounded-2xl shadow-2xl border border-ctp-surface1 flex flex-col overflow-hidden pointer-events-auto max-h-[85vh] animate-slide-down">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-ctp-surface1 shrink-0">
           {user ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {user.image ? (
                 <Image
                   src={user.image}
                   alt={user.name}
-                  width={40}
-                  height={40}
-                  className="rounded-full border border-ctp-surface0"
+                  width={36}
+                  height={36}
+                  className="rounded-full border border-ctp-surface1 shadow-xs"
                 />
               ) : (
-                <div className="w-10 h-10 bg-ctp-sky-800 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                <div className="w-9 h-9 bg-ctp-sky-800 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-sm">
                   {user.name?.charAt(0)}
                 </div>
               )}
               <div className="flex flex-col min-w-0">
-                <span className="text-lg font-bold text-ctp-text truncate">
+                <span className="text-sm font-bold text-ctp-text truncate">
                   {user.name}
                 </span>
-                <span className="text-sm font-medium text-ctp-subtext1 truncate">
+                <span className="text-[12px] font-medium text-ctp-subtext1 truncate">
                   {user.email}
                 </span>
               </div>
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <Image src="/favicon.svg" alt="" width={32} height={32} />
-              <span className="text-lg font-bold text-ctp-text">AyosDocs</span>
+              <Image src="/favicon.svg" alt="" width={28} height={28} />
+              <span className="text-base font-bold text-ctp-text">AyosDocs</span>
             </div>
           )}
 
           <div className="flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-full bg-ctp-base text-ctp-subtext1 hover:text-ctp-text transition-colors active:scale-90"
+              className="p-2 rounded-full bg-ctp-base text-ctp-subtext1 hover:text-ctp-text transition-colors active:scale-90 border border-ctp-surface1"
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
             </button>
             <button 
               onClick={() => toggleMobileMenu(false)}
-              className="p-2.5 rounded-full bg-ctp-base text-ctp-subtext1 hover:text-ctp-text transition-colors active:scale-90"
+              className="p-2 rounded-full bg-ctp-base text-ctp-subtext1 hover:text-ctp-text transition-colors active:scale-90 border border-ctp-surface1"
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
         </div>
 
-        <div className="overflow-y-auto px-6 py-6 space-y-8">
+        <div className="overflow-y-auto px-5 py-6 space-y-6">
           {/* PRIMARY NAV */}
           <div className="space-y-0.5">
-            <p className="px-6 text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] mb-3">Explore</p>
+            <p className="px-4 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-2 opacity-60">Explore</p>
             <Link href="/" onClick={() => handleClick()} className={linkClass("/")}>
               <div className="flex items-center gap-3">
-                <Home size={20} strokeWidth={isActive("/") ? 2.5 : 2} />
+                <Home size={18} strokeWidth={isActive("/") ? 2.5 : 2} />
                 Home
               </div>
             </Link>
             <Link href="/guides" onClick={() => handleClick()} className={linkClass("/guides")}>
               <div className="flex items-center gap-3">
-                <FileText size={20} strokeWidth={isActive("/guides") ? 2.5 : 2} />
+                <FileText size={18} strokeWidth={isActive("/guides") ? 2.5 : 2} />
                 Guides
               </div>
             </Link>
             <Link href="/bundles" onClick={() => handleClick()} className={linkClass("/bundles")}>
               <div className="flex items-center gap-3">
-                <LayoutGrid size={20} strokeWidth={isActive("/bundles") ? 2.5 : 2} />
+                <LayoutGrid size={18} strokeWidth={isActive("/bundles") ? 2.5 : 2} />
                 Bundles
               </div>
             </Link>
             <Link href="/offices" onClick={() => handleClick()} className={linkClass("/offices")}>
               <div className="flex items-center gap-3">
-                <Building2 size={20} strokeWidth={isActive("/offices") ? 2.5 : 2} />
+                <Building2 size={18} strokeWidth={isActive("/offices") ? 2.5 : 2} />
                 Offices
               </div>
             </Link>
@@ -135,50 +135,31 @@ const MobileMenu = () => {
           {/* USER WORKSPACE */}
           {user && (
             <div className="space-y-0.5">
-              <p className="px-6 text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] mb-3">Personal Workspace</p>
+              <p className="px-4 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-2 opacity-60">Personal</p>
               <Link href="/my-docs" onClick={() => handleClick()} className={linkClass("/my-docs")}>
                 <div className="flex items-center gap-3">
-                  <Image src="/favicon.svg" alt="" width={20} height={20} />
+                  <Image src="/favicon.svg" alt="" width={18} height={18} />
                   My Docs
                 </div>
               </Link>
             </div>
           )}
 
-          {/* INFORMATION */}
-          <div className="space-y-0.5">
-            <p className="px-6 text-[11px] font-black text-ctp-subtext0 uppercase tracking-[0.2em] mb-3">Information</p>
-            {[
-              { label: "About", href: "/about" },
-              { label: "FAQs", href: "/faqs" },
-              { label: "Contact", href: "/contact" },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => handleClick()}
-                className={linkClass(item.href)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-
-          <div className="pt-6 border-t border-ctp-surface0 pb-2">
+          <div className="pt-4 border-t border-ctp-surface1 pb-2">
             {user ? (
               <button
                 onClick={() => handleClick(() => signOut({ callbackUrl: '/' }))}
-                className="w-full flex items-center justify-center gap-2 bg-red-500/10 text-red-500 py-3.5 rounded-xl font-bold text-lg transition-all active:scale-[0.98]"
+                className="w-full flex items-center justify-center gap-2 bg-red-500/5 text-red-500 py-3 rounded-xl font-bold text-sm transition-all active:scale-[0.98] border border-red-500/10"
               >
-                <LogOut size={20} />
+                <LogOut size={18} />
                 Logout
               </button>
             ) : (
               <button
                 onClick={() => handleClick(openAuthModal)}
-                className="w-full bg-ctp-sky-800 hover:opacity-90 text-white py-4 rounded-xl font-bold text-lg transition-all active:scale-[0.98] shadow-lg flex items-center justify-center gap-2"
+                className="w-full bg-ctp-sky-800 hover:opacity-90 text-white py-3.5 rounded-xl font-bold text-sm transition-all active:scale-[0.98] shadow-sm flex items-center justify-center gap-2"
               >
-                <UserPlus size={20} />
+                <UserPlus size={18} />
                 Login / Register
               </button>
             )}

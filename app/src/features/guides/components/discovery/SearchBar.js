@@ -49,7 +49,7 @@ const SearchBar = ({ guides }) => {
       <div className="relative flex items-center">
         <Search
           size={18}
-          className="absolute left-4 sm:left-6 text-ctp-subtext0"
+          className="absolute left-4 text-ctp-subtext0"
         />
 
         <input
@@ -59,58 +59,58 @@ const SearchBar = ({ guides }) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearchAction()}
-          className="w-full pl-11 sm:pl-14 pr-11 sm:pr-36 py-4 sm:py-5 rounded-full border border-ctp-surface0 
-          bg-ctp-base text-[18px] text-ctp-text placeholder:text-ctp-subtext1
-          focus:outline-none focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800
-          shadow-xl
+          className="w-full pl-11 pr-11 sm:pr-32 py-3.5 rounded-xl border border-ctp-surface1 
+          bg-ctp-base text-base text-ctp-text placeholder:text-ctp-subtext1
+          focus:outline-none focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800
+          shadow-sm
           transition-all duration-200"
         />
 
         {query && (
           <button
             onClick={clearSearch}
-            className="absolute right-3.5 sm:right-36 text-ctp-subtext0 hover:text-ctp-text transition-colors"
+            className="absolute right-3.5 sm:right-32 text-ctp-subtext0 hover:text-ctp-text transition-colors"
           >
-            <X size={18} />
+            <X size={16} />
           </button>
         )}
 
         <button
           onClick={handleSearchAction}
-          className="absolute right-2 hidden sm:flex bg-ctp-sky-800 hover:opacity-90 
-          text-ctp-base px-5 sm:px-7 py-3 rounded-full transition-all duration-200 
-          shadow-md hover:shadow-lg items-center gap-2 active:scale-95"
+          className="absolute right-1.5 hidden sm:flex bg-ctp-sky-800 hover:bg-ctp-sky-800/90 
+          text-ctp-base px-5 py-2 rounded-lg transition-all duration-200 
+          shadow-sm items-center gap-2 active:scale-95"
         >
-          <Search size={18} strokeWidth={2.5} />
-          <span className="font-bold text-[18px]">Search</span>
+          <Search size={16} />
+          <span className="font-semibold text-sm">Search</span>
         </button>
       </div>
 
       {results.length > 0 && (
-        <div className="absolute w-full mt-2 bg-ctp-base border border-ctp-surface0 
-        rounded-2xl shadow-xl z-50 overflow-hidden ring-1 ring-black/5">
+        <div className="absolute w-full mt-2 bg-ctp-base border border-ctp-surface1 
+        rounded-xl shadow-lg z-50 overflow-hidden">
           {results.map((guide, index) => (
             <div
               key={guide.slug}
               onClick={() => handleSelect(guide.slug)}
-              className={`px-5 py-4 cursor-pointer transition flex items-center gap-4
-              ${index === 0 ? "bg-ctp-mantle/50" : ""}
-              hover:bg-ctp-mantle active:bg-ctp-surface1`}
+              className={`px-4 py-3 cursor-pointer transition flex items-center gap-3
+              ${index === 0 ? "bg-ctp-mantle" : ""}
+              hover:bg-ctp-mantle active:bg-ctp-surface0`}
             >
-              <div className="w-10 h-10 rounded-xl bg-ctp-mantle border border-ctp-surface0 flex items-center justify-center p-2 shrink-0 shadow-sm">
+              <div className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center p-1.5 shrink-0 shadow-sm">
                 <Image 
                   src={getGuideIcon(guide.slug, guide.agency)} 
                   alt={guide.title} 
-                  width={24}
-                  height={24}
+                  width={20}
+                  height={20}
                   className="w-full h-full object-contain" 
                 />
               </div>
               <div className="flex-1">
-                <p className="text-[14px] font-black text-ctp-text leading-tight uppercase tracking-tight">
+                <p className="text-sm font-semibold text-ctp-text leading-tight">
                   {guide.title}
                 </p>
-                <p className="text-[14px] text-ctp-subtext1 mt-0.5 font-bold uppercase tracking-widest opacity-60">
+                <p className="text-[11px] text-ctp-subtext0 mt-0.5 font-medium uppercase tracking-wider">
                   Step-by-step guide
                 </p>
               </div>

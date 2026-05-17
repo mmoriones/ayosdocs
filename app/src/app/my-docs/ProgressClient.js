@@ -196,33 +196,33 @@ export default function ProgressClient({ allGuides }) {
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans pb-20">
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-12">
 
         <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="inline-flex items-center gap-2 text-ctp-sky-800">
-              <ArrowRight size={20} className="-rotate-45" />
-              <span className="text-[14px] font-black uppercase tracking-[0.3em]">My Docs</span>
+              <ArrowRight size={18} className="-rotate-45" />
+              <span className="text-xs font-bold uppercase tracking-widest">My Workspace</span>
             </div>
-            <h1 className="text-[40px] font-black text-ctp-text tracking-tight uppercase leading-none">My Docs</h1>
-            <p className="text-ctp-subtext1 text-[18px] font-medium max-w-xl">Track your government journey, check milestones, and complete goals.</p>
+            <h1 className="text-4xl font-bold text-ctp-text tracking-tight">My Docs</h1>
+            <p className="text-ctp-subtext1 text-lg max-w-xl font-medium">Track your government journey, check milestones, and complete goals.</p>
           </div>
         </header>
 
-        <div className="flex flex-col lg:flex-row gap-14">
-          <div className="flex-1 space-y-16">
+        <div className="flex flex-col lg:flex-row gap-12">
+          <div className="flex-1 space-y-12">
             <SummaryStats stats={stats} />
 
-            <div className="space-y-8">
-              <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-8">
-                <div className="flex bg-ctp-mantle p-1.5 rounded-2xl border border-ctp-surface0 shadow-sm overflow-x-auto no-scrollbar">
+            <div className="space-y-6">
+              <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
+                <div className="flex bg-ctp-mantle p-1 rounded-xl border border-ctp-surface1 shadow-sm overflow-x-auto no-scrollbar">
                   {['All', 'In Progress', 'Completed', 'Favorites'].map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-8 py-3 rounded-xl text-[11px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${
+                      className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
                         activeTab === tab 
-                          ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' 
+                          ? 'bg-ctp-sky-800 text-ctp-base shadow-sm' 
                           : 'text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-surface0'
                       }`}
                     >
@@ -231,46 +231,46 @@ export default function ProgressClient({ allGuides }) {
                   ))}
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <div className="relative">
                     <select 
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
-                      className="appearance-none bg-ctp-mantle border border-ctp-surface0 rounded-2xl px-6 py-3.5 pr-12 text-[11px] font-black uppercase tracking-widest text-ctp-subtext1 focus:ring-4 focus:ring-ctp-sky-800/10 transition-all cursor-pointer shadow-sm"
+                      className="appearance-none bg-ctp-mantle border border-ctp-surface1 rounded-xl px-5 py-2.5 pr-10 text-xs font-bold uppercase tracking-wider text-ctp-subtext1 focus:ring-4 focus:ring-ctp-sky-800/10 transition-all cursor-pointer shadow-sm"
                     >
                       <option>Recently updated</option>
                       <option>Alphabetical</option>
                       <option>Progress %</option>
                     </select>
-                    <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-ctp-subtext0 pointer-events-none" />
+                    <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-ctp-subtext0 pointer-events-none" />
                   </div>
-                  <button className="p-3.5 bg-ctp-mantle border border-ctp-surface0 rounded-2xl text-ctp-subtext0 hover:text-ctp-text shadow-sm transition-all active:scale-90">
-                    <Filter size={20} />
+                  <button className="p-2.5 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-ctp-subtext0 hover:text-ctp-text shadow-sm transition-all active:scale-90">
+                    <Filter size={18} />
                   </button>
                 </div>
               </div>
 
               <div className="relative group">
-                <Search size={20} className="absolute left-5 top-1/2 -translate-y-1/2 text-ctp-subtext1 transition-colors group-focus-within:text-ctp-sky-800" />
+                <Search size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-ctp-subtext1 transition-colors group-focus-within:text-ctp-sky-800" />
                 <input 
                   type="text"
                   placeholder="Search your tracked guides and goals..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-14 pr-6 py-5 bg-ctp-mantle border border-ctp-surface0 rounded-[2rem] text-[18px] shadow-sm focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-ctp-text placeholder:text-ctp-subtext0 font-medium"
+                  className="w-full pl-12 pr-6 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-base shadow-sm focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-ctp-text placeholder:text-ctp-subtext0 font-medium"
                 />
               </div>
             </div>
 
-            <section className="space-y-10">
-              <div className="flex items-end justify-between border-b border-ctp-surface0 pb-6">
+            <section className="space-y-8">
+              <div className="flex items-end justify-between border-b border-ctp-surface1 pb-4">
                 <div>
-                  <h2 className="text-[24px] font-black text-ctp-text uppercase tracking-tight">Active Goal Bundles</h2>
-                  <p className="text-[10px] text-ctp-subtext0 font-black uppercase tracking-[0.2em] mt-3">Multi-requirement tracking at scale.</p>
+                  <h2 className="text-xl font-bold text-ctp-text tracking-tight">Active Goal Bundles</h2>
+                  <p className="text-xs text-ctp-subtext0 font-semibold uppercase tracking-wider mt-1">Multi-requirement tracking at scale.</p>
                 </div>
                 <button 
                   onClick={() => router.push('/bundles')}
-                  className="group flex items-center gap-2 text-ctp-sky-800 font-black text-[11px] uppercase tracking-widest hover:text-ctp-sky-300 transition-colors mb-1"
+                  className="group flex items-center gap-2 text-ctp-sky-800 font-bold text-xs uppercase tracking-wider hover:text-ctp-sky-300 transition-colors mb-1"
                 >
                   View Library <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </button>
@@ -287,27 +287,28 @@ export default function ProgressClient({ allGuides }) {
 
                 <button 
                   onClick={() => router.push('/bundles')}
-                  className="w-full py-10 bg-ctp-mantle border-2 border-dashed border-ctp-surface0 rounded-[2.5rem] text-ctp-subtext0 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-sky-800/5 transition-all flex flex-col items-center justify-center gap-4 group"
+                  className="w-full py-8 bg-ctp-mantle border-2 border-dashed border-ctp-surface1 rounded-xl text-ctp-subtext0 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-sky-800/5 transition-all flex flex-col items-center justify-center gap-3 group"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-ctp-base border border-ctp-surface0 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-                    <Plus size={28} className="text-ctp-subtext0 group-hover:text-ctp-sky-800" strokeWidth={3} />
+                  <div className="w-12 h-12 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+                    <Plus size={24} className="text-ctp-subtext0 group-hover:text-ctp-sky-800" strokeWidth={2.5} />
                   </div>
-                  <span className="text-[13px] font-black uppercase tracking-[0.2em]">Explore life event bundles</span>
+                  <span className="text-xs font-bold uppercase tracking-wider">Explore life event bundles</span>
                 </button>
               </div>
             </section>
-            <section className="space-y-10">
-              <div className="flex items-end justify-between border-b border-ctp-surface0 pb-6">
+
+            <section className="space-y-8">
+              <div className="flex items-end justify-between border-b border-ctp-surface1 pb-4">
                 <div>
-                  <h2 className="text-[24px] font-black text-ctp-text uppercase tracking-tight">Tracked Procedures</h2>
-                  <p className="text-[10px] text-ctp-subtext0 font-black uppercase tracking-[0.2em] mt-3">Individual documentation requirements.</p>
+                  <h2 className="text-xl font-bold text-ctp-text tracking-tight">Tracked Procedures</h2>
+                  <p className="text-xs text-ctp-subtext0 font-semibold uppercase tracking-wider mt-1">Individual documentation requirements.</p>
                 </div>
-                <Link href="/guides" className="group flex items-center gap-2 text-ctp-sky-800 font-black text-[11px] uppercase tracking-widest hover:text-ctp-sky-300 transition-colors mb-1">
+                <Link href="/guides" className="group flex items-center gap-2 text-ctp-sky-800 font-bold text-xs uppercase tracking-wider hover:text-ctp-sky-300 transition-colors mb-1">
                   Knowledge Base <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 gap-4">
                 {displayedGuides.length > 0 ? (
                   displayedGuides.map((item) => (
                     <GuideRowCard 
@@ -319,20 +320,20 @@ export default function ProgressClient({ allGuides }) {
                     />
                   ))
                 ) : (
-                  <div className="text-center py-24 bg-ctp-mantle rounded-[3rem] border-2 border-dashed border-ctp-surface0">
-                    <div className="w-16 h-16 bg-ctp-base rounded-2xl flex items-center justify-center mx-auto mb-6 border border-ctp-surface0 shadow-inner">
-                       <List size={32} className="text-ctp-subtext0" />
+                  <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1">
+                    <div className="w-14 h-14 bg-ctp-base rounded-xl flex items-center justify-center mx-auto mb-6 border border-ctp-surface1 shadow-inner">
+                       <List size={28} className="text-ctp-subtext0" />
                     </div>
-                    <h3 className="text-xl font-black text-ctp-text uppercase tracking-tight">No guides found</h3>
-                    <p className="text-ctp-subtext1 font-medium mt-2">Try adjusting your filters or section.</p>
-                    <Link href="/guides" className="mt-8 inline-block px-8 py-4 bg-ctp-sky-800 text-ctp-base rounded-xl font-black uppercase tracking-widest shadow-lg active:scale-95 transition-all">Explore all guides</Link>
+                    <h3 className="text-lg font-bold text-ctp-text tracking-tight">No guides found</h3>
+                    <p className="text-sm text-ctp-subtext1 font-medium mt-1">Try adjusting your filters or section.</p>
+                    <Link href="/guides" className="mt-8 inline-block px-8 py-3 bg-ctp-sky-800 text-ctp-base rounded-xl font-bold uppercase tracking-wider shadow-md active:scale-95 transition-all">Explore all guides</Link>
                   </div>
                 )}
                 
                 {filteredGuides.length > displayedGuides.length && (
                   <button 
                     onClick={() => setVisibleCount(prev => prev + 5)}
-                    className="w-full py-6 text-[11px] font-black text-ctp-sky-800 hover:text-ctp-sky-300 uppercase tracking-[0.3em] transition-colors border-2 border-dashed border-ctp-surface0 rounded-[2rem] bg-ctp-mantle/50 hover:bg-ctp-mantle shadow-sm active:scale-[0.99]"
+                    className="w-full py-4 text-xs font-bold text-ctp-sky-800 hover:text-ctp-sky-300 uppercase tracking-wider transition-colors border-2 border-dashed border-ctp-surface1 rounded-xl bg-ctp-mantle/50 hover:bg-ctp-mantle active:scale-[0.99]"
                   >
                     Load more items
                   </button>

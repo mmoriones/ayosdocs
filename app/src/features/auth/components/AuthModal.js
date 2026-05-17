@@ -52,23 +52,23 @@ const AuthModal = ({ isOpen, onClose }) => {
         onClick={onClose}
       />
 
-      <div className="relative w-full max-w-md bg-ctp-mantle/95 backdrop-blur-2xl rounded-[32px] shadow-2xl border border-ctp-surface0/60 overflow-hidden animate-slide-down pointer-events-auto">
+      <div className="relative w-full max-w-md bg-ctp-mantle rounded-2xl shadow-2xl border border-ctp-surface1 overflow-hidden animate-slide-down pointer-events-auto">
         <button
           onClick={onClose}
           disabled={isExchanging}
-          className="absolute top-6 right-6 z-50 p-2.5 rounded-full text-ctp-subtext0 hover:bg-ctp-surface1 hover:text-ctp-subtext1 transition-all active:scale-90 disabled:opacity-50"
+          className="absolute top-5 right-5 z-50 p-2 rounded-full text-ctp-subtext1 hover:bg-ctp-surface1 hover:text-ctp-text transition-all active:scale-95 disabled:opacity-50 border border-transparent hover:border-ctp-surface1"
           aria-label="Close modal"
         >
-          <X size={20} />
+          <X size={18} />
         </button>
 
-        <div className="p-10 pt-12 relative">
+        <div className="p-8 pt-10 relative">
           {isExchanging && (
             <div className="absolute inset-0 z-20 bg-ctp-mantle/80 backdrop-blur-[2px] flex flex-col items-center justify-center">
               <div className="flex flex-col items-center">
-                <Loader2 className="w-10 h-10 animate-spin text-ctp-sky-800 mb-4" strokeWidth={2.5} />
-                <h3 className="text-lg font-bold text-ctp-text">Signing you in...</h3>
-                <p className="text-[13px] font-medium text-ctp-subtext1 mt-1.5">Please wait a moment</p>
+                <Loader2 className="w-8 h-8 animate-spin text-ctp-sky-800 mb-3" strokeWidth={2.5} />
+                <h3 className="text-base font-bold text-ctp-text">Signing you in...</h3>
+                <p className="text-xs font-medium text-ctp-subtext1 mt-1">Please wait a moment</p>
               </div>
             </div>
           )}
@@ -77,7 +77,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             <h2 className="text-2xl font-bold text-ctp-text tracking-tight">
               Sign in to AyosDocs
             </h2>
-            <p className="text-[14px] font-medium text-ctp-subtext1 mt-2.5 leading-relaxed">
+            <p className="text-sm font-medium text-ctp-subtext1 mt-2 leading-relaxed">
               Save your progress and access your checklists across all your devices.
             </p>
           </div>
@@ -85,20 +85,20 @@ const AuthModal = ({ isOpen, onClose }) => {
           <button
             onClick={handleGoogleLogin}
             disabled={isExchanging}
-            className="w-full flex items-center justify-center gap-3 bg-ctp-mantle border border-ctp-surface2 hover:bg-ctp-surface1 text-ctp-text font-bold py-4 rounded-[20px] transition-all active:scale-[0.98] shadow-sm disabled:opacity-50"
+            className="w-full flex items-center justify-center gap-3 bg-ctp-base border border-ctp-surface1 hover:bg-ctp-mantle text-ctp-text font-semibold py-3.5 rounded-xl transition-all active:scale-[0.98] shadow-sm disabled:opacity-50"
           >
             <Image
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="Google"
-              width={20}
-              height={20}
-              className="w-5 h-5"
+              width={18}
+              height={18}
+              className="w-4.5 h-4.5"
             />
             Continue with Google
           </button>
 
           <p className="mt-8 text-center text-[11px] font-medium text-ctp-subtext0 leading-relaxed px-4">
-            By continuing, you agree to our <span className="underline cursor-pointer">Terms of Service</span> and <span className="underline cursor-pointer">Privacy Policy</span>.
+            By continuing, you agree to our <span className="underline cursor-pointer hover:text-ctp-sky-800 transition-colors">Terms of Service</span> and <span className="underline cursor-pointer hover:text-ctp-sky-800 transition-colors">Privacy Policy</span>.
           </p>
         </div>
       </div>

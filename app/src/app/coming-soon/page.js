@@ -36,31 +36,31 @@ export default function ComingSoon() {
             <Construction size={14} />
             Feature in Development
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-ctp-text tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold text-ctp-text tracking-tight leading-tight">
             We&apos;re building something <span className="text-ctp-sky-800">amazing.</span>
           </h1>
-          <p className="text-ctp-subtext0 text-lg max-w-lg mx-auto leading-relaxed font-medium">
-            Our team is working hard to bring you more powerful features to make your government transactions even easier. 
+          <p className="text-ctp-subtext1 text-lg max-w-lg mx-auto leading-relaxed font-medium">
+            Our team is working hard to bring you more powerful features to make your government transactions even easier.
           </p>
-        </div>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto text-left">
-          <div className="bg-ctp-mantle p-5 rounded-3xl border border-ctp-surface0 shadow-sm flex items-start gap-4">
-            <div className="w-10 h-10 rounded-2xl bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shrink-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto text-left">
+          <div className="bg-ctp-mantle p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shrink-0">
                <ShieldCheck size={20} />
             </div>
             <div>
               <h3 className="text-sm font-bold text-ctp-text mb-1">Coming Next</h3>
-              <p className="text-[11px] text-ctp-subtext0 leading-relaxed uppercase tracking-tight font-bold">Bundles & Insights</p>
+              <p className="text-xs text-ctp-subtext1 leading-relaxed tracking-tight font-semibold">Bundles & Insights</p>
             </div>
           </div>
-          <div className="bg-ctp-mantle p-5 rounded-3xl border border-ctp-surface0 shadow-sm flex items-start gap-4">
-            <div className="w-10 h-10 rounded-2xl bg-ctp-peach/10 flex items-center justify-center text-ctp-peach shrink-0">
+          <div className="bg-ctp-mantle p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-ctp-peach/10 flex items-center justify-center text-ctp-peach shrink-0">
                <Timer size={20} />
             </div>
             <div>
               <h3 className="text-sm font-bold text-ctp-text mb-1">Timeline</h3>
-              <p className="text-[11px] text-ctp-subtext0 leading-relaxed uppercase tracking-tight font-bold">Q3 2026 Release</p>
+              <p className="text-xs text-ctp-subtext1 leading-relaxed tracking-tight font-semibold">Q2 - Q3 2026 Release</p>
             </div>
           </div>
         </div>

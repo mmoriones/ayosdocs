@@ -214,7 +214,7 @@ Costs may vary depending on driving schools and LTO branches.
 
 ## 8. Step-by-Step Application Process
 
-## Phase 1 — Apply for a Student Permit
+### Phase 1 — Apply for a Student Permit
 
 ### Step 1 – Complete the Theoretical Driving Course (TDC)
 
@@ -284,7 +284,7 @@ Student Permits are generally valid for one year.
 
 ---
 
-## Phase 2 — Apply for a Non-Professional Driver’s License
+### Phase 2 — Apply for a Non-Professional Driver’s License
 
 ### Step 6 – Complete the Practical Driving Course (PDC)
 

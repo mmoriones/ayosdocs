@@ -54,46 +54,46 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
     <div className={`lg:hidden fixed bottom-6 left-6 right-6 z-[100] transition-all duration-500 ease-in-out ${
       isVisible && !isAuthModalOpen ? "translate-y-0 opacity-100" : "translate-y-40 opacity-0 pointer-events-none"
     }`}>
-      <div className="bg-ctp-mantle/95 backdrop-blur-xl border border-ctp-surface0 shadow-2xl rounded-[2rem] p-2 flex items-center gap-2">
+      <div className="bg-ctp-mantle/95 backdrop-blur-xl border border-ctp-surface1 shadow-xl rounded-2xl p-1.5 flex items-center gap-1.5">
         
         <button
           onClick={() => router.push("/")}
-          className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all duration-200 active:scale-95 ${
+          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-xl transition-all duration-200 active:scale-95 ${
             isHomeActive 
-              ? "bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20" 
-              : "text-ctp-subtext1 hover:bg-ctp-mantle"
+              ? "bg-ctp-sky-800 text-ctp-base shadow-sm" 
+              : "text-ctp-subtext1 hover:bg-ctp-surface0"
           }`}
         >
-          <Home size={20} strokeWidth={isHomeActive ? 3 : 2} />
-          <span className={`text-[10px] mt-1 uppercase tracking-widest ${isHomeActive ? "font-black" : "font-bold"}`}>
+          <Home size={18} strokeWidth={2} />
+          <span className={`text-[10px] mt-1 tracking-wide ${isHomeActive ? "font-bold" : "font-medium"}`}>
             Home
           </span>
         </button>
 
         <button
           onClick={onOpenTOC}
-          className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all duration-200 active:scale-95 ${
+          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-xl transition-all duration-200 active:scale-95 ${
             isTOCOpen 
-              ? "bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20" 
-              : "text-ctp-subtext1 hover:bg-ctp-mantle"
+              ? "bg-ctp-sky-800 text-ctp-base shadow-sm" 
+              : "text-ctp-subtext1 hover:bg-ctp-surface0"
           }`}
         >
-          {isTOCOpen ? <X size={20} strokeWidth={3} /> : <List size={20} strokeWidth={2} />}
-          <span className={`text-[10px] mt-1 uppercase tracking-widest ${isTOCOpen ? "font-black" : "font-bold"}`}>
+          {isTOCOpen ? <X size={18} strokeWidth={2} /> : <List size={18} strokeWidth={2} />}
+          <span className={`text-[10px] mt-1 tracking-wide ${isTOCOpen ? "font-bold" : "font-medium"}`}>
             {isTOCOpen ? "Close" : "TOC"}
           </span>
         </button>
 
         <button
           onClick={onOpenChecklist}
-          className={`flex-1 flex flex-col items-center justify-center py-3 rounded-2xl transition-all duration-200 active:scale-95 ${
+          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-xl transition-all duration-200 active:scale-95 ${
             isChecklistOpen 
-              ? "bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20" 
-              : "text-ctp-subtext1 hover:bg-ctp-mantle"
+              ? "bg-ctp-sky-800 text-ctp-base shadow-sm" 
+              : "text-ctp-subtext1 hover:bg-ctp-surface0"
           }`}
         >
-          {isChecklistOpen ? <X size={20} strokeWidth={3} /> : <CheckSquare size={20} strokeWidth={2} />}
-          <span className={`text-[10px] mt-1 uppercase tracking-widest ${isChecklistOpen ? "font-black" : "font-bold"}`}>
+          {isChecklistOpen ? <X size={18} strokeWidth={2} /> : <CheckSquare size={18} strokeWidth={2} />}
+          <span className={`text-[10px] mt-1 tracking-wide ${isChecklistOpen ? "font-bold" : "font-medium"}`}>
             {isChecklistOpen ? "Close" : "Checklist"}
           </span>
         </button>

@@ -50,14 +50,21 @@ function extractHeadings(markdown) {
   const matches = [...markdown.matchAll(regex)];
   
   return matches.map((match) => {
-    const text = match[1];
+    let text = match[1];
+    
+    // Create ID matching rehype-slug (github-slugger) more accurately
+    // It keeps consecutive dashes if they come from different non-alphanumeric chars
     const id = text
       .toLowerCase()
-      .replace(/[^\w\s-]/g, "")
       .trim()
-      .replace(/\s+/g, "-")
-      .replace(/-+/g, "-");
+      .replace(/[^\w\s-]/g, '') // Remove most punctuation (like em-dash)
+      .replace(/\s+/g, '-')      // Replace spaces with dashes
+      .replace(/^-+|-+$/g, '');  // Trim dashes only from start/end
 
-    return { text, id };
+    // Strip leading numbers for TOC display (e.g., "1. ", "01. ", "1) ", " 1. ")
+    // We only strip if it looks like a list number, preserving "Phase 1"
+    const strippedText = text.replace(/^\s*(\d+[\.\)]\s*)+/, '').trim();
+
+    return { text: strippedText, id };
   });
 }

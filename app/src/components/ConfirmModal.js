@@ -48,32 +48,32 @@ const ConfirmModal = ({
         onClick={onClose} 
       />
 
-      <div className="relative w-full max-w-[340px] bg-ctp-mantle rounded-[28px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-ctp-surface0 p-7 pointer-events-auto animate-in fade-in zoom-in-95 duration-300">
+      <div className="relative w-full max-w-[340px] bg-ctp-mantle rounded-2xl shadow-xl border border-ctp-surface1 p-6 pointer-events-auto animate-in fade-in zoom-in-95 duration-300">
         <button 
           onClick={onClose}
-          className="absolute top-5 right-5 p-1.5 text-ctp-subtext0 hover:text-ctp-subtext1 rounded-full transition-all active:scale-90"
+          className="absolute top-4 right-4 p-1.5 text-ctp-subtext1 hover:text-ctp-text rounded-full transition-all active:scale-95 border border-transparent hover:border-ctp-surface1"
         >
-          <X size={18} />
+          <X size={16} />
         </button>
 
         <div className="flex flex-col items-center text-center">
-          <div className="mb-5">
-            <div className={`p-4 rounded-2xl border shadow-sm ${iconVariants[variant]}`}>
-              <AlertCircle size={28} />
+          <div className="mb-4">
+            <div className={`p-3.5 rounded-xl border shadow-sm ${iconVariants[variant]}`}>
+              <AlertCircle size={24} />
             </div>
           </div>
 
-          <h3 className="text-[18px] font-bold text-ctp-text tracking-tight leading-tight mb-2">
+          <h3 className="text-lg font-bold text-ctp-text tracking-tight leading-tight mb-2">
             {title}
           </h3>
-          <p className="text-[13px] font-medium text-ctp-subtext1 mb-8 leading-relaxed px-2">
+          <p className="text-sm font-medium text-ctp-subtext1 mb-6 leading-relaxed px-1">
             {message}
           </p>
 
-          <div className="flex items-center gap-3 w-full">
+          <div className="flex items-center gap-2.5 w-full">
             <button
               onClick={onClose}
-              className="flex-1 py-3 rounded-xl text-[13px] font-bold text-ctp-subtext1 bg-ctp-base hover:bg-ctp-surface0 transition-all active:scale-[0.98] border border-ctp-surface0"
+              className="flex-1 py-2.5 rounded-lg text-sm font-semibold text-ctp-subtext1 bg-ctp-base hover:bg-ctp-surface1 transition-all active:scale-[0.98] border border-ctp-surface1"
             >
               {cancelText}
             </button>
@@ -82,7 +82,7 @@ const ConfirmModal = ({
                 onConfirm();
                 onClose();
               }}
-              className={`flex-1 py-3 rounded-xl text-[13px] font-bold transition-all active:scale-[0.98] ${variantStyles[variant]}`}
+              className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all active:scale-[0.98] ${variantStyles[variant]}`}
             >
               {confirmText}
             </button>

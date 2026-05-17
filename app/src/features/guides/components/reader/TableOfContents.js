@@ -46,18 +46,18 @@ const TableOfContents = ({ headings, onItemClick, activeId }) => {
               
               if (onItemClick) onItemClick(h.id);
             }}
-            className={`block py-2.5 px-4 rounded-xl text-xs transition-all uppercase tracking-widest ${
+            className={`block py-2 px-3 rounded-lg text-xs transition-all tracking-tight ${
               activeId === h.id
-                ? "bg-ctp-sky-800/10 text-ctp-sky-800 font-black border border-ctp-sky-800/20 shadow-sm"
-                : "text-ctp-subtext0 font-bold hover:bg-ctp-mantle hover:text-ctp-sky-800"
+                ? "bg-ctp-sky-800/10 text-ctp-sky-800 font-semibold border border-ctp-sky-800/20"
+                : "text-ctp-subtext1 font-medium hover:bg-ctp-base hover:text-ctp-sky-800"
             }`}
           >
-            <span className={`mr-3 font-black transition-colors ${
-              activeId === h.id ? "text-ctp-sky-800" : "text-ctp-surface2"
+            <span className={`mr-3 font-bold transition-colors ${
+              activeId === h.id ? "text-ctp-sky-800" : "text-ctp-subtext0"
             }`}>
               {String(index + 1).padStart(2, '0')}
             </span>
-            {h.text}
+            {h.text.replace(/^\s*(\d+[\.\)]\s*)+/, '').trim()}
           </a>
         </li>
       ))}

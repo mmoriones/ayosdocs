@@ -208,7 +208,7 @@ Some OWWA services and appointments may be available online.
 
 ## 9. Step-by-Step Application Process
 
-## Phase 1 — OWWA Membership Application or Renewal
+### Phase 1 — OWWA Membership Application or Renewal
 
 ### Step 1 – Prepare Your Documents
 
@@ -271,7 +271,7 @@ After successful processing:
 
 ---
 
-## Phase 2 — OWWA e-Card Application
+### Phase 2 — OWWA e-Card Application
 
 ### Step 6 – Apply for the OWWA e-Card
 

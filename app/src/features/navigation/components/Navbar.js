@@ -24,8 +24,8 @@ const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   return (
-    <nav className="w-full sticky top-0 z-[60] bg-ctp-base/80 backdrop-blur-xl border-b border-ctp-surface0 transition-all duration-300">
-      <div className="max-w-[1600px] mx-auto flex items-center justify-between px-6 lg:px-8 py-4">
+    <nav className="w-full sticky top-0 z-[60] bg-ctp-base/70 backdrop-blur-md border-b border-ctp-surface1 transition-all duration-300">
+      <div className="max-w-[1600px] mx-auto flex items-center justify-between px-6 lg:px-8 py-3">
 
         {/* LEFT: Logo */}
         <Link
@@ -35,14 +35,14 @@ const Navbar = () => {
           <Image
             src="/favicon.svg"
             alt="AyosDocs logo"
-            width={36}
-            height={36}
-            className="object-contain transition-transform group-hover:scale-110"
+            width={32}
+            height={32}
+            className="object-contain transition-transform group-hover:scale-105"
           />
 
-          <h1 className="text-2xl font-bold text-ctp-text leading-none tracking-tight">
+          <h1 className="text-xl font-bold text-ctp-text leading-none tracking-tight">
             <span className="text-ctp-sky-800">Ayos</span>
-            <span className="ml-1">Docs</span>
+            <span className="">Docs</span>
           </h1>
         </Link>
 
