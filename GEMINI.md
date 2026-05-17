@@ -79,16 +79,17 @@ The project is structured as a monorepo-style workspace to separate application 
     ```
 
 2.  **Environment Setup:**
-    Create a `.env.local` file in the `app/` directory.
+    AyosDocs uses Ansible Vault to manage secrets. Ensure you have Ansible installed, then run the setup script to generate your local environment files:
+    ```bash
+    npm run setup-env
+    ```
+    You will be prompted for the Vault password. This will create `app/.env.local` and `app/.env.tunnel`.
 
-    **`app/.env.local`**
+    **`app/.env.local` (Generated)**
     ```env
-    MONGO_URI=your_mongodb_uri
-    NEXTAUTH_SECRET=your_nextauth_secret
     NEXTAUTH_URL=http://localhost:3000
-    GOOGLE_CLIENT_ID=your_google_client_id
-    GOOGLE_CLIENT_SECRET=your_google_client_secret
-    NEXT_PUBLIC_ADSENSE_ENABLED=false
+    MONGO_URI=your_mongodb_uri
+    ...
     ```
 
 ### Running the Project

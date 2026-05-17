@@ -7,7 +7,7 @@
  * @returns {JSX.Element | null}
  */
 const Adsense = ({ variant = 'sidebar' }) => {
-  const isEnabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true';
+  const isEnabled = process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'false';
 
   if (!isEnabled) return null;
 

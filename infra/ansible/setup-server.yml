@@ -161,9 +161,11 @@
         mode: '0644'
 
     # 6. Secrets & Env Configuration
-    - name: Create .env file in project root
+    - name: Create .env file in app/ dir
       copy:
-        content: "{{ vault_env_content }}"
+        content: |
+          {{ vault_global_shared_env }}
+          {{ vault_server_env }}
         dest: "{{ project_path }}/app/.env"
         mode: '0600'
         owner: "{{ ansible_user }}"

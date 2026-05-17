@@ -8,7 +8,8 @@
     "dev": "npm run dev -w app",
     "build": "npm run build -w app",
     "start": "npm run start -w app",
-    "lint": "npm run lint -w app"
+    "lint": "npm run lint -w app",
+    "setup-env": "./scripts/setup-local-env.sh"
   },
   "dependencies": {
     "picomatch": "4.0.4"

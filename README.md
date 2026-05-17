@@ -61,17 +61,14 @@ ayosdocs/
    ```
 
 3. **Configure Environment Variables:**
-   Create a `.env` file in the **root** directory (it will be passed to Docker):
-   ```env
-   # Use test.ayosdocs.com for VM testing, ayosdocs.com for Production
-   NEXTAUTH_URL=http://test.ayosdocs.com
-   NEXTAUTH_SECRET=your_nextauth_secret
+   AyosDocs uses **Ansible Vault** to manage secrets. 
    
-   MONGO_URI=mongodb://mongodb:27017/ayosdocs
-   
-   GOOGLE_CLIENT_ID=your_google_client_id
-   GOOGLE_CLIENT_SECRET=your_google_client_secret
+   - Edit your secrets in `infra/ansible/vars/secrets.yml`.
+   - Run the setup script to generate local environment files:
+   ```bash
+   npm run setup-env
    ```
+   *This will create `app/.env.local` and `app/.env.tunnel` using the encrypted variables.*
 
 ## 🚢 Deployment & Infrastructure
 

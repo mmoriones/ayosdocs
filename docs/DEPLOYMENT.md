@@ -22,8 +22,14 @@ This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubun
     ```
 
 3.  **Secrets Management (Ansible Vault):**
-    Open `infra/ansible/vars/secrets.yml` and fill in your real credentials. 
-    **Note:** Ensure `MONGO_URI` in `vault_env_content` uses the new container name: `mongodb://ayosdocs-db:27017/ayosdocs`.
+    AyosDocs uses a modular secrets system managed via Ansible Vault in `infra/ansible/vars/secrets.yml`. 
+
+    **Structure of `secrets.yml`:**
+    - `vault_global_shared_env`: Variables used in all environments (e.g., MongoDB credentials, Google OAuth).
+    - `vault_local_shared_env`: Variables shared between local and tunnel modes.
+    - `vault_local_host`: Local-only variables (e.g., `NEXTAUTH_URL=http://localhost:3000`).
+    - `vault_tunnel_host`: Tunnel-only variables (e.g., `NEXTAUTH_URL=https://your-tunnel.com`).
+    - `vault_server_env`: Production-only overrides.
 
     **To encrypt for the first time:**
     ```bash
@@ -34,6 +40,13 @@ This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubun
     ```bash
     ansible-vault edit infra/ansible/vars/secrets.yml
     ```
+
+4.  **Local Environment Setup (.env files):**
+    After configuring your secrets, generate your local `.env.local` and `.env.tunnel` files:
+    ```bash
+    npm run setup-env
+    ```
+    This script extracts the encrypted variables from the Vault and assembles the environment files for local development.
 
 ---
 
