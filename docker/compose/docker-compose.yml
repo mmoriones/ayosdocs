@@ -17,7 +17,7 @@ services:
 
   watchtower:
     container_name: ayosdocs-watchtower
-    image: containrrr/watchtower
+    image: nickfedor/watchtower:latest
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
