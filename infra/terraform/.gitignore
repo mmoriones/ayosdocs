@@ -1,0 +1,12 @@
+# Terraform local state
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Ignore variables file containing credentials
+terraform.tfvars
+
+# Ignore the .terraform directory
+.terraform/
