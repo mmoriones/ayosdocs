@@ -7,7 +7,6 @@ import Hero from '@/features/guides/components/discovery/Hero';
 import StartWithGoal from '@/features/guides/components/discovery/StartWithGoal';
 import RecentExperiences from '@/features/guides/components/discovery/RecentExperiences';
 import ChecklistCard from '@/features/guides/components/tracking/ChecklistCard';
-import HolidayAlert from '@/components/HolidayAlert';
 import WhySignUp from '@/features/guides/components/callouts/WhySignUp';
 import Adsense from '@/components/Adsense';
 import OnboardingBanner from '@/features/guides/components/discovery/OnboardingBanner';
@@ -56,10 +55,6 @@ export default function HomeClient({ allGuides }) {
       <Hero guides={allGuides} />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-12 space-y-16">
-        <section className="-mt-8 relative z-20">
-          <HolidayAlert />
-        </section>
-
         <section className="py-2 border-y border-ctp-surface1/50">
           <Adsense variant="article" />
         </section>

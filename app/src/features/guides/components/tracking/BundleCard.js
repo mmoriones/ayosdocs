@@ -1,5 +1,6 @@
 import { ChevronRight, Layers } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { getBundleIcon } from '@/lib/bundleIcons';
 
 /**
  * BundleCard Component
@@ -15,8 +16,8 @@ const BundleCard = ({ bundle, progress }) => {
       className="bg-ctp-base rounded-xl p-6 border border-ctp-surface1 shadow-sm hover:shadow-md transition-all group cursor-pointer relative overflow-hidden flex flex-col h-full"
     >
       <div className="flex flex-col md:flex-row gap-6 items-start">
-        <div className="w-16 h-16 rounded-lg bg-ctp-mantle flex items-center justify-center text-3xl group-hover:scale-105 transition-transform border border-ctp-surface1 shrink-0">
-          {bundle.icon}
+        <div className="w-16 h-16 rounded-lg bg-ctp-mantle flex items-center justify-center group-hover:scale-105 transition-transform border border-ctp-surface1 shrink-0">
+          {getBundleIcon(bundle.id, { size: 24, className: "text-ctp-sky-800" })}
         </div>
         
         <div className="flex-1 min-w-0 space-y-4">

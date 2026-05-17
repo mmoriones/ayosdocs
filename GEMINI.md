@@ -105,6 +105,17 @@ The project is structured as a monorepo-style workspace to separate application 
 
 ## Development Conventions
 
+### UI Standards
+-   **Reusable Components:** Use standardized components for consistent UI.
+    -   `PageHeader`: Mandatory for all main discovery pages (Guides, Bundles, Offices).
+    -   `HolidayAlert`: Displays important closure information, typically moved to the Offices page during holiday periods.
+    -   `Banner`: Use for tips, alerts, and inline information.
+-   **Spacing:** Follow the established 1600px max-width and responsive padding (`px-6 lg:px-10`) for main page containers.
+
+### Git Workflow
+-   **Linting:** ALWAYS run `npm run lint` before committing changes. Fix any linting errors before proceeding with the commit.
+-   **Commit Messages:** Prefer clear, concise messages that focus on "why" and "what".
+
 ### Documentation & Comments
 -   **JSDoc:** Use JSDoc for all exported functions and components.
 -   **Educational Comments:** Explain the "why" and "how" of complex logic. 

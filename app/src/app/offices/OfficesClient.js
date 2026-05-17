@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
   Search, 
@@ -11,7 +11,6 @@ import {
   TrendingUp, 
   ShieldCheck, 
   Building2, 
-  ChevronDown,
   Info,
   CheckCircle2,
   Users,
@@ -20,6 +19,8 @@ import {
   Filter
 } from 'lucide-react';
 import { getGuideIcon } from '@/lib/guideIcons';
+import PageHeader from '@/components/ui/PageHeader';
+import HolidayAlert from '@/components/HolidayAlert';
 import Image from 'next/image';
 
 /**
@@ -88,51 +89,44 @@ export default function OfficesClient() {
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans flex flex-col transition-colors duration-300 text-ctp-text">
-      <div className="bg-ctp-mantle border-b border-ctp-surface1">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-5 flex-1">
-            <div className="p-3.5 rounded-xl bg-ctp-sky-800/10 shrink-0 border border-ctp-sky-800/20 shadow-sm">
-              <Building2 className="text-ctp-sky-800" size={24} />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-ctp-text tracking-tight uppercase">
-                Office Insights
-              </h1>
-              <p className="text-ctp-subtext1 text-sm font-medium mt-1">
-                Real-time community data on government branches and wait times.
-              </p>
-            </div>
+      <PageHeader 
+        icon={Building2}
+        title="Office Insights"
+        description="Real-time community data on government branches and wait times."
+        iconBoxClassName="bg-ctp-sky-800/10 border-ctp-sky-800/20 shadow-sm"
+        actions={
+          <div className="bg-ctp-base/50 backdrop-blur-sm px-5 py-2.5 rounded-xl border border-ctp-surface1 shadow-sm flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_rgba(32,159,181,0.5)]" />
+            <span className="text-[11px] font-bold text-ctp-subtext0 uppercase tracking-[0.2em]">5,402 Reports this month</span>
           </div>
+        }
+      />
 
-          <div className="flex flex-wrap items-center gap-4 shrink-0">
-            <div className="bg-ctp-base/50 backdrop-blur-sm px-5 py-2.5 rounded-xl border border-ctp-surface1 shadow-sm flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_rgba(32,159,181,0.5)]" />
-              <span className="text-[11px] font-bold text-ctp-subtext0 uppercase tracking-[0.2em]">5,402 Reports this month</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* QUICK AGENCY PILLS */}
       <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[73px] z-40 backdrop-blur-md bg-ctp-base/80">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-3 flex items-center gap-3 overflow-x-auto no-scrollbar">
-          <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
-            <Filter size={14} className="text-ctp-subtext1" />
-            <span className="text-xs font-semibold text-ctp-subtext0 uppercase tracking-wider">Quick Filter</span>
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2.5 flex items-center justify-between gap-8">
+          <div className="flex items-center gap-3 overflow-x-auto no-scrollbar flex-1">
+            <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
+              <Filter size={14} className="text-ctp-subtext1" />
+              <span className="text-xs font-semibold text-ctp-subtext0 uppercase tracking-wider">Quick Filter</span>
+            </div>
+            {agencies.map((agency) => (
+              <button
+                key={agency}
+                onClick={() => setSelectedAgency(agency)}
+                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap border ${
+                  selectedAgency === agency
+                    ? 'bg-ctp-sky-800 text-ctp-base border-ctp-sky-800 shadow-lg shadow-ctp-sky-800/20'
+                    : 'bg-ctp-mantle text-ctp-subtext0 border-ctp-surface1 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
+                }`}
+              >
+                {agency}
+              </button>
+            ))}
           </div>
-          {agencies.map((agency) => (
-            <button
-              key={agency}
-              onClick={() => setSelectedAgency(agency)}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap border ${
-                selectedAgency === agency
-                  ? 'bg-ctp-sky-800 text-ctp-base border-ctp-sky-800 shadow-lg shadow-ctp-sky-800/20'
-                  : 'bg-ctp-mantle text-ctp-subtext0 border-ctp-surface1 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
-              }`}
-            >
-              {agency}
-            </button>
-          ))}
+
+          <div className="shrink-0 hidden lg:block max-w-md">
+            <HolidayAlert />
+          </div>
         </div>
       </div>
 
@@ -148,7 +142,7 @@ export default function OfficesClient() {
                   placeholder="Search by office name, city, or province..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-6 py-3.5 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-lg focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-ctp-text placeholder:text-ctp-subtext0 font-medium"
+                  className="w-full pl-12 pr-6 py-3.5 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-lg focus:outline-none focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 shadow-sm transition-all text-ctp-text placeholder:text-ctp-subtext1 font-medium"
                 />
               </div>
             </div>

@@ -3,6 +3,7 @@
 import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { bundles } from '@/data/bundles';
+import { getBundleIcon } from '@/lib/bundleIcons';
 
 /**
  * StartWithGoal Component
@@ -24,8 +25,8 @@ const StartWithGoal = () => {
             flex flex-col md:flex-row items-center gap-6
           "
         >
-          <div className="w-14 h-14 rounded-xl bg-ctp-mantle flex items-center justify-center text-3xl shrink-0 group-hover:scale-105 transition-transform duration-300 border border-ctp-surface1">
-            {bundle.icon}
+          <div className="w-14 h-14 rounded-xl bg-ctp-mantle flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300 border border-ctp-surface1">
+            {getBundleIcon(bundle.id, { size: 28, className: "text-ctp-sky-800" })}
           </div>
 
           <div className="flex-1 text-center md:text-left min-w-0">

@@ -100,20 +100,6 @@ export const bundles = [
     ]
   },
   {
-    id: 'college-graduation',
-    title: 'College / Graduation',
-    description: 'Enrollment, graduation, board exams, and scholarship requirements.',
-    icon: '📜',
-    category: 'Education',
-    flow: [
-      { 
-        step: 1, 
-        label: 'Foundational ID', 
-        guides: ['psa-birth-certificate', 'national-id'] 
-      }
-    ]
-  },
-  {
     id: 'travel-tourist',
     title: 'Travel / Tourist Visa',
     description: 'Documents needed for international travel and visa applications.',

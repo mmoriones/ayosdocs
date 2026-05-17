@@ -17,6 +17,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { getGuideIcon } from '@/lib/guideIcons';
+import { getBundleIcon } from '@/lib/bundleIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
 import { startBundleAction, stopBundleAction } from '@/app/actions/user';
 import { useToast } from '@/context/ToastContext';
@@ -47,9 +48,8 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
         const res = await startBundleAction(bundle.id);
         if (res.success) {
           setIsTracked(true);
-          showToast({ type: 'success', title: 'Workflow Started', message: 'Workflow started and all guides added to your dashboard.' });
-          // Optional: router.refresh() to get latest savedProgress if needed, 
-          // but for now we'll rely on local state or next navigation
+          showToast({ type: 'success', title: 'Workflow Started', message: 'Workflow started and added to your dashboard.' });
+          router.refresh(); // Refresh to update server-side data if needed
         } else {
           showToast({ type: 'error', title: 'Error', message: res.message });
         }
@@ -146,8 +146,8 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
           <div className="flex-1 space-y-12">
             <header className="space-y-6">
               <div className="flex items-center gap-5">
-                <div className="w-16 h-16 rounded-xl bg-ctp-mantle flex items-center justify-center text-3xl border border-ctp-surface1 shadow-sm">
-                  {bundle.icon}
+                <div className="w-16 h-16 rounded-xl bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shadow-sm">
+                  {getBundleIcon(bundle.id)}
                 </div>
                 <div>
                   <div className="flex items-center gap-3 mb-1">

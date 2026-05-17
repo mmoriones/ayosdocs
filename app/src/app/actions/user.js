@@ -135,26 +135,13 @@ export async function startBundleAction(bundleId) {
       user.trackedBundles.push({ bundleId });
     }
 
-    // 2. Bulk enroll in all guides in the bundle flow
-    const bundleGuides = bundle.flow.flatMap(stage => stage.guides);
-    
-    bundleGuides.forEach(slug => {
-      const alreadyTracked = user.savedProgress.some(p => p.guideSlug === slug);
-      if (!alreadyTracked) {
-        user.savedProgress.push({
-          guideSlug: slug,
-          completedTasks: "" // Initially no tasks completed
-        });
-      }
-    });
-
     await user.save();
 
     revalidatePath("/my-docs");
     revalidatePath("/bundles");
     revalidatePath(`/bundles/${bundleId}`);
 
-    return { success: true, message: "Workflow started and guides added to your dashboard" };
+    return { success: true, message: "Workflow started and added to your dashboard" };
   } catch (error) {
     console.error("Start Bundle Action Error:", error);
     return { success: false, message: "Internal Server Error" };

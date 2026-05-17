@@ -22,6 +22,7 @@ import {
 import { getGuideIcon } from '@/lib/guideIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
 import Banner from '@/components/ui/Banner';
+import PageHeader from '@/components/ui/PageHeader';
 import Adsense from '@/components/Adsense';
 import Image from 'next/image';
 
@@ -160,24 +161,12 @@ export default function GuidesClient({ initialGuides }) {
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans flex flex-col transition-colors duration-300">
-      {/* HEADER SECTION */}
-      <div className="bg-ctp-mantle border-b border-ctp-surface0">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-5 flex-1">
-            <div className="p-4 rounded-2xl bg-ctp-sky-800/10 shrink-0 border border-ctp-sky-800/20">
-              <FileText className="text-ctp-sky-800" size={24} />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-ctp-text tracking-tight uppercase">
-                Knowledge Base
-              </h1>
-              <p className="text-ctp-subtext1 text-sm mt-1">
-                Step-by-step procedures for Philippine government requirements.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-4 md:gap-6 shrink-0">
+      <PageHeader 
+        icon={FileText}
+        title="Knowledge Base"
+        description="Step-by-step procedures for Philippine government requirements."
+        actions={
+          <>
             <div className="hidden xl:flex items-center gap-4 text-xs font-semibold text-ctp-subtext0 uppercase tracking-wider border-r border-ctp-surface1 pr-6">
               <span className="flex items-center gap-2">
                 <FileText size={14} className="text-ctp-sky-800" />
@@ -198,9 +187,9 @@ export default function GuidesClient({ initialGuides }) {
                 Passport, NBI, SSS
               </span>
             </div>
-          </div>
-        </div>
-      </div>
+          </>
+        }
+      />
 
       {/* QUICK CATEGORY PILLS */}
       <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[73px] z-40 backdrop-blur-md bg-ctp-base/80">

@@ -13,13 +13,13 @@ const HolidayAlert = () => {
     <Banner
       variant="sky"
       icon={Info}
-      title="Local Holiday Alert"
       onClose={() => setIsVisible(false)}
+      className="py-1 px-3 items-center whitespace-nowrap shadow-none border-ctp-sky-800/10"
     >
-      Offices may be closed today{" "}
-      <span className="text-ctp-sky-800 font-bold">
-        (May 15, Friday)
-      </span>
+      <div className="text-xs font-medium">
+        <span className="font-bold mr-1.5">Holiday Alert:</span>
+        Offices may be closed today (May 15)
+      </div>
     </Banner>
   );
 };

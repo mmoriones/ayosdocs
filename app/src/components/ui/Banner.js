@@ -47,9 +47,9 @@ const Banner = ({
   };
 
   return (
-    <div className={`border rounded-xl p-3 flex items-start gap-3 animate-in fade-in slide-in-from-top-1 duration-200 ${variants[variant]} ${className}`}>
+    <div className={`border rounded-xl p-3 flex gap-3 animate-in fade-in slide-in-from-top-1 duration-200 ${variants[variant]} ${className.includes('items-') ? '' : 'items-start'} ${className}`}>
       {Icon && (
-        <div className={`w-6 h-6 rounded-lg flex items-center justify-center mt-0.5 flex-shrink-0 border border-current/10 ${iconBgVariants[variant]}`}>
+        <div className={`w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0 border border-current/10 ${iconBgVariants[variant]} ${className.includes('items-center') ? '' : 'mt-0.5'}`}>
           <Icon size={12} />
         </div>
       )}
