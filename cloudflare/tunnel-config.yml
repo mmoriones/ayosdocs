@@ -1,9 +1,0 @@
-tunnel: 30dbe7f1-3a82-4e8f-9eb9-d6667b7d63b3
-credentials-file: /etc/cloudflared/creds.json
-
-ingress:
-  - hostname: vps.ayosdocs.com
-    service: http://nginx:80
-  - hostname: ayosdocs.com
-    service: http://nginx:80
-  - service: http_status:404

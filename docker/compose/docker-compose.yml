@@ -41,18 +41,6 @@ services:
     networks:
       - ayosdocs-network
 
-  tunnel:
-    container_name: ayosdocs-tunnel
-    image: cloudflare/cloudflared:latest
-    restart: always
-    command: tunnel --config /etc/cloudflared/config.yml run
-    volumes:
-      - /etc/cloudflared:/etc/cloudflared:ro
-    depends_on:
-      - nginx
-    networks:
-      - ayosdocs-network
-
   mongodb:
     container_name: ayosdocs-db
     image: mongo:latest

@@ -50,8 +50,8 @@ The project is structured as a monorepo-style workspace to separate application 
   - **Database:** MongoDB (via Mongoose) stores user profiles and their progress.
   - **Authentication:** NextAuth.js with Google Provider managed through `app/src/app/api/auth/`.
 - **Documentation (`/docs`):** Project-wide documentation, architecture diagrams, and runbooks.
-- **Infrastructure (`/infra`):** Terraform and Ansible configurations (Planned).
-- **Docker (`/docker`):** Orchestration and monitoring configurations (Planned).
+- **Infrastructure (`/infra`):** Terraform and Ansible configurations.
+- **Docker (`/docker`):** Orchestration and monitoring configurations.
 
 ## Core Technologies
 

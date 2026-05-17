@@ -45,9 +45,13 @@
 - ~~[X] **Guide Management:** Remove "Related Guides" section from `.md` files (handle dynamically).~~
 - [ ] **Versioning:** Track guide update dates in frontmatter or database.
 - [ ] **Mail:** Integrate **Zoho Mail** for communications.
+- [ ] **Monitoring Alerts:** Configure **Alertmanager** with Zoho SMTP credentials for system notifications.
+- [ ] **Grafana Dashboards:** Set up and configure dashboards for App performance, Docker container health, and Host metrics.
+- [ ] **SSL Security:** Implement **Cloudflare Origin Certificates** and switch to **Full (Strict)** SSL mode for end-to-end encryption.
 - [ ] **Deployment:**
-    - [ ] Dockerize the application.
-    - [ ] Setup CI/CD pipelines.
+
+    ~~- [ ] Dockerize the application.~~
+    ~~- [ ] Setup CI/CD pipelines.~~
 
 ## 🐛 Bugs & Fixes
 - ~~[X] **AuthModal:** Fix bug where AuthModal continues to show after successful login.~~

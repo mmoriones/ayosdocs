@@ -1,108 +1,91 @@
 # 🚀 AyosDocs Deployment Guide
 
-This guide covers how to provision and deploy the AyosDocs stack to a fresh Ubuntu VM or VPS using Ansible and Docker.
+This guide covers how to provision and deploy the AyosDocs stack to a fresh AWS instance using Terraform, Ansible, and Docker.
 
 ---
 
-## 🏗️ Step 1: Local Environment Setup
+## 📋 0. Prerequisites
 
-1.  **Clone the Repository (Local):**
-    First, you must have the code on your local machine to manage configurations and secrets.
-    ```bash
-    git clone https://github.com/your-username/ayosdocs.git
-    cd ayosdocs
-    ```
+Before starting, ensure you have the following ready:
 
-2.  **Install Ansible (Local):**
-    **Ubuntu/Debian:** `sudo apt install ansible`
+### Accounts & Infrastructure
+- **AWS Account:** Active account with permissions to create EC2 instances and Security Groups.
+- **AWS EC2 Key Pair:** Create a key pair (e.g., `ayosdocs-key`) in your target region (default: `ap-southeast-1`). Download the `.pem` file to `~/.ssh/`.
+- **Cloudflare Account:** A domain (e.g., `ayosdocs.com`) managed by Cloudflare.
+- **Cloudflare API Token:** A token with `Zone.DNS:Edit` permissions for your domain.
 
-    **Install Required Collections:**
-    ```bash
-    ansible-galaxy collection install community.general
-    ```
-
-3.  **Secrets Management (Ansible Vault):**
-    AyosDocs uses a modular secrets system managed via Ansible Vault in `infra/ansible/vars/secrets.yml`. 
-
-    **Structure of `secrets.yml`:**
-    - `vault_global_shared_env`: Variables used in all environments (e.g., MongoDB credentials, Google OAuth).
-    - `vault_local_shared_env`: Variables shared between local and tunnel modes.
-    - `vault_local_host`: Local-only variables (e.g., `NEXTAUTH_URL=http://localhost:3000`).
-    - `vault_tunnel_host`: Tunnel-only variables (e.g., `NEXTAUTH_URL=https://your-tunnel.com`).
-    - `vault_server_env`: Production-only overrides.
-
-    **To encrypt for the first time:**
-    ```bash
-    ansible-vault encrypt infra/ansible/vars/secrets.yml
-    ```
-
-    **To edit an already encrypted file:**
-    ```bash
-    ansible-vault edit infra/ansible/vars/secrets.yml
-    ```
-
-4.  **Local Environment Setup (.env files):**
-    After configuring your secrets, generate your local `.env.local` and `.env.tunnel` files:
-    ```bash
-    npm run setup-env
-    ```
-    This script extracts the encrypted variables from the Vault and assembles the environment files for local development.
+### Local Tools
+- **Terraform:** [Install Terraform](https://developer.hashicorp.com/terraform/downloads)
+- **Ansible:** `sudo apt install ansible`
+- **AWS CLI:** [Install & Configure](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) with your credentials.
 
 ---
 
-## 🌐 Step 2: Remote Server Preparation
+## 🏗️ Step 1: Infrastructure Provisioning (Terraform - LOCAL)
 
-1.  **SSH into your server:**
+Use Terraform on your **local machine** to create the AWS EC2 instance and configure the Cloudflare DNS record.
+
+1.  **Navigate to Terraform directory (Local):**
+    ```bash
+    cd infra/terraform
+    ```
+2.  **Configure Variables (Local):**
+    Create a `terraform.tfvars` file (this file is gitignored):
+    ```hcl
+    cloudflare_api_token = "your_token"
+    cloudflare_zone_id   = "your_zone_id"
+    ssh_key_name         = "ayosdocs-key" # Must match your AWS Key Pair name
+    ```
+3.  **Initialize and Apply (Local):**
+    ```bash
+    terraform init
+    terraform apply
+    ```
+    *Note the output `public_ip` for the next step.*
+
+---
+
+## 🛠️ Step 2: Server Configuration (Ansible - LOCAL)
+
+Run these commands from your **local machine**. Ansible will connect to the server via SSH to configure it.
+
+1.  **Configure Inventory (Local):**
+    Edit `infra/ansible/inventory.ini` with your new server IP:
+    ```ini
+    [webservers]
+    your_server_ip ansible_user=ubuntu project_path=/home/ubuntu/ayosdocs ansible_ssh_private_key_file=~/.ssh/ayosdocs-key.pem
+    ```
+2.  **Secrets Management (Local):**
+    AyosDocs uses Ansible Vault in `infra/ansible/vars/secrets.yml`. 
+    ```bash
+    # To edit existing secrets
+    ansible-vault edit infra/ansible/vars/secrets.yml --vault-password-file .vault_pass
+    ```
+3.  **Run the Playbook (Local):**
+    ```bash
+    cd infra/ansible
+    ansible-playbook -i inventory.ini setup-server.yml --ask-vault-pass
+    ```
+
+---
+
+## 🚢 Step 3: Launch Application (REMOTE SERVER)
+
+Once the playbook finishes, SSH into the **remote server** to launch the stack.
+
+1.  **SSH into Server:**
     ```bash
     ssh ubuntu@your_server_ip
     ```
 
-2.  **Configure Passwordless Sudo:**
-    To allow Ansible to run administrative tasks without being prompted for a password, run the following command on the server (replace `ubuntu` with your `ansible_user`):
-    ```bash
-    echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ayosdocs-ansible
-    ```
-
----
-
-## 🤖 Step 3: Automated Provisioning
-
-The Ansible playbook now automates the entire setup, including **cloning and updating the repository** on the remote server.
-
-1.  **Configure Inventory (Local):**
-    Edit `infra/ansible/inventory.ini` on your local machine with the server IP and the **Remote** project path:
-    ```ini
-    [webservers]
-    your_server_ip ansible_user=ubuntu project_path=/home/ubuntu/ayosdocs
-    ```
-
-2.  **Configure Repo URL (Local):**
-    If you are using a fork, ensure the `repo_url` in `infra/ansible/setup-server.yml` points to your repository.
-
-3.  **Run the Master Setup (Local):**
-    This command will install Docker, sync your repository, configure Cloudflared, and deploy your encrypted secrets to the server.
-    ```bash
-    ansible-playbook -i infra/ansible/inventory.ini infra/ansible/setup-server.yml --ask-vault-pass
-    ```
-
----
-
-## 🚢 Step 4: Launch Application
-
-Once the playbook finishes, the server is ready with the latest code and configuration. 
-
-1.  **Configure Image Name (Local):**
-    Ensure your `.env` (managed via Ansible Vault) includes the `IMAGE_NAME` variable pointing to your GHCR repository.
-
 2.  **Start the stack:**
-    On your server terminal:
     ```bash
     cd /home/ubuntu/ayosdocs
     make docker-up
     ```
 
 3.  **Automatic Updates:**
-    The stack includes **Watchtower**. Every 5 minutes, it will check GHCR for a new version of your image. If you push a change to `main`, GitHub Actions will build a new image, and Watchtower will automatically restart your app on the server with the latest version. No manual `git pull` or `docker compose restart` required!
+    The stack includes **Watchtower**. Every day at 3:00 AM, it will check GHCR for a new version of your image. If you push a change to `main`, GitHub Actions will build a new image, and Watchtower will automatically restart your app on the server with the latest version. No manual `git pull` or `docker compose restart` required!
 
 ## 📦 Backup Strategy (Cloudflare R2)
 
@@ -128,22 +111,39 @@ The application includes an automated backup service that runs every day at 3:00
 
 ---
 
-## 🔍 Troubleshooting
+## 📊 Monitoring & Observability
 
-Use these commands on your server to diagnose issues with the stack.
+AyosDocs includes a full observability stack (Prometheus, Grafana, Node Exporter, cAdvisor). For security, Grafana is not exposed to the public internet.
 
+### Accessing the Grafana Dashboard
+To view your metrics and dashboards, use an SSH tunnel:
+
+1.  **Start the SSH Tunnel (from your local machine):**
+    ```bash
+    ssh -i ~/.ssh/ayosdocs-key.pem -L 3000:localhost:3000 ubuntu@your_server_ip
+    ```
+2.  **Open your browser:**
+    Navigate to [http://localhost:3000](http://localhost:3000)
+3.  **Login:**
+    - **User:** `admin`
+    - **Password:** (Set in your `.env` as `GRAFANA_PASSWORD`)
+
+---
+
+## 🏗️ CI/CD Pipeline Flow
+...
 ### 📝 Check Logs
 - **All Services:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f`
 - **Web App:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f app`
 - **Nginx Proxy:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f nginx`
 - **Database:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f mongodb`
-- **Cloudflare Tunnel:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f tunnel`
+- **Observability:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f prometheus grafana`
 - **Watchtower (Auto-updates):** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f watchtower`
 - **Backup Service:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f backup`
 
 ### 🛠️ Diagnostic Commands
 - **Nginx Syntax Check:** `docker exec -it ayosdocs-nginx nginx -t`
 - **MongoDB Shell:** `docker exec -it ayosdocs-db mongosh`
-- **Check Tunnel Config:** `docker exec -it ayosdocs-tunnel cloudflared tunnel info`
 - **Manual Backup Trigger:** `docker exec ayosdocs-backup /scripts/backup.sh`
 - **Restart All Services:** `make docker-down && make docker-up`
+
