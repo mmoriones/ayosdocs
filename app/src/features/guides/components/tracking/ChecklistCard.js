@@ -73,36 +73,40 @@ const ChecklistCard = ({
     }
   });
 
-  useEffect(() => {
-    if (!initialSteps) return;
+  // State synchronization from server/props
+  const [prevSlug, setPrevSlug] = useState(slug);
+  const [prevSavedTasks, setPrevSavedTasks] = useState(savedData?.completedTasks);
 
+  // Sync state if slug changes (switching guides)
+  if (slug !== prevSlug) {
+    setPrevSlug(slug);
+    setSteps(initialSteps || []);
+    setPrevSavedTasks(savedData?.completedTasks);
+  } 
+  // Sync state if server data changes and we aren't currently syncing
+  else if (savedData?.completedTasks !== prevSavedTasks && !saveMutation.isPending) {
+    setPrevSavedTasks(savedData?.completedTasks);
+    
     const completedIndices = savedData?.completedTasks
       ? savedData.completedTasks.split(",").filter(s => s !== "").map(Number)
       : [];
 
-    const nextStepsFromData = initialSteps.map((step, index) => ({
+    const nextStepsFromData = (initialSteps || []).map((step, index) => ({
       ...step,
       completed: completedIndices.includes(index),
     }));
+    
+    // We only update if the current local state is actually different 
+    // from what the server just sent us.
+    const currentLocalIndices = steps
+      .map((s, i) => (s.completed ? i : null))
+      .filter((i) => i !== null)
+      .join(",");
 
-    // CRITICAL FIX: Only overwrite local state if:
-    // 1. We have no steps yet (initial load)
-    // 2. The slug has changed (switching guides)
-    // 3. The server data is DIFFERENT and we aren't currently syncing
-    setSteps(prev => {
-      if (prev.length === 0) return nextStepsFromData;
-      
-      const currentIndices = prev
-        .map((s, i) => (s.completed ? i : null))
-        .filter((i) => i !== null)
-        .join(",");
-        
-      if (savedData?.completedTasks !== currentIndices && !saveMutation.isPending) {
-         return nextStepsFromData;
-      }
-      return prev;
-    });
-  }, [initialSteps, savedData, slug, saveMutation.isPending]);
+    if (savedData?.completedTasks !== currentLocalIndices) {
+      setSteps(nextStepsFromData);
+    }
+  }
 
   const nextStepIndex = steps.findIndex((s) => !s.completed);
   const lastCompletedIndex = nextStepIndex === -1 
