@@ -130,6 +130,20 @@ The application includes an automated backup service that runs every day at 3:00
 
 ## 🔍 Troubleshooting
 
-- **Check Tunnel Status:** `docker compose -f docker/compose/docker-compose.yml logs -f tunnel`
-- **Check Docker Logs:** `docker compose -f docker/compose/docker-compose.yml logs -f`
-- **Nginx Config:** `docker exec -it ayosdocs-nginx nginx -t`
+Use these commands on your server to diagnose issues with the stack.
+
+### 📝 Check Logs
+- **All Services:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f`
+- **Web App:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f app`
+- **Nginx Proxy:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f nginx`
+- **Database:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f mongodb`
+- **Cloudflare Tunnel:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f tunnel`
+- **Watchtower (Auto-updates):** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f watchtower`
+- **Backup Service:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f backup`
+
+### 🛠️ Diagnostic Commands
+- **Nginx Syntax Check:** `docker exec -it ayosdocs-nginx nginx -t`
+- **MongoDB Shell:** `docker exec -it ayosdocs-db mongosh`
+- **Check Tunnel Config:** `docker exec -it ayosdocs-tunnel cloudflared tunnel info`
+- **Manual Backup Trigger:** `docker exec ayosdocs-backup /scripts/backup.sh`
+- **Restart All Services:** `make docker-down && make docker-up`
