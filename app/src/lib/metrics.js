@@ -18,26 +18,28 @@ if (global.prometheusRegistry) {
 }
 
 // Custom Business Metrics
-export const guideViewCounter = new Counter({
+// We check if the metric exists in the registry before creating it 
+// to prevent errors during Next.js build/HMR
+export const guideViewCounter = registry.getSingleMetric('ayosdocs_guide_views_total') || new Counter({
   name: 'ayosdocs_guide_views_total',
   help: 'Total number of times a guide has been viewed',
   labelNames: ['slug'],
   registers: [registry]
 });
 
-export const userTotalGauge = new Gauge({
+export const userTotalGauge = registry.getSingleMetric('ayosdocs_users_total') || new Gauge({
   name: 'ayosdocs_users_total',
   help: 'Total number of registered users',
   registers: [registry]
 });
 
-export const userOnboardedGauge = new Gauge({
+export const userOnboardedGauge = registry.getSingleMetric('ayosdocs_users_onboarded_total') || new Gauge({
   name: 'ayosdocs_users_onboarded_total',
   help: 'Total number of users who completed onboarding',
   registers: [registry]
 });
 
-export const userSignupCounter = new Counter({
+export const userSignupCounter = registry.getSingleMetric('ayosdocs_user_signups_total') || new Counter({
   name: 'ayosdocs_user_signups_total',
   help: 'Total number of new user signups',
   registers: [registry]
