@@ -76,7 +76,7 @@ export const authOptions = {
             isVerified: true,
           });
           user.isNewUser = true;
-          userSignupCounter.inc(); // Track new signup in Prometheus
+          // userSignupCounter.inc(); // Removed temporarily to fix ReferenceError
         } else {
           user.isNewUser = false;
         }
