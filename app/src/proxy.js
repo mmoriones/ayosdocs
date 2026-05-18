@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
  * - Redirects/Blocks /admin access on the main domain.
  * - Internal rewrites admin.ayosdocs.com to the /admin folder.
  */
-export function middleware(request) {
+export function proxy(request) {
   const url = request.nextUrl.clone();
   const host = request.headers.get('host') || '';
   

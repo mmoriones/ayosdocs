@@ -1,5 +1,6 @@
 import { getGuideBySlug, getGuideSlugs, getAllGuides } from '@/lib/guides';
 import { notFound } from 'next/navigation';
+import { guideViewCounter } from '@/lib/metrics';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
