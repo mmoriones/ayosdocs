@@ -58,12 +58,12 @@ Run these commands from your **local machine**. Ansible will connect to the serv
 2.  **Secrets Management (Local):**
     AyosDocs uses Ansible Vault in `infra/ansible/vars/secrets.yml`. 
     ```bash
-    # To edit existing secrets
-    ansible-vault edit infra/ansible/vars/secrets.yml --vault-password-file .vault_pass
+    # To edit secrets
+    make vault-edit
     ```
 3.  **Run the Playbook (Local):**
     ```bash
-    ansible-playbook -i infra/ansible/inventory.ini infra/ansible/setup-server.yml --ask-vault-pass
+    make infra-provision
     ```
 
 ---
@@ -80,7 +80,11 @@ Once the playbook finishes, SSH into the **remote server** to launch the stack.
 2.  **Start the stack:**
     ```bash
     cd /home/ubuntu/ayosdocs
+    # For full observability stack (requires >1GB RAM)
     make docker-up
+
+    # For minimal resource usage (recommended for 1GB RAM instances)
+    make docker-minimal
     ```
 
 3.  **Automatic Updates:**
@@ -133,20 +137,21 @@ Navigate to [http://admin.ayosdocs.com/grafana/](http://admin.ayosdocs.com/grafa
 
 ---
 
-## 🏗️ CI/CD Pipeline Flow
-...
+## 🛠️ Operations & Maintenance
+
 ### 📝 Check Logs
-- **All Services:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f`
-- **Web App:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f app`
-- **Nginx Proxy:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f nginx`
-- **Database:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f mongodb`
-- **Observability:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f prometheus grafana`
-- **Watchtower (Auto-updates):** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f watchtower`
-- **Backup Service:** `docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f backup`
+- **All Services:** `make docker-logs`
+- **Web App:** `make docker-log-app`
+- **Nginx Proxy:** `make docker-log-nginx`
+- **Database:** `make docker-log-mongodb`
+- **Backup Service:** `make docker-log-backup`
+- **Watchtower (Auto-updates):** `make docker-log-watchtower`
+- **Observability:** `make docker-log-prometheus` or `make docker-log-grafana`
 
 ### 🛠️ Diagnostic Commands
 - **Nginx Syntax Check:** `docker exec -it ayosdocs-nginx nginx -t`
 - **MongoDB Shell:** `docker exec -it ayosdocs-db mongosh`
-- **Manual Backup Trigger:** `docker exec ayosdocs-backup /scripts/backup.sh`
-- **Restart All Services:** `make docker-down && make docker-up`
+- **Manual Backup Trigger:** `make backup`
+- **Restart All Services:** `make docker-down && (make docker-up | make docker-minimal)`
+- **Resource Usage:** `docker stats`
 

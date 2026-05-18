@@ -29,6 +29,7 @@
 - ~~[X] **Popular Guides:** Replace UMID Card and Digital TIN ID with PSA Birth Cert and National ID.~~
 - [ ] **Holiday Alert:** Connect to real holiday data.
 - [ ] **ChecklistCard:** Disable "Save Progress" button when no changes are made.
+- [ ] **Authentication:** Sign up using email and verification using OTP or verification link
 
 ## 👤 User Dashboard (My Docs)
 ~~- [ ] **Rename:** Rebrand "User Progress" to **"My Docs"**.~~
