@@ -27,6 +27,7 @@ export const guideViewCounter = registry.getSingleMetric('ayosdocs_guide_views_t
   registers: [registry]
 });
 
+/*
 export const userTotalGauge = registry.getSingleMetric('ayosdocs_users_total') || new Gauge({
   name: 'ayosdocs_users_total',
   help: 'Total number of registered users',
@@ -44,5 +45,6 @@ export const userSignupCounter = registry.getSingleMetric('ayosdocs_user_signups
   help: 'Total number of new user signups',
   registers: [registry]
 });
+*/
 
 export default registry;
