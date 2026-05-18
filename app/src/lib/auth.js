@@ -76,7 +76,6 @@ export const authOptions = {
             isVerified: true,
           });
           user.isNewUser = true;
-          // userSignupCounter.inc(); // Removed temporarily to fix ReferenceError
         } else {
           user.isNewUser = false;
         }

@@ -34,20 +34,28 @@ export default async function AdminPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-          <div className="p-6 bg-gray-700 rounded-xl hover:bg-gray-600 transition-colors cursor-pointer border border-gray-600">
-            <h3 className="text-xl font-bold">User Management</h3>
-            <p className="text-sm text-gray-400 mt-2">Manage accounts and roles.</p>
+          <div className="relative p-6 bg-gray-800/50 rounded-xl border border-gray-700 opacity-60 grayscale-[0.5]">
+            <div className="absolute top-3 right-3 px-2 py-0.5 rounded text-[10px] font-bold bg-gray-700 text-gray-400 uppercase tracking-widest">
+              Coming Soon
+            </div>
+            <h3 className="text-xl font-bold text-gray-500">User Management</h3>
+            <p className="text-sm text-gray-600 mt-2">Manage accounts and roles.</p>
           </div>
-          <div className="p-6 bg-gray-700 rounded-xl hover:bg-gray-600 transition-colors cursor-pointer border border-gray-600">
-            <h3 className="text-xl font-bold">Guide Editor</h3>
-            <p className="text-sm text-gray-400 mt-2">Update and publish new guides.</p>
+          
+          <div className="relative p-6 bg-gray-800/50 rounded-xl border border-gray-700 opacity-60 grayscale-[0.5]">
+            <div className="absolute top-3 right-3 px-2 py-0.5 rounded text-[10px] font-bold bg-gray-700 text-gray-400 uppercase tracking-widest">
+              Coming Soon
+            </div>
+            <h3 className="text-xl font-bold text-gray-500">Guide Editor</h3>
+            <p className="text-sm text-gray-600 mt-2">Update and publish new guides.</p>
           </div>
+
           <a 
             href="/grafana/" 
-            className="p-6 bg-blue-900 rounded-xl hover:bg-blue-800 transition-colors cursor-pointer border border-blue-700"
+            className="p-6 bg-blue-900/40 rounded-xl hover:bg-blue-800/60 transition-all cursor-pointer border border-blue-700/50 group"
           >
-            <h3 className="text-xl font-bold">Grafana Metrics</h3>
-            <p className="text-sm text-blue-200 mt-2">View system performance →</p>
+            <h3 className="text-xl font-bold group-hover:text-blue-200 transition-colors">Grafana Metrics</h3>
+            <p className="text-sm text-blue-300/70 mt-2 group-hover:text-blue-200 transition-colors">View system performance →</p>
           </a>
         </div>
 
