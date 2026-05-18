@@ -1,10 +1,9 @@
 'use client';
 
-import { Bookmark, ChevronRight, Clock, DollarSign, BarChart3, TrendingUp, Eye, ArrowRight } from 'lucide-react';
+import { Bookmark, Clock, DollarSign, Eye, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
-import { getGuideIcon } from '@/lib/guideIcons';
+import { GuideIcon } from '@/lib/guideIcons';
 
 /**
  * Unified GuideCard Component
@@ -24,7 +23,6 @@ const GuideCard = ({
 }) => {
   const router = useRouter();
   const isList = viewMode === 'list';
-  const iconSrc = getGuideIcon(guide.slug, guide.agency);
   
   // Styling based on minimalist aesthetic
   const baseCardClass = `
@@ -43,7 +41,7 @@ const GuideCard = ({
     return (
       <Link href={`/guides/${guide.slug}`} className={`${listCardClass} ${className}`}>
         <div className="w-14 h-14 rounded-lg bg-ctp-base flex items-center justify-center p-2.5 group-hover:bg-ctp-sky-800/5 transition-colors border border-ctp-surface1 shrink-0">
-          <Image src={iconSrc} alt={guide.title} width={36} height={36} className="w-full h-full object-contain" />
+          <GuideIcon slug={guide.slug} agency={guide.agency} className="w-8 h-8 text-ctp-sky-800" strokeWidth={1.5} />
         </div>
 
         <div className="flex-1 min-w-0 py-1">
@@ -127,7 +125,7 @@ const GuideCard = ({
       )}
 
       <div className="mb-5 w-12 h-12 rounded-lg bg-ctp-base flex items-center justify-center p-2.5 group-hover:bg-ctp-sky-800/5 transition-colors border border-ctp-surface1">
-        <Image src={iconSrc} alt={guide.title} width={36} height={36} className="w-full h-full object-contain" />
+        <GuideIcon slug={guide.slug} agency={guide.agency} className="w-7 h-7 text-ctp-sky-800" strokeWidth={1.5} />
       </div>
 
       <div className="flex-1">

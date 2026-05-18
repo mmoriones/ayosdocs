@@ -1,44 +1,77 @@
-/**
- * Mapping of specific guide slugs to their corresponding logos.
- */
-const iconMap = {
-  'nbi-clearance': '/assets/nbi.webp',
-  'passport-appointment': '/assets/dfa.webp',
-  'psa-birth-certificate': '/assets/psa.webp',
-  'psa-cenomar': '/assets/psa.webp',
-  'psa-marriage-certificate': '/assets/psa.webp',
-  'national-id': '/assets/psa.webp',
-  'sss-registration': '/assets/sss.webp',
-  'philhealth-registration': '/assets/philhealth.webp',
-};
+import React from 'react';
+import { 
+  ShieldCheck, 
+  MapPin, 
+  FileText, 
+  CreditCard, 
+  HeartPulse, 
+  Briefcase,
+  FileSearch,
+  Users,
+  Building2,
+  FileCheck,
+  Sticker,
+  UserCheck,
+  Truck,
+  GraduationCap,
+  Scale,
+  Hotel,
+  Passport,
+  BadgeCheck,
+  Globe,
+  Wallet,
+  Landmark,
+  FileStack,
+  Contact2,
+  Plane
+} from 'lucide-react';
 
 /**
- * Mapping of government agencies to their default logos.
+ * Mapping of government agencies to Lucide icons for legal safety.
  */
 const agencyMap = {
-  'NBI': '/assets/nbi.webp',
-  'DFA': '/assets/dfa.webp',
-  'PSA': '/assets/psa.webp',
-  'SSS': '/assets/sss.webp',
-  'PhilHealth': '/assets/philhealth.webp',
+  'NBI': ShieldCheck,
+  'DFA': Globe,
+  'PSA': FileText,
+  'SSS': Landmark,
+  'PhilHealth': HeartPulse,
+  'Pag-IBIG': Hotel,
+  'BIR': Wallet,
+  'LTO': Truck,
+  'DTI': Briefcase,
+  'PRC': GraduationCap,
+  'DOJ': Scale,
+  'POEA': Plane,
+  'OWWA': Users,
+  'COMELEC': UserCheck,
+  'Barangay': MapPin,
+  'Police': ShieldCheck,
+  'Post Office': Contact2,
 };
 
 /**
- * Retrieves the appropriate icon for a guide based on its slug and/or agency.
- * 
- * @param {string} slug - The unique identifier for the guide.
- * @param {string|string[]} [agency] - The agency or agencies associated with the guide.
- * @returns {string} The URL to the icon image.
+ * Renders a Lucide icon based on guide slug and agency.
+ * Using a component approach to satisfy React best practices.
  */
-export const getGuideIcon = (slug, agency) => {
-  if (iconMap[slug]) return iconMap[slug];
+export const GuideIcon = ({ slug, agency, ...props }) => {
+  let IconComponent = FileText;
 
   if (agency) {
     const agencyName = Array.isArray(agency) ? agency[0] : agency;
-    if (agencyMap[agencyName]) return agencyMap[agencyName];
+    if (agencyMap[agencyName]) {
+      IconComponent = agencyMap[agencyName];
+    }
   }
 
-  if (slug.startsWith('psa-')) return '/assets/psa.webp';
+  // Fallback to slug-based detection if agency doesn't match
+  if (IconComponent === FileText) {
+    if (slug.includes('clearance')) IconComponent = FileCheck;
+    else if (slug.includes('registration')) IconComponent = FileSearch;
+    else if (slug.includes('license')) IconComponent = CreditCard;
+    else if (slug.includes('id')) IconComponent = Sticker;
+    else if (slug.includes('permit')) IconComponent = Building2;
+    else if (slug.includes('psa-')) IconComponent = FileStack;
+  }
   
-  return '/assets/notepad.webp';
+  return <IconComponent {...props} />;
 };

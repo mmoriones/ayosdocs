@@ -18,10 +18,9 @@ import {
   MessageSquare,
   Filter
 } from 'lucide-react';
-import { getGuideIcon } from '@/lib/guideIcons';
+import { GuideIcon } from '@/lib/guideIcons';
 import PageHeader from '@/components/ui/PageHeader';
 import HolidayAlert from '@/components/HolidayAlert';
-import Image from 'next/image';
 
 /**
  * OfficesClient Component
@@ -46,7 +45,7 @@ export default function OfficesClient() {
       friendliness: 78,
       queue: 92,
       proTip: "Slots open at midnight. Photocopy services available across the street.",
-      icon: getGuideIcon('passport-appointment'),
+      guideSlug: 'passport-appointment',
       status: 'Regular Hours'
     },
     {
@@ -61,7 +60,7 @@ export default function OfficesClient() {
       friendliness: 82,
       queue: 88,
       proTip: "Apply online first to use the priority lane.",
-      icon: getGuideIcon('psa-birth-certificate'),
+      guideSlug: 'psa-birth-certificate',
       status: 'Regular Hours'
     },
     {
@@ -76,7 +75,7 @@ export default function OfficesClient() {
       friendliness: 70,
       queue: 65,
       proTip: "Go before 8 AM for walk-ins, though online appointment is preferred.",
-      icon: getGuideIcon('nbi-clearance'),
+      guideSlug: 'nbi-clearance',
       status: 'Busy'
     }
   ];
@@ -249,7 +248,7 @@ const OfficeCard = ({ office, router }) => {
       <div className="flex flex-col md:flex-row gap-6 md:items-start">
         <div className="flex md:flex-col items-center gap-4">
           <div className="w-16 h-16 rounded-xl bg-ctp-base flex items-center justify-center p-3.5 group-hover:bg-ctp-sky-800/10 transition-colors border border-ctp-surface1 shrink-0">
-            <Image src={office.icon} alt="" width={40} height={40} className="w-full h-full object-contain" />
+            <GuideIcon slug={office.guideSlug} agency={office.agency} className="w-9 h-9 text-ctp-sky-800" strokeWidth={1.5} />
           </div>
           <span className="px-3 py-1 rounded-lg bg-ctp-surface0 text-ctp-mauve text-[9px] font-bold uppercase tracking-[0.2em] border border-ctp-surface1 whitespace-nowrap">
             {office.agency}

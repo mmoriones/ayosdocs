@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X } from "lucide-react";
 import { searchGuides } from '@/lib/searchGuides';
-import { getGuideIcon } from "@/lib/guideIcons";
-import Image from "next/image";
+import { GuideIcon } from "@/lib/guideIcons";
 
 /**
  * Search input component for finding government guides.
@@ -98,12 +97,11 @@ const SearchBar = ({ guides }) => {
               hover:bg-ctp-mantle active:bg-ctp-surface0`}
             >
               <div className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center p-1.5 shrink-0 shadow-sm">
-                <Image 
-                  src={getGuideIcon(guide.slug, guide.agency)} 
-                  alt={guide.title} 
-                  width={20}
-                  height={20}
-                  className="w-full h-full object-contain" 
+                <GuideIcon 
+                  slug={guide.slug} 
+                  agency={guide.agency} 
+                  className="w-5 h-5 text-ctp-sky-800"
+                  strokeWidth={1.5}
                 />
               </div>
               <div className="flex-1">

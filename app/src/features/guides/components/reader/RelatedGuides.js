@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { getGuideIcon } from "@/lib/guideIcons";
-import Image from "next/image";
+import { GuideIcon } from "@/lib/guideIcons";
 
 /**
  * Component for displaying a list of guides related to the current one.
@@ -27,12 +26,11 @@ const RelatedGuides = ({ currentSlug, category, allGuides }) => {
             className="flex items-center gap-4 p-4 rounded-xl hover:bg-ctp-base transition-all border border-transparent hover:border-ctp-surface1 group shadow-sm"
           >
             <div className="w-10 h-10 shrink-0 bg-ctp-base rounded-lg p-2 flex items-center justify-center group-hover:bg-ctp-mantle transition-colors border border-ctp-surface1">
-              <Image 
-                src={getGuideIcon(g.slug, g.agency)} 
-                alt={g.title}
-                width={32}
-                height={32}
-                className="w-full h-full object-contain" 
+              <GuideIcon 
+                slug={g.slug} 
+                agency={g.agency} 
+                className="w-5 h-5 text-ctp-sky-800"
+                strokeWidth={1.5}
               />
             </div>
             <span className="text-ctp-text text-sm font-semibold group-hover:text-ctp-sky-800 line-clamp-2 tracking-tight">

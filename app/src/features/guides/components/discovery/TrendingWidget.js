@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { getGuideIcon } from '@/lib/guideIcons';
+import { GuideIcon } from '@/lib/guideIcons';
 import { Eye, ArrowRight } from 'lucide-react';
 
 /**
@@ -10,8 +9,6 @@ import { Eye, ArrowRight } from 'lucide-react';
  * A centered, highly visual widget for featuring popular guides on the home page.
  */
 const TrendingWidget = ({ guide, stats }) => {
-  const iconSrc = getGuideIcon(guide.slug, guide.agency);
-  
   return (
     <div className="bg-ctp-base rounded-xl p-6 border border-ctp-surface1 shadow-sm hover:shadow-md hover:border-ctp-surface2 transition-all duration-300 flex flex-col items-center text-center group h-full relative overflow-hidden">
       
@@ -19,14 +16,12 @@ const TrendingWidget = ({ guide, stats }) => {
       <div 
         className="w-16 h-16 rounded-xl flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-300 shadow-sm border border-ctp-surface1 bg-ctp-mantle"
       >
-        <div className="w-8 h-8 relative">
-          <Image 
-            src={iconSrc} 
-            alt={guide.title} 
-            fill 
-            className="object-contain grayscale-[0.2] group-hover:grayscale-0 transition-all" 
-          />
-        </div>
+        <GuideIcon 
+          slug={guide.slug} 
+          agency={guide.agency} 
+          className="w-8 h-8 text-ctp-sky-800 grayscale-[0.2] group-hover:grayscale-0 transition-all" 
+          strokeWidth={1.5}
+        />
       </div>
       
       {/* Content Section */}

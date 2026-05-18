@@ -21,10 +21,9 @@ import TableOfContents from './TableOfContents';
 import MobileBottomNav from './MobileBottomNav';
 import ChecklistModal from './ChecklistModal';
 import RelatedGuides from './RelatedGuides';
-import { getGuideIcon } from '@/lib/guideIcons';
+import { GuideIcon } from '@/lib/guideIcons';
 import Banner from '@/components/ui/Banner';
 import Adsense from '@/components/Adsense';
-import Image from 'next/image';
 
 /**
  * Layout component for the Guide Page.
@@ -182,13 +181,7 @@ const GuidePageLayout = ({
               <header className="p-8 md:p-10 border-b border-ctp-surface1 bg-ctp-mantle/50">
                 <div className="flex flex-col md:flex-row md:items-center gap-8">
                   <div className="p-5 rounded-2xl bg-ctp-base shrink-0 w-fit shadow-sm border border-ctp-surface1">
-                    <Image 
-                      src={getGuideIcon(slug, agency)} 
-                      alt={title}
-                      width={64}
-                      height={64}
-                      className="w-12 h-12 md:w-16 md:h-16 object-contain"
-                    />
+                    <GuideIcon slug={slug} agency={agency} className="w-12 h-12 md:w-16 md:h-16 text-ctp-sky-800" strokeWidth={1} />
                   </div>
                   
                   <div className="space-y-4 flex-1">

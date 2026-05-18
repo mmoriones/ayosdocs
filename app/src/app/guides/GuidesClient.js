@@ -19,12 +19,10 @@ import {
   Building2,
   Filter
 } from 'lucide-react';
-import { getGuideIcon } from '@/lib/guideIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
 import Banner from '@/components/ui/Banner';
 import PageHeader from '@/components/ui/PageHeader';
 import Adsense from '@/components/Adsense';
-import Image from 'next/image';
 
 /**
  * GuidesClient Component

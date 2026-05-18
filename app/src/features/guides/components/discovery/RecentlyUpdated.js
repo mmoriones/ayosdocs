@@ -2,8 +2,7 @@
 
 import { ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { getGuideIcon } from '@/lib/guideIcons';
-import Image from 'next/image';
+import { GuideIcon } from '@/lib/guideIcons';
 
 const updates = [
   {
@@ -52,13 +51,7 @@ const RecentlyUpdated = ({ className = "" }) => {
             `}
           >
             <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center p-2 group-hover:scale-105 transition-transform shrink-0 border border-ctp-surface1">
-              <Image 
-                src={getGuideIcon(update.slug)} 
-                alt={update.title}
-                width={32}
-                height={32}
-                className="w-full h-full object-contain"
-              />
+              <GuideIcon slug={update.slug} className="w-8 h-8 text-ctp-sky-800" strokeWidth={1.5} />
             </div>
 
             <div className="flex-1 min-w-0">

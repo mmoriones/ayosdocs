@@ -3,8 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Bookmark, MoreVertical, Trash2, Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { getGuideIcon } from '@/lib/guideIcons';
-import Image from 'next/image';
+import { GuideIcon } from '@/lib/guideIcons';
 
 /**
  * GuideRowCard Component
@@ -37,7 +36,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete }) => {
     >
       <div className="flex items-center gap-6">
         <div className="w-16 h-16 rounded-lg bg-ctp-mantle flex items-center justify-center p-3 group-hover:scale-105 transition-transform border border-ctp-surface1">
-          <Image src={getGuideIcon(guide.slug, guide.agency)} alt={guide.title} width={40} height={40} className="w-full h-full object-contain" />
+          <GuideIcon slug={guide.slug} agency={guide.agency} className="w-full h-full text-ctp-sky-800" strokeWidth={1.5} />
         </div>
         
         <div className="flex-1 min-w-0">

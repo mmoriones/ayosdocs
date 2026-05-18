@@ -17,9 +17,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';
 import { useToast } from '@/context/ToastContext';
-import { getGuideIcon } from '@/lib/guideIcons';
+import { GuideIcon } from '@/lib/guideIcons';
 import { updateProgressAction } from '@/app/actions/user';
-import Image from 'next/image';
 import axios from 'axios';
 
 /**
@@ -42,7 +41,6 @@ const ChecklistCard = ({
   const queryClient = useQueryClient();
 
   const [steps, setSteps] = useState(initialSteps || []);
-  const icon = getGuideIcon(slug, agency);
 
   const { data: savedData, isLoading: isLoadingProgress } = useQuery({
     queryKey: ['progress', slug],
@@ -208,7 +206,7 @@ const ChecklistCard = ({
             <div className="flex items-start gap-4 w-full">
               {!inGuidePage && (
                 <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 shadow-sm p-3">
-                  <Image src={icon} alt="" width={32} height={32} className="w-full h-full object-contain" />
+                  <GuideIcon slug={slug} agency={agency} className="w-full h-full text-ctp-sky-800" strokeWidth={1.5} />
                 </div>
               )}
               

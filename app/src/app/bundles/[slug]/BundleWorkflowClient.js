@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -16,7 +15,6 @@ import {
   PauseCircle,
   Loader2
 } from 'lucide-react';
-import { getGuideIcon } from '@/lib/guideIcons';
 import { getBundleIcon } from '@/lib/bundleIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
 import { startBundleAction, stopBundleAction } from '@/app/actions/user';
