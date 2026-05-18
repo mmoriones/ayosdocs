@@ -24,6 +24,7 @@ export const authOptions = {
             isVerified: true,
           });
           user.isNewUser = true;
+          userSignupCounter.inc(); // Track new signup in Prometheus
         } else {
           user.isNewUser = false;
         }

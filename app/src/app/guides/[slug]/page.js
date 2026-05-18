@@ -46,6 +46,9 @@ export default async function GuidePage({ params }) {
     notFound();
   }
 
+  // Increment the Prometheus counter for this guide view
+  guideViewCounter.inc({ slug });
+
   return (
     <GuidePageLayout
       title={guide.title}
