@@ -39,10 +39,10 @@ variable "project_name" {
   default     = "ayosdocs"
 }
 
-variable "testing_subdomain" {
-  description = "Subdomain for testing the VPS"
+variable "management_subdomain" {
+  description = "Subdomain for managing the VPS (Backdoor)"
   type        = string
-  default     = "vps"
+  default     = "admin"
 }
 
 variable "ssh_key_name" {

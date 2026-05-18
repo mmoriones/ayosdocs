@@ -113,20 +113,24 @@ The application includes an automated backup service that runs every day at 3:00
 
 ## 📊 Monitoring & Observability
 
-AyosDocs includes a full observability stack (Prometheus, Grafana, Node Exporter, cAdvisor). For security, Grafana is not exposed to the public internet.
+AyosDocs includes a full observability stack (Prometheus, Grafana, Node Exporter, cAdvisor). 
 
 ### Accessing the Grafana Dashboard
-To view your metrics and dashboards, use an SSH tunnel:
 
+#### Option A: Direct via Admin Subdomain (Recommended)
+Navigate to [http://admin.ayosdocs.com/grafana/](http://admin.ayosdocs.com/grafana/)
+
+#### Option B: SSH Tunnel (Secure Backdoor)
 1.  **Start the SSH Tunnel (from your local machine):**
     ```bash
     ssh -i ~/.ssh/ayosdocs-key.pem -L 3000:localhost:3000 ubuntu@your_server_ip
     ```
 2.  **Open your browser:**
     Navigate to [http://localhost:3000](http://localhost:3000)
-3.  **Login:**
-    - **User:** `admin`
-    - **Password:** (Set in your `.env` as `GRAFANA_PASSWORD`)
+
+#### Credentials:
+- **User:** `admin`
+- **Password:** (Set in your vault/env as `GRAFANA_PASSWORD`)
 
 ---
 
