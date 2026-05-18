@@ -89,7 +89,7 @@ services:
       - grafana_data:/var/lib/grafana
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
-      - GF_SERVER_ROOT_URL=%(protocol)s://%(domain)s:%(http_port)s/grafana/
+      - GF_SERVER_ROOT_URL=http://admin.ayosdocs.com/grafana/
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
     networks:
       - ayosdocs-network

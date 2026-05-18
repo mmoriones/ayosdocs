@@ -8,9 +8,11 @@ import { NextResponse } from 'next/server';
 export function middleware(request) {
   const url = request.nextUrl.clone();
   const host = request.headers.get('host') || '';
+  
+  console.log(`[Middleware] Host: ${host}, Path: ${url.pathname}`);
 
   // 1. Logic for admin.ayosdocs.com
-  if (host.startsWith('admin.')) {
+  if (host.includes('admin.ayosdocs.com')) {
     // If the path is just '/', rewrite to internal '/admin'
     // If the path is something else, like '/users', rewrite to '/admin/users'
     if (!url.pathname.startsWith('/admin')) {
