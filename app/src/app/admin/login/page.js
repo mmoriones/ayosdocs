@@ -29,12 +29,12 @@ function LoginForm() {
   // Redirect if already an admin
   useEffect(() => {
     if (status === 'authenticated' && session?.user?.role === 'admin') {
-      router.push('/');
+      router.push('/admin');
     }
   }, [status, session, router]);
 
   const handleGoogleSignIn = () => {
-    signIn('google', { callbackUrl: '/' });
+    signIn('google', { callbackUrl: '/admin' });
   };
 
   return (

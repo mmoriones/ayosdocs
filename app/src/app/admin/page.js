@@ -13,7 +13,7 @@ export default async function AdminPage() {
 
   // Security Check: Redirect to login if not authenticated or not an admin
   if (!session || session.user.role !== 'admin') {
-    redirect('/login');
+    redirect('/admin/login');
   }
 
   return (
@@ -28,7 +28,7 @@ export default async function AdminPage() {
               Welcome to the internal management system.
             </p>
           </div>
-          <Link href="/login" className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm transition-colors border border-gray-600">
+          <Link href="/admin/login" className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm transition-colors border border-gray-600">
             Sign Out
           </Link>
         </div>
