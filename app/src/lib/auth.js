@@ -10,6 +10,58 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  // Support multiple subdomains and proxies
+  trustHost: true,
+  cookies: {
+    sessionToken: {
+      name: `${process.env.NEXTAUTH_URL?.startsWith('https://') ? '__Secure-' : ''}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        domain: '.ayosdocs.com',
+        secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
+      },
+    },
+    callbackUrl: {
+      name: `${process.env.NEXTAUTH_URL?.startsWith('https://') ? '__Secure-' : ''}next-auth.callback-url`,
+      options: {
+        path: '/',
+        domain: '.ayosdocs.com',
+        secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
+      },
+    },
+    csrfToken: {
+      name: `${process.env.NEXTAUTH_URL?.startsWith('https://') ? '__Secure-' : ''}next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        domain: '.ayosdocs.com',
+        secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
+      },
+    },
+    pkceCodeVerifier: {
+      name: `${process.env.NEXTAUTH_URL?.startsWith('https://') ? '__Secure-' : ''}next-auth.pkce.code_verifier`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        domain: '.ayosdocs.com',
+        secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
+      },
+    },
+    state: {
+      name: `${process.env.NEXTAUTH_URL?.startsWith('https://') ? '__Secure-' : ''}next-auth.state`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        domain: '.ayosdocs.com',
+        secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
+      },
+    },
+  },
   callbacks: {
     async signIn({ user, account, profile }) {
       if (account.provider === "google") {
