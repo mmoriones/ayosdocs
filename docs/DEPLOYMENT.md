@@ -63,8 +63,7 @@ Run these commands from your **local machine**. Ansible will connect to the serv
     ```
 3.  **Run the Playbook (Local):**
     ```bash
-    cd infra/ansible
-    ansible-playbook -i inventory.ini setup-server.yml --ask-vault-pass
+    ansible-playbook -i infra/ansible/inventory.ini infra/ansible/setup-server.yml --ask-vault-pass
     ```
 
 ---
