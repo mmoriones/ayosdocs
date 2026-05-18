@@ -42,6 +42,7 @@ export const authOptions = {
       if (dbUser) {
         session.user.id = dbUser._id.toString();
         session.user.onboarded = dbUser.onboarded;
+        session.user.role = dbUser.role;
         session.user.isNewUser = token.isNewUser;
       }
       return session;
