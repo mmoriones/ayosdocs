@@ -9,6 +9,7 @@ import { registerUserAction, checkEmailAction } from "@/app/actions/user";
 
 const AuthModal = ({ isOpen, onClose }) => {
   const { status } = useSession();
+  const { showToast } = useToast();
   const [isExchanging, setIsExchanging] = useState(false);
   const [mode, setMode] = useState('initial'); // 'initial', 'login', 'signup'
   const [showPassword, setShowPassword] = useState(false);
@@ -97,10 +98,19 @@ const AuthModal = ({ isOpen, onClose }) => {
             text: 'It looks like you usually sign in with Google.'
           });
         } else {
+          const isRateLimited = result.error.includes('Too many') || result.error.includes('locked');
           setStatusMessage({
             type: 'error',
             text: result.error === 'CredentialsSignin' ? 'Invalid credentials' : result.error
           });
+          
+          if (isRateLimited) {
+            showToast({
+              type: 'error',
+              title: 'Security Alert',
+              message: result.error
+            });
+          }
         }
       } else {
         // Success handled by useEffect session status
@@ -147,10 +157,19 @@ const AuthModal = ({ isOpen, onClose }) => {
         setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
         setTimeout(() => setMode('login'), 2000);
       } else {
+        const isRateLimited = result.message.includes('Too many');
         setStatusMessage({
           type: 'error',
           text: result.message
         });
+
+        if (isRateLimited) {
+          showToast({
+            type: 'error',
+            title: 'Action Throttled',
+            message: result.message
+          });
+        }
       }
     } catch (error) {
       setStatusMessage({

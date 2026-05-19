@@ -6,6 +6,7 @@ import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { revalidatePath } from "next/cache";
 import { bundles } from "@/data/bundles";
+import { rateLimit } from "@/lib/rate-limit";
 
 /**
  * Server action to check if an email already exists in the database.
@@ -29,6 +30,12 @@ export async function checkEmailAction(email) {
  * Server action to register a new user with email and password.
  */
 export async function registerUserAction(formData) {
+  // Rate limiting
+  const ipLimit = await rateLimit('register', 5);
+  if (!ipLimit.success) {
+    return { success: false, message: "Too many registration attempts. Please try again later." };
+  }
+
   const fullName = formData.get('fullName')?.trim();
   const email = formData.get('email')?.trim().toLowerCase();
   const password = formData.get('password');

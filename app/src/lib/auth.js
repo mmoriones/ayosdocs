@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
+import { rateLimit } from "./rate-limit";
 
 export const authOptions = {
   providers: [
@@ -21,11 +22,23 @@ export const authOptions = {
           throw new Error("Invalid credentials");
         }
 
+        // 1. IP Rate Limiting
+        const ipLimit = await rateLimit('login', 10);
+        if (!ipLimit.success) {
+          throw new Error("Too many login attempts. Please try again later.");
+        }
+
         await connectDB();
-        const user = await User.findOne({ email: credentials.email });
+        const user = await User.findOne({ email: credentials.email.toLowerCase().trim() });
 
         if (!user) {
           throw new Error("Invalid credentials");
+        }
+
+        // 2. Account Lockout Check
+        if (user.lockUntil && user.lockUntil > Date.now()) {
+          const remainingMinutes = Math.ceil((user.lockUntil - Date.now()) / (60 * 1000));
+          throw new Error(`Account temporarily locked. Try again in ${remainingMinutes} minutes.`);
         }
 
         if (!user.password && user.googleAuth) {
@@ -39,7 +52,20 @@ export const authOptions = {
         const isPasswordCorrect = await user.comparePassword(credentials.password);
 
         if (!isPasswordCorrect) {
+          // Increment login attempts
+          user.loginAttempts += 1;
+          if (user.loginAttempts >= 5) {
+            user.lockUntil = new Date(Date.now() + 15 * 60 * 1000); // 15 mins
+          }
+          await user.save();
           throw new Error("Invalid credentials");
+        }
+
+        // Success - Reset attempts
+        if (user.loginAttempts > 0 || user.lockUntil) {
+          user.loginAttempts = 0;
+          user.lockUntil = undefined;
+          await user.save();
         }
 
         return {
