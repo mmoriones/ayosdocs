@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { X, Loader2, Mail, Lock, User as UserIcon, ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
 import { signIn, useSession } from 'next-auth/react';
 import { useToast } from "@/context/ToastContext";
-import { registerUserAction, checkEmailAction } from "@/app/actions/user";
+import { registerUserAction, checkEmailAction, checkRateLimitAction } from "@/app/actions/user";
 
 const AuthModal = ({ isOpen, onClose }) => {
   const { status } = useSession();
@@ -30,26 +30,86 @@ const AuthModal = ({ isOpen, onClose }) => {
     }
   }, [status, isOpen, onClose]);
 
-  // Debounced email check
+  // 1. Pre-check rate limits when modal opens or mode changes
   useEffect(() => {
-    // Only proceed if we're in signup mode and have a potentially valid email
-    if (mode !== 'signup' || !formData.email || !formData.email.includes('@') || emailTaken) {
+    if (!isOpen || mode === 'initial') return;
+
+    const checkLimits = async () => {
+      const action = mode === 'signup' ? 'register' : 'login';
+      const limit = mode === 'signup' ? 3 : 5;
+      
+      try {
+        const result = await checkRateLimitAction(action, limit);
+        if (!result.success) {
+          const resetTime = result.resetTime ? new Date(result.resetTime) : null;
+          if (!resetTime) return;
+
+          const remainingMs = resetTime.getTime() - Date.now();
+          if (remainingMs <= 0) {
+            setStatusMessage(null);
+            return;
+          }
+
+          if (mode === 'signup') {
+            const remainingMinutes = Math.ceil(remainingMs / (60 * 1000));
+            setStatusMessage({
+              type: 'error',
+              text: `Too many registration attempts. Please try again in about ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}.`
+            });
+          } else {
+            const remainingSeconds = Math.ceil(remainingMs / 1000);
+            setStatusMessage({
+              type: 'error',
+              text: `Too many login attempts. Please try again in ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''}.`
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Check rate limit error:", error);
+      }
+    };
+
+    checkLimits();
+  }, [isOpen, mode]);
+
+  // 2. Debounced email check
+  useEffect(() => {
+    // Only proceed if we have a potentially valid email
+    if (!formData.email || !formData.email.includes('@')) {
       return;
     }
 
     const timer = setTimeout(async () => {
       setIsCheckingEmail(true);
-      const result = await checkEmailAction(formData.email);
-      if (result.exists) {
-        setEmailTaken(result.isGoogle ? 'google' : 'email');
-      } else {
-        setEmailTaken(null);
+      try {
+        const result = await checkEmailAction(formData.email);
+        
+        if (mode === 'signup') {
+          if (result.exists) {
+            setEmailTaken(result.isGoogle ? 'google' : 'email');
+          } else {
+            setEmailTaken(null);
+          }
+        } else if (mode === 'login') {
+          if (result.locked) {
+            setStatusMessage({
+              type: 'error',
+              text: result.lockoutMessage
+            });
+          } else {
+            // Only clear if it's currently showing a lockout message for THIS email
+            setStatusMessage(prev => (prev?.text.includes('Account temporarily locked') ? null : prev));
+          }
+        }
+      } catch (err) {
+        console.error("Email check error:", err);
+      } finally {
+        setIsCheckingEmail(false);
       }
-      setIsCheckingEmail(false);
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [formData.email, mode, emailTaken]);
+  }, [formData.email, mode]); // Mode is needed to know whether to check lockout or existence
 
   useEffect(() => {
     if (!isOpen) {
@@ -196,13 +256,42 @@ const AuthModal = ({ isOpen, onClose }) => {
     });
   };
 
-  const changeMode = (newMode) => {
+  const changeMode = async (newMode) => {
     setMode(newMode);
     setStatusMessage(null);
     setEmailTaken(null);
     setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
     setShowPassword(false);
     setShowConfirmPassword(false);
+
+    // Immediate rate limit check
+    if (newMode === 'signup' || newMode === 'login') {
+      const action = newMode === 'signup' ? 'register' : 'login';
+      const limit = newMode === 'signup' ? 3 : 5;
+      
+      try {
+        const result = await checkRateLimitAction(action, limit);
+        if (!result.success) {
+          const remainingMs = result.resetTime ? new Date(result.resetTime).getTime() - Date.now() : 60 * 1000;
+          
+          if (newMode === 'signup') {
+            const remainingMinutes = Math.max(1, Math.ceil(remainingMs / (60 * 1000)));
+            setStatusMessage({
+              type: 'error',
+              text: `Too many registration attempts. Please try again in ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}.`
+            });
+          } else {
+            const remainingSeconds = Math.max(1, Math.ceil(remainingMs / 1000));
+            setStatusMessage({
+              type: 'error',
+              text: `Too many login attempts. Please try again in ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''}.`
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Check rate limit error:", error);
+      }
+    }
   };
 
   const isFormValid = () => {
@@ -281,7 +370,6 @@ const AuthModal = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 pointer-events-none">
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-md animate-in fade-in duration-500 pointer-events-auto"
-        onClick={onClose}
       />
 
       <div className="relative w-full max-w-md bg-ctp-mantle rounded-2xl shadow-2xl border border-ctp-surface1 overflow-hidden animate-slide-down pointer-events-auto">

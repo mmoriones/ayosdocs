@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default async function GuidesPage() {
-  const guides = getAllGuides();
+  const guides = getAllGuides(true);
 
   return (
     <GuidesClient initialGuides={guides} />

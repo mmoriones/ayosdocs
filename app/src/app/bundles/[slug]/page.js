@@ -39,7 +39,7 @@ export default async function BundleWorkflowPage({ params }) {
   }
 
   // Get all guides to pass metadata (title, icons, etc.) to the workflow view
-  const allGuides = getAllGuides();
+  const allGuides = getAllGuides(true);
 
   return (
     <BundleWorkflowClient 

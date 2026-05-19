@@ -25,10 +25,12 @@ export const authOptions = {
         // 1. IP Rate Limiting (Tightened to 5)
         const ipLimit = await rateLimit('login', 5);
         if (!ipLimit.success) {
-          const remainingMs = ipLimit.resetTime ? ipLimit.resetTime.getTime() - Date.now() : 60 * 1000;
+          const resetTime = ipLimit.resetTime ? new Date(ipLimit.resetTime) : new Date(Date.now() + 60000);
+          const remainingMs = resetTime.getTime() - Date.now();
           const remainingSeconds = Math.max(1, Math.ceil(remainingMs / 1000));
-          throw new Error(`Too many login attempts. Please try again in ${remainingSeconds} seconds.`);
+          throw new Error(`Too many login attempts. Please try again in ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''}.`);
         }
+
 
         await connectDB();
         const user = await User.findOne({ email: credentials.email.toLowerCase().trim() });
@@ -39,8 +41,15 @@ export const authOptions = {
 
         // 2. Account Lockout Check
         if (user.lockUntil && user.lockUntil > Date.now()) {
-          const remainingMinutes = Math.ceil((user.lockUntil - Date.now()) / (60 * 1000));
-          throw new Error(`Account temporarily locked. Try again in ${remainingMinutes} minutes.`);
+          const remainingMs = user.lockUntil - Date.now();
+          const remainingSeconds = Math.ceil(remainingMs / 1000);
+          
+          if (remainingSeconds < 120) {
+            throw new Error(`Account temporarily locked. Try again in ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''}.`);
+          }
+          
+          const remainingMinutes = Math.ceil(remainingMs / (60 * 1000));
+          throw new Error(`Account temporarily locked. Try again in ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}.`);
         }
 
         if (!user.password && user.googleAuth) {
@@ -56,8 +65,10 @@ export const authOptions = {
         if (!isPasswordCorrect) {
           // Increment login attempts
           user.loginAttempts += 1;
+          
           if (user.loginAttempts >= 5) {
-            user.lockUntil = new Date(Date.now() + 15 * 60 * 1000); // 15 mins
+            // Fixed 15-minute lockout
+            user.lockUntil = new Date(Date.now() + 15 * 60 * 1000);
           }
           await user.save();
           throw new Error("Invalid credentials");

@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default async function HomePage() {
-  const allGuides = getAllGuides();
+  const allGuides = getAllGuides(true);
 
   return (
     <HomeClient allGuides={allGuides} />

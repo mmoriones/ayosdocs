@@ -34,12 +34,20 @@ export function getGuideBySlug(slug) {
   };
 }
 
-export function getAllGuides() {
+export function getAllGuides(summary = false) {
   const slugs = getGuideSlugs();
   const guides = slugs
     .map((slug) => getGuideBySlug(slug))
     // filter out nulls if any
     .filter(Boolean)
+    // if summary is true, remove the full content to save memory/payload size
+    .map((guide) => {
+      if (summary) {
+        const { content, ...rest } = guide;
+        return rest;
+      }
+      return guide;
+    })
     // sort guides by date or title if needed
     .sort((a, b) => (a.title > b.title ? 1 : -1));
   return guides;

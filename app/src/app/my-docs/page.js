@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default async function MyProgressPage() {
-  const allGuides = getAllGuides();
+  const allGuides = getAllGuides(true);
 
   return (
     <ProgressClient allGuides={allGuides} />

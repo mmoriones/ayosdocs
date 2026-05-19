@@ -6,7 +6,14 @@ import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { revalidatePath } from "next/cache";
 import { bundles } from "@/data/bundles";
-import { rateLimit, resetRateLimit } from "@/lib/rate-limit";
+import { rateLimit, resetRateLimit, getRateLimitInfo } from "@/lib/rate-limit";
+
+/**
+ * Server action to check rate limit status without incrementing.
+ */
+export async function checkRateLimitAction(action, limit) {
+  return await getRateLimitInfo(action, limit);
+}
 
 /**
  * Server action to check if an email already exists in the database.
@@ -21,9 +28,31 @@ export async function checkEmailAction(email) {
   try {
     await connectDB();
     const user = await User.findOne({ email: email.toLowerCase().trim() });
+    
+    if (user && user.lockUntil && user.lockUntil > Date.now()) {
+      const remainingMs = user.lockUntil - Date.now();
+      const remainingSeconds = Math.ceil(remainingMs / 1000);
+      let lockoutMessage = '';
+      
+      if (remainingSeconds < 120) {
+        lockoutMessage = `Account temporarily locked. Try again in ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''}.`;
+      } else {
+        const remainingMinutes = Math.ceil(remainingMs / (60 * 1000));
+        lockoutMessage = `Account temporarily locked. Try again in ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}.`;
+      }
+      
+      return {
+        exists: true,
+        isGoogle: user.googleAuth,
+        locked: true,
+        lockoutMessage
+      };
+    }
+
     return { 
       exists: !!user,
-      isGoogle: user?.googleAuth || false
+      isGoogle: user?.googleAuth || false,
+      locked: false
     };
   } catch (error) {
     return { exists: false };
@@ -104,9 +133,6 @@ export async function registerUserAction(formData) {
       googleAuth: false,
       isVerified: false,
     });
-
-    // Reset rate limit on success
-    await resetRateLimit('register');
 
     return { success: true, message: "Account created successfully! You can now sign in." };
   } catch (error) {

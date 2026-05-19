@@ -41,7 +41,7 @@ export async function generateMetadata({ params }) {
 export default async function GuidePage({ params }) {
   const { slug } = await params;
   const guide = getGuideBySlug(slug);
-  const allGuides = getAllGuides();
+  const allGuides = getAllGuides(true);
 
   if (!guide) {
     notFound();
