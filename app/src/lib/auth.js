@@ -22,10 +22,12 @@ export const authOptions = {
           throw new Error("Invalid credentials");
         }
 
-        // 1. IP Rate Limiting
-        const ipLimit = await rateLimit('login', 10);
+        // 1. IP Rate Limiting (Tightened to 5)
+        const ipLimit = await rateLimit('login', 5);
         if (!ipLimit.success) {
-          throw new Error("Too many login attempts. Please try again later.");
+          const remainingMs = ipLimit.resetTime ? ipLimit.resetTime.getTime() - Date.now() : 60 * 1000;
+          const remainingSeconds = Math.max(1, Math.ceil(remainingMs / 1000));
+          throw new Error(`Too many login attempts. Please try again in ${remainingSeconds} seconds.`);
         }
 
         await connectDB();
