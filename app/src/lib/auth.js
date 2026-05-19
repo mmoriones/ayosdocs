@@ -55,13 +55,15 @@ export const authOptions = {
   trustHost: true,
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    updateAge: 24 * 60 * 60, // 24 hours
   },
   cookies: {
     sessionToken: {
       name: `${process.env.NEXTAUTH_URL?.startsWith('https://') ? '__Secure-' : ''}next-auth.session-token`,
       options: {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'lax', // Lax is usually better for OAuth flows to avoid initial redirect issues
         path: '/',
         domain: process.env.NEXTAUTH_URL?.includes('localhost') ? undefined : '.ayosdocs.com',
         secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
@@ -79,7 +81,7 @@ export const authOptions = {
       name: `${process.env.NEXTAUTH_URL?.startsWith('https://') ? '__Secure-' : ''}next-auth.csrf-token`,
       options: {
         httpOnly: true,
-        sameSite: 'lax',
+        sameSite: 'strict',
         path: '/',
         domain: process.env.NEXTAUTH_URL?.includes('localhost') ? undefined : '.ayosdocs.com',
         secure: process.env.NEXTAUTH_URL?.startsWith('https://'),

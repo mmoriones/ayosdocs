@@ -3,9 +3,16 @@ import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
+import { validateCSRF } from "@/lib/security";
 
 export async function DELETE(request, { params }) {
   try {
+    // CSRF Protection
+    const isCsrfValid = await validateCSRF();
+    if (!isCsrfValid) {
+      return NextResponse.json({ message: "Invalid origin" }, { status: 403 });
+    }
+
     const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
