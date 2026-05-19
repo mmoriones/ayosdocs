@@ -55,6 +55,7 @@
     ~~- [ ] Setup CI/CD pipelines.~~
 
 ## 🐛 Bugs & Fixes
+- [ ] **AuthModal:** Fix browser autofill/autocomplete styling issues (font flicker and background color mismatch).
 - ~~[X] **AuthModal:** Fix bug where AuthModal continues to show after successful login.~~
 - ~~[X] **Clean Content:** Review and remove any legacy references in guide files.~~
 

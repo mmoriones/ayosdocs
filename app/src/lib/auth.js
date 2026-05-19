@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 
@@ -9,9 +10,52 @@ export const authOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Invalid credentials");
+        }
+
+        await connectDB();
+        const user = await User.findOne({ email: credentials.email });
+
+        if (!user) {
+          throw new Error("Invalid credentials");
+        }
+
+        if (!user.password && user.googleAuth) {
+          throw new Error("GoogleAccountOnly");
+        }
+
+        if (!user.password) {
+          throw new Error("Invalid credentials");
+        }
+
+        const isPasswordCorrect = await user.comparePassword(credentials.password);
+
+        if (!isPasswordCorrect) {
+          throw new Error("Invalid credentials");
+        }
+
+        return {
+          id: user._id.toString(),
+          email: user.email,
+          name: user.fullName,
+          image: user.picture,
+        };
+      }
+    }),
   ],
   // Support multiple subdomains and proxies
   trustHost: true,
+  session: {
+    strategy: "jwt",
+  },
   cookies: {
     sessionToken: {
       name: `${process.env.NEXTAUTH_URL?.startsWith('https://') ? '__Secure-' : ''}next-auth.session-token`,
@@ -19,7 +63,7 @@ export const authOptions = {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        domain: '.ayosdocs.com',
+        domain: process.env.NEXTAUTH_URL?.includes('localhost') ? undefined : '.ayosdocs.com',
         secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
       },
     },
@@ -27,7 +71,7 @@ export const authOptions = {
       name: `${process.env.NEXTAUTH_URL?.startsWith('https://') ? '__Secure-' : ''}next-auth.callback-url`,
       options: {
         path: '/',
-        domain: '.ayosdocs.com',
+        domain: process.env.NEXTAUTH_URL?.includes('localhost') ? undefined : '.ayosdocs.com',
         secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
       },
     },
@@ -37,7 +81,7 @@ export const authOptions = {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        domain: '.ayosdocs.com',
+        domain: process.env.NEXTAUTH_URL?.includes('localhost') ? undefined : '.ayosdocs.com',
         secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
       },
     },
@@ -47,7 +91,7 @@ export const authOptions = {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        domain: '.ayosdocs.com',
+        domain: process.env.NEXTAUTH_URL?.includes('localhost') ? undefined : '.ayosdocs.com',
         secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
       },
     },
@@ -57,7 +101,7 @@ export const authOptions = {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        domain: '.ayosdocs.com',
+        domain: process.env.NEXTAUTH_URL?.includes('localhost') ? undefined : '.ayosdocs.com',
         secure: process.env.NEXTAUTH_URL?.startsWith('https://'),
       },
     },
@@ -67,7 +111,9 @@ export const authOptions = {
       if (account.provider === "google") {
         await connectDB();
         const existingUser = await User.findOne({ email: user.email });
+        
         if (!existingUser) {
+          // New user registration via Google
           await User.create({
             fullName: user.name,
             email: user.email,
@@ -77,6 +123,15 @@ export const authOptions = {
           });
           user.isNewUser = true;
         } else {
+          // Existing user (either Google or Email/Password)
+          // If they haven't used Google before, "merge/link" it now
+          if (!existingUser.googleAuth) {
+            existingUser.googleAuth = true;
+            // Refresh name and picture from Google to keep profile up to date
+            if (user.name) existingUser.fullName = user.name;
+            if (user.image) existingUser.picture = user.image;
+            await existingUser.save();
+          }
           user.isNewUser = false;
         }
       }
@@ -93,6 +148,8 @@ export const authOptions = {
       const dbUser = await User.findOne({ email: session.user.email });
       if (dbUser) {
         session.user.id = dbUser._id.toString();
+        session.user.name = dbUser.fullName;
+        session.user.image = dbUser.picture;
         session.user.onboarded = dbUser.onboarded;
         session.user.role = dbUser.role;
         session.user.isNewUser = token.isNewUser;

@@ -24,7 +24,7 @@ const ToastModal = ({ isOpen, type = "success", title, message, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 pointer-events-none">
+    <div className="fixed inset-0 z-[300] flex items-center justify-center p-6 pointer-events-none">
       <div 
         className="absolute inset-0 bg-black/20 backdrop-blur-[2px] pointer-events-auto" 
         onClick={onClose}
