@@ -13,25 +13,79 @@ import {
   ChevronRight,
   Info,
   PauseCircle,
-  Loader2
+  Loader2,
+  ShieldAlert,
+  Lock,
+  Send,
+  CheckCircle
 } from 'lucide-react';
 import { getBundleIcon } from '@/lib/bundleIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
-import { startBundleAction, stopBundleAction } from '@/app/actions/user';
+import { startBundleAction, stopBundleAction, resendVerificationAction } from '@/app/actions/user';
 import { useToast } from '@/context/ToastContext';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { useAuthUI } from '@/components/Providers';
 
 /**
  * BundleWorkflowClient Component
  * Visualizes a sequential roadmap for a requirement bundle.
  */
 export default function BundleWorkflowClient({ bundle, allGuides, initialIsTracked, savedProgress = [] }) {
+  const { data: session, status } = useSession();
+  const { openAuthModal } = useAuthUI();
+  const isLoggedIn = status === 'authenticated';
+  const isVerified = session?.user?.isVerified;
+
   const [isTracked, setIsTracked] = useState(initialIsTracked);
   const [isLoading, setIsLoading] = useState(false);
+  const [isResending, setIsResending] = useState(false);
   const { showToast } = useToast();
   const router = useRouter();
 
+  const handleResendVerification = async () => {
+    setIsResending(true);
+    try {
+      const result = await resendVerificationAction();
+      if (result.success) {
+        showToast({
+          type: 'success',
+          title: 'Verification Sent',
+          message: result.message
+        });
+      } else {
+        showToast({
+          type: 'error',
+          title: 'Error',
+          message: result.message
+        });
+      }
+    } catch (error) {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: 'Failed to resend verification email.'
+      });
+    } finally {
+      setIsResending(false);
+    }
+  };
+
   const handleToggleTracking = async () => {
+    if (!isLoggedIn) {
+      openAuthModal();
+      return;
+    }
+
+    if (!isVerified) {
+      showToast({
+        type: 'warning',
+        title: 'Verification Required',
+        message: 'Please verify your email to track requirement bundles.'
+      });
+      return;
+    }
+
     setIsLoading(true);
     try {
       if (isTracked) {
@@ -138,6 +192,39 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
       </div>
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-12">
+        
+        {isLoggedIn && !isVerified && (
+          <div className="mb-12 animate-shake">
+            <div className="bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 rounded-xl bg-ctp-base border border-ctp-yellow-800/20 flex items-center justify-center text-ctp-yellow-800 shrink-0 shadow-sm">
+                  <ShieldAlert size={28} />
+                </div>
+                <div className="space-y-1 text-center md:text-left">
+                  <h3 className="text-lg font-bold text-ctp-yellow-800 tracking-tight">Tracking Restricted</h3>
+                  <p className="text-sm text-ctp-yellow-800/80 font-medium leading-relaxed">
+                    You can view this roadmap, but syncing progress to your dashboard requires a verified email.
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={handleResendVerification}
+                disabled={isResending}
+                className="px-6 py-2.5 bg-ctp-yellow-800 text-ctp-base rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-md shrink-0 flex items-center gap-2"
+              >
+                {isResending ? (
+                  <>
+                    <Loader2 size={14} className="animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  'Resend Verification'
+                )}
+              </button>
+            </div>
+          </div>
+        )}
+
         <div className="flex flex-col lg:flex-row gap-16">
           
           {/* LEFT CONTENT: WORKFLOW TIMELINE */}
@@ -229,6 +316,26 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
           {/* RIGHT SIDEBAR: BUNDLE STATS & ADVICE */}
           <aside className="w-full lg:w-96 shrink-0 space-y-8">
             <div className="bg-ctp-base rounded-xl p-6 border border-ctp-surface1 shadow-sm space-y-8 sticky top-24">
+              
+              {!isLoggedIn && (
+                <div className="bg-ctp-sky-800 text-ctp-base rounded-xl p-5 space-y-4 shadow-md relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-ctp-base/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+                  <div className="flex items-center gap-3 relative z-10">
+                    <Lock size={20} />
+                    <h4 className="text-xs font-bold uppercase tracking-tight">Sync Progress</h4>
+                  </div>
+                  <p className="text-[11px] font-semibold leading-relaxed relative z-10 opacity-90">
+                    Sign in to track this bundle and save your progress across devices.
+                  </p>
+                  <button 
+                    onClick={openAuthModal}
+                    className="w-full py-2.5 bg-ctp-base text-ctp-sky-800 rounded-lg font-bold text-[11px] uppercase tracking-widest hover:bg-ctp-base/90 transition-all shadow-sm relative z-10"
+                  >
+                    Get Started
+                  </button>
+                </div>
+              )}
+
               <div className="space-y-4">
                 <h3 className="text-xs font-bold text-ctp-text uppercase tracking-wider">Workflow Insights</h3>
                 <div className="space-y-3">

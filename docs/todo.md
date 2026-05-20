@@ -25,8 +25,8 @@
     - [ ] Connect to backend endpoint for update tracking.
 - [ ] **Onboarding:**
     - ~~[X] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").~~
-- [x] Implement user login using email and email verification
-- [x] **Authentication:** Sign up using email and verification using OTP or verification link
+~~- [x] Implement user login using email and email verification~~
+~~- [x] **Authentication:** Sign up using email and verification using OTP or verification link~~
 
 ## 👤 User Dashboard (My Docs)
 ~~- [ ] **Rename:** Rebrand "User Progress" to **"My Docs"**.~~
@@ -44,7 +44,7 @@
 - [ ] **Versioning:** Track guide update dates in frontmatter or database.
 -~~ [x] **Mail:** Integrate **Zoho Mail** for communications.~~
 - [ ] **Forgot Password Flow:** Email infrastructure (setting up a service like Resend or a Gmail SMTP to send the mail) 
-- [x] **Email Verification** Add "guards" to your pages to check if isVerified is true
+- [x] **Email Verification** Add "guards" to pages to check if isVerified is true
 - [ ] **Monitoring Alerts:** Configure **Alertmanager** with Zoho SMTP credentials for system notifications. (inject pass from .env)
 - [ ] **Grafana Dashboards:** Set up and configure dashboards for App performance, Docker container health, and Host metrics.
 - [ ] **SSL Security:** Implement **Cloudflare Origin Certificates** and switch to **Full (Strict)** SSL mode for end-to-end encryption.

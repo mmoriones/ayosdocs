@@ -10,6 +10,7 @@ import {
   Save, 
   Loader2,
   Scan,
+  AlertTriangle,
 } from 'lucide-react';
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
@@ -35,21 +36,23 @@ const ChecklistCard = ({
 }) => {
   const { data: session, status } = useSession();
   const isLoggedIn = status === 'authenticated';
+  const isVerified = session?.user?.isVerified;
   const { openAuthModal } = useAuthUI();
   const { showToast } = useToast();
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const [steps, setSteps] = useState(initialSteps || []);
+  const [isShaking, setIsShaking] = useState(false);
 
   const { data: savedData, isLoading: isLoadingProgress } = useQuery({
     queryKey: ['progress', slug],
     queryFn: async () => {
-      if (!isLoggedIn || !slug || slug === "getting-started") return null;
+      if (!isLoggedIn || !isVerified || !slug || slug === "getting-started") return null;
       const response = await axios.get(`/api/user/get-progress/${slug}`);
       return response.data;
     },
-    enabled: isLoggedIn && !!slug && slug !== "getting-started",
+    enabled: isLoggedIn && isVerified && !!slug && slug !== "getting-started",
   });
 
   const saveMutation = useMutation({
@@ -63,11 +66,6 @@ const ChecklistCard = ({
     },
     onError: (error) => {
       console.error("Save error:", error.message);
-      showToast({
-        type: 'error',
-        title: 'Sync Error',
-        message: 'Failed to sync progress. It will retry on your next action.'
-      });
     }
   });
 
@@ -114,6 +112,18 @@ const ChecklistCard = ({
   const nextStep = nextStepIndex !== -1 ? steps[nextStepIndex] : null;
 
   const handleStepAction = (index) => {
+    if (!isLoggedIn) {
+      openAuthModal();
+      return;
+    }
+
+    // Trigger shake animation and skip action if not verified
+    if (!isVerified) {
+      setIsShaking(true);
+      setTimeout(() => setIsShaking(false), 600);
+      return;
+    }
+
     const isNext = index === nextStepIndex;
     const isLast = index === lastCompletedIndex;
     if (!isNext && !isLast) return;
@@ -127,7 +137,7 @@ const ChecklistCard = ({
 
   // Debounced Auto-save Effect
   useEffect(() => {
-    if (!isLoggedIn || !slug || slug === "getting-started" || !steps.length) return;
+    if (!isLoggedIn || !isVerified || !slug || slug === "getting-started" || !steps.length) return;
 
     // Don't sync on initial load (when savedData is first applied)
     // We only want to sync when the user interacts
@@ -144,7 +154,7 @@ const ChecklistCard = ({
     }, 1000);
 
     return () => clearTimeout(timeout);
-  }, [steps, isLoggedIn, slug, savedData?.completedTasks, saveMutation.mutate]);
+  }, [steps, isLoggedIn, isVerified, slug, savedData?.completedTasks, saveMutation.mutate]);
 
   const completedCount = steps.filter((s) => s.completed).length;
   const totalSteps = steps.length;
@@ -177,7 +187,12 @@ const ChecklistCard = ({
               </h3>
               {isLoggedIn && (
                 <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-ctp-mantle border border-ctp-surface1">
-                  {saveMutation.isPending ? (
+                  {!isVerified ? (
+                    <>
+                      <div className="w-1 h-1 rounded-full bg-ctp-yellow-800" />
+                      <span className="text-[9px] font-bold text-ctp-yellow-800 uppercase tracking-widest">Verify to Sync</span>
+                    </>
+                  ) : saveMutation.isPending ? (
                     <>
                       <Loader2 size={10} className="animate-spin text-ctp-sky-800" />
                       <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest">Syncing</span>
@@ -254,6 +269,24 @@ const ChecklistCard = ({
               />
             </div>
             <span className="text-xs font-semibold shrink-0 tracking-wider text-ctp-sky-800">{progress}%</span>
+          </div>
+        </div>
+      )}
+
+      {isLoggedIn && !isVerified && (
+        <div className={`${(isModal || isBare) ? "px-0" : "px-6"} mt-6 ${isShaking ? 'animate-shake' : ''}`}>
+          <div className="bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 rounded-xl p-4 flex items-center gap-4 transition-all shadow-sm">
+            <div className="w-10 h-10 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-yellow-800 shadow-sm shrink-0 border border-ctp-yellow-800/20">
+              <AlertTriangle size={18} />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-ctp-yellow-800 leading-tight tracking-tight">
+                Verification Required
+              </p>
+              <p className="text-[10px] font-medium text-ctp-yellow-800/70 mt-0.5">
+                Please verify your email to sync and save your progress.
+              </p>
+            </div>
           </div>
         </div>
       )}

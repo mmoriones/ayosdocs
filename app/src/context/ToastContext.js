@@ -20,6 +20,11 @@ export const ToastProvider = ({ children }) => {
       title,
       message
     });
+
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+      setToast(prev => ({ ...prev, isOpen: false }));
+    }, 5000);
   }, []);
 
   const hideToast = useCallback(() => {

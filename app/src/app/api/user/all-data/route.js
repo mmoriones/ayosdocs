@@ -11,6 +11,10 @@ export async function GET() {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
+    if (!session.user.isVerified) {
+      return NextResponse.json({ message: "Account verification required" }, { status: 403 });
+    }
+
     await connectDB();
     const user = await User.findOne({ email: session.user.email });
     if (!user) {

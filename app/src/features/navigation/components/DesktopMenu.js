@@ -10,7 +10,8 @@ import {
   Home, 
   FileText, 
   LayoutGrid, 
-  Building2 
+  Building2,
+  ShieldAlert
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
@@ -31,6 +32,7 @@ const DesktopMenu = ({ variant = 'all' }) => {
   const { openAuthModal } = useAuthUI();
   
   const user = session?.user;
+  const isVerified = user?.isVerified;
 
   const isActive = (path) => {
     if (path === '/') return pathname === '/';
@@ -88,6 +90,9 @@ const DesktopMenu = ({ variant = 'all' }) => {
           }`}
         >
           My Docs
+          {user && !isVerified && (
+            <div className="w-1.5 h-1.5 rounded-full bg-ctp-yellow animate-pulse" />
+          )}
         </Link>
       )}
 
@@ -110,19 +115,31 @@ const DesktopMenu = ({ variant = 'all' }) => {
         <div ref={dropdownRef} className="relative">
           <button
             onClick={() => setIsProfileOpen(!isProfileOpen)}
-            className="flex items-center gap-2 bg-ctp-mantle hover:bg-ctp-surface1 p-1 pr-2.5 rounded-full border border-ctp-surface1 transition-all active:scale-95"
+            className="flex items-center gap-2 bg-ctp-mantle hover:bg-ctp-surface1 p-1 pr-2.5 rounded-full border border-ctp-surface1 transition-all active:scale-95 relative"
           >
             {user.image ? (
-              <Image
-                src={user.image}
-                alt={user.name}
-                width={28}
-                height={28}
-                className="rounded-full border border-ctp-surface1 shadow-xs"
-              />
+              <div className="relative">
+                <Image
+                  src={user.image}
+                  alt={user.name}
+                  width={28}
+                  height={28}
+                  className="rounded-full border border-ctp-surface1 shadow-xs"
+                />
+                {!isVerified && (
+                  <div className="absolute -top-1 -right-1 bg-ctp-yellow rounded-full p-0.5 border border-ctp-mantle text-ctp-base">
+                    <ShieldAlert size={8} strokeWidth={3} />
+                  </div>
+                )}
+              </div>
             ) : (
-              <div className="w-7 h-7 bg-ctp-sky-800 text-white rounded-full flex items-center justify-center text-[10px] font-bold">
+              <div className="w-7 h-7 bg-ctp-sky-800 text-white rounded-full flex items-center justify-center text-[10px] font-bold relative">
                 {user.name?.charAt(0)}
+                {!isVerified && (
+                  <div className="absolute -top-1 -right-1 bg-ctp-yellow rounded-full p-0.5 border border-ctp-mantle text-ctp-base">
+                    <ShieldAlert size={8} strokeWidth={3} />
+                  </div>
+                )}
               </div>
             )}
             <ChevronDown
@@ -149,9 +166,14 @@ const DesktopMenu = ({ variant = 'all' }) => {
                     </div>
                   )}
                   <div className="flex flex-col min-w-0">
-                    <span className="text-sm font-bold text-ctp-text truncate">
-                      {user.name}
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-sm font-bold text-ctp-text truncate">
+                        {user.name}
+                      </span>
+                      {!isVerified && (
+                        <ShieldAlert size={12} className="text-ctp-yellow shrink-0" />
+                      )}
+                    </div>
                     <span className="text-[12px] font-medium text-ctp-subtext1 truncate">
                       {user.email}
                     </span>
@@ -160,6 +182,18 @@ const DesktopMenu = ({ variant = 'all' }) => {
               </div>
 
               <div className="p-1.5 space-y-0.5">
+                {!isVerified && (
+                  <div className="px-3.5 py-2 mb-1 bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 rounded-lg">
+                    <p className="text-[10px] font-bold text-ctp-yellow-800 uppercase tracking-widest flex items-center gap-2">
+                      <ShieldAlert size={10} />
+                      Unverified Account
+                    </p>
+                    <p className="text-[9px] font-medium text-ctp-yellow-800/80 mt-0.5 leading-tight">
+                      Some features are restricted until you verify your email.
+                    </p>
+                  </div>
+                )}
+                
                 <Link
                   href="/my-docs"
                   onClick={() => setIsProfileOpen(false)}

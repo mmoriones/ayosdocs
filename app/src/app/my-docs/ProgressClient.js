@@ -9,7 +9,8 @@ import {
   Filter, 
   ChevronDown, 
   List,
-  ArrowRight
+  ArrowRight,
+  ShieldAlert
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -28,7 +29,7 @@ import axios from 'axios';
 /**
  * ProgressClient Component
  */
-export default function ProgressClient({ allGuides }) {
+export default function ProgressClient({ allGuides, isRestricted }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -45,10 +46,12 @@ export default function ProgressClient({ allGuides }) {
       const response = await axios.get('/api/user/all-data');
       return response.data;
     },
+    enabled: !isRestricted,
   });
 
   const deleteMutation = useMutation({
     mutationFn: async (slug) => {
+      if (isRestricted) throw new Error("Verification required");
       const result = await deleteProgressAction(slug);
       if (!result.success) throw new Error(result.message);
       return result;
@@ -65,12 +68,22 @@ export default function ProgressClient({ allGuides }) {
       showToast({
         type: 'error',
         title: 'Error',
-        message: error.message || 'Failed to remove guide. Please try again.'
+        message: error.message === "Verification required" 
+          ? "Please verify your email to perform this action."
+          : (error.message || 'Failed to remove guide. Please try again.')
       });
     }
   });
 
   const handleDeleteGuide = (slug) => {
+    if (isRestricted) {
+      showToast({
+        type: 'warning',
+        title: 'Verification Required',
+        message: 'Please verify your email to manage your guides.'
+      });
+      return;
+    }
     setSelectedSlug(slug);
     setIsConfirmOpen(true);
   };
@@ -189,6 +202,81 @@ export default function ProgressClient({ allGuides }) {
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="animate-spin text-ctp-sky-800" size={40} />
           <p className="text-ctp-subtext1 font-medium">Loading your dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isRestricted) {
+    return (
+      <div className="min-h-[85vh] bg-ctp-base flex items-center justify-center px-6 py-20 relative overflow-hidden">
+        {/* BACKGROUND DECORATION */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-ctp-sky-800/5 rounded-full blur-3xl -z-10 animate-blob" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-ctp-mauve/5 rounded-full blur-3xl -z-10 animate-blob animation-delay-2000" />
+
+        <div className="max-w-2xl w-full text-center space-y-12">
+          <div className="space-y-6 relative">
+            <div className="flex justify-center relative">
+              <div className="w-24 h-24 rounded-3xl bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 flex items-center justify-center text-ctp-yellow-800 shadow-xl shadow-ctp-yellow-800/5 animate-shake relative z-10">
+                <ShieldAlert size={48} strokeWidth={1.5} />
+              </div>
+              <div className="absolute inset-0 bg-ctp-yellow-800/10 rounded-3xl blur-2xl animate-pulse" />
+            </div>
+            
+            <div className="space-y-3">
+              <h2 className="text-4xl font-black text-ctp-text tracking-tight uppercase">Feature Locked</h2>
+              <p className="text-ctp-subtext1 font-semibold leading-relaxed text-lg max-w-md mx-auto">
+                Your personal government documentation dashboard is waiting. Just one more step to unlock it.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+             {[
+               { icon: List, title: "Progress Sync", desc: "Save across devices" },
+               { icon: ArrowRight, title: "Life Bundles", desc: "Goal-based tracking" },
+               { icon: Loader2, title: "Auto Updates", desc: "Real-time guide info" }
+             ].map((item, i) => (
+               <div key={i} className="p-6 bg-ctp-mantle border border-ctp-surface1 rounded-2xl space-y-3 text-left hover:border-ctp-sky-800/30 transition-all group">
+                 <div className="w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-sky-800 border border-ctp-surface1 shadow-sm group-hover:scale-110 transition-transform">
+                   <item.icon size={20} />
+                 </div>
+                 <div className="space-y-1">
+                   <h4 className="font-bold text-sm text-ctp-text">{item.title}</h4>
+                   <p className="text-[10px] font-medium text-ctp-subtext1 uppercase tracking-wider">{item.desc}</p>
+                 </div>
+               </div>
+             ))}
+          </div>
+
+          <div className="bg-ctp-mantle p-8 rounded-3xl border border-ctp-surface1 space-y-6 relative overflow-hidden group">
+             <div className="absolute top-0 right-0 p-8 opacity-5">
+                <ShieldAlert size={120} />
+             </div>
+             
+             <div className="space-y-2 relative z-10">
+                <p className="text-xs font-bold text-ctp-yellow-800 uppercase tracking-[0.3em]">Next Step</p>
+                <h3 className="text-xl font-bold text-ctp-text">Check your inbox for a verification link</h3>
+                <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed max-w-sm mx-auto">
+                  We sent a link to your email. Click it to instantly unlock your dashboard and start tracking your progress.
+                </p>
+             </div>
+
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
+                <button 
+                  onClick={() => router.push('/')}
+                  className="w-full sm:w-auto px-8 py-4 bg-ctp-sky-800 text-ctp-base rounded-2xl font-bold uppercase tracking-widest text-xs hover:opacity-90 shadow-xl shadow-ctp-sky-800/20 active:scale-95 transition-all"
+                >
+                  Back to Home
+                </button>
+                <button 
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="w-full sm:w-auto px-8 py-4 bg-ctp-base border border-ctp-surface1 text-ctp-text rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-ctp-mantle active:scale-95 transition-all"
+                >
+                  Resend Link
+                </button>
+             </div>
+          </div>
         </div>
       </div>
     );

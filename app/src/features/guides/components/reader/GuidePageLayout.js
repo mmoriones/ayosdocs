@@ -17,6 +17,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import Link from 'next/link';
+import { useToast } from '@/context/ToastContext';
 import ChecklistCard from '../tracking/ChecklistCard';
 import TableOfContents from './TableOfContents';
 import MobileBottomNav from './MobileBottomNav';
@@ -46,7 +47,33 @@ const GuidePageLayout = ({
   const [activeId, setActiveId] = useState("");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeTab, setActiveTab] = useState('checklist');
+  const { showToast } = useToast();
   const observer = useRef(null);
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: `${title} | AyosDocs`,
+        text: `Check out this government guide on AyosDocs: ${title}`,
+        url: window.location.href,
+      }).catch(console.error);
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      showToast({
+        type: 'success',
+        title: 'Link Copied',
+        message: 'Guide URL has been copied to your clipboard.'
+      });
+    }
+  };
+
+  const handleBookmark = () => {
+    showToast({
+      type: 'info',
+      title: 'Guide Bookmarked',
+      message: 'This guide has been saved to your favorites.'
+    });
+  };
 
   const toggleModal = (modalType) => {
     setActiveModal(prev => prev === modalType ? null : modalType);
@@ -163,7 +190,10 @@ const GuidePageLayout = ({
           </div>
 
           {!isSidebarCollapsed && (
-            <button className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-4 flex items-center gap-3 group hover:bg-ctp-surface0 transition-all shadow-sm text-left">
+            <button 
+              onClick={handleBookmark}
+              className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-4 flex items-center gap-3 group hover:bg-ctp-surface0 transition-all shadow-sm text-left w-full"
+            >
               <div className="w-9 h-9 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-sky border border-ctp-surface1 transition-transform group-hover:scale-105">
                 <Bookmark size={18} />
               </div>
@@ -190,10 +220,16 @@ const GuidePageLayout = ({
                         {category || 'GUIDE'}
                       </span>
                       <div className="flex items-center gap-2">
-                        <button className="p-2 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-sky hover:border-ctp-sky/30 transition-all shadow-sm active:scale-95">
+                        <button 
+                          onClick={handleBookmark}
+                          className="p-2 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-sky hover:border-ctp-sky/30 transition-all shadow-sm active:scale-95"
+                        >
                           <Bookmark size={18} />
                         </button>
-                        <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle transition-all shadow-sm active:scale-95 font-bold text-xs">
+                        <button 
+                          onClick={handleShare}
+                          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle transition-all shadow-sm active:scale-95 font-bold text-xs"
+                        >
                           <Share2 size={16} />
                           Share
                         </button>

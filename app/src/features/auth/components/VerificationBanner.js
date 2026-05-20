@@ -54,7 +54,7 @@ export default function VerificationBanner() {
   };
 
   return (
-    <div className="bg-ctp-yellow-800/10 border-b border-ctp-yellow-800/20 py-2.5 px-6 lg:px-8">
+    <div className="bg-ctp-yellow-800/10 border-b border-ctp-yellow-800/20 py-2.5 px-6 lg:px-8 animate-shake">
       <div className="max-w-[1600px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3 text-ctp-yellow-800">
           <AlertTriangle size={18} className="shrink-0" />

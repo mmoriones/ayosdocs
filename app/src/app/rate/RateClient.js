@@ -17,11 +17,15 @@ import {
   ShieldCheck,
   Zap,
   HelpCircle,
-  MessageSquare
+  MessageSquare,
+  Lock,
+  ShieldAlert
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import Banner from '@/components/ui/Banner';
 import { useToast } from '@/context/ToastContext';
+import { useAuthUI } from '@/components/Providers';
 import Image from 'next/image';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
@@ -29,9 +33,9 @@ const STAR_VALUES = [1, 2, 3, 4, 5];
 /**
  * StarRating component for the experience reporting form.
  */
-const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, onHover }) => {
+const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, onHover, disabled }) => {
   return (
-    <div className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-5 flex flex-col items-center text-center shadow-sm hover:border-ctp-surface2 transition-all">
+    <div className={`bg-ctp-mantle border border-ctp-surface1 rounded-xl p-5 flex flex-col items-center text-center shadow-sm transition-all ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-ctp-surface2'}`}>
       <div className="w-10 h-10 rounded-lg bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 mb-3">
         <Icon size={20} />
       </div>
@@ -41,10 +45,11 @@ const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, o
           <button
             key={star}
             type="button"
+            disabled={disabled}
             onClick={() => onClick(category, star)}
-            onMouseEnter={() => onHover(category, star)}
-            onMouseLeave={() => onHover(category, 0)}
-            className="transition-transform active:scale-90"
+            onMouseEnter={() => !disabled && onHover(category, star)}
+            onMouseLeave={() => !disabled && onHover(category, 0)}
+            className={`transition-transform ${!disabled ? 'active:scale-90' : 'cursor-not-allowed'}`}
           >
             <Star
               size={20}
@@ -64,23 +69,24 @@ const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, o
 /**
  * RadioGroup component for the experience reporting form.
  */
-const RadioGroup = ({ label, name, options, value, onChange, tooltip }) => (
-  <div className="py-5 border-b border-ctp-surface1 last:border-0 flex flex-col md:flex-row md:items-center justify-between gap-4">
+const RadioGroup = ({ label, name, options, value, onChange, tooltip, disabled }) => (
+  <div className={`py-5 border-b border-ctp-surface1 last:border-0 flex flex-col md:flex-row md:items-center justify-between gap-4 ${disabled ? 'opacity-50 pointer-events-none' : ''}`}>
     <div className="flex items-center gap-2">
       <label className="text-sm font-semibold text-ctp-text">{label}</label>
       {tooltip && <Info size={14} className="text-ctp-subtext0 cursor-help" />}
     </div>
     <div className="flex flex-wrap items-center gap-4">
       {options.map((option) => (
-        <label key={option.value} className="flex items-center gap-2 cursor-pointer group">
+        <label key={option.value} className={`flex items-center gap-2 group ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
           <div className="relative flex items-center justify-center">
             <input
               type="radio"
               name={name}
               value={option.value}
+              disabled={disabled}
               checked={value === option.value}
               onChange={(e) => onChange(e.target.value)}
-              className="peer appearance-none w-4 h-4 rounded-full border border-ctp-surface2 checked:border-ctp-sky-800 transition-all cursor-pointer bg-ctp-base"
+              className="peer appearance-none w-4 h-4 rounded-full border border-ctp-surface2 checked:border-ctp-sky-800 transition-all cursor-pointer bg-ctp-base disabled:cursor-not-allowed"
             />
             <div className="absolute w-2 h-2 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
           </div>
@@ -99,7 +105,13 @@ const RadioGroup = ({ label, name, options, value, onChange, tooltip }) => (
  */
 export default function RateClient() {
   const router = useRouter();
+  const { status, data: session } = useSession();
+  const { openAuthModal } = useAuthUI();
   const { showToast } = useToast();
+  
+  const isLoggedIn = status === 'authenticated';
+  const isVerified = session?.user?.isVerified;
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   
@@ -129,6 +141,18 @@ export default function RateClient() {
   });
 
   const handleRatingClick = (category, value) => {
+    if (!isLoggedIn) {
+      openAuthModal();
+      return;
+    }
+    if (!isVerified) {
+      showToast({
+        type: 'warning',
+        title: 'Verification Required',
+        message: 'Please verify your email to rate offices.'
+      });
+      return;
+    }
     setFormData(prev => ({
       ...prev,
       ratings: { ...prev.ratings, [category]: value }
@@ -141,6 +165,21 @@ export default function RateClient() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if (!isLoggedIn) {
+      openAuthModal();
+      return;
+    }
+
+    if (!isVerified) {
+      showToast({
+        type: 'warning',
+        title: 'Verification Required',
+        message: 'Your account must be verified to publish reports.'
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     // Simulate API call
@@ -202,17 +241,66 @@ export default function RateClient() {
             <p className="text-ctp-subtext1 text-lg">Help others by providing structured, honest feedback about government offices.</p>
           </div>
           <div className="bg-ctp-mantle border border-ctp-surface1 rounded-xl px-5 py-3 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800">
-              <ShieldCheck size={18} />
+            <div className={`w-9 h-9 rounded-full flex items-center justify-center ${isVerified ? 'bg-ctp-sky-800/10 text-ctp-sky-800 border-ctp-sky-800/20' : 'bg-ctp-yellow-800/10 text-ctp-yellow-800 border-ctp-yellow-800/20'} border`}>
+              {isVerified ? <ShieldCheck size={18} /> : <ShieldAlert size={18} />}
             </div>
             <div>
-              <p className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">Verified Reports</p>
-              <p className="text-[10px] text-ctp-subtext1 font-semibold uppercase tracking-tight">Structured & Moderated</p>
+              <p className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">{isVerified ? 'Verified Reporter' : 'Verification Required'}</p>
+              <p className="text-[10px] text-ctp-subtext1 font-semibold uppercase tracking-tight">{isVerified ? 'Trusted contributor' : 'To prevent spam'}</p>
             </div>
           </div>
         </header>
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {isLoggedIn && !isVerified && (
+          <div className="mb-10">
+            <div className="bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 rounded-xl bg-ctp-base border border-ctp-yellow-800/20 flex items-center justify-center text-ctp-yellow-800 shrink-0 shadow-sm">
+                  <ShieldAlert size={28} />
+                </div>
+                <div className="space-y-1 text-center md:text-left">
+                  <h3 className="text-lg font-bold text-ctp-yellow-800 tracking-tight">Publication Locked</h3>
+                  <p className="text-sm text-ctp-yellow-800/80 font-medium leading-relaxed">
+                    You can fill out the form, but publishing requires a verified email address to ensure community authenticity.
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="px-6 py-2.5 bg-ctp-yellow-800 text-ctp-base rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-md shrink-0"
+              >
+                Verify Email Now
+              </button>
+            </div>
+          </div>
+        )}
+
+        {!isLoggedIn && (
+          <div className="mb-10">
+            <div className="bg-ctp-sky-800 text-ctp-base rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-ctp-base/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
+              <div className="flex items-center gap-5 relative z-10">
+                <div className="w-14 h-14 rounded-xl bg-ctp-base/10 border border-ctp-base/20 flex items-center justify-center text-ctp-base shrink-0">
+                  <Lock size={28} />
+                </div>
+                <div className="space-y-1 text-center md:text-left">
+                  <h3 className="text-lg font-bold uppercase tracking-tight">Sign in to Contribute</h3>
+                  <p className="text-sm text-ctp-base/80 font-semibold">
+                    Join the community to share your government service experiences.
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={openAuthModal}
+                className="px-8 py-3 bg-ctp-base text-ctp-sky-800 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-ctp-base/90 transition-all shadow-xl active:scale-95 shrink-0 relative z-10"
+              >
+                Sign In / Register
+              </button>
+            </div>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-start ${(isLoggedIn && !isVerified) ? '' : (!isLoggedIn ? 'opacity-50 pointer-events-none' : '')}`}>
           
           <div className="lg:col-span-8 space-y-8">
             
@@ -301,6 +389,7 @@ export default function RateClient() {
                   hoverValue={hoverRatings.speed}
                   onClick={handleRatingClick}
                   onHover={handleHoverRating}
+                  disabled={!isLoggedIn}
                 />
                 <StarRating 
                   category="friendliness" 
@@ -310,6 +399,7 @@ export default function RateClient() {
                   hoverValue={hoverRatings.friendliness}
                   onClick={handleRatingClick}
                   onHover={handleHoverRating}
+                  disabled={!isLoggedIn}
                 />
                 <StarRating 
                   category="management" 
@@ -319,6 +409,7 @@ export default function RateClient() {
                   hoverValue={hoverRatings.management}
                   onClick={handleRatingClick}
                   onHover={handleHoverRating}
+                  disabled={!isLoggedIn}
                 />
                 <StarRating 
                   category="cleanliness" 
@@ -328,6 +419,7 @@ export default function RateClient() {
                   hoverValue={hoverRatings.cleanliness}
                   onClick={handleRatingClick}
                   onHover={handleHoverRating}
+                  disabled={!isLoggedIn}
                 />
               </div>
             </section>
@@ -355,6 +447,7 @@ export default function RateClient() {
                   value={formData.appointment}
                   onChange={(val) => setFormData({...formData, appointment: val})}
                   tooltip
+                  disabled={!isLoggedIn}
                 />
                 <RadioGroup 
                   label="Actual Waiting Time" 
@@ -367,6 +460,7 @@ export default function RateClient() {
                   value={formData.waitingTime}
                   onChange={(val) => setFormData({...formData, waitingTime: val})}
                   tooltip
+                  disabled={!isLoggedIn}
                 />
                 <RadioGroup 
                   label="Extra requirements requested?" 
@@ -378,6 +472,7 @@ export default function RateClient() {
                   value={formData.extraRequirements}
                   onChange={(val) => setFormData({...formData, extraRequirements: val})}
                   tooltip
+                  disabled={!isLoggedIn}
                 />
                 <RadioGroup 
                   label="Fixer activity noticeable?" 
@@ -389,6 +484,7 @@ export default function RateClient() {
                   value={formData.fixerActivity}
                   onChange={(val) => setFormData({...formData, fixerActivity: val})}
                   tooltip
+                  disabled={!isLoggedIn}
                 />
               </div>
             </section>
@@ -408,10 +504,11 @@ export default function RateClient() {
                 <textarea 
                   rows="4" 
                   maxLength={500}
+                  disabled={!isLoggedIn}
                   placeholder="Share a pro-tip or detail about your visit... (Max 500 chars)"
                   value={formData.comment}
                   onChange={(e) => setFormData({...formData, comment: e.target.value})}
-                  className="w-full px-6 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-base font-medium focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all resize-none"
+                  className="w-full px-6 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-base font-medium focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all resize-none disabled:opacity-50"
                 />
                 <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-ctp-subtext0 px-2">
                   <span>Honest feedback only</span>
@@ -423,7 +520,7 @@ export default function RateClient() {
           </div>
 
           <div className="lg:col-span-4 sticky top-28 space-y-6">
-            <div className="bg-ctp-sky-800 text-ctp-base rounded-2xl p-8 space-y-8 shadow-md relative overflow-hidden group">
+            <div className={`bg-ctp-sky-800 text-ctp-base rounded-2xl p-8 space-y-8 shadow-md relative overflow-hidden group ${!isVerified ? 'grayscale-[0.5]' : ''}`}>
               <div className="absolute top-0 right-0 w-32 h-32 bg-ctp-base/10 rounded-full -translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-700" />
               
               <div className="relative z-10 space-y-1">
@@ -446,8 +543,8 @@ export default function RateClient() {
 
               <div className="relative z-10 pt-2 space-y-6">
                 <div 
-                  className="flex items-center gap-3 cursor-pointer select-none"
-                  onClick={() => setFormData({...formData, isAnonymous: !formData.isAnonymous})}
+                  className={`flex items-center gap-3 select-none ${!isLoggedIn ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+                  onClick={() => isLoggedIn && setFormData({...formData, isAnonymous: !formData.isAnonymous})}
                 >
                   <div className={`w-5 h-5 rounded border-2 border-ctp-base flex items-center justify-center transition-all ${formData.isAnonymous ? 'bg-ctp-base text-ctp-sky-800' : 'bg-transparent'}`}>
                     {formData.isAnonymous && <CheckCircle2 size={14} strokeWidth={4} />}
@@ -457,10 +554,10 @@ export default function RateClient() {
 
                 <button 
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-ctp-base text-ctp-sky-800 py-4 rounded-xl font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-sm text-sm"
+                  disabled={isSubmitting || !isVerified}
+                  className="w-full bg-ctp-base text-ctp-sky-800 py-4 rounded-xl font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-sm text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? "Processing..." : "Publish Report"}
+                  {isSubmitting ? "Processing..." : (!isVerified ? "Verification Required" : "Publish Report")}
                   <ArrowRight size={18} />
                 </button>
               </div>

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useToast } from "@/context/ToastContext";
 
 /**
@@ -11,8 +12,12 @@ import { useToast } from "@/context/ToastContext";
 export default function VerifiedClient() {
   const router = useRouter();
   const { showToast } = useToast();
+  const { update } = useSession();
 
   useEffect(() => {
+    // Refresh the session to reflect the verified status
+    update();
+
     showToast({
       type: 'success',
       title: 'Email Verified',

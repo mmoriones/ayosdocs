@@ -11,7 +11,8 @@ import {
   Home, 
   FileText, 
   LayoutGrid, 
-  Building2 
+  Building2,
+  ShieldAlert
 } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { useSession, signOut } from "next-auth/react";
@@ -27,6 +28,7 @@ const MobileMenu = () => {
   if (!isMobileMenuOpen) return null;
 
   const user = session?.user;
+  const isVerified = user?.isVerified;
 
   const handleClick = (action) => {
     if (action) action();
@@ -57,22 +59,39 @@ const MobileMenu = () => {
           {user ? (
             <div className="flex items-center gap-3">
               {user.image ? (
-                <Image
-                  src={user.image}
-                  alt={user.name}
-                  width={36}
-                  height={36}
-                  className="rounded-full border border-ctp-surface1 shadow-xs"
-                />
+                <div className="relative">
+                  <Image
+                    src={user.image}
+                    alt={user.name}
+                    width={36}
+                    height={36}
+                    className="rounded-full border border-ctp-surface1 shadow-xs"
+                  />
+                  {!isVerified && (
+                    <div className="absolute -top-1 -right-1 bg-ctp-yellow rounded-full p-0.5 border border-ctp-mantle text-ctp-base">
+                      <ShieldAlert size={10} strokeWidth={3} />
+                    </div>
+                  )}
+                </div>
               ) : (
-                <div className="w-9 h-9 bg-ctp-sky-800 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-sm">
+                <div className="w-9 h-9 bg-ctp-sky-800 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-sm relative">
                   {user.name?.charAt(0)}
+                  {!isVerified && (
+                    <div className="absolute -top-1 -right-1 bg-ctp-yellow rounded-full p-0.5 border border-ctp-mantle text-ctp-base">
+                      <ShieldAlert size={10} strokeWidth={3} />
+                    </div>
+                  )}
                 </div>
               )}
               <div className="flex flex-col min-w-0">
-                <span className="text-sm font-bold text-ctp-text truncate">
-                  {user.name}
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm font-bold text-ctp-text truncate">
+                    {user.name}
+                  </span>
+                  {!isVerified && (
+                    <ShieldAlert size={12} className="text-ctp-yellow shrink-0" />
+                  )}
+                </div>
                 <span className="text-[12px] font-medium text-ctp-subtext1 truncate">
                   {user.email}
                 </span>
@@ -136,10 +155,24 @@ const MobileMenu = () => {
           {user && (
             <div className="space-y-0.5">
               <p className="px-4 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-2 opacity-60">Personal</p>
+              {!isVerified && (
+                <div className="mx-4 mb-3 px-4 py-3 bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 rounded-xl">
+                  <p className="text-[10px] font-bold text-ctp-yellow-800 uppercase tracking-widest flex items-center gap-2">
+                    <ShieldAlert size={12} />
+                    Verify Account
+                  </p>
+                  <p className="text-[11px] font-medium text-ctp-yellow-800/80 mt-1 leading-relaxed">
+                    Personal dashboard and progress sync are locked until verified.
+                  </p>
+                </div>
+              )}
               <Link href="/my-docs" onClick={() => handleClick()} className={linkClass("/my-docs")}>
-                <div className="flex items-center gap-3">
-                  <Image src="/favicon.svg" alt="" width={18} height={18} />
-                  My Docs
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-3">
+                    <Image src="/favicon.svg" alt="" width={18} height={18} />
+                    My Docs
+                  </div>
+                  {!isVerified && <div className="w-2 h-2 rounded-full bg-ctp-yellow animate-pulse" />}
                 </div>
               </Link>
             </div>

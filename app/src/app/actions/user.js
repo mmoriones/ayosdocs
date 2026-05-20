@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { bundles } from "@/data/bundles";
 import { rateLimit, resetRateLimit, getRateLimitInfo } from "@/lib/rate-limit";
 import { sendVerificationEmail } from "@/lib/mail";
@@ -222,6 +223,10 @@ export async function updateProgressAction(guideSlug, completedTasks) {
       return { success: false, message: "Unauthorized" };
     }
 
+    if (!session.user.isVerified) {
+      return { success: false, message: "Account verification required to save progress." };
+    }
+
     await connectDB();
     const user = await User.findOne({ email: session.user.email });
     if (!user) {
@@ -261,6 +266,10 @@ export async function updateOnboardingAction(onboarded) {
       return { success: false, message: "Unauthorized" };
     }
 
+    if (!session.user.isVerified) {
+      return { success: false, message: "Account verification required to update onboarding." };
+    }
+
     await connectDB();
     const user = await User.findOneAndUpdate(
       { email: session.user.email },
@@ -292,6 +301,10 @@ export async function deleteProgressAction(slug) {
       return { success: false, message: "Unauthorized" };
     }
 
+    if (!session.user.isVerified) {
+      return { success: false, message: "Account verification required to remove guides." };
+    }
+
     await connectDB();
     const user = await User.findOne({ email: session.user.email });
     if (!user) {
@@ -320,6 +333,10 @@ export async function startBundleAction(bundleId) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) return { success: false, message: "Unauthorized" };
+
+    if (!session.user.isVerified) {
+      return { success: false, message: "Account verification required to track bundles." };
+    }
 
     await connectDB();
     const user = await User.findOne({ email: session.user.email });
@@ -356,6 +373,10 @@ export async function stopBundleAction(bundleId) {
   try {
     const session = await getServerSession(authOptions);
     if (!session) return { success: false, message: "Unauthorized" };
+
+    if (!session.user.isVerified) {
+      return { success: false, message: "Account verification required to stop tracking bundles." };
+    }
 
     await connectDB();
     const user = await User.findOne({ email: session.user.email });

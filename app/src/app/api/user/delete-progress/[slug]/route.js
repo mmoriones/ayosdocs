@@ -18,6 +18,10 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
+    if (!session.user.isVerified) {
+      return NextResponse.json({ message: "Account verification required" }, { status: 403 });
+    }
+
     const { slug } = await params;
     await connectDB();
 

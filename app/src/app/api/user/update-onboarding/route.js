@@ -18,6 +18,10 @@ export async function POST(request) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
+    if (!session.user.isVerified) {
+      return NextResponse.json({ message: "Account verification required" }, { status: 403 });
+    }
+
     const { onboarded } = await request.json();
     await connectDB();
 
