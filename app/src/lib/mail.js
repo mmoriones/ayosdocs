@@ -48,9 +48,11 @@ export const sendContactEmail = async ({ name, email, message }) => {
  * 
  * @param {string} email - The user's email address.
  * @param {string} token - The verification token.
+ * @param {string} [baseUrl] - The base URL for the verification link (optional).
  */
-export const sendVerificationEmail = async (email, token) => {
-  const confirmLink = `${process.env.NEXTAUTH_URL}/api/auth/verify?token=${token}`;
+export const sendVerificationEmail = async (email, token, baseUrl) => {
+  const base = baseUrl || process.env.NEXTAUTH_URL;
+  const confirmLink = `${base}/api/auth/verify?token=${token}`;
 
   const mailOptions = {
     from: `"AyosDocs" <${process.env.ZOHO_FROM_EMAIL}>`,

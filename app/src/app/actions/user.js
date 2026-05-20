@@ -196,7 +196,10 @@ export async function resendVerificationAction() {
     user.verificationTokenExpires = verificationTokenExpires;
     await user.save();
 
-    await sendVerificationEmail(user.email, verificationToken);
+    const host = (await headers()).get("host");
+    const protocol = host.includes("localhost") ? "http" : "https";
+    const baseUrl = `${protocol}://${host}`;
+    await sendVerificationEmail(user.email, verificationToken, baseUrl);
 
     return { success: true, message: "Verification email sent! Please check your inbox." };
   } catch (error) {
