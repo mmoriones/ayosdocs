@@ -7,6 +7,8 @@ import User from "@/models/User";
 import { revalidatePath } from "next/cache";
 import { bundles } from "@/data/bundles";
 import { rateLimit, resetRateLimit, getRateLimitInfo } from "@/lib/rate-limit";
+import { sendVerificationEmail } from "@/lib/mail";
+import crypto from "crypto";
 
 /**
  * Server action to check rate limit status without incrementing.
@@ -125,6 +127,10 @@ export async function registerUserAction(formData) {
       return { success: false, message: "Email already registered" };
     }
 
+    // Generate verification token
+    const verificationToken = crypto.randomBytes(32).toString("hex");
+    const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
     // Create new user (password will be hashed by pre-save hook)
     const newUser = await User.create({
       fullName,
@@ -132,12 +138,70 @@ export async function registerUserAction(formData) {
       password,
       googleAuth: false,
       isVerified: false,
+      verificationToken,
+      verificationTokenExpires,
     });
 
-    return { success: true, message: "Account created successfully! You can now sign in." };
+    // Send verification email
+    try {
+      await sendVerificationEmail(email, verificationToken);
+    } catch (mailError) {
+      console.error("Failed to send verification email during registration:", mailError);
+      // We still return success because the account was created, 
+      // but the user might need to resend the verification email later.
+    }
+
+    return { 
+      success: true, 
+      message: "Account created successfully! Please check your email to verify your account." 
+    };
   } catch (error) {
     console.error("Register User Action Error:", error);
     return { success: false, message: "Failed to create account. Please try again." };
+  }
+}
+
+/**
+ * Server action to resend the verification email.
+ */
+export async function resendVerificationAction() {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return { success: false, message: "You must be signed in to resend verification." };
+    }
+
+    // Rate limiting for resending email (1 per 2 minutes)
+    const resendLimit = await rateLimit(`resend-verify:${session.user.id}`, 1, 2 * 60 * 1000);
+    if (!resendLimit.success) {
+      return { success: false, message: "Please wait a few minutes before requesting another email." };
+    }
+
+    await connectDB();
+    const user = await User.findOne({ email: session.user.email });
+
+    if (!user) {
+      return { success: false, message: "User not found." };
+    }
+
+    if (user.isVerified) {
+      return { success: false, message: "Account is already verified." };
+    }
+
+    // Generate new token
+    const verificationToken = crypto.randomBytes(32).toString("hex");
+    const verificationTokenExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+    user.verificationToken = verificationToken;
+    user.verificationTokenExpires = verificationTokenExpires;
+    await user.save();
+
+    await sendVerificationEmail(user.email, verificationToken);
+
+    return { success: true, message: "Verification email sent! Please check your inbox." };
+  } catch (error) {
+    console.error("Resend Verification Action Error:", error);
+    return { success: false, message: "Failed to send verification email. Please try again later." };
   }
 }
 

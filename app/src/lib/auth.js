@@ -193,6 +193,7 @@ export const authOptions = {
         session.user.image = dbUser.picture;
         session.user.onboarded = dbUser.onboarded;
         session.user.role = dbUser.role;
+        session.user.isVerified = dbUser.isVerified;
         session.user.isNewUser = token.isNewUser;
       }
       return session;

@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Navbar from "@/features/navigation/components/Navbar";
 import Footer from "@/components/Footer";
 import ClientAuthWrapper from "@/components/ClientAuthWrapper";
+import VerificationBanner from "@/features/auth/components/VerificationBanner";
 
 /**
  * ConditionalLayout Component
@@ -25,6 +26,7 @@ export default function ConditionalLayout({ children }) {
 
   return (
     <>
+      <VerificationBanner />
       <Navbar />
       <main className="flex-1">
         {children}

@@ -215,7 +215,7 @@ const AuthModal = ({ isOpen, onClose }) => {
         });
         // Clear sensitive data but keep email for login
         setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
-        setTimeout(() => setMode('login'), 2000);
+        setTimeout(() => setMode('login'), 5000);
       } else {
         const isRateLimited = result.message.includes('Too many');
         setStatusMessage({
