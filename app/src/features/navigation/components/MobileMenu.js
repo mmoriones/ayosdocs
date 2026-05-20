@@ -14,14 +14,20 @@ import {
   Building2,
   ShieldAlert
 } from "lucide-react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useTheme } from "@/context/ThemeContext";
 import { useSession, signOut } from "next-auth/react";
 import { useAuthUI } from "@/components/Providers";
 import Image from "next/image";
 
+const emptySubscribe = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
+
 const MobileMenu = () => {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const mounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
   const { data: session } = useSession();
   const { isMobileMenuOpen, toggleMobileMenu, openAuthModal } = useAuthUI();
 
@@ -110,7 +116,13 @@ const MobileMenu = () => {
               className="p-2 rounded-full bg-ctp-base text-ctp-subtext1 hover:text-ctp-text transition-colors active:scale-90 border border-ctp-surface1"
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+              {!mounted ? (
+                <div className="w-[18px] h-[18px]" />
+              ) : theme === 'light' ? (
+                <Moon size={18} />
+              ) : (
+                <Sun size={18} />
+              )}
             </button>
             <button 
               onClick={() => toggleMobileMenu(false)}

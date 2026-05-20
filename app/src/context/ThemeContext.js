@@ -1,52 +1,45 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { ThemeProvider as NextThemesProvider, useTheme as useNextTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
-const ThemeContext = createContext();
-
+/**
+ * Custom ThemeProvider wrapper using next-themes.
+ * It handles the attribute switching between Catppuccin themes (latte/mocha).
+ */
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setTimeout(() => setTheme(savedTheme), 0);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTimeout(() => setTheme('dark'), 0);
-    }
-    setTimeout(() => setMounted(true), 0);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    
-    const root = window.document.documentElement;
-    root.classList.remove('latte', 'mocha', 'dark');
-    
-    if (theme === 'dark') {
-      root.classList.add('mocha', 'dark');
-    } else {
-      root.classList.add('latte');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme, mounted]);
-
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-  };
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <NextThemesProvider 
+      attribute="class" 
+      defaultTheme="system" 
+      enableSystem
+      disableTransitionOnChange
+      // Mapping standard themes to Catppuccin flavors used in globals.css
+      value={{
+        light: 'latte',
+        dark: 'mocha'
+      }}
+    >
       {children}
-    </ThemeContext.Provider>
+    </NextThemesProvider>
   );
 };
 
+/**
+ * Custom hook to maintain compatibility with existing codebase
+ * while leveraging next-themes power.
+ */
 export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+  const { theme, setTheme, resolvedTheme } = useNextTheme();
+
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+  };
+
+  return { 
+    theme: resolvedTheme || theme, // Fallback to theme if resolved isn't ready
+    setTheme, 
+    toggleTheme,
+    actualTheme: theme // 'light', 'dark', or 'system'
+  };
 };

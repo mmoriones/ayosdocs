@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "npm run dev -w app",
     "build": "npm run build -w app",
+    "build:tunnel": "npm run build:tunnel -w app",
     "start": "npm run start -w app",
+    "start:tunnel": "npm run start:tunnel -w app",
     "lint": "npm run lint -w app",
     "setup-env": "./scripts/setup-local-env.sh"
   },

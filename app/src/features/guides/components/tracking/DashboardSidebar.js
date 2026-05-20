@@ -119,7 +119,7 @@ const DashboardSidebar = () => {
         <div className="relative z-10 flex flex-col items-center text-center">
           <div className="w-24 h-24 mb-4 relative">
             <div className="absolute inset-0 bg-ctp-mantle/20 rounded-full blur-2xl opacity-50 animate-pulse" />
-            <Image src="/assets/person.webp" alt="" width={96} height={96} className="w-full h-full object-contain relative z-10 drop-shadow-xl" />
+            <Image src="/assets/person.webp" alt="" width={96} height={96} className="w-full h-auto object-contain relative z-10 drop-shadow-xl" />
           </div>
           <h3 className="text-lg font-bold mb-1.5 tracking-tight">Stay on track!</h3>
           <p className="text-ctp-base/90 text-[11px] leading-relaxed mb-6 max-w-[200px] font-medium">

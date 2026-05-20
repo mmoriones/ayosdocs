@@ -66,7 +66,7 @@ const WhySignUp = ({ onSignUp }) => {
           alt="" 
           width={256}
           height={320}
-          className="w-full h-full object-contain object-right-bottom translate-y-8"
+          className="w-full h-auto object-contain object-right-bottom translate-y-8"
         />
       </div>
     </div>
