@@ -146,12 +146,14 @@ const Hero = ({ guides }) => {
           <p className="text-center lg:text-left text-xs font-semibold text-ctp-subtext0 uppercase tracking-[0.2em] opacity-80">
             Guides for primary government agencies
           </p>
-          <div className="flex flex-wrap justify-center lg:justify-between items-center gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-            <Image src="/assets/psa.webp" alt="PSA" width={100} height={36} className="h-6 lg:h-8 w-auto object-contain" />
-            <Image src="/assets/nbi.webp" alt="NBI" width={100} height={36} className="h-6 lg:h-8 w-auto object-contain" />
-            <Image src="/assets/dfa.webp" alt="DFA" width={100} height={36} className="h-6 lg:h-8 w-auto object-contain" />
-            <Image src="/assets/philhealth.webp" alt="PhilHealth" width={120} height={44} className="h-8 lg:h-10 w-auto object-contain" />
-            <Image src="/assets/sss.webp" alt="SSS" width={100} height={36} className="h-6 lg:h-8 w-auto object-contain" />
+          <div className="flex flex-wrap justify-center lg:justify-start items-center gap-x-12 gap-y-6 opacity-60">
+            <span className="text-sm font-bold text-ctp-subtext0 tracking-wider">PSA</span>
+            <span className="text-sm font-bold text-ctp-subtext0 tracking-wider">NBI</span>
+            <span className="text-sm font-bold text-ctp-subtext0 tracking-wider">DFA</span>
+            <span className="text-sm font-bold text-ctp-subtext0 tracking-wider">PHILHEALTH</span>
+            <span className="text-sm font-bold text-ctp-subtext0 tracking-wider">SSS</span>
+            <span className="text-sm font-bold text-ctp-subtext0 tracking-wider">PAG-IBIG</span>
+            <span className="text-sm font-bold text-ctp-subtext0 tracking-wider">BIR</span>
           </div>
         </div>
       </div>

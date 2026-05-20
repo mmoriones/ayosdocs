@@ -1,9 +1,9 @@
 # AyosDocs Sprint Checklist 📋
 
 ## 🎨 Frontend & UI Refinements
-- [ ] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.
+~~- [ ] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.~~
 - [ ] **Branding:** 
-    - [-] Fix logo and add government agency logos. (started)
+    ~~- [-] Fix logo and add government agency logos. (started)~~
     - ~~[X] Add consistent SVGs/Graphics across the platform.(used webp instead)~~
 - [ ] **Mobile Experience:** 
     - ~~[X] Implement Home page Mobile view (refer to `home_wireframe_mobile.png`).~~
@@ -28,7 +28,6 @@
 - [ ] Implement user login using email and email verification
 - ~~[X] **Popular Guides:** Replace UMID Card and Digital TIN ID with PSA Birth Cert and National ID.~~
 - [ ] **Holiday Alert:** Connect to real holiday data.
-- [ ] **ChecklistCard:** Disable "Save Progress" button when no changes are made.
 - [ ] **Authentication:** Sign up using email and verification using OTP or verification link
 
 ## 👤 User Dashboard (My Docs)
@@ -46,6 +45,8 @@
 - ~~[X] **Guide Management:** Remove "Related Guides" section from `.md` files (handle dynamically).~~
 - [ ] **Versioning:** Track guide update dates in frontmatter or database.
 - [ ] **Mail:** Integrate **Zoho Mail** for communications.
+- [ ] **Forgot Password Flow:** Email infrastructure (setting up a service like Resend or a Gmail SMTP to send the mail) 
+- [ ] **Email Verification** Add "guards" to your pages to check if isVerified is true
 - [ ] **Monitoring Alerts:** Configure **Alertmanager** with Zoho SMTP credentials for system notifications.
 - [ ] **Grafana Dashboards:** Set up and configure dashboards for App performance, Docker container health, and Host metrics.
 - [ ] **SSL Security:** Implement **Cloudflare Origin Certificates** and switch to **Full (Strict)** SSL mode for end-to-end encryption.

@@ -13,7 +13,8 @@ import {
   Info,
   List,
   CheckSquare,
-  Settings2
+  Settings2,
+  AlertCircle
 } from 'lucide-react';
 import Link from 'next/link';
 import ChecklistCard from '../tracking/ChecklistCard';
@@ -45,7 +46,6 @@ const GuidePageLayout = ({
   const [activeId, setActiveId] = useState("");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeTab, setActiveTab] = useState('checklist');
-  const [showTip, setShowTip] = useState(true);
   const observer = useRef(null);
 
   const toggleModal = (modalType) => {
@@ -223,17 +223,14 @@ const GuidePageLayout = ({
               </header>
 
               <div className="p-8 md:p-10 lg:p-12">
-                {showTip && (
-                  <Banner
-                    variant="sky"
-                    icon={Info}
-                    title="Tip"
-                    onClose={() => setShowTip(false)}
-                    className="mb-8"
-                  >
-                    Bookmark guides you need and track your progress in <Link href="/my-docs" className="underline font-bold text-ctp-sky hover:text-ctp-sky/80 transition-colors">My Docs</Link>.
-                  </Banner>
-                )}
+                <Banner
+                  variant="orange"
+                  icon={AlertCircle}
+                  title="Legal Disclaimer"
+                  className="mb-8"
+                >
+                  This is a private educational website and is not affiliated with, endorsed by, or sponsored by any government agency.
+                </Banner>
 
                 <div className="min-w-0 prose prose-ctp max-w-none">
                   {children}
