@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
  */
 export const sendContactEmail = async ({ name, email, message }) => {
   const mailOptions = {
-    from: `"${name}" <${process.env.ZOHO_FROM_EMAIL}>`, // Sent via alias
+    from: `"${name}" <${process.env.ZOHO_SUPPORT_EMAIL}>`, // Sent via alias
     to: process.env.ZOHO_USER, // Received by you
     replyTo: email, // Direct reply goes to the user
     subject: `[Contact Form] Message from ${name}`,
@@ -55,7 +55,7 @@ export const sendVerificationEmail = async (email, token, baseUrl) => {
   const confirmLink = `${base}/api/auth/verify?token=${token}`;
 
   const mailOptions = {
-    from: `"AyosDocs" <${process.env.ZOHO_FROM_EMAIL}>`,
+    from: `"AyosDocs" <${process.env.ZOHO_VERIFY_EMAIL}>`,
     to: email,
     subject: "Verify your AyosDocs account",
     html: `

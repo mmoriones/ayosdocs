@@ -85,13 +85,6 @@ The project is structured as a monorepo-style workspace to separate application 
     ```
     You will be prompted for the Vault password. This will create `app/.env.local` and `app/.env.tunnel`.
 
-    **`app/.env.local` (Generated)**
-    ```env
-    NEXTAUTH_URL=http://localhost:3000
-    MONGO_URI=your_mongodb_uri
-    ...
-    ```
-
 ### Running the Project
 
 -   **Development mode (from root):**
