@@ -39,15 +39,15 @@
 ## ⚙️ Backend & Infrastructure
 - [ ] **API Endpoints:**
     - [ ] `/api/guides/recently-updated`
-    - [ ] `/api/contact` (Contact form submission)
+    - [x] `/api/contact` (Contact form submission)
     - [ ] `/api/rate` (office rating submission)
     - [ ] `/api/trending` (trending guides)
 - ~~[X] **Guide Management:** Remove "Related Guides" section from `.md` files (handle dynamically).~~
 - [ ] **Versioning:** Track guide update dates in frontmatter or database.
-- [ ] **Mail:** Integrate **Zoho Mail** for communications.
+-~~ [x] **Mail:** Integrate **Zoho Mail** for communications.~~
 - [ ] **Forgot Password Flow:** Email infrastructure (setting up a service like Resend or a Gmail SMTP to send the mail) 
 - [ ] **Email Verification** Add "guards" to your pages to check if isVerified is true
-- [ ] **Monitoring Alerts:** Configure **Alertmanager** with Zoho SMTP credentials for system notifications.
+- [ ] **Monitoring Alerts:** Configure **Alertmanager** with Zoho SMTP credentials for system notifications. (inject pass from .env)
 - [ ] **Grafana Dashboards:** Set up and configure dashboards for App performance, Docker container health, and Host metrics.
 - [ ] **SSL Security:** Implement **Cloudflare Origin Certificates** and switch to **Full (Strict)** SSL mode for end-to-end encryption.
 - [ ] **Deployment:**

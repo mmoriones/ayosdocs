@@ -36,6 +36,7 @@ echo "---
           {{ vault_local_host }}
           {{ vault_global_shared_env }}
           {{ vault_local_shared_env }}
+          {{ vault_zoho_env }}
         dest: \"../app/.env.local\"
         mode: '0600'
 
@@ -45,6 +46,7 @@ echo "---
           {{ vault_tunnel_host }}
           {{ vault_global_shared_env }}
           {{ vault_local_shared_env }}
+          {{ vault_zoho_env }}
         dest: \"../app/.env.tunnel\"
         mode: '0600'
 " > "$PLAYBOOK_FILE"
