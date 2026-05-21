@@ -1,15 +1,14 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Navbar from "@/features/navigation/components/Navbar";
-import Footer from "@/components/Footer";
+import AppShell from "@/components/layout/AppShell";
 import ClientAuthWrapper from "@/components/ClientAuthWrapper";
 import VerificationBanner from "@/features/auth/components/VerificationBanner";
 
 /**
  * ConditionalLayout Component
  * 
- * This component conditionally renders the Navbar, Footer, and ClientAuthWrapper
+ * This component conditionally renders the new AppShell (Cloudflare-style)
  * based on the current route. It's designed to hide these standard website
  * elements on admin-related pages.
  */
@@ -17,7 +16,6 @@ export default function ConditionalLayout({ children }) {
   const pathname = usePathname();
   
   // Check if current path is an admin page
-  // This includes /admin, /admin/login, and any other sub-routes
   const isAdminPage = pathname?.startsWith('/admin');
 
   if (isAdminPage) {
@@ -25,14 +23,10 @@ export default function ConditionalLayout({ children }) {
   }
 
   return (
-    <>
+    <AppShell>
       <VerificationBanner />
-      <Navbar />
-      <main className="flex-1">
-        {children}
-      </main>
-      <Footer />
+      {children}
       <ClientAuthWrapper />
-    </>
+    </AppShell>
   );
 }

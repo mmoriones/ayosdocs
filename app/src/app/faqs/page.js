@@ -52,7 +52,7 @@ export default function FAQsPage() {
 
         <div className="text-center">
           <p className="text-ctp-subtext1 text-base font-medium">
-            Still have questions? <a href="mailto:contact@ayosdocs.com" className="text-ctp-sky-800 font-bold hover:underline ml-2">Email contact@ayosdocs.com</a>
+            Still have questions? <a href="mailto:support@ayosdocs.com" className="text-ctp-sky-800 font-bold hover:underline ml-2">Email support@ayosdocs.com</a>
           </p>
         </div>
       </div>

@@ -35,6 +35,12 @@ const experiences = [
   }
 ];
 
+/**
+ * Widget displaying community-reported ratings and wait times for offices.
+ * 
+ * @param {Object} props
+ * @param {string} [props.className] - Optional container styling
+ */
 const RecentExperiences = ({ className = "" }) => {
   const router = useRouter();
 
@@ -50,32 +56,24 @@ const RecentExperiences = ({ className = "" }) => {
               ${i !== experiences.length - 1 ? 'border-b border-ctp-surface1' : ''}
             `}
           >
-            <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center p-2 group-hover:scale-105 transition-transform shrink-0 border border-ctp-surface1">
-              <GuideIcon slug={office.slug} className="w-8 h-8 text-ctp-sky-800" strokeWidth={1.5} />
+            <div className="w-9 h-9 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 group-hover:border-ctp-sky-800/30 transition-colors">
+              <GuideIcon slug={office.slug} className="w-5 h-5 text-ctp-sky-800" strokeWidth={2} />
             </div>
 
             <div className="flex-1 min-w-0">
-              <h3 className="text-base font-semibold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
+              <h3 className="text-sm font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
                 {office.name}
               </h3>
-              <div className="flex items-center gap-3 mt-1.5">
-                <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-ctp-yellow/10 border border-ctp-yellow/20">
+              <div className="flex items-center gap-2 mt-1">
+                <div className="flex items-center gap-1">
                   <Star size={10} className="fill-ctp-yellow text-ctp-yellow" />
-                  <span className="text-[11px] font-semibold text-ctp-yellow tracking-wider">{office.rating}</span>
+                  <span className="text-[11px] font-bold text-ctp-text tracking-tight">{office.rating}</span>
                 </div>
-                <span className="text-xs text-ctp-subtext0">•</span>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] font-semibold text-ctp-subtext0 uppercase tracking-wider">Wait:</span>
-                  <span className="text-[12px] font-semibold text-ctp-sky-800 tracking-tight">
-                    {office.waitTime}
-                  </span>
-                </div>
+                <span className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest">• Wait: {office.waitTime}</span>
               </div>
             </div>
 
-            <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-sky-800 transition-all transform group-hover:translate-x-1">
-              <ChevronRight size={18} />
-            </div>
+            <ChevronRight size={14} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all" />
           </div>
         ))}
       </div>

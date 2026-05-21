@@ -5,10 +5,37 @@ import { GuideIcon } from '@/lib/guideIcons';
 import { Eye, ArrowRight } from 'lucide-react';
 
 /**
- * TrendingWidget Component
- * A centered, highly visual widget for featuring popular guides on the home page.
+ * Popular guides widget.
+ * Supports 'default' grid and 'compact' list views.
  */
-const TrendingWidget = ({ guide, stats }) => {
+const TrendingWidget = ({ guide, stats, variant = 'default' }) => {
+  if (variant === 'compact') {
+    return (
+      <Link 
+        href={`/guides/${guide.slug}`}
+        className="flex items-center gap-4 p-3 rounded-xl border border-ctp-surface1 bg-ctp-base hover:bg-ctp-mantle transition-all group"
+      >
+        <div className="w-10 h-10 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0">
+          <GuideIcon 
+            slug={guide.slug} 
+            agency={guide.agency} 
+            className="w-5 h-5 text-ctp-sky-800" 
+            strokeWidth={1.5}
+          />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h4 className="text-sm font-semibold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors">
+            {guide.shortTitle || guide.title}
+          </h4>
+          <p className="text-[10px] text-ctp-subtext0 uppercase tracking-widest font-bold opacity-70">
+            {guide.agency}
+          </p>
+        </div>
+        <ArrowRight size={14} className="text-ctp-subtext1 group-hover:translate-x-1 transition-transform" />
+      </Link>
+    );
+  }
+
   return (
     <div className="bg-ctp-base rounded-xl p-6 border border-ctp-surface1 shadow-sm hover:shadow-md hover:border-ctp-surface2 transition-all duration-300 flex flex-col items-center text-center group h-full relative overflow-hidden">
       
