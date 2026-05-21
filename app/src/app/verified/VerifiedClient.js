@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Home, ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useToast } from "@/context/ToastContext";
 
@@ -26,37 +26,45 @@ export default function VerifiedClient() {
 
     const timer = setTimeout(() => {
       router.push("/");
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timer);
-  }, [router, showToast]);
+  }, [router, showToast, update]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-ctp-base px-4 text-ctp-text">
-      <div className="bg-ctp-mantle border border-ctp-surface1 rounded-2xl shadow-sm p-12 max-w-md w-full text-center">
-        <div className="flex justify-center mb-8">
-          <div className="w-20 h-20 flex items-center justify-center rounded-2xl bg-ctp-sky-800/10 border border-ctp-sky-800/20">
-            <CheckCircle className="text-ctp-sky-800" size={40} strokeWidth={2} />
+    <div className="min-h-screen flex items-center justify-center bg-ctp-base px-6 text-ctp-text">
+      <div className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm p-10 md:p-12 max-w-md w-full text-center space-y-10 relative overflow-hidden group">
+        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(var(--sky-800)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        
+        <div className="space-y-6 relative">
+          <div className="flex justify-center relative">
+            <div className="w-20 h-20 flex items-center justify-center rounded-2xl bg-ctp-green/10 border border-ctp-green/20 text-ctp-green shadow-xl shadow-ctp-green/5 relative z-10">
+              <CheckCircle size={40} strokeWidth={2.5} />
+            </div>
+            <div className="absolute inset-0 bg-ctp-green/10 rounded-2xl blur-3xl animate-pulse" />
+          </div>
+
+          <div className="space-y-2">
+            <h2 className="text-2xl font-bold text-ctp-text tracking-tight uppercase tracking-widest">Email Verified</h2>
+            <p className="text-sm font-medium text-ctp-subtext1 leading-relaxed">
+              Your identity has been confirmed. You now have full access to workspace sync and bundle tracking.
+            </p>
           </div>
         </div>
 
-        <h2 className="text-3xl font-bold text-ctp-text tracking-tight">
-          Email verified
-        </h2>
+        <div className="flex flex-col gap-3 relative z-10 pt-4">
+          <button
+            onClick={() => router.push("/")}
+            className="group w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white font-bold py-3 rounded-lg transition-all shadow-md active:scale-[0.98] text-[10px] uppercase tracking-widest flex items-center justify-center gap-2"
+          >
+            <Home size={14} />
+            Enter My Dashboard
+            <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" strokeWidth={3} />
+          </button>
+        </div>
 
-        <p className="text-[16px] font-medium text-ctp-subtext1 mt-3 mb-10 leading-relaxed">
-          Your account has been successfully verified. You&apos;ll be redirected shortly.
-        </p>
-
-        <button
-          onClick={() => router.push("/")}
-          className="w-full bg-ctp-sky-800 hover:opacity-90 text-ctp-base font-semibold py-3.5 rounded-xl transition-all shadow-sm active:scale-[0.98] text-[14px]"
-        >
-          Go to Home
-        </button>
-
-        <p className="text-[11px] font-semibold text-ctp-subtext0 mt-6 uppercase tracking-widest animate-pulse opacity-60">
-          Redirecting in 3 seconds...
+        <p className="text-[9px] font-bold text-ctp-subtext1 mt-6 uppercase tracking-widest animate-pulse opacity-60">
+          Auto-redirecting shortly...
         </p>
       </div>
     </div>

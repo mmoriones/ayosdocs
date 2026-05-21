@@ -2,7 +2,7 @@ import { LayoutGrid, CheckCircle2, Star, Clock } from 'lucide-react';
 
 /**
  * SummaryStats Component
- * Displays top-level progress statistics in card format.
+ * Displays top-level progress statistics in high-density cards.
  */
 const SummaryStats = ({ stats }) => {
   const statItems = [
@@ -13,59 +13,51 @@ const SummaryStats = ({ stats }) => {
       icon: Clock, 
       color: 'text-ctp-green', 
       bg: 'bg-ctp-green/10',
-      progress: 0
+      border: 'border-ctp-green/20'
     },
     { 
       label: 'In Progress', 
       value: stats.inProgress || 0, 
-      sub: 'Keep going!', 
+      sub: 'Guides tracked', 
       icon: LayoutGrid, 
       color: 'text-ctp-sky-800', 
       bg: 'bg-ctp-sky-800/10',
-      progress: 65 
+      border: 'border-ctp-sky-800/20'
     },
     { 
       label: 'Completed', 
       value: stats.completed || 0, 
-      sub: 'Great job!', 
+      sub: 'All tasks done', 
       icon: CheckCircle2, 
       color: 'text-ctp-mauve', 
       bg: 'bg-ctp-mauve/10',
-      progress: 100
+      border: 'border-ctp-mauve/20'
     },
     { 
       label: 'Favorites', 
       value: stats.favorites || 0, 
-      sub: 'Saved guides', 
+      sub: 'Saved items', 
       icon: Star, 
       color: 'text-ctp-orange', 
       bg: 'bg-ctp-orange/10',
-      progress: 0
+      border: 'border-ctp-orange/20'
     }
   ];
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
       {statItems.map((item) => (
-        <div key={item.label} className="bg-ctp-mantle rounded-xl p-6 border border-ctp-surface1 shadow-sm group hover:shadow-md transition-all">
-          <div className="flex items-start justify-between mb-4">
-            <div className={`p-2.5 rounded-lg ${item.bg} ${item.color}`}>
+        <div key={item.label} className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm group hover:shadow-md transition-all">
+          <div className="flex items-center justify-between mb-4">
+            <div className={`w-10 h-10 rounded-lg ${item.bg} ${item.color} flex items-center justify-center border ${item.border} group-hover:scale-105 transition-transform`}>
               <item.icon size={18} strokeWidth={2.5} />
             </div>
-            <span className="text-2xl font-bold text-ctp-text tracking-tight">{item.value}</span>
+            <span className="text-2xl font-bold text-ctp-text tracking-tight leading-none">{item.value}</span>
           </div>
-          <div>
-            <h4 className="text-xs font-bold text-ctp-text uppercase tracking-wider">{item.label}</h4>
-            <p className="text-xs text-ctp-subtext1 font-medium mt-1 opacity-80">{item.sub}</p>
+          <div className="space-y-1">
+            <h4 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest leading-none">{item.label}</h4>
+            <p className="text-[10px] font-bold text-ctp-subtext0 opacity-60 uppercase tracking-tight">{item.sub}</p>
           </div>
-          {item.progress > 0 && (
-            <div className="mt-5 h-1 w-full bg-ctp-base rounded-full overflow-hidden">
-              <div 
-                className={`h-full ${item.color.replace('text', 'bg')} transition-all duration-1000 ease-out`} 
-                style={{ width: `${item.progress}%` }}
-              />
-            </div>
-          )}
         </div>
       ))}
     </div>

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { Rocket, Construction, ArrowLeft, Timer, Sparkles, ShieldCheck } from 'lucide-react';
+import { Rocket, Construction, Home, ArrowLeft, Timer, Sparkles, ShieldCheck } from 'lucide-react';
 
 /**
  * ComingSoon Page Component
@@ -12,77 +12,74 @@ export default function ComingSoon() {
 
   return (
     <div className="min-h-screen bg-ctp-base flex items-center justify-center px-6 py-20 font-sans text-ctp-text">
-      <div className="max-w-2xl w-full text-center space-y-12">
+      <div className="max-w-xl w-full text-center space-y-12 animate-in fade-in zoom-in-95 duration-500">
         
         <div className="relative">
-          <div className="absolute inset-0 bg-ctp-sky-800/20 blur-3xl rounded-full scale-150 animate-pulse" />
+          <div className="absolute inset-0 bg-ctp-sky-800/10 blur-3xl rounded-full scale-150 animate-pulse" />
           <div className="relative flex justify-center">
-            <div className="w-24 h-24 bg-ctp-mantle rounded-3xl shadow-xl shadow-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 border border-ctp-surface0 relative overflow-hidden group">
+            <div className="w-20 h-20 bg-ctp-mantle rounded-2xl shadow-xl shadow-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 border border-ctp-surface1 relative overflow-hidden group">
               <div className="absolute inset-0 bg-ctp-sky-800/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full" />
-              <Rocket size={48} className="relative z-10 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+              <Rocket size={32} className="relative z-10 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" strokeWidth={1.5} />
             </div>
             
-            <div className="absolute -top-4 -right-4 w-8 h-8 bg-ctp-peach/10 rounded-2xl flex items-center justify-center text-ctp-peach animate-bounce delay-75">
-               <Sparkles size={16} />
-            </div>
-            <div className="absolute -bottom-2 -left-6 w-10 h-10 bg-ctp-mauve/10 rounded-2xl flex items-center justify-center text-ctp-mauve animate-bounce delay-150">
-               <Timer size={20} />
+            <div className="absolute -top-4 -right-4 w-7 h-7 bg-ctp-peach/10 rounded-xl flex items-center justify-center text-ctp-peach animate-bounce delay-75 shadow-sm border border-ctp-peach/20">
+               <Sparkles size={14} />
             </div>
           </div>
         </div>
 
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-full text-ctp-sky-800 text-xs font-bold uppercase tracking-widest mb-4">
-            <Construction size={14} />
-            Feature in Development
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-md text-ctp-sky-800 text-[10px] font-bold uppercase tracking-widest">
+            <Construction size={12} />
+            Workspace Expansion
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-ctp-text tracking-tight leading-tight">
-            We&apos;re building something <span className="text-ctp-sky-800">amazing.</span>
+          <h1 className="text-3xl font-bold text-ctp-text tracking-tight uppercase tracking-widest">
+            Module Under Development
           </h1>
-          <p className="text-ctp-subtext1 text-lg max-w-lg mx-auto leading-relaxed font-medium">
-            Our team is working hard to bring you more powerful features to make your government transactions even easier.
+          <p className="text-ctp-subtext1 text-sm max-w-sm mx-auto leading-relaxed font-medium opacity-90">
+            Our team is activeley building powerful new tools to help you navigate your government documentation journey.
           </p>
-          </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto text-left">
-          <div className="bg-ctp-mantle p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shrink-0">
-               <ShieldCheck size={20} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto text-left">
+          <div className="bg-ctp-mantle p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4 hover:border-ctp-sky-800/30 transition-all group">
+            <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
+               <ShieldCheck size={18} />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-ctp-text mb-1">Coming Next</h3>
-              <p className="text-xs text-ctp-subtext1 leading-relaxed tracking-tight font-semibold">Bundles & Insights</p>
+              <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Coming Next</h3>
+              <p className="text-xs font-bold text-ctp-text leading-tight tracking-tight">Requirement Bundles</p>
             </div>
           </div>
-          <div className="bg-ctp-mantle p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-ctp-peach/10 flex items-center justify-center text-ctp-peach shrink-0">
-               <Timer size={20} />
+          <div className="bg-ctp-mantle p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4 hover:border-ctp-sky-800/30 transition-all group">
+            <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-peach shrink-0 group-hover:scale-105 transition-transform shadow-inner">
+               <Timer size={18} />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-ctp-text mb-1">Timeline</h3>
-              <p className="text-xs text-ctp-subtext1 leading-relaxed tracking-tight font-semibold">Q2 - Q3 2026 Release</p>
+              <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Release Cycle</h3>
+              <p className="text-xs font-bold text-ctp-text leading-tight tracking-tight">Q3 2026 Rollout</p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-          <button 
-            onClick={() => router.back()}
-            className="flex items-center gap-2 px-8 py-3.5 bg-ctp-text text-ctp-base rounded-2xl font-bold text-sm shadow-xl shadow-ctp-text/10 hover:opacity-90 transition-all active:scale-95"
-          >
-            <ArrowLeft size={18} />
-            Go Back
-          </button>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
           <button 
             onClick={() => router.push('/')}
-            className="px-8 py-3.5 bg-ctp-mantle text-ctp-subtext1 border border-ctp-surface0 rounded-2xl font-bold text-sm hover:bg-ctp-surface1 transition-all active:scale-95"
+            className="w-full sm:w-auto group flex items-center justify-center gap-2 px-8 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold text-[10px] uppercase tracking-widest shadow-md hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all"
           >
-            Return Home
+            <Home size={14} />
+            Dashboard
+          </button>
+          <button 
+            onClick={() => router.back()}
+            className="w-full sm:w-auto px-8 py-2.5 bg-ctp-base text-ctp-subtext1 border border-ctp-surface1 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-ctp-mantle hover:text-ctp-text active:scale-[0.98] transition-all shadow-sm"
+          >
+            Previous Page
           </button>
         </div>
 
-        <p className="text-[10px] text-ctp-subtext0 font-bold uppercase tracking-widest pt-8">
-          AyosDocs v1.0 • Roadmap 2026
+        <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-[0.3em] pt-8 opacity-40">
+          AyosDocs Engine v1.0.4
         </p>
       </div>
     </div>

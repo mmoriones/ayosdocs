@@ -54,24 +54,24 @@ export function getAllGuides(summary = false) {
 }
 
 function extractHeadings(markdown) {
+  // Matches both ## and ### if needed, but we'll stick to ## for now as per current design
   const regex = /^##\s+(.*)/gm;
   const matches = [...markdown.matchAll(regex)];
   
   return matches.map((match) => {
-    let text = match[1];
+    const text = match[1].trim();
     
-    // Create ID matching rehype-slug (github-slugger) more accurately
-    // It keeps consecutive dashes if they come from different non-alphanumeric chars
+    // Improved slugify logic to match rehype-slug (github-slugger)
     const id = text
       .toLowerCase()
-      .trim()
-      .replace(/[^\w\s-]/g, '') // Remove most punctuation (like em-dash)
+      .replace(/<[^>]+>/g, '') // Remove HTML tags if any
+      .replace(/[^\w\s-]/g, '') // Remove punctuation
       .replace(/\s+/g, '-')      // Replace spaces with dashes
-      .replace(/^-+|-+$/g, '');  // Trim dashes only from start/end
+      .replace(/-+/g, '-')      // Replace multiple dashes with single
+      .trim();
 
-    // Strip leading numbers for TOC display (e.g., "1. ", "01. ", "1) ", " 1. ")
-    // We only strip if it looks like a list number, preserving "Phase 1"
-    const strippedText = text.replace(/^\s*(\d+[\.\)]\s*)+/, '').trim();
+    // Strip leading numbers for display in the TOC list
+    const strippedText = text.replace(/^(\d+[\.\)]\s*)+/, '').trim();
 
     return { text: strippedText, id };
   });

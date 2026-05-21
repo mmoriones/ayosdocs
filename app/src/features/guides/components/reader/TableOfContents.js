@@ -32,11 +32,13 @@ const TableOfContents = ({ headings, onItemClick, activeId }) => {
             onClick={(e) => {
               e.preventDefault();
               const element = document.getElementById(h.id);
-              const offset = 100; // Increased offset for Next.js header
+              const headerOffset = 90; // Balanced offset for the sticky header
               
               if (element) {
-                const elementPosition = element.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = element.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - headerOffset;
 
                 window.scrollTo({
                   top: offsetPosition,
@@ -57,7 +59,7 @@ const TableOfContents = ({ headings, onItemClick, activeId }) => {
             }`}>
               {String(index + 1).padStart(2, '0')}
             </span>
-            {h.text.replace(/^\s*(\d+[\.\)]\s*)+/, '').trim()}
+            {h.text}
           </a>
         </li>
       ))}

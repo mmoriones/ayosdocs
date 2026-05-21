@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useAuthUI } from '@/components/Providers';
 import { 
   ArrowRight, 
@@ -32,10 +34,55 @@ import Adsense from '@/components/Adsense';
  */
 export default function HomeClient({ allGuides }) {
   const [activeSlug, setActiveSlug] = useState('getting-started');
+  const [officeSearch, setOfficeSearch] = useState('');
   const { data: session, status } = useSession();
   const isLoggedIn = status === 'authenticated';
+  const isVerified = session?.user?.isVerified;
   const { openAuthModal } = useAuthUI();
   const router = useRouter();
+
+  // Fetch comprehensive user data (progress, bundles, etc.)
+  const { data: userData } = useQuery({
+    queryKey: ['userAllData'],
+    queryFn: async () => {
+      const response = await axios.get('/api/user/all-data');
+      return response.data;
+    },
+    enabled: isLoggedIn && isVerified,
+  });
+
+  // Calculate stats based on real progress data
+  const stats = useMemo(() => {
+    if (!userData?.savedProgress) return { active: 0, completed: 0 };
+
+    let active = 0;
+    let completed = 0;
+
+    userData.savedProgress.forEach(progress => {
+      const guide = allGuides.find(g => g.slug === progress.slug);
+      if (!guide || !guide.checklist) return;
+
+      const completedCount = progress.completedTasks 
+        ? progress.completedTasks.split(',').filter(s => s !== "").length 
+        : 0;
+
+      if (completedCount === guide.checklist.length) {
+        completed++;
+      } else if (completedCount > 0) {
+        active++;
+      }
+    });
+
+    return { active, completed };
+  }, [userData, allGuides]);
+
+  // Dynamically find recently updated guides from metadata
+  const recentlyUpdatedGuides = useMemo(() => {
+    return [...allGuides]
+      .filter(g => g.lastUpdated)
+      .sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated))
+      .slice(0, 4);
+  }, [allGuides]);
 
   const popularSlugs = [
     'passport-appointment',
@@ -58,7 +105,26 @@ export default function HomeClient({ allGuides }) {
     }
   }, [activeSlug]);
 
-  const activeGuide = activeSlug !== 'getting-started' ? allGuides.find(g => g.slug === activeSlug) : null;
+  // Logic to determine which guide to feature in the "Active Workflow"
+  const activeGuide = useMemo(() => {
+    if (userData?.savedProgress && userData.savedProgress.length > 0) {
+      // Pick the guide with the absolute latest activity
+      const mostRecent = [...userData.savedProgress]
+        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))[0];
+      return allGuides.find(g => g.slug === mostRecent.slug);
+    }
+    // Fallback to guest's last visited guide
+    return activeSlug !== 'getting-started' ? allGuides.find(g => g.slug === activeSlug) : null;
+  }, [userData, allGuides, activeSlug]);
+
+  const handleOfficeSearch = (e) => {
+    e?.preventDefault();
+    if (!officeSearch.trim()) {
+      router.push('/offices');
+    } else {
+      router.push(`/offices?q=${encodeURIComponent(officeSearch)}`);
+    }
+  };
 
   return (
     <div className="bg-ctp-base font-sans text-ctp-text pb-20">
@@ -103,15 +169,15 @@ export default function HomeClient({ allGuides }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatsCard 
             label="Active Guides" 
-            value={isLoggedIn ? "3" : "—"} 
+            value={stats.active.toString()} 
             icon={Clock} 
-            trend="up" 
-            trendValue="+1 this week"
+            isLocked={!isLoggedIn}
           />
           <StatsCard 
             label="Completed" 
-            value={isLoggedIn ? "12" : "—"} 
+            value={stats.completed.toString()} 
             icon={CheckCircle2} 
+            isLocked={!isLoggedIn}
           />
           <StatsCard 
             label="Total Guides" 
@@ -213,21 +279,23 @@ export default function HomeClient({ allGuides }) {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 w-full md:w-auto shrink-0">
-                    <div className="relative flex-1 md:w-64 lg:w-80">
-                      <input 
-                        type="text" 
-                        placeholder="City or Agency..." 
-                        className="w-full bg-ctp-base border border-ctp-surface1 rounded-lg py-3 px-4 text-sm focus:outline-none focus:border-ctp-sky-800 transition-all placeholder:text-ctp-subtext0 font-medium"
-                      />
-                    </div>
-                    <button 
-                      onClick={() => router.push('/offices')}
-                      className="px-6 py-3 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all shadow-sm whitespace-nowrap active:scale-[0.98]"
-                    >
-                      Search
-                    </button>
-                  </div>
+                <div className="w-full md:w-auto flex items-center gap-2 relative z-10 shrink-0">
+                  <form onSubmit={handleOfficeSearch} className="relative flex-1 md:w-64 lg:w-80">
+                    <input 
+                      type="text" 
+                      placeholder="City or Agency..." 
+                      value={officeSearch}
+                      onChange={(e) => setOfficeSearch(e.target.value)}
+                      className="w-full bg-ctp-base border border-ctp-surface1 rounded-lg py-3 px-4 text-sm focus:outline-none focus:border-ctp-sky-800 transition-all placeholder:text-ctp-subtext0 font-medium"
+                    />
+                  </form>
+                  <button 
+                    onClick={handleOfficeSearch}
+                    className="px-6 py-3 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all shadow-sm whitespace-nowrap active:scale-[0.98]"
+                  >
+                    Search
+                  </button>
+                </div>
                 </div>
               </div>
             </section>
@@ -235,7 +303,7 @@ export default function HomeClient({ allGuides }) {
             {/* Recently Updated */}
             <section className="space-y-4">
               <h2 className="text-lg font-bold tracking-tight">Latest Changes</h2>
-              <RecentlyUpdated />
+              <RecentlyUpdated guides={recentlyUpdatedGuides} />
             </section>
           </div>
 

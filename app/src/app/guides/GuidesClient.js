@@ -191,20 +191,20 @@ export default function GuidesClient({ initialGuides }) {
       />
 
       {/* QUICK CATEGORY PILLS */}
-      <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[73px] z-40 backdrop-blur-md bg-ctp-base/80">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-3 flex items-center gap-3 overflow-x-auto no-scrollbar">
+      <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[64px] z-40 backdrop-blur-md bg-ctp-base/80">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2.5 flex items-center gap-3 overflow-x-auto no-scrollbar">
           <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
-            <Filter size={14} className="text-ctp-subtext1" />
-            <span className="text-xs font-semibold text-ctp-subtext0 uppercase tracking-wider">Quick Filter</span>
+            <Filter size={12} className="text-ctp-subtext1" />
+            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Filter by category</span>
           </div>
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap border ${
+              className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap border ${
                 selectedCategory === cat
-                  ? 'bg-ctp-sky-800 text-ctp-base border-ctp-sky-800 shadow-lg shadow-ctp-sky-800/20'
-                  : 'bg-ctp-mantle text-ctp-subtext0 border-ctp-surface1 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
+                  ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
+                  : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
               }`}
             >
               {cat}
@@ -220,10 +220,10 @@ export default function GuidesClient({ initialGuides }) {
             <div className="sticky top-40 space-y-8">
               <div className="bg-ctp-mantle rounded-2xl p-6 border border-ctp-surface1 shadow-sm space-y-8">
                 <div className="flex items-center justify-between border-b border-ctp-surface1 pb-4">
-                  <h2 className="text-sm font-semibold text-ctp-text uppercase tracking-wider">Filters</h2>
+                  <h2 className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">Advanced Filters</h2>
                   <button 
                     onClick={resetFilters}
-                    className="text-xs text-ctp-sky-800 font-semibold uppercase tracking-wider hover:text-ctp-sky-300 transition-colors"
+                    className="text-[10px] text-ctp-sky-800 font-bold uppercase tracking-widest hover:underline transition-colors"
                   >
                     Reset
                   </button>
@@ -232,7 +232,7 @@ export default function GuidesClient({ initialGuides }) {
                 {/* Agency Filter */}
                 <div className="space-y-4">
                   <button onClick={() => toggleFilterSection('agency')} className="flex items-center justify-between w-full group">
-                    <label className="text-xs font-semibold text-ctp-subtext0 uppercase tracking-wider cursor-pointer group-hover:text-ctp-text">Government Agency</label>
+                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Government Agency</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.agency ? 'rotate-180' : ''}`} />
                   </button>
                   {expandedFilters.agency && (
@@ -243,11 +243,11 @@ export default function GuidesClient({ initialGuides }) {
                 {/* Difficulty Filter */}
                 <div className="space-y-4">
                   <button onClick={() => toggleFilterSection('difficulty')} className="flex items-center justify-between w-full group">
-                    <label className="text-xs font-semibold text-ctp-subtext0 uppercase tracking-wider cursor-pointer group-hover:text-ctp-text">Difficulty</label>
+                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Difficulty</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.difficulty ? 'rotate-180' : ''}`} />
                   </button>
                   {expandedFilters.difficulty && (
-                    <div className="space-y-3 pl-1">
+                    <div className="space-y-2.5 pl-0.5">
                       {['All Levels', 'Easy', 'Moderate', 'Complex'].map((level) => (
                         <label key={level} className="flex items-center gap-3 cursor-pointer group">
                           <div className="relative flex items-center justify-center">
@@ -255,11 +255,11 @@ export default function GuidesClient({ initialGuides }) {
                               type="checkbox" 
                               checked={selectedDifficulties.includes(level)}
                               onChange={() => handleDifficultyChange(level)}
-                              className="peer appearance-none w-5 h-5 rounded-md border border-ctp-surface1 bg-ctp-base checked:bg-ctp-sky-800 checked:border-ctp-sky-800 transition-all cursor-pointer" 
+                              className="peer appearance-none w-4 h-4 rounded-md border border-ctp-surface1 bg-ctp-mantle checked:bg-ctp-sky-800 checked:border-ctp-sky-800 transition-all cursor-pointer" 
                             />
-                            <X className="absolute w-3 h-3 text-ctp-base opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+                            <X className="absolute w-2.5 h-2.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" strokeWidth={3} />
                           </div>
-                          <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-medium">{level}</span>
+                          <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-semibold">{level}</span>
                         </label>
                       ))}
                     </div>
@@ -269,7 +269,7 @@ export default function GuidesClient({ initialGuides }) {
                 {/* Cost Filter */}
                 <div className="space-y-4">
                   <button onClick={() => toggleFilterSection('costRange')} className="flex items-center justify-between w-full group">
-                    <label className="text-xs font-semibold text-ctp-subtext0 uppercase tracking-wider cursor-pointer group-hover:text-ctp-text">Cost Range</label>
+                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Cost Range</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.costRange ? 'rotate-180' : ''}`} />
                   </button>
                   {expandedFilters.costRange && (
@@ -294,18 +294,18 @@ export default function GuidesClient({ initialGuides }) {
                 </div>
               </div>
 
-              <div className="bg-ctp-mantle rounded-2xl p-6 border border-ctp-surface1 shadow-sm space-y-6">
+              <div className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm space-y-5">
                 <div className="flex items-center gap-2">
-                  <TrendingUp size={16} className="text-ctp-sky-800" />
-                  <h3 className="text-sm font-semibold text-ctp-text uppercase tracking-wider">Trending</h3>
+                  <TrendingUp size={14} className="text-ctp-sky-800" />
+                  <h3 className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">Trending Guides</h3>
                 </div>
-                <div className="space-y-5">
+                <div className="space-y-4">
                   {initialGuides.slice(0, 3).map((guide, index) => (
                     <Link key={guide.slug} href={`/guides/${guide.slug}`} className="flex items-start gap-3 group">
-                      <span className="text-xs font-bold text-ctp-surface2 group-hover:text-ctp-sky-800 transition-colors mt-0.5">{index + 1}</span>
-                      <div className="flex-1">
-                        <p className="text-xs font-medium text-ctp-text group-hover:text-ctp-sky-800 transition-colors line-clamp-2 leading-snug">{guide.title}</p>
-                        <p className="text-[10px] text-ctp-subtext0 mt-1 uppercase font-semibold tracking-wider">4.8k views</p>
+                      <span className="text-[10px] font-bold text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-colors mt-0.5">0{index + 1}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors line-clamp-2 leading-tight tracking-tight">{guide.title}</p>
+                        <p className="text-[9px] text-ctp-subtext1 mt-1 uppercase font-bold tracking-widest">4.8k interactions</p>
                       </div>
                     </Link>
                   ))}
@@ -327,14 +327,14 @@ export default function GuidesClient({ initialGuides }) {
                 />
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
-                <div className="flex items-center bg-ctp-mantle border border-ctp-surface1 p-1 rounded-xl shadow-sm">
-                  <button onClick={() => handleViewModeChange('grid')} className={`p-2 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-ctp-sky-800 text-ctp-base shadow-md shadow-ctp-sky-800/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
-                    <LayoutGrid size={18} />
+                <div className="flex items-center bg-ctp-mantle border border-ctp-surface1 p-1 rounded-lg shadow-sm">
+                  <button onClick={() => handleViewModeChange('grid')} className={`p-1.5 rounded-md transition-all ${viewMode === 'grid' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
+                    <LayoutGrid size={16} />
                   </button>
-                  <button onClick={() => handleViewModeChange('list')} className={`p-2 rounded-lg transition-all ${viewMode === 'list' ? 'bg-ctp-sky-800 text-ctp-base shadow-md shadow-ctp-sky-800/20' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
-                    <List size={18} />
+                  <button onClick={() => handleViewModeChange('list')} className={`p-1.5 rounded-md transition-all ${viewMode === 'list' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
+                    <List size={16} />
                   </button>
                 </div>
               </div>
@@ -359,24 +359,24 @@ export default function GuidesClient({ initialGuides }) {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-24 bg-ctp-mantle rounded-2xl border border-dashed border-ctp-surface1">
-                <div className="w-16 h-16 bg-ctp-surface1/30 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Search size={32} className="text-ctp-subtext1" />
+              <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
+                <div className="w-14 h-14 bg-ctp-base/50 border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto mb-6">
+                  <Search size={24} className="text-ctp-subtext1" />
                 </div>
-                <h3 className="text-xl font-bold text-ctp-text">No guides found</h3>
-                <p className="text-ctp-subtext1 font-medium mt-2">Try adjusting your filters or search keywords.</p>
-                <button onClick={resetFilters} className="mt-8 px-8 py-3 bg-ctp-sky-800 text-ctp-base rounded-xl font-bold uppercase tracking-wider shadow-lg active:scale-95 transition-all">Clear all</button>
+                <h3 className="text-lg font-bold text-ctp-text tracking-tight">No guides found</h3>
+                <p className="text-sm text-ctp-subtext1 font-medium mt-1">Try adjusting your filters or search terms.</p>
+                <button onClick={resetFilters} className="mt-8 px-6 py-2 bg-ctp-sky-800 text-white rounded-lg font-bold uppercase text-[10px] tracking-widest shadow-md active:scale-95 transition-all">Clear Filters</button>
               </div>
             )}
 
             {filteredGuides.length > visibleCount && (
-              <div className="mt-16 text-center pb-12">
+              <div className="mt-12 text-center pb-12">
                 <button 
                   onClick={handleLoadMore}
-                  className="px-8 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl font-bold text-xs text-ctp-text uppercase tracking-wider hover:border-ctp-sky-800 hover:text-ctp-sky-800 transition-all flex items-center gap-3 mx-auto shadow-sm active:scale-95"
+                  className="px-6 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg font-bold text-[10px] text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-text hover:border-ctp-sky-800 transition-all flex items-center gap-2 mx-auto shadow-sm active:scale-95"
                 >
                   Load more guides
-                  <ChevronDown size={16} />
+                  <ChevronDown size={14} />
                 </button>
               </div>
             )}
@@ -403,25 +403,25 @@ const SidebarDropdown = ({ value, onChange, options }) => {
     <div className="relative w-full" ref={dropdownRef}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between gap-3 bg-ctp-base border rounded-xl px-4 py-3 text-xs font-semibold text-ctp-text transition-all active:scale-[0.98] ${
+        className={`w-full flex items-center justify-between gap-3 bg-ctp-base border rounded-lg px-3 py-2 text-[10px] font-bold text-ctp-text transition-all active:scale-[0.98] ${
           isOpen ? 'border-ctp-sky-800 ring-2 ring-ctp-sky-800/10' : 'border-ctp-surface1 hover:border-ctp-sky-800 shadow-sm'
         }`}
       >
-        <span className="truncate">{value}</span>
-        <ChevronDown size={14} className={`text-ctp-subtext1 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="truncate uppercase tracking-widest">{value}</span>
+        <ChevronDown size={12} className={`text-ctp-subtext1 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-full bg-ctp-mantle border border-ctp-surface1 rounded-xl shadow-2xl z-[60] overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top">
-          <div className="p-1.5 max-h-60 overflow-y-auto custom-scrollbar space-y-1">
+        <div className="absolute left-0 mt-2 w-full bg-ctp-base border border-ctp-surface1 rounded-xl shadow-2xl z-[60] overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top">
+          <div className="p-1 max-h-60 overflow-y-auto custom-scrollbar space-y-0.5">
             {options.map((option) => (
               <button
                 key={option}
                 onClick={() => { onChange(option); setIsOpen(false); }}
-                className={`w-full text-left px-4 py-2.5 rounded-lg text-xs font-medium transition-all ${
+                className={`w-full text-left px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
                   value === option 
-                    ? 'bg-ctp-sky-800 text-ctp-base shadow-md shadow-ctp-sky-800/20' 
-                    : 'text-ctp-subtext1 hover:bg-ctp-surface0 hover:text-ctp-text'
+                    ? 'bg-ctp-sky-800 text-white shadow-sm' 
+                    : 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text'
                 }`}
               >
                 {option}
@@ -455,25 +455,25 @@ const SortDropdown = ({ sortBy, setSortBy }) => {
     <div className="relative shrink-0" ref={dropdownRef}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-3 bg-ctp-mantle border rounded-xl px-5 py-2.5 text-xs font-semibold text-ctp-text transition-all shadow-sm active:scale-95 ${
+        className={`flex items-center gap-3 bg-ctp-mantle border rounded-lg px-4 py-2 text-[10px] font-bold text-ctp-text transition-all shadow-sm active:scale-95 ${
           isOpen ? 'border-ctp-sky-800 ring-2 ring-ctp-sky-800/10' : 'border-ctp-surface1 hover:border-ctp-sky-800'
         }`}
       >
-        <span className="text-ctp-subtext1 font-normal">Sort:</span>
-        {sortBy}
-        <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="text-ctp-subtext1 font-bold uppercase tracking-widest">Sort:</span>
+        <span className="uppercase tracking-widest">{sortBy}</span>
+        <ChevronDown size={12} className={`text-ctp-subtext1 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-56 bg-ctp-base/95 backdrop-blur-xl border border-ctp-surface1 rounded-xl shadow-2xl z-[60] overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right">
-          <div className="p-1.5 space-y-1">
+        <div className="absolute right-0 mt-2 w-52 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-2xl z-[60] overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right">
+          <div className="p-1 space-y-0.5">
             {options.map((option) => (
               <button
                 key={option.value}
                 onClick={() => { setSortBy(option.value); setIsOpen(false); }}
-                className={`w-full text-left px-4 py-3 rounded-lg text-xs font-semibold transition-all ${
+                className={`w-full text-left px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
                   sortBy === option.value 
-                    ? 'bg-ctp-sky-800 text-ctp-base shadow-lg shadow-ctp-sky-800/20' 
+                    ? 'bg-ctp-sky-800 text-white shadow-sm' 
                     : 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text'
                 }`}
               >

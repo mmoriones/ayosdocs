@@ -26,7 +26,7 @@ export default function AppShell({ children }) {
       >
         <DashboardHeader />
         
-        <main className="flex-1 overflow-x-hidden">
+        <main className="flex-1">
           {children}
         </main>
 

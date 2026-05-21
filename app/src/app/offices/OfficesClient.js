@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { GuideIcon } from '@/lib/guideIcons';
 import PageHeader from '@/components/ui/PageHeader';
+import SearchInput from '@/components/ui/SearchInput';
 import HolidayAlert from '@/components/HolidayAlert';
 
 /**
@@ -92,30 +93,30 @@ export default function OfficesClient() {
         icon={Building2}
         title="Office Insights"
         description="Real-time community data on government branches and wait times."
-        iconBoxClassName="bg-ctp-sky-800/10 border-ctp-sky-800/20 shadow-sm"
         actions={
-          <div className="bg-ctp-base/50 backdrop-blur-sm px-5 py-2.5 rounded-xl border border-ctp-surface1 shadow-sm flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_rgba(32,159,181,0.5)]" />
-            <span className="text-[11px] font-bold text-ctp-subtext0 uppercase tracking-[0.2em]">5,402 Reports this month</span>
+          <div className="bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_rgba(4,165,229,0.5)]" />
+            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">5,402 Monthly Reports</span>
           </div>
         }
       />
 
-      <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[73px] z-40 backdrop-blur-md bg-ctp-base/80">
+      {/* QUICK CATEGORY PILLS */}
+      <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[64px] z-40 backdrop-blur-md bg-ctp-base/80">
         <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2.5 flex items-center justify-between gap-8">
           <div className="flex items-center gap-3 overflow-x-auto no-scrollbar flex-1">
             <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
-              <Filter size={14} className="text-ctp-subtext1" />
-              <span className="text-xs font-semibold text-ctp-subtext0 uppercase tracking-wider">Quick Filter</span>
+              <Filter size={12} className="text-ctp-subtext1" />
+              <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Filter agency</span>
             </div>
             {agencies.map((agency) => (
               <button
                 key={agency}
                 onClick={() => setSelectedAgency(agency)}
-                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap border ${
+                className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap border ${
                   selectedAgency === agency
-                    ? 'bg-ctp-sky-800 text-ctp-base border-ctp-sky-800 shadow-lg shadow-ctp-sky-800/20'
-                    : 'bg-ctp-mantle text-ctp-subtext0 border-ctp-surface1 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
+                    ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
+                    : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
                 }`}
               >
                 {agency}
@@ -123,25 +124,21 @@ export default function OfficesClient() {
             ))}
           </div>
 
-          <div className="shrink-0 hidden lg:block max-w-md">
+          <div className="shrink-0 hidden lg:block max-w-sm">
             <HolidayAlert />
           </div>
         </div>
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10 w-full">
-        <div className="flex flex-col lg:flex-row gap-12">
-          <div className="flex-1 space-y-8">
-            <div className="flex flex-col md:flex-row gap-4 mb-10">
-              <div className="flex-1 relative">
-                <Search size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-ctp-subtext1" />
-                <input 
-                  type="text"
-                  maxLength={100}
-                  placeholder="Search by office name, city, or province..."
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 w-full">
+        <div className="flex flex-col lg:flex-row gap-10">
+          <div className="flex-1 min-w-0 space-y-8">
+            <div className="flex flex-col md:flex-row gap-4 mb-8">
+              <div className="flex-1">
+                <SearchInput
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-6 py-3.5 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-lg focus:outline-none focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 shadow-sm transition-all text-ctp-text placeholder:text-ctp-subtext1 font-medium"
+                  placeholder="Search by office name, city, or province..."
                 />
               </div>
             </div>
@@ -152,87 +149,89 @@ export default function OfficesClient() {
                   <OfficeCard key={office.id} office={office} router={router} />
                 ))
               ) : (
-                <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1">
-                  <div className="w-14 h-14 bg-ctp-base rounded-xl flex items-center justify-center mx-auto mb-6 border border-ctp-surface1 shadow-inner">
-                    <Search size={28} className="text-ctp-subtext0" />
+                <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
+                  <div className="w-14 h-14 bg-ctp-base/50 border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto mb-6">
+                    <Search size={24} className="text-ctp-subtext1" />
                   </div>
-                  <h3 className="text-lg font-bold text-ctp-text uppercase tracking-tight">No offices found</h3>
+                  <h3 className="text-lg font-bold text-ctp-text tracking-tight uppercase tracking-widest">No offices found</h3>
                   <p className="text-sm text-ctp-subtext1 font-medium mt-1">Try adjusting your search or filters.</p>
                 </div>
               )}
             </div>
           </div>
 
-          <aside className="w-full lg:w-[380px] shrink-0 space-y-8">
-            <section className="bg-ctp-mantle rounded-xl p-6 border border-ctp-surface1 shadow-sm">
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-ctp-surface1">
-                <TrendingUp size={18} className="text-ctp-sky-800" />
-                <h3 className="text-xs font-bold text-ctp-text uppercase tracking-widest">Best Performing</h3>
+          <aside className="w-full lg:w-80 shrink-0 space-y-6">
+            <section className="bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
+              <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-3">
+                <TrendingUp size={14} className="text-ctp-sky-800" />
+                <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Best Performing</h3>
               </div>
               
-              <div className="space-y-6">
+              <div className="divide-y divide-ctp-surface1/50">
                 {offices.slice(0, 3).map((office, i) => (
-                  <div key={office.id} className="flex items-center gap-4 group cursor-pointer">
-                    <div className="w-9 h-9 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center text-xs font-bold border border-ctp-sky-800/20 shadow-sm">
-                      {i + 1}
+                  <div key={office.id} className="flex items-center gap-4 p-4 hover:bg-ctp-mantle/30 transition-colors group cursor-pointer">
+                    <div className="w-8 h-8 rounded-lg bg-ctp-mantle border border-ctp-surface1 text-ctp-sky-800 flex items-center justify-center text-[10px] font-bold shadow-sm">
+                      0{i + 1}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight">{office.name}</h4>
-                      <p className="text-[10px] text-ctp-subtext0 font-bold uppercase tracking-widest mt-1 opacity-80">{office.agency} • {office.rating} rating</p>
+                      <h4 className="text-xs font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight">{office.name}</h4>
+                      <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 opacity-80">{office.agency} • {office.rating} rating</p>
                     </div>
-                    <div className="text-right">
-                      <span className="text-[9px] font-bold text-ctp-sky-800 bg-ctp-sky-800/10 border border-ctp-sky-800/20 px-2 py-0.5 rounded-lg uppercase tracking-widest">Fast</span>
-                    </div>
+                    <span className="text-[8px] font-bold text-ctp-green bg-ctp-green/5 border border-ctp-green/20 px-1.5 py-0.5 rounded uppercase tracking-widest">Top</span>
                   </div>
                 ))}
               </div>
               
               <button 
                 onClick={() => router.push('/coming-soon')}
-                className="w-full mt-8 py-3.5 bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 rounded-xl text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-ctp-surface0 hover:text-ctp-text transition-all shadow-sm active:scale-95"
+                className="p-3 bg-ctp-mantle border-t border-ctp-surface1 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-text transition-colors"
               >
                 View Full Rankings
               </button>
             </section>
 
-            <section className="bg-ctp-sky-800 rounded-xl p-6 text-ctp-base relative overflow-hidden group border border-ctp-sky-800/20 shadow-lg">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-ctp-mantle/10 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-125 duration-700 blur-2xl" />
+            <section className="bg-ctp-sky-800 rounded-xl p-5 text-white relative overflow-hidden group shadow-lg shadow-ctp-sky-800/20">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8 blur-2xl" />
               
-              <div className="relative z-10">
-                <ShieldCheck size={28} className="mb-4 opacity-90" strokeWidth={2.5} />
-                <h3 className="text-lg font-bold mb-2 uppercase tracking-tight">Community Insights</h3>
-                <p className="text-ctp-base/80 text-xs leading-relaxed mb-6 font-medium">
-                  Our data is powered by real people sharing their actual experiences. All reports are moderated to ensure accuracy.
+              <div className="relative z-10 space-y-4">
+                <div className="flex items-center gap-3">
+                  <ShieldCheck size={18} strokeWidth={2.5} />
+                  <h3 className="text-[10px] font-bold uppercase tracking-widest">Community Verification</h3>
+                </div>
+                <p className="text-xs font-medium leading-relaxed opacity-90">
+                  Data is crowdsourced from real citizens. All reports are verified for quality and relevance.
                 </p>
                 
-                <div className="space-y-3">
+                <div className="space-y-2 pt-1">
                   {[
-                    "100% Anonymous reports",
-                    "Moderated for quality",
-                    "Real-time wait updates"
+                    "Anonymous reports",
+                    "Moderated content",
+                    "Real-time updates"
                   ].map((text, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <CheckCircle2 size={14} className="text-ctp-base" strokeWidth={3} />
-                      <span className="text-[10px] font-bold uppercase tracking-widest">{text}</span>
+                    <div key={i} className="flex items-center gap-2.5">
+                      <CheckCircle2 size={12} strokeWidth={3} />
+                      <span className="text-[9px] font-bold uppercase tracking-widest">{text}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </section>
 
-            <section className="bg-ctp-mantle rounded-xl p-6 border border-ctp-surface1 shadow-sm flex flex-col items-center text-center">
-              <div className="w-14 h-14 bg-ctp-peach/10 border border-ctp-peach/20 rounded-xl flex items-center justify-center text-ctp-peach mb-6 shadow-sm">
-                <Zap size={28} className="fill-ctp-peach/10" strokeWidth={2.5} />
+            <section className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm flex flex-col items-center text-center space-y-4">
+              <div className="w-12 h-12 bg-ctp-mantle border border-ctp-surface1 rounded-xl flex items-center justify-center text-ctp-sky-800 shadow-inner">
+                <Zap size={24} strokeWidth={2} />
               </div>
-              <h3 className="text-lg font-bold text-ctp-text mb-2 uppercase tracking-tight">Recently visited?</h3>
-              <p className="text-xs text-ctp-subtext1 leading-relaxed mb-6 font-medium">
-                Your experience helps thousands of others plan their visits better.
-              </p>
+              <div className="space-y-1">
+                <h3 className="text-xs font-bold text-ctp-text uppercase tracking-widest">Recently visited?</h3>
+                <p className="text-[10px] text-ctp-subtext1 font-medium leading-relaxed">
+                  Help the community by reporting your wait time and experience.
+                </p>
+              </div>
               <button 
                 onClick={() => router.push('/rate')}
-                className="w-full py-3.5 bg-ctp-sky-800 text-ctp-base rounded-xl font-bold text-xs uppercase tracking-widest shadow-md hover:opacity-95 transition-all active:scale-95"
+                className="w-full py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold text-[10px] uppercase tracking-widest shadow-sm hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all"
               >
-                Share Your Experience
+                Submit Report
               </button>
             </section>
           </aside>
@@ -244,63 +243,63 @@ export default function OfficesClient() {
 
 const OfficeCard = ({ office, router }) => {
   return (
-    <div className="group bg-ctp-mantle rounded-xl p-6 border border-ctp-surface1 shadow-sm hover:shadow-md hover:border-ctp-sky-800/30 transition-all relative overflow-hidden flex flex-col h-full">
+    <div className="group bg-ctp-base rounded-xl p-5 lg:p-6 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all relative overflow-hidden flex flex-col h-full">
       <div className="flex flex-col md:flex-row gap-6 md:items-start">
         <div className="flex md:flex-col items-center gap-4">
-          <div className="w-16 h-16 rounded-xl bg-ctp-base flex items-center justify-center p-3.5 group-hover:bg-ctp-sky-800/10 transition-colors border border-ctp-surface1 shrink-0">
-            <GuideIcon slug={office.guideSlug} agency={office.agency} className="w-9 h-9 text-ctp-sky-800" strokeWidth={1.5} />
+          <div className="w-14 h-14 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
+            <GuideIcon slug={office.guideSlug} agency={office.agency} className="w-8 h-8 text-ctp-sky-800" strokeWidth={1.5} />
           </div>
-          <span className="px-3 py-1 rounded-lg bg-ctp-surface0 text-ctp-mauve text-[9px] font-bold uppercase tracking-[0.2em] border border-ctp-surface1 whitespace-nowrap">
+          <span className="px-2 py-0.5 rounded bg-ctp-sky-800/5 text-ctp-sky-800 text-[9px] font-bold uppercase tracking-widest border border-ctp-sky-800/20 whitespace-nowrap">
             {office.agency}
           </span>
         </div>
 
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-5">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-              <h3 className="text-xl font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight uppercase tracking-tight">
+            <div className="min-w-0 flex-1">
+              <h3 className="text-xl font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
                 {office.name}
               </h3>
               <div className="flex items-center gap-2 mt-1.5 text-ctp-subtext1">
                 <MapPin size={12} className="text-ctp-sky-800" />
-                <span className="text-xs font-bold uppercase tracking-widest">{office.location}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest">{office.location}</span>
               </div>
             </div>
             
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 shrink-0">
               <div className="text-right">
-                <div className="flex items-center gap-2 justify-end">
+                <div className="flex items-center gap-1.5 justify-end">
                   <Star size={14} className="fill-ctp-yellow text-ctp-yellow" />
                   <span className="text-lg font-bold text-ctp-text">{office.rating}</span>
                 </div>
-                <p className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 whitespace-nowrap">{office.reviews} reports</p>
+                <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 whitespace-nowrap opacity-80">{office.reviews} interactions</p>
               </div>
-              <div className="h-10 w-px bg-ctp-surface1 hidden md:block" />
-              <div className="bg-ctp-sky-800/5 px-4 py-2 rounded-xl border border-ctp-sky-800/10 flex flex-col items-center">
-                <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-[0.2em] mb-0.5 opacity-80 whitespace-nowrap">Avg. Wait</span>
-                <span className="text-sm font-bold text-ctp-sky-800 uppercase tracking-tight whitespace-nowrap">{office.waitTime}</span>
+              <div className="h-8 w-px bg-ctp-surface1 hidden md:block" />
+              <div className="bg-ctp-sky-800/5 px-3 py-1.5 rounded-lg border border-ctp-sky-800/10 flex flex-col items-center min-w-[80px]">
+                <span className="text-[8px] font-bold text-ctp-sky-800 uppercase tracking-widest mb-0.5 opacity-80">Avg. Wait</span>
+                <span className="text-xs font-bold text-ctp-sky-800 uppercase tracking-tight">{office.waitTime}</span>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-4 border-y border-ctp-surface1">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-4 border-y border-ctp-surface1/50">
             {[
-              { label: 'Speed', value: office.speed, icon: Zap, color: 'ctp-sky-800' },
-              { label: 'Staff', value: office.friendliness, icon: Users, color: 'ctp-mauve' },
-              { label: 'Queue', value: office.queue, icon: Clock, color: 'ctp-peach' },
-              { label: 'Facility', value: 85, icon: Building2, color: 'ctp-green' }
+              { label: 'Speed', value: office.speed, icon: Zap, color: 'text-ctp-sky-800', bg: 'bg-ctp-sky-800' },
+              { label: 'Staff', value: office.friendliness, icon: Users, color: 'text-ctp-mauve', bg: 'bg-ctp-mauve' },
+              { label: 'Queue', value: office.queue, icon: Clock, color: 'text-ctp-peach', bg: 'bg-ctp-peach' },
+              { label: 'Facility', value: 85, icon: Building2, color: 'text-ctp-green', bg: 'bg-ctp-green' }
             ].map((stat) => (
-              <div key={stat.label} className="space-y-2">
+              <div key={stat.label} className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest flex items-center gap-1.5">
-                    <stat.icon size={11} className={`text-${stat.color}`} strokeWidth={2.5} />
+                  <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest flex items-center gap-1.5">
+                    <stat.icon size={10} className={stat.color} strokeWidth={3} />
                     {stat.label}
                   </span>
                   <span className="text-[10px] font-bold text-ctp-text">{stat.value}%</span>
                 </div>
-                <div className="h-1 w-full bg-ctp-surface1 rounded-full overflow-hidden">
+                <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/30">
                   <div 
-                    className={`h-full bg-${stat.color} rounded-full`} 
+                    className={`h-full ${stat.bg} rounded-full`} 
                     style={{ width: `${stat.value}%` }}
                   />
                 </div>
@@ -309,11 +308,11 @@ const OfficeCard = ({ office, router }) => {
           </div>
 
           {office.proTip && (
-            <div className="bg-ctp-peach/5 border border-ctp-peach/10 rounded-xl p-4 flex items-start gap-4">
-              <div className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-peach/10 flex items-center justify-center text-ctp-peach shrink-0">
-                <Info size={16} strokeWidth={2.5} />
+            <div className="bg-ctp-mantle border border-ctp-surface1 rounded-lg p-3.5 flex items-start gap-3 shadow-inner">
+              <div className="w-7 h-7 rounded-md bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shrink-0 shadow-sm">
+                <Info size={14} strokeWidth={2.5} />
               </div>
-              <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed italic">
+              <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed italic">
                 &quot;{office.proTip}&quot;
               </p>
             </div>
@@ -321,19 +320,19 @@ const OfficeCard = ({ office, router }) => {
         </div>
       </div>
       
-      <div className="mt-6 pt-5 border-t border-ctp-surface1 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-ctp-base border border-ctp-surface1">
-            <MessageSquare size={14} className="text-ctp-subtext1" />
+      <div className="mt-5 pt-4 border-t border-ctp-surface1/50 flex items-center justify-between">
+        <div className="flex items-center gap-2.5 opacity-80">
+          <div className="p-1.5 rounded bg-ctp-mantle border border-ctp-surface1">
+            <MessageSquare size={12} className="text-ctp-subtext1" />
           </div>
-          <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">3 Recent reports today</span>
+          <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">3 Community reports today</span>
         </div>
         <button 
           onClick={() => router.push('/coming-soon')}
-          className="group flex items-center gap-2 text-ctp-sky-800 font-bold text-xs uppercase tracking-widest hover:text-ctp-sky-300 transition-all"
+          className="group flex items-center gap-1.5 text-ctp-sky-800 font-bold text-[10px] uppercase tracking-widest hover:underline transition-all"
         >
           View detailed insights
-          <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+          <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" strokeWidth={3} />
         </button>
       </div>
     </div>

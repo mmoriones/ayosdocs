@@ -21,6 +21,7 @@ import SummaryStats from '@/features/guides/components/tracking/SummaryStats';
 import BundleCard from '@/features/guides/components/tracking/BundleCard';
 import GuideRowCard from '@/features/guides/components/tracking/GuideRowCard';
 import DashboardSidebar from '@/features/guides/components/tracking/DashboardSidebar';
+import SearchInput from '@/components/ui/SearchInput';
 import { useToast } from '@/context/ToastContext';
 import ConfirmModal from '@/components/ConfirmModal';
 import { deleteProgressAction } from '@/app/actions/user';
@@ -209,69 +210,60 @@ export default function ProgressClient({ allGuides, isRestricted }) {
 
   if (isRestricted) {
     return (
-      <div className="min-h-[85vh] bg-ctp-base flex items-center justify-center px-6 py-20 relative overflow-hidden">
-        {/* BACKGROUND DECORATION */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-ctp-sky-800/5 rounded-full blur-3xl -z-10 animate-blob" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-ctp-mauve/5 rounded-full blur-3xl -z-10 animate-blob animation-delay-2000" />
-
-        <div className="max-w-2xl w-full text-center space-y-12">
-          <div className="space-y-6 relative">
-            <div className="flex justify-center relative">
-              <div className="w-24 h-24 rounded-3xl bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 flex items-center justify-center text-ctp-yellow-800 shadow-xl shadow-ctp-yellow-800/5 animate-shake relative z-10">
-                <ShieldAlert size={48} strokeWidth={1.5} />
+      <div className="min-h-[85vh] bg-ctp-base flex items-center justify-center px-6 py-20">
+        <div className="max-w-2xl w-full text-center space-y-10">
+          <div className="space-y-6">
+            <div className="flex justify-center">
+              <div className="w-20 h-20 rounded-2xl bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 flex items-center justify-center text-ctp-yellow-800 shadow-xl shadow-ctp-yellow-800/5 animate-shake">
+                <ShieldAlert size={40} strokeWidth={1.5} />
               </div>
-              <div className="absolute inset-0 bg-ctp-yellow-800/10 rounded-3xl blur-2xl animate-pulse" />
             </div>
             
-            <div className="space-y-3">
-              <h2 className="text-4xl font-black text-ctp-text tracking-tight uppercase">Feature Locked</h2>
-              <p className="text-ctp-subtext1 font-semibold leading-relaxed text-lg max-w-md mx-auto">
-                Your personal government documentation dashboard is waiting. Just one more step to unlock it.
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold text-ctp-text tracking-tight uppercase tracking-widest">Dashboard Access Restricted</h2>
+              <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed max-w-md mx-auto">
+                Securely sync your progress and track requirement bundles by verifying your account identity.
               </p>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
              {[
-               { icon: List, title: "Progress Sync", desc: "Save across devices" },
-               { icon: ArrowRight, title: "Life Bundles", desc: "Goal-based tracking" },
-               { icon: Loader2, title: "Auto Updates", desc: "Real-time guide info" }
+               { icon: List, title: "Cloud Sync", desc: "Save across all devices" },
+               { icon: ArrowRight, title: "Bundle Tracking", desc: "Goal-based roadmaps" },
+               { icon: Loader2, title: "System Alerts", desc: "Real-time guide updates" }
              ].map((item, i) => (
-               <div key={i} className="p-6 bg-ctp-mantle border border-ctp-surface1 rounded-2xl space-y-3 text-left hover:border-ctp-sky-800/30 transition-all group">
-                 <div className="w-10 h-10 rounded-xl bg-ctp-base flex items-center justify-center text-ctp-sky-800 border border-ctp-surface1 shadow-sm group-hover:scale-110 transition-transform">
-                   <item.icon size={20} />
+               <div key={i} className="p-5 bg-ctp-mantle border border-ctp-surface1 rounded-xl space-y-3 text-left hover:border-ctp-sky-800/30 transition-all group">
+                 <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-inner group-hover:scale-105 transition-transform">
+                   <item.icon size={16} />
                  </div>
                  <div className="space-y-1">
-                   <h4 className="font-bold text-sm text-ctp-text">{item.title}</h4>
-                   <p className="text-[10px] font-medium text-ctp-subtext1 uppercase tracking-wider">{item.desc}</p>
+                   <h4 className="font-bold text-xs text-ctp-text uppercase tracking-tight">{item.title}</h4>
+                   <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60 leading-tight">{item.desc}</p>
                  </div>
                </div>
              ))}
           </div>
 
-          <div className="bg-ctp-mantle p-8 rounded-3xl border border-ctp-surface1 space-y-6 relative overflow-hidden group">
-             <div className="absolute top-0 right-0 p-8 opacity-5">
-                <ShieldAlert size={120} />
-             </div>
-             
+          <div className="bg-ctp-mantle p-8 rounded-xl border border-ctp-surface1 space-y-6 relative overflow-hidden group shadow-sm">
              <div className="space-y-2 relative z-10">
-                <p className="text-xs font-bold text-ctp-yellow-800 uppercase tracking-[0.3em]">Next Step</p>
-                <h3 className="text-xl font-bold text-ctp-text">Check your inbox for a verification link</h3>
-                <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed max-w-sm mx-auto">
-                  We sent a link to your email. Click it to instantly unlock your dashboard and start tracking your progress.
+                <p className="text-[10px] font-bold text-ctp-yellow-800 uppercase tracking-widest">Action Required</p>
+                <h3 className="text-lg font-bold text-ctp-text">Check your inbox for a verification link</h3>
+                <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed max-w-sm mx-auto">
+                  We sent a link to your email. Click it to instantly unlock your workspace and start tracking your journey.
                 </p>
              </div>
 
-             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10 pt-2">
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 relative z-10 pt-2">
                 <button 
                   onClick={() => router.push('/')}
-                  className="w-full sm:w-auto px-8 py-4 bg-ctp-sky-800 text-ctp-base rounded-2xl font-bold uppercase tracking-widest text-xs hover:opacity-90 shadow-xl shadow-ctp-sky-800/20 active:scale-95 transition-all"
+                  className="w-full sm:w-auto px-6 py-2.5 bg-ctp-base border border-ctp-surface1 text-ctp-text rounded-lg font-bold uppercase tracking-widest text-[10px] hover:bg-ctp-mantle active:scale-95 transition-all shadow-sm"
                 >
                   Back to Home
                 </button>
                 <button 
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="w-full sm:w-auto px-8 py-4 bg-ctp-base border border-ctp-surface1 text-ctp-text rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-ctp-mantle active:scale-95 transition-all"
+                  className="w-full sm:w-auto px-6 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold uppercase tracking-widest text-[10px] hover:bg-ctp-sky-800/90 shadow-md active:scale-95 transition-all"
                 >
                   Resend Link
                 </button>
@@ -284,33 +276,39 @@ export default function ProgressClient({ allGuides, isRestricted }) {
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans pb-20">
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-12">
-
-        <header className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 text-ctp-sky-800">
-              <ArrowRight size={18} className="-rotate-45" />
-              <span className="text-xs font-bold uppercase tracking-widest">My Workspace</span>
-            </div>
-            <h1 className="text-4xl font-bold text-ctp-text tracking-tight">My Docs</h1>
-            <p className="text-ctp-subtext1 text-lg max-w-xl font-medium">Track your government journey, check milestones, and complete goals.</p>
+      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50 mb-10">
+        <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-2xl font-bold tracking-tight text-ctp-text">My Docs</h1>
+            <p className="text-sm text-ctp-subtext1">Manage your active workflows and tracked procedures.</p>
           </div>
-        </header>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => router.push('/guides')}
+              className="px-4 py-2 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all flex items-center gap-2"
+            >
+              <Plus size={16} />
+              <span>Track New</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
-        <div className="flex flex-col lg:flex-row gap-12">
-          <div className="flex-1 space-y-12">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 w-full">
+        <div className="flex flex-col lg:flex-row gap-10">
+          <div className="flex-1 min-w-0 space-y-12">
             <SummaryStats stats={stats} />
 
             <div className="space-y-6">
               <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
-                <div className="flex bg-ctp-mantle p-1 rounded-xl border border-ctp-surface1 shadow-sm overflow-x-auto no-scrollbar">
+                <div className="flex bg-ctp-mantle p-1 rounded-lg border border-ctp-surface1 shadow-sm overflow-x-auto no-scrollbar">
                   {['All', 'In Progress', 'Completed', 'Favorites'].map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-6 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap ${
+                      className={`px-5 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
                         activeTab === tab 
-                          ? 'bg-ctp-sky-800 text-ctp-base shadow-sm' 
+                          ? 'bg-ctp-sky-800 text-white shadow-sm' 
                           : 'text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-surface0'
                       }`}
                     >
@@ -320,51 +318,47 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="relative">
+                  <div className="flex items-center gap-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg px-4 py-2 shadow-sm">
+                    <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Sort:</span>
                     <select 
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
-                      className="appearance-none bg-ctp-mantle border border-ctp-surface1 rounded-xl px-5 py-2.5 pr-10 text-xs font-bold uppercase tracking-wider text-ctp-subtext1 focus:ring-4 focus:ring-ctp-sky-800/10 transition-all cursor-pointer shadow-sm"
+                      className="bg-transparent text-[10px] font-bold uppercase tracking-widest text-ctp-text focus:outline-none cursor-pointer hover:text-ctp-sky-800 transition-all outline-none"
                     >
                       <option>Recently updated</option>
                       <option>Alphabetical</option>
                       <option>Progress %</option>
                     </select>
-                    <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-ctp-subtext0 pointer-events-none" />
                   </div>
-                  <button className="p-2.5 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-ctp-subtext0 hover:text-ctp-text shadow-sm transition-all active:scale-90">
-                    <Filter size={18} />
-                  </button>
                 </div>
               </div>
 
-              <div className="relative group">
-                <Search size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-ctp-subtext1 transition-colors group-focus-within:text-ctp-sky-800" />
-                <input 
-                  type="text"
-                  placeholder="Search your tracked guides and goals..."
+              <div className="max-w-2xl">
+                <SearchInput 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-6 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-base shadow-sm focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all text-ctp-text placeholder:text-ctp-subtext0 font-medium"
+                  placeholder="Search your tracked items..."
                 />
               </div>
             </div>
 
-            <section className="space-y-8">
-              <div className="flex items-end justify-between border-b border-ctp-surface1 pb-4">
-                <div>
-                  <h2 className="text-xl font-bold text-ctp-text tracking-tight">Active Goal Bundles</h2>
-                  <p className="text-xs text-ctp-subtext0 font-semibold uppercase tracking-wider mt-1">Multi-requirement tracking at scale.</p>
+            <section className="space-y-6">
+              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-4">
+                <div className="flex items-center gap-3">
+                  <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Goal Bundles</h2>
+                  <span className="px-2 py-0.5 rounded-md bg-ctp-sky-800/5 text-ctp-sky-800 text-[10px] font-bold border border-ctp-sky-800/10">
+                    {bundleProgress.length}
+                  </span>
                 </div>
                 <button 
                   onClick={() => router.push('/bundles')}
-                  className="group flex items-center gap-2 text-ctp-sky-800 font-bold text-xs uppercase tracking-wider hover:text-ctp-sky-300 transition-colors mb-1"
+                  className="text-[10px] text-ctp-sky-800 font-bold uppercase tracking-widest hover:underline transition-colors"
                 >
-                  View Library <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  Browse Library
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 gap-5">
                 {bundleProgress.map((item) => (
                   <BundleCard 
                     key={item.bundle.id} 
@@ -373,26 +367,30 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                   />
                 ))}
 
-                <button 
-                  onClick={() => router.push('/bundles')}
-                  className="w-full py-8 bg-ctp-mantle border-2 border-dashed border-ctp-surface1 rounded-xl text-ctp-subtext0 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-sky-800/5 transition-all flex flex-col items-center justify-center gap-3 group"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-                    <Plus size={24} className="text-ctp-subtext0 group-hover:text-ctp-sky-800" strokeWidth={2.5} />
-                  </div>
-                  <span className="text-xs font-bold uppercase tracking-wider">Explore life event bundles</span>
-                </button>
+                {bundleProgress.length === 0 && !searchQuery && (
+                  <button 
+                    onClick={() => router.push('/bundles')}
+                    className="w-full py-8 bg-ctp-mantle border-2 border-dashed border-ctp-surface1 rounded-xl text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-sky-800/5 transition-all flex flex-col items-center justify-center gap-3 group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center group-hover:scale-105 transition-transform shadow-inner">
+                      <Plus size={20} className="text-ctp-subtext1 group-hover:text-ctp-sky-800" strokeWidth={2.5} />
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-widest">Start a new life event roadmap</span>
+                  </button>
+                )}
               </div>
             </section>
 
-            <section className="space-y-8">
-              <div className="flex items-end justify-between border-b border-ctp-surface1 pb-4">
-                <div>
-                  <h2 className="text-xl font-bold text-ctp-text tracking-tight">Tracked Procedures</h2>
-                  <p className="text-xs text-ctp-subtext0 font-semibold uppercase tracking-wider mt-1">Individual documentation requirements.</p>
+            <section className="space-y-6 pb-12">
+              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-4">
+                <div className="flex items-center gap-3">
+                  <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Tracked Procedures</h2>
+                  <span className="px-2 py-0.5 rounded-md bg-ctp-sky-800/5 text-ctp-sky-800 text-[10px] font-bold border border-ctp-sky-800/10">
+                    {filteredGuides.length}
+                  </span>
                 </div>
-                <Link href="/guides" className="group flex items-center gap-2 text-ctp-sky-800 font-bold text-xs uppercase tracking-wider hover:text-ctp-sky-300 transition-colors mb-1">
-                  Knowledge Base <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                <Link href="/guides" className="text-[10px] text-ctp-sky-800 font-bold uppercase tracking-widest hover:underline transition-colors">
+                  Knowledge Base
                 </Link>
               </div>
 
@@ -409,19 +407,19 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                   ))
                 ) : (
                   <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1">
-                    <div className="w-14 h-14 bg-ctp-base rounded-xl flex items-center justify-center mx-auto mb-6 border border-ctp-surface1 shadow-inner">
-                       <List size={28} className="text-ctp-subtext0" />
+                    <div className="w-14 h-14 bg-ctp-base rounded-xl flex items-center justify-center mx-auto mb-6 border border-ctp-surface1 shadow-inner shadow-sm">
+                       <List size={24} className="text-ctp-subtext1" />
                     </div>
-                    <h3 className="text-lg font-bold text-ctp-text tracking-tight">No guides found</h3>
-                    <p className="text-sm text-ctp-subtext1 font-medium mt-1">Try adjusting your filters or section.</p>
-                    <Link href="/guides" className="mt-8 inline-block px-8 py-3 bg-ctp-sky-800 text-ctp-base rounded-xl font-bold uppercase tracking-wider shadow-md active:scale-95 transition-all">Explore all guides</Link>
+                    <h3 className="text-base font-bold text-ctp-text uppercase tracking-widest">No trackers active</h3>
+                    <p className="text-xs text-ctp-subtext1 font-medium mt-1">Pick a guide to start your journey.</p>
+                    <Link href="/guides" className="mt-8 inline-block px-6 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold uppercase text-[10px] tracking-widest shadow-md active:scale-95 transition-all">Explore all guides</Link>
                   </div>
                 )}
                 
                 {filteredGuides.length > displayedGuides.length && (
                   <button 
                     onClick={() => setVisibleCount(prev => prev + 5)}
-                    className="w-full py-4 text-xs font-bold text-ctp-sky-800 hover:text-ctp-sky-300 uppercase tracking-wider transition-colors border-2 border-dashed border-ctp-surface1 rounded-xl bg-ctp-mantle/50 hover:bg-ctp-mantle active:scale-[0.99]"
+                    className="w-full py-4 text-[10px] font-bold text-ctp-sky-800 hover:text-ctp-sky-300 uppercase tracking-widest transition-colors border-2 border-dashed border-ctp-surface1 rounded-xl bg-ctp-mantle/50 hover:bg-ctp-mantle active:scale-[0.99]"
                   >
                     Load more items
                   </button>

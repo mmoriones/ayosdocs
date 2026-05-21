@@ -24,80 +24,71 @@ const GuideCard = ({
   const router = useRouter();
   const isList = viewMode === 'list';
   
-  // Styling based on minimalist aesthetic
+  // Styling based on high-density dashboard aesthetic
   const baseCardClass = `
-    group bg-ctp-mantle rounded-2xl border border-ctp-surface1
-    hover:border-ctp-surface2 hover:shadow-md transition-all 
-    relative overflow-hidden flex flex-col h-full
+    group bg-ctp-base rounded-xl border border-ctp-surface1
+    hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all 
+    relative overflow-hidden flex flex-col h-full shadow-sm
   `;
 
   const listCardClass = `
-    group bg-ctp-mantle rounded-xl p-5 border border-ctp-surface1
-    hover:border-ctp-surface2 hover:shadow-sm transition-all 
-    relative overflow-hidden flex items-center gap-6
+    group bg-ctp-base rounded-xl p-4 border border-ctp-surface1
+    hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all 
+    relative overflow-hidden flex items-center gap-5 shadow-sm
   `;
 
   if (isList) {
     return (
       <Link href={`/guides/${guide.slug}`} className={`${listCardClass} ${className}`}>
-        <div className="w-14 h-14 rounded-lg bg-ctp-base flex items-center justify-center p-2.5 group-hover:bg-ctp-sky-800/5 transition-colors border border-ctp-surface1 shrink-0">
-          <GuideIcon slug={guide.slug} agency={guide.agency} className="w-8 h-8 text-ctp-sky-800" strokeWidth={1.5} />
+        <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 group-hover:scale-105 transition-transform duration-300">
+          <GuideIcon slug={guide.slug} agency={guide.agency} className="w-7 h-7 text-ctp-sky-800" strokeWidth={1.5} />
         </div>
 
-        <div className="flex-1 min-w-0 py-1">
-          <div className="flex items-center gap-3 mb-1.5">
+        <div className="flex-1 min-w-0 py-0.5">
+          <div className="flex items-center gap-3 mb-1">
             {showAgency && (
-              <span className="text-[10px] font-bold text-ctp-green uppercase tracking-wider bg-ctp-green/10 px-2 py-0.5 rounded-md border border-ctp-green/20">
-                {Array.isArray(guide.agency) ? guide.agency.join(', ') : (guide.agency || "Official")}
+              <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest bg-ctp-sky-800/5 px-1.5 py-0.5 rounded border border-ctp-sky-800/20">
+                {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
               </span>
             )}
-            <span className="text-[10px] text-ctp-subtext1 font-semibold uppercase tracking-wider opacity-70">
-              Updated {guide.lastUpdated || "May 8, 2026"}
+            <span className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-80">
+              Updated {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Recently"}
             </span>
           </div>
-          <h3 className={`text-lg font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-snug tracking-tight truncate ${!showDescription ? 'mb-0' : ''}`}>
+          <h3 className={`text-base font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight truncate ${!showDescription ? 'mb-0' : 'mb-0.5'}`}>
             {guide.shortTitle || guide.title}
           </h3>
           {showDescription && (
-            <p className="text-sm text-ctp-subtext1 line-clamp-1 font-medium leading-relaxed">
-              {guide.description || "Step-by-step requirements and procedures."}
+            <p className="text-xs text-ctp-subtext1 line-clamp-1 font-medium leading-relaxed opacity-90">
+              {guide.description}
             </p>
           )}
         </div>
 
         {showMeta && (
-          <div className="hidden md:flex flex-col items-end gap-2 shrink-0 border-l border-ctp-surface1 pl-6 h-12 justify-center">
-            <div className="flex items-center gap-4 text-[11px] font-bold text-ctp-subtext1 uppercase tracking-wider">
-              {stats && (
-                <div className="flex items-center gap-1 text-ctp-mauve">
-                  <span>{stats.views}</span>
-                  <Eye size={12} />
-                </div>
-              )}
-              <div className="flex items-center gap-1.5">
-                <Clock size={12} className="text-ctp-subtext0" />
-                <span>{guide.estimatedTime || "1-3 days"}</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <DollarSign size={12} className="text-ctp-subtext0" />
-                <span>{guide.costRange || "Free"}</span>
-              </div>
+          <div className="hidden md:flex items-center gap-4 shrink-0 border-l border-ctp-surface1 pl-6 h-10">
+            <div className="flex items-center gap-1.5 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+              <Clock size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
+              <span>{guide.estimatedTime || "1-3 days"}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+              <DollarSign size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
+              <span>{guide.costRange || "Free"}</span>
             </div>
           </div>
         )}
 
-        <div className="shrink-0 ml-4 flex items-center gap-3">
+        <div className="shrink-0 ml-2 flex items-center gap-3">
           {showBookmark && (
             <button 
               onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-              className="p-2.5 text-ctp-subtext1 hover:text-ctp-sky-800 transition-all bg-ctp-base rounded-lg border border-ctp-surface1 shadow-sm active:scale-95 relative z-10"
+              className="p-2 text-ctp-subtext1 hover:text-ctp-sky-800 transition-all rounded-lg active:scale-95 relative z-10"
+              title="Bookmark"
             >
               <Bookmark size={18} />
             </button>
           )}
-          <div className="w-9 h-9 rounded-lg bg-ctp-sky-800 text-white flex items-center justify-center shadow-sm active:scale-95 transition-all">
-            <ArrowRight size={18} strokeWidth={2.5} />
-          </div>
+          <ArrowRight size={16} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all" strokeWidth={2.5} />
         </div>
       </Link>
     );
@@ -106,72 +97,59 @@ const GuideCard = ({
   return (
     <Link 
       href={`/guides/${guide.slug}`}
-      className={`${baseCardClass} p-6 ${className}`}
+      className={`${baseCardClass} p-5 ${className}`}
     >
       {showBookmark && (
-        <button className="absolute top-5 right-5 p-2 text-ctp-subtext1 hover:text-ctp-sky-800 transition-all bg-ctp-base rounded-lg shadow-sm z-10 active:scale-95 border border-ctp-surface1" onClick={(e) => e.preventDefault()}>
-          <Bookmark size={18} />
+        <button className="absolute top-4 right-4 p-1.5 text-ctp-subtext1 hover:text-ctp-sky-800 transition-all rounded-lg z-10 active:scale-95" onClick={(e) => e.preventDefault()}>
+          <Bookmark size={16} />
         </button>
       )}
 
-      {progress?.tracked && (
-        <div className="absolute top-0 right-0 p-2">
-          <div className={`px-2 py-0.5 rounded-bl-lg rounded-tr-lg text-[10px] font-bold uppercase tracking-wider ${
-            progress.completed ? 'bg-ctp-green text-white' : 'bg-ctp-sky-800/10 text-ctp-sky-800 border border-ctp-sky-800/20'
-          }`}>
-            {progress.completed ? 'Done' : `${progress.percentage}%`}
-          </div>
-        </div>
-      )}
-
-      <div className="mb-5 w-12 h-12 rounded-lg bg-ctp-base flex items-center justify-center p-2.5 group-hover:bg-ctp-sky-800/5 transition-colors border border-ctp-surface1">
-        <GuideIcon slug={guide.slug} agency={guide.agency} className="w-7 h-7 text-ctp-sky-800" strokeWidth={1.5} />
+      <div className="mb-4 w-10 h-10 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 group-hover:scale-105 transition-transform duration-300 shrink-0">
+        <GuideIcon slug={guide.slug} agency={guide.agency} className="w-6 h-6 text-ctp-sky-800" strokeWidth={1.5} />
       </div>
 
       <div className="flex-1">
         {showAgency && (
-          <div className="inline-flex items-center px-2 py-0.5 rounded-md bg-ctp-green/10 text-ctp-green text-[10px] font-bold uppercase tracking-wider mb-3 border border-ctp-green/20">
-            {Array.isArray(guide.agency) ? guide.agency.join(', ') : (guide.agency || "Official")}
+          <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-ctp-sky-800/5 text-ctp-sky-800 text-[9px] font-bold uppercase tracking-widest mb-2.5 border border-ctp-sky-800/20">
+            {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
           </div>
         )}
-        <h3 className={`text-lg font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight ${showDescription ? 'mb-2' : 'mb-0'}`}>
+        <h3 className={`text-base font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight ${showDescription ? 'mb-1.5' : 'mb-0'}`}>
           {guide.shortTitle || guide.title}
         </h3>
         {showDescription && (
-          <p className="text-sm text-ctp-subtext1 line-clamp-2 mb-5 font-medium leading-relaxed">
-            {guide.description || "Step-by-step requirements and procedures."}
+          <p className="text-xs text-ctp-subtext1 line-clamp-2 mb-4 font-medium leading-relaxed opacity-90">
+            {guide.description}
           </p>
         )}
 
         {showMeta && (
-          <div className="space-y-2.5 mb-5">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] font-bold text-ctp-subtext1 uppercase tracking-wider">
-              <div className="flex items-center gap-1.5 min-w-0">
-                <Clock size={12} className="text-ctp-subtext0 shrink-0" />
-                <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>
-              </div>
-              <div className="flex items-center gap-1.5 min-w-0">
-                <DollarSign size={12} className="text-ctp-subtext0 shrink-0" />
-                <span className="truncate">{guide.costRange || "Free"}</span>
-              </div>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-4">
+            <div className="flex items-center gap-1.5 min-w-0">
+              <Clock size={14} className="text-ctp-sky-800 shrink-0" strokeWidth={2.5} />
+              <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>
+            </div>
+            <div className="flex items-center gap-1.5 min-w-0">
+              <DollarSign size={14} className="text-ctp-sky-800 shrink-0" strokeWidth={2.5} />
+              <span className="truncate">{guide.costRange || "Free"}</span>
             </div>
           </div>
         )}
       </div>
 
       {showFooter && (
-        <div className="pt-5 border-t border-ctp-surface1/50 flex items-center justify-between mt-auto">
-          <span className="text-[10px] text-ctp-subtext1 font-semibold uppercase tracking-wider">
-            Updated {guide.lastUpdated || "May 8, 2026"}
+        <div className="pt-4 border-t border-ctp-surface1/50 flex items-center justify-between mt-auto">
+          <span className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest">
+            {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Updated Recently"}
           </span>
-          <div className="group/link text-ctp-sky-800 font-bold text-[11px] uppercase tracking-wider flex items-center gap-1.5 transition-all">
-            View guide
-            <ArrowRight size={14} strokeWidth={2.5} className="transition-transform group-hover/link:translate-x-0.5" />
+          <div className="text-ctp-sky-800 font-bold text-[9px] uppercase tracking-widest flex items-center gap-1">
+            Open
+            <ArrowRight size={12} strokeWidth={3} className="transition-transform group-hover:translate-x-0.5" />
           </div>
         </div>
       )}
     </Link>
-
   );
 };
 

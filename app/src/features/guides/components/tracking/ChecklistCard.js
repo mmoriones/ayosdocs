@@ -7,12 +7,14 @@ import {
   UserPlus, 
   ShieldCheck, 
   ChevronRight, 
+  ArrowRight,
   Save, 
   Loader2,
   Scan,
   AlertTriangle,
+  AlertCircle,
 } from 'lucide-react';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
@@ -44,6 +46,7 @@ const ChecklistCard = ({
 
   const [steps, setSteps] = useState(initialSteps || []);
   const [isShaking, setIsShaking] = useState(false);
+  const lastInteractionRef = useRef(0);
 
   const { data: savedData, isLoading: isLoadingProgress } = useQuery({
     queryKey: ['progress', slug],
@@ -71,19 +74,21 @@ const ChecklistCard = ({
 
   // State synchronization from server/props
   const [prevSlug, setPrevSlug] = useState(slug);
-  const [prevSavedTasks, setPrevSavedTasks] = useState(savedData?.completedTasks);
 
-  // Sync state if slug changes (switching guides)
+  // 1. Reset state if switching guides (Sync during render is okay for slug reset)
   if (slug !== prevSlug) {
     setPrevSlug(slug);
     setSteps(initialSteps || []);
-    setPrevSavedTasks(savedData?.completedTasks);
-  } 
-  // Sync state if server data changes and we aren't currently syncing
-  else if (savedData?.completedTasks !== prevSavedTasks && !saveMutation.isPending) {
-    setPrevSavedTasks(savedData?.completedTasks);
+  }
+
+  // 2. Sync server data to local state ONLY if user is not currently active
+  useEffect(() => {
+    if (!savedData || saveMutation.isPending) return;
     
-    const completedIndices = savedData?.completedTasks
+    const isUserInactive = Date.now() - lastInteractionRef.current > 2500;
+    if (!isUserInactive) return;
+
+    const completedIndices = savedData.completedTasks
       ? savedData.completedTasks.split(",").filter(s => s !== "").map(Number)
       : [];
 
@@ -91,67 +96,60 @@ const ChecklistCard = ({
       ...step,
       completed: completedIndices.includes(index),
     }));
-    
-    // We only update if the current local state is actually different 
-    // from what the server just sent us.
+
+    // Only update if current steps are actually different (Cloud Sync case)
     const currentLocalIndices = steps
       .map((s, i) => (s.completed ? i : null))
       .filter((i) => i !== null)
       .join(",");
 
-    if (savedData?.completedTasks !== currentLocalIndices) {
-      setSteps(nextStepsFromData);
+    if (savedData.completedTasks !== currentLocalIndices) {
+      setTimeout(() => {
+        setSteps(nextStepsFromData);
+      }, 0);
     }
-  }
+  }, [savedData?.completedTasks, slug]); // slug dependency ensures it runs on new guide
 
   const nextStepIndex = steps.findIndex((s) => !s.completed);
-  const lastCompletedIndex = nextStepIndex === -1 
-    ? (steps.length > 0 ? steps.length - 1 : -1) 
-    : nextStepIndex - 1;
-
   const nextStep = nextStepIndex !== -1 ? steps[nextStepIndex] : null;
 
-  const handleStepAction = (index) => {
+  const handleStepAction = useCallback((index) => {
     if (!isLoggedIn) {
       openAuthModal();
       return;
     }
 
-    // Trigger shake animation and skip action if not verified
     if (!isVerified) {
       setIsShaking(true);
       setTimeout(() => setIsShaking(false), 600);
       return;
     }
 
-    const isNext = index === nextStepIndex;
-    const isLast = index === lastCompletedIndex;
-    if (!isNext && !isLast) return;
+    // Update interaction time to block incoming server syncs for 2.5s
+    lastInteractionRef.current = Date.now();
 
-    const newSteps = steps.map((step, i) =>
-      i === index ? { ...step, completed: !step.completed } : step
+    setSteps(prevSteps => 
+      prevSteps.map((step, i) =>
+        i === index ? { ...step, completed: !step.completed } : step
+      )
     );
+  }, [isLoggedIn, isVerified, openAuthModal]);
 
-    setSteps(newSteps);
-  };
-
-  // Debounced Auto-save Effect
+  // Snappier Debounced Auto-save
   useEffect(() => {
     if (!isLoggedIn || !isVerified || !slug || slug === "getting-started" || !steps.length) return;
 
-    // Don't sync on initial load (when savedData is first applied)
-    // We only want to sync when the user interacts
     const completedTaskIndices = steps
       .map((s, i) => (s.completed ? i : null))
       .filter((i) => i !== null)
       .join(",");
 
-    // Compare with what's currently in savedData to avoid redundant calls
+    // Only sync if local state actually differs from last known server state
     if (savedData?.completedTasks === completedTaskIndices) return;
 
     const timeout = setTimeout(() => {
       saveMutation.mutate(completedTaskIndices);
-    }, 1000);
+    }, 600);
 
     return () => clearTimeout(timeout);
   }, [steps, isLoggedIn, isVerified, slug, savedData?.completedTasks, saveMutation.mutate]);
@@ -179,18 +177,18 @@ const ChecklistCard = ({
     }`}>
       
       {!isBare && (
-        <div className={`${isModal ? "p-0" : "p-6"} pb-0`}>
-          <div className="flex items-center justify-between gap-4 mb-5">
+        <div className={`${isModal ? "p-0" : "p-5 lg:p-6"} pb-0`}>
+          <div className="flex items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-3">
-              <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.2em] leading-none">
+              <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest leading-none">
                 {cardLabel}
               </h3>
               {isLoggedIn && (
-                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-ctp-mantle border border-ctp-surface1">
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-ctp-mantle border border-ctp-surface1">
                   {!isVerified ? (
                     <>
-                      <div className="w-1 h-1 rounded-full bg-ctp-yellow-800" />
-                      <span className="text-[9px] font-bold text-ctp-yellow-800 uppercase tracking-widest">Verify to Sync</span>
+                      <div className="w-1 h-1 rounded-full bg-ctp-yellow" />
+                      <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Unverified</span>
                     </>
                   ) : saveMutation.isPending ? (
                     <>
@@ -200,7 +198,7 @@ const ChecklistCard = ({
                   ) : (
                     <>
                       <div className="w-1 h-1 rounded-full bg-ctp-green" />
-                      <span className="text-[9px] font-bold text-ctp-subtext0 uppercase tracking-widest">Saved</span>
+                      <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Synced</span>
                     </>
                   )}
                 </div>
@@ -210,48 +208,36 @@ const ChecklistCard = ({
             {!inGuidePage && (
               <button 
                 onClick={() => router.push('/my-docs')}
-                className="text-[10px] font-bold text-ctp-sky-800 hover:opacity-80 flex items-center gap-1 uppercase tracking-widest transition-colors"
+                className="text-[10px] font-bold text-ctp-sky-800 hover:underline flex items-center gap-1 uppercase tracking-widest transition-all"
               >
-                Dashboard <ChevronRight size={12} />
+                Go to Workspace <ChevronRight size={12} strokeWidth={3} />
               </button>
             )}
           </div>
 
           <div className="flex items-start justify-between gap-4">
-            <div className="flex items-start gap-4 w-full">
+            <div className="flex items-start gap-4 w-full min-w-0">
               {!inGuidePage && (
-                <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 shadow-sm p-3">
-                  <GuideIcon slug={slug} agency={agency} className="w-full h-full text-ctp-sky-800" strokeWidth={1.5} />
+                <div className="w-11 h-11 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 shadow-inner">
+                  <GuideIcon slug={slug} agency={agency} className="w-6 h-6 text-ctp-sky-800" strokeWidth={1.5} />
                 </div>
               )}
               
-              <div className="space-y-1 flex-1">
-                {!isModal && !inGuidePage && (
-                  <p className="text-[10px] text-ctp-subtext0 font-semibold uppercase tracking-wider">
-                    Continue where you left off
-                  </p>
-                )}
-                
+              <div className="space-y-1 flex-1 min-w-0">
                 {(!inGuidePage || isModal) && (
-                  <h4 className="font-semibold text-ctp-text leading-tight tracking-tight text-xl">
+                  <h4 className="font-bold text-ctp-text leading-tight tracking-tight text-lg truncate">
                     {slug === "getting-started" ? "Getting Started" : title}
                   </h4>
                 )}
                 
-                {isLoggedIn ? (
-                  <p className={`font-semibold text-ctp-sky-800 tracking-tight ${inGuidePage && !isModal ? "text-base" : "text-sm"}`}>
-                    {completedCount} of {totalSteps} steps completed
-                  </p>
-                ) : (
-                  <p className="text-sm text-ctp-subtext0 font-medium tracking-tight">
-                    Follow each requirement step-by-step.
-                  </p>
-                )}
+                <p className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest leading-none">
+                  {isLoggedIn ? `${completedCount} of ${totalSteps} tasks verified` : "Requirement Roadmap"}
+                </p>
               </div>
 
               {!inGuidePage && isLoggedIn && (
-                <button className="p-2 text-ctp-subtext0 hover:text-ctp-sky-800 hover:bg-ctp-mantle rounded-lg border border-ctp-surface1 transition-all shrink-0 bg-ctp-base shadow-sm active:scale-95">
-                  <Bookmark size={20} />
+                <button className="p-2 text-ctp-subtext1 hover:text-ctp-sky-800 rounded-lg border border-ctp-surface1 transition-all shrink-0 bg-ctp-base shadow-sm active:scale-95">
+                  <Bookmark size={16} />
                 </button>
               )}
             </div>
@@ -260,107 +246,104 @@ const ChecklistCard = ({
       )}
 
       {isLoggedIn && slug !== "getting-started" && (
-        <div className={`${(isModal || isBare) ? "px-0" : "px-6"} mt-6 mb-2`}>
-          <div className="flex items-center gap-3">
-            <div className="flex-1 h-2 bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1">
-              <div 
-                className="h-full transition-all duration-1000 ease-out bg-ctp-sky-800"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-            <span className="text-xs font-semibold shrink-0 tracking-wider text-ctp-sky-800">{progress}%</span>
+        <div className={`${(isModal || isBare) ? "px-0" : "px-5 lg:px-6"} mt-5 mb-2`}>
+          <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/50">
+            <div 
+              className={`h-full transition-all duration-1000 ease-out ${progress === 100 ? 'bg-ctp-green' : 'bg-ctp-sky-800 shadow-[0_0_8px_rgba(4,165,229,0.3)]'}`}
+              style={{ width: `${progress}%` }}
+            />
           </div>
         </div>
       )}
 
       {isLoggedIn && !isVerified && (
-        <div className={`${(isModal || isBare) ? "px-0" : "px-6"} mt-6 ${isShaking ? 'animate-shake' : ''}`}>
-          <div className="bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 rounded-xl p-4 flex items-center gap-4 transition-all shadow-sm">
-            <div className="w-10 h-10 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-yellow-800 shadow-sm shrink-0 border border-ctp-yellow-800/20">
-              <AlertTriangle size={18} />
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-semibold text-ctp-yellow-800 leading-tight tracking-tight">
-                Verification Required
-              </p>
-              <p className="text-[10px] font-medium text-ctp-yellow-800/70 mt-0.5">
-                Please verify your email to sync and save your progress.
-              </p>
+        <div className={`${(isModal || isBare) ? "px-0" : "px-5 lg:px-6"} mt-5 ${isShaking ? 'animate-shake' : ''}`}>
+          <div className="bg-ctp-yellow/5 border border-ctp-yellow/20 rounded-lg p-4 flex items-center gap-4 transition-all shadow-sm">
+            <AlertTriangle size={18} className="text-ctp-yellow shrink-0" />
+            <div className="flex-1 min-w-0">
+              <p className="text-[11px] font-bold text-ctp-text uppercase tracking-tight">Sync Restricted</p>
+              <p className="text-[10px] text-ctp-subtext1 font-medium mt-0.5 leading-tight">Verify email to save your progress.</p>
             </div>
           </div>
         </div>
       )}
 
       {!isLoggedIn && (
-        <div className={`${(isModal || isBare) ? "px-0" : "px-6"} mt-6`}>
-          <div className="bg-ctp-sky-10 border border-ctp-sky-300/20 rounded-xl p-4 flex items-center gap-4 group cursor-pointer hover:bg-ctp-sky-50 transition-all shadow-sm" onClick={openAuthModal}>
-            <div className="w-10 h-10 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-sky-800 shadow-sm shrink-0 border border-ctp-sky-300/20 group-hover:scale-105 transition-transform">
-              <Lock size={18} />
+        <div className={`${(isModal || isBare) ? "px-0" : "px-5 lg:px-6"} mt-5`}>
+          <div 
+            className="bg-ctp-sky-800/5 border border-ctp-sky-800/10 rounded-lg p-4 flex items-center justify-between group cursor-pointer hover:bg-ctp-sky-800/10 transition-all shadow-sm"
+            onClick={openAuthModal}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-8 h-8 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-sky-800 shadow-sm shrink-0 border border-ctp-sky-800/10">
+                <Lock size={14} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-[11px] font-bold text-ctp-text uppercase tracking-tight">Cloud Save Disabled</p>
+                <p className="text-[10px] text-ctp-subtext1 font-medium mt-0.5">Sign in to track procedures.</p>
+              </div>
             </div>
-            <p className="text-sm font-semibold text-ctp-sky-800 leading-tight tracking-tight">
-              Sign up to track <br /> your progress
-            </p>
+            <ArrowRight size={14} className="text-ctp-sky-800 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
           </div>
         </div>
       )}
 
       {(inGuidePage || isModal || isBare) && (
         <div className={`
-          ${(isModal || isBare) ? "px-0 py-4" : "px-6 py-6"} 
+          ${(isModal || isBare) ? "px-0 py-4" : "px-5 lg:px-6 py-6"} 
           ${(inGuidePage && !isBare) ? "lg:max-h-[520px] overflow-y-auto custom-scrollbar" : ""}
         `}>
           <div className="space-y-1">
             {steps.map((step, index) => {
               const isNextStep = index === nextStepIndex;
-              const isLastStep = index === lastCompletedIndex;
-              const isClickable = isNextStep || isLastStep;
+              const isClickable = true; // All items now clickable
               const isUpcoming = !step.completed && !isNextStep;
 
               return (
                 <div 
                   key={index}
                   onClick={() => handleStepAction(index)}
-                  className={`flex items-start gap-4 px-4 py-3 rounded-xl transition-all duration-200 group
-                    ${step.completed ? "bg-ctp-sky-800/[0.03]" : ""}
-                    ${isNextStep ? "bg-ctp-sky-800/[0.05]" : ""}
+                  className={`flex items-start gap-4 px-3 py-3 rounded-lg transition-all duration-200 group
+                    ${step.completed ? "bg-ctp-mantle/50" : ""}
+                    ${isNextStep ? "bg-ctp-sky-800/5" : ""}
                     ${isClickable ? "cursor-pointer hover:bg-ctp-mantle" : "cursor-default"}
                   `}
                 >
                   <div className="shrink-0 mt-0.5">
                     {step.completed ? (
-                      <div className="w-6 h-6 rounded-full bg-ctp-sky-800/15 flex items-center justify-center text-ctp-sky-800 transition-all group-hover:scale-110 border border-ctp-sky-800/20 shadow-sm">
-                        <Check size={12} strokeWidth={4} />
+                      <div className="w-5 h-5 rounded-full bg-ctp-green/10 flex items-center justify-center text-ctp-green transition-all group-hover:scale-110 border border-ctp-green/20 shadow-sm">
+                        <Check size={10} strokeWidth={4} />
                       </div>
                     ) : isNextStep ? (
-                      <div className="w-6 h-6 rounded-full border-2 border-ctp-sky-800 flex items-center justify-center bg-ctp-base group-hover:border-ctp-sky-300 transition-all shadow-[0_0_12px_rgba(32,159,181,0.15)]">
-                        <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse" />
+                      <div className="w-5 h-5 rounded-full border-2 border-ctp-sky-800 flex items-center justify-center bg-ctp-base group-hover:border-ctp-sky-300 transition-all shadow-[0_0_8px_rgba(4,165,229,0.1)]">
+                        <div className="w-1.5 h-1.5 rounded-full bg-ctp-sky-800 animate-pulse" />
                       </div>
                     ) : (
-                      <div className="w-6 h-6 rounded-full border-2 border-ctp-surface1 bg-ctp-mantle flex items-center justify-center text-[10px] font-bold text-ctp-subtext0 transition-colors">
+                      <div className="w-5 h-5 rounded-full border border-ctp-surface1 bg-ctp-mantle flex items-center justify-center text-[9px] font-bold text-ctp-subtext1 transition-colors group-hover:border-ctp-surface2 group-hover:text-ctp-text">
                         {index + 1}
                       </div>
                     )}
                   </div>
                   
-                  <div className="flex-1 pt-0.5">
+                  <div className="flex-1 pt-0.5 min-w-0">
                     <div className="flex items-center gap-3">
-                      <p className={`text-sm font-semibold leading-relaxed transition-colors tracking-tight
-                        ${step.completed ? "text-ctp-subtext0 line-through opacity-70" : "text-ctp-text"}
+                      <p className={`text-xs font-bold leading-relaxed transition-colors tracking-tight
+                        ${step.completed ? "text-ctp-subtext1 line-through opacity-60" : "text-ctp-text"}
                         ${isNextStep ? "text-ctp-sky-800" : ""}
-                        ${isUpcoming ? "text-ctp-subtext1 opacity-60" : "opacity-100"}
+                        ${isUpcoming ? "text-ctp-subtext1 opacity-60 font-medium" : ""}
                       `}>
                         {step.task}
                       </p>
                       {isNextStep && (
-                        <span className="px-1.5 py-0.5 rounded border border-ctp-sky-800/30 bg-ctp-sky-800/10 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest shrink-0">
+                        <span className="px-1.5 py-0.5 rounded bg-ctp-sky-800/10 text-[8px] font-bold text-ctp-sky-800 uppercase tracking-widest shrink-0 border border-ctp-sky-800/20">
                           Active
                         </span>
                       )}
                     </div>
                     
                     {isNextStep && (
-                      <p className="text-[10px] font-medium text-ctp-sky-800/60 mt-0.5 tracking-tight">
-                        {index === 0 ? "Initial requirement to start the process." : "Follow instructions in the guide to complete this step."}
+                      <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-tight mt-0.5 opacity-60">
+                        {index === 0 ? "Initial requirement" : "Instructional milestone"}
                       </p>
                     )}
                   </div>
@@ -372,52 +355,52 @@ const ChecklistCard = ({
       )}
 
       {nextStep && !inGuidePage && !isModal && (
-        <div className="px-6 mb-8 mt-4">
+        <div className="px-5 lg:px-6 mb-8 mt-2">
           <div 
-            className="flex items-start gap-4 p-5 rounded-xl border bg-ctp-sky-10 border-ctp-sky-300/20 cursor-pointer hover:bg-ctp-sky-50 transition-all shadow-sm group"
+            className="flex items-start gap-4 p-4 rounded-xl border border-ctp-surface1 bg-ctp-mantle/30 cursor-pointer hover:bg-ctp-mantle hover:border-ctp-sky-800/30 transition-all shadow-sm group shadow-inner"
             onClick={() => router.push(`/guides/${slug}`)}
           >
             <div className="shrink-0 mt-0.5">
-              <div className="w-10 h-10 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:scale-105 transition-transform">
-                <Scan size={20} />
+              <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:scale-105 transition-transform">
+                <Scan size={18} />
               </div>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-base font-semibold text-ctp-text line-clamp-1 tracking-tight">{nextStep.task}</p>
-              <p className="text-[10px] font-semibold text-ctp-sky-800 mt-1 uppercase tracking-wider flex items-center gap-1.5">
+              <p className="text-sm font-bold text-ctp-text line-clamp-1 tracking-tight">{nextStep.task}</p>
+              <p className="text-[9px] font-bold text-ctp-sky-800 mt-1 uppercase tracking-widest flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-ctp-sky-800" />
-                {nextStepIndex === 0 ? "Begin here" : nextStepIndex === steps.length - 1 ? "Last step" : "Next step"}
+                {nextStepIndex === 0 ? "Initial Step" : "Next Milestone"}
               </p>
             </div>
-            <ChevronRight size={20} className="text-ctp-subtext0 self-center group-hover:translate-x-1 transition-transform" />
+            <ChevronRight size={14} className="text-ctp-subtext1 self-center group-hover:translate-x-1 group-hover:text-ctp-sky-800 transition-all" />
           </div>
         </div>
       )}
 
       {!inGuidePage && !isModal && (
-        <div className="px-6 pb-6 pt-0">
+        <div className="px-5 lg:px-6 pb-6 pt-0 mt-auto">
           <button 
             onClick={() => router.push(`/guides/${slug}`)}
-            className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-ctp-base py-3.5 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-sm"
+            className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white py-2.5 rounded-lg font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-sm"
           >
-            Continue Workflow
+            Continue Roadmap
           </button>
         </div>
       )}
 
       {(inGuidePage || isModal || isBare) && !isLoggedIn && (
-        <div className={`${(isModal || isBare) ? "px-0 pb-8" : "p-8"} pt-4 mt-auto`}>
+        <div className={`${(isModal || isBare) ? "px-0 pb-8" : "p-6"} pt-4 mt-auto`}>
           <div className="space-y-4">
             <button 
               onClick={openAuthModal}
-              className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-ctp-base py-3.5 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-sm"
+              className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-md shadow-ctp-sky-800/10"
             >
-              <UserPlus size={20} />
-              Create Free Account
+              <UserPlus size={14} strokeWidth={2.5} />
+              Setup Tracking
             </button>
-            <div className="flex items-center justify-center gap-1.5 text-[10px] font-semibold text-ctp-subtext0 uppercase tracking-wider opacity-80">
+            <div className="flex items-center justify-center gap-1.5 text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">
               <ShieldCheck size={12} className="text-ctp-sky-800" />
-              <span>Secure Cloud Sync</span>
+              <span>Identity Sync Verified</span>
             </div>
           </div>
         </div>

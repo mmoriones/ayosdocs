@@ -152,38 +152,43 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
   return (
     <div className="min-h-screen bg-ctp-base font-sans pb-24">
       {/* NAVIGATION & HEADER */}
-      <div className="bg-ctp-base/80 border-b border-ctp-surface1 sticky top-0 z-50 backdrop-blur-md">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
-          <Link href="/bundles" className="flex items-center gap-2 text-ctp-subtext1 hover:text-ctp-sky transition-colors group">
-            <ArrowLeft size={16} />
-            <span className="text-sm font-medium hidden sm:inline">Back to Bundles</span>
-          </Link>
+      <div className="bg-ctp-base/80 border-b border-ctp-surface1 sticky top-0 z-50 backdrop-blur-md h-16 flex items-center">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 w-full flex items-center justify-between">
+          <div className="flex items-center gap-4 min-w-0">
+            <div className="w-10 h-10 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0 shadow-inner">
+              {getBundleIcon(bundle.id, { size: 20, className: "text-ctp-sky-800" })}
+            </div>
+            <div className="min-w-0">
+              <h2 className="text-sm font-bold text-ctp-text truncate tracking-tight">{bundle.title}</h2>
+              <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest block leading-none">{bundle.category}</span>
+            </div>
+          </div>
 
           <div className="flex items-center gap-6">
             <div className="hidden md:flex flex-col items-end">
-              <span className="text-[10px] font-semibold text-ctp-subtext0 uppercase tracking-wider">Global Progress</span>
-              <span className="text-xs font-medium text-ctp-text">{isTracked ? (stageStats.every(s => s.completed) ? 'Completed' : 'In Progress') : 'Not Started'}</span>
+              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Global Progress</span>
+              <span className="text-xs font-bold text-ctp-text">{isTracked ? (stageStats.every(s => s.completed) ? 'Completed' : 'In Progress') : 'Not Active'}</span>
             </div>
             <button 
               onClick={handleToggleTracking}
               disabled={isLoading}
-              className={`px-4 py-2 rounded-lg text-sm font-semibold shadow-sm active:scale-95 transition-all flex items-center gap-2 ${
+              className={`px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest shadow-sm active:scale-95 transition-all flex items-center gap-2 ${
                 isTracked 
-                  ? 'bg-ctp-surface0 text-ctp-text hover:bg-ctp-surface1' 
-                  : 'bg-ctp-sky text-ctp-base hover:bg-ctp-sky/90'
+                  ? 'bg-ctp-mantle text-ctp-text border border-ctp-surface1 hover:bg-ctp-base' 
+                  : 'bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90'
               }`}
             >
               {isLoading ? (
-                <Loader2 size={16} className="animate-spin" />
+                <Loader2 size={14} className="animate-spin" />
               ) : isTracked ? (
                 <>
-                  <PauseCircle size={16} />
+                  <PauseCircle size={14} />
                   Stop Tracking
                 </>
               ) : (
                 <>
-                  <PlayCircle size={16} />
-                  Start Workflow
+                  <PlayCircle size={14} />
+                  Start Roadmap
                 </>
               )}
             </button>
@@ -191,105 +196,105 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-12">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10">
         
         {isLoggedIn && !isVerified && (
-          <div className="mb-12 animate-shake">
-            <div className="bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-              <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-xl bg-ctp-base border border-ctp-yellow-800/20 flex items-center justify-center text-ctp-yellow-800 shrink-0 shadow-sm">
-                  <ShieldAlert size={28} />
+          <div className="mb-10 animate-shake">
+            <div className="bg-ctp-yellow/5 border border-ctp-yellow/20 rounded-xl p-5 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-ctp-base border border-ctp-yellow/20 flex items-center justify-center text-ctp-yellow shrink-0">
+                  <ShieldAlert size={24} />
                 </div>
-                <div className="space-y-1 text-center md:text-left">
-                  <h3 className="text-lg font-bold text-ctp-yellow-800 tracking-tight">Tracking Restricted</h3>
-                  <p className="text-sm text-ctp-yellow-800/80 font-medium leading-relaxed">
-                    You can view this roadmap, but syncing progress to your dashboard requires a verified email.
+                <div className="space-y-0.5 text-center md:text-left">
+                  <h3 className="text-base font-bold text-ctp-text tracking-tight">Email Verification Required</h3>
+                  <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed">
+                    You can view this roadmap, but syncing progress requires a verified email.
                   </p>
                 </div>
               </div>
               <button 
                 onClick={handleResendVerification}
                 disabled={isResending}
-                className="px-6 py-2.5 bg-ctp-yellow-800 text-ctp-base rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-md shrink-0 flex items-center gap-2"
+                className="px-5 py-2 bg-ctp-yellow/10 text-ctp-yellow rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-ctp-yellow/20 transition-all shadow-sm shrink-0 flex items-center gap-2"
               >
                 {isResending ? (
                   <>
-                    <Loader2 size={14} className="animate-spin" />
+                    <Loader2 size={12} className="animate-spin" />
                     Sending...
                   </>
                 ) : (
-                  'Resend Verification'
+                  'Resend Link'
                 )}
               </button>
             </div>
           </div>
         )}
 
-        <div className="flex flex-col lg:flex-row gap-16">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
           
           {/* LEFT CONTENT: WORKFLOW TIMELINE */}
           <div className="flex-1 space-y-12">
             <header className="space-y-6">
-              <div className="flex items-center gap-5">
-                <div className="w-16 h-16 rounded-xl bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shadow-sm">
-                  {getBundleIcon(bundle.id)}
+              <div className="flex items-center gap-6">
+                <div className="w-14 h-14 rounded-xl bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shadow-inner">
+                  {getBundleIcon(bundle.id, { size: 24, className: "text-ctp-sky-800" })}
                 </div>
-                <div>
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="text-[10px] font-bold text-ctp-sky uppercase tracking-wider px-2 py-0.5 bg-ctp-sky/10 rounded-md border border-ctp-sky/20">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest px-2 py-0.5 bg-ctp-sky-800/5 rounded border border-ctp-sky-800/20">
                       {bundle.category}
                     </span>
-                    <span className="text-[10px] font-semibold text-ctp-subtext0 uppercase tracking-wider">
-                      Roadmap
+                    <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-80">
+                      Roadmap View
                     </span>
                   </div>
-                  <h1 className="text-3xl md:text-4xl font-bold text-ctp-text tracking-tight">
+                  <h1 className="text-3xl font-bold text-ctp-text tracking-tight leading-none">
                     {bundle.title}
                   </h1>
                 </div>
               </div>
-              <p className="text-lg text-ctp-subtext1 leading-relaxed max-w-2xl">
+              <p className="text-sm text-ctp-subtext1 leading-relaxed max-w-2xl font-medium">
                 {bundle.description}
               </p>
             </header>
 
             <div className="relative">
               {/* VERTICAL LINE */}
-              <div className="absolute left-8 top-10 bottom-10 w-px bg-ctp-surface1" />
+              <div className="absolute left-7 top-10 bottom-10 w-0.5 bg-ctp-surface1/50" />
 
-              <div className="space-y-20">
+              <div className="space-y-16">
                 {stageStats.map((step, stepIdx) => {
                   const isLocked = step.step > activeStage && !isTracked;
                   const isCurrent = step.step === activeStage && isTracked;
                   
                   return (
-                    <div key={stepIdx} className={`relative pl-24 group transition-opacity duration-500 ${isLocked ? 'opacity-40 grayscale pointer-events-none' : 'opacity-100'}`}>
+                    <div key={stepIdx} className={`relative pl-20 transition-all duration-500 ${isLocked ? 'opacity-40 grayscale pointer-events-none' : 'opacity-100'}`}>
                       {/* STEP INDICATOR */}
-                      <div className={`absolute left-0 top-0 w-16 h-16 rounded-xl flex items-center justify-center border-2 transition-all duration-500 z-10 shadow-sm ${
+                      <div className={`absolute left-0 top-0 w-14 h-14 rounded-xl flex items-center justify-center border-2 transition-all duration-500 z-10 shadow-sm ${
                         step.completed 
-                          ? 'bg-ctp-green border-ctp-green text-ctp-base scale-100' 
+                          ? 'bg-ctp-green border-ctp-green text-white scale-95' 
                           : step.step <= activeStage
-                            ? 'bg-ctp-sky border-ctp-sky text-ctp-base scale-105 shadow-md shadow-ctp-sky/10' 
+                            ? 'bg-ctp-sky-800 border-ctp-sky-800 text-white scale-100 shadow-lg shadow-ctp-sky-800/20' 
                             : 'bg-ctp-base border-ctp-surface1 text-ctp-subtext1'
                       }`}>
-                        {step.completed ? <CheckCircle2 size={24} /> : <span className="text-xl font-bold">{step.step}</span>}
+                        {step.completed ? <CheckCircle size={20} strokeWidth={3} /> : <span className="text-lg font-bold">{step.step}</span>}
                       </div>
 
-                      <div className="space-y-8">
-                        <div>
-                          <div className="flex items-center gap-3 mb-2">
-                            <h2 className="text-[10px] font-bold text-ctp-sky uppercase tracking-wider">Stage {step.step}</h2>
+                      <div className="space-y-6">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-3">
+                            <h2 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-70">Stage {step.step}</h2>
                             {step.completed && (
-                              <span className="px-2 py-0.5 bg-ctp-green/10 text-ctp-green border border-ctp-green/20 rounded-md text-[8px] font-bold uppercase tracking-wider">Complete</span>
+                              <span className="px-2 py-0.5 bg-ctp-green/10 text-ctp-green border border-ctp-green/20 rounded text-[9px] font-bold uppercase tracking-widest">Complete</span>
                             )}
                             {isCurrent && (
-                              <span className="px-2 py-0.5 bg-ctp-sky/10 text-ctp-sky border border-ctp-sky/20 rounded-md text-[8px] font-bold uppercase tracking-wider animate-pulse">Current Focus</span>
+                              <span className="px-2 py-0.5 bg-ctp-sky-800/10 text-ctp-sky-800 border border-ctp-sky-800/20 rounded text-[9px] font-bold uppercase tracking-widest animate-pulse">Current Focus</span>
                             )}
                           </div>
-                          <h3 className="text-2xl font-bold text-ctp-text tracking-tight">{step.label}</h3>
+                          <h3 className="text-xl font-bold text-ctp-text tracking-tight">{step.label}</h3>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                           {step.guides.map((guideSlug) => {
                             const guide = allGuides.find(g => g.slug === guideSlug);
                             const progress = getGuideProgress(guideSlug);
@@ -301,6 +306,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                                 progress={progress}
                                 showAgency={true}
                                 showBookmark={true}
+                                showFooter={true}
                               />
                             );
                           })}
@@ -314,80 +320,82 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
           </div>
 
           {/* RIGHT SIDEBAR: BUNDLE STATS & ADVICE */}
-          <aside className="w-full lg:w-96 shrink-0 space-y-8">
-            <div className="bg-ctp-base rounded-xl p-6 border border-ctp-surface1 shadow-sm space-y-8 sticky top-24">
+          <aside className="w-full lg:w-80 shrink-0 space-y-6">
+            <div className="space-y-6 sticky top-24">
               
               {!isLoggedIn && (
-                <div className="bg-ctp-sky-800 text-ctp-base rounded-xl p-5 space-y-4 shadow-md relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-ctp-base/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
+                <div className="bg-ctp-sky-800 text-white rounded-xl p-5 space-y-4 shadow-lg shadow-ctp-sky-800/20 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
                   <div className="flex items-center gap-3 relative z-10">
-                    <Lock size={20} />
-                    <h4 className="text-xs font-bold uppercase tracking-tight">Sync Progress</h4>
+                    <Lock size={18} strokeWidth={2.5} />
+                    <h4 className="text-[10px] font-bold uppercase tracking-widest">Cloud Sync</h4>
                   </div>
-                  <p className="text-[11px] font-semibold leading-relaxed relative z-10 opacity-90">
-                    Sign in to track this bundle and save your progress across devices.
+                  <p className="text-xs font-medium leading-relaxed relative z-10 opacity-90">
+                    Sign in to track this roadmap and save your progress across all devices.
                   </p>
                   <button 
                     onClick={openAuthModal}
-                    className="w-full py-2.5 bg-ctp-base text-ctp-sky-800 rounded-lg font-bold text-[11px] uppercase tracking-widest hover:bg-ctp-base/90 transition-all shadow-sm relative z-10"
+                    className="w-full py-2 bg-white text-ctp-sky-800 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-opacity-90 transition-all shadow-sm relative z-10"
                   >
-                    Get Started
+                    Authenticate
                   </button>
                 </div>
               )}
 
-              <div className="space-y-4">
-                <h3 className="text-xs font-bold text-ctp-text uppercase tracking-wider">Workflow Insights</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3.5 bg-ctp-mantle rounded-xl border border-ctp-surface1">
+              <div className="bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
+                <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50">
+                  <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Workflow Insights</h3>
+                </div>
+                <div className="divide-y divide-ctp-surface1/50">
+                  <div className="flex items-center justify-between p-4 hover:bg-ctp-mantle/30 transition-colors">
                     <div className="flex items-center gap-3">
-                      <CheckCircle2 size={16} className="text-ctp-green" />
-                      <span className="text-xs font-semibold text-ctp-subtext1">Total Tasks</span>
+                      <CheckCircle2 size={14} className="text-ctp-green" />
+                      <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Documents</span>
                     </div>
-                    <span className="text-sm font-bold text-ctp-text">{totalGuides}</span>
+                    <span className="text-xs font-bold text-ctp-text">{totalGuides}</span>
                   </div>
-                  <div className="flex items-center justify-between p-3.5 bg-ctp-mantle rounded-xl border border-ctp-surface1">
+                  <div className="flex items-center justify-between p-4 hover:bg-ctp-mantle/30 transition-colors">
                     <div className="flex items-center gap-3">
-                      <Clock size={16} className="text-ctp-sky" />
-                      <span className="text-xs font-semibold text-ctp-subtext1">Est. Duration</span>
+                      <Clock size={14} className="text-ctp-sky-800" />
+                      <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Duration</span>
                     </div>
-                    <span className="text-sm font-bold text-ctp-text">~2-4 Weeks</span>
+                    <span className="text-xs font-bold text-ctp-text">~3 Weeks</span>
                   </div>
-                  <div className="flex items-center justify-between p-3.5 bg-ctp-mantle rounded-xl border border-ctp-surface1">
+                  <div className="flex items-center justify-between p-4 hover:bg-ctp-mantle/30 transition-colors">
                     <div className="flex items-center gap-3">
-                      <AlertCircle size={16} className="text-ctp-yellow" />
-                      <span className="text-xs font-semibold text-ctp-subtext1">Complexity</span>
+                      <AlertCircle size={14} className="text-ctp-yellow" />
+                      <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Complexity</span>
                     </div>
-                    <span className="text-sm font-bold text-ctp-text">Moderate</span>
+                    <span className="text-xs font-bold text-ctp-text uppercase tracking-widest">Normal</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-5 bg-ctp-sky/5 rounded-xl border border-ctp-sky/10 space-y-3">
-                <div className="flex items-center gap-3 text-ctp-sky">
+              <div className="p-5 bg-ctp-mantle border border-ctp-surface1 rounded-xl space-y-3 shadow-sm">
+                <div className="flex items-center gap-3 text-ctp-sky-800">
                   <Info size={16} />
-                  <h4 className="text-[10px] font-bold uppercase tracking-wider">Pro Tip</h4>
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest">Roadmap Tip</h4>
                 </div>
-                <p className="text-xs text-ctp-subtext1 leading-relaxed">
-                  Start with <strong className="text-ctp-text">Stage 1</strong>. These are foundational documents that you will likely need to present when applying for the items in later stages.
+                <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
+                  Focus on <strong className="text-ctp-text">Stage 1</strong> items first. These foundational documents are often required as prerequisites for subsequent stages.
                 </p>
               </div>
 
               <button 
                 onClick={handleToggleTracking}
                 disabled={isLoading}
-                className={`w-full py-4 rounded-xl font-bold text-sm shadow-md active:scale-95 transition-all ${
+                className={`w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2 ${
                   isTracked 
-                    ? 'bg-ctp-surface0 text-ctp-text hover:bg-ctp-surface1' 
-                    : 'bg-ctp-sky text-ctp-base hover:bg-ctp-sky/90 shadow-ctp-sky/10'
+                    ? 'bg-ctp-mantle text-ctp-text border border-ctp-surface1 hover:bg-ctp-base' 
+                    : 'bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90 shadow-lg shadow-ctp-sky-800/10'
                 }`}
               >
                 {isLoading ? (
-                  <Loader2 size={18} className="animate-spin mx-auto" />
+                  <Loader2 size={16} className="animate-spin" />
                 ) : isTracked ? (
-                  'Stop Tracking This Goal'
+                  'Disable Roadmap'
                 ) : (
-                  'Add to My Docs'
+                  'Activate Workflow'
                 )}
               </button>
             </div>

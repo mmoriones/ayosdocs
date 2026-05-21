@@ -7,26 +7,24 @@ import {
   Users, 
   Building2, 
   Info, 
-  Search, 
   MapPin, 
   ChevronRight, 
   CheckCircle2, 
   AlertCircle,
-  Camera,
   ArrowRight,
   ShieldCheck,
   Zap,
   HelpCircle,
   MessageSquare,
   Lock,
-  ShieldAlert
+  ShieldAlert,
+  Loader2
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import Banner from '@/components/ui/Banner';
+import PageHeader from '@/components/ui/PageHeader';
 import { useToast } from '@/context/ToastContext';
 import { useAuthUI } from '@/components/Providers';
-import Image from 'next/image';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 
@@ -35,12 +33,12 @@ const STAR_VALUES = [1, 2, 3, 4, 5];
  */
 const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, onHover, disabled }) => {
   return (
-    <div className={`bg-ctp-mantle border border-ctp-surface1 rounded-xl p-5 flex flex-col items-center text-center shadow-sm transition-all ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-ctp-surface2'}`}>
-      <div className="w-10 h-10 rounded-lg bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 mb-3">
-        <Icon size={20} />
+    <div className={`bg-ctp-base border border-ctp-surface1 rounded-xl p-5 flex flex-col items-center text-center shadow-sm transition-all ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-ctp-sky-800/30 group'}`}>
+      <div className="w-10 h-10 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 mb-3 group-hover:scale-105 transition-transform shadow-inner">
+        <Icon size={18} />
       </div>
-      <h4 className="text-xs font-semibold text-ctp-subtext1 mb-3 uppercase tracking-wider">{label}</h4>
-      <div className="flex items-center gap-1">
+      <h4 className="text-[10px] font-bold text-ctp-subtext1 mb-3 uppercase tracking-widest leading-none">{label}</h4>
+      <div className="flex items-center gap-1.5">
         {STAR_VALUES.map((star) => (
           <button
             key={star}
@@ -49,14 +47,14 @@ const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, o
             onClick={() => onClick(category, star)}
             onMouseEnter={() => !disabled && onHover(category, star)}
             onMouseLeave={() => !disabled && onHover(category, 0)}
-            className={`transition-transform ${!disabled ? 'active:scale-90' : 'cursor-not-allowed'}`}
+            className={`transition-all ${!disabled ? 'active:scale-90' : 'cursor-not-allowed'}`}
           >
             <Star
-              size={20}
+              size={18}
               className={`${
                 star <= (hoverValue || value)
                   ? 'fill-ctp-yellow text-ctp-yellow'
-                  : 'text-ctp-surface2'
+                  : 'text-ctp-surface1'
               } transition-colors`}
             />
           </button>
@@ -70,10 +68,10 @@ const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, o
  * RadioGroup component for the experience reporting form.
  */
 const RadioGroup = ({ label, name, options, value, onChange, tooltip, disabled }) => (
-  <div className={`py-5 border-b border-ctp-surface1 last:border-0 flex flex-col md:flex-row md:items-center justify-between gap-4 ${disabled ? 'opacity-50 pointer-events-none' : ''}`}>
+  <div className={`py-4 border-b border-ctp-surface1 last:border-0 flex flex-col md:flex-row md:items-center justify-between gap-4 ${disabled ? 'opacity-50 pointer-events-none' : ''}`}>
     <div className="flex items-center gap-2">
-      <label className="text-sm font-semibold text-ctp-text">{label}</label>
-      {tooltip && <Info size={14} className="text-ctp-subtext0 cursor-help" />}
+      <label className="text-xs font-bold text-ctp-text uppercase tracking-tight">{label}</label>
+      {tooltip && <Info size={12} className="text-ctp-subtext1 cursor-help" />}
     </div>
     <div className="flex flex-wrap items-center gap-4">
       {options.map((option) => (
@@ -86,11 +84,11 @@ const RadioGroup = ({ label, name, options, value, onChange, tooltip, disabled }
               disabled={disabled}
               checked={value === option.value}
               onChange={(e) => onChange(e.target.value)}
-              className="peer appearance-none w-4 h-4 rounded-full border border-ctp-surface2 checked:border-ctp-sky-800 transition-all cursor-pointer bg-ctp-base disabled:cursor-not-allowed"
+              className="peer appearance-none w-4 h-4 rounded-full border border-ctp-surface1 bg-ctp-mantle checked:bg-ctp-sky-800 checked:border-ctp-sky-800 transition-all cursor-pointer shadow-inner"
             />
-            <div className="absolute w-2 h-2 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+            <div className="absolute w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
           </div>
-          <span className={`text-sm transition-colors ${value === option.value ? 'font-semibold text-ctp-text' : 'text-ctp-subtext1 group-hover:text-ctp-text'}`}>
+          <span className={`text-[11px] font-bold uppercase tracking-tight transition-colors ${value === option.value ? 'text-ctp-text' : 'text-ctp-subtext1 group-hover:text-ctp-text'}`}>
             {option.label}
           </span>
         </label>
@@ -101,7 +99,6 @@ const RadioGroup = ({ label, name, options, value, onChange, tooltip, disabled }
 
 /**
  * RateClient Component
- * Handles the structured experience reporting for government offices.
  */
 export default function RateClient() {
   const router = useRouter();
@@ -197,29 +194,29 @@ export default function RateClient() {
 
   if (showSuccess) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center p-6">
-        <div className="max-w-md w-full bg-ctp-base rounded-2xl border border-ctp-surface1 p-8 md:p-10 text-center space-y-8 shadow-sm">
-          <div className="w-20 h-20 bg-ctp-green/10 rounded-full flex items-center justify-center mx-auto text-ctp-green border border-ctp-green/20">
+      <div className="min-h-[80vh] flex items-center justify-center p-6 bg-ctp-base">
+        <div className="max-w-md w-full bg-ctp-base rounded-xl border border-ctp-surface1 p-10 text-center space-y-8 shadow-sm">
+          <div className="w-20 h-20 bg-ctp-green/10 rounded-2xl flex items-center justify-center mx-auto text-ctp-green border border-ctp-green/20">
             <CheckCircle2 size={40} />
           </div>
-          <div className="space-y-3">
-            <h2 className="text-2xl font-bold text-ctp-text">Report Received!</h2>
-            <p className="text-base text-ctp-subtext1 leading-relaxed">
-              Your contribution helps fellow Filipinos navigate government services with more confidence. Your report will be visible after a short moderation period.
+          <div className="space-y-2">
+            <h2 className="text-2xl font-bold text-ctp-text tracking-tight uppercase">Report Received</h2>
+            <p className="text-sm text-ctp-subtext1 leading-relaxed font-medium">
+              Your contribution helps fellow Filipinos navigate government services with more confidence.
             </p>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 pt-4">
             <button 
               onClick={() => router.push('/offices')}
-              className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-ctp-base py-3.5 rounded-xl font-semibold transition-all active:scale-[0.98]"
+              className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white py-3 rounded-lg font-bold uppercase tracking-widest text-[10px] transition-all shadow-md active:scale-[0.98]"
             >
               Back to Offices
             </button>
             <button 
               onClick={() => setShowSuccess(false)}
-              className="w-full py-3.5 rounded-xl font-semibold text-ctp-subtext1 hover:bg-ctp-mantle transition-all text-sm"
+              className="w-full py-3 rounded-lg font-bold uppercase tracking-widest text-[10px] text-ctp-subtext1 hover:bg-ctp-mantle transition-all border border-ctp-surface1"
             >
-              Submit Another Report
+              Submit Another
             </button>
           </div>
         </div>
@@ -228,353 +225,245 @@ export default function RateClient() {
   }
 
   return (
-    <div className="min-h-screen bg-ctp-base font-sans pb-20 text-ctp-text">
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-8 py-10">
+    <div className="min-h-screen bg-ctp-base font-sans pb-20">
+      <PageHeader 
+        icon={Star}
+        title="Report Experience"
+        description="Share real-world insights to help other Filipinos navigate this office better."
+        actions={
+          <div className="bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-ctp-green animate-pulse shadow-[0_0_8px_rgba(166,227,161,0.5)]" />
+            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Public Contribution</span>
+          </div>
+        }
+      />
+
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-10">
         
-        <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 text-ctp-sky-800">
-              <MessageSquare size={18} />
-              <span className="text-xs font-semibold uppercase tracking-wider">Experience Sharing</span>
-            </div>
-            <h1 className="text-3xl font-bold text-ctp-text tracking-tight">Share Your Experience</h1>
-            <p className="text-ctp-subtext1 text-lg">Help others by providing structured, honest feedback about government offices.</p>
-          </div>
-          <div className="bg-ctp-mantle border border-ctp-surface1 rounded-xl px-5 py-3 flex items-center gap-3">
-            <div className={`w-9 h-9 rounded-full flex items-center justify-center ${isVerified ? 'bg-ctp-sky-800/10 text-ctp-sky-800 border-ctp-sky-800/20' : 'bg-ctp-yellow-800/10 text-ctp-yellow-800 border-ctp-yellow-800/20'} border`}>
-              {isVerified ? <ShieldCheck size={18} /> : <ShieldAlert size={18} />}
-            </div>
-            <div>
-              <p className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">{isVerified ? 'Verified Reporter' : 'Verification Required'}</p>
-              <p className="text-[10px] text-ctp-subtext1 font-semibold uppercase tracking-tight">{isVerified ? 'Trusted contributor' : 'To prevent spam'}</p>
-            </div>
-          </div>
-        </header>
-
-        {isLoggedIn && !isVerified && (
-          <div className="mb-10">
-            <div className="bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-              <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-xl bg-ctp-base border border-ctp-yellow-800/20 flex items-center justify-center text-ctp-yellow-800 shrink-0 shadow-sm">
-                  <ShieldAlert size={28} />
-                </div>
-                <div className="space-y-1 text-center md:text-left">
-                  <h3 className="text-lg font-bold text-ctp-yellow-800 tracking-tight">Publication Locked</h3>
-                  <p className="text-sm text-ctp-yellow-800/80 font-medium leading-relaxed">
-                    You can fill out the form, but publishing requires a verified email address to ensure community authenticity.
-                  </p>
-                </div>
-              </div>
-              <button 
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="px-6 py-2.5 bg-ctp-yellow-800 text-ctp-base rounded-xl font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-all shadow-md shrink-0"
-              >
-                Verify Email Now
-              </button>
-            </div>
-          </div>
-        )}
-
-        {!isLoggedIn && (
-          <div className="mb-10">
-            <div className="bg-ctp-sky-800 text-ctp-base rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-ctp-base/5 rounded-full -translate-x-1/2 -translate-y-1/2" />
-              <div className="flex items-center gap-5 relative z-10">
-                <div className="w-14 h-14 rounded-xl bg-ctp-base/10 border border-ctp-base/20 flex items-center justify-center text-ctp-base shrink-0">
+        {!isLoggedIn || !isVerified ? (
+          <div className="max-w-2xl mx-auto py-12">
+            <div className="bg-ctp-base border border-ctp-surface1 rounded-xl p-12 text-center space-y-6 shadow-sm relative overflow-hidden group">
+               <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(var(--sky-800)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+               <div className="w-16 h-16 bg-ctp-mantle border border-ctp-surface1 rounded-2xl flex items-center justify-center mx-auto text-ctp-subtext1 mb-4 shadow-inner relative z-10">
                   <Lock size={28} />
-                </div>
-                <div className="space-y-1 text-center md:text-left">
-                  <h3 className="text-lg font-bold uppercase tracking-tight">Sign in to Contribute</h3>
-                  <p className="text-sm text-ctp-base/80 font-semibold">
-                    Join the community to share your government service experiences.
+               </div>
+               <div className="space-y-2 relative z-10">
+                  <h3 className="text-xl font-bold text-ctp-text uppercase tracking-tight">Authentication Required</h3>
+                  <p className="text-sm text-ctp-subtext1 font-medium max-w-sm mx-auto">
+                    To maintain report quality, only verified community members can submit office experiences.
                   </p>
-                </div>
-              </div>
-              <button 
-                onClick={openAuthModal}
-                className="px-8 py-3 bg-ctp-base text-ctp-sky-800 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-ctp-base/90 transition-all shadow-xl active:scale-95 shrink-0 relative z-10"
-              >
-                Sign In / Register
-              </button>
+               </div>
+               <button 
+                 onClick={openAuthModal}
+                 className="px-10 py-3 bg-ctp-sky-800 text-white rounded-lg font-bold text-[10px] uppercase tracking-widest shadow-md hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all relative z-10"
+               >
+                 Sign in to Unlock
+               </button>
             </div>
           </div>
-        )}
-
-        <form onSubmit={handleSubmit} className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-start ${(isLoggedIn && !isVerified) ? '' : (!isLoggedIn ? 'opacity-50 pointer-events-none' : '')}`}>
-          
-          <div className="lg:col-span-8 space-y-8">
-            
-            <section className="bg-ctp-base rounded-2xl border border-ctp-surface1 p-6 md:p-10 space-y-10 shadow-sm">
-              <div className="flex items-center gap-4 border-b border-ctp-surface1 pb-6">
-                <div className="w-10 h-10 rounded-xl bg-ctp-sky-800 text-ctp-base flex items-center justify-center">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-ctp-text">Office Details</h2>
-                  <p className="text-xs text-ctp-subtext1 font-semibold uppercase tracking-wider mt-0.5">Which branch did you visit?</p>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-ctp-subtext1 uppercase tracking-wider ml-1">Government Agency</label>
-                  <div className="relative">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-ctp-subtext0" size={16} />
-                    <select 
-                      required
-                      value={formData.agency}
-                      onChange={(e) => setFormData({...formData, agency: e.target.value})}
-                      className="w-full pl-11 pr-6 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-sm font-medium focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all appearance-none cursor-pointer"
-                    >
-                      <option value="">Select Agency</option>
-                      <option value="DFA">DFA</option>
-                      <option value="PSA">PSA</option>
-                      <option value="NBI">NBI</option>
-                      <option value="SSS">SSS</option>
-                      <option value="LTO">LTO</option>
-                      <option value="PhilHealth">PhilHealth</option>
-                      <option value="PAG-IBIG">PAG-IBIG</option>
-                    </select>
+        ) : (
+          <div className="flex flex-col lg:flex-row gap-10">
+            <div className="flex-1 min-w-0 space-y-10">
+              <form onSubmit={handleSubmit} className="space-y-10">
+                {/* Office Details */}
+                <section className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                  <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-4">
+                    <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm">
+                      <MapPin size={18} />
+                    </div>
+                    <div>
+                      <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest leading-none">Office Details</h2>
+                      <p className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-1 opacity-70">Which branch did you visit?</p>
+                    </div>
                   </div>
-                </div>
+                  
+                  <div className="p-8 grid md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Government Agency</label>
+                      <select 
+                        required
+                        value={formData.agency}
+                        onChange={(e) => setFormData({...formData, agency: e.target.value})}
+                        className="w-full px-4 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg text-sm font-bold uppercase tracking-wider text-ctp-text focus:outline-none focus:border-ctp-sky-800 transition-all outline-none"
+                      >
+                        <option value="">Select Agency</option>
+                        {['DFA', 'PSA', 'NBI', 'SSS', 'LTO', 'PhilHealth', 'PAG-IBIG'].map(a => (
+                          <option key={a} value={a}>{a}</option>
+                        ))}
+                      </select>
+                    </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-ctp-subtext1 uppercase tracking-wider ml-1">Branch Location</label>
-                  <div className="relative">
-                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-ctp-subtext0" size={16} />
-                    <input 
-                      required
-                      type="text" 
-                      minLength={3}
-                      maxLength={100}
-                      placeholder="e.g. SM Manila, Quezon City Hall"
-                      value={formData.branch}
-                      onChange={(e) => setFormData({...formData, branch: e.target.value})}
-                      className="w-full pl-11 pr-6 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-sm font-medium focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all placeholder:text-ctp-subtext0/50"
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Branch Location</label>
+                      <input 
+                        required
+                        type="text" 
+                        placeholder="e.g. SM Manila, QC Hall"
+                        value={formData.branch}
+                        onChange={(e) => setFormData({...formData, branch: e.target.value})}
+                        className="w-full px-4 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all outline-none"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Date of Visit</label>
+                      <input 
+                        required
+                        type="date" 
+                        max={new Date().toISOString().split('T')[0]}
+                        value={formData.dateVisited}
+                        onChange={(e) => setFormData({...formData, dateVisited: e.target.value})}
+                        className="w-full px-4 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all outline-none"
+                      />
+                    </div>
+                  </div>
+                </section>
+
+                {/* Performance Ratings */}
+                <section className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                  <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-4">
+                    <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-yellow shadow-sm">
+                      <Star size={18} />
+                    </div>
+                    <div>
+                      <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest leading-none">Performance Ratings</h2>
+                      <p className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-1 opacity-70">Rate based on your actual experience.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="p-8 grid grid-cols-2 md:grid-cols-4 gap-5">
+                    <StarRating category="speed" label="Processing Speed" icon={Clock} value={formData.ratings.speed} hoverValue={hoverRatings.speed} onClick={handleRatingClick} onHover={handleHoverRating} />
+                    <StarRating category="friendliness" label="Staff Behavior" icon={Users} value={formData.ratings.friendliness} hoverValue={hoverRatings.friendliness} onClick={handleRatingClick} onHover={handleHoverRating} />
+                    <StarRating category="management" label="Queue Flow" icon={Users} value={formData.ratings.management} hoverValue={hoverRatings.management} onClick={handleRatingClick} onHover={handleHoverRating} />
+                    <StarRating category="cleanliness" label="Environment" icon={Building2} value={formData.ratings.cleanliness} hoverValue={hoverRatings.cleanliness} onClick={handleRatingClick} onHover={handleHoverRating} />
+                  </div>
+                </section>
+
+                {/* Detailed Insights */}
+                <section className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                  <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-4">
+                    <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-peach shadow-sm">
+                      <CheckCircle2 size={18} />
+                    </div>
+                    <div>
+                      <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest leading-none">Detailed Insights</h2>
+                      <p className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-1 opacity-70">Helpful context for other applicants.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-8 bg-ctp-mantle/30 divide-y divide-ctp-surface1/50">
+                    <RadioGroup 
+                      label="Appointment Availability" 
+                      name="appointment"
+                      options={[{ label: 'Easy', value: 'easy' }, { label: 'Moderate', value: 'moderate' }, { label: 'Difficult', value: 'difficult' }]}
+                      value={formData.appointment}
+                      onChange={(val) => setFormData({...formData, appointment: val})}
+                    />
+                    <RadioGroup 
+                      label="Actual Waiting Time" 
+                      name="waitingTime"
+                      options={[{ label: '< 1 Hour', value: 'fast' }, { label: '1–3 Hours', value: 'medium' }, { label: 'Whole Day', value: 'slow' }]}
+                      value={formData.waitingTime}
+                      onChange={(val) => setFormData({...formData, waitingTime: val})}
+                    />
+                    <RadioGroup 
+                      label="Extra requirements requested?" 
+                      name="extraRequirements"
+                      options={[{ label: 'No', value: 'no' }, { label: 'Yes', value: 'yes' }]}
+                      value={formData.extraRequirements}
+                      onChange={(val) => setFormData({...formData, extraRequirements: val})}
                     />
                   </div>
-                </div>
+                </section>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-bold text-ctp-subtext1 uppercase tracking-wider ml-1">Date of Visit</label>
-                  <input 
-                    required
-                    type="date" 
-                    max={new Date().toISOString().split('T')[0]}
-                    value={formData.dateVisited}
-                    onChange={(e) => setFormData({...formData, dateVisited: e.target.value})}
-                    className="w-full px-6 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-sm font-medium focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all cursor-pointer"
-                  />
-                </div>
-              </div>
-            </section>
-
-            <section className="bg-ctp-base rounded-2xl border border-ctp-surface1 p-6 md:p-10 space-y-10 shadow-sm">
-              <div className="flex items-center gap-4 border-b border-ctp-surface1 pb-6">
-                <div className="w-10 h-10 rounded-xl bg-ctp-yellow text-ctp-base flex items-center justify-center">
-                  <Star size={20} />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-ctp-text">Performance Ratings</h2>
-                  <p className="text-xs text-ctp-subtext1 font-semibold uppercase tracking-wider mt-0.5">Rate based on your actual experience.</p>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <StarRating 
-                  category="speed" 
-                  label="Processing Speed" 
-                  icon={Clock} 
-                  value={formData.ratings.speed}
-                  hoverValue={hoverRatings.speed}
-                  onClick={handleRatingClick}
-                  onHover={handleHoverRating}
-                  disabled={!isLoggedIn}
-                />
-                <StarRating 
-                  category="friendliness" 
-                  label="Staff Friendliness" 
-                  icon={Users} 
-                  value={formData.ratings.friendliness}
-                  hoverValue={hoverRatings.friendliness}
-                  onClick={handleRatingClick}
-                  onHover={handleHoverRating}
-                  disabled={!isLoggedIn}
-                />
-                <StarRating 
-                  category="management" 
-                  label="Queue Management" 
-                  icon={Users} 
-                  value={formData.ratings.management}
-                  hoverValue={hoverRatings.management}
-                  onClick={handleRatingClick}
-                  onHover={handleHoverRating}
-                  disabled={!isLoggedIn}
-                />
-                <StarRating 
-                  category="cleanliness" 
-                  label="Facility Cleanliness" 
-                  icon={Building2} 
-                  value={formData.ratings.cleanliness}
-                  hoverValue={hoverRatings.cleanliness}
-                  onClick={handleRatingClick}
-                  onHover={handleHoverRating}
-                  disabled={!isLoggedIn}
-                />
-              </div>
-            </section>
-
-            <section className="bg-ctp-base rounded-2xl border border-ctp-surface1 p-6 md:p-10 space-y-10 shadow-sm">
-              <div className="flex items-center gap-4 border-b border-ctp-surface1 pb-6">
-                <div className="w-10 h-10 rounded-xl bg-ctp-peach text-ctp-base flex items-center justify-center">
-                  <CheckCircle2 size={20} />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-ctp-text">Specific Insights</h2>
-                  <p className="text-xs text-ctp-subtext1 font-semibold uppercase tracking-wider mt-0.5">Helpful details for fellow applicants.</p>
-                </div>
-              </div>
-
-              <div className="bg-ctp-mantle rounded-xl border border-ctp-surface1 p-6 shadow-sm">
-                <RadioGroup 
-                  label="Appointment Availability" 
-                  name="appointment"
-                  options={[
-                    { label: 'Easy', value: 'easy' },
-                    { label: 'Moderate', value: 'moderate' },
-                    { label: 'Difficult', value: 'difficult' }
-                  ]}
-                  value={formData.appointment}
-                  onChange={(val) => setFormData({...formData, appointment: val})}
-                  tooltip
-                  disabled={!isLoggedIn}
-                />
-                <RadioGroup 
-                  label="Actual Waiting Time" 
-                  name="waitingTime"
-                  options={[
-                    { label: '< 1 Hour', value: 'fast' },
-                    { label: '1–3 Hours', value: 'medium' },
-                    { label: 'Whole Day', value: 'slow' }
-                  ]}
-                  value={formData.waitingTime}
-                  onChange={(val) => setFormData({...formData, waitingTime: val})}
-                  tooltip
-                  disabled={!isLoggedIn}
-                />
-                <RadioGroup 
-                  label="Extra requirements requested?" 
-                  name="extraRequirements"
-                  options={[
-                    { label: 'No', value: 'no' },
-                    { label: 'Yes', value: 'yes' }
-                  ]}
-                  value={formData.extraRequirements}
-                  onChange={(val) => setFormData({...formData, extraRequirements: val})}
-                  tooltip
-                  disabled={!isLoggedIn}
-                />
-                <RadioGroup 
-                  label="Fixer activity noticeable?" 
-                  name="fixerActivity"
-                  options={[
-                    { label: 'No', value: 'no' },
-                    { label: 'Yes', value: 'yes' }
-                  ]}
-                  value={formData.fixerActivity}
-                  onChange={(val) => setFormData({...formData, fixerActivity: val})}
-                  tooltip
-                  disabled={!isLoggedIn}
-                />
-              </div>
-            </section>
-
-            <section className="bg-ctp-base rounded-2xl border border-ctp-surface1 p-6 md:p-10 space-y-8 shadow-sm">
-              <div className="flex items-center gap-4 border-b border-ctp-surface1 pb-6">
-                <div className="w-10 h-10 rounded-xl bg-ctp-mauve text-ctp-base flex items-center justify-center">
-                  <MessageSquare size={20} />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-ctp-text">Your Feedback</h2>
-                  <p className="text-xs text-ctp-subtext1 font-semibold uppercase tracking-wider mt-0.5">Briefly share your thoughts (Optional).</p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <textarea 
-                  rows="4" 
-                  maxLength={500}
-                  disabled={!isLoggedIn}
-                  placeholder="Share a pro-tip or detail about your visit... (Max 500 chars)"
-                  value={formData.comment}
-                  onChange={(e) => setFormData({...formData, comment: e.target.value})}
-                  className="w-full px-6 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-base font-medium focus:ring-2 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 transition-all resize-none disabled:opacity-50"
-                />
-                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-ctp-subtext0 px-2">
-                  <span>Honest feedback only</span>
-                  <span>{formData.comment.length}/500</span>
-                </div>
-              </div>
-            </section>
-
-          </div>
-
-          <div className="lg:col-span-4 sticky top-28 space-y-6">
-            <div className={`bg-ctp-sky-800 text-ctp-base rounded-2xl p-8 space-y-8 shadow-md relative overflow-hidden group ${!isVerified ? 'grayscale-[0.5]' : ''}`}>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-ctp-base/10 rounded-full -translate-x-1/2 -translate-y-1/2 group-hover:scale-150 transition-transform duration-700" />
-              
-              <div className="relative z-10 space-y-1">
-                <h3 className="text-xl font-bold uppercase tracking-tight">Guidelines</h3>
-                <p className="text-ctp-base/80 text-sm font-semibold">Ensure your report is helpful.</p>
-              </div>
-
-              <div className="relative z-10 space-y-3">
-                {[
-                  { icon: Zap, text: "Keep it constructive" },
-                  { icon: ShieldCheck, text: "Privacy-focused" },
-                  { icon: HelpCircle, text: "Accurate details" }
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 bg-ctp-base/10 p-4 rounded-xl border border-ctp-base/20">
-                    <item.icon size={16} />
-                    <span className="text-[11px] font-bold uppercase tracking-wider">{item.text}</span>
+                {/* Feedback Comment */}
+                <section className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">
+                  <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-4">
+                    <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-mauve shadow-sm">
+                      <MessageSquare size={18} />
+                    </div>
+                    <div>
+                      <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest leading-none">Your Feedback</h2>
+                      <p className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-1 opacity-70">Share a pro-tip or detail (Optional).</p>
+                    </div>
                   </div>
-                ))}
-              </div>
-
-              <div className="relative z-10 pt-2 space-y-6">
-                <div 
-                  className={`flex items-center gap-3 select-none ${!isLoggedIn ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
-                  onClick={() => isLoggedIn && setFormData({...formData, isAnonymous: !formData.isAnonymous})}
-                >
-                  <div className={`w-5 h-5 rounded border-2 border-ctp-base flex items-center justify-center transition-all ${formData.isAnonymous ? 'bg-ctp-base text-ctp-sky-800' : 'bg-transparent'}`}>
-                    {formData.isAnonymous && <CheckCircle2 size={14} strokeWidth={4} />}
+                  
+                  <div className="p-8 space-y-4">
+                    <textarea 
+                      rows="4" 
+                      maxLength={500}
+                      placeholder="e.g. Bring your own pen, the Xerox machine is currently out of order..."
+                      value={formData.comment}
+                      onChange={(e) => setFormData({...formData, comment: e.target.value})}
+                      className="w-full px-6 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all resize-none shadow-inner"
+                    />
+                    <div className="flex justify-between items-center text-[9px] font-bold uppercase tracking-widest text-ctp-subtext1 opacity-60 px-2">
+                      <span>Honest community feedback only</span>
+                      <span>{formData.comment.length}/500</span>
+                    </div>
                   </div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider">Submit as anonymous</span>
-                </div>
+                </section>
 
-                <button 
-                  type="submit"
-                  disabled={isSubmitting || !isVerified}
-                  className="w-full bg-ctp-base text-ctp-sky-800 py-4 rounded-xl font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-sm text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? "Processing..." : (!isVerified ? "Verification Required" : "Publish Report")}
-                  <ArrowRight size={18} />
-                </button>
-              </div>
+                <div className="flex justify-end pt-4">
+                   <button 
+                     type="submit"
+                     disabled={isSubmitting}
+                     className="px-12 py-3.5 bg-ctp-sky-800 text-white rounded-lg font-bold text-xs uppercase tracking-widest shadow-lg shadow-ctp-sky-800/20 hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all flex items-center gap-3"
+                   >
+                     {isSubmitting ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" />
+                          <span>Publishing...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Zap size={16} />
+                          <span>Submit Community Report</span>
+                        </>
+                      )}
+                   </button>
+                </div>
+              </form>
             </div>
 
-            <div className="bg-ctp-mantle border border-ctp-surface1 rounded-2xl p-6 space-y-4">
-               <div className="flex items-center gap-2 text-ctp-peach">
-                 <AlertCircle size={18} />
-                 <h4 className="text-[11px] font-bold uppercase tracking-wider">Important Note</h4>
-               </div>
-               <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed italic opacity-90">
-                 Reports undergo moderation before appearing publicly. Please avoid including personal identifiable information (PII).
-               </p>
-            </div>
-          </div>
+            <aside className="w-full lg:w-80 shrink-0 space-y-6">
+              <section className="bg-ctp-sky-800 rounded-xl p-6 text-white relative overflow-hidden shadow-lg shadow-ctp-sky-800/20 group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8 blur-2xl transition-transform group-hover:scale-125" />
+                <div className="relative z-10 space-y-4">
+                  <div className="flex items-center gap-3">
+                    <HelpCircle size={18} strokeWidth={2.5} />
+                    <h3 className="text-[10px] font-bold uppercase tracking-widest">Guidelines</h3>
+                  </div>
+                  <p className="text-xs font-medium leading-relaxed opacity-90">
+                    Help your fellow citizens by providing objective, helpful feedback.
+                  </p>
+                  <div className="space-y-2 pt-2 border-t border-white/10">
+                    {[
+                      "Be specific about wait times",
+                      "Mention current branch issues",
+                      "Avoid personal attacks"
+                    ].map((text, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <CheckCircle2 size={12} strokeWidth={3} />
+                        <span className="text-[9px] font-bold uppercase tracking-widest">{text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
 
-        </form>
+              <div className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-6 space-y-4 shadow-sm">
+                <div className="flex items-center gap-2 text-ctp-peach">
+                  <AlertCircle size={16} />
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-ctp-text">Data Privacy</h4>
+                </div>
+                <p className="text-[10px] text-ctp-subtext1 font-medium leading-relaxed opacity-90 uppercase tracking-tight">
+                  Your report is moderated to ensure it contains no personal information. It helps keep our community safe and informed.
+                </p>
+              </div>
+            </aside>
+          </div>
+        )}
       </div>
     </div>
   );
