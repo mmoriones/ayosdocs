@@ -3,8 +3,10 @@
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { ToastProvider } from "@/context/ToastContext";
+import { SearchProvider } from "@/context/SearchContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, createContext, useContext } from "react";
+import CommandPalette from "./ui/CommandPalette";
 
 const AuthUIContext = createContext();
 
@@ -34,15 +36,18 @@ export default function Providers({ children }) {
       <SessionProvider>
         <ThemeProvider>
           <ToastProvider>
-            <AuthUIContext.Provider value={{
-              isAuthModalOpen,
-              openAuthModal,
-              closeAuthModal,
-              isMobileMenuOpen,
-              toggleMobileMenu
-            }}>
-              {children}
-            </AuthUIContext.Provider>
+            <SearchProvider>
+              <AuthUIContext.Provider value={{
+                isAuthModalOpen,
+                openAuthModal,
+                closeAuthModal,
+                isMobileMenuOpen,
+                toggleMobileMenu
+              }}>
+                {children}
+                <CommandPalette />
+              </AuthUIContext.Provider>
+            </SearchProvider>
           </ToastProvider>
         </ThemeProvider>
       </SessionProvider>

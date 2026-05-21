@@ -1,10 +1,12 @@
 'use client';
 
-import { Search, Bell, Menu, Sun, Moon } from 'lucide-react';
+import { Bell, Menu, Sun, Moon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useTheme } from "@/context/ThemeContext";
-import { useSyncExternalStore } from "react";
+import { useSearch } from "@/context/SearchContext";
+import { useSyncExternalStore, useState } from "react";
+import SearchInput from '@/components/ui/SearchInput';
 
 const emptySubscribe = () => () => {};
 const getClientSnapshot = () => true;
@@ -16,6 +18,7 @@ const getServerSnapshot = () => false;
 export default function DashboardHeader() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const { toggleSearch } = useSearch();
   const mounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
   
   const segments = pathname.split('/').filter(Boolean);
@@ -51,18 +54,14 @@ export default function DashboardHeader() {
       </div>
 
       <div className="flex-1 max-w-xl px-8 hidden sm:block">
-        <div className="relative group">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-ctp-subtext1 group-focus-within:text-ctp-sky-800 transition-colors" size={18} />
-          <input 
-            type="text" 
-            placeholder="Search guides, offices, requirements..." 
-            className="w-full bg-ctp-mantle border border-ctp-surface1 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-ctp-sky-800 focus:ring-1 focus:ring-ctp-sky-800 transition-all"
-          />
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 hidden md:flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-crust text-[10px] font-sans text-ctp-subtext0">⌘</kbd>
-            <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-crust text-[10px] font-sans text-ctp-subtext0">K</kbd>
-          </div>
-        </div>
+        <SearchInput 
+          value=""
+          onChange={() => {}}
+          onClick={toggleSearch}
+          placeholder="Search guides, offices, requirements..."
+          variant="compact"
+          showShortcut={true}
+        />
       </div>
 
       <div className="flex items-center gap-2">

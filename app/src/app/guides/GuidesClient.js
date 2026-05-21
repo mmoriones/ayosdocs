@@ -22,6 +22,7 @@ import {
 import GuideCard from '@/features/guides/components/GuideCard';
 import Banner from '@/components/ui/Banner';
 import PageHeader from '@/components/ui/PageHeader';
+import SearchInput from '@/components/ui/SearchInput';
 import Adsense from '@/components/Adsense';
 
 /**
@@ -318,20 +319,12 @@ export default function GuidesClient({ initialGuides }) {
           {/* MAIN CONTENT AREA */}
           <main className="flex-1 min-w-0">
             <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 mb-10">
-              <div className="flex-1 relative">
-                <Search size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-ctp-subtext1" />
-                <input
-                  type="text"
-                  placeholder="Search for documents, processes, or agencies..."
+              <div className="flex-1 max-w-2xl">
+                <SearchInput
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-14 pr-12 py-3.5 rounded-xl border border-ctp-surface1 bg-ctp-mantle text-lg text-ctp-text placeholder:text-ctp-subtext1 focus:outline-none focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 shadow-sm transition-all font-medium"
+                  placeholder="Search for documents, processes, or agencies..."
                 />
-                {searchQuery && (
-                  <button onClick={clearSearch} className="absolute right-4 top-1/2 -translate-y-1/2 text-ctp-subtext1 hover:text-ctp-text transition-colors">
-                    <X size={18} />
-                  </button>
-                )}
               </div>
 
               <div className="flex items-center gap-4">

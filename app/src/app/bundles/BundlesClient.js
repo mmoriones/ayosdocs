@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import Banner from '@/components/ui/Banner';
 import PageHeader from '@/components/ui/PageHeader';
+import SearchInput from '@/components/ui/SearchInput';
 import { getBundleIcon } from '@/lib/bundleIcons';
 
 /**
@@ -85,27 +86,15 @@ export default function BundlesClient({ initialBundles }) {
           ))}
         </div>
       </div>
-
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10 w-full">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-            <div className="flex-1 relative">
-              <Search size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-ctp-subtext1" />
-              <input
-                type="text"
-                placeholder="Search for bundles (e.g., Marriage, First Job, Business)..."
+            <div className="flex-1 max-w-2xl">
+              <SearchInput
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-14 pr-12 py-3 rounded-xl border border-ctp-surface1 bg-ctp-mantle text-base text-ctp-text placeholder:text-ctp-subtext1 focus:outline-none focus:ring-4 focus:ring-ctp-sky-800/10 focus:border-ctp-sky-800 shadow-sm transition-all font-medium"
+                placeholder="Search for bundles (e.g., Marriage, First Job, Business)..."
               />
-              {searchQuery && (
-                <button 
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-ctp-subtext1 hover:text-ctp-text transition-colors"
-                >
-                  <X size={18} />
-                </button>
-              )}
             </div>
 
             <div className="flex flex-wrap items-center gap-4 shrink-0">
