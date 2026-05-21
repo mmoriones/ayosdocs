@@ -26,7 +26,7 @@ import NavItem from './NavItem';
  * @param {boolean} props.isCollapsed
  * @param {Function} props.setIsCollapsed
  */
-export default function Sidebar({ isCollapsed, setIsCollapsed }) {
+export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = false, closeMobile }) {
   const { data: session, status } = useSession();
   const { openAuthModal } = useAuthUI();
   const isLoggedIn = status === 'authenticated';
@@ -47,11 +47,13 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
     <aside 
       className={`fixed left-0 top-0 h-screen bg-ctp-base border-r border-ctp-surface1 z-50 flex flex-col transition-all duration-300 ${
         isCollapsed ? 'w-16' : 'w-64'
+      } ${
+        isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
       }`}
     >
       {/* Header / Logo */}
       <div className="h-16 flex items-center px-4 border-b border-ctp-surface1 shrink-0">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/" onClick={closeMobile} className="flex items-center gap-3">
           <Image
             src="/favicon.svg"
             alt="AyosDocs"
@@ -78,6 +80,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
               key={item.href} 
               {...item} 
               collapsed={isCollapsed} 
+              onClick={closeMobile}
             />
           ))}
         </div>
@@ -108,9 +111,13 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
                 icon={Settings} 
                 label="Settings" 
                 collapsed={isCollapsed} 
+                onClick={closeMobile}
               />
               <button
-                onClick={() => signOut()}
+                onClick={() => {
+                  signOut();
+                  closeMobile?.();
+                }}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text transition-all duration-200 group`}
               >
                 <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-text">
@@ -121,7 +128,10 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
             </>
           ) : (
             <button
-              onClick={openAuthModal}
+              onClick={() => {
+                openAuthModal();
+                closeMobile?.();
+              }}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90 transition-all duration-200`}
             >
               <div className="shrink-0">

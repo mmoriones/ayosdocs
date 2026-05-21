@@ -13,13 +13,14 @@ import { usePathname } from 'next/navigation';
  * @param {boolean} props.collapsed
  * @param {boolean} [props.active]
  */
-export default function NavItem({ href, icon: Icon, label, collapsed, active }) {
+export default function NavItem({ href, icon: Icon, label, collapsed, active, onClick }) {
   const pathname = usePathname();
-  const isActive = active ?? pathname === href;
+  const isActive = active ?? (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 group ${
         isActive
           ? 'bg-ctp-sky-800/10 text-ctp-sky-800 font-semibold'

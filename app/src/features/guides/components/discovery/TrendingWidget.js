@@ -8,11 +8,12 @@ import { Eye, ArrowRight } from 'lucide-react';
  * Popular guides widget.
  * Supports 'default' grid and 'compact' list views.
  */
-const TrendingWidget = ({ guide, stats, variant = 'default' }) => {
+const TrendingWidget = ({ guide, stats, variant = 'default', onClick }) => {
   if (variant === 'compact') {
     return (
       <Link 
         href={`/guides/${guide.slug}`}
+        onClick={onClick}
         className="flex items-center gap-4 p-3 rounded-xl border border-ctp-surface1 bg-ctp-base hover:bg-ctp-mantle transition-all group"
       >
         <div className="w-10 h-10 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0">
@@ -73,6 +74,7 @@ const TrendingWidget = ({ guide, stats, variant = 'default' }) => {
       {/* Action Button - Centered Pill */}
       <Link 
         href={`/guides/${guide.slug}`}
+        onClick={onClick}
         className="px-6 py-2 bg-ctp-mantle text-ctp-text border border-ctp-surface1 rounded-lg font-semibold text-xs hover:bg-ctp-surface0 transition-all active:scale-95 flex items-center justify-center gap-2 group/btn w-full sm:w-fit"
       >
         <span>Learn More</span>

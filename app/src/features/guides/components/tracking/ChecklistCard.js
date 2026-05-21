@@ -19,6 +19,7 @@ import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';
+import { useWorkspace } from '@/context/WorkspaceContext';
 import { useToast } from '@/context/ToastContext';
 import { GuideIcon } from '@/lib/guideIcons';
 import { updateProgressAction } from '@/app/actions/user';
@@ -37,6 +38,7 @@ const ChecklistCard = ({
   isBare = false 
 }) => {
   const { data: session, status } = useSession();
+  const { setActiveGuideSlug } = useWorkspace();
   const isLoggedIn = status === 'authenticated';
   const isVerified = session?.user?.isVerified;
   const { openAuthModal } = useAuthUI();
@@ -51,11 +53,11 @@ const ChecklistCard = ({
   const { data: savedData, isLoading: isLoadingProgress } = useQuery({
     queryKey: ['progress', slug],
     queryFn: async () => {
-      if (!isLoggedIn || !isVerified || !slug || slug === "getting-started") return null;
+      if (!isLoggedIn || !isVerified || !slug) return null;
       const response = await axios.get(`/api/user/get-progress/${slug}`);
       return response.data;
     },
-    enabled: isLoggedIn && isVerified && !!slug && slug !== "getting-started",
+    enabled: isLoggedIn && isVerified && !!slug,
   });
 
   const saveMutation = useMutation({
@@ -128,16 +130,19 @@ const ChecklistCard = ({
     // Update interaction time to block incoming server syncs for 2.5s
     lastInteractionRef.current = Date.now();
 
+    // Mark as the active dashboard workflow
+    setActiveGuideSlug(slug);
+
     setSteps(prevSteps => 
       prevSteps.map((step, i) =>
         i === index ? { ...step, completed: !step.completed } : step
       )
     );
-  }, [isLoggedIn, isVerified, openAuthModal]);
+  }, [isLoggedIn, isVerified, openAuthModal, slug, setActiveGuideSlug]);
 
   // Snappier Debounced Auto-save
   useEffect(() => {
-    if (!isLoggedIn || !isVerified || !slug || slug === "getting-started" || !steps.length) return;
+    if (!isLoggedIn || !isVerified || !slug || !steps.length) return;
 
     const completedTaskIndices = steps
       .map((s, i) => (s.completed ? i : null))
@@ -159,9 +164,7 @@ const ChecklistCard = ({
   const progress = totalSteps ? Math.round((completedCount / totalSteps) * 100) : 0;
   const hasCompletedSteps = steps.some((s) => s.completed);
 
-  const cardLabel = inGuidePage 
-    ? (slug === "getting-started" ? "Your Journey" : "Requirements Tracker") 
-    : "Your Progress";
+  const cardLabel = inGuidePage ? "Requirements Tracker" : "Your Progress";
 
   if (isLoadingProgress) {
     return (
@@ -226,7 +229,7 @@ const ChecklistCard = ({
               <div className="space-y-1 flex-1 min-w-0">
                 {(!inGuidePage || isModal) && (
                   <h4 className="font-bold text-ctp-text leading-tight tracking-tight text-lg truncate">
-                    {slug === "getting-started" ? "Getting Started" : title}
+                    {title}
                   </h4>
                 )}
                 
@@ -245,7 +248,7 @@ const ChecklistCard = ({
         </div>
       )}
 
-      {isLoggedIn && slug !== "getting-started" && (
+      {isLoggedIn && slug && (
         <div className={`${(isModal || isBare) ? "px-0" : "px-5 lg:px-6"} mt-5 mb-2`}>
           <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/50">
             <div 
@@ -377,7 +380,7 @@ const ChecklistCard = ({
         </div>
       )}
 
-      {!inGuidePage && !isModal && (
+      {!inGuidePage && !isModal && slug && (
         <div className="px-5 lg:px-6 pb-6 pt-0 mt-auto">
           <button 
             onClick={() => router.push(`/guides/${slug}`)}

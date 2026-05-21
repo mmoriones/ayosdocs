@@ -3,19 +3,42 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSearch } from '@/context/SearchContext';
-import { Search, X, BookOpen, Layers, ArrowRight, Loader2 } from 'lucide-react';
+import { useWorkspace } from '@/context/WorkspaceContext';
+import { Search, X, BookOpen, Layers, ArrowRight, Loader2, Settings, User, CheckSquare, Home, Shield, Sparkles } from 'lucide-react';
 
 /**
- * Global command palette for searching guides and bundles.
+ * Global command palette for searching guides, bundles, and app pages.
  */
 export default function CommandPalette() {
   const { isOpen, closeSearch, searchItems, isLoading } = useSearch();
+  const { activeGuideSlug } = useWorkspace();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
   const inputRef = useRef(null);
 
-  // Focus input on open
+  // App-level navigation items
+  const appItems = [
+    { title: 'Overview', href: '/', type: 'nav', icon: Home, description: 'Return to your dashboard' },
+    { title: 'My Documents', href: '/my-docs', type: 'nav', icon: CheckSquare, description: 'Track your active guides' },
+    { title: 'User Profile', href: '/profile', type: 'nav', icon: User, description: 'Manage your personal info' },
+    { title: 'System Settings', href: '/settings', type: 'nav', icon: Settings, description: 'Interface and account preferences' },
+    { title: 'Privacy Policy', href: '/privacy', type: 'nav', icon: Shield, description: 'Data protection and usage' },
+  ];
+
+  // 1. Background scroll lock when palette is active
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  // Focus and reset logic
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
@@ -27,13 +50,33 @@ export default function CommandPalette() {
   }, [isOpen]);
 
   const filteredItems = useMemo(() => {
-    if (!query) return searchItems.slice(0, 5); // Show first 5 as suggestions
-    return searchItems.filter(item => 
-      item.title.toLowerCase().includes(query.toLowerCase()) ||
-      item.description.toLowerCase().includes(query.toLowerCase()) ||
-      item.category.toLowerCase().includes(query.toLowerCase())
-    ).slice(0, 8);
-  }, [query, searchItems]);
+    if (query) {
+      const allSearchable = [...appItems, ...searchItems];
+      return allSearchable.filter(item => 
+        item.title.toLowerCase().includes(query.toLowerCase()) ||
+        (item.description && item.description.toLowerCase().includes(query.toLowerCase())) ||
+        (item.category && item.category.toLowerCase().includes(query.toLowerCase()))
+      ).slice(0, 8);
+    }
+
+    // SUGGESTIONS LOGIC (Query is empty)
+    // 1. Find the active guide if it exists
+    const activeGuide = activeGuideSlug ? searchItems.find(item => item.id === activeGuideSlug) : null;
+    
+    // 2. Build suggestion list
+    const suggestions = [...appItems];
+    
+    // 3. Insert active guide at the top if found
+    if (activeGuide) {
+      // Add a special 'isActive' flag for the UI
+      suggestions.unshift({ ...activeGuide, isActive: true });
+    } else {
+      // Otherwise just show the first 2 guides as suggestions
+      suggestions.push(...searchItems.slice(0, 2));
+    }
+
+    return suggestions.slice(0, 6);
+  }, [query, searchItems, activeGuideSlug]);
 
   const handleSelect = (item) => {
     router.push(item.href);
@@ -41,6 +84,8 @@ export default function CommandPalette() {
   };
 
   const handleKeyDown = (e) => {
+    if (filteredItems.length === 0) return;
+    
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       setSelectedIndex(prev => (prev + 1) % filteredItems.length);
@@ -71,9 +116,14 @@ export default function CommandPalette() {
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search guides, bundles, and more..."
+            maxLength={50} // 3. Constraint: limit input length
+            placeholder="Search guides, settings, and more..."
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              // 3. Validation: basic sanitization
+              const sanitized = e.target.value.replace(/[^\w\s-]/gi, '');
+              setQuery(sanitized);
+            }}
             onKeyDown={handleKeyDown}
             className="w-full bg-transparent border-none py-4 px-3 text-sm focus:ring-0 outline-none text-ctp-text font-medium"
           />
@@ -93,11 +143,12 @@ export default function CommandPalette() {
           ) : filteredItems.length > 0 ? (
             <div className="space-y-1 px-2">
               <div className="px-3 py-2 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">
-                {query ? 'Search Results' : 'Suggested for you'}
+                {query ? 'Search Results' : 'Suggested Actions'}
               </div>
               {filteredItems.map((item, index) => {
-                const Icon = item.type === 'guide' ? BookOpen : Layers;
+                const Icon = item.icon || (item.type === 'guide' ? BookOpen : Layers);
                 const isSelected = index === selectedIndex;
+                const isActiveWorkflow = item.isActive;
                 
                 return (
                   <button
@@ -116,15 +167,24 @@ export default function CommandPalette() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold truncate">{item.title}</span>
-                        <span className={`text-[9px] px-1.5 py-0.5 rounded border uppercase tracking-widest font-bold ${
-                          isSelected ? 'border-white/30 bg-white/10' : 'border-ctp-surface1 bg-ctp-crust text-ctp-subtext1'
-                        }`}>
-                          {item.type}
-                        </span>
+                        {isActiveWorkflow ? (
+                          <span className="px-1.5 py-0.5 rounded border border-ctp-sky-800/30 bg-ctp-sky-800/10 text-[8px] font-bold text-ctp-sky-800 uppercase tracking-widest flex items-center gap-1 shadow-sm">
+                            <Sparkles size={8} />
+                            Active
+                          </span>
+                        ) : (
+                          <span className={`text-[9px] px-1.5 py-0.5 rounded border uppercase tracking-widest font-bold ${
+                            isSelected ? 'border-white/30 bg-white/10' : 'border-ctp-surface1 bg-ctp-crust text-ctp-subtext1'
+                          }`}>
+                            {item.type}
+                          </span>
+                        )}
                       </div>
-                      <p className={`text-xs truncate opacity-70 mt-0.5`}>
-                        {item.description}
-                      </p>
+                      {item.description && (
+                        <p className={`text-xs truncate opacity-70 mt-0.5`}>
+                          {item.description}
+                        </p>
+                      )}
                     </div>
                     {isSelected && <ArrowRight size={16} className="shrink-0" />}
                   </button>
@@ -134,7 +194,7 @@ export default function CommandPalette() {
           ) : (
             <div className="text-center py-12 px-6">
               <p className="text-sm text-ctp-subtext1">No results found for &quot;<span className="font-bold text-ctp-text">{query}</span>&quot;</p>
-              <p className="text-xs text-ctp-subtext0 mt-1">Try searching for common documents like &quot;Passport&quot; or &quot;TIN&quot;.</p>
+              <p className="text-xs text-ctp-subtext0 mt-1">Try searching for &quot;Profile&quot; or &quot;Passport&quot;.</p>
             </div>
           )}
         </div>

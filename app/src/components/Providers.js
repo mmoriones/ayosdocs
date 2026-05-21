@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { SearchProvider } from "@/context/SearchContext";
+import { WorkspaceProvider } from "@/context/WorkspaceContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, createContext, useContext } from "react";
 import CommandPalette from "./ui/CommandPalette";
@@ -25,11 +26,9 @@ export default function Providers({ children }) {
   }));
   
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const openAuthModal = () => setIsAuthModalOpen(true);
   const closeAuthModal = () => setIsAuthModalOpen(false);
-  const toggleMobileMenu = (val) => setIsMobileMenuOpen(prev => val !== undefined ? val : !prev);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -37,16 +36,16 @@ export default function Providers({ children }) {
         <ThemeProvider>
           <ToastProvider>
             <SearchProvider>
-              <AuthUIContext.Provider value={{
-                isAuthModalOpen,
-                openAuthModal,
-                closeAuthModal,
-                isMobileMenuOpen,
-                toggleMobileMenu
-              }}>
-                {children}
-                <CommandPalette />
-              </AuthUIContext.Provider>
+              <WorkspaceProvider>
+                <AuthUIContext.Provider value={{
+                  isAuthModalOpen,
+                  openAuthModal,
+                  closeAuthModal
+                }}>
+                  {children}
+                  <CommandPalette />
+                </AuthUIContext.Provider>
+              </WorkspaceProvider>
             </SearchProvider>
           </ToastProvider>
         </ThemeProvider>

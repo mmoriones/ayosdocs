@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useToast } from '@/context/ToastContext';
+import { useWorkspace } from '@/context/WorkspaceContext';
 import ChecklistCard from '../tracking/ChecklistCard';
 import TableOfContents from './TableOfContents';
 import MobileBottomNav from './MobileBottomNav';
@@ -48,6 +49,7 @@ const GuidePageLayout = ({
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeTab, setActiveTab] = useState('checklist');
   const { showToast } = useToast();
+  const { setActiveGuideSlug } = useWorkspace();
   const observer = useRef(null);
 
   const handleShare = () => {
@@ -80,6 +82,11 @@ const GuidePageLayout = ({
   };
 
   useEffect(() => {
+    // Persist as last visited guide via global context
+    if (slug) {
+      setActiveGuideSlug(slug);
+    }
+
     const handleObserver = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {

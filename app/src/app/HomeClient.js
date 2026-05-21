@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useAuthUI } from '@/components/Providers';
+import { useWorkspace } from '@/context/WorkspaceContext';
 import { 
   ArrowRight, 
   MapPin, 
@@ -33,7 +34,7 @@ import Adsense from '@/components/Adsense';
  * Dashboard Overview (Home).
  */
 export default function HomeClient({ allGuides }) {
-  const [activeSlug, setActiveSlug] = useState('getting-started');
+  const { activeGuideSlug, setActiveGuideSlug } = useWorkspace();
   const [officeSearch, setOfficeSearch] = useState('');
   const { data: session, status } = useSession();
   const isLoggedIn = status === 'authenticated';
@@ -42,7 +43,7 @@ export default function HomeClient({ allGuides }) {
   const router = useRouter();
 
   // Fetch comprehensive user data (progress, bundles, etc.)
-  const { data: userData } = useQuery({
+  const { data: userData, isLoading: isLoadingUserData } = useQuery({
     queryKey: ['userAllData'],
     queryFn: async () => {
       const response = await axios.get('/api/user/all-data');
@@ -59,16 +60,17 @@ export default function HomeClient({ allGuides }) {
     let completed = 0;
 
     userData.savedProgress.forEach(progress => {
-      const guide = allGuides.find(g => g.slug === progress.slug);
+      const guide = allGuides.find(g => g.slug === progress.guideSlug);
       if (!guide || !guide.checklist) return;
 
       const completedCount = progress.completedTasks 
         ? progress.completedTasks.split(',').filter(s => s !== "").length 
         : 0;
 
+      // If it's in the list, it's tracked. If it's 100%, it's completed. Otherwise active.
       if (completedCount === guide.checklist.length) {
         completed++;
-      } else if (completedCount > 0) {
+      } else {
         active++;
       }
     });
@@ -98,24 +100,22 @@ export default function HomeClient({ allGuides }) {
 
   const onboarded = session?.user?.onboarded ?? false;
 
-  useEffect(() => {
-    const lastSlug = localStorage.getItem("lastGuideSlug");
-    if (lastSlug && lastSlug !== activeSlug) {
-      setTimeout(() => setActiveSlug(lastSlug), 0);
-    }
-  }, [activeSlug]);
-
   // Logic to determine which guide to feature in the "Active Workflow"
   const activeGuide = useMemo(() => {
-    if (userData?.savedProgress && userData.savedProgress.length > 0) {
-      // Pick the guide with the absolute latest activity
-      const mostRecent = [...userData.savedProgress]
-        .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))[0];
-      return allGuides.find(g => g.slug === mostRecent.slug);
+    // 1. Prioritize the global context (recently clicked/viewed)
+    if (activeGuideSlug) {
+      const contextGuide = allGuides.find(g => g.slug === activeGuideSlug);
+      if (contextGuide) return contextGuide;
     }
-    // Fallback to guest's last visited guide
-    return activeSlug !== 'getting-started' ? allGuides.find(g => g.slug === activeSlug) : null;
-  }, [userData, allGuides, activeSlug]);
+
+    // 2. Fallback to latest database progress for auth users
+    if (userData?.savedProgress && userData.savedProgress.length > 0) {
+      const mostRecent = userData.savedProgress[userData.savedProgress.length - 1];
+      return allGuides.find(g => g.slug === mostRecent.guideSlug);
+    }
+
+    return null;
+  }, [userData, allGuides, activeGuideSlug]);
 
   const handleOfficeSearch = (e) => {
     e?.preventDefault();
@@ -169,13 +169,13 @@ export default function HomeClient({ allGuides }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatsCard 
             label="Active Guides" 
-            value={stats.active.toString()} 
+            value={isLoggedIn && isLoadingUserData ? "..." : stats.active.toString()} 
             icon={Clock} 
             isLocked={!isLoggedIn}
           />
           <StatsCard 
             label="Completed" 
-            value={stats.completed.toString()} 
+            value={isLoggedIn && isLoadingUserData ? "..." : stats.completed.toString()} 
             icon={CheckCircle2} 
             isLocked={!isLoggedIn}
           />
@@ -212,7 +212,7 @@ export default function HomeClient({ allGuides }) {
                 <ChecklistCard
                   title={activeGuide.title}
                   initialSteps={activeGuide.checklist?.map(task => ({ task }))}
-                  slug={activeSlug}
+                  slug={activeGuide.slug}
                   agency={activeGuide.agency}
                   inGuidePage={false}
                   isModal={false}
@@ -347,7 +347,7 @@ export default function HomeClient({ allGuides }) {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <Link href="/contact" className="px-6 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-sm font-semibold hover:bg-ctp-crust transition-all">
+              <Link href="/faqs" className="px-6 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-sm font-semibold hover:bg-ctp-crust transition-all">
                 Help Center
               </Link>
               <Link href="/contact" className="px-6 py-2.5 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all shadow-sm">
