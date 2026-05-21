@@ -1,7 +1,11 @@
 'use client';
 
 import { useState, useMemo, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 import { 
   Search, 
   ArrowRight, 
@@ -23,15 +27,33 @@ import GuideCard from '@/features/guides/components/GuideCard';
 import Banner from '@/components/ui/Banner';
 import PageHeader from '@/components/ui/PageHeader';
 import SearchInput from '@/components/ui/SearchInput';
+import SortDropdown from '@/components/ui/SortDropdown';
 import Adsense from '@/components/Adsense';
+import { toggleFavoriteAction } from '@/app/actions/user';
+import { useToast } from '@/context/ToastContext';
+import { useAuthUI } from '@/components/Providers';
 
 /**
  * GuidesClient Component
  * Client-side component for the All Guides page with interactive filtering.
  */
 export default function GuidesClient({ initialGuides }) {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === 'authenticated';
+  const isVerified = session?.user?.isVerified;
+  const { openAuthModal } = useAuthUI();
+  const { showToast } = useToast();
+  const queryClient = useQueryClient();
+
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('Most Popular');
+
+  const sortOptions = [
+    { label: 'Most Popular', value: 'Most Popular' },
+    { label: 'Alphabetical', value: 'Alphabetical' },
+    { label: 'Recently Updated', value: 'Recently Updated' }
+  ];
   const [viewMode, setViewMode] = useState('grid'); // Default to grid for hydration consistency
   const [showTip, setShowTip] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -47,6 +69,56 @@ export default function GuidesClient({ initialGuides }) {
     costRange: true,
     agency: true
   });
+
+  // Fetch comprehensive user data
+  const { data: userData } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: async () => {
+      const response = await axios.get('/api/user/all-data');
+      return response.data;
+    },
+    enabled: isLoggedIn && isVerified,
+  });
+
+  const favoriteMutation = useMutation({
+    mutationFn: async (slug) => {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      if (!isVerified) {
+        showToast({
+          type: 'warning',
+          title: 'Verification Required',
+          message: 'Please verify your email to favorite guides.'
+        });
+        return;
+      }
+      const result = await toggleFavoriteAction(slug);
+      if (!result.success) throw new Error(result.message);
+      return result;
+    },
+    onSuccess: (data) => {
+      if (!data) return;
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      showToast({
+        type: 'success',
+        title: data.isFavorite ? 'Added to Favorites' : 'Removed from Favorites',
+        message: data.message
+      });
+    },
+    onError: (error) => {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: error.message || 'Failed to update favorite. Please try again.'
+      });
+    }
+  });
+
+  const handleFavoriteGuide = (slug) => {
+    favoriteMutation.mutate(slug);
+  };
 
   // Load viewMode from localStorage on mount
   useEffect(() => {
@@ -88,20 +160,45 @@ export default function GuidesClient({ initialGuides }) {
 
   const agencyOptions = useMemo(() => ['All Agencies', ...agencies.sort()], [agencies]);
 
+  // Search Relevance Mapping
+  const agencyMap = {
+    'DFA': 'Department of Foreign Affairs',
+    'PSA': 'Philippine Statistics Authority',
+    'NBI': 'National Bureau of Investigation',
+    'SSS': 'Social Security System',
+    'LTO': 'Land Transportation Office',
+    'BIR': 'Bureau of Internal Revenue',
+    'TIN': 'Taxpayer Identification Number',
+    'PRC': 'Professional Regulation Commission',
+    'DTI': 'Department of Trade and Industry',
+    'DOLE': 'Department of Labor and Employment',
+    'OWWA': 'Overseas Workers Welfare Administration',
+    'PAG-IBIG': 'Home Development Mutual Fund',
+    'PhilHealth': 'Philippine Health Insurance Corporation',
+    'GSIS': 'Government Service Insurance System',
+    'BOI': 'Board of Investments',
+    'SEC': 'Securities and Exchange Commission'
+  };
+
   const filteredGuides = useMemo(() => {
+    const query = searchQuery.toLowerCase().trim();
+    
     const result = initialGuides.filter(guide => {
       const guideAgencies = Array.isArray(guide.agency) 
         ? guide.agency 
         : (guide.agency ? guide.agency.split(',').map(s => s.trim()) : []);
-      const guideAgencyStr = guideAgencies.join(' ');
+      
+      // Expand agencies with their full names for better search matching
+      const expandedAgencies = guideAgencies.flatMap(a => [a, agencyMap[a] || '']);
+      const guideAgencyStr = expandedAgencies.join(' ').toLowerCase();
 
-      const matchesSearch = 
-        guide.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (guide.description && guide.description.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        guideAgencyStr.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (guide.category && guide.category.toLowerCase().includes(searchQuery.toLowerCase())) ||
-        (guide.tags && guide.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))) ||
-        (guide.aliases && guide.aliases.some(alias => alias.toLowerCase().includes(searchQuery.toLowerCase())));
+      const matchesSearch = !query || 
+        guide.title.toLowerCase().includes(query) ||
+        (guide.description && guide.description.toLowerCase().includes(query)) ||
+        guideAgencyStr.includes(query) ||
+        (guide.category && guide.category.toLowerCase().includes(query)) ||
+        (guide.tags && guide.tags.some(tag => tag.toLowerCase().includes(query))) ||
+        (guide.aliases && guide.aliases.some(alias => alias.toLowerCase().includes(query)));
 
       const matchesCategory = selectedCategory === 'All' || guide.category === selectedCategory;
       const matchesAgency = selectedAgency === 'All Agencies' || guideAgencies.includes(selectedAgency);
@@ -243,7 +340,7 @@ export default function GuidesClient({ initialGuides }) {
                 {/* Difficulty Filter */}
                 <div className="space-y-4">
                   <button onClick={() => toggleFilterSection('difficulty')} className="flex items-center justify-between w-full group">
-                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Difficulty</label>
+                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Difficulty Level</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.difficulty ? 'rotate-180' : ''}`} />
                   </button>
                   {expandedFilters.difficulty && (
@@ -260,6 +357,33 @@ export default function GuidesClient({ initialGuides }) {
                             <X className="absolute w-2.5 h-2.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" strokeWidth={3} />
                           </div>
                           <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-semibold">{level}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Processing Time Filter */}
+                <div className="space-y-4">
+                  <button onClick={() => toggleFilterSection('estimatedTime')} className="flex items-center justify-between w-full group">
+                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Processing Time</label>
+                    <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.estimatedTime ? 'rotate-180' : ''}`} />
+                  </button>
+                  {expandedFilters.estimatedTime && (
+                    <div className="space-y-3 pl-1">
+                      {['All Durations', 'Same Day', '1-3 Days', '3-7 Days', '1 Week+'].map((time) => (
+                        <label key={time} className="flex items-center gap-3 cursor-pointer group">
+                          <div className="relative flex items-center justify-center">
+                            <input 
+                              type="radio" 
+                              name="time" 
+                              checked={selectedTime === time}
+                              onChange={() => setSelectedTime(time)}
+                              className="peer appearance-none w-5 h-5 rounded-full border border-ctp-surface1 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer" 
+                            />
+                            <div className="absolute w-2.5 h-2.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+                          </div>
+                          <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-medium">{time}</span>
                         </label>
                       ))}
                     </div>
@@ -319,16 +443,27 @@ export default function GuidesClient({ initialGuides }) {
           {/* MAIN CONTENT AREA */}
           <main className="flex-1 min-w-0">
             <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 mb-10">
-              <div className="flex-1 max-w-2xl">
+              <div className="flex-1 max-w-2xl relative">
                 <SearchInput
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for documents, processes, or agencies..."
                 />
+                {searchQuery && (
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                    <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest bg-ctp-mantle px-2 py-1 rounded border border-ctp-surface1">
+                      {filteredGuides.length} {filteredGuides.length === 1 ? 'result' : 'results'}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="flex items-center gap-3">
-                <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+                <SortDropdown 
+                  value={sortBy} 
+                  onChange={setSortBy} 
+                  options={sortOptions} 
+                />
                 <div className="flex items-center bg-ctp-mantle border border-ctp-surface1 p-1 rounded-lg shadow-sm">
                   <button onClick={() => handleViewModeChange('grid')} className={`p-1.5 rounded-md transition-all ${viewMode === 'grid' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
                     <LayoutGrid size={16} />
@@ -340,6 +475,34 @@ export default function GuidesClient({ initialGuides }) {
               </div>
             </div>
 
+            {/* Active Filters Bar */}
+            {(selectedCategory !== 'All' || selectedAgency !== 'All Agencies' || !selectedDifficulties.includes('All Levels') || selectedTime !== 'All Durations' || selectedCost !== 'All Costs') && (
+              <div className="mb-8 flex flex-wrap items-center gap-3">
+                <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mr-2">Active Filters:</span>
+                {selectedCategory !== 'All' && (
+                   <FilterPill label={selectedCategory} onClear={() => setSelectedCategory('All')} />
+                )}
+                {selectedAgency !== 'All Agencies' && (
+                   <FilterPill label={selectedAgency} onClear={() => setSelectedAgency('All Agencies')} />
+                )}
+                {!selectedDifficulties.includes('All Levels') && selectedDifficulties.map(d => (
+                   <FilterPill key={d} label={d} onClear={() => handleDifficultyChange(d)} />
+                ))}
+                {selectedTime !== 'All Durations' && (
+                   <FilterPill label={selectedTime} onClear={() => setSelectedTime('All Durations')} />
+                )}
+                {selectedCost !== 'All Costs' && (
+                   <FilterPill label={selectedCost} onClear={() => setSelectedCost('All Costs')} />
+                )}
+                <button 
+                  onClick={resetFilters}
+                  className="text-[10px] font-bold text-ctp-peach uppercase tracking-widest hover:underline px-2"
+                >
+                  Clear All
+                </button>
+              </div>
+            )}
+
             {showTip && (
               <Banner variant="sky" icon={Bookmark} title="Tip" onClose={() => setShowTip(false)} className="mb-8">
                 Bookmark guides you need and track your progress in My Docs.
@@ -348,15 +511,20 @@ export default function GuidesClient({ initialGuides }) {
 
             {filteredGuides.length > 0 ? (
               <div className={`grid gap-8 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3' : 'grid-cols-1'}`}>
-                {filteredGuides.slice(0, visibleCount).map((guide) => (
-                  <GuideCard 
-                    key={guide.slug} 
-                    guide={guide} 
-                    viewMode={viewMode} 
-                    showAgency={true}
-                    showBookmark={true}
-                  />
-                ))}
+                {filteredGuides.slice(0, visibleCount).map((guide) => {
+                  const progress = userData?.savedProgress?.find(p => p.guideSlug === guide.slug);
+                  return (
+                    <GuideCard 
+                      key={guide.slug} 
+                      guide={guide} 
+                      progress={progress}
+                      viewMode={viewMode} 
+                      showAgency={true}
+                      showBookmark={true}
+                      onFavorite={() => handleFavoriteGuide(guide.slug)}
+                    />
+                  );
+                })}
               </div>
             ) : (
               <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
@@ -434,55 +602,16 @@ const SidebarDropdown = ({ value, onChange, options }) => {
   );
 };
 
-const SortDropdown = ({ sortBy, setSortBy }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const options = [
-    { label: 'Most Popular', value: 'Most Popular' },
-    { label: 'Alphabetical', value: 'Alphabetical' },
-    { label: 'Recently Updated', value: 'Recently Updated' }
-  ];
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) setIsOpen(false);
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
+const FilterPill = ({ label, onClear }) => {
   return (
-    <div className="relative shrink-0" ref={dropdownRef}>
+    <div className="flex items-center gap-2 px-2 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-lg group animate-in fade-in zoom-in-95 duration-200">
+      <span className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest">{label}</span>
       <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-3 bg-ctp-mantle border rounded-lg px-4 py-2 text-[10px] font-bold text-ctp-text transition-all shadow-sm active:scale-95 ${
-          isOpen ? 'border-ctp-sky-800 ring-2 ring-ctp-sky-800/10' : 'border-ctp-surface1 hover:border-ctp-sky-800'
-        }`}
+        onClick={onClear}
+        className="text-ctp-subtext1 hover:text-ctp-peach transition-colors"
       >
-        <span className="text-ctp-subtext1 font-bold uppercase tracking-widest">Sort:</span>
-        <span className="uppercase tracking-widest">{sortBy}</span>
-        <ChevronDown size={12} className={`text-ctp-subtext1 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+        <X size={10} strokeWidth={3} />
       </button>
-
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-52 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-2xl z-[60] overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right">
-          <div className="p-1 space-y-0.5">
-            {options.map((option) => (
-              <button
-                key={option.value}
-                onClick={() => { setSortBy(option.value); setIsOpen(false); }}
-                className={`w-full text-left px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
-                  sortBy === option.value 
-                    ? 'bg-ctp-sky-800 text-white shadow-sm' 
-                    : 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text'
-                }`}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

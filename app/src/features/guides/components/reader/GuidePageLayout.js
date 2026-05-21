@@ -27,6 +27,11 @@ import RelatedGuides from './RelatedGuides';
 import { GuideIcon } from '@/lib/guideIcons';
 import Banner from '@/components/ui/Banner';
 import Adsense from '@/components/Adsense';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
+import { toggleFavoriteAction } from '@/app/actions/user';
+import { useAuthUI } from '@/components/Providers';
 
 /**
  * Layout component for the Guide Page.
@@ -50,7 +55,65 @@ const GuidePageLayout = ({
   const [activeTab, setActiveTab] = useState('checklist');
   const { showToast } = useToast();
   const { setActiveGuideSlug } = useWorkspace();
+  const { data: session, status } = useSession();
+  const { openAuthModal } = useAuthUI();
+  const isLoggedIn = status === 'authenticated';
+  const isVerified = session?.user?.isVerified;
+  const queryClient = useQueryClient();
   const observer = useRef(null);
+
+  // Fetch comprehensive user data
+  const { data: userData } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: async () => {
+      const response = await axios.get('/api/user/all-data');
+      return response.data;
+    },
+    enabled: isLoggedIn && isVerified,
+  });
+
+  const progress = userData?.savedProgress?.find(p => p.guideSlug === slug);
+  const isFavorite = progress?.isFavorite || false;
+
+  const favoriteMutation = useMutation({
+    mutationFn: async () => {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      if (!isVerified) {
+        showToast({
+          type: 'warning',
+          title: 'Verification Required',
+          message: 'Please verify your email to favorite guides.'
+        });
+        return;
+      }
+      const result = await toggleFavoriteAction(slug);
+      if (!result.success) throw new Error(result.message);
+      return result;
+    },
+    onSuccess: (data) => {
+      if (!data) return;
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      showToast({
+        type: 'success',
+        title: data.isFavorite ? 'Added to Favorites' : 'Removed from Favorites',
+        message: data.message
+      });
+    },
+    onError: (error) => {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: error.message || 'Failed to update favorite. Please try again.'
+      });
+    }
+  });
+
+  const handleBookmark = () => {
+    favoriteMutation.mutate();
+  };
 
   const handleShare = () => {
     if (navigator.share) {
@@ -67,14 +130,6 @@ const GuidePageLayout = ({
         message: 'Guide URL has been copied to your clipboard.'
       });
     }
-  };
-
-  const handleBookmark = () => {
-    showToast({
-      type: 'info',
-      title: 'Guide Bookmarked',
-      message: 'This guide has been saved to your favorites.'
-    });
   };
 
   const toggleModal = (modalType) => {
@@ -136,10 +191,14 @@ const GuidePageLayout = ({
                       <div className="flex items-center gap-2">
                         <button 
                           onClick={handleBookmark}
-                          className="p-2 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-sky hover:border-ctp-sky/30 transition-all shadow-sm active:scale-95"
-                          title="Bookmark guide"
+                          className={`p-2 rounded-lg bg-ctp-base border transition-all shadow-sm active:scale-95 ${
+                            isFavorite 
+                              ? 'text-ctp-sky-800 border-ctp-sky-800' 
+                              : 'text-ctp-subtext1 border-ctp-surface1 hover:text-ctp-sky hover:border-ctp-sky/30'
+                          }`}
+                          title={isFavorite ? "Remove from favorites" : "Bookmark guide"}
                         >
-                          <Bookmark size={18} />
+                          <Bookmark size={18} fill={isFavorite ? "currentColor" : "none"} />
                         </button>
                         <button 
                           onClick={handleShare}
@@ -291,13 +350,17 @@ const GuidePageLayout = ({
           {!isSidebarCollapsed && (
             <button 
               onClick={handleBookmark}
-              className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-4 flex items-center gap-3 group hover:bg-ctp-base transition-all shadow-sm text-left w-full"
+              className={`bg-ctp-mantle border rounded-xl p-4 flex items-center gap-3 group hover:bg-ctp-base transition-all shadow-sm text-left w-full ${
+                isFavorite ? 'border-ctp-sky-800/30' : 'border-ctp-surface1'
+              }`}
             >
-              <div className="w-9 h-9 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-sky-800 border border-ctp-surface1 transition-transform group-hover:scale-105">
-                <Bookmark size={18} />
+              <div className={`w-9 h-9 rounded-lg bg-ctp-base flex items-center justify-center border transition-transform group-hover:scale-105 ${
+                isFavorite ? 'text-ctp-sky-800 border-ctp-sky-800 shadow-inner' : 'text-ctp-sky-800 border-ctp-surface1'
+              }`}>
+                <Bookmark size={18} fill={isFavorite ? "currentColor" : "none"} />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-bold text-ctp-text">Bookmark guide</p>
+                <p className="text-xs font-bold text-ctp-text">{isFavorite ? 'Saved in favorites' : 'Bookmark guide'}</p>
                 <p className="text-[10px] text-ctp-subtext1 font-medium truncate">Save for offline access</p>
               </div>
             </button>

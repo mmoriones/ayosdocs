@@ -1,3 +1,6 @@
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
+import { redirect } from 'next/navigation';
 import ProfileClient from './ProfileClient';
 
 export const metadata = {
@@ -5,6 +8,12 @@ export const metadata = {
   description: 'Manage your personal information and account security.',
 };
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect('/');
+  }
+
   return <ProfileClient />;
 }

@@ -1,3 +1,6 @@
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
+import { redirect } from 'next/navigation';
 import SettingsClient from './SettingsClient';
 
 export const metadata = {
@@ -5,6 +8,12 @@ export const metadata = {
   description: 'Configure your application preferences and security settings.',
 };
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect('/');
+  }
+
   return <SettingsClient />;
 }

@@ -10,7 +10,8 @@ import {
   ChevronDown, 
   List,
   ArrowRight,
-  ShieldAlert
+  ShieldAlert,
+  BarChart3
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -22,9 +23,10 @@ import BundleCard from '@/features/guides/components/tracking/BundleCard';
 import GuideRowCard from '@/features/guides/components/tracking/GuideRowCard';
 import DashboardSidebar from '@/features/guides/components/tracking/DashboardSidebar';
 import SearchInput from '@/components/ui/SearchInput';
+import SortDropdown from '@/components/ui/SortDropdown';
 import { useToast } from '@/context/ToastContext';
 import ConfirmModal from '@/components/ConfirmModal';
-import { deleteProgressAction } from '@/app/actions/user';
+import { deleteProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';
 
 /**
@@ -35,6 +37,13 @@ export default function ProgressClient({ allGuides, isRestricted }) {
   const [activeTab, setActiveTab] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('Recently updated');
+
+  const sortOptions = [
+    { label: 'Recently updated', value: 'Recently updated' },
+    { label: 'Alphabetical', value: 'Alphabetical' },
+    { label: 'Progress %', value: 'Progress %' }
+  ];
+
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [selectedSlug, setSelectedSlug] = useState(null);
   const [visibleCount, setVisibleCount] = useState(5);
@@ -76,6 +85,33 @@ export default function ProgressClient({ allGuides, isRestricted }) {
     }
   });
 
+  const favoriteMutation = useMutation({
+    mutationFn: async (slug) => {
+      if (isRestricted) throw new Error("Verification required");
+      const result = await toggleFavoriteAction(slug);
+      if (!result.success) throw new Error(result.message);
+      return result;
+    },
+    onSuccess: (data) => {
+      if (!data) return;
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      showToast({
+        type: 'success',
+        title: data.isFavorite ? 'Added to Favorites' : 'Removed from Favorites',
+        message: data.message
+      });
+    },
+    onError: (error) => {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: error.message === "Verification required" 
+          ? "Please verify your email to favorite guides."
+          : (error.message || 'Failed to update favorite. Please try again.')
+      });
+    }
+  });
+
   const handleDeleteGuide = (slug) => {
     if (isRestricted) {
       showToast({
@@ -89,6 +125,10 @@ export default function ProgressClient({ allGuides, isRestricted }) {
     setIsConfirmOpen(true);
   };
 
+  const handleFavoriteGuide = (slug) => {
+    favoriteMutation.mutate(slug);
+  };
+
   const confirmDelete = () => {
     if (selectedSlug) {
       deleteMutation.mutate(selectedSlug);
@@ -96,7 +136,9 @@ export default function ProgressClient({ allGuides, isRestricted }) {
   };
 
   const processedGuides = useMemo(() => {
-    return userData.savedProgress
+    const progressData = userData?.savedProgress || [];
+    
+    let result = progressData
       .map((item) => {
         const guide = allGuides.find(g => g.slug === item.guideSlug);
         if (!guide) return null;
@@ -110,34 +152,97 @@ export default function ProgressClient({ allGuides, isRestricted }) {
           completed: completedIndices.includes(idx)
         }));
 
+        const completedCount = completedIndices.length;
+        const totalCount = steps.length;
+        const percent = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
+
         return {
           guide,
           slug: item.guideSlug,
           steps,
+          updatedAt: item.updatedAt || new Date().toISOString(),
           progress: {
-            completedCount: completedIndices.length,
-            totalCount: steps.length,
-            isFavorite: false
+            completedCount,
+            totalCount,
+            isFavorite: !!item.isFavorite,
+            percent
           }
         };
       })
       .filter(Boolean);
-  }, [userData, allGuides]);
+
+    // Sorting logic
+    if (sortBy === 'Recently updated') {
+      result.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    } else if (sortBy === 'Alphabetical') {
+      result.sort((a, b) => a.guide.title.localeCompare(b.guide.title));
+    } else if (sortBy === 'Progress %') {
+      result.sort((a, b) => b.progress.percent - a.progress.percent);
+    }
+
+    return result;
+  }, [userData, allGuides, sortBy]);
 
   const stats = useMemo(() => {
     const total = processedGuides.length;
     const completed = processedGuides.filter(g => g.progress.completedCount === g.progress.totalCount).length;
     const inProgress = total - completed;
     const activeBundles = userData.trackedBundles?.length || 0;
+    const favorites = processedGuides.filter(g => g.progress.isFavorite).length;
     
+    // Aggregate Analytics for Active Bundles
+    let totalMinCost = 0;
+    let totalMaxCost = 0;
+    let totalMinDays = 0;
+    let totalMaxDays = 0;
+
+    const parseCost = (range) => {
+      if (!range || range === 'Free') return [0, 0];
+      if (range.includes('Under ₱500')) return [0, 500];
+      if (range.includes('₱500–₱2000')) return [500, 2000];
+      if (range.includes('₱2000+')) return [2000, 5000];
+      return [0, 0];
+    };
+
+    const parseTime = (time) => {
+      if (!time || time === 'Same Day') return [0, 1];
+      if (time === '1-3 Days') return [1, 3];
+      if (time === '3-7 Days') return [3, 7];
+      if (time === '1 Week+') return [7, 14];
+      return [0, 0];
+    };
+
+    const trackedBundleIds = userData.trackedBundles?.map(b => b.bundleId) || [];
+    bundles.filter(b => trackedBundleIds.includes(b.id)).forEach(bundle => {
+      bundle.flow.forEach(step => {
+        step.guides.forEach(slug => {
+          const guide = allGuides.find(g => g.slug === slug);
+          const progress = processedGuides.find(pg => pg.slug === slug);
+          
+          if (!progress?.progress?.completedCount || progress.progress.completedCount < progress.progress.totalCount) {
+             const [minC, maxC] = parseCost(guide?.costRange);
+             const [minD, maxD] = parseTime(guide?.estimatedTime);
+             totalMinCost += minC;
+             totalMaxCost += maxC;
+             totalMinDays += minD;
+             totalMaxDays += maxD;
+          }
+        });
+      });
+    });
+
     return {
       total,
       completed,
       inProgress,
-      favorites: 0,
-      activeBundles
+      favorites,
+      activeBundles,
+      aggregateRemaining: {
+        cost: `₱${totalMinCost}-${totalMaxCost}`,
+        time: `${totalMinDays}-${totalMaxDays} days`
+      }
     };
-  }, [processedGuides, userData]);
+  }, [processedGuides, userData, allGuides]);
 
   const bundleProgress = useMemo(() => {
     const trackedIds = userData.trackedBundles?.map(b => b.bundleId) || [];
@@ -299,6 +404,37 @@ export default function ProgressClient({ allGuides, isRestricted }) {
           <div className="flex-1 min-w-0 space-y-12">
             <SummaryStats stats={stats} />
 
+            {stats.activeBundles > 0 && (
+              <div className="bg-ctp-sky-800 rounded-2xl p-6 text-white shadow-xl shadow-ctp-sky-800/10 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-12 -mt-12 blur-2xl group-hover:scale-125 transition-transform" />
+                <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-3">
+                      <BarChart3 size={18} strokeWidth={2.5} />
+                      <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">Workflow Analytics</h3>
+                    </div>
+                    <p className="text-xl font-bold tracking-tight">Active Milestone Forecast</p>
+                    <p className="text-xs opacity-70 font-medium">Estimated resources needed to complete all {stats.activeBundles} active bundles.</p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-8 md:gap-12">
+                    <div className="space-y-1">
+                      <span className="text-[9px] font-bold uppercase tracking-widest opacity-60">Est. Total Cost</span>
+                      <p className="text-2xl font-bold tracking-tighter">{stats.aggregateRemaining.cost}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[9px] font-bold uppercase tracking-widest opacity-60">Est. Time Left</span>
+                      <p className="text-2xl font-bold tracking-tighter">{stats.aggregateRemaining.time}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[9px] font-bold uppercase tracking-widest opacity-60">Completion Rate</span>
+                      <p className="text-2xl font-bold tracking-tighter">{Math.round((stats.completed / (stats.total || 1)) * 100)}%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="space-y-6">
               <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
                 <div className="flex bg-ctp-mantle p-1 rounded-lg border border-ctp-surface1 shadow-sm overflow-x-auto no-scrollbar">
@@ -318,18 +454,11 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg px-4 py-2 shadow-sm">
-                    <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Sort:</span>
-                    <select 
-                      value={sortBy}
-                      onChange={(e) => setSortBy(e.target.value)}
-                      className="bg-transparent text-[10px] font-bold uppercase tracking-widest text-ctp-text focus:outline-none cursor-pointer hover:text-ctp-sky-800 transition-all outline-none"
-                    >
-                      <option>Recently updated</option>
-                      <option>Alphabetical</option>
-                      <option>Progress %</option>
-                    </select>
-                  </div>
+                  <SortDropdown 
+                    value={sortBy} 
+                    onChange={setSortBy} 
+                    options={sortOptions} 
+                  />
                 </div>
               </div>
 
@@ -403,6 +532,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                       progress={item.progress} 
                       steps={item.steps}
                       onDelete={() => handleDeleteGuide(item.slug)}
+                      onFavorite={() => handleFavoriteGuide(item.slug)}
                     />
                   ))
                 ) : (

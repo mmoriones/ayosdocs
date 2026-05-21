@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { 
   Search, 
   MapPin, 
@@ -16,7 +18,8 @@ import {
   Users,
   Zap,
   MessageSquare,
-  Filter
+  Filter,
+  Loader2
 } from 'lucide-react';
 import { GuideIcon } from '@/lib/guideIcons';
 import PageHeader from '@/components/ui/PageHeader';
@@ -31,61 +34,25 @@ export default function OfficesClient() {
   const [selectedAgency, setSelectedAgency] = useState('All Agencies');
   const router = useRouter();
 
-  const agencies = ['All Agencies', 'DFA', 'PSA', 'NBI', 'LTO', 'SSS'];
+  const agencies = ['All Agencies', 'DFA', 'PSA', 'NBI', 'SSS', 'LTO', 'PhilHealth', 'PAG-IBIG'];
 
-  const offices = [
-    {
-      id: 1,
-      name: 'DFA Manila Aseana',
-      agency: 'DFA',
-      location: 'Parañaque, Metro Manila',
-      rating: 4.3,
-      reviews: 182,
-      waitTime: '2-3 hrs',
-      speed: 85,
-      friendliness: 78,
-      queue: 92,
-      proTip: "Slots open at midnight. Photocopy services available across the street.",
-      guideSlug: 'passport-appointment',
-      status: 'Regular Hours'
+  const { data: offices = [], isLoading } = useQuery({
+    queryKey: ['offices', selectedAgency, searchQuery],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      if (selectedAgency !== 'All Agencies') params.append('agency', selectedAgency);
+      if (searchQuery) params.append('search', searchQuery);
+      
+      const response = await axios.get(`/api/offices?${params.toString()}`);
+      return response.data;
     },
-    {
-      id: 2,
-      name: 'PSA Quezon City Main Office',
-      agency: 'PSA',
-      location: 'East Ave, Quezon City',
-      rating: 4.5,
-      reviews: 156,
-      waitTime: '1-2 hrs',
-      speed: 90,
-      friendliness: 82,
-      queue: 88,
-      proTip: "Apply online first to use the priority lane.",
-      guideSlug: 'psa-birth-certificate',
-      status: 'Regular Hours'
-    },
-    {
-      id: 3,
-      name: 'NBI Clearance Center - UN Avenue',
-      agency: 'NBI',
-      location: 'Manila, Metro Manila',
-      rating: 4.1,
-      reviews: 98,
-      waitTime: '2-4 hrs',
-      speed: 75,
-      friendliness: 70,
-      queue: 65,
-      proTip: "Go before 8 AM for walk-ins, though online appointment is preferred.",
-      guideSlug: 'nbi-clearance',
-      status: 'Busy'
-    }
-  ];
+    // Keep data fresh but allow some stale time for UX
+    staleTime: 60 * 1000,
+  });
 
-  const filteredOffices = offices.filter(office => 
-    (office.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-     office.location.toLowerCase().includes(searchQuery.toLowerCase())) &&
-    (selectedAgency === 'All Agencies' || office.agency === selectedAgency)
-  );
+  const bestPerformingOffices = useMemo(() => {
+    return [...offices].sort((a, b) => b.stats.avgRating - a.stats.avgRating).slice(0, 3);
+  }, [offices]);
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans flex flex-col transition-colors duration-300 text-ctp-text">
@@ -96,7 +63,7 @@ export default function OfficesClient() {
         actions={
           <div className="bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_rgba(4,165,229,0.5)]" />
-            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">5,402 Monthly Reports</span>
+            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Community Reports Active</span>
           </div>
         }
       />
@@ -144,9 +111,14 @@ export default function OfficesClient() {
             </div>
 
             <div className="space-y-6">
-              {filteredOffices.length > 0 ? (
-                filteredOffices.map((office) => (
-                  <OfficeCard key={office.id} office={office} router={router} />
+              {isLoading ? (
+                <div className="flex flex-col items-center justify-center py-20 gap-4">
+                  <Loader2 className="animate-spin text-ctp-sky-800" size={40} />
+                  <p className="text-sm font-bold text-ctp-subtext1 uppercase tracking-widest">Fetching intelligence...</p>
+                </div>
+              ) : offices.length > 0 ? (
+                offices.map((office) => (
+                  <OfficeCard key={office._id} office={office} router={router} />
                 ))
               ) : (
                 <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
@@ -164,22 +136,25 @@ export default function OfficesClient() {
             <section className="bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
               <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-3">
                 <TrendingUp size={14} className="text-ctp-sky-800" />
-                <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Best Performing</h3>
+                <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Top Rated Branches</h3>
               </div>
               
               <div className="divide-y divide-ctp-surface1/50">
-                {offices.slice(0, 3).map((office, i) => (
-                  <div key={office.id} className="flex items-center gap-4 p-4 hover:bg-ctp-mantle/30 transition-colors group cursor-pointer">
+                {bestPerformingOffices.map((office, i) => (
+                  <div key={office._id} className="flex items-center gap-4 p-4 hover:bg-ctp-mantle/30 transition-colors group cursor-pointer">
                     <div className="w-8 h-8 rounded-lg bg-ctp-mantle border border-ctp-surface1 text-ctp-sky-800 flex items-center justify-center text-[10px] font-bold shadow-sm">
                       0{i + 1}
                     </div>
                     <div className="flex-1 min-w-0">
                       <h4 className="text-xs font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight">{office.name}</h4>
-                      <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 opacity-80">{office.agency} • {office.rating} rating</p>
+                      <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 opacity-80">{office.agency} • {office.stats.avgRating} rating</p>
                     </div>
                     <span className="text-[8px] font-bold text-ctp-green bg-ctp-green/5 border border-ctp-green/20 px-1.5 py-0.5 rounded uppercase tracking-widest">Top</span>
                   </div>
                 ))}
+                {bestPerformingOffices.length === 0 && (
+                  <p className="p-4 text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest text-center">No data yet</p>
+                )}
               </div>
               
               <button 
@@ -242,12 +217,26 @@ export default function OfficesClient() {
 }
 
 const OfficeCard = ({ office, router }) => {
+  const waitTimeLabel = {
+    fast: '< 1 hr',
+    medium: '1-3 hrs',
+    slow: 'Whole day',
+    'N/A': 'No data'
+  }[office.stats.avgWaitTime || 'N/A'];
+
+  const waitTimeColor = {
+    fast: 'text-ctp-green bg-ctp-green/5 border-ctp-green/20',
+    medium: 'text-ctp-sky-800 bg-ctp-sky-800/5 border-ctp-sky-800/20',
+    slow: 'text-ctp-peach bg-ctp-peach/5 border-ctp-peach/20',
+    'N/A': 'text-ctp-subtext1 bg-ctp-mantle border-ctp-surface1'
+  }[office.stats.avgWaitTime || 'N/A'];
+
   return (
     <div className="group bg-ctp-base rounded-xl p-5 lg:p-6 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all relative overflow-hidden flex flex-col h-full">
       <div className="flex flex-col md:flex-row gap-6 md:items-start">
         <div className="flex md:flex-col items-center gap-4">
           <div className="w-14 h-14 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
-            <GuideIcon slug={office.guideSlug} agency={office.agency} className="w-8 h-8 text-ctp-sky-800" strokeWidth={1.5} />
+            <GuideIcon agency={office.agency} className="w-8 h-8 text-ctp-sky-800" strokeWidth={1.5} />
           </div>
           <span className="px-2 py-0.5 rounded bg-ctp-sky-800/5 text-ctp-sky-800 text-[9px] font-bold uppercase tracking-widest border border-ctp-sky-800/20 whitespace-nowrap">
             {office.agency}
@@ -262,7 +251,7 @@ const OfficeCard = ({ office, router }) => {
               </h3>
               <div className="flex items-center gap-2 mt-1.5 text-ctp-subtext1">
                 <MapPin size={12} className="text-ctp-sky-800" />
-                <span className="text-[10px] font-bold uppercase tracking-widest">{office.location}</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest">{office.city}, {office.province}</span>
               </div>
             </div>
             
@@ -270,53 +259,22 @@ const OfficeCard = ({ office, router }) => {
               <div className="text-right">
                 <div className="flex items-center gap-1.5 justify-end">
                   <Star size={14} className="fill-ctp-yellow text-ctp-yellow" />
-                  <span className="text-lg font-bold text-ctp-text">{office.rating}</span>
+                  <span className="text-lg font-bold text-ctp-text">{office.stats.avgRating?.toFixed(1) || '0.0'}</span>
                 </div>
-                <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 whitespace-nowrap opacity-80">{office.reviews} interactions</p>
+                <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 whitespace-nowrap opacity-80">{office.stats.totalReports} interactions</p>
               </div>
               <div className="h-8 w-px bg-ctp-surface1 hidden md:block" />
-              <div className="bg-ctp-sky-800/5 px-3 py-1.5 rounded-lg border border-ctp-sky-800/10 flex flex-col items-center min-w-[80px]">
-                <span className="text-[8px] font-bold text-ctp-sky-800 uppercase tracking-widest mb-0.5 opacity-80">Avg. Wait</span>
-                <span className="text-xs font-bold text-ctp-sky-800 uppercase tracking-tight">{office.waitTime}</span>
+              <div className={`${waitTimeColor} px-3 py-1.5 rounded-lg border flex flex-col items-center min-w-[80px]`}>
+                <span className="text-[8px] font-bold uppercase tracking-widest mb-0.5 opacity-80">Avg. Wait</span>
+                <span className="text-xs font-bold uppercase tracking-tight">{waitTimeLabel}</span>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-4 border-y border-ctp-surface1/50">
-            {[
-              { label: 'Speed', value: office.speed, icon: Zap, color: 'text-ctp-sky-800', bg: 'bg-ctp-sky-800' },
-              { label: 'Staff', value: office.friendliness, icon: Users, color: 'text-ctp-mauve', bg: 'bg-ctp-mauve' },
-              { label: 'Queue', value: office.queue, icon: Clock, color: 'text-ctp-peach', bg: 'bg-ctp-peach' },
-              { label: 'Facility', value: 85, icon: Building2, color: 'text-ctp-green', bg: 'bg-ctp-green' }
-            ].map((stat) => (
-              <div key={stat.label} className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest flex items-center gap-1.5">
-                    <stat.icon size={10} className={stat.color} strokeWidth={3} />
-                    {stat.label}
-                  </span>
-                  <span className="text-[10px] font-bold text-ctp-text">{stat.value}%</span>
-                </div>
-                <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/30">
-                  <div 
-                    className={`h-full ${stat.bg} rounded-full`} 
-                    style={{ width: `${stat.value}%` }}
-                  />
-                </div>
-              </div>
-            ))}
+          <div className="flex flex-col gap-2">
+             <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Office Address:</p>
+             <p className="text-xs text-ctp-text font-medium leading-relaxed opacity-90">{office.address}</p>
           </div>
-
-          {office.proTip && (
-            <div className="bg-ctp-mantle border border-ctp-surface1 rounded-lg p-3.5 flex items-start gap-3 shadow-inner">
-              <div className="w-7 h-7 rounded-md bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shrink-0 shadow-sm">
-                <Info size={14} strokeWidth={2.5} />
-              </div>
-              <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed italic">
-                &quot;{office.proTip}&quot;
-              </p>
-            </div>
-          )}
         </div>
       </div>
       
@@ -325,7 +283,9 @@ const OfficeCard = ({ office, router }) => {
           <div className="p-1.5 rounded bg-ctp-mantle border border-ctp-surface1">
             <MessageSquare size={12} className="text-ctp-subtext1" />
           </div>
-          <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">3 Community reports today</span>
+          <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+            {office.stats.totalReports > 0 ? `Crowdsourced from ${office.stats.totalReports} citizens` : 'Be the first to report'}
+          </span>
         </div>
         <button 
           onClick={() => router.push('/coming-soon')}

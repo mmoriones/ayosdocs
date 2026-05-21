@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { 
   Star, 
   Clock, 
@@ -18,13 +18,17 @@ import {
   MessageSquare,
   Lock,
   ShieldAlert,
-  Loader2
+  Loader2,
+  Search
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import PageHeader from '@/components/ui/PageHeader';
 import { useToast } from '@/context/ToastContext';
 import { useAuthUI } from '@/components/Providers';
+import { submitOfficeReportAction } from '@/app/actions/office';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 
@@ -111,11 +115,11 @@ export default function RateClient() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [officeSearch, setOfficeSearch] = useState('');
+  const [selectedOffice, setSelectedOffice] = useState(null);
   
   const [formData, setFormData] = useState({
-    agency: '',
-    branch: '',
-    dateVisited: '',
+    visitDate: '',
     ratings: {
       speed: 0,
       friendliness: 0,
@@ -135,6 +139,16 @@ export default function RateClient() {
     friendliness: 0,
     management: 0,
     cleanliness: 0
+  });
+
+  const { data: offices = [], isLoading: isLoadingOffices } = useQuery({
+    queryKey: ['offices-search', officeSearch],
+    queryFn: async () => {
+      if (officeSearch.length < 2) return [];
+      const response = await axios.get(`/api/offices?search=${officeSearch}`);
+      return response.data;
+    },
+    enabled: officeSearch.length >= 2,
   });
 
   const handleRatingClick = (category, value) => {
@@ -160,7 +174,7 @@ export default function RateClient() {
     setHoverRatings(prev => ({ ...prev, [category]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!isLoggedIn) {
@@ -177,19 +191,58 @@ export default function RateClient() {
       return;
     }
 
+    if (!selectedOffice) {
+      showToast({
+        type: 'error',
+        title: 'Office Required',
+        message: 'Please select a government office from the list.'
+      });
+      return;
+    }
+
+    // Check if ratings are filled
+    const allRatingsFilled = Object.values(formData.ratings).every(r => r > 0);
+    if (!allRatingsFilled) {
+      showToast({
+        type: 'error',
+        title: 'Ratings Required',
+        message: 'Please provide all performance ratings.'
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setShowSuccess(true);
-      showToast({
-        type: 'success',
-        title: 'Report Submitted',
-        message: 'Thank you for sharing your experience! It helps the community.'
+    try {
+      const result = await submitOfficeReportAction({
+        ...formData,
+        officeId: selectedOffice._id,
       });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1500);
+
+      if (result.success) {
+        setShowSuccess(true);
+        showToast({
+          type: 'success',
+          title: 'Report Submitted',
+          message: result.message
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        showToast({
+          type: 'error',
+          title: 'Submission Failed',
+          message: result.message
+        });
+      }
+    } catch (error) {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: 'An unexpected error occurred. Please try again.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (showSuccess) {
@@ -213,7 +266,21 @@ export default function RateClient() {
               Back to Offices
             </button>
             <button 
-              onClick={() => setShowSuccess(false)}
+              onClick={() => {
+                setShowSuccess(false);
+                setSelectedOffice(null);
+                setOfficeSearch('');
+                setFormData({
+                  visitDate: '',
+                  ratings: { speed: 0, friendliness: 0, management: 0, cleanliness: 0 },
+                  appointment: '',
+                  waitingTime: '',
+                  extraRequirements: '',
+                  fixerActivity: '',
+                  comment: '',
+                  isAnonymous: false
+                });
+              }}
               className="w-full py-3 rounded-lg font-bold uppercase tracking-widest text-[10px] text-ctp-subtext1 hover:bg-ctp-mantle transition-all border border-ctp-surface1"
             >
               Submit Another
@@ -277,44 +344,85 @@ export default function RateClient() {
                     </div>
                   </div>
                   
-                  <div className="p-8 grid md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Government Agency</label>
-                      <select 
-                        required
-                        value={formData.agency}
-                        onChange={(e) => setFormData({...formData, agency: e.target.value})}
-                        className="w-full px-4 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg text-sm font-bold uppercase tracking-wider text-ctp-text focus:outline-none focus:border-ctp-sky-800 transition-all outline-none"
-                      >
-                        <option value="">Select Agency</option>
-                        {['DFA', 'PSA', 'NBI', 'SSS', 'LTO', 'PhilHealth', 'PAG-IBIG'].map(a => (
-                          <option key={a} value={a}>{a}</option>
-                        ))}
-                      </select>
+                  <div className="p-8 space-y-8">
+                    <div className="space-y-4">
+                      <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Search & Select Office</label>
+                      
+                      {!selectedOffice ? (
+                        <div className="relative group">
+                          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ctp-subtext1 group-focus-within:text-ctp-sky-800 transition-colors" />
+                          <input 
+                            type="text"
+                            placeholder="Type branch name (e.g. DFA Aseana, PSA East Ave)..."
+                            value={officeSearch}
+                            onChange={(e) => setOfficeSearch(e.target.value)}
+                            className="w-full pl-12 pr-4 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all outline-none shadow-inner"
+                          />
+                          
+                          {officeSearch.length >= 2 && (
+                            <div className="absolute top-full left-0 right-0 mt-2 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-xl z-50 overflow-hidden">
+                              {isLoadingOffices ? (
+                                <div className="p-6 text-center text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest flex items-center justify-center gap-3">
+                                  <Loader2 size={14} className="animate-spin" />
+                                  Searching branches...
+                                </div>
+                              ) : offices.length > 0 ? (
+                                <div className="divide-y divide-ctp-surface1/50 max-h-60 overflow-y-auto no-scrollbar">
+                                  {offices.map((office) => (
+                                    <button
+                                      key={office._id}
+                                      type="button"
+                                      onClick={() => setSelectedOffice(office)}
+                                      className="w-full px-5 py-4 text-left hover:bg-ctp-mantle transition-colors flex items-center justify-between group"
+                                    >
+                                      <div>
+                                        <h4 className="text-xs font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight">{office.name}</h4>
+                                        <p className="text-[10px] text-ctp-subtext1 mt-1 font-medium">{office.city}, {office.province}</p>
+                                      </div>
+                                      <span className="text-[9px] font-bold text-ctp-sky-800 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">Select</span>
+                                    </button>
+                                  ))}
+                                </div>
+                              ) : (
+                                <div className="p-6 text-center text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">No offices found</div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="bg-ctp-sky-800/5 border border-ctp-sky-800/20 rounded-xl p-5 flex items-center justify-between group">
+                          <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded-lg bg-ctp-base border border-ctp-sky-800/20 flex items-center justify-center text-ctp-sky-800 shadow-sm">
+                              <Building2 size={20} />
+                            </div>
+                            <div>
+                              <h4 className="text-sm font-bold text-ctp-text uppercase tracking-tight">{selectedOffice.name}</h4>
+                              <p className="text-[11px] text-ctp-subtext1 font-medium">{selectedOffice.city}, {selectedOffice.province}</p>
+                            </div>
+                          </div>
+                          <button 
+                            type="button"
+                            onClick={() => { setSelectedOffice(null); setOfficeSearch(''); }}
+                            className="text-[10px] font-bold text-ctp-sky-800 hover:text-ctp-peach uppercase tracking-widest transition-colors"
+                          >
+                            Change Office
+                          </button>
+                        </div>
+                      )}
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Branch Location</label>
-                      <input 
-                        required
-                        type="text" 
-                        placeholder="e.g. SM Manila, QC Hall"
-                        value={formData.branch}
-                        onChange={(e) => setFormData({...formData, branch: e.target.value})}
-                        className="w-full px-4 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all outline-none"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Date of Visit</label>
-                      <input 
-                        required
-                        type="date" 
-                        max={new Date().toISOString().split('T')[0]}
-                        value={formData.dateVisited}
-                        onChange={(e) => setFormData({...formData, dateVisited: e.target.value})}
-                        className="w-full px-4 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all outline-none"
-                      />
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Date of Visit</label>
+                        <input 
+                          required
+                          type="date" 
+                          max={new Date().toISOString().split('T')[0]}
+                          value={formData.visitDate}
+                          onChange={(e) => setFormData({...formData, visitDate: e.target.value})}
+                          className="w-full px-4 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all outline-none"
+                        />
+                      </div>
                     </div>
                   </div>
                 </section>
@@ -372,6 +480,13 @@ export default function RateClient() {
                       options={[{ label: 'No', value: 'no' }, { label: 'Yes', value: 'yes' }]}
                       value={formData.extraRequirements}
                       onChange={(val) => setFormData({...formData, extraRequirements: val})}
+                    />
+                    <RadioGroup 
+                      label="Fixer/Scalper activity noticed?" 
+                      name="fixerActivity"
+                      options={[{ label: 'No', value: 'no' }, { label: 'Yes', value: 'yes' }]}
+                      value={formData.fixerActivity}
+                      onChange={(val) => setFormData({...formData, fixerActivity: val})}
                     />
                   </div>
                 </section>

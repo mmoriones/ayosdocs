@@ -2,38 +2,59 @@
 
 import Link from 'next/link';
 import { GuideIcon } from '@/lib/guideIcons';
-import { Eye, ArrowRight } from 'lucide-react';
+import { Eye, ArrowRight, Bookmark } from 'lucide-react';
 
 /**
  * Popular guides widget.
  * Supports 'default' grid and 'compact' list views.
  */
-const TrendingWidget = ({ guide, stats, variant = 'default', onClick }) => {
+const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, onFavorite }) => {
+  const isFavorite = progress?.isFavorite || false;
+
   if (variant === 'compact') {
     return (
-      <Link 
-        href={`/guides/${guide.slug}`}
-        onClick={onClick}
-        className="flex items-center gap-4 p-3 rounded-xl border border-ctp-surface1 bg-ctp-base hover:bg-ctp-mantle transition-all group"
-      >
-        <div className="w-10 h-10 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0">
-          <GuideIcon 
-            slug={guide.slug} 
-            agency={guide.agency} 
-            className="w-5 h-5 text-ctp-sky-800" 
-            strokeWidth={1.5}
-          />
-        </div>
-        <div className="flex-1 min-w-0">
-          <h4 className="text-sm font-semibold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors">
-            {guide.shortTitle || guide.title}
-          </h4>
-          <p className="text-[10px] text-ctp-subtext0 uppercase tracking-widest font-bold opacity-70">
-            {guide.agency}
-          </p>
-        </div>
-        <ArrowRight size={14} className="text-ctp-subtext1 group-hover:translate-x-1 transition-transform" />
-      </Link>
+      <div className="group relative flex items-center">
+        <Link 
+          href={`/guides/${guide.slug}`}
+          onClick={onClick}
+          className="flex-1 flex items-center gap-4 p-3 rounded-xl border border-ctp-surface1 bg-ctp-base hover:bg-ctp-mantle transition-all group"
+        >
+          <div className="w-10 h-10 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0">
+            <GuideIcon 
+              slug={guide.slug} 
+              agency={guide.agency} 
+              className="w-5 h-5 text-ctp-sky-800" 
+              strokeWidth={1.5}
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h4 className="text-sm font-semibold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors">
+              {guide.shortTitle || guide.title}
+            </h4>
+            <p className="text-[10px] text-ctp-subtext0 uppercase tracking-widest font-bold opacity-70">
+              {guide.agency}
+            </p>
+          </div>
+          <ArrowRight size={14} className="text-ctp-subtext1 group-hover:translate-x-1 transition-transform" />
+        </Link>
+        
+        {onFavorite && (
+          <button 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onFavorite();
+            }}
+            className={`absolute -right-2 -top-2 w-7 h-7 rounded-full border shadow-sm flex items-center justify-center transition-all active:scale-90 z-10 ${
+              isFavorite 
+                ? 'bg-ctp-sky-800 border-ctp-sky-800 text-white' 
+                : 'bg-ctp-base border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30'
+            }`}
+          >
+            <Bookmark size={12} fill={isFavorite ? "currentColor" : "none"} />
+          </button>
+        )}
+      </div>
     );
   }
 

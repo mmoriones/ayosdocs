@@ -8,13 +8,11 @@ import {
   ShieldCheck, 
   ChevronRight, 
   ArrowRight,
-  Save, 
   Loader2,
   Scan,
   AlertTriangle,
-  AlertCircle,
 } from 'lucide-react';
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
@@ -22,7 +20,7 @@ import { useAuthUI } from '@/components/Providers';
 import { useWorkspace } from '@/context/WorkspaceContext';
 import { useToast } from '@/context/ToastContext';
 import { GuideIcon } from '@/lib/guideIcons';
-import { updateProgressAction } from '@/app/actions/user';
+import { updateProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';
 
 /**
@@ -59,6 +57,61 @@ const ChecklistCard = ({
     },
     enabled: isLoggedIn && isVerified && !!slug,
   });
+
+  // Fetch comprehensive user data for favorites sync
+  const { data: userData } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: async () => {
+      const response = await axios.get('/api/user/all-data');
+      return response.data;
+    },
+    enabled: isLoggedIn && isVerified,
+  });
+
+  const fullProgress = userData?.savedProgress?.find(p => p.guideSlug === slug);
+  const isFavorite = !!fullProgress?.isFavorite;
+
+  const favoriteMutation = useMutation({
+    mutationFn: async () => {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      if (!isVerified) {
+        showToast({
+          type: 'warning',
+          title: 'Verification Required',
+          message: 'Please verify your email to favorite guides.'
+        });
+        return;
+      }
+      const result = await toggleFavoriteAction(slug);
+      if (!result.success) throw new Error(result.message);
+      return result;
+    },
+    onSuccess: (data) => {
+      if (!data) return;
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      showToast({
+        type: 'success',
+        title: data.isFavorite ? 'Added to Favorites' : 'Removed from Favorites',
+        message: data.message
+      });
+    },
+    onError: (error) => {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: error.message || 'Failed to update favorite. Please try again.'
+      });
+    }
+  });
+
+  const handleFavorite = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    favoriteMutation.mutate();
+  };
 
   const saveMutation = useMutation({
     mutationFn: async (completedTaskIndices) => {
@@ -161,8 +214,7 @@ const ChecklistCard = ({
 
   const completedCount = steps.filter((s) => s.completed).length;
   const totalSteps = steps.length;
-  const progress = totalSteps ? Math.round((completedCount / totalSteps) * 100) : 0;
-  const hasCompletedSteps = steps.some((s) => s.completed);
+  const progressPercent = totalSteps ? Math.round((completedCount / totalSteps) * 100) : 0;
 
   const cardLabel = inGuidePage ? "Requirements Tracker" : "Your Progress";
 
@@ -239,8 +291,16 @@ const ChecklistCard = ({
               </div>
 
               {!inGuidePage && isLoggedIn && (
-                <button className="p-2 text-ctp-subtext1 hover:text-ctp-sky-800 rounded-lg border border-ctp-surface1 transition-all shrink-0 bg-ctp-base shadow-sm active:scale-95">
-                  <Bookmark size={16} />
+                <button 
+                  onClick={handleFavorite}
+                  className={`p-2 rounded-lg border transition-all shrink-0 active:scale-95 shadow-sm ${
+                    isFavorite 
+                      ? 'text-ctp-sky-800 bg-ctp-sky-800/10 border-ctp-sky-800/30' 
+                      : 'text-ctp-subtext1 bg-ctp-base border-ctp-surface1 hover:text-ctp-sky-800'
+                  }`}
+                  title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+                >
+                  <Bookmark size={16} fill={isFavorite ? "currentColor" : "none"} />
                 </button>
               )}
             </div>
@@ -252,8 +312,8 @@ const ChecklistCard = ({
         <div className={`${(isModal || isBare) ? "px-0" : "px-5 lg:px-6"} mt-5 mb-2`}>
           <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/50">
             <div 
-              className={`h-full transition-all duration-1000 ease-out ${progress === 100 ? 'bg-ctp-green' : 'bg-ctp-sky-800 shadow-[0_0_8px_rgba(4,165,229,0.3)]'}`}
-              style={{ width: `${progress}%` }}
+              className={`h-full transition-all duration-1000 ease-out ${progressPercent === 100 ? 'bg-ctp-green' : 'bg-ctp-sky-800 shadow-[0_0_8px_rgba(4,165,229,0.3)]'}`}
+              style={{ width: `${progressPercent}%` }}
             />
           </div>
         </div>

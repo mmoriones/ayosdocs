@@ -16,6 +16,7 @@ import {
 import Banner from '@/components/ui/Banner';
 import PageHeader from '@/components/ui/PageHeader';
 import SearchInput from '@/components/ui/SearchInput';
+import SortDropdown from '@/components/ui/SortDropdown';
 import { getBundleIcon } from '@/lib/bundleIcons';
 
 /**
@@ -26,6 +27,11 @@ export default function BundlesClient({ initialBundles }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('Default');
+
+  const sortOptions = [
+    { label: 'Default', value: 'Default' },
+    { label: 'Alphabetical', value: 'Alphabetical' }
+  ];
 
   const categories = useMemo(() => 
     ['All', ...new Set(initialBundles.map(b => b.category))], 
@@ -99,17 +105,11 @@ export default function BundlesClient({ initialBundles }) {
             </div>
 
             <div className="flex flex-wrap items-center gap-3 shrink-0">
-              <div className="flex items-center gap-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg px-4 py-2 shadow-sm">
-                <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Sort:</span>
-                <select 
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-transparent text-[10px] font-bold uppercase tracking-widest text-ctp-text focus:outline-none cursor-pointer hover:text-ctp-sky-800 transition-all outline-none"
-                >
-                  <option>Default</option>
-                  <option>Alphabetical</option>
-                </select>
-              </div>
+              <SortDropdown 
+                value={sortBy} 
+                onChange={setSortBy} 
+                options={sortOptions} 
+              />
 
               <button 
                 onClick={() => window.location.href = '/coming-soon'}

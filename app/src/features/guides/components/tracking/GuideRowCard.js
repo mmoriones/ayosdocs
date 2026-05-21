@@ -9,12 +9,13 @@ import { GuideIcon } from '@/lib/guideIcons';
  * GuideRowCard Component
  * High-density horizontal list item for individual guide tracking.
  */
-const GuideRowCard = ({ guide, progress, steps = [], onDelete }) => {
+const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const router = useRouter();
   const percentage = Math.round((progress.completedCount / progress.totalCount) * 100) || 0;
   const status = percentage === 100 ? 'Completed' : 'In Progress';
+  const isFavorite = progress.isFavorite;
 
   const nextStepIndex = steps.findIndex((s) => !s.completed);
   const nextStep = nextStepIndex !== -1 ? steps[nextStepIndex] : null;
@@ -86,11 +87,22 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete }) => {
 
           <div className="flex items-center gap-2">
             <button 
-              onClick={(e) => { e.stopPropagation(); }}
-              className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 transition-all flex items-center justify-center active:scale-90"
-              title="Bookmark"
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                onFavorite();
+              }}
+              className={`w-10 h-10 rounded-lg border transition-all flex items-center justify-center active:scale-90 ${
+                isFavorite 
+                  ? 'bg-ctp-sky-800 border-ctp-sky-800 text-white shadow-lg' 
+                  : 'bg-ctp-base border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30'
+              }`}
+              title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
             >
-              <Bookmark size={14} />
+              <Bookmark 
+                size={16} 
+                className="transition-colors" 
+                fill={isFavorite ? "currentColor" : "none"} 
+              />
             </button>
             
             <div className="relative" ref={menuRef}>

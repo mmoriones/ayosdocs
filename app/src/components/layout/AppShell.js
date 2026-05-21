@@ -6,11 +6,12 @@ import DashboardHeader from './DashboardHeader';
 import Footer from '@/components/Footer';
 
 /**
- * Dashboard layout shell.
- * Manages Sidebar, Header, and Main content area.
+ * Primary layout wrapper for the application dashboard.
+ * Coordinates global navigation (Sidebar, Header), responsive transitions,
+ * and the main content area with a unified footer.
  * 
  * @param {Object} props
- * @param {React.ReactNode} props.children
+ * @param {React.ReactNode} props.children - Content to be rendered in the main area.
  */
 export default function AppShell({ children }) {
   const [isCollapsed, setIsCollapsed] = useState(false);

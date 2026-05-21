@@ -1,7 +1,7 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { User, Mail, ShieldCheck, Calendar, Camera } from 'lucide-react';
+import { useSession, signOut } from 'next-auth/react';
+import { User, Mail, ShieldCheck, Calendar, Camera, LogOut } from 'lucide-react';
 import Image from 'next/image';
 
 /**
@@ -57,14 +57,14 @@ export default function ProfileClient() {
                         <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Full Name</label>
                         <div className="flex items-center gap-2 text-ctp-text font-semibold">
                           <User size={16} className="text-ctp-subtext0" />
-                          <span>{user?.name || 'AyosDocs User'}</span>
+                          <span>{user?.name}</span>
                         </div>
                       </div>
                       <div className="space-y-1">
                         <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Email Address</label>
                         <div className="flex items-center gap-2 text-ctp-text font-semibold">
                           <Mail size={16} className="text-ctp-subtext0" />
-                          <span>{user?.email || 'user@example.com'}</span>
+                          <span>{user?.email}</span>
                         </div>
                       </div>
                     </div>
@@ -128,6 +128,14 @@ export default function ProfileClient() {
                   <span className="text-xs font-bold text-ctp-sky-800">Standard</span>
                 </div>
               </div>
+
+              <button 
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="w-full mt-6 flex items-center justify-center gap-2 py-2.5 rounded-lg border border-ctp-surface1 text-ctp-red hover:bg-ctp-red/5 transition-all text-[10px] font-bold uppercase tracking-widest active:scale-[0.98] shadow-sm"
+              >
+                <LogOut size={14} />
+                <span>Sign Out</span>
+              </button>
             </section>
           </div>
         </div>

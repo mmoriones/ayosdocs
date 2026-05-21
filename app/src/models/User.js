@@ -22,7 +22,9 @@ const userSchema = new mongoose.Schema({
     savedProgress: [
         {
             guideSlug: String,
-            completedTasks: String
+            completedTasks: String,
+            isFavorite: { type: Boolean, default: false },
+            updatedAt: { type: Date, default: Date.now }
         }
     ],
     trackedBundles: [

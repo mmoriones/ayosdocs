@@ -4,10 +4,12 @@ import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useAuthUI } from '@/components/Providers';
 import { useWorkspace } from '@/context/WorkspaceContext';
+import { useToast } from '@/context/ToastContext';
+import { toggleFavoriteAction } from '@/app/actions/user';
 import { 
   ArrowRight, 
   MapPin, 
@@ -40,17 +42,59 @@ export default function HomeClient({ allGuides }) {
   const isLoggedIn = status === 'authenticated';
   const isVerified = session?.user?.isVerified;
   const { openAuthModal } = useAuthUI();
+  const { showToast } = useToast();
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   // Fetch comprehensive user data (progress, bundles, etc.)
   const { data: userData, isLoading: isLoadingUserData } = useQuery({
-    queryKey: ['userAllData'],
+    queryKey: ['user-data'],
     queryFn: async () => {
       const response = await axios.get('/api/user/all-data');
       return response.data;
     },
     enabled: isLoggedIn && isVerified,
   });
+
+  const favoriteMutation = useMutation({
+    mutationFn: async (slug) => {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      if (!isVerified) {
+        showToast({
+          type: 'warning',
+          title: 'Verification Required',
+          message: 'Please verify your email to favorite guides.'
+        });
+        return;
+      }
+      const result = await toggleFavoriteAction(slug);
+      if (!result.success) throw new Error(result.message);
+      return result;
+    },
+    onSuccess: (data) => {
+      if (!data) return;
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      showToast({
+        type: 'success',
+        title: data.isFavorite ? 'Added to Favorites' : 'Removed from Favorites',
+        message: data.message
+      });
+    },
+    onError: (error) => {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: error.message || 'Failed to update favorite. Please try again.'
+      });
+    }
+  });
+
+  const handleFavoriteGuide = (slug) => {
+    favoriteMutation.mutate(slug);
+  };
 
   // Calculate stats based on real progress data
   const stats = useMemo(() => {
@@ -77,14 +121,6 @@ export default function HomeClient({ allGuides }) {
 
     return { active, completed };
   }, [userData, allGuides]);
-
-  // Dynamically find recently updated guides from metadata
-  const recentlyUpdatedGuides = useMemo(() => {
-    return [...allGuides]
-      .filter(g => g.lastUpdated)
-      .sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated))
-      .slice(0, 4);
-  }, [allGuides]);
 
   const popularSlugs = [
     'passport-appointment',
@@ -151,14 +187,6 @@ export default function HomeClient({ allGuides }) {
                 <Search size={16} />
                 <span>Search Guides</span>
               </button>
-              {!isLoggedIn && (
-                <button 
-                  onClick={openAuthModal}
-                  className="px-4 py-2 bg-ctp-base border border-ctp-surface1 text-ctp-text rounded-lg text-sm font-semibold hover:bg-ctp-mantle transition-all"
-                >
-                  Sign In
-                </button>
-              )}
             </div>
           </div>
         </div>
@@ -302,8 +330,16 @@ export default function HomeClient({ allGuides }) {
 
             {/* Recently Updated */}
             <section className="space-y-4">
-              <h2 className="text-lg font-bold tracking-tight">Latest Changes</h2>
-              <RecentlyUpdated guides={recentlyUpdatedGuides} />
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-bold tracking-tight">Latest Changes</h2>
+                <button 
+                  onClick={() => router.push('/updates')}
+                  className="text-xs font-bold text-ctp-sky-800 hover:underline uppercase tracking-wider"
+                >
+                  View All
+                </button>
+              </div>
+              <RecentlyUpdated />
             </section>
           </div>
 
@@ -313,20 +349,33 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <h2 className="text-lg font-bold tracking-tight">Popular Guides</h2>
               <div className="space-y-3">
-                {popularGuides.map((guide, idx) => (
-                  <TrendingWidget 
-                    key={guide.slug} 
-                    guide={guide} 
-                    stats={{ views: `${(5.2 - idx * 0.8).toFixed(1)}k` }}
-                    variant="compact"
-                  />
-                ))}
+                {popularGuides.map((guide, idx) => {
+                  const progress = userData?.savedProgress?.find(p => p.guideSlug === guide.slug);
+                  return (
+                    <TrendingWidget 
+                      key={guide.slug} 
+                      guide={guide} 
+                      progress={progress}
+                      stats={{ views: `${(5.2 - idx * 0.8).toFixed(1)}k` }}
+                      variant="compact"
+                      onFavorite={() => handleFavoriteGuide(guide.slug)}
+                    />
+                  );
+                })}
               </div>
             </section>
 
             {/* Recent Experiences */}
             <section className="space-y-4">
-              <h2 className="text-lg font-bold tracking-tight">Recent Reports</h2>
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-bold tracking-tight">Recent Reports</h2>
+                <button 
+                  onClick={() => router.push('/offices')}
+                  className="text-xs font-bold text-ctp-sky-800 hover:underline uppercase tracking-wider"
+                >
+                  View All
+                </button>
+              </div>
               <RecentExperiences />
             </section>
 

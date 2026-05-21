@@ -64,7 +64,7 @@ export const GuideIcon = ({ slug, agency, ...props }) => {
   }
 
   // Fallback to slug-based detection if agency doesn't match
-  if (IconComponent === FileText) {
+  if (IconComponent === FileText && slug) {
     if (slug.includes('clearance')) IconComponent = FileCheck;
     else if (slug.includes('registration')) IconComponent = FileSearch;
     else if (slug.includes('license')) IconComponent = CreditCard;

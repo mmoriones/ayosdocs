@@ -9,13 +9,19 @@ import { useSyncExternalStore, useState } from "react";
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import SearchInput from '@/components/ui/SearchInput';
+import { useAuthUI } from '@/components/Providers';
 
 const emptySubscribe = () => () => {};
 const getClientSnapshot = () => true;
 const getServerSnapshot = () => false;
 
 /**
- * Dashboard header with breadcrumbs and tools.
+ * Global application header containing breadcrumb navigation, 
+ * central search trigger, theme toggling, and account actions.
+ * Automatically adapts UI for guest vs authenticated states.
+ * 
+ * @param {Object} props
+ * @param {Function} props.onMenuClick - Triggered to open the mobile sidebar.
  */
 export default function DashboardHeader({ onMenuClick }) {
   const pathname = usePathname();
@@ -23,6 +29,7 @@ export default function DashboardHeader({ onMenuClick }) {
   const { toggleSearch } = useSearch();
   const mounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
   const { data: session } = useSession();
+  const { openAuthModal } = useAuthUI();
   const user = session?.user;
   
   const segments = pathname.split('/').filter(Boolean);
@@ -85,28 +92,40 @@ export default function DashboardHeader({ onMenuClick }) {
             <Sun size={20} />
           )}
         </button>
-        <button className="p-2 text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle rounded-lg transition-all">
-          <Bell size={20} />
-        </button>
-        
-        <Link 
-          href="/profile"
-          className="ml-1 w-8 h-8 rounded-full border border-ctp-surface1 flex items-center justify-center overflow-hidden hover:border-ctp-sky-800 transition-all active:scale-95 shadow-sm bg-ctp-mantle"
-        >
-          {user?.image ? (
-            <Image
-              src={user.image}
-              alt={user.name || 'User'}
-              width={32}
-              height={32}
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div className="w-full h-full bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 text-xs font-bold uppercase">
-              {user?.name?.charAt(0) || 'AD'}
-            </div>
-          )}
-        </Link>
+
+        {!session ? (
+          <button 
+            onClick={openAuthModal}
+            className="px-4 py-1.5 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all shadow-sm active:scale-95 ml-2"
+          >
+            Sign In
+          </button>
+        ) : (
+          <>
+            <button className="p-2 text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle rounded-lg transition-all">
+              <Bell size={20} />
+            </button>
+            
+            <Link 
+              href="/profile"
+              className="ml-1 w-8 h-8 rounded-full border border-ctp-surface1 flex items-center justify-center overflow-hidden hover:border-ctp-sky-800 transition-all active:scale-95 shadow-sm bg-ctp-mantle"
+            >
+              {user?.image ? (
+                <Image
+                  src={user.image}
+                  alt={user.name || 'User'}
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 text-xs font-bold uppercase">
+                  {user?.name?.charAt(0) || 'AD'}
+                </div>
+              )}
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );

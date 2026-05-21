@@ -2,6 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -21,7 +23,7 @@ import {
 } from 'lucide-react';
 import { getBundleIcon } from '@/lib/bundleIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
-import { startBundleAction, stopBundleAction, resendVerificationAction } from '@/app/actions/user';
+import { startBundleAction, stopBundleAction, resendVerificationAction, toggleFavoriteAction } from '@/app/actions/user';
 import { useToast } from '@/context/ToastContext';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
@@ -36,6 +38,57 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
   const { openAuthModal } = useAuthUI();
   const isLoggedIn = status === 'authenticated';
   const isVerified = session?.user?.isVerified;
+  const queryClient = useQueryClient();
+
+  // Fetch comprehensive user data
+  const { data: userData } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: async () => {
+      const response = await axios.get('/api/user/all-data');
+      return response.data;
+    },
+    enabled: isLoggedIn && isVerified,
+  });
+
+  const favoriteMutation = useMutation({
+    mutationFn: async (slug) => {
+      if (!isLoggedIn) {
+        openAuthModal();
+        return;
+      }
+      if (!isVerified) {
+        showToast({
+          type: 'warning',
+          title: 'Verification Required',
+          message: 'Please verify your email to favorite guides.'
+        });
+        return;
+      }
+      const result = await toggleFavoriteAction(slug);
+      if (!result.success) throw new Error(result.message);
+      return result;
+    },
+    onSuccess: (data) => {
+      if (!data) return;
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      showToast({
+        type: 'success',
+        title: data.isFavorite ? 'Added to Favorites' : 'Removed from Favorites',
+        message: data.message
+      });
+    },
+    onError: (error) => {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: error.message || 'Failed to update favorite. Please try again.'
+      });
+    }
+  });
+
+  const handleFavoriteGuide = (slug) => {
+    favoriteMutation.mutate(slug);
+  };
 
   const [isTracked, setIsTracked] = useState(initialIsTracked);
   const [isLoading, setIsLoading] = useState(false);
@@ -130,6 +183,75 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
       percentage: totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0
     };
   };
+
+  // Analytics Calculations
+  const analytics = useMemo(() => {
+    let completedGuides = 0;
+    let totalMinCost = 0;
+    let totalMaxCost = 0;
+    let completedMinCost = 0;
+    let completedMaxCost = 0;
+    let totalMinDays = 0;
+    let totalMaxDays = 0;
+    let completedMinDays = 0;
+    let completedMaxDays = 0;
+
+    const parseCost = (range) => {
+      if (!range || range === 'Free') return [0, 0];
+      if (range.includes('Under ₱500')) return [0, 500];
+      if (range.includes('₱500–₱2000')) return [500, 2000];
+      if (range.includes('₱2000+')) return [2000, 5000];
+      return [0, 0];
+    };
+
+    const parseTime = (time) => {
+      if (!time || time === 'Same Day') return [0, 1];
+      if (time === '1-3 Days') return [1, 3];
+      if (time === '3-7 Days') return [3, 7];
+      if (time === '1 Week+') return [7, 14];
+      return [0, 0];
+    };
+
+    bundle.flow.forEach(step => {
+      step.guides.forEach(slug => {
+        const guide = allGuides.find(g => g.slug === slug);
+        const progress = getGuideProgress(slug);
+        
+        const [minC, maxC] = parseCost(guide?.costRange);
+        const [minD, maxD] = parseTime(guide?.estimatedTime);
+
+        totalMinCost += minC;
+        totalMaxCost += maxC;
+        totalMinDays += minD;
+        totalMaxDays += maxD;
+
+        if (progress.completed) {
+          completedGuides++;
+          completedMinCost += minC;
+          completedMaxCost += maxC;
+          completedMinDays += minD;
+          completedMaxDays += maxD;
+        }
+      });
+    });
+
+    const overallPercentage = Math.round((completedGuides / totalGuides) * 100);
+
+    return {
+      completedGuides,
+      overallPercentage,
+      cost: {
+        total: `₱${totalMinCost}-${totalMaxCost}`,
+        remaining: `₱${totalMinCost - completedMinCost}-${totalMaxCost - completedMaxCost}`,
+        percentage: totalMaxCost > 0 ? Math.round((completedMaxCost / totalMaxCost) * 100) : 0
+      },
+      time: {
+        total: `${totalMinDays}-${totalMaxDays} days`,
+        remaining: `${totalMinDays - completedMinDays}-${totalMaxDays - completedMaxDays} days`,
+        percentage: totalMaxDays > 0 ? Math.round((completedMaxDays / totalMaxDays) * 100) : 0
+      }
+    };
+  }, [bundle, allGuides, savedProgress]);
 
   // Calculate stage completion and active stage
   const stageStats = useMemo(() => {
@@ -263,6 +385,29 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
               <div className="absolute left-7 top-10 bottom-10 w-0.5 bg-ctp-surface1/50" />
 
               <div className="space-y-16">
+                {/* Analytics Summary Banner */}
+                {isTracked && (
+                   <div className="relative ml-20 bg-ctp-mantle border border-ctp-surface1 rounded-2xl p-6 mb-12 shadow-sm flex flex-col md:flex-row gap-8 items-center justify-between">
+                      <div className="space-y-1">
+                        <h4 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Resource Forecast</h4>
+                        <p className="text-sm font-bold text-ctp-text">Estimated to complete this workflow</p>
+                      </div>
+                      <div className="flex gap-10">
+                        <div className="text-center">
+                          <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Total Cost</p>
+                          <p className="text-lg font-bold text-ctp-text leading-none">{analytics.cost.total}</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Time Investment</p>
+                          <p className="text-lg font-bold text-ctp-text leading-none">{analytics.time.total}</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Guides Left</p>
+                          <p className="text-lg font-bold text-ctp-text leading-none">{totalGuides - analytics.completedGuides}</p>
+                        </div>
+                      </div>
+                   </div>
+                )}
                 {stageStats.map((step, stepIdx) => {
                   const isLocked = step.step > activeStage && !isTracked;
                   const isCurrent = step.step === activeStage && isTracked;
@@ -297,16 +442,18 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                           {step.guides.map((guideSlug) => {
                             const guide = allGuides.find(g => g.slug === guideSlug);
-                            const progress = getGuideProgress(guideSlug);
+                            const guideProgress = getGuideProgress(guideSlug);
+                            const fullProgress = userData?.savedProgress?.find(p => p.guideSlug === guideSlug);
                             
                             return (
                               <GuideCard 
                                 key={guideSlug}
                                 guide={guide || { slug: guideSlug, title: guideSlug.replace(/-/g, ' ') }}
-                                progress={progress}
+                                progress={{ ...guideProgress, isFavorite: fullProgress?.isFavorite }}
                                 showAgency={true}
                                 showBookmark={true}
                                 showFooter={true}
+                                onFavorite={() => handleFavoriteGuide(guideSlug)}
                               />
                             );
                           })}
@@ -347,26 +494,48 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                   <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Workflow Insights</h3>
                 </div>
                 <div className="divide-y divide-ctp-surface1/50">
-                  <div className="flex items-center justify-between p-4 hover:bg-ctp-mantle/30 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <CheckCircle2 size={14} className="text-ctp-green" />
-                      <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Documents</span>
+                  <div className="p-4 space-y-3 hover:bg-ctp-mantle/30 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <CheckCircle2 size={14} className="text-ctp-green" />
+                        <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Documents</span>
+                      </div>
+                      <span className="text-xs font-bold text-ctp-text">{analytics.completedGuides} / {totalGuides}</span>
                     </div>
-                    <span className="text-xs font-bold text-ctp-text">{totalGuides}</span>
+                    <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/30">
+                      <div className="h-full bg-ctp-green transition-all duration-1000" style={{ width: `${analytics.overallPercentage}%` }} />
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between p-4 hover:bg-ctp-mantle/30 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <Clock size={14} className="text-ctp-sky-800" />
-                      <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Duration</span>
+
+                  <div className="p-4 space-y-3 hover:bg-ctp-mantle/30 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Clock size={14} className="text-ctp-sky-800" />
+                        <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Est. Duration</span>
+                      </div>
+                      <span className="text-xs font-bold text-ctp-text">{analytics.time.total}</span>
                     </div>
-                    <span className="text-xs font-bold text-ctp-text">~3 Weeks</span>
+                    <div className="flex items-center justify-between text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-70">
+                      <span>Remaining</span>
+                      <span>{analytics.time.remaining}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between p-4 hover:bg-ctp-mantle/30 transition-colors">
-                    <div className="flex items-center gap-3">
-                      <AlertCircle size={14} className="text-ctp-yellow" />
-                      <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Complexity</span>
+
+                  <div className="p-4 space-y-3 hover:bg-ctp-mantle/30 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <DollarSign size={14} className="text-ctp-yellow" />
+                        <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Est. Cost</span>
+                      </div>
+                      <span className="text-xs font-bold text-ctp-text">{analytics.cost.total}</span>
                     </div>
-                    <span className="text-xs font-bold text-ctp-text uppercase tracking-widest">Normal</span>
+                    <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/30">
+                      <div className="h-full bg-ctp-yellow transition-all duration-1000" style={{ width: `${analytics.cost.percentage}%` }} />
+                    </div>
+                    <div className="flex items-center justify-between text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-70">
+                      <span>Spent</span>
+                      <span>{analytics.cost.percentage}%</span>
+                    </div>
                   </div>
                 </div>
               </div>

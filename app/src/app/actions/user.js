@@ -327,6 +327,60 @@ export async function deleteProgressAction(slug) {
 }
 
 /**
+ * Server action to toggle favorite status of a guide.
+ */
+export async function toggleFavoriteAction(guideSlug) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session) return { success: false, message: "Unauthorized" };
+
+    if (!session.user.isVerified) {
+      return { success: false, message: "Account verification required to favorite guides." };
+    }
+
+    await connectDB();
+    const user = await User.findOne({ email: session.user.email });
+    if (!user) return { success: false, message: "User not found" };
+
+    const progressIndex = user.savedProgress.findIndex(p => p.guideSlug === guideSlug);
+    
+    let isFavorite;
+    if (progressIndex === -1) {
+      // If guide is not tracked, add it as a favorite with empty progress
+      user.savedProgress.push({
+        guideSlug,
+        completedTasks: "",
+        isFavorite: true,
+        updatedAt: Date.now()
+      });
+      isFavorite = true;
+    } else {
+      user.savedProgress[progressIndex].isFavorite = !user.savedProgress[progressIndex].isFavorite;
+      user.savedProgress[progressIndex].updatedAt = Date.now();
+      isFavorite = user.savedProgress[progressIndex].isFavorite;
+    }
+    
+    // Explicitly mark as modified for nested array updates
+    user.markModified('savedProgress');
+    
+    await user.save();
+    
+    revalidatePath("/my-docs");
+    revalidatePath(`/guides/${guideSlug}`);
+    revalidatePath("/");
+    
+    return { 
+      success: true, 
+      isFavorite,
+      message: isFavorite ? "Added to favorites" : "Removed from favorites" 
+    };
+  } catch (error) {
+    console.error("Toggle Favorite Action Error:", error);
+    return { success: false, message: "Internal Server Error" };
+  }
+}
+
+/**
  * Server action to start tracking a bundle.
  */
 export async function startBundleAction(bundleId) {

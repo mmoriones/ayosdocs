@@ -4,14 +4,17 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 /**
- * Sidebar navigation link.
+ * Responsive navigation link for the sidebar.
+ * Automatically detects active state based on current pathname and
+ * supports collapsed/expanded visual modes.
  * 
  * @param {Object} props
- * @param {string} props.href
- * @param {import('lucide-react').LucideIcon} props.icon
- * @param {string} props.label
- * @param {boolean} props.collapsed
- * @param {boolean} [props.active]
+ * @param {string} props.href - Destination path.
+ * @param {import('lucide-react').LucideIcon} props.icon - Icon to display.
+ * @param {string} props.label - Text label (hidden in collapsed mode).
+ * @param {boolean} props.collapsed - Whether the parent sidebar is collapsed.
+ * @param {boolean} [props.active] - Forced active state (optional).
+ * @param {Function} [props.onClick] - Click handler for mobile menu closing.
  */
 export default function NavItem({ href, icon: Icon, label, collapsed, active, onClick }) {
   const pathname = usePathname();
@@ -31,7 +34,11 @@ export default function NavItem({ href, icon: Icon, label, collapsed, active, on
         <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
       </div>
       {!collapsed && (
-        <span className="text-sm truncate">{label}</span>
+        <span className={`text-sm truncate transition-all duration-300 whitespace-nowrap ${
+          collapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'
+        }`}>
+          {label}
+        </span>
       )}
     </Link>
   );
