@@ -6,6 +6,9 @@ import { Loader2, Lock, Eye, EyeOff, CheckCircle2, AlertCircle, ArrowLeft } from
 import Link from 'next/link';
 import { resetPasswordAction } from '@/app/actions/user';
 import { useToast } from '@/context/ToastContext';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
+import Card from '@/components/ui/Card';
 
 function ResetPasswordForm() {
   const router = useRouter();
@@ -17,8 +20,6 @@ function ResetPasswordForm() {
     password: '',
     confirmPassword: ''
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null); // { type: 'error' | 'success', text: string }
 
@@ -34,28 +35,17 @@ function ResetPasswordForm() {
   const handleInputChange = (e) => {
     if (status) setStatus(null);
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const getFieldError = (fieldName) => {
-    const value = formData[fieldName];
-    if (!value || value.length === 0) return '';
-
-    switch (fieldName) {
-      case 'password':
-        return value.length < 8 ? 'Password must be at least 8 characters' : '';
-      case 'confirmPassword':
-        return value !== formData.password ? 'Passwords do not match' : '';
-      default:
-        return '';
+  const getFieldError = (name) => {
+    if (name === 'password' && formData.password && formData.password.length < 8) {
+      return 'Password must be at least 8 characters';
     }
-  };
-
-  const isFieldInvalid = (fieldName) => {
-    return getFieldError(fieldName) !== '';
+    if (name === 'confirmPassword' && formData.confirmPassword && formData.confirmPassword !== formData.password) {
+      return 'Passwords do not match';
+    }
+    return '';
   };
 
   const isFormValid = () => {
@@ -68,7 +58,6 @@ function ResetPasswordForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     if (!isFormValid()) return;
 
     setIsSubmitting(true);
@@ -83,10 +72,7 @@ function ResetPasswordForm() {
           title: 'Password Reset',
           message: 'Your password has been updated successfully.'
         });
-        // Redirect to home after 3 seconds
-        setTimeout(() => {
-          router.push('/');
-        }, 3000);
+        setTimeout(() => router.push('/'), 3000);
       } else {
         setStatus({ type: 'error', text: result.message });
       }
@@ -98,8 +84,17 @@ function ResetPasswordForm() {
   };
 
   return (
-    <div className="w-full max-w-md bg-ctp-mantle rounded-2xl shadow-2xl border border-ctp-surface1 overflow-hidden animate-slide-down">
-      <div className="p-8">
+    <Card 
+      background="mantle" 
+      className="w-full max-w-md animate-slide-down"
+      noPadding
+      footer={
+        <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest text-center">
+          Secure Password Reset System
+        </p>
+      }
+    >
+      <div className="p-8 md:p-10">
         <div className="mb-8 text-center">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-ctp-sky-800/10 text-ctp-sky-800 mb-4">
             <Lock size={24} />
@@ -136,89 +131,41 @@ function ResetPasswordForm() {
             </Link>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="space-y-1.5">
-              <div className="relative">
-                <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('password') ? 'text-red-500' : 'text-ctp-subtext1'}`} />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="New Password"
-                  required
-                  minLength={8}
-                  maxLength={128}
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  disabled={isSubmitting || !token}
-                  className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-12 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
-                    isFieldInvalid('password') 
-                      ? 'border-red-500/50 focus:border-red-500' 
-                      : 'border-ctp-surface1 focus:border-ctp-sky-800'
-                  } disabled:opacity-50`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('password') ? 'text-red-500/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-              {isFieldInvalid('password') && (
-                <p className="text-[10px] font-bold text-red-500 ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
-                  {getFieldError('password')}
-                </p>
-              )}
-            </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <Input
+              label="New Password"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="At least 8 characters"
+              disabled={isSubmitting || !token}
+              error={getFieldError('password')}
+              leftIcon={Lock}
+              required
+            />
 
-            <div className="space-y-1.5">
-              <div className="relative">
-                <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('confirmPassword') ? 'text-red-500' : 'text-ctp-subtext1'}`} />
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="confirmPassword"
-                  placeholder="Confirm New Password"
-                  required
-                  minLength={8}
-                  maxLength={128}
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  disabled={isSubmitting || !token}
-                  className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-12 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
-                    isFieldInvalid('confirmPassword') 
-                      ? 'border-red-500/50 focus:border-red-500' 
-                      : 'border-ctp-surface1 focus:border-ctp-sky-800'
-                  } disabled:opacity-50`}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('confirmPassword') ? 'text-red-500/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
-                >
-                  {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-              {isFieldInvalid('confirmPassword') && (
-                <p className="text-[10px] font-bold text-red-500 ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
-                  {getFieldError('confirmPassword')}
-                </p>
-              )}
-            </div>
+            <Input
+              label="Confirm Password"
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              placeholder="Repeat new password"
+              disabled={isSubmitting || !token}
+              error={getFieldError('confirmPassword')}
+              leftIcon={Lock}
+              required
+            />
 
-            <button
+            <Button
               type="submit"
               disabled={isSubmitting || !isFormValid()}
-              className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-700 disabled:bg-ctp-surface1 disabled:text-ctp-subtext1 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl transition-all active:scale-[0.98] shadow-md mt-2 flex items-center justify-center gap-2"
+              isLoading={isSubmitting}
+              className="w-full mt-2"
             >
-              {isSubmitting ? (
-                <>
-                  <Loader2 size={18} className="animate-spin" />
-                  Updating Password...
-                </>
-              ) : (
-                'Update Password'
-              )}
-            </button>
+              Update Password
+            </Button>
 
             {!isSubmitting && !token && (
               <div className="text-center pt-2">
@@ -230,18 +177,13 @@ function ResetPasswordForm() {
           </form>
         )}
       </div>
-      <div className="bg-ctp-surface0/30 p-4 border-t border-ctp-surface1 text-center">
-        <p className="text-[10px] font-medium text-ctp-subtext0 uppercase tracking-widest">
-          Secure Password Reset System
-        </p>
-      </div>
-    </div>
+    </Card>
   );
 }
 
 export default function ResetPasswordPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-ctp-base p-6 font-sans">
+    <div className="min-h-screen flex items-center justify-center bg-ctp-base p-6 font-sans text-ctp-text">
       <Suspense fallback={
         <div className="w-full max-w-md bg-ctp-mantle rounded-2xl shadow-2xl border border-ctp-surface1 p-8 flex flex-col items-center justify-center py-20">
           <Loader2 className="w-10 h-10 animate-spin text-ctp-sky-800 mb-4" />

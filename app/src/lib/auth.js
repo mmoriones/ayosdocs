@@ -200,6 +200,8 @@ export const authOptions = {
         session.user.role = dbUser.role;
         session.user.isVerified = dbUser.isVerified;
         session.user.isNewUser = token.isNewUser;
+        session.user.hasPassword = !!dbUser.password;
+        session.user.googleAuth = dbUser.googleAuth;
       }
       return session;
     },

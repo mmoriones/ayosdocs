@@ -469,9 +469,8 @@ export async function requestPasswordResetAction(email) {
     await connectDB();
     const user = await User.findOne({ email: email.toLowerCase().trim() });
 
-    // Security: Always return success even if user not found to prevent email harvesting
     if (!user) {
-      return { success: true, message: "If an account exists with that email, a reset link has been sent." };
+      return { success: false, message: "No account found with that email address." };
     }
 
     if (user.googleAuth && !user.password) {
@@ -537,5 +536,63 @@ export async function resetPasswordAction(token, password) {
   } catch (error) {
     console.error("Reset Password Action Error:", error);
     return { success: false, message: "Failed to reset password. Please try again later." };
+  }
+}
+
+/**
+ * Server action to change the current user's password.
+ */
+export async function changePasswordAction(currentPassword, newPassword) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return { success: false, message: "Unauthorized" };
+  }
+
+  if (!newPassword || newPassword.length < 8) {
+    return { success: false, message: "New password must be at least 8 characters." };
+  }
+
+  if (newPassword.length > 128) {
+    return { success: false, message: "New password is too long." };
+  }
+
+  try {
+    await connectDB();
+    const user = await User.findOne({ email: session.user.email });
+
+    if (!user) {
+      return { success: false, message: "User not found." };
+    }
+
+    // If they already have a password, they MUST provide the correct current one
+    if (user.password) {
+      if (!currentPassword) {
+        return { success: false, message: "Current password is required." };
+      }
+      const isMatch = await user.comparePassword(currentPassword);
+      if (!isMatch) {
+        return { success: false, message: "Incorrect current password." };
+      }
+      
+      // Polish: Check if new password is same as current
+      const isSameAsOld = await user.comparePassword(newPassword);
+      if (isSameAsOld) {
+        return { success: false, message: "New password must be different from your current password." };
+      }
+    }
+
+    // Update password (pre-save hook will hash it)
+    user.password = newPassword;
+    
+    // Clear any active reset tokens for security
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    
+    await user.save();
+
+    return { success: true, message: "Password updated successfully." };
+  } catch (error) {
+    console.error("Change Password Action Error:", error);
+    return { success: false, message: "Failed to update password. Please try again later." };
   }
 }

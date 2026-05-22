@@ -250,7 +250,7 @@ const AuthModal = ({ isOpen, onClose }) => {
       if (result.success) {
         setStatusMessage({
           type: 'success',
-          text: result.message
+          text: 'Success! A reset link has been sent to your email.'
         });
       } else {
         setStatusMessage({
