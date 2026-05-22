@@ -17,8 +17,7 @@ import {
   AlertCircle
 } from 'lucide-react';
 import Link from 'next/link';
-import { useToast } from '@/context/ToastContext';
-import { useWorkspace } from '@/context/WorkspaceContext';
+import { useToast, useWorkspace } from '@/context';
 import ChecklistCard from '../tracking/ChecklistCard';
 import TableOfContents from './TableOfContents';
 import MobileBottomNav from './MobileBottomNav';

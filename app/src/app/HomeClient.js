@@ -7,8 +7,7 @@ import { useSession } from 'next-auth/react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useAuthUI } from '@/components/Providers';
-import { useWorkspace } from '@/context/WorkspaceContext';
-import { useToast } from '@/context/ToastContext';
+import { useWorkspace, useToast } from '@/context';
 import { toggleFavoriteAction } from '@/app/actions/user';
 import { 
   ArrowRight, 
@@ -23,14 +22,15 @@ import {
   Search
 } from 'lucide-react';
 
-import ChecklistCard from '@/features/guides/components/tracking/ChecklistCard';
-import StartWithGoal from '@/features/guides/components/discovery/StartWithGoal';
-import RecentExperiences from '@/features/guides/components/discovery/RecentExperiences';
-import OnboardingBanner from '@/features/guides/components/discovery/OnboardingBanner';
-import RecentlyUpdated from '@/features/guides/components/discovery/RecentlyUpdated';
-import TrendingWidget from '@/features/guides/components/discovery/TrendingWidget';
+import { ChecklistCard } from '@/features/guides/components/tracking';
+import { StartWithGoal, RecentExperiences, OnboardingBanner, RecentlyUpdated, TrendingWidget } from '@/features/guides/components/discovery';
 import StatsCard from '@/components/dashboard/StatsCard';
 import Adsense from '@/components/Adsense';
+import PageHeader from '@/components/ui/PageHeader';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
+import Input from '@/components/ui/Input';
 
 /**
  * Dashboard Overview (Home).
@@ -164,39 +164,26 @@ export default function HomeClient({ allGuides }) {
 
   return (
     <div className="bg-ctp-base font-sans text-ctp-text pb-20">
-      {/* Dashboard Welcome Header */}
-      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50">
-        <div className="max-w-[1600px] mx-auto">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-1">
-              <h1 className="text-2xl font-bold tracking-tight">
-                {status === 'loading' 
-                  ? 'Overview' 
-                  : isLoggedIn 
-                  ? `${session.user.isNewUser ? 'Welcome to AyosDocs' : 'Welcome back'}, ${session.user.name?.split(' ')[0] || 'User'}!` 
-                  : 'Overview'}
-              </h1>
-              <p className="text-sm text-ctp-subtext1">
-                {status === 'loading'
-                  ? 'Access your government requirement checklists.'
-                  : isLoggedIn 
-                  ? "Track your applications and discover new guides." 
-                  : "Discover and plan your Philippine government document requirements."}
-              </p>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <button 
-                onClick={() => router.push('/guides')}
-                className="px-4 py-2 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all flex items-center gap-2"
-              >
-                <Search size={16} />
-                <span>Search Guides</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PageHeader 
+        title={status === 'loading' 
+          ? 'Overview' 
+          : isLoggedIn 
+          ? `${session.user.isNewUser ? 'Welcome to AyosDocs' : 'Welcome back'}, ${session.user.name?.split(' ')[0] || 'User'}!` 
+          : 'Overview'}
+        description={status === 'loading'
+          ? 'Access your government requirement checklists.'
+          : isLoggedIn 
+          ? "Track your applications and discover new guides." 
+          : "Discover and plan your Philippine government document requirements."}
+        actions={
+          <Button 
+            onClick={() => router.push('/guides')}
+            leftIcon={<Search size={16} />}
+          >
+            Search Guides
+          </Button>
+        }
+      />
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-10">
         {/* Stats Grid */}
@@ -244,12 +231,14 @@ export default function HomeClient({ allGuides }) {
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold tracking-tight">Active Workflow</h2>
                 {activeGuide && !isLoadingUserData && status !== 'loading' && (
-                  <button 
+                  <Button 
+                    variant="ghost"
+                    size="sm"
                     onClick={() => router.push('/my-docs')}
-                    className="text-xs font-bold text-ctp-sky-800 hover:underline uppercase tracking-wider"
+                    className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
                   >
                     View All
-                  </button>
+                  </Button>
                 )}
               </div>
               
@@ -275,12 +264,14 @@ export default function HomeClient({ allGuides }) {
                       Start tracking your progress by picking a guide from our library.
                     </p>
                   </div>
-                  <button 
+                  <Button 
+                    variant="ghost"
+                    size="sm"
                     onClick={() => router.push('/guides')}
-                    className="text-sm font-bold text-ctp-sky-800 hover:underline"
+                    className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold"
                   >
                     Browse Library
-                  </button>
+                  </Button>
                 </div>
               )}
             </section>
@@ -289,12 +280,14 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold tracking-tight">Life Event Goals</h2>
-                <button 
+                <Button 
+                  variant="ghost"
+                  size="sm"
                   onClick={() => router.push('/bundles')}
-                  className="text-xs font-bold text-ctp-sky-800 hover:underline uppercase tracking-wider"
+                  className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
                 >
                   View All
-                </button>
+                </Button>
               </div>
               <StartWithGoal />
             </section>
@@ -303,60 +296,63 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold tracking-tight">Government Offices</h2>
-                <button 
+                <Button 
+                  variant="ghost"
+                  size="sm"
                   onClick={() => router.push('/offices')}
-                  className="text-xs font-bold text-ctp-sky-800 hover:underline uppercase tracking-wider"
+                  className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
                 >
                   View All
-                </button>
+                </Button>
               </div>
-              <div className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-6 lg:p-8 shadow-sm relative overflow-hidden group">
+              <Card background="mantle" noPadding className="relative group overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(var(--sky-800)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
                 
-                <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 lg:gap-10">
+                <div className="relative z-10 p-6 lg:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 lg:gap-10">
                   <div className="flex items-center gap-5 lg:gap-6 flex-1 min-w-0">
                     <div className="w-14 h-14 rounded-2xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:scale-105 transition-transform shrink-0">
                       <MapPin size={28} strokeWidth={1.5} />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-xl font-bold tracking-tight leading-none whitespace-nowrap mb-2">Locate an Office</h3>
+                      <h3 className="text-xl font-bold tracking-tight leading-none whitespace-nowrap mb-2 text-ctp-text">Locate an Office</h3>
                       <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed max-w-md hidden sm:block">
                         Find government branches near you and check real-time wait times.
                       </p>
                     </div>
                   </div>
 
-                <div className="w-full md:w-auto flex items-center gap-2 relative z-10 shrink-0">
-                  <form onSubmit={handleOfficeSearch} className="relative flex-1 md:w-64 lg:w-80">
-                    <input 
-                      type="text" 
-                      placeholder="City or Agency..." 
-                      value={officeSearch}
-                      onChange={(e) => setOfficeSearch(e.target.value)}
-                      className="w-full bg-ctp-base border border-ctp-surface1 rounded-lg py-3 px-4 text-sm focus:outline-none focus:border-ctp-sky-800 transition-all placeholder:text-ctp-subtext0 font-medium"
-                    />
-                  </form>
-                  <button 
-                    onClick={handleOfficeSearch}
-                    className="px-6 py-3 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all shadow-sm whitespace-nowrap active:scale-[0.98]"
-                  >
-                    Search
-                  </button>
+                  <div className="w-full md:w-auto flex items-end gap-2 relative z-10 shrink-0">
+                    <form onSubmit={handleOfficeSearch} className="relative flex-1 md:w-64 lg:w-80">
+                      <Input 
+                        placeholder="City or Agency..." 
+                        value={officeSearch}
+                        onChange={(e) => setOfficeSearch(e.target.value)}
+                        containerClassName="space-y-0"
+                      />
+                    </form>
+                    <Button 
+                      onClick={handleOfficeSearch}
+                      className="whitespace-nowrap h-[50px]"
+                    >
+                      Search
+                    </Button>
+                  </div>
                 </div>
-                </div>
-              </div>
+              </Card>
             </section>
 
             {/* Recently Updated */}
             <section className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold tracking-tight">Latest Changes</h2>
-                <button 
+                <Button 
+                  variant="ghost"
+                  size="sm"
                   onClick={() => router.push('/updates')}
-                  className="text-xs font-bold text-ctp-sky-800 hover:underline uppercase tracking-wider"
+                  className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
                 >
                   View All
-                </button>
+                </Button>
               </div>
               <RecentlyUpdated />
             </section>
@@ -394,12 +390,14 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold tracking-tight">Recent Reports</h2>
-                <button 
+                <Button 
+                  variant="ghost"
+                  size="sm"
                   onClick={() => router.push('/offices')}
-                  className="text-xs font-bold text-ctp-sky-800 hover:underline uppercase tracking-wider"
+                  className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
                 >
                   View All
-                </button>
+                </Button>
               </div>
               <RecentExperiences />
             </section>
@@ -413,7 +411,7 @@ export default function HomeClient({ allGuides }) {
         </div>
 
         <section className="py-8 border-t border-ctp-surface1">
-          <div className="bg-ctp-mantle rounded-2xl p-8 border border-ctp-surface1 flex flex-col md:flex-row items-center justify-between gap-6">
+          <Card background="mantle" noPadding className="flex flex-col md:flex-row items-center justify-between gap-6 p-8">
             <div className="space-y-2 text-center md:text-left">
               <h3 className="text-xl font-bold tracking-tight text-ctp-text">Need assistance?</h3>
               <p className="text-sm text-ctp-subtext1 max-w-md">
@@ -421,14 +419,19 @@ export default function HomeClient({ allGuides }) {
               </p>
             </div>
             <div className="flex items-center gap-3">
-              <Link href="/faqs" className="px-6 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-sm font-semibold hover:bg-ctp-crust transition-all">
+              <Button 
+                variant="secondary"
+                onClick={() => router.push('/faqs')}
+              >
                 Help Center
-              </Link>
-              <Link href="/contact" className="px-6 py-2.5 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all shadow-sm">
+              </Button>
+              <Button 
+                onClick={() => router.push('/contact')}
+              >
                 Contact Support
-              </Link>
+              </Button>
             </div>
-          </div>
+          </Card>
         </section>
       </div>
     </div>

@@ -22,6 +22,9 @@ import {
 } from 'lucide-react';
 import { GuideIcon } from '@/lib/guideIcons';
 import PageHeader from '@/components/ui/PageHeader';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
 import SearchInput from '@/components/ui/SearchInput';
 import HolidayAlert from '@/components/HolidayAlert';
 import Skeleton from '@/components/ui/Skeleton';
@@ -77,8 +80,10 @@ export default function OfficesClient() {
               <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Filter agency</span>
             </div>
             {agencies.map((agency) => (
-              <button
+              <Button
                 key={agency}
+                variant={selectedAgency === agency ? 'primary' : 'secondary'}
+                size="sm"
                 onClick={() => setSelectedAgency(agency)}
                 className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap border ${
                   selectedAgency === agency
@@ -87,7 +92,7 @@ export default function OfficesClient() {
                 }`}
               >
                 {agency}
-              </button>
+              </Button>
             ))}
           </div>
 
@@ -132,7 +137,7 @@ export default function OfficesClient() {
           </div>
 
           <aside className="w-full lg:w-80 shrink-0 space-y-6">
-            <section className="bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
+            <Card background="base" noPadding className="overflow-hidden flex flex-col">
               <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-3">
                 <TrendingUp size={14} className="text-ctp-sky-800" />
                 <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Top Rated Branches</h3>
@@ -156,13 +161,15 @@ export default function OfficesClient() {
                 )}
               </div>
               
-              <button 
+              <Button 
+                variant="ghost"
+                size="sm"
                 onClick={() => router.push('/coming-soon')}
-                className="p-3 bg-ctp-mantle border-t border-ctp-surface1 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-text transition-colors"
+                className="w-full rounded-none border-t border-ctp-surface1 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-text transition-colors"
               >
                 View Full Rankings
-              </button>
-            </section>
+              </Button>
+            </Card>
 
             <section className="bg-ctp-sky-800 rounded-xl p-5 text-white relative overflow-hidden group shadow-lg shadow-ctp-sky-800/20">
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8 blur-2xl" />
@@ -191,7 +198,7 @@ export default function OfficesClient() {
               </div>
             </section>
 
-            <section className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm flex flex-col items-center text-center space-y-4">
+            <Card background="base" className="flex flex-col items-center text-center space-y-4">
               <div className="w-12 h-12 bg-ctp-mantle border border-ctp-surface1 rounded-xl flex items-center justify-center text-ctp-sky-800 shadow-inner">
                 <Zap size={24} strokeWidth={2} />
               </div>
@@ -201,13 +208,13 @@ export default function OfficesClient() {
                   Help the community by reporting your wait time and experience.
                 </p>
               </div>
-              <button 
+              <Button 
                 onClick={() => router.push('/rate')}
-                className="w-full py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold text-[10px] uppercase tracking-widest shadow-sm hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all"
+                className="w-full text-[10px] uppercase tracking-widest"
               >
                 Submit Report
-              </button>
-            </section>
+              </Button>
+            </Card>
           </aside>
         </div>
       </div>
@@ -223,23 +230,21 @@ const OfficeCard = ({ office, router }) => {
     'N/A': 'No data'
   }[office.stats.avgWaitTime || 'N/A'];
 
-  const waitTimeColor = {
-    fast: 'text-ctp-green bg-ctp-green/5 border-ctp-green/20',
-    medium: 'text-ctp-sky-800 bg-ctp-sky-800/5 border-ctp-sky-800/20',
-    slow: 'text-ctp-peach bg-ctp-peach/5 border-ctp-peach/20',
-    'N/A': 'text-ctp-subtext1 bg-ctp-mantle border-ctp-surface1'
+  const waitTimeVariant = {
+    fast: 'green',
+    medium: 'sky',
+    slow: 'yellow',
+    'N/A': 'slate'
   }[office.stats.avgWaitTime || 'N/A'];
 
   return (
-    <div className="group bg-ctp-base rounded-xl p-5 lg:p-6 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all relative overflow-hidden flex flex-col h-full">
+    <Card className="group hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden">
       <div className="flex flex-col md:flex-row gap-6 md:items-start">
         <div className="flex md:flex-col items-center gap-4">
           <div className="w-14 h-14 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
             <GuideIcon agency={office.agency} className="w-8 h-8 text-ctp-sky-800" strokeWidth={1.5} />
           </div>
-          <span className="px-2 py-0.5 rounded bg-ctp-sky-800/5 text-ctp-sky-800 text-[9px] font-bold uppercase tracking-widest border border-ctp-sky-800/20 whitespace-nowrap">
-            {office.agency}
-          </span>
+          <Badge variant="sky">{office.agency}</Badge>
         </div>
 
         <div className="flex-1 space-y-5">
@@ -263,9 +268,9 @@ const OfficeCard = ({ office, router }) => {
                 <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 whitespace-nowrap opacity-80">{office.stats.totalReports} interactions</p>
               </div>
               <div className="h-8 w-px bg-ctp-surface1 hidden md:block" />
-              <div className={`${waitTimeColor} px-3 py-1.5 rounded-lg border flex flex-col items-center min-w-[80px]`}>
-                <span className="text-[8px] font-bold uppercase tracking-widest mb-0.5 opacity-80">Avg. Wait</span>
-                <span className="text-xs font-bold uppercase tracking-tight">{waitTimeLabel}</span>
+              <div className="flex flex-col items-center min-w-[80px] gap-1">
+                <span className="text-[8px] font-bold uppercase tracking-widest opacity-80">Avg. Wait</span>
+                <Badge variant={waitTimeVariant}>{waitTimeLabel}</Badge>
               </div>
             </div>
           </div>
@@ -286,21 +291,23 @@ const OfficeCard = ({ office, router }) => {
             {office.stats.totalReports > 0 ? `Crowdsourced from ${office.stats.totalReports} citizens` : 'Be the first to report'}
           </span>
         </div>
-        <button 
+        <Button 
+          variant="ghost"
+          size="sm"
           onClick={() => router.push('/coming-soon')}
-          className="group flex items-center gap-1.5 text-ctp-sky-800 font-bold text-[10px] uppercase tracking-widest hover:underline transition-all"
+          rightIcon={<ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" strokeWidth={3} />}
+          className="text-ctp-sky-800 font-bold text-[10px] uppercase tracking-widest hover:underline px-0 py-0 h-auto"
         >
           View detailed insights
-          <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" strokeWidth={3} />
-        </button>
+        </Button>
       </div>
-    </div>
+    </Card>
   );
 };
 
 OfficeCard.Skeleton = function OfficeCardSkeleton() {
   return (
-    <div className="bg-ctp-base rounded-xl p-5 lg:p-6 border border-ctp-surface1 shadow-sm space-y-6">
+    <div className="bg-ctp-base rounded-2xl p-5 lg:p-6 border border-ctp-surface1 shadow-sm space-y-6">
       <div className="flex flex-col md:flex-row gap-6 md:items-start">
         <div className="flex md:flex-col items-center gap-4">
           <Skeleton className="w-14 h-14 rounded-lg shrink-0" />

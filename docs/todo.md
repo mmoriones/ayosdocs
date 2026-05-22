@@ -49,6 +49,7 @@
 -~~ [x] **Mail:** Integrate **Zoho Mail** for communications.~~
 ~~- [ ] **Forgot Password Flow:** Email infrastructure (setting up a service like Resend or a Gmail SMTP to send the mail) ~~
 ~~- [x] **Email Verification** Add "guards" to pages to check if isVerified is true~~
+- [ ] **Testing:** Set up **Vitest + Testing Library** for unit/integration tests.
 - [ ] **Monitoring Alerts:** Configure **Alertmanager** with Zoho SMTP credentials for system notifications. (inject pass from .env)
 - [ ] **Grafana Dashboards:** Set up and configure dashboards for App performance, Docker container health, and Host metrics.
 - [ ] **SSL Security:** Implement **Cloudflare Origin Certificates** and switch to **Full (Strict)** SSL mode for end-to-end encryption.

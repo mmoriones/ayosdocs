@@ -17,12 +17,15 @@ import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';
-import { useWorkspace } from '@/context/WorkspaceContext';
-import { useToast } from '@/context/ToastContext';
+import { useWorkspace, useToast } from '@/context';
 import { GuideIcon } from '@/lib/guideIcons';
 import { updateProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';
 import Skeleton from '@/components/ui/Skeleton';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
+import ProgressBar from '@/components/ui/ProgressBar';
 
 /**
  * Component for rendering and managing a guide's checklist.
@@ -225,7 +228,7 @@ const ChecklistCard = ({
 
   return (
     <div className={`flex flex-col overflow-hidden transition-all duration-300 ${
-      (isModal || isBare) ? "" : "bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm"
+      (isModal || isBare) ? "" : "bg-ctp-base rounded-2xl border border-ctp-surface1 shadow-sm"
     }`}>
       
       {!isBare && (
@@ -236,34 +239,28 @@ const ChecklistCard = ({
                 {cardLabel}
               </h3>
               {isLoggedIn && (
-                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-ctp-mantle border border-ctp-surface1">
+                <div className="flex items-center gap-1.5">
                   {!isVerified ? (
-                    <>
-                      <div className="w-1 h-1 rounded-full bg-ctp-yellow" />
-                      <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Unverified</span>
-                    </>
+                    <Badge variant="yellow" icon={AlertTriangle}>Unverified</Badge>
                   ) : saveMutation.isPending ? (
-                    <>
-                      <Loader2 size={10} className="animate-spin text-ctp-sky-800" />
-                      <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest">Syncing</span>
-                    </>
+                    <Badge variant="sky" icon={Loader2}>Syncing</Badge>
                   ) : (
-                    <>
-                      <div className="w-1 h-1 rounded-full bg-ctp-green" />
-                      <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Synced</span>
-                    </>
+                    <Badge variant="green" icon={ShieldCheck}>Synced</Badge>
                   )}
                 </div>
               )}
             </div>
             
             {!inGuidePage && (
-              <button 
+              <Button 
+                variant="ghost"
+                size="sm"
                 onClick={() => router.push('/my-docs')}
-                className="text-[10px] font-bold text-ctp-sky-800 hover:underline flex items-center gap-1 uppercase tracking-widest transition-all"
+                rightIcon={<ChevronRight size={12} strokeWidth={3} />}
+                className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest px-0 py-0 h-auto"
               >
-                Go to Workspace <ChevronRight size={12} strokeWidth={3} />
-              </button>
+                Go to Workspace
+              </Button>
             )}
           </div>
 
@@ -307,12 +304,11 @@ const ChecklistCard = ({
 
       {isLoggedIn && slug && (
         <div className={`${(isModal || isBare) ? "px-0" : "px-5 lg:px-6"} mt-5 mb-2`}>
-          <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/50">
-            <div 
-              className={`h-full transition-all duration-1000 ease-out ${progressPercent === 100 ? 'bg-ctp-green' : 'bg-ctp-sky-800 shadow-[0_0_8px_rgba(4,165,229,0.3)]'}`}
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
+          <ProgressBar
+            value={progressPercent}
+            size="sm"
+            color={progressPercent === 100 ? 'green' : 'sky'}
+          />
         </div>
       )}
 
@@ -439,25 +435,25 @@ const ChecklistCard = ({
 
       {!inGuidePage && !isModal && slug && (
         <div className="px-5 lg:px-6 pb-6 pt-0 mt-auto">
-          <button 
+          <Button 
             onClick={() => router.push(`/guides/${slug}`)}
-            className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white py-2.5 rounded-lg font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-sm"
+            className="w-full text-xs uppercase tracking-widest"
           >
             Continue Roadmap
-          </button>
+          </Button>
         </div>
       )}
 
       {(inGuidePage || isModal || isBare) && !isLoggedIn && (
         <div className={`${(isModal || isBare) ? "px-0 pb-8" : "p-6"} pt-4 mt-auto`}>
           <div className="space-y-4">
-            <button 
+            <Button 
               onClick={openAuthModal}
-              className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white py-3 rounded-lg font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-md shadow-ctp-sky-800/10"
+              leftIcon={<UserPlus size={14} strokeWidth={2.5} />}
+              className="w-full text-xs uppercase tracking-widest shadow-md shadow-ctp-sky-800/10"
             >
-              <UserPlus size={14} strokeWidth={2.5} />
               Setup Tracking
-            </button>
+            </Button>
             <div className="flex items-center justify-center gap-1.5 text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">
               <ShieldCheck size={12} className="text-ctp-sky-800" />
               <span>Identity Sync Verified</span>
@@ -473,7 +469,7 @@ const ChecklistCard = ({
 ChecklistCard.Skeleton = function ChecklistCardSkeleton({ isModal, isBare, inGuidePage }) {
   return (
     <div className={`flex flex-col overflow-hidden ${
-      (isModal || isBare) ? "" : "bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm"
+      (isModal || isBare) ? "" : "bg-ctp-base rounded-2xl border border-ctp-surface1 shadow-sm"
     }`}>
       <div className={`${isModal ? "p-0" : "p-5 lg:p-6"} space-y-6 pb-0`}>
         <div className="flex items-center justify-between">

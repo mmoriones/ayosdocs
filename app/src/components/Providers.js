@@ -1,10 +1,7 @@
 'use client';
 
 import { SessionProvider } from "next-auth/react";
-import { ThemeProvider } from "@/context/ThemeContext";
-import { ToastProvider } from "@/context/ToastContext";
-import { SearchProvider } from "@/context/SearchContext";
-import { WorkspaceProvider } from "@/context/WorkspaceContext";
+import { ThemeProvider, ToastProvider, SearchProvider, WorkspaceProvider } from "@/context";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, createContext, useContext } from "react";
 import CommandPalette from "./ui/CommandPalette";

@@ -3,14 +3,13 @@
 import { Bell, Menu, Sun, Moon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useTheme } from "@/context/ThemeContext";
-import { useSearch } from "@/context/SearchContext";
+import { useTheme, useSearch } from "@/context";
 import { useSyncExternalStore, useState } from "react";
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 import SearchInput from '@/components/ui/SearchInput';
 import { useAuthUI } from '@/components/Providers';
 import Skeleton from '@/components/ui/Skeleton';
+import Avatar from '@/components/ui/Avatar';
 
 const emptySubscribe = () => () => {};
 const getClientSnapshot = () => true;
@@ -114,21 +113,13 @@ export default function DashboardHeader({ onMenuClick }) {
             
             <Link 
               href="/profile"
-              className="ml-1 w-8 h-8 rounded-full border border-ctp-surface1 flex items-center justify-center overflow-hidden hover:border-ctp-sky-800 transition-all active:scale-95 shadow-sm bg-ctp-mantle"
+              className="ml-1 hover:opacity-80 transition-all active:scale-95"
             >
-              {user?.image ? (
-                <Image
-                  src={user.image}
-                  alt={user.name || 'User'}
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 text-xs font-bold uppercase">
-                  {user?.name?.charAt(0) || 'AD'}
-                </div>
-              )}
+              <Avatar
+                src={user?.image}
+                name={user?.name || 'User'}
+                size="sm"
+              />
             </Link>
           </>
         )}

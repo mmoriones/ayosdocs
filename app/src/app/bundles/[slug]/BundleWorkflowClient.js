@@ -30,7 +30,7 @@ import {
 import { getBundleIcon } from '@/lib/bundleIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
 import { startBundleAction, stopBundleAction, resendVerificationAction, toggleFavoriteAction } from '@/app/actions/user';
-import { useToast } from '@/context/ToastContext';
+import { useToast } from '@/context';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';

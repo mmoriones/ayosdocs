@@ -4,7 +4,7 @@ import React, { useEffect, Suspense } from 'react';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useToast } from '@/context/ToastContext';
+import { useToast } from '@/context';
 
 /**
  * Inner component that uses searchParams.

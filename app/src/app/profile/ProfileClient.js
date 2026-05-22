@@ -3,13 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { User, Mail, ShieldCheck, Calendar, Camera, LogOut, Loader2, CheckCircle2, Edit3 } from 'lucide-react';
-import Image from 'next/image';
-import { useToast } from '@/context/ToastContext';
+import { useToast } from '@/context';
 import { updateUserProfileAction } from '@/app/actions/user';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
 import Skeleton from '@/components/ui/Skeleton';
+import Avatar from '@/components/ui/Avatar';
 
 /**
  * Enhanced Profile client page with editable identity management.
@@ -123,21 +123,13 @@ export default function ProfileClient() {
               ) : (
               <div className="space-y-8">
                 <div className="flex flex-col md:flex-row md:items-start gap-8">
-                  {/* Avatar (Static for now) */}
                   <div className="relative shrink-0">
-                    {user?.image ? (
-                      <Image 
-                        src={user.image} 
-                        alt={user.name || 'User'} 
-                        width={96} 
-                        height={96} 
-                        className="rounded-2xl border border-ctp-surface1 shadow-md object-cover"
-                      />
-                    ) : (
-                      <div className="w-24 h-24 rounded-2xl bg-ctp-sky-800/10 border border-ctp-sky-800/20 flex items-center justify-center text-ctp-sky-800 text-3xl font-bold uppercase">
-                        {user?.name?.charAt(0) || 'A'}
-                      </div>
-                    )}
+                    <Avatar
+                      src={user?.image}
+                      name={user?.name || 'A'}
+                      size="xl"
+                      className="rounded-2xl"
+                    />
                     <div className="absolute -bottom-2 -right-2 p-2 bg-ctp-base border border-ctp-surface1 rounded-lg shadow-sm text-ctp-subtext1 opacity-50 cursor-not-allowed" title="Avatar editing coming soon">
                       <Camera size={16} />
                     </div>

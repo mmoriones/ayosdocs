@@ -2,8 +2,7 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSearch } from '@/context/SearchContext';
-import { useWorkspace } from '@/context/WorkspaceContext';
+import { useSearch, useWorkspace } from '@/context';
 import { Search, X, BookOpen, Layers, ArrowRight, Loader2, Settings, User, CheckSquare, Home, Shield, Sparkles } from 'lucide-react';
 
 /**

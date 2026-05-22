@@ -3,6 +3,8 @@
 import { Calendar, ChevronRight, Zap, ListChecks, CheckCircle2, Clock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
 
 /**
  * DashboardSidebar Component
@@ -12,15 +14,17 @@ const DashboardSidebar = () => {
   return (
     <aside className="w-full lg:w-[320px] shrink-0 space-y-6">
       
-      <section className="bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
+      <Card background="base" noPadding className="overflow-hidden flex flex-col">
         <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
           <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Reminders</h3>
-          <button 
+          <Button 
+            variant="ghost"
+            size="sm"
             onClick={() => router.push('/coming-soon')}
-            className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:underline"
+            className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:underline px-0 py-0 h-auto"
           >
             View all
-          </button>
+          </Button>
         </div>
         
         <div className="divide-y divide-ctp-surface1/50">
@@ -44,9 +48,9 @@ const DashboardSidebar = () => {
             </div>
           </div>
         </div>
-      </section>
+      </Card>
 
-      <section className="bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
+      <Card background="base" noPadding className="overflow-hidden flex flex-col">
         <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50">
           <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Next Best Steps</h3>
         </div>
@@ -70,15 +74,17 @@ const DashboardSidebar = () => {
           ))}
         </div>
         
-        <button 
+        <Button 
+          variant="ghost"
+          size="sm"
           onClick={() => router.push('/coming-soon')}
-          className="p-3 bg-ctp-mantle border-t border-ctp-surface1 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-text transition-colors"
+          className="w-full rounded-none border-t border-ctp-surface1 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-text transition-colors"
         >
           View recommendations
-        </button>
-      </section>
+        </Button>
+      </Card>
 
-      <section className="bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
+      <Card background="base" noPadding className="overflow-hidden flex flex-col">
         <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
           <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Activity</h3>
           <select className="text-[9px] font-bold text-ctp-sky-800 bg-ctp-base border border-ctp-surface1 rounded-md px-2 py-1 focus:ring-2 focus:ring-ctp-sky-800/10 transition-all cursor-pointer uppercase tracking-widest outline-none">
@@ -106,15 +112,17 @@ const DashboardSidebar = () => {
           ))}
         </div>
 
-        <button 
+        <Button 
+          variant="ghost"
+          size="sm"
           onClick={() => router.push('/coming-soon')}
-          className="p-3 bg-ctp-mantle border-t border-ctp-surface1 text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-text transition-colors"
+          className="w-full rounded-none border-t border-ctp-surface1 text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-text transition-colors"
         >
           View detailed log
-        </button>
-      </section>
+        </Button>
+      </Card>
 
-      <section className="bg-ctp-sky-800 rounded-xl p-5 text-white relative overflow-hidden group shadow-lg shadow-ctp-sky-800/20">
+      <section className="bg-ctp-sky-800 rounded-2xl p-5 text-white relative overflow-hidden group shadow-lg shadow-ctp-sky-800/20">
         <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8 blur-2xl" />
         
         <div className="relative z-10 space-y-4">
@@ -125,9 +133,12 @@ const DashboardSidebar = () => {
           <p className="text-xs font-medium leading-relaxed opacity-90">
             Keep your momentum! Small daily checks lead to stress-free government applications.
           </p>
-          <button className="w-full py-2 bg-white text-ctp-sky-800 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-opacity-90 transition-all shadow-sm">
+          <Button 
+            variant="secondary"
+            className="w-full py-2 bg-white text-ctp-sky-800 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-white/90 transition-all shadow-sm border-none"
+          >
             Explore more guides
-          </button>
+          </Button>
         </div>
       </section>
 

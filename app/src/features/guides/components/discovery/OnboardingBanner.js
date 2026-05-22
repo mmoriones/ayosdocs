@@ -3,7 +3,7 @@
 import { ArrowRight, CheckCircle, HelpCircle, ShieldAlert } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { useToast } from '@/context/ToastContext';
+import { useToast } from '@/context';
 
 /**
  * Onboarding banner for the dashboard.

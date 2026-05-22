@@ -26,11 +26,13 @@ import {
 import GuideCard from '@/features/guides/components/GuideCard';
 import Banner from '@/components/ui/Banner';
 import PageHeader from '@/components/ui/PageHeader';
+import Button from '@/components/ui/Button';
 import SearchInput from '@/components/ui/SearchInput';
 import SortDropdown from '@/components/ui/SortDropdown';
+import FilterPill from '@/components/ui/FilterPill';
 import Adsense from '@/components/Adsense';
 import { toggleFavoriteAction } from '@/app/actions/user';
-import { useToast } from '@/context/ToastContext';
+import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
 
 /**
@@ -318,12 +320,14 @@ export default function GuidesClient({ initialGuides }) {
               <div className="bg-ctp-mantle rounded-2xl p-6 border border-ctp-surface1 shadow-sm space-y-8">
                 <div className="flex items-center justify-between border-b border-ctp-surface1 pb-4">
                   <h2 className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">Advanced Filters</h2>
-                  <button 
+                  <Button 
+                    variant="ghost"
+                    size="sm"
                     onClick={resetFilters}
-                    className="text-[10px] text-ctp-sky-800 font-bold uppercase tracking-widest hover:underline transition-colors"
+                    className="text-[10px] text-ctp-sky-800 font-bold uppercase tracking-widest hover:underline px-0 py-0 h-auto"
                   >
                     Reset
-                  </button>
+                  </Button>
                 </div>
 
                 {/* Agency Filter */}
@@ -494,12 +498,14 @@ export default function GuidesClient({ initialGuides }) {
                 {selectedCost !== 'All Costs' && (
                    <FilterPill label={selectedCost} onClear={() => setSelectedCost('All Costs')} />
                 )}
-                <button 
+                <Button 
+                  variant="ghost"
+                  size="sm"
                   onClick={resetFilters}
-                  className="text-[10px] font-bold text-ctp-peach uppercase tracking-widest hover:underline px-2"
+                  className="text-[10px] font-bold text-ctp-peach uppercase tracking-widest hover:underline px-2 py-0 h-auto"
                 >
                   Clear All
-                </button>
+                </Button>
               </div>
             )}
 
@@ -538,19 +544,25 @@ export default function GuidesClient({ initialGuides }) {
                 </div>
                 <h3 className="text-lg font-bold text-ctp-text tracking-tight">No guides found</h3>
                 <p className="text-sm text-ctp-subtext1 font-medium mt-1">Try adjusting your filters or search terms.</p>
-                <button onClick={resetFilters} className="mt-8 px-6 py-2 bg-ctp-sky-800 text-white rounded-lg font-bold uppercase text-[10px] tracking-widest shadow-md active:scale-95 transition-all">Clear Filters</button>
+                <Button 
+                  onClick={resetFilters} 
+                  className="mt-8 uppercase text-[10px] tracking-widest"
+                >
+                  Clear Filters
+                </Button>
               </div>
             )}
 
             {filteredGuides.length > visibleCount && (
               <div className="mt-12 text-center pb-12">
-                <button 
+                <Button 
+                  variant="secondary"
                   onClick={handleLoadMore}
-                  className="px-6 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg font-bold text-[10px] text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-text hover:border-ctp-sky-800 transition-all flex items-center gap-2 mx-auto shadow-sm active:scale-95"
+                  rightIcon={<ChevronDown size={14} />}
+                  className="text-[10px] text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-text"
                 >
                   Load more guides
-                  <ChevronDown size={14} />
-                </button>
+                </Button>
               </div>
             )}
           </main>
@@ -607,16 +619,3 @@ const SidebarDropdown = ({ value, onChange, options }) => {
   );
 };
 
-const FilterPill = ({ label, onClear }) => {
-  return (
-    <div className="flex items-center gap-2 px-2 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-lg group animate-in fade-in zoom-in-95 duration-200">
-      <span className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest">{label}</span>
-      <button 
-        onClick={onClear}
-        className="text-ctp-subtext1 hover:text-ctp-peach transition-colors"
-      >
-        <X size={10} strokeWidth={3} />
-      </button>
-    </div>
-  );
-};

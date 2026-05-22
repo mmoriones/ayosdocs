@@ -15,6 +15,8 @@ import {
 } from 'lucide-react';
 import Banner from '@/components/ui/Banner';
 import PageHeader from '@/components/ui/PageHeader';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
 import SearchInput from '@/components/ui/SearchInput';
 import SortDropdown from '@/components/ui/SortDropdown';
 import { getBundleIcon } from '@/lib/bundleIcons';
@@ -80,8 +82,10 @@ export default function BundlesClient({ initialBundles }) {
             <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Filter by goal</span>
           </div>
           {categories.map((cat) => (
-            <button
+            <Button
               key={cat}
+              variant={selectedCategory === cat ? 'primary' : 'secondary'}
+              size="sm"
               onClick={() => setSelectedCategory(cat)}
               className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap border ${
                 selectedCategory === cat
@@ -90,7 +94,7 @@ export default function BundlesClient({ initialBundles }) {
               }`}
             >
               {cat}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -113,13 +117,13 @@ export default function BundlesClient({ initialBundles }) {
                 options={sortOptions} 
               />
 
-              <button 
+              <Button 
                 onClick={() => window.location.href = '/coming-soon'}
-                className="flex items-center gap-2 px-6 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold text-[10px] uppercase tracking-widest shadow-sm hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all group"
+                leftIcon={<Plus size={14} strokeWidth={3} className="group-hover:rotate-90 transition-transform" />}
+                className="text-[10px] uppercase tracking-widest group"
               >
-                <Plus size={14} strokeWidth={3} className="group-hover:rotate-90 transition-transform" />
-                <span>Custom Workflow</span>
-              </button>
+                Custom Workflow
+              </Button>
             </div>
           </div>
 
@@ -139,12 +143,13 @@ export default function BundlesClient({ initialBundles }) {
             <p className="text-ctp-subtext1 mt-4 max-w-md mx-auto">
               We&apos;re constantly adding new workflows. Try a broader search or browse by category.
             </p>
-            <button 
+            <Button 
               onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
-              className="mt-10 px-10 py-4 bg-ctp-sky-800 text-ctp-base rounded-2xl font-bold uppercase tracking-wider shadow-xl active:scale-95 transition-all"
+              size="lg"
+              className="mt-10 px-10 py-4 uppercase tracking-wider shadow-xl"
             >
               Reset all filters
-            </button>
+            </Button>
           </div>
         )}
         </div>
@@ -159,7 +164,7 @@ const BundleCard = ({ bundle }) => {
   return (
     <Link 
       href={`/bundles/${bundle.id}`}
-      className="group bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden"
+      className="group bg-ctp-base rounded-2xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden"
     >
       <div className="absolute top-4 right-4 text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all opacity-0 group-hover:opacity-100">
         <ArrowRight size={16} strokeWidth={2.5} />
@@ -220,7 +225,7 @@ const BundleCard = ({ bundle }) => {
 
 BundleCard.Skeleton = function BundleCardSkeleton() {
   return (
-    <div className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm flex flex-col h-full space-y-4">
+    <div className="bg-ctp-base rounded-2xl p-5 border border-ctp-surface1 shadow-sm flex flex-col h-full space-y-4">
       <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
       <div className="space-y-2 flex-1">
         <div className="flex gap-2">

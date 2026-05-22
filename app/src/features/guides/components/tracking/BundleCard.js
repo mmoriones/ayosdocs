@@ -2,6 +2,7 @@ import { ChevronRight, Layers } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { getBundleIcon } from '@/lib/bundleIcons';
 import Skeleton from '@/components/ui/Skeleton';
+import ProgressBar from '@/components/ui/ProgressBar';
 
 /**
  * BundleCard Component
@@ -50,14 +51,11 @@ const BundleCard = ({ bundle, progress }) => {
               <span className="text-ctp-subtext1 opacity-80">{progress.completed} of {progress.total} guides</span>
               <span className="text-ctp-sky-800">{percentage}%</span>
             </div>
-            <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1">
-              <div 
-                className={`h-full transition-all duration-1000 ease-out ${
-                  percentage === 100 ? 'bg-ctp-green' : 'bg-ctp-sky-800 shadow-[0_0_8px_rgba(4,165,229,0.3)]'
-                }`} 
-                style={{ width: `${percentage}%` }}
-              />
-            </div>
+            <ProgressBar
+              value={percentage}
+              size="sm"
+              color={percentage === 100 ? 'green' : 'sky'}
+            />
           </div>
 
           <div className="flex flex-wrap gap-x-3 gap-y-1.5 pt-1">

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { AlertTriangle, Send, Loader2, CheckCircle } from 'lucide-react';
 import { resendVerificationAction } from '@/app/actions/user';
-import { useToast } from '@/context/ToastContext';
+import { useToast } from '@/context';
 
 /**
  * VerificationBanner Component

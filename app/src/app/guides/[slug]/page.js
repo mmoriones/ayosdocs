@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import GuidePageLayout from '@/features/guides/components/reader/GuidePageLayout';
+import { GuidePageLayout } from '@/features/guides/components/reader';
 import Adsense from '@/components/Adsense';
 import { Sparkles } from 'lucide-react';
 

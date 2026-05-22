@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useToast } from '@/context/ToastContext';
+import { useToast } from '@/context';
 import { Mail, MessageCircle, Send, Loader2, Globe, Clock, Sparkles } from 'lucide-react';
 import PageHeader from '@/components/ui/PageHeader';
 import axios from 'axios';

@@ -17,13 +17,10 @@ import Link from 'next/link';
 
 import { bundles } from "@/data/bundles";
 
-import SummaryStats from '@/features/guides/components/tracking/SummaryStats';
-import BundleCard from '@/features/guides/components/tracking/BundleCard';
-import GuideRowCard from '@/features/guides/components/tracking/GuideRowCard';
-import DashboardSidebar from '@/features/guides/components/tracking/DashboardSidebar';
+import { SummaryStats, BundleCard, GuideRowCard, DashboardSidebar } from '@/features/guides/components/tracking';
 import SearchInput from '@/components/ui/SearchInput';
 import SortDropdown from '@/components/ui/SortDropdown';
-import { useToast } from '@/context/ToastContext';
+import { useToast } from '@/context';
 import ConfirmModal from '@/components/ConfirmModal';
 import { deleteProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';

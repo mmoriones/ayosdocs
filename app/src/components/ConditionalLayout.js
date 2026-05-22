@@ -1,9 +1,9 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import AppShell from "@/components/layout/AppShell";
+import { AppShell } from "@/components/layout";
 import ClientAuthWrapper from "@/components/ClientAuthWrapper";
-import VerificationBanner from "@/features/auth/components/VerificationBanner";
+import { VerificationBanner } from "@/features/auth/components";
 
 /**
  * ConditionalLayout Component

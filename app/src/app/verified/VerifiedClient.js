@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { CheckCircle, Home, ArrowRight } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { useToast } from "@/context/ToastContext";
+import { useToast } from "@/context";
 
 /**
  * VerifiedClient Component

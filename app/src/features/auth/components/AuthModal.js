@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from "react";
 import { X, Loader2, Mail, Lock, User as UserIcon, ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
 import { signIn, useSession } from 'next-auth/react';
-import { useToast } from "@/context/ToastContext";
+import { useToast } from "@/context";
 import { registerUserAction, checkEmailAction, checkRateLimitAction, requestPasswordResetAction } from "@/app/actions/user";
 
 const AuthModal = ({ isOpen, onClose }) => {

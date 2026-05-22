@@ -1,7 +1,7 @@
 'use client';
 
 import { useAuthUI } from "@/components/Providers";
-import AuthModal from "@/features/auth/components/AuthModal";
+import { AuthModal } from "@/features/auth/components";
 
 export default function ClientAuthWrapper() {
   const { isAuthModalOpen, closeAuthModal } = useAuthUI();

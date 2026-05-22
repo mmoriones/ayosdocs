@@ -25,9 +25,8 @@ import {
   Eye,
   LogOut
 } from 'lucide-react';
-import { useTheme } from '@/context/ThemeContext';
+import { useTheme, useToast } from '@/context';
 import { changePasswordAction } from '@/app/actions/user';
-import { useToast } from '@/context/ToastContext';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
@@ -35,6 +34,7 @@ import Skeleton from '@/components/ui/Skeleton';
 import Badge from '@/components/ui/Badge';
 import PageHeader from '@/components/ui/PageHeader';
 import SortDropdown from '@/components/ui/SortDropdown';
+import Switch from '@/components/ui/Switch';
 
 /**
  * Settings client page with interactive tab management and security features.
@@ -51,7 +51,6 @@ export default function SettingsClient() {
     { label: 'Notifications', icon: Bell, description: 'Email and push alerts' },
     { label: 'Privacy & Security', icon: Shield, description: 'Data and account protection' },
     { label: 'Password', icon: Lock, description: 'Security credentials' },
-    { label: 'Sessions', icon: Smartphone, description: 'Connected devices' },
   ];
 
   if (status === 'loading') {
@@ -299,30 +298,19 @@ function NotificationsSection() {
   return (
     <Card title="Notifications" background="base" className="animate-in fade-in slide-in-from-bottom-3 duration-500">
       <div className="space-y-10">
-        <div className="flex items-center justify-between">
-          <div className="space-y-1.5">
-            <h3 className="text-sm font-bold text-ctp-text uppercase tracking-wide">Email Updates</h3>
-            <p className="text-xs text-ctp-subtext1 font-medium">Get notified about guide updates and new features.</p>
-          </div>
-          <button 
-            onClick={() => setEmailUpdates(!emailUpdates)}
-            className={`w-14 h-7 rounded-full transition-all duration-300 relative shadow-inner ${emailUpdates ? 'bg-ctp-sky-800' : 'bg-ctp-surface1'}`}
-          >
-            <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all duration-300 shadow-sm ${emailUpdates ? 'left-8' : 'left-1'}`} />
-          </button>
-        </div>
-
-        <div className="pt-10 border-t border-ctp-surface1 flex items-center justify-between">
-          <div className="space-y-1.5">
-            <h3 className="text-sm font-bold text-ctp-text uppercase tracking-wide">Security Alerts</h3>
-            <p className="text-xs text-ctp-subtext1 font-medium">Receive alerts about new sign-ins or password changes.</p>
-          </div>
-          <button 
-            onClick={() => setSecurityAlerts(!securityAlerts)}
-            className={`w-14 h-7 rounded-full transition-all duration-300 relative shadow-inner ${securityAlerts ? 'bg-ctp-sky-800' : 'bg-ctp-surface1'}`}
-          >
-            <div className={`absolute top-1 w-5 h-5 rounded-full bg-white transition-all duration-300 shadow-sm ${securityAlerts ? 'left-8' : 'left-1'}`} />
-          </button>
+        <Switch
+          checked={emailUpdates}
+          onChange={setEmailUpdates}
+          label="Email Updates"
+          description="Get notified about guide updates and new features."
+        />
+        <div className="pt-10 border-t border-ctp-surface1">
+          <Switch
+            checked={securityAlerts}
+            onChange={setSecurityAlerts}
+            label="Security Alerts"
+            description="Receive alerts about new sign-ins or password changes."
+          />
         </div>
       </div>
     </Card>
