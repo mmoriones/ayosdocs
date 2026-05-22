@@ -20,9 +20,9 @@
 
 ## ✨ Features & Logic
 - [ ] **Recently Updated:**
-    - [-] Replace dummy data in `RecentlyUpdated.jsx` with real content.
-    - [ ] Implement "View all updates" page/logic.
-    - [ ] Connect to backend endpoint for update tracking.
+    ~~- [-] Replace dummy data in `RecentlyUpdated.jsx` with real content.~~
+    ~~- [ ] Implement "View all updates" page/logic.~~
+    ~~- [ ] Connect to backend endpoint for update tracking.~~
 - [ ] **Onboarding:**
     - ~~[X] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").~~
 ~~- [x] Implement user login using email and email verification~~
@@ -31,17 +31,17 @@
 ## 👤 User Dashboard (My Docs)
 ~~- [ ] **Rename:** Rebrand "User Progress" to **"My Docs"**.~~
 ~~- [ ] **Grouping:** Add functionality to create and edit custom guide groups (Requires new schema & endpoints).~~
-- [ ] **Search:** Add search function within the dashboard.
-- [ ] **Sorting:** Implement filters for All, In Progress, Completed, and Favorites.
+~~- [ ] **Search:** Add search function within the dashboard.~~
+~~- [ ] **Sorting:** Implement filters for All, In Progress, Completed, and Favorites.~~
 
 ## ⚙️ Backend & Infrastructure
 - [ ] **API Endpoints:**
-    - [ ] `/api/guides/recently-updated`
-    - [x] `/api/contact` (Contact form submission)
-    - [ ] `/api/rate` (office rating submission)
-    - [ ] `/api/trending` (trending guides)
+    ~~- [ ] `/api/guides/recently-updated`~~
+    ~~- [x] `/api/contact` (Contact form submission)~~
+    ~~- [ ] `/api/rate` (office rating submission)~~
+    ~~- [ ] `/api/trending` (trending guides)~~
 - ~~[X] **Guide Management:** Remove "Related Guides" section from `.md` files (handle dynamically).~~
-- [ ] **Versioning:** Track guide update dates in frontmatter or database.
+~~- [ ] **Versioning:** Track guide update dates in frontmatter or database.~~
 -~~ [x] **Mail:** Integrate **Zoho Mail** for communications.~~
 - [ ] **Forgot Password Flow:** Email infrastructure (setting up a service like Resend or a Gmail SMTP to send the mail) 
 ~~- [x] **Email Verification** Add "guards" to pages to check if isVerified is true~~

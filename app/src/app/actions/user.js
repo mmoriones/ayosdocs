@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { bundles } from "@/data/bundles";
 import { rateLimit, resetRateLimit, getRateLimitInfo } from "@/lib/rate-limit";
-import { sendVerificationEmail } from "@/lib/mail";
+import { sendVerificationEmail, sendResetPasswordEmail, sendGoogleAuthResetEmail } from "@/lib/mail";
 import crypto from "crypto";
 
 /**
@@ -448,5 +448,94 @@ export async function stopBundleAction(bundleId) {
   } catch (error) {
     console.error("Stop Bundle Action Error:", error);
     return { success: false, message: "Internal Server Error" };
+  }
+}
+
+/**
+ * Server action to request a password reset.
+ */
+export async function requestPasswordResetAction(email) {
+  if (!email || !email.includes('@')) {
+    return { success: false, message: "Please provide a valid email address." };
+  }
+
+  // Rate limiting (3 requests per hour)
+  const resetLimit = await rateLimit(`pw-reset-req:${email.toLowerCase()}`, 3, 60 * 60 * 1000);
+  if (!resetLimit.success) {
+    return { success: false, message: "Too many requests. Please try again in an hour." };
+  }
+
+  try {
+    await connectDB();
+    const user = await User.findOne({ email: email.toLowerCase().trim() });
+
+    // Security: Always return success even if user not found to prevent email harvesting
+    if (!user) {
+      return { success: true, message: "If an account exists with that email, a reset link has been sent." };
+    }
+
+    if (user.googleAuth && !user.password) {
+      await sendGoogleAuthResetEmail(user.email);
+      return { success: true, message: "If an account exists with that email, a reset link has been sent." };
+    }
+
+    // Generate token
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const resetTokenExpires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = resetTokenExpires;
+    await user.save();
+
+    const host = (await headers()).get("host");
+    const protocol = host.includes("localhost") ? "http" : "https";
+    const baseUrl = `${protocol}://${host}`;
+    
+    await sendResetPasswordEmail(user.email, resetToken, baseUrl);
+
+    return { success: true, message: "If an account exists with that email, a reset link has been sent." };
+  } catch (error) {
+    console.error("Request Password Reset Error:", error);
+    return { success: false, message: "Failed to process request. Please try again later." };
+  }
+}
+
+/**
+ * Server action to reset password using a token.
+ */
+export async function resetPasswordAction(token, password) {
+  if (!token || !password || password.length < 8) {
+    return { success: false, message: "Invalid request. Password must be at least 8 characters." };
+  }
+
+  if (password.length > 128) {
+    return { success: false, message: "Password must be less than 128 characters." };
+  }
+
+  try {
+    await connectDB();
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return { success: false, message: "Invalid or expired reset token." };
+    }
+
+    user.password = password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    
+    // Also unlock account if it was locked due to too many login attempts
+    user.loginAttempts = 0;
+    user.lockUntil = undefined;
+    
+    await user.save();
+
+    return { success: true, message: "Password has been reset successfully. You can now log in." };
+  } catch (error) {
+    console.error("Reset Password Action Error:", error);
+    return { success: false, message: "Failed to reset password. Please try again later." };
   }
 }

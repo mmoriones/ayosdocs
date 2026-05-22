@@ -12,24 +12,28 @@ import { useToast } from "@/context/ToastContext";
 export default function VerifiedClient() {
   const router = useRouter();
   const { showToast } = useToast();
-  const { update } = useSession();
+  const { data: session, status, update } = useSession();
 
   useEffect(() => {
-    // Refresh the session to reflect the verified status
-    update();
-
+    // Show toast once on mount
     showToast({
       type: 'success',
       title: 'Email Verified',
       message: 'Your account has been successfully verified.'
     });
 
+    // We still update the session in the background to ensure local state is fresh
+    // but we don't block the UI on it.
+    update();
+
     const timer = setTimeout(() => {
       router.push("/");
     }, 4000);
 
-    return () => clearTimeout(timer);
-  }, [router, showToast, update]);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []); // Only run once on mount
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-ctp-base px-6 text-ctp-text">

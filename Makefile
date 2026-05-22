@@ -21,6 +21,9 @@ infra-provision:
 vault-edit:
 	ansible-vault edit infra/ansible/vars/secrets.yml
 
+docker-pull-app:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.yml pull app
+
 docker-up:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d
 

@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { X, Loader2, Mail, Lock, User as UserIcon, ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
 import { signIn, useSession } from 'next-auth/react';
 import { useToast } from "@/context/ToastContext";
-import { registerUserAction, checkEmailAction, checkRateLimitAction } from "@/app/actions/user";
+import { registerUserAction, checkEmailAction, checkRateLimitAction, requestPasswordResetAction } from "@/app/actions/user";
 
 const AuthModal = ({ isOpen, onClose }) => {
   const { status } = useSession();
   const { showToast } = useToast();
   const [isExchanging, setIsExchanging] = useState(false);
-  const [mode, setMode] = useState('initial'); // 'initial', 'login', 'signup'
+  const [mode, setMode] = useState('initial'); // 'initial', 'login', 'signup', 'forgot-password'
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [statusMessage, setStatusMessage] = useState(null); // { type: 'error' | 'success', text: string }
@@ -241,6 +241,33 @@ const AuthModal = ({ isOpen, onClose }) => {
     }
   };
 
+  const handleForgotPasswordSubmit = async (e) => {
+    e.preventDefault();
+    setIsExchanging(true);
+    setStatusMessage(null);
+    try {
+      const result = await requestPasswordResetAction(formData.email);
+      if (result.success) {
+        setStatusMessage({
+          type: 'success',
+          text: result.message
+        });
+      } else {
+        setStatusMessage({
+          type: 'error',
+          text: result.message
+        });
+      }
+    } catch (error) {
+      setStatusMessage({
+        type: 'error',
+        text: 'An unexpected error occurred.'
+      });
+    } finally {
+      setIsExchanging(false);
+    }
+  };
+
   const handleInputChange = (e) => {
     if (statusMessage) setStatusMessage(null);
     const { name, value } = e.target;
@@ -315,6 +342,10 @@ const AuthModal = ({ isOpen, onClose }) => {
         !emailTaken &&
         !isCheckingEmail
       );
+    }
+
+    if (mode === 'forgot-password') {
+      return emailRegex.test(formData.email);
     }
 
     return true;
@@ -406,14 +437,16 @@ const AuthModal = ({ isOpen, onClose }) => {
 
           <div className="mb-6 text-center">
             <h2 className="text-2xl font-bold text-ctp-text tracking-tight">
-              {mode === 'initial' ? 'Sign in to AyosDocs' : mode === 'login' ? 'Welcome Back' : 'Create Account'}
+              {mode === 'initial' ? 'Sign in to AyosDocs' : mode === 'login' ? 'Welcome Back' : mode === 'signup' ? 'Create Account' : 'Reset Password'}
             </h2>
             <p className="text-sm font-medium text-ctp-subtext1 mt-2 leading-relaxed px-4">
               {mode === 'initial' 
                 ? 'Save your progress and access your checklists across all your devices.'
                 : mode === 'login'
                 ? 'Sign in with your email and password to continue.'
-                : 'Join AyosDocs to start tracking your government requirements.'}
+                : mode === 'signup'
+                ? 'Join AyosDocs to start tracking your government requirements.'
+                : 'Enter your email address and we\'ll send you a link to reset your password.'}
             </p>
           </div>
 
@@ -497,7 +530,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               </p>
             </div>
           ) : (
-            <form onSubmit={mode === 'login' ? handleEmailLogin : handleEmailSignUp} className="space-y-4">
+            <form onSubmit={mode === 'login' ? handleEmailLogin : mode === 'signup' ? handleEmailSignUp : handleForgotPasswordSubmit} className="space-y-4">
               {mode === 'signup' && (
                 <div className="space-y-1">
                   <div className="relative">
@@ -551,38 +584,51 @@ const AuthModal = ({ isOpen, onClose }) => {
                 )}
               </div>
 
-              <div className="space-y-1">
-                <div className="relative">
-                  <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('password') ? 'text-red-500' : 'text-ctp-subtext1'}`} />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    placeholder="Password"
-                    required
-                    minLength={8}
-                    maxLength={128}
-                    autoComplete="off"
-                    value={formData.password}                    onChange={handleInputChange}
-                    className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-12 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
-                      isFieldInvalid('password') 
-                        ? 'border-red-500/50 focus:border-red-500' 
-                        : 'border-ctp-surface1 focus:border-ctp-sky-800'
-                      }`}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('password') ? 'text-red-500/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
+              {mode !== 'forgot-password' && (
+                <div className="space-y-1">
+                  <div className="relative">
+                    <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('password') ? 'text-red-500' : 'text-ctp-subtext1'}`} />
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      placeholder="Password"
+                      required
+                      minLength={8}
+                      maxLength={128}
+                      autoComplete="off"
+                      value={formData.password}                    onChange={handleInputChange}
+                      className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-12 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
+                        isFieldInvalid('password') 
+                          ? 'border-red-500/50 focus:border-red-500' 
+                          : 'border-ctp-surface1 focus:border-ctp-sky-800'
+                        }`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('password') ? 'text-red-500/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                  {isFieldInvalid('password') && (
+                    <p className="text-[10px] font-bold text-red-500 ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                      {getFieldError('password')}
+                    </p>
+                  )}
+                  {mode === 'login' && (
+                    <div className="flex justify-end px-1">
+                      <button 
+                        type="button"
+                        onClick={() => setMode('forgot-password')}
+                        className="text-[11px] font-bold text-ctp-subtext1 hover:text-ctp-sky-800 transition-colors"
+                      >
+                        Forgot password?
+                      </button>
+                    </div>
+                  )}
                 </div>
-                {isFieldInvalid('password') && (
-                  <p className="text-[10px] font-bold text-red-500 ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
-                    {getFieldError('password')}
-                  </p>
-                )}
-              </div>
+              )}
 
               {mode === 'signup' && (
                 <div className="space-y-1">
@@ -625,34 +671,36 @@ const AuthModal = ({ isOpen, onClose }) => {
                 disabled={isExchanging || !isFormValid()}
                 className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-700 disabled:bg-ctp-surface1 disabled:text-ctp-subtext1 disabled:cursor-not-allowed disabled:shadow-none text-white font-bold py-3.5 rounded-xl transition-all active:scale-[0.98] shadow-md mt-2"
               >
-                {mode === 'login' ? 'Sign In' : 'Create Account'}
+                {mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Send Reset Link'}
               </button>
 
-              <p className="text-center text-sm text-ctp-subtext1 mt-4">
-                {mode === 'login' ? (
-                  <>
-                    Don&apos;t have an account?{' '}
-                    <button 
-                      type="button"
-                      onClick={() => changeMode('signup')}
-                      className="text-ctp-sky-800 font-bold hover:underline"
-                    >
-                      Sign up
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    Already have an account?{' '}
-                    <button 
-                      type="button"
-                      onClick={() => changeMode('login')}
-                      className="text-ctp-sky-800 font-bold hover:underline"
-                    >
-                      Sign in
-                    </button>
-                  </>
-                )}
-              </p>
+              {mode !== 'forgot-password' && (
+                <p className="text-center text-sm text-ctp-subtext1 mt-4">
+                  {mode === 'login' ? (
+                    <>
+                      Don&apos;t have an account?{' '}
+                      <button 
+                        type="button"
+                        onClick={() => changeMode('signup')}
+                        className="text-ctp-sky-800 font-bold hover:underline"
+                      >
+                        Sign up
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      Already have an account?{' '}
+                      <button 
+                        type="button"
+                        onClick={() => changeMode('login')}
+                        className="text-ctp-sky-800 font-bold hover:underline"
+                      >
+                        Sign in
+                      </button>
+                    </>
+                  )}
+                </p>
+              )}
             </form>
           )}
 

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useRef } from 'react';
 import ToastModal from '../components/ToastModal';
 
 const ToastContext = createContext();
@@ -12,8 +12,23 @@ export const ToastProvider = ({ children }) => {
     title: '',
     message: ''
   });
+  
+  const timerRef = useRef(null);
+
+  const hideToast = useCallback(() => {
+    setToast(prev => ({ ...prev, isOpen: false }));
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
 
   const showToast = useCallback(({ type = 'success', title = '', message = '' }) => {
+    // Clear existing timer if any
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
     setToast({
       isOpen: true,
       type,
@@ -22,13 +37,10 @@ export const ToastProvider = ({ children }) => {
     });
 
     // Auto-dismiss after 5 seconds
-    setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setToast(prev => ({ ...prev, isOpen: false }));
+      timerRef.current = null;
     }, 5000);
-  }, []);
-
-  const hideToast = useCallback(() => {
-    setToast(prev => ({ ...prev, isOpen: false }));
   }, []);
 
   return (

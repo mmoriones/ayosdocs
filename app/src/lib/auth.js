@@ -10,6 +10,7 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -90,6 +91,10 @@ export const authOptions = {
       }
     }),
   ],
+  pages: {
+    signIn: '/',
+    error: '/',
+  },
   // Support multiple subdomains and proxies
   trustHost: true,
   session: {

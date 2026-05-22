@@ -170,7 +170,9 @@ export default function HomeClient({ allGuides }) {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-1">
               <h1 className="text-2xl font-bold tracking-tight">
-                {isLoggedIn ? `Welcome back, ${session.user.name?.split(' ')[0]}!` : 'Overview'}
+                {isLoggedIn 
+                  ? `${session.user.isNewUser ? 'Welcome to AyosDocs' : 'Welcome back'}, ${session.user.name?.split(' ')[0] || 'User'}!` 
+                  : 'Overview'}
               </h1>
               <p className="text-sm text-ctp-subtext1">
                 {isLoggedIn 
