@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Bookmark, MoreVertical, Trash2, Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { GuideIcon } from '@/lib/guideIcons';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * GuideRowCard Component
@@ -137,6 +138,32 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  );
+};
+
+GuideRowCard.Skeleton = function GuideRowCardSkeleton() {
+  return (
+    <div className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm flex items-center gap-6 w-full">
+      <Skeleton className="w-12 h-12 rounded-lg shrink-0" />
+      <div className="flex-1 space-y-2.5">
+        <div className="flex items-center gap-3">
+          <Skeleton className="w-40 h-4" />
+          <Skeleton className="w-16 h-3 rounded-md" />
+        </div>
+        <Skeleton className="w-3/4 h-3" />
+      </div>
+      <div className="hidden md:flex items-center gap-8 shrink-0 px-4">
+        <div className="w-40 space-y-2">
+          <div className="flex justify-between">
+            <Skeleton className="w-12 h-2" />
+            <Skeleton className="w-8 h-2" />
+          </div>
+          <Skeleton className="w-full h-1 rounded-full" />
+        </div>
+        <Skeleton className="w-10 h-10 rounded-lg" />
+        <Skeleton className="w-8 h-8 rounded-lg" />
       </div>
     </div>
   );

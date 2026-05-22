@@ -8,13 +8,14 @@ import { useToast } from '@/context/ToastContext';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * Settings client page with interactive tab management and security features.
  */
 export default function SettingsClient() {
   const [activeTab, setActiveTab] = useState('General');
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { showToast } = useToast();
   const user = session?.user;
 
@@ -27,7 +28,31 @@ export default function SettingsClient() {
     { label: 'Password', icon: Lock },
   ];
 
+  if (status === 'loading') {
+    return (
+      <div className="bg-ctp-base font-sans text-ctp-text min-h-screen pb-20">
+        <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50">
+          <div className="max-w-[1600px] mx-auto space-y-2">
+            <Skeleton className="w-24 h-7" />
+            <Skeleton className="w-64 h-4 opacity-50" />
+          </div>
+        </div>
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-1 space-y-2">
+               {[1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} className="w-full h-12 rounded-lg opacity-20" />)}
+            </div>
+            <div className="lg:col-span-2">
+               <Card><div className="space-y-6 py-4"><Skeleton className="w-1/2 h-6" /><Skeleton className="w-full h-40 rounded-xl" /></div></Card>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
+
     <div className="bg-ctp-base font-sans text-ctp-text min-h-screen pb-20">
       {/* Header */}
       <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50">

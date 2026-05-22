@@ -22,6 +22,7 @@ import { useToast } from '@/context/ToastContext';
 import { GuideIcon } from '@/lib/guideIcons';
 import { updateProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * Component for rendering and managing a guide's checklist.
@@ -218,12 +219,8 @@ const ChecklistCard = ({
 
   const cardLabel = inGuidePage ? "Requirements Tracker" : "Your Progress";
 
-  if (isLoadingProgress) {
-    return (
-      <div className={`flex items-center justify-center py-12 ${isModal || isBare ? "" : "bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm"}`}>
-        <Loader2 className="animate-spin text-ctp-sky-800" size={24} />
-      </div>
-    );
+  if (isLoadingProgress || status === 'loading') {
+    return <ChecklistCard.Skeleton isModal={isModal} isBare={isBare} inGuidePage={inGuidePage} />;
   }
 
   return (
@@ -319,7 +316,7 @@ const ChecklistCard = ({
         </div>
       )}
 
-      {isLoggedIn && !isVerified && (
+      {status !== 'loading' && isLoggedIn && !isVerified && (
         <div className={`${(isModal || isBare) ? "px-0" : "px-5 lg:px-6"} mt-5 ${isShaking ? 'animate-shake' : ''}`}>
           <div className="bg-ctp-yellow/5 border border-ctp-yellow/20 rounded-lg p-4 flex items-center gap-4 transition-all shadow-sm">
             <AlertTriangle size={18} className="text-ctp-yellow shrink-0" />
@@ -331,7 +328,7 @@ const ChecklistCard = ({
         </div>
       )}
 
-      {!isLoggedIn && (
+      {status !== 'loading' && !isLoggedIn && (
         <div className={`${(isModal || isBare) ? "px-0" : "px-5 lg:px-6"} mt-5`}>
           <div 
             className="bg-ctp-sky-800/5 border border-ctp-sky-800/10 rounded-lg p-4 flex items-center justify-between group cursor-pointer hover:bg-ctp-sky-800/10 transition-all shadow-sm"
@@ -469,6 +466,48 @@ const ChecklistCard = ({
         </div>
       )}
 
+    </div>
+  );
+};
+
+ChecklistCard.Skeleton = function ChecklistCardSkeleton({ isModal, isBare, inGuidePage }) {
+  return (
+    <div className={`flex flex-col overflow-hidden ${
+      (isModal || isBare) ? "" : "bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm"
+    }`}>
+      <div className={`${isModal ? "p-0" : "p-5 lg:p-6"} space-y-6 pb-0`}>
+        <div className="flex items-center justify-between">
+          <Skeleton className="w-24 h-3" />
+          {!inGuidePage && <Skeleton className="w-20 h-3" />}
+        </div>
+        
+        <div className="flex items-start gap-4">
+          {!inGuidePage && <Skeleton className="w-11 h-11 rounded-lg shrink-0" />}
+          <div className="space-y-2 flex-1">
+            <Skeleton className="w-3/4 h-5" />
+            <Skeleton className="w-1/2 h-3" />
+          </div>
+        </div>
+      </div>
+
+      <div className="px-5 lg:px-6 mt-6">
+        <Skeleton className="w-full h-1 rounded-full" />
+      </div>
+
+      <div className="p-5 lg:p-6 space-y-4">
+        {[1, 2, 3].map(i => (
+          <div key={i} className="flex items-center gap-4 px-3">
+            <Skeleton className="w-5 h-5 rounded-full shrink-0" />
+            <Skeleton className="w-full h-4" />
+          </div>
+        ))}
+      </div>
+
+      {!inGuidePage && (
+        <div className="px-5 lg:px-6 pb-6 mt-auto">
+          <Skeleton className="w-full h-10 rounded-lg" />
+        </div>
+      )}
     </div>
   );
 };

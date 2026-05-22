@@ -170,12 +170,16 @@ export default function HomeClient({ allGuides }) {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-1">
               <h1 className="text-2xl font-bold tracking-tight">
-                {isLoggedIn 
+                {status === 'loading' 
+                  ? 'Overview' 
+                  : isLoggedIn 
                   ? `${session.user.isNewUser ? 'Welcome to AyosDocs' : 'Welcome back'}, ${session.user.name?.split(' ')[0] || 'User'}!` 
                   : 'Overview'}
               </h1>
               <p className="text-sm text-ctp-subtext1">
-                {isLoggedIn 
+                {status === 'loading'
+                  ? 'Access your government requirement checklists.'
+                  : isLoggedIn 
                   ? "Track your applications and discover new guides." 
                   : "Discover and plan your Philippine government document requirements."}
               </p>
@@ -197,28 +201,39 @@ export default function HomeClient({ allGuides }) {
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-10">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <StatsCard 
-            label="Active Guides" 
-            value={isLoggedIn && isLoadingUserData ? "..." : stats.active.toString()} 
-            icon={Clock} 
-            isLocked={!isLoggedIn}
-          />
-          <StatsCard 
-            label="Completed" 
-            value={isLoggedIn && isLoadingUserData ? "..." : stats.completed.toString()} 
-            icon={CheckCircle2} 
-            isLocked={!isLoggedIn}
-          />
-          <StatsCard 
-            label="Total Guides" 
-            value={allGuides.length.toString()} 
-            icon={BookOpen} 
-          />
-          <StatsCard 
-            label="Community Reports" 
-            value="1.2k" 
-            icon={TrendingUp} 
-          />
+          {status === 'loading' || (isLoggedIn && isLoadingUserData) ? (
+            <>
+              <StatsCard.Skeleton />
+              <StatsCard.Skeleton />
+              <StatsCard.Skeleton />
+              <StatsCard.Skeleton />
+            </>
+          ) : (
+            <>
+              <StatsCard 
+                label="Active Guides" 
+                value={stats.active.toString()} 
+                icon={Clock} 
+                isLocked={!isLoggedIn}
+              />
+              <StatsCard 
+                label="Completed" 
+                value={stats.completed.toString()} 
+                icon={CheckCircle2} 
+                isLocked={!isLoggedIn}
+              />
+              <StatsCard 
+                label="Total Guides" 
+                value={allGuides.length.toString()} 
+                icon={BookOpen} 
+              />
+              <StatsCard 
+                label="Community Reports" 
+                value="1.2k" 
+                icon={TrendingUp} 
+              />
+            </>
+          )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -228,7 +243,7 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-bold tracking-tight">Active Workflow</h2>
-                {activeGuide && (
+                {activeGuide && !isLoadingUserData && status !== 'loading' && (
                   <button 
                     onClick={() => router.push('/my-docs')}
                     className="text-xs font-bold text-ctp-sky-800 hover:underline uppercase tracking-wider"
@@ -238,7 +253,9 @@ export default function HomeClient({ allGuides }) {
                 )}
               </div>
               
-              {activeGuide ? (
+              {status === 'loading' || (isLoggedIn && isLoadingUserData) ? (
+                <ChecklistCard.Skeleton />
+              ) : activeGuide ? (
                 <ChecklistCard
                   title={activeGuide.title}
                   initialSteps={activeGuide.checklist?.map(task => ({ task }))}
@@ -351,19 +368,25 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <h2 className="text-lg font-bold tracking-tight">Popular Guides</h2>
               <div className="space-y-3">
-                {popularGuides.map((guide, idx) => {
-                  const progress = userData?.savedProgress?.find(p => p.guideSlug === guide.slug);
-                  return (
-                    <TrendingWidget 
-                      key={guide.slug} 
-                      guide={guide} 
-                      progress={progress}
-                      stats={{ views: `${(5.2 - idx * 0.8).toFixed(1)}k` }}
-                      variant="compact"
-                      onFavorite={() => handleFavoriteGuide(guide.slug)}
-                    />
-                  );
-                })}
+                {popularGuides.length > 0 ? (
+                  popularGuides.map((guide, idx) => {
+                    const progress = userData?.savedProgress?.find(p => p.guideSlug === guide.slug);
+                    return (
+                      <TrendingWidget 
+                        key={guide.slug} 
+                        guide={guide} 
+                        progress={progress}
+                        stats={{ views: `${(5.2 - idx * 0.8).toFixed(1)}k` }}
+                        variant="compact"
+                        onFavorite={() => handleFavoriteGuide(guide.slug)}
+                      />
+                    );
+                  })
+                ) : (
+                  Array.from({ length: 5 }).map((_, i) => (
+                    <TrendingWidget.Skeleton key={i} variant="compact" />
+                  ))
+                )}
               </div>
             </section>
 

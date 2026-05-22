@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { 
-  Loader2, 
   Search, 
   Plus, 
   Filter, 
@@ -28,12 +27,16 @@ import { useToast } from '@/context/ToastContext';
 import ConfirmModal from '@/components/ConfirmModal';
 import { deleteProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import Skeleton from '@/components/ui/Skeleton';
+import Card from '@/components/ui/Card';
 
 /**
  * ProgressClient Component
  */
 export default function ProgressClient({ allGuides, isRestricted }) {
   const router = useRouter();
+  const { status } = useSession();
   const [activeTab, setActiveTab] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('Recently updated');
@@ -302,83 +305,6 @@ export default function ProgressClient({ allGuides, isRestricted }) {
     return filteredGuides;
   }, [filteredGuides, activeTab, searchQuery, visibleCount]);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-ctp-base">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="animate-spin text-ctp-sky-800" size={40} />
-          <p className="text-ctp-subtext1 font-medium">Loading your dashboard...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (isRestricted) {
-    return (
-      <div className="min-h-[85vh] bg-ctp-base flex items-center justify-center px-6 py-20">
-        <div className="max-w-2xl w-full text-center space-y-10">
-          <div className="space-y-6">
-            <div className="flex justify-center">
-              <div className="w-20 h-20 rounded-2xl bg-ctp-yellow-800/10 border border-ctp-yellow-800/20 flex items-center justify-center text-ctp-yellow-800 shadow-xl shadow-ctp-yellow-800/5 animate-shake">
-                <ShieldAlert size={40} strokeWidth={1.5} />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <h2 className="text-2xl font-bold text-ctp-text tracking-tight uppercase tracking-widest">Dashboard Access Restricted</h2>
-              <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed max-w-md mx-auto">
-                Securely sync your progress and track requirement bundles by verifying your account identity.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-             {[
-               { icon: List, title: "Cloud Sync", desc: "Save across all devices" },
-               { icon: ArrowRight, title: "Bundle Tracking", desc: "Goal-based roadmaps" },
-               { icon: Loader2, title: "System Alerts", desc: "Real-time guide updates" }
-             ].map((item, i) => (
-               <div key={i} className="p-5 bg-ctp-mantle border border-ctp-surface1 rounded-xl space-y-3 text-left hover:border-ctp-sky-800/30 transition-all group">
-                 <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-inner group-hover:scale-105 transition-transform">
-                   <item.icon size={16} />
-                 </div>
-                 <div className="space-y-1">
-                   <h4 className="font-bold text-xs text-ctp-text uppercase tracking-tight">{item.title}</h4>
-                   <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60 leading-tight">{item.desc}</p>
-                 </div>
-               </div>
-             ))}
-          </div>
-
-          <div className="bg-ctp-mantle p-8 rounded-xl border border-ctp-surface1 space-y-6 relative overflow-hidden group shadow-sm">
-             <div className="space-y-2 relative z-10">
-                <p className="text-[10px] font-bold text-ctp-yellow-800 uppercase tracking-widest">Action Required</p>
-                <h3 className="text-lg font-bold text-ctp-text">Check your inbox for a verification link</h3>
-                <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed max-w-sm mx-auto">
-                  We sent a link to your email. Click it to instantly unlock your workspace and start tracking your journey.
-                </p>
-             </div>
-
-             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 relative z-10 pt-2">
-                <button 
-                  onClick={() => router.push('/')}
-                  className="w-full sm:w-auto px-6 py-2.5 bg-ctp-base border border-ctp-surface1 text-ctp-text rounded-lg font-bold uppercase tracking-widest text-[10px] hover:bg-ctp-mantle active:scale-95 transition-all shadow-sm"
-                >
-                  Back to Home
-                </button>
-                <button 
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="w-full sm:w-auto px-6 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold uppercase tracking-widest text-[10px] hover:bg-ctp-sky-800/90 shadow-md active:scale-95 transition-all"
-                >
-                  Resend Link
-                </button>
-             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-ctp-base font-sans pb-20">
       <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50 mb-10">
@@ -388,13 +314,15 @@ export default function ProgressClient({ allGuides, isRestricted }) {
             <p className="text-sm text-ctp-subtext1">Manage your active workflows and tracked procedures.</p>
           </div>
           <div className="flex items-center gap-3">
-            <button 
-              onClick={() => router.push('/guides')}
-              className="px-4 py-2 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all flex items-center gap-2"
-            >
-              <Plus size={16} />
-              <span>Track New</span>
-            </button>
+            {status !== 'loading' && (
+              <button 
+                onClick={() => router.push('/guides')}
+                className="px-4 py-2 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all flex items-center gap-2 animate-in fade-in duration-300"
+              >
+                <Plus size={16} />
+                <span>Track New</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -402,7 +330,11 @@ export default function ProgressClient({ allGuides, isRestricted }) {
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 w-full">
         <div className="flex flex-col lg:flex-row gap-10">
           <div className="flex-1 min-w-0 space-y-12">
-            <SummaryStats stats={stats} />
+            {(isLoading || status === 'loading') && !isRestricted ? (
+              <SummaryStats.Skeleton />
+            ) : (
+              <SummaryStats stats={stats} />
+            )}
 
             {stats.activeBundles > 0 && (
               <div className="bg-ctp-sky-800 rounded-2xl p-6 text-white shadow-xl shadow-ctp-sky-800/10 relative overflow-hidden group">
@@ -488,15 +420,19 @@ export default function ProgressClient({ allGuides, isRestricted }) {
               </div>
 
               <div className="grid grid-cols-1 gap-5">
-                {bundleProgress.map((item) => (
-                  <BundleCard 
-                    key={item.bundle.id} 
-                    bundle={item.bundle} 
-                    progress={item} 
-                  />
-                ))}
-
-                {bundleProgress.length === 0 && !searchQuery && (
+                {isLoading && !isRestricted ? (
+                  Array.from({ length: 1 }).map((_, i) => (
+                    <BundleCard.Skeleton key={i} />
+                  ))
+                ) : bundleProgress.length > 0 ? (
+                  bundleProgress.map((item) => (
+                    <BundleCard 
+                      key={item.bundle.id} 
+                      bundle={item.bundle} 
+                      progress={item} 
+                    />
+                  ))
+                ) : !searchQuery && (
                   <button 
                     onClick={() => router.push('/bundles')}
                     className="w-full py-8 bg-ctp-mantle border-2 border-dashed border-ctp-surface1 rounded-xl text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-sky-800/5 transition-all flex flex-col items-center justify-center gap-3 group"
@@ -524,7 +460,11 @@ export default function ProgressClient({ allGuides, isRestricted }) {
               </div>
 
               <div className="grid grid-cols-1 gap-4">
-                {displayedGuides.length > 0 ? (
+                {isLoading && !isRestricted ? (
+                  Array.from({ length: 3 }).map((_, i) => (
+                    <GuideRowCard.Skeleton key={i} />
+                  ))
+                ) : displayedGuides.length > 0 ? (
                   displayedGuides.map((item) => (
                     <GuideRowCard 
                       key={item.guide.slug} 

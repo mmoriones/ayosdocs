@@ -9,7 +9,7 @@
     - ~~[X] Implement Home page Mobile view (refer to `home_wireframe_mobile.png`).~~
         - ~~[X] Spcaing on H1 on Hero section (no spacing between "we" & "help")~~
     - ~~[ ] Modernize Mobile Menu to match new design~~
-    - [ ] Add mobile press feedback (haptics/visual).
+    - [ ] Improve mobile view and overall UX (haptics/visual).
 - [ ] **Components:**
     - [ ] **Skeleton Loading:** Implement for all data-fetching sections.
     - [ ] **UI:** Create reusable components for tips badges, close button, etc
@@ -17,8 +17,9 @@
     ~~- [ ] **Adsense:** Create Adsense component with eligibility context (hidden by default).~~
     - ~~[X] **ToastModal:** Optimize styles and add specific text for first-time login.~~
         - ~~[X] Scroll actions still available when toast modal is open~~
-    - [ ] **Skeleton:** Add skeleton loading for dynamic UI components
-    - [ ] **Settings & Profile:** Add the components and make them functional
+    ~~- [ ] **Skeleton:** Add skeleton loading for dynamic UI components~~
+    - [ ] **Settings:** Add components on the empty tabs on /settings and make them functional.
+   ~~- [X] **Profile:** Make user details editable except email~~
     - [ ] **Refator:** Implement global UI component reuse for consistency
     - [ ] **Theme:** Add better color palettes for dark mode to improve contrast and readability 
 

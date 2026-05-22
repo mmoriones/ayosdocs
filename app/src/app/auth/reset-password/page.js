@@ -21,16 +21,10 @@ function ResetPasswordForm() {
     confirmPassword: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState(null); // { type: 'error' | 'success', text: string }
-
-  useEffect(() => {
-    if (!token) {
-      setStatus({
-        type: 'error',
-        text: 'Invalid or missing reset token. Please request a new reset link.'
-      });
-    }
-  }, [token]);
+  const [status, setStatus] = useState(() => token ? null : {
+    type: 'error',
+    text: 'Invalid or missing reset token. Please request a new reset link.'
+  });
 
   const handleInputChange = (e) => {
     if (status) setStatus(null);

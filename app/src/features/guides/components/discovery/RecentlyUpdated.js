@@ -1,10 +1,11 @@
 'use client';
 
-import { ChevronRight, Loader2 } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { GuideIcon } from '@/lib/guideIcons';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * Widget displaying a list of recently added or modified guides.
@@ -23,9 +24,19 @@ const RecentlyUpdated = ({ className = "" }) => {
 
   if (isLoading) {
     return (
-      <div className={`w-full bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm p-8 flex flex-col items-center justify-center gap-3 ${className}`}>
-        <Loader2 className="animate-spin text-ctp-sky-800" size={20} />
-        <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Checking for updates...</span>
+      <div className={`w-full flex flex-col ${className}`}>
+        <div className="flex-1 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col p-4 space-y-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="flex items-center gap-4">
+              <Skeleton className="w-9 h-9 rounded-lg shrink-0" />
+              <div className="flex-1 space-y-2">
+                <Skeleton className="w-3/4 h-3" />
+                <Skeleton className="w-1/2 h-2" />
+              </div>
+              <Skeleton className="w-4 h-4 rounded-full" />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

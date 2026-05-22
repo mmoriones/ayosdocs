@@ -1,10 +1,11 @@
 'use client';
 
-import { Star, MessageSquare, MapPin, Loader2, ArrowRight } from 'lucide-react';
+import { Star, MessageSquare, MapPin, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { GuideIcon } from '@/lib/guideIcons';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * Revamped RecentExperiences component.
@@ -24,9 +25,24 @@ const RecentExperiences = ({ className = "" }) => {
 
   if (isLoading) {
     return (
-      <div className={`w-full bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm p-12 flex flex-col items-center justify-center gap-4 ${className}`}>
-        <Loader2 className="animate-spin text-ctp-sky-800" size={24} />
-        <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Loading community pulse...</span>
+      <div className={`grid grid-cols-1 gap-4 ${className}`}>
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="bg-ctp-base border border-ctp-surface1 rounded-xl p-5 shadow-sm space-y-4">
+            <div className="flex items-center gap-3">
+              <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
+              <div className="space-y-2 flex-1">
+                <Skeleton className="w-32 h-3" />
+                <Skeleton className="w-20 h-2" />
+              </div>
+              <Skeleton className="w-10 h-5 rounded-md shrink-0" />
+            </div>
+            <Skeleton className="w-full h-10 rounded-lg" />
+            <div className="flex justify-between items-center pt-2">
+              <Skeleton className="w-24 h-3" />
+              <Skeleton className="w-16 h-3" />
+            </div>
+          </div>
+        ))}
       </div>
     );
   }

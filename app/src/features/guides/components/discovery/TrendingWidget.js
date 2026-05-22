@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { GuideIcon } from '@/lib/guideIcons';
 import { Eye, ArrowRight, Bookmark } from 'lucide-react';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * Popular guides widget.
@@ -101,6 +102,36 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
         <span>Learn More</span>
         <ArrowRight size={14} className="transition-transform group-hover/btn:translate-x-1" />
       </Link>
+    </div>
+  );
+};
+
+TrendingWidget.Skeleton = function TrendingWidgetSkeleton({ variant = 'default' }) {
+  if (variant === 'compact') {
+    return (
+      <div className="bg-ctp-base rounded-xl p-3 border border-ctp-surface1 flex items-center gap-4 w-full">
+        <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
+        <div className="flex-1 space-y-2">
+          <Skeleton className="w-3/4 h-3" />
+          <Skeleton className="w-1/2 h-2" />
+        </div>
+        <Skeleton className="w-4 h-4 rounded-lg shrink-0 ml-2" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-ctp-base rounded-xl p-6 border border-ctp-surface1 flex flex-col items-center text-center space-y-5 h-full w-full shadow-sm">
+      <Skeleton className="w-16 h-16 rounded-xl" />
+      <div className="space-y-2.5 w-full flex flex-col items-center">
+        <Skeleton className="w-3/4 h-4" />
+        <Skeleton className="w-1/2 h-2.5 opacity-60" />
+        <div className="w-full space-y-2 mt-2">
+          <Skeleton className="w-full h-3" />
+          <Skeleton className="w-4/5 h-3 mx-auto" />
+        </div>
+      </div>
+      <Skeleton className="w-24 h-9 rounded-lg mt-auto" />
     </div>
   );
 };

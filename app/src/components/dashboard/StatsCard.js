@@ -1,6 +1,7 @@
 'use client';
 
 import { Lock } from 'lucide-react';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * Simple metrics card for the dashboard overview.
@@ -46,3 +47,18 @@ export default function StatsCard({ label, value, icon: Icon, trend, trendValue,
     </div>
   );
 }
+
+StatsCard.Skeleton = function StatsCardSkeleton() {
+  return (
+    <div className="bg-ctp-base border border-ctp-surface1 rounded-xl p-6 shadow-sm">
+      <div className="flex items-center justify-between mb-4">
+        <Skeleton className="w-10 h-10 rounded-lg" />
+        <Skeleton className="w-12 h-5 rounded-full" />
+      </div>
+      <div className="space-y-2">
+        <Skeleton className="w-20 h-3" />
+        <Skeleton className="w-12 h-7" />
+      </div>
+    </div>
+  );
+};

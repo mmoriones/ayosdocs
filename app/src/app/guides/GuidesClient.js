@@ -71,7 +71,7 @@ export default function GuidesClient({ initialGuides }) {
   });
 
   // Fetch comprehensive user data
-  const { data: userData } = useQuery({
+  const { data: userData, isLoading: isLoadingUserData } = useQuery({
     queryKey: ['user-data'],
     queryFn: async () => {
       const response = await axios.get('/api/user/all-data');
@@ -510,8 +510,12 @@ export default function GuidesClient({ initialGuides }) {
             )}
 
             {filteredGuides.length > 0 ? (
-              <div className={`grid gap-8 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3' : 'grid-cols-1'}`}>
-                {filteredGuides.slice(0, visibleCount).map((guide) => {
+              <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+                {isLoggedIn && isLoadingUserData ? (
+                  Array.from({ length: 6 }).map((_, i) => (
+                    <GuideCard.Skeleton key={i} viewMode={viewMode} />
+                  ))
+                ) : filteredGuides.slice(0, visibleCount).map((guide) => {
                   const progress = userData?.savedProgress?.find(p => p.guideSlug === guide.slug);
                   return (
                     <GuideCard 
@@ -527,6 +531,7 @@ export default function GuidesClient({ initialGuides }) {
                 })}
               </div>
             ) : (
+
               <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
                 <div className="w-14 h-14 bg-ctp-base/50 border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto mb-6">
                   <Search size={24} className="text-ctp-subtext1" />

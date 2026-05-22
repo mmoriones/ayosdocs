@@ -18,13 +18,13 @@ import {
   Users,
   Zap,
   MessageSquare,
-  Filter,
-  Loader2
+  Filter
 } from 'lucide-react';
 import { GuideIcon } from '@/lib/guideIcons';
 import PageHeader from '@/components/ui/PageHeader';
 import SearchInput from '@/components/ui/SearchInput';
 import HolidayAlert from '@/components/HolidayAlert';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * OfficesClient Component
@@ -99,23 +99,22 @@ export default function OfficesClient() {
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 w-full">
         <div className="flex flex-col lg:flex-row gap-10">
-          <div className="flex-1 min-w-0 space-y-8">
-            <div className="flex flex-col md:flex-row gap-4 mb-8">
-              <div className="flex-1">
-                <SearchInput
+          <div className="flex-1 min-w-0 space-y-10">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="max-w-2xl flex-1">
+                <SearchInput 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search by office name, city, or province..."
+                  placeholder="Search for a specific branch or city (e.g., PSA Manila, NBI Cebu)..."
                 />
               </div>
             </div>
 
             <div className="space-y-6">
               {isLoading ? (
-                <div className="flex flex-col items-center justify-center py-20 gap-4">
-                  <Loader2 className="animate-spin text-ctp-sky-800" size={40} />
-                  <p className="text-sm font-bold text-ctp-subtext1 uppercase tracking-widest">Fetching intelligence...</p>
-                </div>
+                Array.from({ length: 3 }).map((_, i) => (
+                  <OfficeCard.Skeleton key={i} />
+                ))
               ) : offices.length > 0 ? (
                 offices.map((office) => (
                   <OfficeCard key={office._id} office={office} router={router} />
@@ -294,6 +293,38 @@ const OfficeCard = ({ office, router }) => {
           View detailed insights
           <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" strokeWidth={3} />
         </button>
+      </div>
+    </div>
+  );
+};
+
+OfficeCard.Skeleton = function OfficeCardSkeleton() {
+  return (
+    <div className="bg-ctp-base rounded-xl p-5 lg:p-6 border border-ctp-surface1 shadow-sm space-y-6">
+      <div className="flex flex-col md:flex-row gap-6 md:items-start">
+        <div className="flex md:flex-col items-center gap-4">
+          <Skeleton className="w-14 h-14 rounded-lg shrink-0" />
+          <Skeleton className="w-16 h-4 rounded-md" />
+        </div>
+        <div className="flex-1 space-y-4">
+          <div className="flex justify-between items-center">
+            <Skeleton className="w-1/2 h-6" />
+            <Skeleton className="w-20 h-5" />
+          </div>
+          <Skeleton className="w-3/4 h-4" />
+          <div className="flex gap-4">
+            <Skeleton className="w-24 h-3" />
+            <Skeleton className="w-24 h-3" />
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-ctp-surface1/50">
+        {[1, 2, 3, 4].map(i => (
+          <div key={i} className="space-y-2">
+            <Skeleton className="w-12 h-2" />
+            <Skeleton className="w-16 h-4" />
+          </div>
+        ))}
       </div>
     </div>
   );

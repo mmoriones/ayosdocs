@@ -18,6 +18,7 @@ import PageHeader from '@/components/ui/PageHeader';
 import SearchInput from '@/components/ui/SearchInput';
 import SortDropdown from '@/components/ui/SortDropdown';
 import { getBundleIcon } from '@/lib/bundleIcons';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * BundlesClient Component
@@ -215,5 +216,35 @@ const BundleCard = ({ bundle }) => {
         </span>
       </div>
     </Link>
+  );
+};
+
+BundleCard.Skeleton = function BundleCardSkeleton() {
+  return (
+    <div className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm flex flex-col h-full space-y-4">
+      <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
+      <div className="space-y-2 flex-1">
+        <div className="flex gap-2">
+          <Skeleton className="w-12 h-3" />
+          <Skeleton className="w-16 h-3" />
+        </div>
+        <Skeleton className="w-3/4 h-5" />
+        <Skeleton className="w-full h-3" />
+        <Skeleton className="w-full h-3" />
+      </div>
+      <div className="pt-4 border-t border-ctp-surface1/50 space-y-2">
+        <Skeleton className="w-20 h-2" />
+        <div className="flex gap-1">
+          <Skeleton className="w-16 h-4" />
+          <Skeleton className="w-16 h-4" />
+        </div>
+      </div>
+      <div className="pt-4 border-t border-ctp-surface1/50 flex justify-between">
+        <div className="flex -space-x-1.5">
+          {[1, 2, 3].map(i => <Skeleton key={i} circle className="w-5 h-5 border border-ctp-surface1" />)}
+        </div>
+        <Skeleton className="w-16 h-3" />
+      </div>
+    </div>
   );
 };

@@ -4,6 +4,7 @@ import { Bookmark, Clock, DollarSign, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { GuideIcon } from '@/lib/guideIcons';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * Unified GuideCard Component
@@ -167,6 +168,49 @@ const GuideCard = ({
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+GuideCard.Skeleton = function GuideCardSkeleton({ viewMode = 'grid' }) {
+  if (viewMode === 'list') {
+    return (
+      <div className="bg-ctp-base rounded-xl p-4 border border-ctp-surface1 flex items-center gap-5 shadow-sm w-full">
+        <Skeleton className="w-12 h-12 rounded-lg shrink-0" />
+        <div className="flex-1 space-y-2">
+          <div className="flex gap-2">
+            <Skeleton className="w-16 h-3" />
+            <Skeleton className="w-24 h-3" />
+          </div>
+          <Skeleton className="w-1/2 h-5" />
+          <Skeleton className="w-3/4 h-3" />
+        </div>
+        <div className="hidden md:flex items-center gap-4 shrink-0 pl-6 border-l border-ctp-surface1">
+           <Skeleton className="w-20 h-4" />
+           <Skeleton className="w-20 h-4" />
+        </div>
+        <Skeleton className="w-8 h-8 rounded-lg shrink-0 ml-2" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-ctp-base rounded-xl border border-ctp-surface1 p-5 flex flex-col h-full shadow-sm space-y-4">
+      <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
+      <div className="space-y-2.5 flex-1">
+        <Skeleton className="w-24 h-3" />
+        <Skeleton className="w-3/4 h-5" />
+        <Skeleton className="w-full h-3" />
+        <Skeleton className="w-full h-3" />
+      </div>
+      <div className="flex items-center gap-4 pt-2">
+        <Skeleton className="w-20 h-3" />
+        <Skeleton className="w-20 h-3" />
+      </div>
+      <div className="pt-4 border-t border-ctp-surface1/50 flex justify-between">
+        <Skeleton className="w-24 h-3" />
+        <Skeleton className="w-12 h-3" />
+      </div>
     </div>
   );
 };

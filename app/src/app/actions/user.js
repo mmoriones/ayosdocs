@@ -596,3 +596,45 @@ export async function changePasswordAction(currentPassword, newPassword) {
     return { success: false, message: "Failed to update password. Please try again later." };
   }
 }
+
+/**
+ * Server action to update user profile information.
+ */
+export async function updateUserProfileAction(formData) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return { success: false, message: "Unauthorized" };
+  }
+
+  const fullName = formData.get('fullName')?.trim();
+
+  if (!fullName || fullName.length < 2) {
+    return { success: false, message: "Full name must be at least 2 characters long." };
+  }
+
+  if (fullName.length > 70) {
+    return { success: false, message: "Full name must be less than 70 characters." };
+  }
+
+  const nameRegex = /^[a-zA-Z\s.\-&']+$/;
+  if (!nameRegex.test(fullName)) {
+    return { success: false, message: "Full name contains invalid characters." };
+  }
+
+  try {
+    await connectDB();
+    const user = await User.findOne({ email: session.user.email });
+
+    if (!user) {
+      return { success: false, message: "User not found." };
+    }
+
+    user.fullName = fullName;
+    await user.save();
+
+    return { success: true, message: "Profile updated successfully." };
+  } catch (error) {
+    console.error("Update Profile Action Error:", error);
+    return { success: false, message: "Failed to update profile. Please try again later." };
+  }
+}

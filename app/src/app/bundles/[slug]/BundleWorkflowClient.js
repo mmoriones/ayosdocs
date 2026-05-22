@@ -19,7 +19,13 @@ import {
   ShieldAlert,
   Lock,
   Send,
-  CheckCircle
+  CheckCircle,
+  Sparkles,
+  Layers,
+  Zap,
+  ListChecks,
+  Calendar,
+  Building2
 } from 'lucide-react';
 import { getBundleIcon } from '@/lib/bundleIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
@@ -28,6 +34,7 @@ import { useToast } from '@/context/ToastContext';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * BundleWorkflowClient Component
@@ -41,7 +48,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
   const queryClient = useQueryClient();
 
   // Fetch comprehensive user data
-  const { data: userData } = useQuery({
+  const { data: userData, isLoading: isLoadingUserData } = useQuery({
     queryKey: ['user-data'],
     queryFn: async () => {
       const response = await axios.get('/api/user/all-data');
@@ -170,7 +177,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
 
   // Helper to check if a specific guide is tracked and its progress
   const getGuideProgress = (slug) => {
-    const progress = savedProgress.find(p => p.guideSlug === slug);
+    const progress = userData?.savedProgress?.find(p => p.guideSlug === slug);
     if (!progress) return { tracked: false, completed: false, percentage: 0 };
 
     const guide = allGuides.find(g => g.slug === slug);
@@ -251,7 +258,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
         percentage: totalMaxDays > 0 ? Math.round((completedMaxDays / totalMaxDays) * 100) : 0
       }
     };
-  }, [bundle, allGuides, savedProgress]);
+  }, [bundle, allGuides, userData]);
 
   // Calculate stage completion and active stage
   const stageStats = useMemo(() => {
@@ -266,13 +273,15 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
         anyTracked
       };
     });
-  }, [bundle.flow, savedProgress]);
+  }, [bundle.flow, userData]);
 
   // Find the first incomplete stage
   const activeStage = stageStats.find(s => !s.completed)?.step || bundle.flow.length;
 
+  const isDataLoading = status === 'loading' || (isLoggedIn && isLoadingUserData);
+
   return (
-    <div className="min-h-screen bg-ctp-base font-sans pb-24">
+    <div className="min-h-screen bg-ctp-base font-sans pb-24 text-ctp-text">
       {/* NAVIGATION & HEADER */}
       <div className="bg-ctp-base/80 border-b border-ctp-surface1 sticky top-0 z-50 backdrop-blur-md h-16 flex items-center">
         <div className="max-w-[1600px] mx-auto px-6 lg:px-10 w-full flex items-center justify-between">
@@ -287,40 +296,35 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
           </div>
 
           <div className="flex items-center gap-6">
-            <div className="hidden md:flex flex-col items-end">
-              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Global Progress</span>
-              <span className="text-xs font-bold text-ctp-text">{isTracked ? (stageStats.every(s => s.completed) ? 'Completed' : 'In Progress') : 'Not Active'}</span>
-            </div>
-            <button 
-              onClick={handleToggleTracking}
-              disabled={isLoading}
-              className={`px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest shadow-sm active:scale-95 transition-all flex items-center gap-2 ${
-                isTracked 
-                  ? 'bg-ctp-mantle text-ctp-text border border-ctp-surface1 hover:bg-ctp-base' 
-                  : 'bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90'
-              }`}
-            >
-              {isLoading ? (
-                <Loader2 size={14} className="animate-spin" />
-              ) : isTracked ? (
-                <>
-                  <PauseCircle size={14} />
-                  Stop Tracking
-                </>
-              ) : (
-                <>
-                  <PlayCircle size={14} />
-                  Start Roadmap
-                </>
-              )}
-            </button>
+            {status === 'loading' ? (
+              <div className="h-10 w-32 rounded-lg bg-ctp-mantle border border-ctp-surface1 shadow-inner" />
+            ) : (
+              <>
+                <div className="hidden md:flex flex-col items-end">
+                  <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Global Progress</span>
+                  <span className="text-xs font-bold text-ctp-text">{isTracked ? (stageStats.every(s => s.completed) ? 'Completed' : 'In Progress') : 'Not Active'}</span>
+                </div>
+                <button 
+                  onClick={handleToggleTracking}
+                  disabled={isLoading}
+                  className={`px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest shadow-sm active:scale-95 transition-all flex items-center gap-2 ${
+                    isTracked 
+                      ? 'bg-ctp-mantle border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-red hover:border-ctp-red/30' 
+                      : 'bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90'
+                  }`}
+                >
+                  {isLoading ? <Loader2 size={14} className="animate-spin" /> : isTracked ? <PauseCircle size={14} /> : <PlayCircle size={14} />}
+                  <span>{isTracked ? 'Stop Roadmap' : 'Start Roadmap'}</span>
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10">
         
-        {isLoggedIn && !isVerified && (
+        {status !== 'loading' && isLoggedIn && !isVerified && (
           <div className="mb-10 animate-shake">
             <div className="bg-ctp-yellow/5 border border-ctp-yellow/20 rounded-xl p-5 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
               <div className="flex items-center gap-4">
@@ -393,18 +397,28 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                         <p className="text-sm font-bold text-ctp-text">Estimated to complete this workflow</p>
                       </div>
                       <div className="flex gap-10">
-                        <div className="text-center">
-                          <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Total Cost</p>
-                          <p className="text-lg font-bold text-ctp-text leading-none">{analytics.cost.total}</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Time Investment</p>
-                          <p className="text-lg font-bold text-ctp-text leading-none">{analytics.time.total}</p>
-                        </div>
-                        <div className="text-center">
-                          <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Guides Left</p>
-                          <p className="text-lg font-bold text-ctp-text leading-none">{totalGuides - analytics.completedGuides}</p>
-                        </div>
+                        {isDataLoading ? (
+                          <div className="flex gap-10">
+                            <Skeleton className="w-20 h-8" />
+                            <Skeleton className="w-20 h-8" />
+                            <Skeleton className="w-20 h-8" />
+                          </div>
+                        ) : (
+                          <>
+                            <div className="text-center">
+                              <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Total Cost</p>
+                              <p className="text-lg font-bold text-ctp-text leading-none">{analytics.cost.total}</p>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Time Investment</p>
+                              <p className="text-lg font-bold text-ctp-text leading-none">{analytics.time.total}</p>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Guides Left</p>
+                              <p className="text-lg font-bold text-ctp-text leading-none">{totalGuides - analytics.completedGuides}</p>
+                            </div>
+                          </>
+                        )}
                       </div>
                    </div>
                 )}
@@ -441,6 +455,8 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                           {step.guides.map((guideSlug) => {
+                            if (isDataLoading) return <GuideCard.Skeleton key={guideSlug} />;
+                            
                             const guide = allGuides.find(g => g.slug === guideSlug);
                             const guideProgress = getGuideProgress(guideSlug);
                             const fullProgress = userData?.savedProgress?.find(p => p.guideSlug === guideSlug);
@@ -466,110 +482,54 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
             </div>
           </div>
 
-          {/* RIGHT SIDEBAR: BUNDLE STATS & ADVICE */}
-          <aside className="w-full lg:w-80 shrink-0 space-y-6">
-            <div className="space-y-6 sticky top-24">
+          <aside className="w-full lg:w-80 shrink-0 space-y-8">
+            <section className="bg-ctp-base rounded-2xl border border-ctp-surface1 p-6 shadow-sm space-y-6">
+               <div className="flex items-center gap-3">
+                 <div className="w-10 h-10 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
+                   <Info size={20} strokeWidth={2.5} />
+                 </div>
+                 <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">Requirement Tips</h3>
+               </div>
+               
+               <div className="space-y-4">
+                 {[
+                   { icon: Clock, title: "Time Saver", desc: "Always book appointments 2 weeks in advance." },
+                   { icon: DollarSign, title: "Budgeting", desc: "Bring exact change for faster processing." },
+                   { icon: Sparkles, title: "Efficiency", desc: "Morning slots have significantly shorter queues." }
+                 ].map((tip, i) => (
+                   <div key={tip.title} className="flex gap-4 group">
+                     <div className="shrink-0 w-8 h-8 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-colors">
+                       <tip.icon size={14} />
+                     </div>
+                     <div className="space-y-1">
+                       <h4 className="text-xs font-bold text-ctp-text">{tip.title}</h4>
+                       <p className="text-[10px] text-ctp-subtext1 leading-relaxed">{tip.desc}</p>
+                     </div>
+                   </div>
+                 ))}
+               </div>
+            </section>
+
+            <section className="bg-ctp-mantle rounded-2xl border border-ctp-surface1 p-6 shadow-sm space-y-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center">
+                  <Building2 size={20} strokeWidth={2.5} />
+                </div>
+                <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">Regional Offices</h3>
+              </div>
               
-              {!isLoggedIn && (
-                <div className="bg-ctp-sky-800 text-white rounded-xl p-5 space-y-4 shadow-lg shadow-ctp-sky-800/20 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
-                  <div className="flex items-center gap-3 relative z-10">
-                    <Lock size={18} strokeWidth={2.5} />
-                    <h4 className="text-[10px] font-bold uppercase tracking-widest">Cloud Sync</h4>
-                  </div>
-                  <p className="text-xs font-medium leading-relaxed relative z-10 opacity-90">
-                    Sign in to track this roadmap and save your progress across all devices.
-                  </p>
-                  <button 
-                    onClick={openAuthModal}
-                    className="w-full py-2 bg-white text-ctp-sky-800 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-opacity-90 transition-all shadow-sm relative z-10"
-                  >
-                    Authenticate
-                  </button>
-                </div>
-              )}
-
-              <div className="bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
-                <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50">
-                  <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Workflow Insights</h3>
-                </div>
-                <div className="divide-y divide-ctp-surface1/50">
-                  <div className="p-4 space-y-3 hover:bg-ctp-mantle/30 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <CheckCircle2 size={14} className="text-ctp-green" />
-                        <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Documents</span>
-                      </div>
-                      <span className="text-xs font-bold text-ctp-text">{analytics.completedGuides} / {totalGuides}</span>
-                    </div>
-                    <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/30">
-                      <div className="h-full bg-ctp-green transition-all duration-1000" style={{ width: `${analytics.overallPercentage}%` }} />
-                    </div>
-                  </div>
-
-                  <div className="p-4 space-y-3 hover:bg-ctp-mantle/30 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Clock size={14} className="text-ctp-sky-800" />
-                        <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Est. Duration</span>
-                      </div>
-                      <span className="text-xs font-bold text-ctp-text">{analytics.time.total}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-70">
-                      <span>Remaining</span>
-                      <span>{analytics.time.remaining}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-4 space-y-3 hover:bg-ctp-mantle/30 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <DollarSign size={14} className="text-ctp-yellow" />
-                        <span className="text-[11px] font-bold text-ctp-subtext1 uppercase tracking-widest">Est. Cost</span>
-                      </div>
-                      <span className="text-xs font-bold text-ctp-text">{analytics.cost.total}</span>
-                    </div>
-                    <div className="h-1 w-full bg-ctp-mantle rounded-full overflow-hidden border border-ctp-surface1/30">
-                      <div className="h-full bg-ctp-yellow transition-all duration-1000" style={{ width: `${analytics.cost.percentage}%` }} />
-                    </div>
-                    <div className="flex items-center justify-between text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-70">
-                      <span>Spent</span>
-                      <span>{analytics.cost.percentage}%</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-5 bg-ctp-mantle border border-ctp-surface1 rounded-xl space-y-3 shadow-sm">
-                <div className="flex items-center gap-3 text-ctp-sky-800">
-                  <Info size={16} />
-                  <h4 className="text-[10px] font-bold uppercase tracking-widest">Roadmap Tip</h4>
-                </div>
-                <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
-                  Focus on <strong className="text-ctp-text">Stage 1</strong> items first. These foundational documents are often required as prerequisites for subsequent stages.
-                </p>
-              </div>
-
+              <p className="text-xs text-ctp-subtext1 leading-relaxed">
+                Most documents in this bundle can be processed at local municipal centers or integrated SM Mall service hubs.
+              </p>
+              
               <button 
-                onClick={handleToggleTracking}
-                disabled={isLoading}
-                className={`w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest shadow-md active:scale-[0.98] transition-all flex items-center justify-center gap-2 ${
-                  isTracked 
-                    ? 'bg-ctp-mantle text-ctp-text border border-ctp-surface1 hover:bg-ctp-base' 
-                    : 'bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90 shadow-lg shadow-ctp-sky-800/10'
-                }`}
+                onClick={() => router.push('/offices')}
+                className="w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ctp-text font-bold text-[10px] uppercase tracking-widest hover:bg-ctp-mantle transition-all shadow-sm"
               >
-                {isLoading ? (
-                  <Loader2 size={16} className="animate-spin" />
-                ) : isTracked ? (
-                  'Disable Roadmap'
-                ) : (
-                  'Activate Workflow'
-                )}
+                Find nearest office
               </button>
-            </div>
+            </section>
           </aside>
-
         </div>
       </div>
     </div>

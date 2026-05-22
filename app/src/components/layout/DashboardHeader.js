@@ -10,6 +10,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import SearchInput from '@/components/ui/SearchInput';
 import { useAuthUI } from '@/components/Providers';
+import Skeleton from '@/components/ui/Skeleton';
 
 const emptySubscribe = () => () => {};
 const getClientSnapshot = () => true;
@@ -28,7 +29,7 @@ export default function DashboardHeader({ onMenuClick }) {
   const { theme, toggleTheme } = useTheme();
   const { toggleSearch } = useSearch();
   const mounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { openAuthModal } = useAuthUI();
   const user = session?.user;
   
@@ -93,7 +94,12 @@ export default function DashboardHeader({ onMenuClick }) {
           )}
         </button>
 
-        {!session ? (
+        {status === 'loading' ? (
+          <div className="flex items-center gap-3 ml-2">
+            <div className="w-8 h-8 rounded-lg bg-ctp-mantle border border-ctp-surface1" />
+            <div className="w-8 h-8 rounded-full bg-ctp-mantle border border-ctp-surface1" />
+          </div>
+        ) : !session ? (
           <button 
             onClick={openAuthModal}
             className="px-4 py-1.5 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all shadow-sm active:scale-95 ml-2"

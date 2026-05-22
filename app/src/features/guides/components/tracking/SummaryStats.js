@@ -1,4 +1,5 @@
 import { LayoutGrid, CheckCircle2, Star, Clock } from 'lucide-react';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * SummaryStats Component
@@ -57,6 +58,25 @@ const SummaryStats = ({ stats }) => {
           <div className="space-y-1">
             <h4 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest leading-none">{item.label}</h4>
             <p className="text-[10px] font-bold text-ctp-subtext0 opacity-60 uppercase tracking-tight">{item.sub}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+SummaryStats.Skeleton = function SummaryStatsSkeleton() {
+  return (
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      {[1, 2, 3, 4].map((i) => (
+        <div key={i} className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm space-y-4">
+          <div className="flex items-center justify-between mb-2">
+            <Skeleton className="w-10 h-10 rounded-lg" />
+            <Skeleton className="w-8 h-8 rounded-lg" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="w-20 h-3" />
+            <Skeleton className="w-24 h-2" />
           </div>
         </div>
       ))}

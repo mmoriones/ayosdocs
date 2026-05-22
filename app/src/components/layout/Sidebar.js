@@ -19,6 +19,7 @@ import {
   User
 } from 'lucide-react';
 import NavItem from './NavItem';
+import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * Main navigation container supporting desktop collapse and mobile drawer modes.
@@ -109,7 +110,9 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
       {/* Footer / User */}
       <div className="p-3 border-t border-ctp-surface1 overflow-hidden">
         <div className="space-y-1">
-          {isLoggedIn ? (
+          {status === 'loading' ? (
+            <div className="h-10 w-full" /> // Stable empty space
+          ) : isLoggedIn ? (
             <>
               <NavItem 
                 href="/settings" 
