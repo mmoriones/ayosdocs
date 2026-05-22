@@ -20,13 +20,15 @@ export default function Card({
   className = '',
   headerClassName = '',
   footerClassName = '',
+  overflow = 'hidden',
   ...props
 }) {
   const bgStyles = background === 'mantle' ? 'bg-ctp-mantle' : 'bg-ctp-base';
+  const overflowClass = overflow === 'hidden' ? 'overflow-hidden' : 'overflow-visible';
   
   return (
     <div 
-      className={`rounded-2xl border border-ctp-surface1 shadow-sm overflow-hidden ${bgStyles} ${className}`}
+      className={`rounded-2xl border border-ctp-surface1 shadow-sm ${overflowClass} ${bgStyles} ${className}`}
       {...props}
     >
       {title && (

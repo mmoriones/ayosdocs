@@ -19,6 +19,7 @@ import SearchInput from '@/components/ui/SearchInput';
 import SortDropdown from '@/components/ui/SortDropdown';
 import { getBundleIcon } from '@/lib/bundleIcons';
 import Skeleton from '@/components/ui/Skeleton';
+import Badge from '@/components/ui/Badge';
 
 /**
  * BundlesClient Component
@@ -171,9 +172,7 @@ const BundleCard = ({ bundle }) => {
       <div className="flex-1 space-y-3.5">
         <div className="space-y-1.5">
           <div className="flex items-center gap-2">
-            <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest px-1.5 py-0.5 bg-ctp-sky-800/5 rounded border border-ctp-sky-800/20">
-              {bundle.category}
-            </span>
+            <Badge variant="sky">{bundle.category}</Badge>
             <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">
               {bundle.flow.length} Stages
             </span>

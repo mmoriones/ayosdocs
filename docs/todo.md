@@ -11,14 +11,13 @@
     - ~~[ ] Modernize Mobile Menu to match new design~~
     - [ ] Improve mobile view and overall UX (haptics/visual).
 - [ ] **Components:**
-    - [ ] **Skeleton Loading:** Implement for all data-fetching sections.
     - [ ] **UI:** Create reusable components for tips badges, close button, etc
     ~~- [ ] **Breadcrumbs:** Add navigation breadcrumbs (remove "back to my progress" links).~~
     ~~- [ ] **Adsense:** Create Adsense component with eligibility context (hidden by default).~~
     - ~~[X] **ToastModal:** Optimize styles and add specific text for first-time login.~~
         - ~~[X] Scroll actions still available when toast modal is open~~
     ~~- [ ] **Skeleton:** Add skeleton loading for dynamic UI components~~
-    - [ ] **Settings:** Add components on the empty tabs on /settings and make them functional.
+    ~~- [ ] **Settings:** Add components on the empty tabs on /settings and make them functional.~~
    ~~- [X] **Profile:** Make user details editable except email~~
     - [ ] **Refator:** Implement global UI component reuse for consistency
     - [ ] **Theme:** Add better color palettes for dark mode to improve contrast and readability 
@@ -53,7 +52,7 @@
 - [ ] **Monitoring Alerts:** Configure **Alertmanager** with Zoho SMTP credentials for system notifications. (inject pass from .env)
 - [ ] **Grafana Dashboards:** Set up and configure dashboards for App performance, Docker container health, and Host metrics.
 - [ ] **SSL Security:** Implement **Cloudflare Origin Certificates** and switch to **Full (Strict)** SSL mode for end-to-end encryption.
-- [ ] **Sitemap:** Update sitemap and robot scripts to not include user-based and protected routes
+~~- [ ] **Sitemap:** Update sitemap and robot scripts to not include user-based and protected routes~~
 - [ ] **Vercel:** Update vercel env variable to ZOHO_AUTH_EMAIL for unified auth related emails
 - [ ] **Deployment:**
 

@@ -1,24 +1,36 @@
 import { getGuideSlugs } from "@/lib/guides";
+import { bundles } from "@/data/bundles";
 
 export default async function sitemap() {
-  const slugs = getGuideSlugs();
+  const guideSlugs = getGuideSlugs();
   const baseUrl = "https://ayosdocs.com";
 
-  const guideUrls = slugs.map((slug) => ({
+  const guideUrls = guideSlugs.map((slug) => ({
     url: `${baseUrl}/guides/${slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.8,
   }));
 
+  const bundleUrls = bundles.map((bundle) => ({
+    url: `${baseUrl}/bundles/${bundle.id}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
   const staticPages = [
     "",
     "/guides",
+    "/bundles",
     "/offices",
+    "/updates",
     "/about",
     "/faqs",
+    "/contact",
     "/privacy",
     "/terms",
+    "/coming-soon",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
@@ -26,5 +38,5 @@ export default async function sitemap() {
     priority: route === "" ? 1.0 : 0.5,
   }));
 
-  return [...staticPages, ...guideUrls];
+  return [...staticPages, ...guideUrls, ...bundleUrls];
 }
