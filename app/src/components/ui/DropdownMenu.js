@@ -5,6 +5,7 @@ import { ChevronDown } from 'lucide-react';
 
 /**
  * Reusable DropdownMenu component for action menus and option pickers.
+ * Improved with robust propagation handling to prevent accidental parent clicks.
  *
  * @param {Object} props
  * @param {React.ReactNode} props.trigger - The trigger element.
@@ -33,8 +34,20 @@ export default function DropdownMenu({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleItemClick = (e) => {
-    if (closeOnSelect) setIsOpen(false);
+  const handleToggle = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
+  const handleMenuClick = (e) => {
+    // Stop bubbling to parent components (like GuideRowCard)
+    e.stopPropagation();
+    
+    // Automatically close if requested
+    if (closeOnSelect) {
+      setIsOpen(false);
+    }
   };
 
   const alignClasses = {
@@ -44,14 +57,14 @@ export default function DropdownMenu({
 
   return (
     <div className={`relative inline-flex ${className}`} ref={dropdownRef}>
-      <div onClick={() => setIsOpen(!isOpen)}>
+      <div onClick={handleToggle} className="cursor-pointer">
         {trigger}
       </div>
 
       {isOpen && (
         <div
           className={`absolute ${alignClasses[align]} top-full mt-2 w-52 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-2xl z-[60] overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right`}
-          onClick={handleItemClick}
+          onClick={handleMenuClick}
         >
           <div className="p-1 space-y-0.5">
             {children}
@@ -62,6 +75,9 @@ export default function DropdownMenu({
   );
 }
 
+/**
+ * Item for the DropdownMenu.
+ */
 export function DropdownMenuItem({
   children,
   onClick,
@@ -77,8 +93,12 @@ export function DropdownMenuItem({
 
   return (
     <button
-      onClick={onClick}
-      className={`w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${variants[variant]} ${className}`}
+      onClick={(e) => {
+        // We let it bubble to handleMenuClick in the parent for closing
+        // but the parent handles stopPropagation to the outside world.
+        onClick?.(e);
+      }}
+      className={`w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${variants[variant]} ${className}`}
     >
       {Icon && <Icon size={14} />}
       {children}

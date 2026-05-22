@@ -43,6 +43,10 @@ export async function submitOfficeReportAction(formData) {
       isAnonymous 
     } = formData;
 
+    if (comment && comment.length > 500) {
+      return { success: false, message: "Comment must be 500 characters or less." };
+    }
+
     // Validate office exists
     const office = await GovernmentOffice.findById(officeId);
     if (!office) return { success: false, message: "Government office not found" };

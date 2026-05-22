@@ -33,6 +33,13 @@ export async function POST(req) {
       );
     }
 
+    if (name.length > 70 || email.length > 100 || message.length > 1000) {
+      return NextResponse.json(
+        { error: 'Input is too long.' },
+        { status: 400 }
+      );
+    }
+
     // 3. Send Email
     await sendContactEmail({ name, email, message });
 

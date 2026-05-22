@@ -1,4 +1,5 @@
 import { CheckCircle, FileText, Clock, ExternalLink } from 'lucide-react';
+import { Tooltip } from '@/components/ui';
 
 const TipsCard = () => {
   return (
@@ -8,12 +9,13 @@ const TipsCard = () => {
           Before you proceed
         </h3>
 
-        <button 
-          className="lg:hidden p-2 rounded-lg border border-ctp-surface1 text-ctp-sky-800 hover:bg-ctp-surface0 transition-all active:scale-95 shrink-0 bg-ctp-base"
-          title="View official resources"
-        >
-          <ExternalLink className="w-4 h-4" strokeWidth={2} />
-        </button>
+        <Tooltip content="View official resources">
+          <button 
+            className="lg:hidden p-2 rounded-lg border border-ctp-surface1 text-ctp-sky-800 hover:bg-ctp-surface0 transition-all active:scale-95 shrink-0 bg-ctp-base"
+          >
+            <ExternalLink className="w-4 h-4" strokeWidth={2} />
+          </button>
+        </Tooltip>
       </div>
 
       <div className="space-y-5 flex-1">

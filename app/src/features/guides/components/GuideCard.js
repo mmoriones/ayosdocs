@@ -1,10 +1,10 @@
 'use client';
 
-import { Bookmark, Clock, DollarSign, ArrowRight } from 'lucide-react';
+import { Clock, DollarSign, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { GuideIcon } from '@/lib/guideIcons';
-import Skeleton from '@/components/ui/Skeleton';
+import { Skeleton, BookmarkButton } from '@/components/ui';
 
 /**
  * Unified GuideCard Component
@@ -31,13 +31,13 @@ const GuideCard = ({
   const baseCardClass = `
     group bg-ctp-base rounded-xl border border-ctp-surface1
     hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all 
-    relative overflow-hidden flex flex-col h-full shadow-sm
+    relative flex flex-col h-full shadow-sm
   `;
 
   const listCardClass = `
     group bg-ctp-base rounded-xl p-4 border border-ctp-surface1
     hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all 
-    relative overflow-hidden flex items-center gap-5 shadow-sm
+    relative flex items-center gap-5 shadow-sm
   `;
 
   if (isList) {
@@ -83,19 +83,14 @@ const GuideCard = ({
 
         <div className="shrink-0 ml-2 flex items-center gap-3">
           {showBookmark && (
-            <button 
-              onClick={(e) => { 
-                e.preventDefault(); 
-                e.stopPropagation(); 
+            <BookmarkButton
+              isFavorite={isFavorite}
+              onClick={(e) => {
+                e.preventDefault();
                 onFavorite?.();
               }}
-              className={`p-2 transition-all rounded-lg active:scale-95 relative z-10 ${
-                isFavorite ? 'text-ctp-sky-800' : 'text-ctp-subtext1 hover:text-ctp-sky-800'
-              }`}
-              title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-            >
-              <Bookmark size={18} fill={isFavorite ? "currentColor" : "none"} />
-            </button>
+              size="sm"
+            />
           )}
           <ArrowRight size={16} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all" strokeWidth={2.5} />
         </div>
@@ -109,19 +104,16 @@ const GuideCard = ({
       className={`${baseCardClass} p-5 cursor-pointer ${className}`}
     >
       {showBookmark && (
-        <button 
-          className={`absolute top-4 right-4 p-1.5 transition-all rounded-lg z-10 active:scale-95 ${
-            isFavorite ? 'text-ctp-sky-800' : 'text-ctp-subtext1 hover:text-ctp-sky-800'
-          }`} 
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onFavorite?.();
-          }}
-          title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-        >
-          <Bookmark size={16} fill={isFavorite ? "currentColor" : "none"} />
-        </button>
+        <div className="absolute top-4 right-4 z-10">
+          <BookmarkButton
+            isFavorite={isFavorite}
+            onClick={(e) => {
+              e.preventDefault();
+              onFavorite?.();
+            }}
+            size="sm"
+          />
+        </div>
       )}
 
       <div className="mb-4 w-10 h-10 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 group-hover:scale-105 transition-transform duration-300 shrink-0">

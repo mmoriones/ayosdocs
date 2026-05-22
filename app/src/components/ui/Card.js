@@ -38,9 +38,11 @@ export default function Card({
         </div>
       )}
 
-      <div className={noPadding ? '' : 'p-6 md:p-8'}>
-        {children}
-      </div>
+      {noPadding ? children : (
+        <div className="p-6 md:p-8">
+          {children}
+        </div>
+      )}
 
       {footer && (
         <div className={`px-6 py-4 bg-ctp-mantle/30 border-t border-ctp-surface1 ${footerClassName}`}>

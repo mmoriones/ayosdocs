@@ -29,6 +29,7 @@ import PageHeader from '@/components/ui/PageHeader';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
 import { submitOfficeReportAction } from '@/app/actions/office';
+import { Tooltip } from '@/components/ui';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 
@@ -75,7 +76,11 @@ const RadioGroup = ({ label, name, options, value, onChange, tooltip, disabled }
   <div className={`py-4 border-b border-ctp-surface1 last:border-0 flex flex-col md:flex-row md:items-center justify-between gap-4 ${disabled ? 'opacity-50 pointer-events-none' : ''}`}>
     <div className="flex items-center gap-2">
       <label className="text-xs font-bold text-ctp-text uppercase tracking-tight">{label}</label>
-      {tooltip && <Info size={12} className="text-ctp-subtext1 cursor-help" />}
+      {tooltip && (
+        <Tooltip content={tooltip} delay={0}>
+          <Info size={12} className="text-ctp-subtext1 cursor-help" />
+        </Tooltip>
+      )}
     </div>
     <div className="flex flex-wrap items-center gap-4">
       {options.map((option) => (
@@ -355,6 +360,7 @@ export default function RateClient() {
                             type="text"
                             placeholder="Type branch name (e.g. DFA Aseana, PSA East Ave)..."
                             value={officeSearch}
+                            maxLength={100}
                             onChange={(e) => setOfficeSearch(e.target.value)}
                             className="w-full pl-12 pr-4 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all outline-none shadow-inner"
                           />
@@ -463,6 +469,7 @@ export default function RateClient() {
                     <RadioGroup 
                       label="Appointment Availability" 
                       name="appointment"
+                      tooltip="How difficult was it to secure an online appointment slot?"
                       options={[{ label: 'Easy', value: 'easy' }, { label: 'Moderate', value: 'moderate' }, { label: 'Difficult', value: 'difficult' }]}
                       value={formData.appointment}
                       onChange={(val) => setFormData({...formData, appointment: val})}
@@ -470,6 +477,7 @@ export default function RateClient() {
                     <RadioGroup 
                       label="Actual Waiting Time" 
                       name="waitingTime"
+                      tooltip="Total time spent at the office including queueing."
                       options={[{ label: '< 1 Hour', value: 'fast' }, { label: '1–3 Hours', value: 'medium' }, { label: 'Whole Day', value: 'slow' }]}
                       value={formData.waitingTime}
                       onChange={(val) => setFormData({...formData, waitingTime: val})}
@@ -477,6 +485,7 @@ export default function RateClient() {
                     <RadioGroup 
                       label="Extra requirements requested?" 
                       name="extraRequirements"
+                      tooltip="Were you asked for documents not listed on the official guide?"
                       options={[{ label: 'No', value: 'no' }, { label: 'Yes', value: 'yes' }]}
                       value={formData.extraRequirements}
                       onChange={(val) => setFormData({...formData, extraRequirements: val})}
@@ -484,6 +493,7 @@ export default function RateClient() {
                     <RadioGroup 
                       label="Fixer/Scalper activity noticed?" 
                       name="fixerActivity"
+                      tooltip="Did you notice individuals offering paid speed-up services?"
                       options={[{ label: 'No', value: 'no' }, { label: 'Yes', value: 'yes' }]}
                       value={formData.fixerActivity}
                       onChange={(val) => setFormData({...formData, fixerActivity: val})}

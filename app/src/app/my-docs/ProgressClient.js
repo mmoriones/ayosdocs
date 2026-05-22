@@ -25,8 +25,7 @@ import ConfirmModal from '@/components/ConfirmModal';
 import { deleteProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import Skeleton from '@/components/ui/Skeleton';
-import Card from '@/components/ui/Card';
+import { Skeleton, Tabs, Tab, Card } from '@/components/ui';
 
 /**
  * ProgressClient Component
@@ -366,21 +365,17 @@ export default function ProgressClient({ allGuides, isRestricted }) {
 
             <div className="space-y-6">
               <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
-                <div className="flex bg-ctp-mantle p-1 rounded-lg border border-ctp-surface1 shadow-sm overflow-x-auto no-scrollbar">
+                <Tabs className="xl:w-auto">
                   {['All', 'In Progress', 'Completed', 'Favorites'].map((tab) => (
-                    <button
+                    <Tab
                       key={tab}
+                      active={activeTab === tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-5 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
-                        activeTab === tab 
-                          ? 'bg-ctp-sky-800 text-white shadow-sm' 
-                          : 'text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-surface0'
-                      }`}
                     >
                       {tab}
-                    </button>
+                    </Tab>
                   ))}
-                </div>
+                </Tabs>
 
                 <div className="flex items-center gap-3">
                   <SortDropdown 

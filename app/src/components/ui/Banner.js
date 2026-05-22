@@ -21,7 +21,7 @@ const Banner = ({
 }) => {
   const variants = {
     sky: "bg-ctp-sky-10 border-ctp-sky-300/20 text-ctp-sky-800",
-    teal: "bg-ctp-sky-10 border-ctp-sky-300/20 text-ctp-sky-800",
+    teal: "bg-ctp-teal/5 border-ctp-teal/20 text-ctp-teal",
     sapphire: "bg-ctp-sky-10 border-ctp-sky-300/20 text-ctp-sky-800",
     green: "bg-ctp-green/5 border-ctp-green/20 text-ctp-green",
     orange: "bg-ctp-orange/5 border-ctp-orange/20 text-ctp-orange",
@@ -30,7 +30,7 @@ const Banner = ({
 
   const iconBgVariants = {
     sky: "bg-ctp-base text-ctp-sky-800 shadow-sm",
-    teal: "bg-ctp-base text-ctp-sky-800 shadow-sm",
+    teal: "bg-ctp-base text-ctp-teal shadow-sm",
     sapphire: "bg-ctp-base text-ctp-sky-800 shadow-sm",
     green: "bg-ctp-base text-ctp-green shadow-sm",
     orange: "bg-ctp-base text-ctp-orange shadow-sm",
@@ -39,7 +39,7 @@ const Banner = ({
 
   const closeButtonVariants = {
     sky: "text-ctp-sky-800/40 hover:text-ctp-sky-800",
-    teal: "text-ctp-sky-800/40 hover:text-ctp-sky-800",
+    teal: "text-ctp-teal/40 hover:text-ctp-teal",
     sapphire: "text-ctp-sky-800/40 hover:text-ctp-sky-800",
     green: "text-ctp-green/40 hover:text-ctp-green",
     orange: "text-ctp-orange/40 hover:text-ctp-orange",

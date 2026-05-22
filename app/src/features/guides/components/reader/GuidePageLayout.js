@@ -24,7 +24,7 @@ import MobileBottomNav from './MobileBottomNav';
 import ChecklistModal from './ChecklistModal';
 import RelatedGuides from './RelatedGuides';
 import { GuideIcon } from '@/lib/guideIcons';
-import Banner from '@/components/ui/Banner';
+import { Banner, Tooltip, BookmarkButton, Tabs, Tab } from '@/components/ui';
 import Adsense from '@/components/Adsense';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
@@ -188,17 +188,10 @@ const GuidePageLayout = ({
                         {category || 'GUIDE'}
                       </span>
                       <div className="flex items-center gap-2">
-                        <button 
+                        <BookmarkButton
+                          isFavorite={isFavorite}
                           onClick={handleBookmark}
-                          className={`p-2 rounded-lg bg-ctp-base border transition-all shadow-sm active:scale-95 ${
-                            isFavorite 
-                              ? 'text-ctp-sky-800 border-ctp-sky-800' 
-                              : 'text-ctp-subtext1 border-ctp-surface1 hover:text-ctp-sky hover:border-ctp-sky/30'
-                          }`}
-                          title={isFavorite ? "Remove from favorites" : "Bookmark guide"}
-                        >
-                          <Bookmark size={18} fill={isFavorite ? "currentColor" : "none"} />
-                        </button>
+                        />
                         <button 
                           onClick={handleShare}
                           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle transition-all shadow-sm active:scale-95 font-bold text-xs"
@@ -287,40 +280,35 @@ const GuidePageLayout = ({
                     Guide Tools
                   </h3>
                 )}
-                <button 
-                  onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-                  className="p-1.5 rounded-lg text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle transition-all active:scale-95"
-                  title={isSidebarCollapsed ? "Expand tools" : "Collapse tools"}
-                >
-                  {isSidebarCollapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
-                </button>
+                <Tooltip content={isSidebarCollapsed ? "Expand tools" : "Collapse tools"} position="left">
+                  <button 
+                    onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+                    className="p-1.5 rounded-lg text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle transition-all active:scale-95"
+                  >
+                    {isSidebarCollapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
+                  </button>
+                </Tooltip>
               </div>
 
               {!isSidebarCollapsed && (
-                <div className="flex bg-ctp-mantle p-1 rounded-lg border border-ctp-surface1">
-                  <button
+                <Tabs className="w-full overflow-hidden">
+                  <Tab 
+                    active={activeTab === 'checklist'} 
                     onClick={() => setActiveTab('checklist')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all ${
-                      activeTab === 'checklist' 
-                        ? 'bg-ctp-sky-800 text-white shadow-sm' 
-                        : 'text-ctp-subtext1 hover:text-ctp-text'
-                    }`}
+                    className="flex-1 flex justify-center gap-2"
                   >
                     <CheckSquare size={12} />
                     Tracker
-                  </button>
-                  <button
+                  </Tab>
+                  <Tab 
+                    active={activeTab === 'toc'} 
                     onClick={() => setActiveTab('toc')}
-                    className={`flex-1 flex items-center justify-center gap-2 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all ${
-                      activeTab === 'toc' 
-                        ? 'bg-ctp-sky-800 text-white shadow-sm' 
-                        : 'text-ctp-subtext1 hover:text-ctp-text'
-                    }`}
+                    className="flex-1 flex justify-center gap-2"
                   >
                     <List size={12} />
                     Content
-                  </button>
-                </div>
+                  </Tab>
+                </Tabs>
               )}
             </div>
             

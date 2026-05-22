@@ -6,6 +6,7 @@ import { X, Loader2, Mail, Lock, User as UserIcon, ArrowLeft, Eye, EyeOff, Alert
 import { signIn, useSession } from 'next-auth/react';
 import { useToast } from "@/context";
 import { registerUserAction, checkEmailAction, checkRateLimitAction, requestPasswordResetAction } from "@/app/actions/user";
+import { Modal } from '@/components/ui';
 
 const AuthModal = ({ isOpen, onClose }) => {
   const { status } = useSession();
@@ -384,26 +385,20 @@ const AuthModal = ({ isOpen, onClose }) => {
     }
   };
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
-
   if (!isOpen || status === 'authenticated') return null;
 
   return (
-    <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 pointer-events-none">
-      <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-md animate-in fade-in duration-500 pointer-events-auto"
-      />
-
-      <div className="relative w-full max-w-md bg-ctp-mantle rounded-2xl shadow-2xl border border-ctp-surface1 overflow-hidden animate-slide-down pointer-events-auto">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      showClose={false}
+      closeOnOverlay={!isExchanging}
+      size="md"
+      noPadding={true}
+      contentClassName="p-0 overflow-hidden"
+      animationClassName="animate-slide-down"
+    >
+      <div className="relative">
         <button
           onClick={onClose}
           disabled={isExchanging}
@@ -453,10 +448,10 @@ const AuthModal = ({ isOpen, onClose }) => {
           {statusMessage && (
             <div className={`mb-6 p-4 rounded-xl border flex flex-col gap-3 animate-in fade-in zoom-in-95 duration-200 ${
               statusMessage.type === 'error' 
-                ? 'bg-red-500/10 border-red-500/20 text-red-500' 
+                ? 'bg-ctp-red/10 border-ctp-red/20 text-ctp-red' 
                 : statusMessage.type === 'google-suggestion'
                 ? 'bg-ctp-sky-800/10 border-ctp-sky-800/20 text-ctp-sky-800'
-                : 'bg-green-500/10 border-green-500/20 text-green-500'
+                : 'bg-ctp-green/10 border-ctp-green/20 text-ctp-green'
             }`}>
               <div className="flex items-start gap-3">
                 {statusMessage.type === 'error' ? (
@@ -534,7 +529,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               {mode === 'signup' && (
                 <div className="space-y-1">
                   <div className="relative">
-                    <UserIcon className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('fullName') ? 'text-red-500' : 'text-ctp-subtext1'}`} />
+                    <UserIcon className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('fullName') ? 'text-ctp-red' : 'text-ctp-subtext1'}`} />
                     <input
                       type="text"
                       name="fullName"
@@ -546,13 +541,13 @@ const AuthModal = ({ isOpen, onClose }) => {
                       onChange={handleInputChange}
                       className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-4 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
                         isFieldInvalid('fullName') 
-                          ? 'border-red-500/50 focus:border-red-500' 
+                          ? 'border-ctp-red/50 focus:border-ctp-red' 
                           : 'border-ctp-surface1 focus:border-ctp-sky-800'
                         }`}
                     />
                   </div>
                   {isFieldInvalid('fullName') && (
-                    <p className="text-[10px] font-bold text-red-500 ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                    <p className="text-[10px] font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
                       {getFieldError('fullName')}
                     </p>
                   )}
@@ -561,7 +556,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               
               <div className="space-y-1">
                 <div className="relative">
-                  <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('email') ? 'text-red-500' : 'text-ctp-subtext1'}`} />
+                  <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('email') ? 'text-ctp-red' : 'text-ctp-subtext1'}`} />
                   <input
                     type="email"
                     name="email"
@@ -572,13 +567,13 @@ const AuthModal = ({ isOpen, onClose }) => {
                     value={formData.email}                    onChange={handleInputChange}
                     className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-4 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
                       isFieldInvalid('email') 
-                        ? 'border-red-500/50 focus:border-red-500' 
+                        ? 'border-ctp-red/50 focus:border-ctp-red' 
                         : 'border-ctp-surface1 focus:border-ctp-sky-800'
                       }`}
                   />
                 </div>
                 {isFieldInvalid('email') && (
-                  <p className="text-[10px] font-bold text-red-500 ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                  <p className="text-[10px] font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
                     {getFieldError('email')}
                   </p>
                 )}
@@ -587,7 +582,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               {mode !== 'forgot-password' && (
                 <div className="space-y-1">
                   <div className="relative">
-                    <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('password') ? 'text-red-500' : 'text-ctp-subtext1'}`} />
+                    <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('password') ? 'text-ctp-red' : 'text-ctp-subtext1'}`} />
                     <input
                       type={showPassword ? "text" : "password"}
                       name="password"
@@ -599,20 +594,20 @@ const AuthModal = ({ isOpen, onClose }) => {
                       value={formData.password}                    onChange={handleInputChange}
                       className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-12 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
                         isFieldInvalid('password') 
-                          ? 'border-red-500/50 focus:border-red-500' 
+                          ? 'border-ctp-red/50 focus:border-ctp-red' 
                           : 'border-ctp-surface1 focus:border-ctp-sky-800'
                         }`}
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('password') ? 'text-red-500/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
+                      className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('password') ? 'text-ctp-red/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                   </div>
                   {isFieldInvalid('password') && (
-                    <p className="text-[10px] font-bold text-red-500 ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                    <p className="text-[10px] font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
                       {getFieldError('password')}
                     </p>
                   )}
@@ -633,7 +628,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               {mode === 'signup' && (
                 <div className="space-y-1">
                   <div className="relative">
-                    <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('confirmPassword') ? 'text-red-500' : 'text-ctp-subtext1'}`} />
+                    <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('confirmPassword') ? 'text-ctp-red' : 'text-ctp-subtext1'}`} />
                     <input
                       type={showConfirmPassword ? "text" : "password"}
                       name="confirmPassword"
@@ -646,20 +641,20 @@ const AuthModal = ({ isOpen, onClose }) => {
                       onChange={handleInputChange}
                       className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-12 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
                         isFieldInvalid('confirmPassword') 
-                          ? 'border-red-500/50 focus:border-red-500' 
+                          ? 'border-ctp-red/50 focus:border-ctp-red' 
                           : 'border-ctp-surface1 focus:border-ctp-sky-800'
                       }`}
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('confirmPassword') ? 'text-red-500/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
+                      className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('confirmPassword') ? 'text-ctp-red/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
                     >
                       {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                   </div>
                   {isFieldInvalid('confirmPassword') && (
-                    <p className="text-[10px] font-bold text-red-500 ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                    <p className="text-[10px] font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
                       {getFieldError('confirmPassword')}
                     </p>
                   )}
@@ -709,7 +704,7 @@ const AuthModal = ({ isOpen, onClose }) => {
           </p>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 

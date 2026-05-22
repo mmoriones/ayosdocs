@@ -2,7 +2,6 @@
 
 import { 
   Check, 
-  Bookmark, 
   Lock, 
   UserPlus, 
   ShieldCheck, 
@@ -12,7 +11,7 @@ import {
   Scan,
   AlertTriangle,
 } from 'lucide-react';
-import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
@@ -21,11 +20,7 @@ import { useWorkspace, useToast } from '@/context';
 import { GuideIcon } from '@/lib/guideIcons';
 import { updateProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';
-import Skeleton from '@/components/ui/Skeleton';
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
-import ProgressBar from '@/components/ui/ProgressBar';
+import { Skeleton, Button, Badge, ProgressBar, BookmarkButton } from '@/components/ui';
 
 /**
  * Component for rendering and managing a guide's checklist.
@@ -111,9 +106,7 @@ const ChecklistCard = ({
     }
   });
 
-  const handleFavorite = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleFavorite = () => {
     favoriteMutation.mutate();
   };
 
@@ -227,7 +220,7 @@ const ChecklistCard = ({
   }
 
   return (
-    <div className={`flex flex-col overflow-hidden transition-all duration-300 ${
+    <div className={`flex flex-col relative overflow-visible transition-all duration-300 ${
       (isModal || isBare) ? "" : "bg-ctp-base rounded-2xl border border-ctp-surface1 shadow-sm"
     }`}>
       
@@ -285,17 +278,11 @@ const ChecklistCard = ({
               </div>
 
               {!inGuidePage && isLoggedIn && (
-                <button 
+                <BookmarkButton
+                  isFavorite={isFavorite}
                   onClick={handleFavorite}
-                  className={`p-2 rounded-lg border transition-all shrink-0 active:scale-95 shadow-sm ${
-                    isFavorite 
-                      ? 'text-ctp-sky-800 bg-ctp-sky-800/10 border-ctp-sky-800/30' 
-                      : 'text-ctp-subtext1 bg-ctp-base border-ctp-surface1 hover:text-ctp-sky-800'
-                  }`}
-                  title={isFavorite ? "Remove from favorites" : "Add to favorites"}
-                >
-                  <Bookmark size={16} fill={isFavorite ? "currentColor" : "none"} />
-                </button>
+                  tooltipProps={{ contentClassName: 'z-[150]' }}
+                />
               )}
             </div>
           </div>

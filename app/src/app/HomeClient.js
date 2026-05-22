@@ -327,6 +327,7 @@ export default function HomeClient({ allGuides }) {
                         placeholder="City or Agency..." 
                         value={officeSearch}
                         onChange={(e) => setOfficeSearch(e.target.value)}
+                        maxLength={100}
                         containerClassName="space-y-0"
                       />
                     </form>

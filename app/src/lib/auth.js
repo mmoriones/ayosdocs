@@ -23,6 +23,10 @@ export const authOptions = {
           throw new Error("Invalid credentials");
         }
 
+        if (credentials.email.length > 100 || credentials.password.length > 128) {
+          throw new Error("Invalid credentials");
+        }
+
         // 1. IP Rate Limiting (Tightened to 5)
         const ipLimit = await rateLimit('login', 5);
         if (!ipLimit.success) {

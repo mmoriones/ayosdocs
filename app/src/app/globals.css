@@ -23,6 +23,8 @@
   --color-ctp-green: var(--green);
   --color-ctp-yellow: var(--yellow);
   --color-ctp-orange: var(--orange);
+  --color-ctp-red: var(--red);
+  --color-ctp-peach: var(--peach);
   --color-ctp-mauve: var(--mauve);
   --color-ctp-teal: var(--teal);
 
@@ -102,8 +104,10 @@
     --green: #1a7f37;
     --yellow: #9a6700;
     --orange: #bc4c00;
-    --mauve: #8250df;
+    --red: #cf222e;
+    --peach: #e36209;
     --teal: #05998b;
+    --mauve: #8250df;
   }
 
   .mocha, .dark {
@@ -127,12 +131,14 @@
     --green: #3fb950;
     --yellow: #d29922;
     --orange: #f0883e;
-    --mauve: #bc8cff;
+    --red: #f85149;
+    --peach: #fab387;
     --teal: #39c5bb;
+    --mauve: #bc8cff;
   }
 
   body {
-    @apply bg-ctp-base text-ctp-text font-sans antialiased;
+    @apply bg-ctp-base text-ctp-text font-sans antialiased overflow-x-hidden;
     margin: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
   }

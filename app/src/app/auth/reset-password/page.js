@@ -133,6 +133,7 @@ function ResetPasswordForm() {
               value={formData.password}
               onChange={handleInputChange}
               placeholder="At least 8 characters"
+              maxLength={128}
               disabled={isSubmitting || !token}
               error={getFieldError('password')}
               leftIcon={Lock}
@@ -146,6 +147,7 @@ function ResetPasswordForm() {
               value={formData.confirmPassword}
               onChange={handleInputChange}
               placeholder="Repeat new password"
+              maxLength={128}
               disabled={isSubmitting || !token}
               error={getFieldError('confirmPassword')}
               leftIcon={Lock}

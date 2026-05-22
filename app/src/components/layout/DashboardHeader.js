@@ -73,7 +73,7 @@ export default function DashboardHeader({ onMenuClick }) {
           onChange={() => {}}
           onClick={toggleSearch}
           placeholder="Search guides, offices, requirements..."
-          variant="compact"
+          variant="standard"
           showShortcut={true}
         />
       </div>

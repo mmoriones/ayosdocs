@@ -85,6 +85,7 @@ export default function ContactClient() {
                       required
                       type="text"
                       name="name"
+                      maxLength={70}
                       value={formData.name}
                       placeholder="Juan Dela Cruz"
                       onChange={handleChange}
@@ -98,6 +99,7 @@ export default function ContactClient() {
                       required
                       type="email"
                       name="email"
+                      maxLength={100}
                       value={formData.email}
                       placeholder="juan@example.com"
                       onChange={handleChange}
@@ -110,6 +112,7 @@ export default function ContactClient() {
                     <textarea
                       required
                       name="message"
+                      maxLength={1000}
                       value={formData.message}
                       rows={5}
                       placeholder="Tell us how we can help..."

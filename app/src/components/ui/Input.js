@@ -39,7 +39,7 @@ export default function Input({
       <div className="relative group">
         {LeftIcon && (
           <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${
-            disabled ? 'text-ctp-surface2' : hasError ? 'text-red-500' : 'text-ctp-subtext1 group-focus-within:text-ctp-sky-800'
+            disabled ? 'text-ctp-surface2' : hasError ? 'text-ctp-red' : 'text-ctp-subtext1 group-focus-within:text-ctp-sky-800'
           }`}>
             <LeftIcon size={18} strokeWidth={2} />
           </div>
@@ -53,7 +53,7 @@ export default function Input({
             ${LeftIcon ? 'pl-12' : 'pl-4'}
             ${isPassword ? 'pr-12' : 'pr-4'}
             ${hasError 
-              ? 'border-red-500/50 focus:border-red-500' 
+              ? 'border-ctp-red/50 focus:border-ctp-red' 
               : 'border-ctp-surface1 focus:border-ctp-sky-800'
             }
             ${disabled ? 'opacity-50 cursor-not-allowed grayscale' : ''}
@@ -75,8 +75,8 @@ export default function Input({
 
       {hasError && (
         <div className="flex items-center gap-1.5 ml-1 animate-in fade-in slide-in-from-top-1 duration-200">
-          <AlertCircle size={12} className="text-red-500" />
-          <p className="text-[10px] font-bold text-red-500 uppercase tracking-tight">
+          <AlertCircle size={12} className="text-ctp-red" />
+          <p className="text-[10px] font-bold text-ctp-red uppercase tracking-tight">
             {error}
           </p>
         </div>

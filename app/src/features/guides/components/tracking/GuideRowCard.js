@@ -1,11 +1,9 @@
 'use client';
 
-import { Bookmark, Trash2, Check } from 'lucide-react';
+import { Trash2, Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { GuideIcon } from '@/lib/guideIcons';
-import Skeleton from '@/components/ui/Skeleton';
-import ProgressBar from '@/components/ui/ProgressBar';
-import DropdownMenu, { DropdownMenuItem } from '@/components/ui/DropdownMenu';
+import { Skeleton, ProgressBar, DropdownMenu, DropdownMenuItem, BookmarkButton } from '@/components/ui';
 
 /**
  * GuideRowCard Component
@@ -75,35 +73,26 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
           </div>
 
           <div className="flex items-center gap-2">
-            <button 
-              onClick={(e) => { 
-                e.stopPropagation(); 
-                onFavorite();
-              }}
-              className={`w-10 h-10 rounded-lg border transition-all flex items-center justify-center active:scale-90 ${
-                isFavorite 
-                  ? 'bg-ctp-sky-800 border-ctp-sky-800 text-white shadow-lg' 
-                  : 'bg-ctp-base border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30'
-              }`}
-              title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-            >
-              <Bookmark 
-                size={16} 
-                className="transition-colors" 
-                fill={isFavorite ? "currentColor" : "none"} 
-              />
-            </button>
+            <BookmarkButton
+              isFavorite={isFavorite}
+              onClick={onFavorite}
+            />
             
             <DropdownMenu
               trigger={
-                <div className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface2 transition-all flex items-center justify-center active:scale-90">
+                <button 
+                  className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface2 transition-all flex items-center justify-center active:scale-90"
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-                </div>
+                </button>
               }
               align="right"
             >
               <DropdownMenuItem
-                onClick={(e) => { e.stopPropagation(); onDelete(); }}
+                onClick={(e) => { 
+                  e.stopPropagation(); 
+                  onDelete(); 
+                }}
                 variant="danger"
                 icon={Trash2}
               >

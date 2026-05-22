@@ -20,7 +20,8 @@ export default function Tooltip({
   delay = 500,
   disabled = false,
   className = '',
-}) {
+  contentClassName = '',
+  }) {
   const [isVisible, setIsVisible] = useState(false);
   const timeoutRef = useRef(null);
 
@@ -60,7 +61,7 @@ export default function Tooltip({
     >
       {children}
       {isVisible && (
-        <div className={`absolute z-[100] pointer-events-none animate-in fade-in zoom-in-95 duration-150 ${positions[position]}`}>
+        <div className={`absolute z-[150] pointer-events-none animate-in fade-in zoom-in-95 duration-150 ${positions[position]} ${contentClassName}`}>
           <div className="bg-ctp-crust text-ctp-text text-[10px] font-bold uppercase tracking-widest px-2.5 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
             {content}
           </div>

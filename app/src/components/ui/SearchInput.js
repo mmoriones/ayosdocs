@@ -37,7 +37,8 @@ export default function SearchInput({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`w-full bg-ctp-base border border-ctp-surface1 rounded-lg focus:outline-none focus:border-ctp-sky-800 focus:ring-1 focus:ring-ctp-sky-800 transition-all placeholder:text-ctp-subtext0 font-medium ${
+        maxLength={100}
+        className={`w-full bg-ctp-base border border-ctp-surface1 rounded-xl focus:outline-none focus:border-ctp-sky-800 focus:ring-1 focus:ring-ctp-sky-800 transition-all placeholder:text-ctp-subtext0 font-medium ${
           isCompact ? 'py-1.5 pl-9 pr-3 text-xs' : 'py-2.5 pl-11 pr-4 text-sm'
         }`}
       />

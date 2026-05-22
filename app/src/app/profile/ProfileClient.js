@@ -10,6 +10,7 @@ import Input from '@/components/ui/Input';
 import Card from '@/components/ui/Card';
 import Skeleton from '@/components/ui/Skeleton';
 import Avatar from '@/components/ui/Avatar';
+import { Tooltip } from '@/components/ui';
 
 /**
  * Enhanced Profile client page with editable identity management.
@@ -90,6 +91,7 @@ export default function ProfileClient() {
             {/* Personal Information Section */}
             <Card 
               title="Personal Information" 
+              overflow="visible"
               headerAction={
                 !isEditing && status !== 'loading' && (
                   <Button 
@@ -123,15 +125,19 @@ export default function ProfileClient() {
               ) : (
               <div className="space-y-8">
                 <div className="flex flex-col md:flex-row md:items-start gap-8">
-                  <div className="relative shrink-0">
+                  <div className="relative w-20 h-20 shrink-0">
                     <Avatar
                       src={user?.image}
                       name={user?.name || 'A'}
                       size="xl"
                       className="rounded-2xl"
                     />
-                    <div className="absolute -bottom-2 -right-2 p-2 bg-ctp-base border border-ctp-surface1 rounded-lg shadow-sm text-ctp-subtext1 opacity-50 cursor-not-allowed" title="Avatar editing coming soon">
-                      <Camera size={16} />
+                    <div className="absolute bottom-0 right-0 translate-x-1.5 translate-y-2 z-10">
+                      <Tooltip content="Avatar editing coming soon" position="top">
+                        <div className="p-1.5 bg-ctp-base border border-ctp-surface1 rounded-lg shadow-sm text-ctp-subtext1 opacity-80 cursor-not-allowed">
+                          <Camera size={14} />
+                        </div>
+                      </Tooltip>
                     </div>
                   </div>
 
@@ -147,6 +153,7 @@ export default function ProfileClient() {
                             if (error) setError('');
                           }}
                           placeholder="Your full name"
+                          maxLength={70}
                           error={getFieldError()}
                           leftIcon={User}
                           disabled={isSubmitting}
@@ -187,10 +194,12 @@ export default function ProfileClient() {
                         </div>
                         <div className="space-y-1.5 opacity-80 min-w-0">
                           <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Email Address</label>
-                          <div className="flex items-center gap-3 px-4 py-3.5 bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl text-sm font-semibold text-ctp-subtext1 overflow-hidden">
-                            <Mail size={16} className="text-ctp-surface2 shrink-0" />
-                            <span className="truncate" title={user?.email}>{user?.email}</span>
-                          </div>
+                          <Tooltip content={user?.email} className="w-full">
+                            <div className="flex items-center gap-3 px-4 py-3.5 bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl text-sm font-semibold text-ctp-subtext1 overflow-hidden">
+                              <Mail size={16} className="text-ctp-surface2 shrink-0" />
+                              <span className="truncate">{user?.email}</span>
+                            </div>
+                          </Tooltip>
                           <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-tight ml-1 mt-1 truncate">Contact your admin to change email</p>
                         </div>
                       </div>

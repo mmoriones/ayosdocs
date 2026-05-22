@@ -19,7 +19,7 @@
     ~~- [ ] **Skeleton:** Add skeleton loading for dynamic UI components~~
     ~~- [ ] **Settings:** Add components on the empty tabs on /settings and make them functional.~~
    ~~- [X] **Profile:** Make user details editable except email~~
-    - [ ] **Refator:** Implement global UI component reuse for consistency
+    ~~- [ ] **Refator:** Implement global UI component reuse for consistency~~
     - [ ] **Theme:** Add better color palettes for dark mode to improve contrast and readability 
 
 ## ✨ Features & Logic
@@ -61,7 +61,6 @@
     ~~- [ ] Setup CI/CD pipelines.~~
 
 ## 🐛 Bugs & Fixes
-- [ ] **AuthModal:** Fix browser autofill/autocomplete styling issues (font flicker and background color mismatch).
 - ~~[X] **AuthModal:** Fix bug where AuthModal continues to show after successful login.~~
 - ~~[X] **Clean Content:** Review and remove any legacy references in guide files.~~
 

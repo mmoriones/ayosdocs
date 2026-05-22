@@ -539,6 +539,7 @@ function ChangePasswordForm({ showToast }) {
           value={formData.currentPassword}
           onChange={handleInputChange}
           placeholder="Enter current password"
+          maxLength={128}
           error={getFieldError('currentPassword')}
           leftIcon={Lock}
           required
@@ -552,6 +553,7 @@ function ChangePasswordForm({ showToast }) {
             value={formData.newPassword}
             onChange={handleInputChange}
             placeholder="Min. 8 characters"
+            maxLength={128}
             error={getFieldError('newPassword')}
             leftIcon={Lock}
             required
@@ -564,6 +566,7 @@ function ChangePasswordForm({ showToast }) {
             value={formData.confirmPassword}
             onChange={handleInputChange}
             placeholder="Repeat new password"
+            maxLength={128}
             error={getFieldError('confirmPassword')}
             leftIcon={Lock}
             required

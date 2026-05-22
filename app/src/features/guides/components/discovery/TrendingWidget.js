@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { GuideIcon } from '@/lib/guideIcons';
-import { Eye, ArrowRight, Bookmark } from 'lucide-react';
-import Skeleton from '@/components/ui/Skeleton';
+import { Eye, ArrowRight } from 'lucide-react';
+import { Skeleton, BookmarkButton } from '@/components/ui';
 
 /**
  * Popular guides widget.
@@ -40,20 +40,14 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
         </Link>
         
         {onFavorite && (
-          <button 
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              onFavorite();
-            }}
-            className={`absolute -right-2 -top-2 w-7 h-7 rounded-full border shadow-sm flex items-center justify-center transition-all active:scale-90 z-10 ${
-              isFavorite 
-                ? 'bg-ctp-sky-800 border-ctp-sky-800 text-white' 
-                : 'bg-ctp-base border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30'
-            }`}
-          >
-            <Bookmark size={12} fill={isFavorite ? "currentColor" : "none"} />
-          </button>
+          <div className="absolute -right-2 -top-2 z-10">
+            <BookmarkButton
+              isFavorite={isFavorite}
+              onClick={onFavorite}
+              size="sm"
+              variant="circle"
+            />
+          </div>
         )}
       </div>
     );

@@ -32,7 +32,7 @@ export default function Button({
     secondary: "bg-ctp-surface0 hover:bg-ctp-surface1 text-ctp-text border border-ctp-surface1 disabled:opacity-50",
     outline: "bg-transparent border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle disabled:opacity-50",
     ghost: "bg-transparent text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle disabled:opacity-50",
-    danger: "bg-red-500/10 border border-red-500/20 text-red-500 hover:bg-red-500/20 disabled:opacity-50"
+    danger: "bg-ctp-red/10 border border-ctp-red/20 text-ctp-red hover:bg-ctp-red/20 disabled:opacity-50"
   };
 
   const sizes = {
