@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import GuideCard from '@/features/guides/components/GuideCard';
 import Banner from '@/components/ui/Banner';
+import { Card } from '@/components/ui';
 import PageHeader from '@/components/ui/PageHeader';
 import Button from '@/components/ui/Button';
 import SearchInput from '@/components/ui/SearchInput';
@@ -291,19 +292,19 @@ export default function GuidesClient({ initialGuides }) {
 
       {/* QUICK CATEGORY PILLS */}
       <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[64px] z-40 backdrop-blur-md bg-ctp-base/80">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2.5 flex items-center gap-3 overflow-x-auto no-scrollbar">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2 flex items-center gap-3 overflow-x-auto no-scrollbar">
           <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
             <Filter size={12} className="text-ctp-subtext1" />
-            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Filter by category</span>
+            <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em]">Categories</span>
           </div>
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap border ${
+              className={`px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
                 selectedCategory === cat
                   ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
-                  : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
+                  : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
               }`}
             >
               {cat}
@@ -313,27 +314,27 @@ export default function GuidesClient({ initialGuides }) {
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 w-full">
-        <div className="flex flex-col lg:flex-row gap-10">
+        <div className="flex flex-col lg:flex-row gap-8">
           {/* LEFT SIDEBAR */}
-          <aside className="hidden lg:block w-72 shrink-0">
-            <div className="sticky top-40 space-y-8">
-              <div className="bg-ctp-mantle rounded-2xl p-6 border border-ctp-surface1 shadow-sm space-y-8">
-                <div className="flex items-center justify-between border-b border-ctp-surface1 pb-4">
-                  <h2 className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">Advanced Filters</h2>
+          <aside className="hidden lg:block w-64 shrink-0">
+            <div className="sticky top-40 space-y-6">
+              <div className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 space-y-6">
+                <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
+                  <h2 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.2em]">Filters</h2>
                   <Button 
                     variant="ghost"
                     size="sm"
                     onClick={resetFilters}
-                    className="text-[10px] text-ctp-sky-800 font-bold uppercase tracking-widest hover:underline px-0 py-0 h-auto"
+                    className="text-[9px] text-ctp-sky-800 font-bold uppercase tracking-widest px-1 py-1 h-auto"
                   >
-                    Reset
+                    Clear
                   </Button>
                 </div>
 
                 {/* Agency Filter */}
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <button onClick={() => toggleFilterSection('agency')} className="flex items-center justify-between w-full group">
-                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Government Agency</label>
+                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] cursor-pointer group-hover:text-ctp-text">Agency</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.agency ? 'rotate-180' : ''}`} />
                   </button>
                   {expandedFilters.agency && (
@@ -342,13 +343,13 @@ export default function GuidesClient({ initialGuides }) {
                 </div>
 
                 {/* Difficulty Filter */}
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <button onClick={() => toggleFilterSection('difficulty')} className="flex items-center justify-between w-full group">
-                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Difficulty Level</label>
+                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] cursor-pointer group-hover:text-ctp-text">Difficulty</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.difficulty ? 'rotate-180' : ''}`} />
                   </button>
                   {expandedFilters.difficulty && (
-                    <div className="space-y-2.5 pl-0.5">
+                    <div className="space-y-2 pl-1">
                       {['All Levels', 'Easy', 'Moderate', 'Complex'].map((level) => (
                         <label key={level} className="flex items-center gap-3 cursor-pointer group">
                           <div className="relative flex items-center justify-center">
@@ -356,11 +357,11 @@ export default function GuidesClient({ initialGuides }) {
                               type="checkbox" 
                               checked={selectedDifficulties.includes(level)}
                               onChange={() => handleDifficultyChange(level)}
-                              className="peer appearance-none w-4 h-4 rounded-md border border-ctp-surface1 bg-ctp-mantle checked:bg-ctp-sky-800 checked:border-ctp-sky-800 transition-all cursor-pointer" 
+                              className="peer appearance-none w-3.5 h-3.5 rounded border border-ctp-surface1 bg-ctp-base checked:bg-ctp-sky-800 checked:border-ctp-sky-800 transition-all cursor-pointer" 
                             />
                             <X className="absolute w-2.5 h-2.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" strokeWidth={3} />
                           </div>
-                          <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-semibold">{level}</span>
+                          <span className="text-[11px] text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-semibold">{level}</span>
                         </label>
                       ))}
                     </div>
@@ -368,13 +369,13 @@ export default function GuidesClient({ initialGuides }) {
                 </div>
 
                 {/* Processing Time Filter */}
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <button onClick={() => toggleFilterSection('estimatedTime')} className="flex items-center justify-between w-full group">
-                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Processing Time</label>
+                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] cursor-pointer group-hover:text-ctp-text">Time</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.estimatedTime ? 'rotate-180' : ''}`} />
                   </button>
                   {expandedFilters.estimatedTime && (
-                    <div className="space-y-3 pl-1">
+                    <div className="space-y-2.5 pl-1">
                       {['All Durations', 'Same Day', '1-3 Days', '3-7 Days', '1 Week+'].map((time) => (
                         <label key={time} className="flex items-center gap-3 cursor-pointer group">
                           <div className="relative flex items-center justify-center">
@@ -383,38 +384,11 @@ export default function GuidesClient({ initialGuides }) {
                               name="time" 
                               checked={selectedTime === time}
                               onChange={() => setSelectedTime(time)}
-                              className="peer appearance-none w-5 h-5 rounded-full border border-ctp-surface1 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer" 
+                              className="peer appearance-none w-3.5 h-3.5 rounded-full border border-ctp-surface1 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer" 
                             />
-                            <div className="absolute w-2.5 h-2.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+                            <div className="absolute w-1.5 h-1.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
                           </div>
-                          <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-medium">{time}</span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Cost Filter */}
-                <div className="space-y-4">
-                  <button onClick={() => toggleFilterSection('costRange')} className="flex items-center justify-between w-full group">
-                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest cursor-pointer group-hover:text-ctp-text">Cost Range</label>
-                    <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.costRange ? 'rotate-180' : ''}`} />
-                  </button>
-                  {expandedFilters.costRange && (
-                    <div className="space-y-3 pl-1">
-                      {['All Costs', 'Free', 'Under ₱500', '₱500–₱2000', '₱2000+'].map((cost) => (
-                        <label key={cost} className="flex items-center gap-3 cursor-pointer group">
-                          <div className="relative flex items-center justify-center">
-                            <input 
-                              type="radio" 
-                              name="cost" 
-                              checked={selectedCost === cost}
-                              onChange={() => setSelectedCost(cost)}
-                              className="peer appearance-none w-5 h-5 rounded-full border border-ctp-surface1 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer" 
-                            />
-                            <div className="absolute w-2.5 h-2.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
-                          </div>
-                          <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-medium">{cost}</span>
+                          <span className="text-[11px] text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-medium">{time}</span>
                         </label>
                       ))}
                     </div>
@@ -422,25 +396,23 @@ export default function GuidesClient({ initialGuides }) {
                 </div>
               </div>
 
-              <div className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm space-y-5">
-                <div className="flex items-center gap-2">
+              <Card background="mantle" className="border-ctp-surface1/50">
+                <div className="flex items-center gap-2 mb-4">
                   <TrendingUp size={14} className="text-ctp-sky-800" />
-                  <h3 className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">Trending Guides</h3>
+                  <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Trending</h3>
                 </div>
                 <div className="space-y-4">
                   {initialGuides.slice(0, 3).map((guide, index) => (
                     <Link key={guide.slug} href={`/guides/${guide.slug}`} className="flex items-start gap-3 group">
-                      <span className="text-[10px] font-bold text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-colors mt-0.5">0{index + 1}</span>
+                      <span className="text-[10px] font-bold text-ctp-surface2 group-hover:text-ctp-sky-800 transition-colors mt-0.5">0{index + 1}</span>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors line-clamp-2 leading-tight tracking-tight">{guide.title}</p>
-                        <p className="text-[9px] text-ctp-subtext1 mt-1 uppercase font-bold tracking-widest">4.8k interactions</p>
+                        <p className="text-[11px] font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors line-clamp-1 leading-tight">{guide.shortTitle || guide.title}</p>
+                        <p className="text-[9px] text-ctp-subtext1 mt-0.5 font-bold uppercase tracking-widest opacity-60">{guide.agency}</p>
                       </div>
                     </Link>
                   ))}
                 </div>
-              </div>
-
-              <Adsense variant="sidebar" />
+              </Card>
             </div>
           </aside>
 

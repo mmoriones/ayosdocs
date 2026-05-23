@@ -25,20 +25,20 @@ export default function Button({
   onClick,
   ...props
 }) {
-  const baseStyles = "inline-flex items-center justify-center font-bold transition-all active:scale-[0.98] rounded-xl disabled:cursor-not-allowed disabled:active:scale-100";
+  const baseStyles = "inline-flex items-center justify-center font-bold transition-all active:scale-[0.97] rounded-lg disabled:cursor-not-allowed disabled:active:scale-100 whitespace-nowrap";
   
   const variants = {
-    primary: "bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white shadow-md disabled:bg-ctp-surface1 disabled:text-ctp-subtext1 disabled:shadow-none",
-    secondary: "bg-ctp-surface0 hover:bg-ctp-surface1 text-ctp-text border border-ctp-surface1 disabled:opacity-50",
-    outline: "bg-transparent border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle disabled:opacity-50",
-    ghost: "bg-transparent text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle disabled:opacity-50",
-    danger: "bg-ctp-red/10 border border-ctp-red/20 text-ctp-red hover:bg-ctp-red/20 disabled:opacity-50"
+    primary: "bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white shadow-sm shadow-ctp-sky-800/10 disabled:bg-ctp-surface1 disabled:text-ctp-subtext1 disabled:shadow-none",
+    secondary: "bg-ctp-mantle border border-ctp-surface1 text-ctp-text hover:bg-ctp-crust hover:border-ctp-surface2 shadow-sm disabled:opacity-50",
+    outline: "bg-transparent border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle hover:border-ctp-surface2 disabled:opacity-50",
+    ghost: "bg-transparent text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 disabled:opacity-50",
+    danger: "bg-ctp-red/5 border border-ctp-red/20 text-ctp-red hover:bg-ctp-red hover:text-white disabled:opacity-50"
   };
 
   const sizes = {
-    sm: "px-3 py-1.5 text-xs",
-    md: "px-6 py-2.5 text-sm",
-    lg: "px-8 py-3.5 text-base"
+    sm: "px-3 py-1.5 text-[11px] uppercase tracking-wider",
+    md: "px-5 py-2.5 text-xs uppercase tracking-widest",
+    lg: "px-8 py-3.5 text-sm uppercase tracking-widest"
   };
 
   const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;

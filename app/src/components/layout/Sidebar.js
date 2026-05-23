@@ -51,20 +51,20 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
 
   return (
     <aside 
-      className={`fixed left-0 top-0 h-screen bg-ctp-base border-r border-ctp-surface1 z-50 flex flex-col transition-all duration-300 ${
+      className={`fixed left-0 top-0 h-screen bg-ctp-mantle border-r border-ctp-surface1 z-50 flex flex-col transition-all duration-300 ${
         isCollapsed ? 'w-16' : 'w-64'
       } ${
         isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
       }`}
     >
       {/* Header / Logo */}
-      <div className="h-16 flex items-center px-4 border-b border-ctp-surface1 shrink-0 overflow-hidden">
-        <Link href="/" onClick={closeMobile} className="flex items-center gap-3 shrink-0">
+      <div className="h-16 flex items-center px-4 shrink-0 overflow-hidden">
+        <Link href="/" onClick={closeMobile} className="flex items-center gap-3 shrink-0 ml-1">
           <Image
             src="/favicon.svg"
             alt="AyosDocs"
-            width={32}
-            height={32}
+            width={28}
+            height={28}
             className="shrink-0"
           />
           <span className={`text-lg font-bold tracking-tight transition-all duration-300 whitespace-nowrap ${
@@ -76,9 +76,9 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
       </div>
 
       {/* Navigation */}
-      <div className="flex-1 overflow-y-auto py-6 px-3 space-y-8 custom-scrollbar overflow-x-hidden">
+      <div className="flex-1 overflow-y-auto py-4 px-3 space-y-8 custom-scrollbar overflow-x-hidden">
         <div className="space-y-1">
-          <h3 className={`px-3 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-2 transition-opacity duration-300 whitespace-nowrap ${isCollapsed ? 'opacity-0' : 'opacity-100'}`}>
+          <h3 className={`px-4 text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em] mb-3 transition-opacity duration-300 whitespace-nowrap ${isCollapsed ? 'opacity-0' : 'opacity-100'}`}>
             Discovery
           </h3>
           {navItems.map((item) => (
@@ -93,7 +93,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
 
         {isLoggedIn && (
           <div className="space-y-1">
-            <h3 className={`px-3 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-2 transition-opacity duration-300 whitespace-nowrap ${isCollapsed ? 'opacity-0' : 'opacity-100'}`}>
+            <h3 className={`px-4 text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em] mb-3 transition-opacity duration-300 whitespace-nowrap ${isCollapsed ? 'opacity-0' : 'opacity-100'}`}>
               Workspace
             </h3>
             {authItems.map((item) => (
@@ -108,10 +108,10 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
       </div>
 
       {/* Footer / User */}
-      <div className="p-3 border-t border-ctp-surface1 overflow-hidden">
+      <div className="p-3 border-t border-ctp-surface1 bg-ctp-crust/50 overflow-hidden">
         <div className="space-y-1">
           {status === 'loading' ? (
-            <div className="h-10 w-full" /> // Stable empty space
+            <div className="h-10 w-full" />
           ) : isLoggedIn ? (
             <>
               <NavItem 
@@ -126,12 +126,12 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
                   signOut();
                   closeMobile?.();
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text transition-all duration-200 group overflow-hidden whitespace-nowrap`}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-ctp-subtext1 hover:bg-ctp-base hover:text-ctp-text transition-all duration-200 group overflow-hidden whitespace-nowrap`}
               >
-                <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-text">
+                <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-red transition-colors">
                   <LogOut size={20} />
                 </div>
-                <span className={`text-sm transition-all duration-300 ${isCollapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'}`}>
+                <span className={`text-sm font-medium transition-all duration-300 ${isCollapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'}`}>
                   Sign Out
                 </span>
               </button>
@@ -142,12 +142,12 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
                 openAuthModal();
                 closeMobile?.();
               }}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90 transition-all duration-200 overflow-hidden whitespace-nowrap`}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90 transition-all duration-200 shadow-sm shadow-ctp-sky-800/20 overflow-hidden whitespace-nowrap group`}
             >
-              <div className="shrink-0">
+              <div className="shrink-0 transition-transform group-hover:scale-110">
                 <LogIn size={20} />
               </div>
-              <span className={`text-sm font-semibold transition-all duration-300 ${isCollapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'}`}>
+              <span className={`text-sm font-bold tracking-tight transition-all duration-300 ${isCollapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'}`}>
                 Sign In
               </span>
             </button>
@@ -156,12 +156,12 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
 
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className={`flex items-center gap-3 px-3 py-2 mt-4 rounded-lg text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text transition-all duration-200 group w-full overflow-hidden whitespace-nowrap`}
+          className={`flex items-center gap-3 px-3 py-2.5 mt-2 rounded-lg text-ctp-subtext1 hover:bg-ctp-base hover:text-ctp-text transition-all duration-200 group w-full overflow-hidden whitespace-nowrap`}
         >
           <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-text">
             {isCollapsed ? <PanelRight size={20} /> : <PanelLeft size={20} />}
           </div>
-          <span className={`text-sm transition-all duration-300 ${isCollapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'}`}>
+          <span className={`text-sm font-medium transition-all duration-300 ${isCollapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'}`}>
             Collapse
           </span>
         </button>

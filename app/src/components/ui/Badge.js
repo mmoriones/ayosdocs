@@ -16,18 +16,18 @@ export default function Badge({
   className = "" 
 }) {
   const variants = {
-    sky: "bg-ctp-sky-800/5 text-ctp-sky-800 border-ctp-sky-800/20",
-    teal: "bg-ctp-teal/5 text-ctp-teal border-ctp-teal/20",
-    green: "bg-ctp-green/5 text-ctp-green border-ctp-green/20",
-    yellow: "bg-ctp-yellow/5 text-ctp-yellow border-ctp-yellow/20",
-    red: "bg-ctp-red/5 text-ctp-red border-ctp-red/20",
-    mauve: "bg-ctp-mauve/5 text-ctp-mauve border-ctp-mauve/20",
-    slate: "bg-ctp-surface0/30 text-ctp-subtext1 border-ctp-surface1",
+    sky: "bg-ctp-sky-800/[0.08] text-ctp-sky-800 border-ctp-sky-800/20",
+    teal: "bg-ctp-teal/[0.08] text-ctp-teal border-ctp-teal/20",
+    green: "bg-ctp-green/[0.08] text-ctp-green border-ctp-green/20",
+    yellow: "bg-ctp-yellow/[0.08] text-ctp-yellow border-ctp-yellow/20",
+    red: "bg-ctp-red/[0.08] text-ctp-red border-ctp-red/20",
+    mauve: "bg-ctp-mauve/[0.08] text-ctp-mauve border-ctp-mauve/20",
+    slate: "bg-ctp-surface0/50 text-ctp-subtext1 border-ctp-surface1",
     surface: "bg-ctp-surface0 text-ctp-subtext1 border-ctp-surface1",
   };
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 border text-[10px] font-bold uppercase tracking-widest ${rounded ? 'rounded-full' : 'rounded-lg'} ${variants[variant]} ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 border text-[9px] font-bold uppercase tracking-[0.12em] ${rounded ? 'rounded-full' : 'rounded-md'} ${variants[variant]} ${className}`}>
       {Icon && <Icon size={10} strokeWidth={2.5} />}
       {children}
     </span>

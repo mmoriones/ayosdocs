@@ -73,26 +73,24 @@ export default function OfficesClient() {
 
       {/* QUICK CATEGORY PILLS */}
       <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[64px] z-40 backdrop-blur-md bg-ctp-base/80">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2.5 flex items-center justify-between gap-8">
-          <div className="flex items-center gap-3 overflow-x-auto no-scrollbar flex-1">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2 flex items-center justify-between gap-8">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar flex-1">
             <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
               <Filter size={12} className="text-ctp-subtext1" />
-              <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Filter agency</span>
+              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em]">Agencies</span>
             </div>
             {agencies.map((agency) => (
-              <Button
+              <button
                 key={agency}
-                variant={selectedAgency === agency ? 'primary' : 'secondary'}
-                size="sm"
                 onClick={() => setSelectedAgency(agency)}
-                className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap border ${
+                className={`px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
                   selectedAgency === agency
                     ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
-                    : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
+                    : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
                 }`}
               >
                 {agency}
-              </Button>
+              </button>
             ))}
           </div>
 
@@ -103,19 +101,20 @@ export default function OfficesClient() {
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 w-full">
-        <div className="flex flex-col lg:flex-row gap-10">
-          <div className="flex-1 min-w-0 space-y-10">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex-1 min-w-0 space-y-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div className="max-w-2xl flex-1">
                 <SearchInput 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search for a specific branch or city (e.g., PSA Manila, NBI Cebu)..."
+                  placeholder="Search branch name or location..."
+                  className="bg-ctp-mantle/50"
                 />
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {isLoading ? (
                 Array.from({ length: 3 }).map((_, i) => (
                   <OfficeCard.Skeleton key={i} />
@@ -125,96 +124,65 @@ export default function OfficesClient() {
                   <OfficeCard key={office._id} office={office} router={router} />
                 ))
               ) : (
-                <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
-                  <div className="w-14 h-14 bg-ctp-base/50 border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto mb-6">
-                    <Search size={24} className="text-ctp-subtext1" />
+                <Card background="mantle" className="text-center py-20 border-dashed">
+                  <div className="w-12 h-12 bg-ctp-base border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+                    <Search size={22} className="text-ctp-subtext1" />
                   </div>
-                  <h3 className="text-lg font-bold text-ctp-text tracking-tight uppercase tracking-widest">No offices found</h3>
-                  <p className="text-sm text-ctp-subtext1 font-medium mt-1">Try adjusting your search or filters.</p>
-                </div>
+                  <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">No matching offices</h3>
+                  <p className="text-xs text-ctp-subtext1 font-medium mt-1">Try broadening your search criteria.</p>
+                </Card>
               )}
             </div>
           </div>
 
-          <aside className="w-full lg:w-80 shrink-0 space-y-6">
-            <Card background="base" noPadding className="overflow-hidden flex flex-col">
-              <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-3">
+          <aside className="w-full lg:w-72 shrink-0 space-y-6">
+            <Card background="base" noPadding className="flex flex-col">
+              <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-2">
                 <TrendingUp size={14} className="text-ctp-sky-800" />
-                <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Top Rated Branches</h3>
+                <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Top Performers</h3>
               </div>
               
-              <div className="divide-y divide-ctp-surface1/50">
+              <div className="divide-y divide-ctp-surface1/30">
                 {bestPerformingOffices.map((office, i) => (
-                  <div key={office._id} className="flex items-center gap-4 p-4 hover:bg-ctp-mantle/30 transition-colors group cursor-pointer">
-                    <div className="w-8 h-8 rounded-lg bg-ctp-mantle border border-ctp-surface1 text-ctp-sky-800 flex items-center justify-center text-[10px] font-bold shadow-sm">
+                  <div key={office._id} className="flex items-center gap-3.5 p-4 hover:bg-ctp-mantle/50 transition-colors group cursor-pointer">
+                    <div className="w-7 h-7 rounded bg-ctp-mantle border border-ctp-surface1 text-ctp-surface2 flex items-center justify-center text-[9px] font-bold group-hover:text-ctp-sky-800 transition-colors">
                       0{i + 1}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-xs font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight">{office.name}</h4>
-                      <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 opacity-80">{office.agency} • {office.stats.avgRating} rating</p>
+                      <h4 className="text-[11px] font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors uppercase leading-tight">{office.name}</h4>
+                      <p className="text-[8px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 opacity-60">{office.agency} • {office.stats.avgRating} ★</p>
                     </div>
-                    <span className="text-[8px] font-bold text-ctp-green bg-ctp-green/5 border border-ctp-green/20 px-1.5 py-0.5 rounded uppercase tracking-widest">Top</span>
                   </div>
                 ))}
-                {bestPerformingOffices.length === 0 && (
-                  <p className="p-4 text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest text-center">No data yet</p>
-                )}
               </div>
               
-              <Button 
-                variant="ghost"
-                size="sm"
+              <button 
                 onClick={() => router.push('/coming-soon')}
-                className="w-full rounded-none border-t border-ctp-surface1 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-text transition-colors"
+                className="w-full p-3 bg-ctp-mantle/50 border-t border-ctp-surface1 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:bg-ctp-sky-800 hover:text-white transition-all"
               >
-                View Full Rankings
-              </Button>
+                View Analytics
+              </button>
             </Card>
 
-            <section className="bg-ctp-sky-800 rounded-xl p-5 text-white relative overflow-hidden group shadow-lg shadow-ctp-sky-800/20">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8 blur-2xl" />
-              
+            <section className="bg-ctp-sky-800 rounded-xl p-5 text-white relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-12 -mt-12 blur-3xl pointer-events-none" />
               <div className="relative z-10 space-y-4">
                 <div className="flex items-center gap-3">
                   <ShieldCheck size={18} strokeWidth={2.5} />
-                  <h3 className="text-[10px] font-bold uppercase tracking-widest">Community Verification</h3>
+                  <h3 className="text-[10px] font-bold uppercase tracking-widest opacity-90">Citizen Verified</h3>
                 </div>
-                <p className="text-xs font-medium leading-relaxed opacity-90">
-                  Data is crowdsourced from real citizens. All reports are verified for quality and relevance.
+                <p className="text-[11px] font-medium leading-relaxed opacity-80">
+                  Join 1.2k+ citizens in improving government service transparency.
                 </p>
-                
-                <div className="space-y-2 pt-1">
-                  {[
-                    "Anonymous reports",
-                    "Moderated content",
-                    "Real-time updates"
-                  ].map((text, i) => (
-                    <div key={i} className="flex items-center gap-2.5">
-                      <CheckCircle2 size={12} strokeWidth={3} />
-                      <span className="text-[9px] font-bold uppercase tracking-widest">{text}</span>
-                    </div>
-                  ))}
-                </div>
+                <Button 
+                  variant="secondary"
+                  onClick={() => router.push('/rate')}
+                  className="w-full bg-white !text-ctp-sky-800 hover:bg-white/90 border-none shadow-lg shadow-black/10"
+                >
+                  Post Report
+                </Button>
               </div>
             </section>
-
-            <Card background="base" className="flex flex-col items-center text-center space-y-4">
-              <div className="w-12 h-12 bg-ctp-mantle border border-ctp-surface1 rounded-xl flex items-center justify-center text-ctp-sky-800 shadow-inner">
-                <Zap size={24} strokeWidth={2} />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-xs font-bold text-ctp-text uppercase tracking-widest">Recently visited?</h3>
-                <p className="text-[10px] text-ctp-subtext1 font-medium leading-relaxed">
-                  Help the community by reporting your wait time and experience.
-                </p>
-              </div>
-              <Button 
-                onClick={() => router.push('/rate')}
-                className="w-full text-[10px] uppercase tracking-widest"
-              >
-                Submit Report
-              </Button>
-            </Card>
           </aside>
         </div>
       </div>
@@ -238,68 +206,64 @@ const OfficeCard = ({ office, router }) => {
   }[office.stats.avgWaitTime || 'N/A'];
 
   return (
-    <Card className="group hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden">
-      <div className="flex flex-col md:flex-row gap-6 md:items-start">
-        <div className="flex md:flex-col items-center gap-4">
-          <div className="w-14 h-14 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
-            <GuideIcon agency={office.agency} className="w-8 h-8 text-ctp-sky-800" strokeWidth={1.5} />
+    <Card className="group hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden p-0" noPadding>
+      <div className="p-4 flex flex-col md:flex-row gap-5 md:items-start">
+        <div className="flex md:flex-col items-center gap-3">
+          <div className="w-11 h-11 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:bg-ctp-base transition-colors duration-300 shadow-sm">
+            <GuideIcon agency={office.agency} className="w-6 h-6 text-ctp-sky-800" strokeWidth={1.5} />
           </div>
-          <Badge variant="sky">{office.agency}</Badge>
+          <Badge variant="sky" className="px-1">{office.agency}</Badge>
         </div>
 
-        <div className="flex-1 space-y-5">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="flex-1 space-y-4">
+          <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
             <div className="min-w-0 flex-1">
-              <h3 className="text-xl font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
+              <h3 className="text-base font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
                 {office.name}
               </h3>
-              <div className="flex items-center gap-2 mt-1.5 text-ctp-subtext1">
-                <MapPin size={12} className="text-ctp-sky-800" />
-                <span className="text-[10px] font-bold uppercase tracking-widest">{office.city}, {office.province}</span>
+              <div className="flex items-center gap-2 mt-1 text-ctp-subtext1">
+                <MapPin size={10} className="text-ctp-sky-800" />
+                <span className="text-[9px] font-bold uppercase tracking-[0.1em]">{office.city}, {office.province}</span>
               </div>
             </div>
             
-            <div className="flex items-center gap-6 shrink-0">
+            <div className="flex items-center gap-5 shrink-0">
               <div className="text-right">
-                <div className="flex items-center gap-1.5 justify-end">
-                  <Star size={14} className="fill-ctp-yellow text-ctp-yellow" />
-                  <span className="text-lg font-bold text-ctp-text">{office.stats.avgRating?.toFixed(1) || '0.0'}</span>
+                <div className="flex items-center gap-1 justify-end">
+                  <Star size={12} className="fill-ctp-yellow text-ctp-yellow" />
+                  <span className="text-sm font-bold text-ctp-text">{office.stats.avgRating?.toFixed(1) || '0.0'}</span>
                 </div>
-                <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 whitespace-nowrap opacity-80">{office.stats.totalReports} interactions</p>
+                <p className="text-[8px] text-ctp-subtext1 font-bold uppercase tracking-[0.1em] mt-0.5 whitespace-nowrap opacity-60">{office.stats.totalReports} interactions</p>
               </div>
-              <div className="h-8 w-px bg-ctp-surface1 hidden md:block" />
-              <div className="flex flex-col items-center min-w-[80px] gap-1">
-                <span className="text-[8px] font-bold uppercase tracking-widest opacity-80">Avg. Wait</span>
-                <Badge variant={waitTimeVariant}>{waitTimeLabel}</Badge>
+              <div className="h-6 w-px bg-ctp-surface1 hidden md:block" />
+              <div className="flex flex-col items-center min-w-[70px] gap-0.5">
+                <span className="text-[8px] font-bold uppercase tracking-widest opacity-60">Wait</span>
+                <Badge variant={waitTimeVariant} className="px-1 py-0">{waitTimeLabel}</Badge>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-2">
-             <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Office Address:</p>
-             <p className="text-xs text-ctp-text font-medium leading-relaxed opacity-90">{office.address}</p>
+          <div className="flex flex-col gap-1">
+             <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em]">Address:</p>
+             <p className="text-[11px] text-ctp-text font-medium leading-relaxed opacity-80 line-clamp-1">{office.address}</p>
           </div>
         </div>
       </div>
       
-      <div className="mt-5 pt-4 border-t border-ctp-surface1/50 flex items-center justify-between">
-        <div className="flex items-center gap-2.5 opacity-80">
-          <div className="p-1.5 rounded bg-ctp-mantle border border-ctp-surface1">
-            <MessageSquare size={12} className="text-ctp-subtext1" />
-          </div>
-          <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">
-            {office.stats.totalReports > 0 ? `Crowdsourced from ${office.stats.totalReports} citizens` : 'Be the first to report'}
+      <div className="px-4 py-2.5 bg-ctp-mantle/30 border-t border-ctp-surface1/50 flex items-center justify-between">
+        <div className="flex items-center gap-2 opacity-80">
+          <Users size={12} className="text-ctp-subtext1" />
+          <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+            {office.stats.totalReports > 0 ? `${office.stats.totalReports} Citizen Reports` : 'No reports yet'}
           </span>
         </div>
-        <Button 
-          variant="ghost"
-          size="sm"
+        <button 
           onClick={() => router.push('/coming-soon')}
-          rightIcon={<ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" strokeWidth={3} />}
-          className="text-ctp-sky-800 font-bold text-[10px] uppercase tracking-widest hover:underline px-0 py-0 h-auto"
+          className="text-ctp-sky-800 font-bold text-[9px] uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
         >
-          View detailed insights
-        </Button>
+          Details
+          <ArrowRight size={10} strokeWidth={4} />
+        </button>
       </div>
     </Card>
   );

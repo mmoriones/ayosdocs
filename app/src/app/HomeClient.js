@@ -168,26 +168,69 @@ export default function HomeClient({ allGuides }) {
         title={status === 'loading' 
           ? 'Overview' 
           : isLoggedIn 
-          ? `${session.user.isNewUser ? 'Welcome to AyosDocs' : 'Welcome back'}, ${session.user.name?.split(' ')[0] || 'User'}!` 
-          : 'Overview'}
-        description={status === 'loading'
-          ? 'Access your government requirement checklists.'
-          : isLoggedIn 
-          ? "Track your applications and discover new guides." 
-          : "Discover and plan your Philippine government document requirements."}
-        actions={
-          <Button 
-            onClick={() => router.push('/guides')}
-            leftIcon={<Search size={16} />}
-          >
-            Search Guides
-          </Button>
-        }
+          ? `Welcome back, ${session.user.name?.split(' ')[0] || 'User'}` 
+          : 'Welcome to AyosDocs'}
+        description={isLoggedIn ? "Here's what's happening with your government applications." : "Your control center for Philippine government requirements."}
+        compact
       />
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-10">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-6 space-y-10">
+        {/* Quick Actions Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card 
+            background="mantle" 
+            className="group cursor-pointer hover:border-ctp-sky-800/30 transition-all border-dashed"
+            onClick={() => router.push('/offices')}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-lg bg-ctp-sky-800/5 text-ctp-sky-800 flex items-center justify-center group-hover:bg-ctp-sky-800 group-hover:text-white transition-all">
+                <MapPin size={20} />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm tracking-tight">Find an Office</h3>
+                <p className="text-xs text-ctp-subtext1">Locate branches and check wait times</p>
+              </div>
+              <ArrowRight size={16} className="ml-auto text-ctp-surface2 group-hover:text-ctp-sky-800 transition-colors" />
+            </div>
+          </Card>
+
+          <Card 
+            background="mantle" 
+            className="group cursor-pointer hover:border-ctp-sky-800/30 transition-all border-dashed"
+            onClick={() => router.push('/bundles')}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-lg bg-ctp-sky-800/5 text-ctp-sky-800 flex items-center justify-center group-hover:bg-ctp-sky-800 group-hover:text-white transition-all">
+                <Layers size={20} />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm tracking-tight">Plan a Life Event</h3>
+                <p className="text-xs text-ctp-subtext1">Bundled guides for your major goals</p>
+              </div>
+              <ArrowRight size={16} className="ml-auto text-ctp-surface2 group-hover:text-ctp-sky-800 transition-colors" />
+            </div>
+          </Card>
+
+          <Card 
+            background="mantle" 
+            className="group cursor-pointer hover:border-ctp-sky-800/30 transition-all border-dashed"
+            onClick={() => router.push('/guides')}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-lg bg-ctp-sky-800/5 text-ctp-sky-800 flex items-center justify-center group-hover:bg-ctp-sky-800 group-hover:text-white transition-all">
+                <BookOpen size={20} />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm tracking-tight">Browse Library</h3>
+                <p className="text-xs text-ctp-subtext1">Search our database of 50+ guides</p>
+              </div>
+              <ArrowRight size={16} className="ml-auto text-ctp-surface2 group-hover:text-ctp-sky-800 transition-colors" />
+            </div>
+          </Card>
+        </div>
+
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {status === 'loading' || (isLoggedIn && isLoadingUserData) ? (
             <>
               <StatsCard.Skeleton />
@@ -198,10 +241,11 @@ export default function HomeClient({ allGuides }) {
           ) : (
             <>
               <StatsCard 
-                label="Active Guides" 
+                label="Active Trackers" 
                 value={stats.active.toString()} 
                 icon={Clock} 
                 isLocked={!isLoggedIn}
+                trend={{ value: "+2", isUp: true }}
               />
               <StatsCard 
                 label="Completed" 
@@ -215,30 +259,32 @@ export default function HomeClient({ allGuides }) {
                 icon={BookOpen} 
               />
               <StatsCard 
-                label="Community Reports" 
+                label="User Reports" 
                 value="1.2k" 
                 icon={TrendingUp} 
+                trend={{ value: "12%", isUp: true }}
               />
             </>
           )}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Main Column: Active Progress & Discovery */}
-          <div className="lg:col-span-2 space-y-10">
-            {/* Active Guide Section */}
+          {/* Main Column */}
+          <div className="lg:col-span-2 space-y-12">
+            {/* Active Workflow */}
             <section className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-bold tracking-tight">Active Workflow</h2>
+              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
+                <div className="flex items-center gap-2">
+                  <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Primary Workflow</h2>
+                  <Badge variant="sky" className="text-[10px] px-1.5 py-0">ACTIVE</Badge>
+                </div>
                 {activeGuide && !isLoadingUserData && status !== 'loading' && (
-                  <Button 
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => router.push('/my-docs')}
-                    className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
+                  <Link 
+                    href="/my-docs"
+                    className="text-[10px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                   >
-                    View All
-                  </Button>
+                    View All Activity
+                  </Link>
                 )}
               </div>
               
@@ -254,69 +300,65 @@ export default function HomeClient({ allGuides }) {
                   isModal={false}
                 />
               ) : (
-                <div className="bg-ctp-mantle border border-dashed border-ctp-surface1 rounded-xl p-12 text-center space-y-4">
-                  <div className="w-12 h-12 bg-ctp-base border border-ctp-surface1 rounded-full flex items-center justify-center mx-auto text-ctp-subtext1">
-                    <BookOpen size={20} />
+                <Card background="mantle" className="border-dashed py-12 text-center space-y-4">
+                  <div className="w-12 h-12 bg-ctp-base border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto text-ctp-subtext1 shadow-inner">
+                    <BookOpen size={22} strokeWidth={1.5} />
                   </div>
                   <div className="space-y-1">
-                    <p className="font-semibold">No active guides</p>
-                    <p className="text-sm text-ctp-subtext1 max-w-xs mx-auto">
-                      Start tracking your progress by picking a guide from our library.
+                    <p className="font-bold text-ctp-text">No active trackers</p>
+                    <p className="text-xs text-ctp-subtext1 max-w-xs mx-auto">
+                      Start tracking your progress by picking a guide from our knowledge base.
                     </p>
                   </div>
                   <Button 
                     variant="ghost"
                     size="sm"
                     onClick={() => router.push('/guides')}
-                    className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold"
+                    className="text-ctp-sky-800 font-bold text-[10px] uppercase tracking-widest"
                   >
-                    Browse Library
+                    Explore Guides
                   </Button>
-                </div>
+                </Card>
               )}
             </section>
 
             {/* Life Event Bundles */}
-            <section className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-bold tracking-tight">Life Event Goals</h2>
-                <Button 
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => router.push('/bundles')}
-                  className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
+            <section className="space-y-6">
+              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Life Event Goals</h2>
+                <Link 
+                  href="/bundles"
+                  className="text-[10px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                 >
-                  View All
-                </Button>
+                  Browse Roadmaps
+                </Link>
               </div>
               <StartWithGoal />
             </section>
 
-            {/* Office Finder Section */}
-            <section className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-bold tracking-tight">Government Offices</h2>
-                <Button 
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => router.push('/offices')}
-                  className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
+            {/* Office Finder */}
+            <section className="space-y-6">
+              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Intelligence Network</h2>
+                <Link 
+                  href="/offices"
+                  className="text-[10px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                 >
-                  View All
-                </Button>
+                  Live Status
+                </Link>
               </div>
-              <Card background="mantle" noPadding className="relative group overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(var(--sky-800)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+              <Card background="mantle" noPadding className="relative group overflow-hidden border-ctp-surface1">
+                <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(var(--sky-800)_1.5px,transparent_1.5px)] [background-size:20px:20px] pointer-events-none" />
                 
-                <div className="relative z-10 p-6 lg:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 lg:gap-10">
-                  <div className="flex items-center gap-5 lg:gap-6 flex-1 min-w-0">
-                    <div className="w-14 h-14 rounded-2xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:scale-105 transition-transform shrink-0">
-                      <MapPin size={28} strokeWidth={1.5} />
+                <div className="relative z-10 p-6 lg:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                  <div className="flex items-center gap-6 flex-1 min-w-0">
+                    <div className="w-14 h-14 rounded-2xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:scale-105 transition-all duration-300 shrink-0">
+                      <MapPin size={30} strokeWidth={1.5} />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-xl font-bold tracking-tight leading-none whitespace-nowrap mb-2 text-ctp-text">Locate an Office</h3>
-                      <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed max-w-md hidden sm:block">
-                        Find government branches near you and check real-time wait times.
+                      <h3 className="text-xl font-bold tracking-tight text-ctp-text mb-1">Office Locator</h3>
+                      <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed max-w-sm">
+                        Find government branches, check real-time wait times, and read community reports.
                       </p>
                     </div>
                   </div>
@@ -324,46 +366,33 @@ export default function HomeClient({ allGuides }) {
                   <div className="w-full md:w-auto flex items-end gap-2 relative z-10 shrink-0">
                     <form onSubmit={handleOfficeSearch} className="relative flex-1 md:w-64 lg:w-80">
                       <Input 
-                        placeholder="City or Agency..." 
+                        placeholder="Search city or agency..." 
                         value={officeSearch}
                         onChange={(e) => setOfficeSearch(e.target.value)}
                         maxLength={100}
                         containerClassName="space-y-0"
+                        className="bg-ctp-base border-ctp-surface1 h-[50px]"
                       />
                     </form>
                     <Button 
                       onClick={handleOfficeSearch}
-                      className="whitespace-nowrap h-[50px]"
+                      className="whitespace-nowrap h-[50px] px-8"
                     >
-                      Search
+                      Locate
                     </Button>
                   </div>
                 </div>
               </Card>
             </section>
-
-            {/* Recently Updated */}
-            <section className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-bold tracking-tight">Latest Changes</h2>
-                <Button 
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => router.push('/updates')}
-                  className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
-                >
-                  View All
-                </Button>
-              </div>
-              <RecentlyUpdated />
-            </section>
           </div>
 
-          {/* Sidebar Column: Widgets */}
-          <div className="space-y-10">
+          {/* Sidebar Column */}
+          <div className="space-y-12">
             {/* Popular Guides */}
-            <section className="space-y-4">
-              <h2 className="text-lg font-bold tracking-tight">Popular Guides</h2>
+            <section className="space-y-6">
+              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Trending Now</h2>
+              </div>
               <div className="space-y-3">
                 {popularGuides.length > 0 ? (
                   popularGuides.map((guide, idx) => {
@@ -388,17 +417,9 @@ export default function HomeClient({ allGuides }) {
             </section>
 
             {/* Recent Experiences */}
-            <section className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-lg font-bold tracking-tight">Recent Reports</h2>
-                <Button 
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => router.push('/offices')}
-                  className="text-ctp-sky-800 hover:text-ctp-sky-700 font-bold uppercase tracking-wider"
-                >
-                  View All
-                </Button>
+            <section className="space-y-6">
+              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Community Feed</h2>
               </div>
               <RecentExperiences />
             </section>
@@ -411,25 +432,27 @@ export default function HomeClient({ allGuides }) {
           </div>
         </div>
 
-        <section className="py-8 border-t border-ctp-surface1">
-          <Card background="mantle" noPadding className="flex flex-col md:flex-row items-center justify-between gap-6 p-8">
-            <div className="space-y-2 text-center md:text-left">
-              <h3 className="text-xl font-bold tracking-tight text-ctp-text">Need assistance?</h3>
-              <p className="text-sm text-ctp-subtext1 max-w-md">
-                Our help center and community are here to help you navigate complex requirements.
+        <section className="py-12 border-t border-ctp-surface1">
+          <Card background="mantle" noPadding className="flex flex-col md:flex-row items-center justify-between gap-8 p-10 border-dashed">
+            <div className="space-y-3 text-center md:text-left">
+              <h3 className="text-2xl font-bold tracking-tight text-ctp-text">Still have questions?</h3>
+              <p className="text-sm text-ctp-subtext1 max-w-lg font-medium">
+                Our help center and community contributors are ready to help you navigate through any government process.
               </p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <Button 
                 variant="secondary"
                 onClick={() => router.push('/faqs')}
+                className="px-6"
               >
                 Help Center
               </Button>
               <Button 
                 onClick={() => router.push('/contact')}
+                className="px-6"
               >
-                Contact Support
+                Contact Us
               </Button>
             </div>
           </Card>

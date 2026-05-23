@@ -74,23 +74,23 @@ export default function ProfileClient() {
 
   return (
     <div className="bg-ctp-base font-sans text-ctp-text min-h-screen pb-20">
-      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50">
+      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/30 mb-8">
         <div className="max-w-[1600px] mx-auto">
           <div className="space-y-1">
             <h1 className="text-2xl font-bold tracking-tight text-ctp-text">Profile</h1>
-            <p className="text-sm text-ctp-subtext1">Manage your identity and account details.</p>
+            <p className="text-xs text-ctp-subtext1 font-medium">Manage your personal identity and account security credentials.</p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-10">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 space-y-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Profile Content */}
           <div className="lg:col-span-2 space-y-8">
             
             {/* Personal Information Section */}
             <Card 
-              title="Personal Information" 
+              title="Personal Identity" 
               overflow="visible"
               headerAction={
                 !isEditing && status !== 'loading' && (
@@ -100,42 +100,42 @@ export default function ProfileClient() {
                     onClick={() => setIsEditing(true)}
                     leftIcon={<Edit3 size={14} />}
                   >
-                    Edit info
+                    Modify
                   </Button>
                 )
               }
-              className="animate-in fade-in slide-in-from-bottom-2 duration-300"
+              className="animate-in fade-in duration-300"
             >
               {status === 'loading' ? (
-                 <div className="p-2 space-y-8">
+                 <div className="space-y-8">
                     <div className="flex flex-col md:flex-row gap-8">
-                      <Skeleton className="w-24 h-24 rounded-2xl shrink-0" />
-                      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="space-y-2.5">
-                          <Skeleton className="w-20 h-2.5 ml-1 opacity-50" />
-                          <Skeleton className="w-full h-12 rounded-xl" />
+                      <Skeleton className="w-20 h-20 rounded-xl shrink-0" />
+                      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <Skeleton className="w-16 h-2.5 ml-1 opacity-50" />
+                          <Skeleton className="w-full h-10 rounded-lg" />
                         </div>
-                        <div className="space-y-2.5 opacity-60">
-                          <Skeleton className="w-20 h-2.5 ml-1 opacity-50" />
-                          <Skeleton className="w-full h-12 rounded-xl" />
+                        <div className="space-y-2 opacity-60">
+                          <Skeleton className="w-16 h-2.5 ml-1 opacity-50" />
+                          <Skeleton className="w-full h-10 rounded-lg" />
                         </div>
                       </div>
                     </div>
                  </div>
               ) : (
               <div className="space-y-8">
-                <div className="flex flex-col md:flex-row md:items-start gap-8">
+                <div className="flex flex-col md:flex-row md:items-start gap-10">
                   <div className="relative w-20 h-20 shrink-0">
                     <Avatar
                       src={user?.image}
                       name={user?.name || 'A'}
                       size="xl"
-                      className="rounded-2xl"
+                      className="rounded-xl border-2 border-ctp-base ring-1 ring-ctp-surface1 shadow-sm"
                     />
-                    <div className="absolute bottom-0 right-0 translate-x-1.5 translate-y-2 z-10">
-                      <Tooltip content="Avatar editing coming soon" position="top">
-                        <div className="p-1.5 bg-ctp-base border border-ctp-surface1 rounded-lg shadow-sm text-ctp-subtext1 opacity-80 cursor-not-allowed">
-                          <Camera size={14} />
+                    <div className="absolute bottom-0 right-0 translate-x-1 translate-y-1 z-10">
+                      <Tooltip content="Upload coming soon" position="top">
+                        <div className="p-1.5 bg-ctp-base border border-ctp-surface1 rounded bg-white shadow-sm text-ctp-sky-800 cursor-not-allowed">
+                          <Camera size={12} strokeWidth={2.5} />
                         </div>
                       </Tooltip>
                     </div>
@@ -144,7 +144,7 @@ export default function ProfileClient() {
                   {/* Info Form/Display */}
                   <div className="flex-1 w-full">
                     {isEditing ? (
-                      <form onSubmit={handleSaveProfile} className="space-y-6 max-w-md">
+                      <form onSubmit={handleSaveProfile} className="space-y-6 max-w-lg">
                         <Input
                           label="Full Name"
                           value={newName}
@@ -152,7 +152,7 @@ export default function ProfileClient() {
                             setNewName(e.target.value);
                             if (error) setError('');
                           }}
-                          placeholder="Your full name"
+                          placeholder="Enter your name"
                           maxLength={70}
                           error={getFieldError()}
                           leftIcon={User}
@@ -168,10 +168,10 @@ export default function ProfileClient() {
                             disabled={newName.trim() === user?.name || newName.trim().length < 2}
                             size="md"
                           >
-                            Save Changes
+                            Save Updates
                           </Button>
                           <Button 
-                            variant="outline" 
+                            variant="secondary" 
                             size="md" 
                             onClick={() => {
                               setIsEditing(false);
@@ -186,21 +186,20 @@ export default function ProfileClient() {
                     ) : (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Full Name</label>
-                          <div className="flex items-center gap-3 px-4 py-3.5 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-sm font-semibold text-ctp-text shadow-inner">
-                            <User size={16} className="text-ctp-sky-800" />
+                          <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Legal Name</label>
+                          <div className="flex items-center gap-3 px-3.5 py-2.5 bg-ctp-mantle/50 border border-ctp-surface1 rounded-lg text-sm font-bold text-ctp-text">
+                            <User size={16} className="text-ctp-sky-800" strokeWidth={2.5} />
                             <span>{user?.name}</span>
                           </div>
                         </div>
                         <div className="space-y-1.5 opacity-80 min-w-0">
-                          <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Email Address</label>
+                          <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Email Address</label>
                           <Tooltip content={user?.email} className="w-full">
-                            <div className="flex items-center gap-3 px-4 py-3.5 bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl text-sm font-semibold text-ctp-subtext1 overflow-hidden">
-                              <Mail size={16} className="text-ctp-surface2 shrink-0" />
+                            <div className="flex items-center gap-3 px-3.5 py-2.5 bg-ctp-crust/30 border border-ctp-surface1 rounded-lg text-sm font-bold text-ctp-subtext1 overflow-hidden">
+                              <Mail size={16} className="text-ctp-surface2 shrink-0" strokeWidth={2.5} />
                               <span className="truncate">{user?.email}</span>
                             </div>
                           </Tooltip>
-                          <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-tight ml-1 mt-1 truncate">Contact your admin to change email</p>
                         </div>
                       </div>
                     )}
@@ -211,39 +210,39 @@ export default function ProfileClient() {
             </Card>
 
             {/* Account Verification Section */}
-            <Card title="Account Verification">
+            <Card title="Security Status">
               {status === 'loading' ? (
-                 <div className="flex items-center gap-6 p-2">
-                  <Skeleton className="w-12 h-12 rounded-xl shrink-0" />
+                 <div className="flex items-center gap-5 p-2">
+                  <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
                   <div className="flex-1 space-y-2">
-                    <Skeleton className="w-1/3 h-4" />
-                    <Skeleton className="w-full h-3" />
+                    <Skeleton className="w-1/4 h-3" />
+                    <Skeleton className="w-full h-2.5" />
                   </div>
                 </div>
               ) : (
-              <div className={`flex flex-col md:flex-row md:items-center gap-6 p-6 rounded-xl border ${
+              <div className={`flex flex-col md:flex-row md:items-center gap-6 p-5 rounded-lg border ${
                 user?.isVerified 
-                  ? 'bg-ctp-green/5 border-ctp-green/20' 
-                  : 'bg-ctp-yellow/5 border-ctp-yellow/20'
+                  ? 'bg-ctp-green/[0.04] border-ctp-green/20' 
+                  : 'bg-ctp-yellow/[0.04] border-ctp-yellow/20'
               }`}>
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${
-                  user?.isVerified ? 'bg-ctp-green/10 text-ctp-green' : 'bg-ctp-yellow/10 text-ctp-yellow'
+                <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 shadow-sm border ${
+                  user?.isVerified ? 'bg-ctp-base text-ctp-green border-ctp-green/20' : 'bg-ctp-base text-ctp-yellow border-ctp-yellow/20'
                 }`}>
-                  <ShieldCheck size={24} />
+                  <ShieldCheck size={20} strokeWidth={2.5} />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-bold tracking-tight">
-                    {user?.isVerified ? 'Verified Account' : 'Action Required: Verify Email'}
+                  <h4 className="text-sm font-bold tracking-tight uppercase">
+                    {user?.isVerified ? 'Identity Verified' : 'Action Required'}
                   </h4>
-                  <p className="text-sm text-ctp-subtext1 mt-1 leading-relaxed">
+                  <p className="text-xs text-ctp-subtext1 mt-1 leading-relaxed font-medium">
                     {user?.isVerified 
-                      ? 'Your identity has been confirmed. You have full access to all government guide tracking and cloud sync features.'
-                      : 'Please verify your email address to enable secure cloud sync and prevent data loss during browser sessions.'}
+                      ? 'Your account is fully verified. Secure cloud sync and guide history are active.'
+                      : 'Verify your email to enable cross-device synchronization and document backup.'}
                   </p>
                 </div>
                 {!user?.isVerified && (
-                  <Button variant="secondary" size="sm" className="whitespace-nowrap">
-                    Resend Verification
+                  <Button variant="secondary" size="sm" className="whitespace-nowrap shadow-sm bg-white">
+                    Send Link
                   </Button>
                 )}
               </div>
@@ -253,45 +252,63 @@ export default function ProfileClient() {
 
           {/* Sidebar Stats */}
           <div className="space-y-8">
-            <Card title="Profile Stats" background="mantle">
+            <Card title="Account Overview" background="mantle" className="border-dashed">
               {status === 'loading' ? (
-                 <div className="space-y-6 py-2">
-                    <div className="flex justify-between items-center"><Skeleton className="w-20 h-3" /><Skeleton className="w-12 h-3" /></div>
-                    <div className="flex justify-between items-center"><Skeleton className="w-20 h-3" /><Skeleton className="w-16 h-3" /></div>
-                    <Skeleton className="w-full h-10 rounded-xl mt-4" />
+                 <div className="space-y-4 py-2">
+                    <div className="flex justify-between items-center"><Skeleton className="w-16 h-2.5" /><Skeleton className="w-10 h-2.5" /></div>
+                    <div className="flex justify-between items-center"><Skeleton className="w-16 h-2.5" /><Skeleton className="w-14 h-2.5" /></div>
+                    <Skeleton className="w-full h-9 rounded-lg mt-4" />
                  </div>
               ) : (
               <>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between py-2 border-b border-ctp-surface1/50">
-                    <div className="flex items-center gap-2 text-ctp-subtext1">
-                      <Calendar size={14} />
-                      <span className="text-xs font-medium">Member Since</span>
+                    <div className="flex items-center gap-2.5 text-ctp-subtext1">
+                      <Calendar size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
+                      <span className="text-[10px] font-bold uppercase tracking-widest">Joined</span>
                     </div>
-                    <span className="text-xs font-bold">May 2026</span>
+                    <span className="text-[11px] font-bold text-ctp-text uppercase">May 2026</span>
                   </div>
                   <div className="flex items-center justify-between py-2">
-                    <div className="flex items-center gap-2 text-ctp-subtext1">
-                      <ShieldCheck size={14} />
-                      <span className="text-xs font-medium">Account Type</span>
+                    <div className="flex items-center gap-2.5 text-ctp-subtext1">
+                      <ShieldCheck size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
+                      <span className="text-[10px] font-bold uppercase tracking-widest">Type</span>
                     </div>
-                    <span className="text-xs font-bold text-ctp-sky-800">
-                      {session?.user?.googleAuth && session?.user?.hasPassword ? 'Hybrid' : session?.user?.googleAuth ? 'Google OAuth' : 'Standard'}
+                    <span className="text-[11px] font-bold text-ctp-sky-800 uppercase">
+                      {session?.user?.googleAuth && session?.user?.hasPassword ? 'Hybrid' : session?.user?.googleAuth ? 'Google' : 'Local'}
                     </span>
                   </div>
                 </div>
 
-                <Button 
-                  variant="outline" 
+                <button 
                   onClick={() => signOut({ callbackUrl: '/' })}
-                  className="w-full mt-8 text-ctp-red hover:bg-red-500/5 hover:border-red-500/20"
-                  leftIcon={<LogOut size={14} />}
+                  className="w-full mt-8 flex items-center justify-center gap-2 p-2.5 rounded-lg border border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red text-[10px] font-bold uppercase tracking-widest hover:bg-ctp-red hover:text-white transition-all group"
                 >
-                  Sign Out
-                </Button>
+                  <LogOut size={14} strokeWidth={3} className="transition-transform group-hover:-translate-x-0.5" />
+                  Sign Out of Account
+                </button>
               </>
               )}
             </Card>
+
+            <div className="bg-ctp-sky-800 rounded-xl p-5 text-white relative overflow-hidden group shadow-lg shadow-ctp-sky-800/10">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8 blur-2xl pointer-events-none" />
+              <div className="relative z-10 space-y-4">
+                <div className="flex items-center gap-2.5">
+                  <Edit3 size={16} strokeWidth={2.5} />
+                  <h3 className="text-[10px] font-bold uppercase tracking-widest opacity-90">Guide Discovery</h3>
+                </div>
+                <p className="text-xs font-medium leading-relaxed opacity-80">
+                  Ready to track more? Explore our updated knowledge base.
+                </p>
+                <Button 
+                  onClick={() => router.push('/guides')}
+                  className="w-full bg-white !text-ctp-sky-800 hover:bg-white/90 text-[10px] uppercase tracking-widest shadow-lg shadow-black/5"
+                >
+                  Browse Guides
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

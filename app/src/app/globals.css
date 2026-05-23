@@ -192,7 +192,7 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -200,12 +200,27 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  @apply bg-ctp-surface1;
-  border-radius: 10px;
+  @apply bg-ctp-surface1/50;
+  border-radius: 20px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   @apply bg-ctp-surface2;
+}
+
+/* High-Density Dashboard Utilities */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.text-density-xs {
+  font-size: 0.65rem;
+  line-height: 1rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 /* Fix Table of Contents Numbering Duplication - Aggressive Reset */

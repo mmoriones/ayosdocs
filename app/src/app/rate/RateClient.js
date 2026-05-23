@@ -29,7 +29,7 @@ import PageHeader from '@/components/ui/PageHeader';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
 import { submitOfficeReportAction } from '@/app/actions/office';
-import { Tooltip } from '@/components/ui';
+import { Tooltip, Card, Input } from '@/components/ui';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 
@@ -38,12 +38,12 @@ const STAR_VALUES = [1, 2, 3, 4, 5];
  */
 const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, onHover, disabled }) => {
   return (
-    <div className={`bg-ctp-base border border-ctp-surface1 rounded-xl p-5 flex flex-col items-center text-center shadow-sm transition-all ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-ctp-sky-800/30 group'}`}>
-      <div className="w-10 h-10 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 mb-3 group-hover:scale-105 transition-transform shadow-inner">
-        <Icon size={18} />
+    <div className={`bg-ctp-base border border-ctp-surface1 rounded-lg p-4 flex flex-col items-center text-center transition-all ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-ctp-sky-800/20 hover:bg-ctp-mantle/30 group'}`}>
+      <div className="w-9 h-9 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 mb-3 group-hover:bg-ctp-base transition-colors shadow-sm">
+        <Icon size={16} strokeWidth={2.5} />
       </div>
-      <h4 className="text-[10px] font-bold text-ctp-subtext1 mb-3 uppercase tracking-widest leading-none">{label}</h4>
-      <div className="flex items-center gap-1.5">
+      <h4 className="text-[9px] font-bold text-ctp-subtext1 mb-3 uppercase tracking-widest leading-none">{label}</h4>
+      <div className="flex items-center gap-1">
         {STAR_VALUES.map((star) => (
           <button
             key={star}
@@ -52,10 +52,11 @@ const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, o
             onClick={() => onClick(category, star)}
             onMouseEnter={() => !disabled && onHover(category, star)}
             onMouseLeave={() => !disabled && onHover(category, 0)}
-            className={`transition-all ${!disabled ? 'active:scale-90' : 'cursor-not-allowed'}`}
+            className={`transition-all ${!disabled ? 'active:scale-90 hover:scale-110' : 'cursor-not-allowed'}`}
           >
             <Star
-              size={18}
+              size={16}
+              strokeWidth={star <= (hoverValue || value) ? 0 : 2}
               className={`${
                 star <= (hoverValue || value)
                   ? 'fill-ctp-yellow text-ctp-yellow'
@@ -73,18 +74,18 @@ const StarRating = ({ category, label, icon: Icon, value, hoverValue, onClick, o
  * RadioGroup component for the experience reporting form.
  */
 const RadioGroup = ({ label, name, options, value, onChange, tooltip, disabled }) => (
-  <div className={`py-4 border-b border-ctp-surface1 last:border-0 flex flex-col md:flex-row md:items-center justify-between gap-4 ${disabled ? 'opacity-50 pointer-events-none' : ''}`}>
+  <div className={`py-3.5 border-b border-ctp-surface1 last:border-0 flex flex-col md:flex-row md:items-center justify-between gap-4 ${disabled ? 'opacity-50 pointer-events-none' : ''}`}>
     <div className="flex items-center gap-2">
-      <label className="text-xs font-bold text-ctp-text uppercase tracking-tight">{label}</label>
+      <label className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">{label}</label>
       {tooltip && (
         <Tooltip content={tooltip} delay={0}>
-          <Info size={12} className="text-ctp-subtext1 cursor-help" />
+          <Info size={12} className="text-ctp-subtext1 cursor-help" strokeWidth={2.5} />
         </Tooltip>
       )}
     </div>
-    <div className="flex flex-wrap items-center gap-4">
+    <div className="flex flex-wrap items-center gap-5">
       {options.map((option) => (
-        <label key={option.value} className={`flex items-center gap-2 group ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+        <label key={option.value} className={`flex items-center gap-2.5 group ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
           <div className="relative flex items-center justify-center">
             <input
               type="radio"
@@ -93,11 +94,11 @@ const RadioGroup = ({ label, name, options, value, onChange, tooltip, disabled }
               disabled={disabled}
               checked={value === option.value}
               onChange={(e) => onChange(e.target.value)}
-              className="peer appearance-none w-4 h-4 rounded-full border border-ctp-surface1 bg-ctp-mantle checked:bg-ctp-sky-800 checked:border-ctp-sky-800 transition-all cursor-pointer shadow-inner"
+              className="peer appearance-none w-3.5 h-3.5 rounded-full border border-ctp-surface1 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer shadow-sm"
             />
-            <div className="absolute w-1.5 h-1.5 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+            <div className="absolute w-1.5 h-1.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
           </div>
-          <span className={`text-[11px] font-bold uppercase tracking-tight transition-colors ${value === option.value ? 'text-ctp-text' : 'text-ctp-subtext1 group-hover:text-ctp-text'}`}>
+          <span className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${value === option.value ? 'text-ctp-sky-800' : 'text-ctp-subtext1 group-hover:text-ctp-text'}`}>
             {option.label}
           </span>
         </label>
@@ -338,100 +339,91 @@ export default function RateClient() {
             <div className="flex-1 min-w-0 space-y-10">
               <form onSubmit={handleSubmit} className="space-y-10">
                 {/* Office Details */}
-                <section className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">
-                  <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-4">
-                    <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm">
-                      <MapPin size={18} />
-                    </div>
-                    <div>
-                      <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest leading-none">Office Details</h2>
-                      <p className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-1 opacity-70">Which branch did you visit?</p>
-                    </div>
-                  </div>
-                  
-                  <div className="p-8 space-y-8">
-                    <div className="space-y-4">
-                      <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Search & Select Office</label>
-                      
-                      {!selectedOffice ? (
-                        <div className="relative group">
-                          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ctp-subtext1 group-focus-within:text-ctp-sky-800 transition-colors" />
-                          <input 
-                            type="text"
-                            placeholder="Type branch name (e.g. DFA Aseana, PSA East Ave)..."
-                            value={officeSearch}
-                            maxLength={100}
-                            onChange={(e) => setOfficeSearch(e.target.value)}
-                            className="w-full pl-12 pr-4 py-4 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all outline-none shadow-inner"
-                          />
-                          
-                          {officeSearch.length >= 2 && (
-                            <div className="absolute top-full left-0 right-0 mt-2 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-xl z-50 overflow-hidden">
-                              {isLoadingOffices ? (
-                                <div className="p-6 text-center text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest flex items-center justify-center gap-3">
-                                  <Loader2 size={14} className="animate-spin" />
-                                  Searching branches...
+                <Card title="Office Selection" background="base" overflow="visible" className="animate-in fade-in duration-300">
+                  <div className="space-y-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                      <div className="space-y-4">
+                        {!selectedOffice ? (
+                          <div className="relative group">
+                            <Input 
+                              label="Search Government Office"
+                              placeholder="e.g. DFA Aseana, NBI Manila..."
+                              value={officeSearch}
+                              onChange={(e) => setOfficeSearch(e.target.value)}
+                              maxLength={100}
+                              leftIcon={Search}
+                              className="bg-ctp-mantle/50"
+                            />
+                            
+                            {officeSearch.length >= 2 && (
+                              <div className="absolute top-[calc(100%+8px)] left-0 right-0 bg-ctp-base border border-ctp-surface1 rounded-lg shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                                {isLoadingOffices ? (
+                                  <div className="p-6 text-center text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest flex items-center justify-center gap-3">
+                                    <Loader2 size={14} className="animate-spin" strokeWidth={3} />
+                                    Searching...
+                                  </div>
+                                ) : offices.length > 0 ? (
+                                  <div className="divide-y divide-ctp-surface1/30 max-h-60 overflow-y-auto custom-scrollbar">
+                                    {offices.map((office) => (
+                                      <button
+                                        key={office._id}
+                                        type="button"
+                                        onClick={() => setSelectedOffice(office)}
+                                        className="w-full px-4 py-3.5 text-left hover:bg-ctp-mantle transition-all flex items-center justify-between group"
+                                      >
+                                        <div className="min-w-0">
+                                          <h4 className="text-[11px] font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight truncate">{office.name}</h4>
+                                          <p className="text-[9px] text-ctp-subtext1 mt-0.5 font-bold uppercase tracking-widest opacity-60 truncate">{office.city}, {office.province}</p>
+                                        </div>
+                                        <ArrowRight size={12} className="text-ctp-sky-800 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                                      </button>
+                                    ))}
+                                  </div>
+                                ) : (
+                                  <div className="p-6 text-center text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">No branches found</div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Selected Location</label>
+                            <div className="bg-ctp-sky-800/[0.04] border border-ctp-sky-800/20 rounded-lg p-4 flex items-center justify-between group shadow-sm">
+                              <div className="flex items-center gap-3.5">
+                                <div className="w-10 h-10 rounded-lg bg-ctp-base border border-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shadow-sm">
+                                  <Building2 size={18} strokeWidth={2.5} />
                                 </div>
-                              ) : offices.length > 0 ? (
-                                <div className="divide-y divide-ctp-surface1/50 max-h-60 overflow-y-auto no-scrollbar">
-                                  {offices.map((office) => (
-                                    <button
-                                      key={office._id}
-                                      type="button"
-                                      onClick={() => setSelectedOffice(office)}
-                                      className="w-full px-5 py-4 text-left hover:bg-ctp-mantle transition-colors flex items-center justify-between group"
-                                    >
-                                      <div>
-                                        <h4 className="text-xs font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight">{office.name}</h4>
-                                        <p className="text-[10px] text-ctp-subtext1 mt-1 font-medium">{office.city}, {office.province}</p>
-                                      </div>
-                                      <span className="text-[9px] font-bold text-ctp-sky-800 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">Select</span>
-                                    </button>
-                                  ))}
+                                <div>
+                                  <h4 className="text-[11px] font-bold text-ctp-text uppercase tracking-tight leading-tight">{selectedOffice.name}</h4>
+                                  <p className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60 mt-1">{selectedOffice.city}, {selectedOffice.province}</p>
                                 </div>
-                              ) : (
-                                <div className="p-6 text-center text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">No offices found</div>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      ) : (
-                        <div className="bg-ctp-sky-800/5 border border-ctp-sky-800/20 rounded-xl p-5 flex items-center justify-between group">
-                          <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-lg bg-ctp-base border border-ctp-sky-800/20 flex items-center justify-center text-ctp-sky-800 shadow-sm">
-                              <Building2 size={20} />
-                            </div>
-                            <div>
-                              <h4 className="text-sm font-bold text-ctp-text uppercase tracking-tight">{selectedOffice.name}</h4>
-                              <p className="text-[11px] text-ctp-subtext1 font-medium">{selectedOffice.city}, {selectedOffice.province}</p>
+                              </div>
+                              <button 
+                                type="button"
+                                onClick={() => { setSelectedOffice(null); setOfficeSearch(''); }}
+                                className="px-3 py-1.5 rounded-md bg-ctp-base border border-ctp-surface1 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:border-ctp-sky-800/30 transition-all shadow-sm"
+                              >
+                                Change
+                              </button>
                             </div>
                           </div>
-                          <button 
-                            type="button"
-                            onClick={() => { setSelectedOffice(null); setOfficeSearch(''); }}
-                            className="text-[10px] font-bold text-ctp-sky-800 hover:text-ctp-peach uppercase tracking-widest transition-colors"
-                          >
-                            Change Office
-                          </button>
-                        </div>
-                      )}
-                    </div>
+                        )}
+                      </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Date of Visit</label>
-                        <input 
+                      <div className="max-w-xs lg:ml-auto">
+                        <Input 
                           required
+                          label="Date of Visit"
                           type="date" 
                           max={new Date().toISOString().split('T')[0]}
                           value={formData.visitDate}
                           onChange={(e) => setFormData({...formData, visitDate: e.target.value})}
-                          className="w-full px-4 py-3 bg-ctp-mantle border border-ctp-surface1 rounded-lg text-sm font-medium focus:outline-none focus:border-ctp-sky-800 transition-all outline-none"
+                          className="bg-ctp-mantle/50"
                         />
                       </div>
                     </div>
                   </div>
-                </section>
+                </Card>
 
                 {/* Performance Ratings */}
                 <section className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">

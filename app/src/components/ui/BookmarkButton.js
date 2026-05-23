@@ -23,18 +23,18 @@ export default function BookmarkButton({
   tooltipProps = {}
 }) {
   const sizes = {
-    sm: 'w-8 h-8',
-    md: 'w-10 h-10',
-    lg: 'w-12 h-12',
+    sm: 'w-7 h-7',
+    md: 'w-9 h-9',
+    lg: 'w-11 h-11',
   };
 
   const iconSizes = {
-    sm: 14,
-    md: 16,
-    lg: 20,
+    sm: 12,
+    md: 14,
+    lg: 18,
   };
 
-  const rounding = variant === 'circle' ? 'rounded-full' : (size === 'lg' ? 'rounded-xl' : 'rounded-lg');
+  const rounding = variant === 'circle' ? 'rounded-full' : 'rounded-lg';
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -50,10 +50,10 @@ export default function BookmarkButton({
     >
       <button 
         onClick={handleClick}
-        className={`${sizes[size]} ${rounding} border transition-all flex items-center justify-center active:scale-90 shadow-sm ${
+        className={`${sizes[size]} ${rounding} border transition-all flex items-center justify-center active:scale-95 ${
           isFavorite 
-            ? 'bg-ctp-sky-800 border-ctp-sky-800 text-white shadow-ctp-sky-800/20' 
-            : 'bg-ctp-base border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30'
+            ? 'bg-ctp-sky-800/[0.08] border-ctp-sky-800/30 text-ctp-sky-800' 
+            : 'bg-ctp-base border-ctp-surface1 text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-sky-800 hover:border-ctp-sky-800/30'
         }`}
         aria-label={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
       >

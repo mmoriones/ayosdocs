@@ -94,67 +94,63 @@ export default function SettingsClient() {
 
   return (
     <div className="bg-ctp-base font-sans text-ctp-text min-h-screen pb-20 transition-colors duration-300">
-      <PageHeader 
-        icon={Settings}
-        title="Settings"
-        description="Configure your workspace and privacy preferences."
-        actions={
-          <div className="flex items-center gap-3 bg-ctp-mantle/50 px-4 py-2 rounded-xl border border-ctp-surface1">
-            <div className="w-8 h-8 rounded-full bg-ctp-sky-800/20 flex items-center justify-center text-ctp-sky-800">
-              <User size={16} />
+      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/30 mb-8">
+        <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-1">
+            <h1 className="text-2xl font-bold tracking-tight text-ctp-text">Settings</h1>
+            <p className="text-xs text-ctp-subtext1 font-medium">Configure your account preferences and interface experience.</p>
+          </div>
+          <div className="flex items-center gap-3 bg-ctp-mantle/50 px-3.5 py-1.5 rounded-lg border border-ctp-surface1 shadow-sm">
+            <div className="w-7 h-7 rounded-full bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shadow-inner">
+              <User size={14} strokeWidth={2.5} />
             </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-ctp-text leading-tight">{user?.name || 'Guest User'}</span>
-              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-tighter">{user?.email || 'Not signed in'}</span>
+            <div className="flex flex-col min-w-0">
+              <span className="text-[10px] font-bold text-ctp-text leading-tight truncate">{user?.name || 'Guest'}</span>
+              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-tight truncate">{user?.email || 'No Email'}</span>
             </div>
           </div>
-        }
-      />
+        </div>
+      </div>
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
           {/* Navigation Sidebar */}
           <div className="lg:col-span-1">
-            <nav className="flex flex-col gap-1.5 sticky top-24">
-              <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] px-4 mb-2">Account Control</p>
+            <nav className="flex flex-col gap-1 sticky top-24">
+              <p className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.2em] px-3 mb-3">Preferences</p>
               {tabs.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => setActiveTab(item.label)}
-                  className={`group w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm transition-all duration-200 ${
+                  className={`group w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs transition-all duration-200 ${
                     activeTab === item.label 
-                      ? 'bg-ctp-sky-800 text-white shadow-lg shadow-ctp-sky-800/20' 
+                      ? 'bg-ctp-sky-800/[0.06] text-ctp-sky-800' 
                       : 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text'
                   }`}
                 >
-                  <div className={`p-1.5 rounded-lg transition-colors ${
-                    activeTab === item.label ? 'bg-white/20' : 'bg-ctp-surface0 group-hover:bg-ctp-surface1'
+                  <div className={`p-1.5 rounded transition-colors ${
+                    activeTab === item.label ? 'bg-ctp-sky-800 text-white' : 'bg-ctp-mantle group-hover:bg-ctp-base'
                   }`}>
-                    <item.icon size={18} />
+                    <item.icon size={14} strokeWidth={activeTab === item.label ? 2.5 : 2} />
                   </div>
-                  <div className="flex flex-col items-start">
-                    <span className="font-bold tracking-tight">{item.label}</span>
-                    {activeTab !== item.label && (
-                      <span className="text-[10px] text-ctp-subtext1 opacity-60 font-medium group-hover:opacity-100 transition-opacity">
-                        {item.description}
-                      </span>
-                    )}
+                  <div className="flex flex-col items-start min-w-0">
+                    <span className={`font-bold tracking-tight ${activeTab === item.label ? 'text-ctp-sky-800' : ''}`}>{item.label}</span>
                   </div>
                   {activeTab === item.label && (
-                    <ChevronRight size={16} className="ml-auto opacity-60" />
+                    <div className="ml-auto w-1 h-4 bg-ctp-sky-800 rounded-full" />
                   )}
                 </button>
               ))}
               
-              <div className="mt-10 pt-6 border-t border-ctp-surface1">
+              <div className="mt-8 pt-6 border-t border-ctp-surface1">
                 <button 
                   onClick={() => window.location.href = '/api/auth/signout'}
-                  className="w-full flex items-center gap-4 px-4 py-3.5 rounded-xl text-sm text-ctp-red hover:bg-ctp-red/5 transition-all font-bold"
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs text-ctp-red bg-ctp-red/[0.04] hover:bg-ctp-red hover:text-white transition-all font-bold group"
                 >
-                  <div className="p-1.5 rounded-lg bg-ctp-red/10">
-                    <LogOut size={18} />
+                  <div className="p-1.5 rounded bg-white/20 group-hover:bg-white/40">
+                    <LogOut size={14} strokeWidth={2.5} />
                   </div>
-                  <span>Sign Out</span>
+                  <span>Logout</span>
                 </button>
               </div>
             </nav>
@@ -189,43 +185,43 @@ function GeneralSection() {
   ];
 
   return (
-    <Card title="General Settings" background="base" overflow="visible" className="animate-in fade-in slide-in-from-bottom-3 duration-500">
+    <Card title="Regional Controls" background="base" overflow="visible" className="animate-in fade-in duration-500">
       <div className="space-y-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800">
-                <Languages size={14} />
+              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shadow-sm border border-ctp-sky-800/20">
+                <Languages size={14} strokeWidth={2.5} />
               </div>
-              <h3 className="text-sm font-bold text-ctp-text uppercase tracking-wide">Display Language</h3>
+              <h3 className="text-xs font-bold text-ctp-text uppercase tracking-widest">Interface Language</h3>
             </div>
-            <p className="text-xs text-ctp-subtext1 font-medium ml-9">Choose your preferred language for the interface.</p>
+            <p className="text-xs text-ctp-subtext1 font-medium ml-9 opacity-80">Localized content and system notifications.</p>
           </div>
           <SortDropdown 
-            label="Language:" 
+            label="Lang:" 
             value={lang} 
             onChange={setLang} 
             options={langOptions} 
-            className="w-full md:w-auto"
+            className="w-full md:w-auto min-w-[140px]"
           />
         </div>
         
         <div className="pt-10 border-t border-ctp-surface1 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800">
-                <Calendar size={14} />
+              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shadow-sm border border-ctp-sky-800/20">
+                <Calendar size={14} strokeWidth={2.5} />
               </div>
-              <h3 className="text-sm font-bold text-ctp-text uppercase tracking-wide">Date Format</h3>
+              <h3 className="text-xs font-bold text-ctp-text uppercase tracking-widest">System Date Format</h3>
             </div>
-            <p className="text-xs text-ctp-subtext1 font-medium ml-9">Choose how dates are displayed across the platform.</p>
+            <p className="text-xs text-ctp-subtext1 font-medium ml-9 opacity-80">Global date formatting across all trackers.</p>
           </div>
           <SortDropdown 
             label="Format:" 
             value={format} 
             onChange={setFormat} 
             options={formatOptions} 
-            className="w-full md:w-auto"
+            className="w-full md:w-auto min-w-[140px]"
           />
         </div>
       </div>
@@ -240,44 +236,39 @@ function AppearanceSection() {
   const { setTheme, actualTheme } = useTheme();
 
   const themes = [
-    { id: 'light', label: 'Latte', icon: Sun, description: 'Light Mode', accent: 'bg-ctp-latte-sky' },
-    { id: 'dark', label: 'Mocha', icon: Moon, description: 'Dark Mode', accent: 'bg-ctp-sky-800' },
-    { id: 'system', label: 'System', icon: Monitor, description: 'OS Default', accent: 'bg-ctp-subtext1' }
+    { id: 'light', label: 'Latte', icon: Sun, description: 'High Contrast' },
+    { id: 'dark', label: 'Mocha', icon: Moon, description: 'Dark Canvas' },
+    { id: 'system', label: 'Dynamic', icon: Monitor, description: 'Auto-detect' }
   ];
 
   return (
-    <Card title="Appearance" background="base" className="animate-in fade-in slide-in-from-bottom-3 duration-500">
+    <Card title="Visual Theme" background="base" className="animate-in fade-in duration-500">
       <div className="space-y-8">
-        <div className="space-y-1">
-          <h3 className="text-sm font-bold text-ctp-text uppercase tracking-wide">Interface Theme</h3>
-          <p className="text-xs text-ctp-subtext1 font-medium">Choose how AyosDocs looks on your device.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {themes.map((t) => (
             <button
               key={t.id}
               onClick={() => setTheme(t.id)}
-              className={`group relative p-5 rounded-2xl border-2 transition-all duration-300 text-left flex flex-col gap-4 ${
+              className={`group relative p-4 rounded-xl border transition-all duration-300 text-left flex flex-col gap-3 ${
                 actualTheme === t.id 
-                  ? 'border-ctp-sky-800 bg-ctp-sky-800/[0.03] ring-4 ring-ctp-sky-800/5' 
-                  : 'border-ctp-surface1 hover:border-ctp-surface2 bg-ctp-mantle'
+                  ? 'border-ctp-sky-800 bg-ctp-sky-800/[0.04] ring-4 ring-ctp-sky-800/5 shadow-sm' 
+                  : 'border-ctp-surface1 hover:border-ctp-surface2 bg-ctp-mantle/50'
               }`}
             >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                actualTheme === t.id ? 'bg-ctp-sky-800 text-white shadow-lg shadow-ctp-sky-800/30' : 'bg-ctp-surface0 text-ctp-subtext1 group-hover:text-ctp-text'
+              <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                actualTheme === t.id ? 'bg-ctp-sky-800 text-white shadow-md' : 'bg-ctp-base text-ctp-subtext1 group-hover:text-ctp-sky-800 shadow-sm border border-ctp-surface1'
               }`}>
-                <t.icon size={22} />
+                <t.icon size={16} strokeWidth={2.5} />
               </div>
               
               <div>
-                <p className="text-sm font-bold text-ctp-text tracking-tight uppercase">{t.label}</p>
-                <p className="text-[10px] text-ctp-subtext1 font-bold uppercase tracking-widest">{t.description}</p>
+                <p className={`text-xs font-bold tracking-tight uppercase ${actualTheme === t.id ? 'text-ctp-sky-800' : 'text-ctp-text'}`}>{t.label}</p>
+                <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60">{t.description}</p>
               </div>
 
               {actualTheme === t.id && (
                 <div className="absolute top-4 right-4">
-                  <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-ctp-sky-800 shadow-[0_0_8px_rgba(32,159,181,0.5)]" />
                 </div>
               )}
             </button>

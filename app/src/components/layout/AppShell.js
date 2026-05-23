@@ -24,7 +24,7 @@ export default function AppShell({ children }) {
       {/* Mobile Backdrop */}
       {isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-ctp-crust/60 backdrop-blur-sm z-[45] lg:hidden animate-in fade-in duration-300"
+          className="fixed inset-0 bg-ctp-crust/80 backdrop-blur-sm z-[45] lg:hidden animate-in fade-in duration-300"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
@@ -37,13 +37,13 @@ export default function AppShell({ children }) {
       />
       
       <div 
-        className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${
+        className={`flex-1 flex flex-col min-w-0 transition-all duration-300 bg-ctp-base ${
           isCollapsed ? 'lg:pl-16' : 'lg:pl-64'
         }`}
       >
         <DashboardHeader onMenuClick={toggleMobileMenu} />
         
-        <main className="flex-1">
+        <main className="flex-1 overflow-x-hidden">
           {children}
         </main>
 

@@ -101,10 +101,14 @@ const GuideCard = ({
   return (
     <div 
       onClick={() => router.push(`/guides/${guide.slug}`)}
-      className={`${baseCardClass} p-5 cursor-pointer ${className}`}
+      className={`${baseCardClass} p-4 cursor-pointer ${className}`}
     >
-      {showBookmark && (
-        <div className="absolute top-4 right-4 z-10">
+      <div className="flex items-start justify-between mb-4">
+        <div className="w-9 h-9 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 group-hover:bg-ctp-base transition-colors duration-300 shrink-0 shadow-sm">
+          <GuideIcon slug={guide.slug} agency={guide.agency} className="w-5 h-5 text-ctp-sky-800" strokeWidth={1.5} />
+        </div>
+        
+        {showBookmark && (
           <BookmarkButton
             isFavorite={isFavorite}
             onClick={(e) => {
@@ -112,37 +116,34 @@ const GuideCard = ({
               onFavorite?.();
             }}
             size="sm"
+            className="scale-90"
           />
-        </div>
-      )}
-
-      <div className="mb-4 w-10 h-10 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 group-hover:scale-105 transition-transform duration-300 shrink-0">
-        <GuideIcon slug={guide.slug} agency={guide.agency} className="w-6 h-6 text-ctp-sky-800" strokeWidth={1.5} />
+        )}
       </div>
 
       <div className="flex-1">
         {showAgency && (
-          <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-ctp-sky-800/5 text-ctp-sky-800 text-[9px] font-bold uppercase tracking-widest mb-2.5 border border-ctp-sky-800/20">
+          <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-ctp-sky-800/[0.08] text-ctp-sky-800 text-[8px] font-bold uppercase tracking-[0.1em] mb-2 border border-ctp-sky-800/20">
             {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
           </div>
         )}
-        <h3 className={`text-base font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight ${showDescription ? 'mb-1.5' : 'mb-0'}`}>
+        <h3 className={`text-sm font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight ${showDescription ? 'mb-1' : 'mb-0'}`}>
           {guide.shortTitle || guide.title}
         </h3>
         {showDescription && (
-          <p className="text-xs text-ctp-subtext1 line-clamp-2 mb-4 font-medium leading-relaxed opacity-90">
+          <p className="text-[11px] text-ctp-subtext1 line-clamp-2 mb-4 font-medium leading-relaxed opacity-80">
             {guide.description}
           </p>
         )}
 
         {showMeta && (
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-4">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-4">
             <div className="flex items-center gap-1.5 min-w-0">
-              <Clock size={14} className="text-ctp-sky-800 shrink-0" strokeWidth={2.5} />
+              <Clock size={12} className="text-ctp-sky-800 shrink-0" strokeWidth={3} />
               <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>
             </div>
             <div className="flex items-center gap-1.5 min-w-0">
-              <DollarSign size={14} className="text-ctp-sky-800 shrink-0" strokeWidth={2.5} />
+              <DollarSign size={12} className="text-ctp-sky-800 shrink-0" strokeWidth={3} />
               <span className="truncate">{guide.costRange || "Free"}</span>
             </div>
           </div>
@@ -150,13 +151,13 @@ const GuideCard = ({
       </div>
 
       {showFooter && (
-        <div className="pt-4 border-t border-ctp-surface1/50 flex items-center justify-between mt-auto">
-          <span className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest">
+        <div className="pt-3 border-t border-ctp-surface1/30 flex items-center justify-between mt-auto">
+          <span className="text-[8px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60">
             {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Updated Recently"}
           </span>
-          <div className="text-ctp-sky-800 font-bold text-[9px] uppercase tracking-widest flex items-center gap-1">
+          <div className="text-ctp-sky-800 font-bold text-[8px] uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
             Open
-            <ArrowRight size={12} strokeWidth={3} className="transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight size={10} strokeWidth={4} />
           </div>
         </div>
       )}

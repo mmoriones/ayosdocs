@@ -76,51 +76,51 @@ export default function BundlesClient({ initialBundles }) {
 
       {/* QUICK CATEGORY PILLS */}
       <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[64px] z-40 backdrop-blur-md bg-ctp-base/80">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2.5 flex items-center gap-3 overflow-x-auto no-scrollbar">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2 flex items-center gap-3 overflow-x-auto no-scrollbar">
           <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
             <Filter size={12} className="text-ctp-subtext1" />
-            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Filter by goal</span>
+            <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em]">Goals</span>
           </div>
           {categories.map((cat) => (
-            <Button
+            <button
               key={cat}
-              variant={selectedCategory === cat ? 'primary' : 'secondary'}
-              size="sm"
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap border ${
+              className={`px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
                 selectedCategory === cat
                   ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
-                  : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800 hover:text-ctp-sky-800'
+                  : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
               }`}
             >
               {cat}
-            </Button>
+            </button>
           ))}
         </div>
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 w-full">
-        <div className="flex flex-col gap-8">
-          <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 mb-2">
+        <div className="flex flex-col gap-10">
+          <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
             <div className="flex-1 max-w-2xl">
               <SearchInput
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search for bundles (e.g., Marriage, First Job, Business)..."
+                placeholder="Search life events (e.g., Marriage, First Job, Business)..."
+                className="bg-ctp-mantle/50"
               />
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <div className="flex flex-wrap items-center gap-4 shrink-0">
               <SortDropdown 
                 value={sortBy} 
                 onChange={setSortBy} 
                 options={sortOptions} 
+                className="h-10"
               />
 
               <Button 
                 onClick={() => window.location.href = '/coming-soon'}
-                leftIcon={<Plus size={14} strokeWidth={3} className="group-hover:rotate-90 transition-transform" />}
-                className="text-[10px] uppercase tracking-widest group"
+                leftIcon={<Plus size={14} strokeWidth={3} />}
+                className="group"
               >
                 Custom Workflow
               </Button>
@@ -135,22 +135,21 @@ export default function BundlesClient({ initialBundles }) {
             ))}
           </div>
         ) : (
-          <div className="text-center py-32 bg-ctp-mantle rounded-2xl border border-dashed border-ctp-surface1">
-            <div className="w-20 h-20 bg-ctp-surface1/30 rounded-2xl flex items-center justify-center mx-auto mb-8">
-              <Layers size={40} className="text-ctp-subtext1" />
+          <Card background="mantle" className="text-center py-24 border-dashed">
+            <div className="w-16 h-16 bg-ctp-base border border-ctp-surface1 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <Layers size={32} className="text-ctp-subtext1" />
             </div>
-            <h3 className="text-2xl font-bold text-ctp-text">No bundles matched your search</h3>
-            <p className="text-ctp-subtext1 mt-4 max-w-md mx-auto">
-              We&apos;re constantly adding new workflows. Try a broader search or browse by category.
+            <h3 className="text-lg font-bold text-ctp-text uppercase tracking-widest">No bundles matched</h3>
+            <p className="text-xs text-ctp-subtext1 mt-2 max-w-md mx-auto font-medium">
+              We&apos;re constantly building new roadmaps. Try adjusting your search.
             </p>
             <Button 
               onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
-              size="lg"
-              className="mt-10 px-10 py-4 uppercase tracking-wider shadow-xl"
+              className="mt-8 px-8"
             >
-              Reset all filters
+              Reset Search
             </Button>
-          </div>
+          </Card>
         )}
         </div>
       </div>
@@ -164,60 +163,57 @@ const BundleCard = ({ bundle }) => {
   return (
     <Link 
       href={`/bundles/${bundle.id}`}
-      className="group bg-ctp-base rounded-2xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden"
+      className="group bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/20 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden"
     >
-      <div className="absolute top-4 right-4 text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all opacity-0 group-hover:opacity-100">
-        <ArrowRight size={16} strokeWidth={2.5} />
+      <div className="w-9 h-9 rounded-lg bg-ctp-mantle flex items-center justify-center mb-5 border border-ctp-surface1 group-hover:bg-ctp-base transition-colors duration-300 shrink-0 shadow-sm">
+        {getBundleIcon(bundle.id, { size: 18, className: "text-ctp-sky-800" })}
       </div>
 
-      <div className="w-10 h-10 rounded-lg bg-ctp-mantle flex items-center justify-center mb-4 border border-ctp-surface1 group-hover:scale-105 transition-transform duration-300 shrink-0 shadow-inner">
-        {getBundleIcon(bundle.id, { size: 20, className: "text-ctp-sky-800" })}
-      </div>
-
-      <div className="flex-1 space-y-3.5">
-        <div className="space-y-1.5">
-          <div className="flex items-center gap-2">
-            <Badge variant="sky">{bundle.category}</Badge>
-            <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+      <div className="flex-1 space-y-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2.5">
+            <Badge variant="sky" className="px-1">{bundle.category}</Badge>
+            <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em] opacity-60">
               {bundle.flow.length} Stages
             </span>
           </div>
-          <h3 className="text-base font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors tracking-tight leading-tight">
+          <h3 className="text-sm font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors tracking-tight leading-tight">
             {bundle.title}
           </h3>
-          <p className="text-xs text-ctp-subtext1 leading-relaxed line-clamp-2 font-medium opacity-90">
+          <p className="text-[11px] text-ctp-subtext1 leading-relaxed line-clamp-2 font-medium opacity-80">
             {bundle.description}
           </p>
         </div>
 
-        <div className="pt-3.5 border-t border-ctp-surface1/50 space-y-2.5">
-          <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Process Flow:</p>
-          <div className="flex flex-wrap gap-1">
+        <div className="pt-4 border-t border-ctp-surface1/30 space-y-2.5">
+          <p className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Workflow Preview:</p>
+          <div className="flex flex-wrap gap-1.5">
             {bundle.flow.flatMap(s => s.guides).slice(0, 2).map((guide, idx) => (
-              <span key={idx} className="text-[9px] font-bold text-ctp-text bg-ctp-mantle px-1.5 py-0.5 rounded border border-ctp-surface1 truncate max-w-[120px] uppercase tracking-tighter">
+              <span key={idx} className="text-[8px] font-bold text-ctp-text bg-ctp-mantle px-1.5 py-0.5 rounded border border-ctp-surface1 truncate max-w-[110px] uppercase tracking-tight">
                 {guide.replace(/-/g, ' ')}
               </span>
             ))}
             {totalGuides > 2 && (
-              <span className="text-[9px] font-bold text-ctp-subtext1 px-1 py-0.5 uppercase tracking-widest">
-                +{totalGuides - 2} more
+              <span className="text-[8px] font-bold text-ctp-subtext1 px-1 py-0.5 uppercase tracking-widest">
+                +{totalGuides - 2}
               </span>
             )}
           </div>
         </div>
       </div>
 
-      <div className="mt-5 flex items-center justify-between pt-4 border-t border-ctp-surface1/50">
+      <div className="mt-6 flex items-center justify-between pt-4 border-t border-ctp-surface1/30">
         <div className="flex -space-x-1.5">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="w-5 h-5 rounded-full bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shadow-sm">
-              <CheckCircle2 size={10} className="text-ctp-sky-800 opacity-30" />
+            <div key={i} className="w-4 h-4 rounded-full bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shadow-sm">
+              <CheckCircle2 size={8} className="text-ctp-sky-800 opacity-30" />
             </div>
           ))}
         </div>
-        <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest group-hover:underline underline-offset-4">
-          View Roadmap
-        </span>
+        <div className="text-ctp-sky-800 font-bold text-[8px] uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+          View roadmap
+          <ArrowRight size={10} strokeWidth={4} />
+        </div>
       </div>
     </Link>
   );

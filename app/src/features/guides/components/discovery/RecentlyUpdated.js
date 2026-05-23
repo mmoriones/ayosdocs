@@ -19,21 +19,20 @@ const RecentlyUpdated = ({ className = "" }) => {
       const response = await axios.get('/api/guides/recently-updated');
       return response.data;
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 5 * 60 * 1000,
   });
 
   if (isLoading) {
     return (
       <div className={`w-full flex flex-col ${className}`}>
-        <div className="flex-1 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col p-4 space-y-4">
+        <div className="flex-1 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col p-3 space-y-3">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="flex items-center gap-4">
-              <Skeleton className="w-9 h-9 rounded-lg shrink-0" />
+            <div key={i} className="flex items-center gap-3.5">
+              <Skeleton className="w-8 h-8 rounded-lg shrink-0" />
               <div className="flex-1 space-y-2">
-                <Skeleton className="w-3/4 h-3" />
-                <Skeleton className="w-1/2 h-2" />
+                <Skeleton className="w-3/4 h-2.5" />
+                <Skeleton className="w-1/2 h-1.5" />
               </div>
-              <Skeleton className="w-4 h-4 rounded-full" />
             </div>
           ))}
         </div>
@@ -50,34 +49,34 @@ const RecentlyUpdated = ({ className = "" }) => {
               key={item.slug}
               onClick={() => router.push(`/guides/${item.slug}`)}
               className={`
-                group flex items-center gap-4 p-4 cursor-pointer transition-colors hover:bg-ctp-mantle flex-1
+                group flex items-center gap-4 p-3.5 cursor-pointer transition-all hover:bg-ctp-mantle/50 flex-1
                 ${index !== latestUpdates.length - 1 ? 'border-b border-ctp-surface1' : ''}
               `}
             >
-              <div className="w-9 h-9 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 group-hover:border-ctp-sky-800/30 transition-colors">
-                <GuideIcon slug={item.slug} className="w-5 h-5 text-ctp-sky-800" strokeWidth={2} />
+              <div className="w-8 h-8 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 group-hover:border-ctp-sky-800/30 transition-colors shadow-sm">
+                <GuideIcon slug={item.slug} className="w-4 h-4 text-ctp-sky-800" strokeWidth={2} />
               </div>
 
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
                   {item.title}
                 </h3>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-[9px] font-bold text-ctp-sky-800 bg-ctp-sky-800/5 px-1.5 py-0.5 rounded border border-ctp-sky-800/20 uppercase tracking-widest">
+                <div className="flex items-center gap-2.5 mt-1">
+                  <span className="text-[8px] font-bold text-ctp-sky-800 bg-ctp-sky-800/5 px-1.5 py-0.5 rounded border border-ctp-sky-800/20 uppercase tracking-[0.1em]">
                     {item.type || 'Updated'}
                   </span>
-                  <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+                  <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em]">
                     {new Date(item.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </span>
                 </div>
               </div>
 
-              <ChevronRight size={14} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all" />
+              <ChevronRight size={14} strokeWidth={2.5} className="text-ctp-surface2 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all" />
             </div>
           ))
         ) : (
-          <div className="p-8 text-center text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">
-            No recent updates found
+          <div className="p-8 text-center text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">
+            No activity found
           </div>
         )}
       </div>

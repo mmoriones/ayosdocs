@@ -1,15 +1,16 @@
 'use client';
 
-import { Bell, Menu, Sun, Moon } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import { Bell, Menu, Sun, Moon, User, Settings, LogOut, ChevronRight, Palette, Globe, CreditCard, ShieldCheck } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useTheme, useSearch } from "@/context";
 import { useSyncExternalStore, useState } from "react";
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import SearchInput from '@/components/ui/SearchInput';
 import { useAuthUI } from '@/components/Providers';
 import Skeleton from '@/components/ui/Skeleton';
 import Avatar from '@/components/ui/Avatar';
+import DropdownMenu, { DropdownMenuItem } from '@/components/ui/DropdownMenu';
 
 const emptySubscribe = () => () => {};
 const getClientSnapshot = () => true;
@@ -19,12 +20,10 @@ const getServerSnapshot = () => false;
  * Global application header containing breadcrumb navigation, 
  * central search trigger, theme toggling, and account actions.
  * Automatically adapts UI for guest vs authenticated states.
- * 
- * @param {Object} props
- * @param {Function} props.onMenuClick - Triggered to open the mobile sidebar.
  */
 export default function DashboardHeader({ onMenuClick }) {
   const pathname = usePathname();
+  const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   const { toggleSearch } = useSearch();
   const mounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
@@ -49,16 +48,20 @@ export default function DashboardHeader({ onMenuClick }) {
           <Menu size={20} />
         </button>
         
-        <nav className="hidden md:flex items-center gap-2 text-sm">
-          <Link href="/" className="text-ctp-subtext1 hover:text-ctp-text transition-colors">
+        <nav className="hidden md:flex items-center gap-1.5 text-sm">
+          <Link href="/" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-colors px-2 py-1 rounded-md hover:bg-ctp-sky-800/5">
             AyosDocs
           </Link>
           {breadcrumbs.map((bc, i) => (
-            <div key={bc.href} className="flex items-center gap-2">
-              <span className="text-ctp-surface2">/</span>
+            <div key={bc.href} className="flex items-center gap-1.5">
+              <span className="text-ctp-surface2 font-light">/</span>
               <Link 
                 href={bc.href}
-                className={i === breadcrumbs.length - 1 ? "font-semibold text-ctp-text" : "text-ctp-subtext1 hover:text-ctp-text"}
+                className={`px-2 py-1 rounded-md transition-all ${
+                  i === breadcrumbs.length - 1 
+                    ? "font-bold text-ctp-text bg-ctp-surface0/30" 
+                    : "text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 font-medium"
+                }`}
               >
                 {bc.label}
               </Link>
@@ -67,60 +70,91 @@ export default function DashboardHeader({ onMenuClick }) {
         </nav>
       </div>
 
-      <div className="flex-1 max-w-xl px-8 hidden sm:block">
-        <SearchInput 
-          value=""
-          onChange={() => {}}
-          onClick={toggleSearch}
-          placeholder="Search guides, offices, requirements..."
-          variant="standard"
-          showShortcut={true}
-        />
+      <div className="flex-1 max-w-lg px-8 hidden sm:block">
+        <div className="relative group">
+          <SearchInput 
+            value=""
+            onChange={() => {}}
+            onClick={toggleSearch}
+            placeholder="Search guides, offices, requirements..."
+            variant="standard"
+            showShortcut={true}
+            className="bg-ctp-mantle/50 border-ctp-surface1 group-hover:border-ctp-sky-800/30 transition-all"
+          />
+        </div>
       </div>
 
       <div className="flex items-center gap-2">
         <button 
           onClick={toggleTheme}
-          className="p-2 text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle rounded-lg transition-all"
+          className="p-2 text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 rounded-lg transition-all"
           aria-label="Toggle theme"
         >
           {!mounted ? (
             <div className="w-5 h-5" />
           ) : theme === 'light' ? (
-            <Moon size={20} />
+            <Moon size={18} />
           ) : (
-            <Sun size={20} />
+            <Sun size={18} />
           )}
         </button>
 
         {status === 'loading' ? (
           <div className="flex items-center gap-3 ml-2">
-            <div className="w-8 h-8 rounded-lg bg-ctp-mantle border border-ctp-surface1" />
-            <div className="w-8 h-8 rounded-full bg-ctp-mantle border border-ctp-surface1" />
+            <div className="w-8 h-8 rounded-lg bg-ctp-mantle border border-ctp-surface1 animate-pulse" />
+            <div className="w-8 h-8 rounded-full bg-ctp-mantle border border-ctp-surface1 animate-pulse" />
           </div>
         ) : !session ? (
           <button 
             onClick={openAuthModal}
-            className="px-4 py-1.5 bg-ctp-sky-800 text-white rounded-lg text-sm font-semibold hover:bg-ctp-sky-800/90 transition-all shadow-sm active:scale-95 ml-2"
+            className="px-5 py-1.5 bg-ctp-sky-800 text-white rounded-lg text-sm font-bold hover:bg-ctp-sky-800/90 transition-all shadow-sm shadow-ctp-sky-800/20 active:scale-95 ml-2"
           >
             Sign In
           </button>
         ) : (
           <>
-            <button className="p-2 text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle rounded-lg transition-all">
-              <Bell size={20} />
+            <button className="p-2 text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 rounded-lg transition-all relative">
+              <Bell size={18} />
+              <span className="absolute top-2 right-2 w-2 h-2 bg-ctp-red rounded-full border-2 border-ctp-base" />
             </button>
             
-            <Link 
-              href="/profile"
-              className="ml-1 hover:opacity-80 transition-all active:scale-95"
+            <DropdownMenu
+              align="right"
+              trigger={
+                <div className="ml-2 p-0.5 rounded-full hover:ring-2 hover:ring-ctp-sky-800/30 transition-all active:scale-95">
+                  <Avatar
+                    src={user?.image}
+                    name={user?.name || 'User'}
+                    size="sm"
+                  />
+                </div>
+              }
             >
-              <Avatar
-                src={user?.image}
-                name={user?.name || 'User'}
-                size="sm"
-              />
-            </Link>
+              <div className="px-3 py-2.5 border-b border-ctp-surface1 bg-ctp-mantle/30">
+                <p className="text-[10px] font-bold text-ctp-text truncate">{user?.name}</p>
+                <p className="text-[9px] font-medium text-ctp-subtext1 truncate">{user?.email}</p>
+              </div>
+
+              <DropdownMenuItem onClick={() => router.push('/profile')} icon={User}>
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push('/my-docs')} icon={ShieldCheck}>
+                Workspace
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push('/settings')} icon={Settings}>
+                Settings
+              </DropdownMenuItem>
+              
+              <div className="h-px bg-ctp-surface1 my-1" />
+              
+              <DropdownMenuItem 
+                onClick={() => signOut({ callbackUrl: '/' })} 
+                icon={LogOut}
+                className="!text-ctp-red hover:!bg-ctp-red/5"
+              >
+                Log out
+              </DropdownMenuItem>
+            </DropdownMenu>
           </>
         )}
       </div>

@@ -23,29 +23,34 @@ export default function Card({
   overflow = 'hidden',
   ...props
 }) {
-  const bgStyles = background === 'mantle' ? 'bg-ctp-mantle' : 'bg-ctp-base';
+  const backgrounds = {
+    base: 'bg-ctp-base',
+    mantle: 'bg-ctp-mantle',
+    crust: 'bg-ctp-crust'
+  };
+  const bgStyles = backgrounds[background] || backgrounds.base;
   const overflowClass = overflow === 'hidden' ? 'overflow-hidden' : 'overflow-visible';
   
   return (
     <div 
-      className={`rounded-2xl border border-ctp-surface1 shadow-sm ${overflowClass} ${bgStyles} ${className}`}
+      className={`rounded-xl border border-ctp-surface1 shadow-sm transition-all ${overflowClass} ${bgStyles} ${className}`}
       {...props}
     >
       {title && (
-        <div className={`px-6 py-4 border-b border-ctp-surface1 flex items-center justify-between ${headerClassName}`}>
-          <h2 className="text-lg font-bold tracking-tight text-ctp-text">{title}</h2>
-          {headerAction && <div>{headerAction}</div>}
+        <div className={`px-6 py-4 border-b border-ctp-surface1 flex items-center justify-between bg-ctp-mantle/50 ${headerClassName}`}>
+          <h2 className="text-sm font-bold tracking-tight text-ctp-text uppercase tracking-widest">{title}</h2>
+          {headerAction && <div className="animate-in fade-in duration-300">{headerAction}</div>}
         </div>
       )}
 
       {noPadding ? children : (
-        <div className="p-6 md:p-8">
+        <div className="p-5 md:p-6">
           {children}
         </div>
       )}
 
       {footer && (
-        <div className={`px-6 py-4 bg-ctp-mantle/30 border-t border-ctp-surface1 ${footerClassName}`}>
+        <div className={`px-6 py-4 bg-ctp-mantle/50 border-t border-ctp-surface1 ${footerClassName}`}>
           {footer}
         </div>
       )}
