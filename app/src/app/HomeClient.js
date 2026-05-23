@@ -606,6 +606,12 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-6">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Community Feed</h2>
+                <Link 
+                  href="/offices"
+                  className="text-[9px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                >
+                  View All
+                </Link>
               </div>
               <RecentExperiences limit={5} />
             </section>

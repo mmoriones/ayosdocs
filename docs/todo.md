@@ -30,6 +30,7 @@
     - [ ] **Buttons:** Review buttons variants usage on all pages
     - [ ] **Hover:** Make hover overlays consistent
     - [ ] **Tooltip:** Review all client pages and components that needs tooltip
+    - [ ] **Scroll:** Create a reusable button for horizontal scroll [ < > ]
 
 ## ✨ Features & Logic
 - [ ] **Recently Updated:**
