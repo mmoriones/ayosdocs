@@ -234,13 +234,24 @@ export async function updateProgressAction(guideSlug, completedTasks) {
     }
 
     if (!user.savedProgress) user.savedProgress = [];
-    const progressIndex = user.savedProgress.findIndex(p => p.guideSlug === guideSlug);
+    
+    // Find existing entry to preserve isFavorite status and handle duplicates
+    const existingEntry = user.savedProgress.find(p => p.guideSlug === guideSlug);
+    const isFavorite = existingEntry ? existingEntry.isFavorite : false;
 
-    if (progressIndex > -1) {
-      user.savedProgress[progressIndex].completedTasks = completedTasks;
-    } else {
-      user.savedProgress.push({ guideSlug, completedTasks });
-    }
+    // Remove all instances of this guideSlug (including duplicates)
+    user.savedProgress = user.savedProgress.filter(p => p.guideSlug !== guideSlug);
+
+    // Add a single clean entry
+    user.savedProgress.push({ 
+      guideSlug, 
+      completedTasks,
+      isFavorite,
+      updatedAt: Date.now()
+    });
+
+    // Explicitly mark as modified for nested array updates
+    user.markModified('savedProgress');
 
     await user.save();
     
@@ -342,23 +353,23 @@ export async function toggleFavoriteAction(guideSlug) {
     const user = await User.findOne({ email: session.user.email });
     if (!user) return { success: false, message: "User not found" };
 
-    const progressIndex = user.savedProgress.findIndex(p => p.guideSlug === guideSlug);
-    
-    let isFavorite;
-    if (progressIndex === -1) {
-      // If guide is not tracked, add it as a favorite with empty progress
-      user.savedProgress.push({
-        guideSlug,
-        completedTasks: "",
-        isFavorite: true,
-        updatedAt: Date.now()
-      });
-      isFavorite = true;
-    } else {
-      user.savedProgress[progressIndex].isFavorite = !user.savedProgress[progressIndex].isFavorite;
-      // Do not update updatedAt for favorite toggles to prevent UI jumping/rearranging
-      isFavorite = user.savedProgress[progressIndex].isFavorite;
-    }
+    // Find existing entry to preserve progress and handle duplicates
+    const existingEntry = user.savedProgress.find(p => p.guideSlug === guideSlug);
+    const completedTasks = existingEntry ? existingEntry.completedTasks : "";
+    const isFavorite = existingEntry ? !existingEntry.isFavorite : true;
+    // Keep existing updatedAt to prevent UI jumping/rearranging when toggling favorites
+    const updatedAt = existingEntry ? existingEntry.updatedAt : Date.now();
+
+    // Remove all instances of this guideSlug (including duplicates)
+    user.savedProgress = user.savedProgress.filter(p => p.guideSlug !== guideSlug);
+
+    // Add a single clean entry
+    user.savedProgress.push({
+      guideSlug,
+      completedTasks,
+      isFavorite,
+      updatedAt
+    });
     
     // Explicitly mark as modified for nested array updates
     user.markModified('savedProgress');

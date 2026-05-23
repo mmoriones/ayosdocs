@@ -4,38 +4,26 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { 
-  ArrowLeft, 
-  ArrowRight, 
-  CheckCircle2, 
+import {  
   Clock, 
   DollarSign, 
-  AlertCircle,
   PlayCircle,
-  ChevronRight,
   Info,
   PauseCircle,
   Loader2,
   ShieldAlert,
-  Lock,
-  Send,
   CheckCircle,
   Sparkles,
-  Layers,
-  Zap,
-  ListChecks,
-  Calendar,
   Building2
 } from 'lucide-react';
 import { getBundleIcon } from '@/lib/bundleIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
-import { Card, Button } from '@/components/ui';
+import { Card, Button, Skeleton } from '@/components/ui';
 import { startBundleAction, stopBundleAction, resendVerificationAction, toggleFavoriteAction } from '@/app/actions/user';
 import { useToast } from '@/context';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';
-import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * BundleWorkflowClient Component

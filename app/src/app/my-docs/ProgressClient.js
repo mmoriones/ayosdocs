@@ -3,13 +3,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { 
-  Search, 
   Plus, 
-  Filter, 
-  ChevronDown, 
   List,
-  ArrowRight,
-  ShieldAlert,
   BarChart3
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -18,14 +13,12 @@ import Link from 'next/link';
 import { bundles } from "@/data/bundles";
 
 import { SummaryStats, BundleCard, GuideRowCard, DashboardSidebar } from '@/features/guides/components/tracking';
-import SearchInput from '@/components/ui/SearchInput';
-import SortDropdown from '@/components/ui/SortDropdown';
+import { SearchInput, SortDropdown, Skeleton, Card } from '@/components/ui';
 import { useToast } from '@/context';
 import ConfirmModal from '@/components/ConfirmModal';
 import { deleteProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import { Skeleton, Tabs, Tab, Card } from '@/components/ui';
 
 /**
  * ProgressClient Component
@@ -137,7 +130,14 @@ export default function ProgressClient({ allGuides, isRestricted }) {
   const processedGuides = useMemo(() => {
     const progressData = userData?.savedProgress || [];
     
-    let result = progressData
+    // De-duplicate by guideSlug, keeping the most recently updated one
+    const uniqueProgress = [...progressData]
+      .sort((a, b) => new Date(b.updatedAt || 0) - new Date(a.updatedAt || 0))
+      .filter((item, index, self) => 
+        index === self.findIndex((t) => t.guideSlug === item.guideSlug)
+      );
+    
+    let result = uniqueProgress
       .map((item) => {
         const guide = allGuides.find(g => g.slug === item.guideSlug);
         if (!guide) return null;

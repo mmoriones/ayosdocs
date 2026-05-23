@@ -1,23 +1,19 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Star, 
   Clock, 
   Users, 
   Building2, 
   Info, 
-  MapPin, 
-  ChevronRight, 
   CheckCircle2, 
   AlertCircle,
   ArrowRight,
-  ShieldCheck,
   Zap,
   HelpCircle,
   MessageSquare,
   Lock,
-  ShieldAlert,
   Loader2,
   Search
 } from 'lucide-react';
@@ -25,11 +21,10 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import PageHeader from '@/components/ui/PageHeader';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
 import { submitOfficeReportAction } from '@/app/actions/office';
-import { Tooltip, Card, Input, Button, Skeleton } from '@/components/ui';
+import { Tooltip, Card, Input, Button, PageHeader } from '@/components/ui';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 

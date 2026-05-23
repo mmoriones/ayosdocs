@@ -2,13 +2,11 @@
 
 import { 
   Check, 
-  Lock, 
   UserPlus, 
   ShieldCheck, 
   ChevronRight, 
   ArrowRight,
   Loader2,
-  Settings,
   Scan,
   AlertTriangle,
 } from 'lucide-react';
@@ -21,7 +19,7 @@ import { useWorkspace, useToast } from '@/context';
 import { GuideIcon } from '@/lib/guideIcons';
 import { updateProgressAction, toggleFavoriteAction } from '@/app/actions/user';
 import axios from 'axios';
-import { Skeleton, Button, Badge, ProgressBar, BookmarkButton } from '@/components/ui';
+import { Skeleton, Button, Badge, BookmarkButton } from '@/components/ui';
 
 /**
  * Component for rendering and managing a guide's checklist.

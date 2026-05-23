@@ -3,13 +3,11 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { 
-  Bell, 
   Globe, 
   Lock, 
   Palette, 
   Smartphone, 
   Shield, 
-  Loader2, 
   CheckCircle2, 
   ChevronRight,
   Sun,
@@ -21,20 +19,11 @@ import {
   Languages,
   Settings,
   User,
-  CreditCard,
-  Eye,
   LogOut
 } from 'lucide-react';
 import { useTheme, useToast } from '@/context';
 import { changePasswordAction } from '@/app/actions/user';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
-import Card from '@/components/ui/Card';
-import Skeleton from '@/components/ui/Skeleton';
-import Badge from '@/components/ui/Badge';
-import PageHeader from '@/components/ui/PageHeader';
-import SortDropdown from '@/components/ui/SortDropdown';
-import Switch from '@/components/ui/Switch';
+import { Button, Input, Card, Skeleton, Badge, PageHeader, SortDropdown, Switch} from '@/components/ui';
 
 /**
  * Settings client page with interactive tab management and security features.

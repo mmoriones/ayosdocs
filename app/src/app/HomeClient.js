@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
@@ -17,11 +17,9 @@ import {
   MessageSquare, 
   BookOpen, 
   Layers, 
-  Star,
   CheckCircle2,
   TrendingUp,
   Search,
-  Users,
   ShieldCheck
 } from 'lucide-react';
 
@@ -30,12 +28,7 @@ import { StartWithGoal, RecentExperiences, OnboardingBanner, TrendingWidget, Rec
 import { bundles } from '@/data/bundles';
 import StatsCard from '@/components/dashboard/StatsCard';
 import Adsense from '@/components/Adsense';
-import PageHeader from '@/components/ui/PageHeader';
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
-import Input from '@/components/ui/Input';
-import Skeleton from '@/components/ui/Skeleton';
+import { PageHeader, Button, Card, Badge, Input } from '@/components/ui';
 
 /**
  * Dashboard Overview (Home).
@@ -195,24 +188,6 @@ export default function HomeClient({ allGuides }) {
           actions={
             isMounted && isLoggedIn && (
               <div className="flex items-center gap-3">
-                <div className="hidden sm:flex items-center gap-4 pr-6 border-r border-ctp-surface1">
-                  <div className="flex flex-col items-end">
-                     <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">Account Status</span>
-                     <div className="flex items-center gap-1.5">
-                        <span className={`text-[10px] font-bold uppercase ${isVerified ? 'text-ctp-green' : 'text-ctp-yellow'}`}>
-                          {isVerified ? 'Verified' : 'Pending'}
-                        </span>
-                        <ShieldCheck size={12} className={isVerified ? 'text-ctp-green' : 'text-ctp-yellow'} strokeWidth={3} />
-                     </div>
-                  </div>
-                  <div className="flex flex-col items-end">
-                     <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">Auto-Save</span>
-                     <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] font-bold text-ctp-sky-800 uppercase">Active</span>
-                        <div className="w-1.5 h-1.5 rounded-full bg-ctp-sky-800 animate-pulse" />
-                     </div>
-                  </div>
-                </div>
                 <Button 
                   variant="secondary"
                   size="sm"

@@ -6,9 +6,7 @@ import { Loader2, Lock, Eye, EyeOff, CheckCircle2, AlertCircle, ArrowLeft } from
 import Link from 'next/link';
 import { resetPasswordAction } from '@/app/actions/user';
 import { useToast } from '@/context';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
-import Card from '@/components/ui/Card';
+import { Button, Input, Card} from '@/components/ui';
 
 function ResetPasswordForm() {
   const router = useRouter();

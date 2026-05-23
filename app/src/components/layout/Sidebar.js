@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSession, signOut } from 'next-auth/react';
@@ -19,7 +18,6 @@ import {
   User
 } from 'lucide-react';
 import NavItem from './NavItem';
-import Skeleton from '@/components/ui/Skeleton';
 
 /**
  * Main navigation container supporting desktop collapse and mobile drawer modes.

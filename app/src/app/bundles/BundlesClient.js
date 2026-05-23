@@ -3,25 +3,15 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { 
-  Search, 
   ArrowRight, 
   Sparkles,
   Layers,
-  ChevronDown,
-  X,
   Filter,
   CheckCircle2,
   Plus
 } from 'lucide-react';
-import Banner from '@/components/ui/Banner';
-import PageHeader from '@/components/ui/PageHeader';
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
-import SearchInput from '@/components/ui/SearchInput';
-import SortDropdown from '@/components/ui/SortDropdown';
+import { PageHeader, Button, SearchInput, SortDropdown, Skeleton, Badge } from '@/components/ui'
 import { getBundleIcon } from '@/lib/bundleIcons';
-import Skeleton from '@/components/ui/Skeleton';
-import Badge from '@/components/ui/Badge';
 
 /**
  * BundlesClient Component

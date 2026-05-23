@@ -3,10 +3,7 @@
 import { useState } from 'react';
 import { Calendar, ChevronRight, Zap, ListChecks, CheckCircle2, Clock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
-import SortDropdown from '@/components/ui/SortDropdown';
+import { Button, Card, SortDropdown } from '@/components/ui';
 
 /**
  * DashboardSidebar Component

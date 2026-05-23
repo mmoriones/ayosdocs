@@ -18,20 +18,12 @@ import {
   ChevronDown,
   TrendingUp,
   X,
-  Star,
   FileText,
   Building2,
   Filter
 } from 'lucide-react';
 import GuideCard from '@/features/guides/components/GuideCard';
-import Banner from '@/components/ui/Banner';
-import { Card } from '@/components/ui';
-import PageHeader from '@/components/ui/PageHeader';
-import Button from '@/components/ui/Button';
-import SearchInput from '@/components/ui/SearchInput';
-import SortDropdown from '@/components/ui/SortDropdown';
-import FilterPill from '@/components/ui/FilterPill';
-import Adsense from '@/components/Adsense';
+import { Card, PageHeader, Button, SearchInput, SortDropdown, FilterPill, Banner } from '@/components/ui';
 import { toggleFavoriteAction } from '@/app/actions/user';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';

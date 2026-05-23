@@ -7,28 +7,18 @@ import axios from 'axios';
 import { 
   Search, 
   MapPin, 
-  Clock, 
   Star, 
   ArrowRight, 
   TrendingUp, 
   ShieldCheck, 
   Building2, 
-  Info,
-  CheckCircle2,
   Users,
-  Zap,
-  MessageSquare,
   Filter
 } from 'lucide-react';
 import { GuideIcon } from '@/lib/guideIcons';
-import PageHeader from '@/components/ui/PageHeader';
-import Banner from '@/components/ui/Banner';
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
-import SearchInput from '@/components/ui/SearchInput';
+import { PageHeader, Banner, Button, Card, Badge, SearchInput, Skeleton } from '@/components/ui'
 import HolidayAlert from '@/components/HolidayAlert';
-import Skeleton from '@/components/ui/Skeleton';
+
 
 /**
  * OfficesClient Component

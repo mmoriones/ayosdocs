@@ -11,9 +11,8 @@ import {
   Info
 } from 'lucide-react';
 import Link from 'next/link';
-import PageHeader from '@/components/ui/PageHeader';
+import { PageHeader, Banner } from '@/components/ui';
 import { GuideIcon } from '@/lib/guideIcons';
-import Banner from '@/components/ui/Banner';
 
 /**
  * UpdatesClient Component

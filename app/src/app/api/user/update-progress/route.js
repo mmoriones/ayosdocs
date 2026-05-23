@@ -36,13 +36,24 @@ export async function POST(request) {
     }
 
     if (!user.savedProgress) user.savedProgress = [];
-    const progressIndex = user.savedProgress.findIndex(p => p.guideSlug === guideSlug);
+    
+    // Find existing entry to preserve isFavorite status and handle duplicates
+    const existingEntry = user.savedProgress.find(p => p.guideSlug === guideSlug);
+    const isFavorite = existingEntry ? existingEntry.isFavorite : false;
 
-    if (progressIndex > -1) {
-      user.savedProgress[progressIndex].completedTasks = completedTasks;
-    } else {
-      user.savedProgress.push({ guideSlug, completedTasks });
-    }
+    // Remove all instances of this guideSlug (including duplicates)
+    user.savedProgress = user.savedProgress.filter(p => p.guideSlug !== guideSlug);
+
+    // Add a single clean entry
+    user.savedProgress.push({ 
+      guideSlug, 
+      completedTasks,
+      isFavorite,
+      updatedAt: Date.now()
+    });
+
+    // Explicitly mark as modified for nested array updates
+    user.markModified('savedProgress');
 
     await user.save();
 

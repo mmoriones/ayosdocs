@@ -5,12 +5,7 @@ import { useSession, signOut } from 'next-auth/react';
 import { User, Mail, ShieldCheck, Calendar, Camera, LogOut, Loader2, CheckCircle2, Edit3 } from 'lucide-react';
 import { useToast } from '@/context';
 import { updateUserProfileAction } from '@/app/actions/user';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
-import Card from '@/components/ui/Card';
-import Skeleton from '@/components/ui/Skeleton';
-import Avatar from '@/components/ui/Avatar';
-import { Tooltip } from '@/components/ui';
+import { Button, Input, Card, Skeleton, Avatar, Tooltip } from '@/components/ui';
 
 /**
  * Enhanced Profile client page with editable identity management.

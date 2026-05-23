@@ -2,18 +2,12 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { 
-  ArrowLeft, 
-  Clock, 
-  History, 
   Share2, 
-  Bookmark, 
   Sparkles,
   PanelLeftClose,
   PanelLeftOpen,
-  Info,
   List,
   CheckSquare,
-  Settings2,
   AlertCircle
 } from 'lucide-react';
 import Link from 'next/link';

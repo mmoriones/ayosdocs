@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { HelpCircle, ChevronDown, Search, MessageCircle, Sparkles, BookOpen } from 'lucide-react';
-import PageHeader from '@/components/ui/PageHeader';
-import SearchInput from '@/components/ui/SearchInput';
+import {PageHeader, SearchInput} from '@/components/ui';
 import Link from 'next/link';
 
 const faqData = [

@@ -1,5 +1,5 @@
 import PageHeader from '@/components/ui/PageHeader';
-import { Shield, Lock, FileText, CheckCircle2 } from 'lucide-react';
+import { Shield, Lock, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata = {

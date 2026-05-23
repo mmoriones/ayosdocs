@@ -1,16 +1,13 @@
 'use client';
 
-import { Bell, Menu, Sun, Moon, User, Settings, LogOut, ChevronRight, Palette, Globe, CreditCard, ShieldCheck } from 'lucide-react';
+import { Bell, Menu, Sun, Moon, User, Settings, LogOut, ShieldCheck } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useTheme, useSearch } from "@/context";
-import { useSyncExternalStore, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useSession, signOut } from 'next-auth/react';
-import SearchInput from '@/components/ui/SearchInput';
+import { SearchInput, Avatar, DropdownMenu, DropdownMenuItem } from '@/components/ui';
 import { useAuthUI } from '@/components/Providers';
-import Skeleton from '@/components/ui/Skeleton';
-import Avatar from '@/components/ui/Avatar';
-import DropdownMenu, { DropdownMenuItem } from '@/components/ui/DropdownMenu';
 
 const emptySubscribe = () => () => {};
 const getClientSnapshot = () => true;
