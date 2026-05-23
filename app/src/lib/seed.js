@@ -1,7 +1,7 @@
 /**
  * SEEDING UTILITY
  * 
- * This script populates the database with initial government office data.
+ * This script populates the database with initial government office data and guide engagement stats.
  * 
  * Usage:
  * 1. Automatic: Triggered by hitting the GET /api/offices endpoint 
@@ -9,12 +9,13 @@
  * 2. Manual: Import seedOffices and call it within a temporary route 
  *     or administrative script.
  * 
- * Note: It includes a safety check (count > 0) to prevent duplicate 
+ * Note: It includes a safety check (count === 0) to prevent duplicate 
  * seeding in development/production environments.
  */
 
 import connectDB from "@/lib/mongodb";
 import GovernmentOffice from "@/models/GovernmentOffice";
+import GuideStats from "@/models/GuideStats";
 
 const initialOffices = [
   {
@@ -31,7 +32,8 @@ const initialOffices = [
       totalReports: 182,
       avgWaitTime: 'medium',
       appointmentDifficulty: 'moderate'
-    }
+    },
+    isActive: true
   },
   {
     name: 'PSA Quezon City Main Office',
@@ -47,7 +49,8 @@ const initialOffices = [
       totalReports: 156,
       avgWaitTime: 'medium',
       appointmentDifficulty: 'easy'
-    }
+    },
+    isActive: true
   },
   {
     name: 'NBI Clearance Center - UN Avenue',
@@ -63,7 +66,8 @@ const initialOffices = [
       totalReports: 98,
       avgWaitTime: 'slow',
       appointmentDifficulty: 'moderate'
-    }
+    },
+    isActive: true
   },
   {
     name: 'DFA NCR East - Megamall',
@@ -79,7 +83,8 @@ const initialOffices = [
       totalReports: 120,
       avgWaitTime: 'medium',
       appointmentDifficulty: 'difficult'
-    }
+    },
+    isActive: true
   },
   {
     name: 'SSS Diliman Branch',
@@ -95,8 +100,19 @@ const initialOffices = [
       totalReports: 75,
       avgWaitTime: 'slow',
       appointmentDifficulty: 'moderate'
-    }
+    },
+    isActive: true
   }
+];
+
+const initialGuideStats = [
+  { slug: 'passport-appointment', views: 5240, bookmarks: 842 },
+  { slug: 'nbi-clearance', views: 4850, bookmarks: 620 },
+  { slug: 'psa-birth-certificate', views: 4210, bookmarks: 512 },
+  { slug: 'sss-registration', views: 3890, bookmarks: 430 },
+  { slug: 'national-id', views: 3100, bookmarks: 390 },
+  { slug: 'driver-license-renewal', views: 2800, bookmarks: 310 },
+  { slug: 'pag-ibig-housing-loan', views: 2400, bookmarks: 280 }
 ];
 
 export async function seedOffices() {
@@ -105,14 +121,25 @@ export async function seedOffices() {
     
     // Check if offices already exist
     const count = await GovernmentOffice.countDocuments();
-    if (count > 0) {
-      console.log('Database already has offices. Skipping seed.');
-      return;
+    if (count === 0) {
+      await GovernmentOffice.insertMany(initialOffices);
+      console.log('Successfully seeded initial government offices.');
     }
-
-    await GovernmentOffice.insertMany(initialOffices);
-    console.log('Successfully seeded initial government offices.');
   } catch (error) {
     console.error('Error seeding offices:', error);
+  }
+}
+
+export async function seedGuideStats() {
+  try {
+    await connectDB();
+    
+    const count = await GuideStats.countDocuments();
+    if (count === 0) {
+      await GuideStats.insertMany(initialGuideStats);
+      console.log('Successfully seeded initial guide statistics.');
+    }
+  } catch (error) {
+    console.error('Error seeding guide stats:', error);
   }
 }

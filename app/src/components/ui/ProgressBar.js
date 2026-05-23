@@ -18,6 +18,7 @@ export default function ProgressBar({
   const clampedValue = Math.min(100, Math.max(0, value));
 
   const sizes = {
+    xs: 'h-0.5',
     sm: 'h-1',
     md: 'h-1.5',
     lg: 'h-2.5',
@@ -32,14 +33,14 @@ export default function ProgressBar({
 
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <div className={`flex-1 bg-ctp-mantle rounded-full overflow-hidden ${sizes[size]}`}>
+      <div className={`flex-1 bg-ctp-surface0 rounded-full overflow-hidden ${sizes[size]}`}>
         <div
-          className={`${sizes[size]} ${colors[color]} rounded-full transition-all duration-500 ease-out`}
+          className={`${sizes[size]} ${colors[color]} rounded-full transition-all duration-700 ease-out shadow-[0_0_8px_rgba(32,159,181,0.2)]`}
           style={{ width: `${clampedValue}%` }}
         />
       </div>
       {showLabel && (
-        <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest shrink-0">
+        <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] shrink-0">
           {Math.round(clampedValue)}%
         </span>
       )}

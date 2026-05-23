@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { GuideIcon } from '@/lib/guideIcons';
-import { Eye, ArrowRight } from 'lucide-react';
+import { Eye, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Skeleton, BookmarkButton } from '@/components/ui';
 
 /**
@@ -54,48 +54,61 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
   }
 
   return (
-    <div className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:shadow-md hover:border-ctp-sky-800/20 transition-all duration-300 flex flex-col items-center text-center group h-full relative overflow-hidden">
-      
-      {/* Icon Container - Refined Squircle */}
-      <div 
-        className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-300 shadow-sm border border-ctp-surface1 bg-ctp-mantle"
-      >
-        <GuideIcon 
-          slug={guide.slug} 
-          agency={guide.agency} 
-          className="w-7 h-7 text-ctp-sky-800 transition-all" 
-          strokeWidth={1.5}
-        />
-      </div>
-      
-      {/* Content Section */}
-      <div className="space-y-2.5 mb-6 flex-1">
-        <div className="space-y-1">
-          <h3 className="text-base font-bold text-ctp-text tracking-tight leading-tight group-hover:text-ctp-sky-800 transition-colors">
-            {guide.shortTitle || guide.title}
-          </h3>
-          {stats && (
-            <div className="flex items-center justify-center gap-1.5 text-ctp-subtext1">
-              <span className="text-[9px] font-bold uppercase tracking-widest opacity-80">{stats.views} views</span>
-              <Eye size={10} strokeWidth={2.5} className="opacity-60" />
-            </div>
-          )}
+    <div 
+      onClick={() => window.location.href = `/guides/${guide.slug}`}
+      className="bg-ctp-base rounded-lg border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/20 hover:bg-ctp-mantle/[0.4] transition-all duration-300 p-5 flex flex-col h-full group cursor-pointer relative overflow-hidden"
+    >
+      <div className="flex items-start justify-between mb-6">
+        <div className="w-10 h-10 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-base transition-colors duration-300">
+          <GuideIcon 
+            slug={guide.slug} 
+            agency={guide.agency} 
+            className="w-6 h-6" 
+            strokeWidth={1.5}
+          />
         </div>
         
-        <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed line-clamp-2 px-2">
+        {onFavorite && (
+          <div className="scale-75 -mr-2 -mt-2 opacity-0 group-hover:opacity-100 transition-all">
+            <BookmarkButton
+              isFavorite={isFavorite}
+              onClick={onFavorite}
+              size="sm"
+              variant="circle"
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="flex-1 space-y-3">
+        <div className="space-y-1">
+          <h3 className="text-sm font-bold text-ctp-text tracking-tight leading-snug group-hover:text-ctp-sky-800 transition-colors">
+            {guide.shortTitle || guide.title}
+          </h3>
+          <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-[0.15em] opacity-60">
+            {guide.agency}
+          </p>
+        </div>
+        
+        <p className="text-[11px] text-ctp-subtext1 font-medium leading-relaxed line-clamp-2">
           {guide.description}
         </p>
       </div>
 
-      {/* Action Button */}
-      <Link 
-        href={`/guides/${guide.slug}`}
-        onClick={onClick}
-        className="px-5 py-2 bg-ctp-mantle text-ctp-text border border-ctp-surface1 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-ctp-sky-800 hover:text-white hover:border-ctp-sky-800 transition-all active:scale-95 flex items-center justify-center gap-2 group/btn w-full"
-      >
-        <span>Guide Details</span>
-        <ArrowRight size={12} strokeWidth={3} className="transition-transform group-hover/btn:translate-x-1" />
-      </Link>
+      <div className="mt-6 pt-4 border-t border-ctp-surface1/30 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+           <div className="flex items-center gap-1 text-ctp-subtext1">
+              <Eye size={10} strokeWidth={2.5} />
+              <span className="text-[8px] font-bold uppercase tracking-widest">{stats?.views || '1.2k'}</span>
+           </div>
+           <div className="w-px h-2 bg-ctp-surface1" />
+           <div className="flex items-center gap-1 text-ctp-green">
+              <ShieldCheck size={10} strokeWidth={2.5} />
+              <span className="text-[8px] font-bold uppercase tracking-widest">98%</span>
+           </div>
+        </div>
+        <ArrowRight size={14} className="text-ctp-surface2 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all" />
+      </div>
     </div>
   );
 };
@@ -103,29 +116,42 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
 TrendingWidget.Skeleton = function TrendingWidgetSkeleton({ variant = 'default' }) {
   if (variant === 'compact') {
     return (
-      <div className="bg-ctp-base rounded-xl p-3 border border-ctp-surface1 flex items-center gap-4 w-full">
-        <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
+      <div className="bg-ctp-base rounded-lg p-3 border border-ctp-surface1 flex items-center gap-3.5 w-full">
+        <Skeleton className="w-9 h-9 rounded-lg shrink-0" />
         <div className="flex-1 space-y-2">
-          <Skeleton className="w-3/4 h-3" />
-          <Skeleton className="w-1/2 h-2" />
+          <Skeleton className="w-3/4 h-2.5" />
+          <Skeleton className="w-1/2 h-1.5 opacity-60" />
         </div>
-        <Skeleton className="w-4 h-4 rounded-lg shrink-0 ml-2" />
+        <Skeleton className="w-4 h-4 rounded-md shrink-0 ml-1" />
       </div>
     );
   }
 
   return (
-    <div className="bg-ctp-base rounded-xl p-6 border border-ctp-surface1 flex flex-col items-center text-center space-y-5 h-full w-full shadow-sm">
-      <Skeleton className="w-16 h-16 rounded-xl" />
-      <div className="space-y-2.5 w-full flex flex-col items-center">
-        <Skeleton className="w-3/4 h-4" />
-        <Skeleton className="w-1/2 h-2.5 opacity-60" />
-        <div className="w-full space-y-2 mt-2">
-          <Skeleton className="w-full h-3" />
-          <Skeleton className="w-4/5 h-3 mx-auto" />
+    <div className="bg-ctp-base rounded-lg border border-ctp-surface1 p-5 flex flex-col h-full w-full shadow-sm space-y-6">
+      <div className="flex items-start justify-between">
+        <Skeleton className="w-10 h-10 rounded-xl" />
+        <Skeleton className="w-6 h-6 rounded-lg opacity-40" />
+      </div>
+      
+      <div className="flex-1 space-y-3">
+        <div className="space-y-2">
+          <Skeleton className="w-full h-4" />
+          <Skeleton className="w-1/2 h-2 opacity-60" />
+        </div>
+        <div className="space-y-2 pt-1">
+          <Skeleton className="w-full h-2.5" />
+          <Skeleton className="w-4/5 h-2.5" />
         </div>
       </div>
-      <Skeleton className="w-24 h-9 rounded-lg mt-auto" />
+      
+      <div className="pt-4 border-t border-ctp-surface1/30 flex justify-between items-center">
+        <div className="flex gap-3">
+          <Skeleton className="w-10 h-2.5" />
+          <Skeleton className="w-10 h-2.5" />
+        </div>
+        <Skeleton className="w-4 h-4 rounded-md" />
+      </div>
     </div>
   );
 };

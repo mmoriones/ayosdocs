@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { bundles } from '@/data/bundles';
 import { getBundleIcon } from '@/lib/bundleIcons';
+import { Badge } from '@/components/ui';
 
 /**
  * StartWithGoal Component
@@ -13,39 +14,41 @@ const StartWithGoal = () => {
   const router = useRouter();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 gap-4">
       {bundles.slice(0, 3).map((bundle) => (
         <div
           key={bundle.id}
           onClick={() => router.push(`/bundles/${bundle.id}`)}
           className="
-            group p-5 rounded-xl 
+            group px-5 py-4 rounded-lg 
             bg-ctp-base border border-ctp-surface1 shadow-sm
-            hover:shadow-md hover:border-ctp-surface2 transition-all duration-300 cursor-pointer 
-            flex flex-col gap-4 h-full
+            hover:border-ctp-sky-800/20 hover:bg-ctp-mantle/50 transition-all duration-300 cursor-pointer 
+            flex flex-col sm:flex-row sm:items-center gap-6
           "
         >
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300 border border-ctp-surface1">
-              {getBundleIcon(bundle.id, { size: 20, className: "text-ctp-sky-800" })}
+          <div className="flex items-center gap-4 flex-1 min-w-0">
+            <div className="w-10 h-10 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0 group-hover:bg-ctp-base transition-colors duration-300">
+              {getBundleIcon(bundle.id, { size: 18, className: "text-ctp-sky-800" })}
             </div>
-            <div className="min-w-0">
-              <h3 className="text-sm font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors tracking-tight truncate">
-                {bundle.title}
-              </h3>
-              <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest truncate">
-                {bundle.category}
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 mb-0.5">
+                <h3 className="text-[13px] font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors tracking-tight truncate uppercase">
+                  {bundle.title}
+                </h3>
+                <Badge variant="sky" className="px-1 py-0 text-[7px]">{bundle.category}</Badge>
+              </div>
+              <p className="text-[11px] text-ctp-subtext1 font-medium truncate opacity-80">
+                {bundle.description}
               </p>
             </div>
           </div>
 
-          <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed flex-1 line-clamp-2">
-            {bundle.description}
-          </p>
-
-          <div className="flex items-center justify-between pt-4 border-t border-ctp-surface1">
-            <span className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest">View Bundle</span>
-            <ArrowRight size={14} className="text-ctp-subtext1 group-hover:translate-x-1 transition-transform" />
+          <div className="flex items-center gap-8 shrink-0 sm:border-l sm:border-ctp-surface1/50 sm:pl-8 h-8">
+            <div className="flex flex-col">
+              <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Roadmap Steps</span>
+              <span className="text-[11px] font-bold text-ctp-text">{bundle.flow.length} STAGES</span>
+            </div>
+            <ArrowRight size={14} className="text-ctp-surface2 group-hover:text-ctp-sky-800 group-hover:translate-x-1 transition-all" strokeWidth={3} />
           </div>
         </div>
       ))}

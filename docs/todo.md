@@ -53,8 +53,9 @@
 - [ ] **Monitoring Alerts:** Configure **Alertmanager** with Zoho SMTP credentials for system notifications. (inject pass from .env)
 - [ ] **Grafana Dashboards:** Set up and configure dashboards for App performance, Docker container health, and Host metrics.
 - [ ] **SSL Security:** Implement **Cloudflare Origin Certificates** and switch to **Full (Strict)** SSL mode for end-to-end encryption.
+- [ ] **Caching:** Research about caching.
 ~~- [ ] **Sitemap:** Update sitemap and robot scripts to not include user-based and protected routes~~
-- [ ] **Vercel:** Update vercel env variable to ZOHO_AUTH_EMAIL for unified auth related emails
+~~- [ ] **Vercel:** Update vercel env variable to ZOHO_AUTH_EMAIL for unified auth related emails~~
 - [ ] **Deployment:**
 
     ~~- [ ] Dockerize the application.~~
