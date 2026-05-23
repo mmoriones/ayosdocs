@@ -90,9 +90,9 @@ export default async function GuidePage({ params }) {
               <li className="marker:text-ctp-sky-800 font-medium" {...props} />
             ),
             blockquote: ({ ...props }) => (
-              <div className="my-8 bg-ctp-mantle border border-ctp-surface1 rounded-xl p-6 shadow-sm">
+              <div className="my-8 bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 shadow-sm">
                 <div className="flex gap-4">
-                  <div className="w-8 h-8 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-sky-800 shrink-0 shadow-sm border border-ctp-surface1">
+                  <div className="w-8 h-8 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-sky-800 shrink-0 shadow-inner border border-ctp-surface1">
                     <Sparkles size={16} />
                   </div>
                   <div className="prose-p:mb-0 prose-p:text-ctp-text prose-p:font-bold prose-p:text-sm italic" {...props} />
@@ -117,7 +117,7 @@ export default async function GuidePage({ params }) {
               <td className="px-5 py-4 text-xs text-ctp-text border-b border-ctp-surface1 font-medium last:border-b-0" {...props} />
             ),
             tr: ({ ...props }) => (
-              <tr className="hover:bg-ctp-mantle/30 transition-colors" {...props} />
+              <tr className="hover:bg-ctp-mantle/50 transition-colors" {...props} />
             ),
             hr: ({ ...props }) => (
               <hr className="my-10 border-t border-ctp-surface1" {...props} />

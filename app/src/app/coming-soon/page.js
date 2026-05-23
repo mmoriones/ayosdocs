@@ -31,18 +31,18 @@ export default function ComingSoon() {
         <div className="space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-md text-ctp-sky-800 text-[10px] font-bold uppercase tracking-widest">
             <Construction size={12} />
-            Workspace Expansion
+            Feature Brewing
           </div>
           <h1 className="text-3xl font-bold text-ctp-text tracking-tight uppercase tracking-widest">
-            Module Under Development
+            Almost Ready for You
           </h1>
-          <p className="text-ctp-subtext1 text-sm max-w-sm mx-auto leading-relaxed font-medium opacity-90">
-            Our team is activeley building powerful new tools to help you navigate your government documentation journey.
+          <p className="text-ctp-subtext1 text-sm max-w-sm mx-auto leading-relaxed font-medium">
+            We&apos;re currently polishing this feature to make your government documentation journey even smoother.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto text-left">
-          <div className="bg-ctp-mantle p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4 hover:border-ctp-sky-800/30 transition-all group">
+          <div className="bg-ctp-mantle/50 p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4 hover:border-ctp-sky-800/30 transition-all group">
             <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
                <ShieldCheck size={18} />
             </div>
@@ -51,13 +51,13 @@ export default function ComingSoon() {
               <p className="text-xs font-bold text-ctp-text leading-tight tracking-tight">Requirement Bundles</p>
             </div>
           </div>
-          <div className="bg-ctp-mantle p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4 hover:border-ctp-sky-800/30 transition-all group">
+          <div className="bg-ctp-mantle/50 p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4 hover:border-ctp-sky-800/30 transition-all group">
             <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-peach shrink-0 group-hover:scale-105 transition-transform shadow-inner">
                <Timer size={18} />
             </div>
             <div>
-              <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Release Cycle</h3>
-              <p className="text-xs font-bold text-ctp-text leading-tight tracking-tight">Q3 2026 Rollout</p>
+              <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Coming Soon</h3>
+              <p className="text-xs font-bold text-ctp-text leading-tight tracking-tight">Stay Tuned!</p>
             </div>
           </div>
         </div>

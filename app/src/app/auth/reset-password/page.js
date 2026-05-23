@@ -101,7 +101,7 @@ function ResetPasswordForm() {
 
         {status && (
           <div className={`mb-6 p-4 rounded-xl border flex items-start gap-3 animate-in fade-in zoom-in-95 duration-200 ${
-            status.type === 'error' ? 'bg-red-500/10 border-red-500/20 text-red-500' : 'bg-green-500/10 border-green-500/20 text-green-500'
+            status.type === 'error' ? 'bg-ctp-red/[0.07] border-ctp-red/20 text-ctp-red' : 'bg-ctp-green/[0.07] border-ctp-green/20 text-ctp-green'
           }`}>
             {status.type === 'error' ? <AlertCircle size={18} className="mt-0.5 shrink-0" /> : <CheckCircle2 size={18} className="mt-0.5 shrink-0" />}
             <p className="text-sm font-semibold leading-tight">{status.text}</p>
@@ -111,14 +111,14 @@ function ResetPasswordForm() {
         {status?.type === 'success' ? (
           <div className="text-center space-y-6 py-4">
             <div className="flex flex-col items-center gap-2">
-              <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 mb-2">
+              <div className="w-12 h-12 rounded-full bg-ctp-green/[0.07] border border-ctp-green/20 flex items-center justify-center text-ctp-green mb-2">
                 <CheckCircle2 size={32} />
               </div>
               <p className="text-sm text-ctp-subtext1">Redirecting you to the home page...</p>
             </div>
             <Link 
               href="/"
-              className="inline-flex items-center gap-2 bg-ctp-surface0 hover:bg-ctp-surface1 text-ctp-text px-6 py-2.5 rounded-xl font-bold transition-all active:scale-95"
+              className="inline-flex items-center gap-2 bg-ctp-mantle/50 border border-ctp-surface1 hover:bg-ctp-mantle text-ctp-text px-6 py-2.5 rounded-xl font-bold transition-all active:scale-95"
             >
               <ArrowLeft size={16} />
               Go to Home now

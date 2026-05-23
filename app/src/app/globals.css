@@ -17,7 +17,9 @@
   --color-ctp-sky-10: var(--sky-10);
   --color-ctp-sky-50: var(--sky-50);
   --color-ctp-sky-300: var(--sky-300);
+  --color-ctp-sky-700: var(--sky-700);
   --color-ctp-sky-800: var(--sky-800);
+  --color-ctp-sky-900: var(--sky-900);
   --color-ctp-sky: var(--sky-800);
 
   --color-ctp-green: var(--green);
@@ -139,7 +141,9 @@
     --sky-10: #121d26;
     --sky-50: #1a3a4e;
     --sky-300: #67b8c7; /* Desaturated teal for better focus */
+    --sky-700: #2196a8; /* Muted hover state */
     --sky-800: #1a7f91; /* Deeper, more muted teal (Sapphire-Dark) to avoid "neon" effect */
+    --sky-900: #126573; /* Even deeper for subtle contrast */
 
     /* Catppuccin Mocha Accents - Desaturated for Readability */
     --green: #56d364;
@@ -237,6 +241,75 @@
   letter-spacing: 0.1em;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+/* Typography - Prose Customization */
+.prose-ctp {
+  --tw-prose-body: var(--ctp-text);
+  --tw-prose-headings: var(--ctp-text);
+  --tw-prose-links: var(--sky-800);
+  --tw-prose-bold: var(--ctp-text);
+  --tw-prose-counters: var(--ctp-subtext1);
+  --tw-prose-bullets: var(--ctp-surface2);
+  --tw-prose-hr: var(--ctp-surface1);
+  --tw-prose-quotes: var(--ctp-subtext0);
+  --tw-prose-quote-borders: var(--ctp-surface1);
+  --tw-prose-captions: var(--ctp-subtext1);
+  --tw-prose-code: var(--ctp-text);
+  --tw-prose-pre-code: var(--ctp-text);
+  --tw-prose-pre-bg: var(--ctp-mantle);
+  --tw-prose-th-borders: var(--ctp-surface1);
+  --tw-prose-td-borders: var(--ctp-surface1);
+}
+
+.prose-ctp a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: all 0.2s ease;
+}
+
+.prose-ctp a:hover {
+  color: var(--sky-700);
+  text-decoration-color: var(--sky-700);
+}
+
+/* Simplified Table Styling for Prose */
+.prose-ctp table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.prose-ctp thead {
+  border-bottom: 2px solid var(--ctp-surface1);
+}
+
+.prose-ctp th {
+  padding: 0.75rem 1rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.1em !important;
+  text-align: left !important;
+  color: var(--ctp-subtext0) !important;
+}
+
+.prose-ctp td {
+  padding: 0.75rem 1rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  color: var(--ctp-text) !important;
+  border-bottom: 1px solid var(--ctp-surface1) !important;
+  vertical-align: middle !important;
+}
+
+.prose-ctp tr:last-child td {
+  border-bottom: none !important;
+}
+
+.prose-ctp tr:hover td {
+  background-color: var(--ctp-mantle);
 }
 
 /* Fix Table of Contents Numbering Duplication - Aggressive Reset */

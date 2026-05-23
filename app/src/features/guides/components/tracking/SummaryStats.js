@@ -12,9 +12,9 @@ const SummaryStats = ({ stats }) => {
       value: stats.activeBundles || 0, 
       sub: 'Workflows active', 
       icon: Clock, 
-      color: 'text-ctp-green', 
-      bg: 'bg-ctp-green/10',
-      border: 'border-ctp-green/20'
+      color: 'text-ctp-sky-800', 
+      bg: 'bg-ctp-sky-800/10',
+      border: 'border-ctp-sky-800/20'
     },
     { 
       label: 'In Progress', 
@@ -30,9 +30,9 @@ const SummaryStats = ({ stats }) => {
       value: stats.completed || 0, 
       sub: 'All tasks done', 
       icon: CheckCircle2, 
-      color: 'text-ctp-mauve', 
-      bg: 'bg-ctp-mauve/10',
-      border: 'border-ctp-mauve/20'
+      color: 'text-ctp-green', 
+      bg: 'bg-ctp-green/[0.07]',
+      border: 'border-ctp-green/20'
     },
     { 
       label: 'Favorites', 
@@ -48,16 +48,16 @@ const SummaryStats = ({ stats }) => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
       {statItems.map((item) => (
-        <div key={item.label} className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm group hover:shadow-md transition-all">
+        <div key={item.label} className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 shadow-sm group hover:shadow-md transition-all">
           <div className="flex items-center justify-between mb-4">
-            <div className={`w-10 h-10 rounded-lg ${item.bg} ${item.color} flex items-center justify-center border ${item.border} group-hover:scale-105 transition-transform`}>
+            <div className={`w-10 h-10 rounded-lg ${item.bg} ${item.color} flex items-center justify-center border ${item.border} group-hover:scale-105 transition-transform shadow-inner`}>
               <item.icon size={18} strokeWidth={2.5} />
             </div>
             <span className="text-2xl font-bold text-ctp-text tracking-tight leading-none">{item.value}</span>
           </div>
           <div className="space-y-1">
             <h4 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest leading-none">{item.label}</h4>
-            <p className="text-[10px] font-bold text-ctp-subtext0 opacity-60 uppercase tracking-tight">{item.sub}</p>
+            <p className="text-[10px] font-bold text-ctp-subtext0 opacity-50 uppercase tracking-tight">{item.sub}</p>
           </div>
         </div>
       ))}
@@ -69,14 +69,14 @@ SummaryStats.Skeleton = function SummaryStatsSkeleton() {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
       {[1, 2, 3, 4].map((i) => (
-        <div key={i} className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm space-y-4">
+        <div key={i} className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 shadow-sm space-y-4">
           <div className="flex items-center justify-between mb-4">
             <Skeleton className="w-10 h-10 rounded-lg" />
             <Skeleton className="w-12 h-8 rounded-lg" />
           </div>
           <div className="space-y-2">
             <Skeleton className="w-20 h-2.5" />
-            <Skeleton className="w-24 h-2.5 opacity-60" />
+            <Skeleton className="w-24 h-2.5 opacity-40" />
           </div>
         </div>
       ))}

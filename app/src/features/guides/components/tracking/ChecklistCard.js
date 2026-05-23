@@ -257,9 +257,9 @@ const ChecklistCard = ({
               <div className="px-2 py-0.5 rounded-md bg-ctp-sky-800/[0.06] border border-ctp-sky-800/10 shadow-sm shrink-0 min-w-[38px] text-center">
                  <span className="text-[10px] font-bold text-ctp-sky-800">{progressPercent}%</span>
               </div>
-              <div className="flex-1 h-3 bg-ctp-crust rounded-full border border-ctp-surface1 overflow-hidden relative shadow-inner">
+              <div className="flex-1 h-3 bg-ctp-mantle/50 rounded-full border border-ctp-surface1 overflow-hidden relative shadow-inner">
                  <div 
-                   className="h-full transition-all duration-1000 ease-out relative bg-ctp-sky-800 shadow-[0_0_12px_rgba(32,159,181,0.5)]"
+                   className="h-full transition-all duration-1000 ease-out relative bg-ctp-sky-800 shadow-[0_0_12px_var(--sky-800)]"
                    style={{ width: `${progressPercent}%` }}
                  />
               </div>
@@ -388,9 +388,9 @@ const ChecklistCard = ({
               <div className="px-2 py-0.5 rounded-md bg-ctp-sky-800/[0.06] border border-ctp-sky-800/10 shadow-sm shrink-0 min-w-[38px] text-center">
                  <span className="text-[10px] font-bold text-ctp-sky-800">{progressPercent}%</span>
               </div>
-              <div className="flex-1 h-2 bg-ctp-crust rounded-full border border-ctp-surface1 overflow-hidden relative shadow-inner">
+              <div className="flex-1 h-2 bg-ctp-mantle/50 rounded-full border border-ctp-surface1 overflow-hidden relative shadow-inner">
                  <div 
-                   className="h-full transition-all duration-1000 ease-out relative bg-ctp-sky-800 shadow-[0_0_10px_rgba(32,159,181,0.4)]"
+                   className="h-full transition-all duration-1000 ease-out relative bg-ctp-sky-800 shadow-[0_0_10px_var(--sky-800)]"
                    style={{ width: `${progressPercent}%` }}
                  />
               </div>
@@ -438,7 +438,7 @@ const ChecklistCard = ({
                           <Check size={8} strokeWidth={4} />
                         </div>
                       ) : isNextStep ? (
-                        <div className="w-4 h-4 rounded-full border-2 border-ctp-sky-800 flex items-center justify-center bg-ctp-base group-hover:border-ctp-sky-300 transition-all shadow-[0_0_8px_rgba(32,159,181,0.2)]">
+                        <div className="w-4 h-4 rounded-full border-2 border-ctp-sky-800 flex items-center justify-center bg-ctp-base group-hover:border-ctp-sky-300 transition-all shadow-[0_0_8px_var(--sky-800)]">
                           <div className="w-1 h-1 rounded-full bg-ctp-sky-800 animate-pulse" />
                         </div>
                       ) : (

@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import { getBundleIcon } from '@/lib/bundleIcons';
 import GuideCard from '@/features/guides/components/GuideCard';
+import { Card, Button } from '@/components/ui';
 import { startBundleAction, stopBundleAction, resendVerificationAction, toggleFavoriteAction } from '@/app/actions/user';
 import { useToast } from '@/context';
 import { useRouter } from 'next/navigation';
@@ -284,7 +285,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
     <div className="min-h-screen bg-ctp-base font-sans pb-24 text-ctp-text">
       {/* NAVIGATION & HEADER */}
       <div className="bg-ctp-base/80 border-b border-ctp-surface1 sticky top-0 z-50 backdrop-blur-md h-16 flex items-center">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 w-full flex items-center justify-between">
+        <div className="max-w-[1600px] mx-auto px-4 lg:px-6 w-full flex items-center justify-between">
           <div className="flex items-center gap-4 min-w-0">
             <div className="w-10 h-10 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0 shadow-inner">
               {getBundleIcon(bundle.id, { size: 20, className: "text-ctp-sky-800" })}
@@ -322,7 +323,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
         </div>
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10">
+      <div className="max-w-[1600px] mx-auto px-4 lg:px-6 py-10">
         
         {status !== 'loading' && isLoggedIn && !isVerified && (
           <div className="mb-10 animate-shake">
@@ -391,12 +392,13 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
               <div className="space-y-16">
                 {/* Analytics Summary Banner */}
                 {isTracked && (
-                   <div className="relative ml-20 bg-ctp-mantle border border-ctp-surface1 rounded-2xl p-6 mb-12 shadow-sm flex flex-col md:flex-row gap-8 items-center justify-between">
-                      <div className="space-y-1">
-                        <h4 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Resource Forecast</h4>
-                        <p className="text-sm font-bold text-ctp-text">Estimated to complete this workflow</p>
+                   <div className="relative ml-20 bg-ctp-mantle/50 border border-ctp-surface1 rounded-2xl p-6 mb-12 shadow-sm flex flex-col md:flex-row gap-8 items-center justify-between overflow-hidden">
+                      <div className="absolute inset-0 bg-ctp-sky-800/[0.01] pointer-events-none" />
+                      <div className="relative z-10 space-y-1">
+                        <h4 className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest">Resource Forecast</h4>
+                        <p className="text-sm font-bold text-ctp-text">Estimated workflow requirements</p>
                       </div>
-                      <div className="flex gap-10">
+                      <div className="relative z-10 flex gap-10">
                         {isDataLoading ? (
                           <>
                             <div className="text-center space-y-1">
@@ -436,24 +438,27 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                   const isCurrent = step.step === activeStage && isTracked;
                   
                   return (
-                    <div key={stepIdx} className={`relative pl-20 transition-all duration-500 ${isLocked ? 'opacity-40 grayscale pointer-events-none' : 'opacity-100'}`}>
+                    <div key={stepIdx} className="relative pl-20">
                       {/* STEP INDICATOR */}
+                      <div className="absolute left-0 top-0 w-14 h-14 bg-ctp-base rounded-xl z-0" />
                       <div className={`absolute left-0 top-0 w-14 h-14 rounded-xl flex items-center justify-center border-2 transition-all duration-500 z-10 shadow-sm ${
+                        isLocked ? 'opacity-40 grayscale' : ''
+                      } ${
                         step.completed 
-                          ? 'bg-ctp-green border-ctp-green text-white scale-95' 
+                          ? 'bg-ctp-green/30 border-ctp-green/50 text-ctp-green scale-95' 
                           : step.step <= activeStage
-                            ? 'bg-ctp-sky-800 border-ctp-sky-800 text-white scale-100 shadow-lg shadow-ctp-sky-800/20' 
+                            ? 'bg-ctp-sky-800 border-ctp-sky-800 text-white scale-100 shadow-lg shadow-ctp-sky-800/10' 
                             : 'bg-ctp-base border-ctp-surface1 text-ctp-subtext1'
                       }`}>
                         {step.completed ? <CheckCircle size={20} strokeWidth={3} /> : <span className="text-lg font-bold">{step.step}</span>}
                       </div>
 
-                      <div className="space-y-6">
+                      <div className={`space-y-6 transition-all duration-500 ${isLocked ? 'opacity-40 grayscale pointer-events-none' : 'opacity-100'}`}>
                         <div className="space-y-1">
                           <div className="flex items-center gap-3">
                             <h2 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-70">Stage {step.step}</h2>
                             {step.completed && (
-                              <span className="px-2 py-0.5 bg-ctp-green/10 text-ctp-green border border-ctp-green/20 rounded text-[9px] font-bold uppercase tracking-widest">Complete</span>
+                              <span className="px-2 py-0.5 bg-ctp-green/[0.07] text-ctp-green border border-ctp-green/20 rounded text-[9px] font-bold uppercase tracking-widest">Complete</span>
                             )}
                             {isCurrent && (
                               <span className="px-2 py-0.5 bg-ctp-sky-800/10 text-ctp-sky-800 border border-ctp-sky-800/20 rounded text-[9px] font-bold uppercase tracking-widest animate-pulse">Current Focus</span>
@@ -479,6 +484,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                                 showBookmark={true}
                                 showFooter={true}
                                 onFavorite={() => handleFavoriteGuide(guideSlug)}
+                                className={!isTracked ? "bg-ctp-mantle/50 border-ctp-surface1/50 shadow-none hover:bg-ctp-mantle/70" : ""}
                               />
                             );
                           })}
@@ -519,25 +525,24 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                </div>
             </section>
 
-            <section className="bg-ctp-mantle rounded-2xl border border-ctp-surface1 p-6 shadow-sm space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center">
-                  <Building2 size={20} strokeWidth={2.5} />
-                </div>
-                <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">Regional Offices</h3>
+            <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
+              <div className="p-4 border-b border-ctp-surface1 flex items-center gap-2">
+                <Building2 size={14} className="text-ctp-sky-800" />
+                <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Regional Offices</h3>
               </div>
-              
-              <p className="text-xs text-ctp-subtext1 leading-relaxed">
-                Most documents in this bundle can be processed at local municipal centers or integrated SM Mall service hubs.
-              </p>
-              
-              <button 
-                onClick={() => router.push('/offices')}
-                className="w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ctp-text font-bold text-[10px] uppercase tracking-widest hover:bg-ctp-mantle transition-all shadow-sm"
-              >
-                Find nearest office
-              </button>
-            </section>
+              <div className="p-5 space-y-4">
+                <p className="text-[11px] font-medium leading-relaxed text-ctp-subtext1">
+                  Most documents in this bundle can be processed at local municipal centers or integrated SM Mall service hubs.
+                </p>
+                <Button 
+                  variant="secondary"
+                  onClick={() => router.push('/offices')}
+                  className="w-full text-[10px] uppercase tracking-widest"
+                >
+                  Find nearest office
+                </Button>
+              </div>
+            </Card>
           </aside>
         </div>
       </div>

@@ -15,7 +15,7 @@ const BundleCard = ({ bundle, progress }) => {
   return (
     <div 
       onClick={() => router.push(`/bundles/${bundle.id}`)}
-      className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all group cursor-pointer relative overflow-hidden flex flex-col h-full"
+      className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/70 transition-all group cursor-pointer relative overflow-hidden flex flex-col h-full"
     >
       <div className="flex gap-5 items-start">
         <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center group-hover:scale-105 transition-transform border border-ctp-surface1 shrink-0 shadow-inner">
@@ -28,7 +28,7 @@ const BundleCard = ({ bundle, progress }) => {
               <div className="flex items-center gap-2">
                 <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-widest border ${
                   percentage === 100 
-                    ? 'bg-ctp-green/10 text-ctp-green border-ctp-green/20' 
+                    ? 'bg-ctp-green/[0.07] text-ctp-green border-ctp-green/20' 
                     : 'bg-ctp-sky-800/10 text-ctp-sky-800 border-ctp-sky-800/20'
                 }`}>
                   {percentage === 100 ? 'Completed' : 'In Progress'}

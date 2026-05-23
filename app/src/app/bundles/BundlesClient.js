@@ -88,7 +88,7 @@ export default function BundlesClient({ initialBundles }) {
               className={`px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
                 selectedCategory === cat
                   ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
-                  : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
+                  : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
               }`}
             >
               {cat}
@@ -135,7 +135,7 @@ export default function BundlesClient({ initialBundles }) {
             ))}
           </div>
         ) : (
-          <Card background="mantle" className="text-center py-24 border-dashed">
+          <div className="text-center py-24 bg-ctp-mantle/50 rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
             <div className="w-16 h-16 bg-ctp-base border border-ctp-surface1 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
               <Layers size={32} className="text-ctp-subtext1" />
             </div>
@@ -145,11 +145,11 @@ export default function BundlesClient({ initialBundles }) {
             </p>
             <Button 
               onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
-              className="mt-8 px-8"
+              className="mt-8 px-8 uppercase text-[10px] tracking-widest"
             >
               Reset Search
             </Button>
-          </Card>
+          </div>
         )}
         </div>
       </div>

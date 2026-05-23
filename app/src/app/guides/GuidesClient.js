@@ -35,6 +35,7 @@ import Adsense from '@/components/Adsense';
 import { toggleFavoriteAction } from '@/app/actions/user';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
+import { RecentlyUpdated } from '@/features/guides/components/discovery';
 
 /**
  * GuidesClient Component
@@ -304,7 +305,7 @@ export default function GuidesClient({ initialGuides }) {
               className={`px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
                 selectedCategory === cat
                   ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
-                  : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
+                  : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
               }`}
             >
               {cat}
@@ -318,7 +319,7 @@ export default function GuidesClient({ initialGuides }) {
           {/* LEFT SIDEBAR */}
           <aside className="hidden lg:block w-64 shrink-0">
             <div className="sticky top-40 space-y-6">
-              <div className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 space-y-6">
+              <div className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 space-y-6 shadow-sm">
                 <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                   <h2 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.2em]">Filters</h2>
                   <Button 
@@ -396,22 +397,20 @@ export default function GuidesClient({ initialGuides }) {
                 </div>
               </div>
 
-              <Card background="mantle" className="border-ctp-surface1/50">
-                <div className="flex items-center gap-2 mb-4">
-                  <TrendingUp size={14} className="text-ctp-sky-800" />
-                  <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Trending</h3>
+              <Card background="mantle" className="border-ctp-surface1 shadow-sm bg-ctp-mantle/50">
+                <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <TrendingUp size={14} className="text-ctp-sky-800" />
+                    <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Recent Updates</h3>
+                  </div>
+                  <Link 
+                    href="/updates"
+                    className="text-[9px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                  >
+                    View All
+                  </Link>
                 </div>
-                <div className="space-y-4">
-                  {initialGuides.slice(0, 3).map((guide, index) => (
-                    <Link key={guide.slug} href={`/guides/${guide.slug}`} className="flex items-start gap-3 group">
-                      <span className="text-[10px] font-bold text-ctp-surface2 group-hover:text-ctp-sky-800 transition-colors mt-0.5">0{index + 1}</span>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-[11px] font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors line-clamp-1 leading-tight">{guide.shortTitle || guide.title}</p>
-                        <p className="text-[9px] text-ctp-subtext1 mt-0.5 font-bold uppercase tracking-widest opacity-60">{guide.agency}</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+                <RecentlyUpdated />
               </Card>
             </div>
           </aside>
@@ -427,7 +426,7 @@ export default function GuidesClient({ initialGuides }) {
                 />
                 {searchQuery && (
                   <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                    <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest bg-ctp-mantle px-2 py-1 rounded border border-ctp-surface1">
+                    <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest bg-ctp-base px-2 py-1 rounded border border-ctp-surface1">
                       {filteredGuides.length} {filteredGuides.length === 1 ? 'result' : 'results'}
                     </span>
                   </div>
@@ -440,7 +439,7 @@ export default function GuidesClient({ initialGuides }) {
                   onChange={setSortBy} 
                   options={sortOptions} 
                 />
-                <div className="flex items-center bg-ctp-mantle border border-ctp-surface1 p-1 rounded-lg shadow-sm">
+                <div className="flex items-center bg-ctp-mantle/50 border border-ctp-surface1 p-1 rounded-lg shadow-sm">
                   <button onClick={() => handleViewModeChange('grid')} className={`p-1.5 rounded-md transition-all ${viewMode === 'grid' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
                     <LayoutGrid size={16} />
                   </button>
@@ -474,7 +473,7 @@ export default function GuidesClient({ initialGuides }) {
                   variant="ghost"
                   size="sm"
                   onClick={resetFilters}
-                  className="text-[10px] font-bold text-ctp-peach uppercase tracking-widest hover:underline px-2 py-0 h-auto"
+                  className="text-[10px] font-bold text-ctp-orange uppercase tracking-widest hover:underline px-2 py-0 h-auto hover:bg-ctp-orange/10"
                 >
                   Clear All
                 </Button>
@@ -510,7 +509,7 @@ export default function GuidesClient({ initialGuides }) {
               </div>
             ) : (
 
-              <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
+              <div className="text-center py-20 bg-ctp-mantle/50 rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
                 <div className="w-14 h-14 bg-ctp-base/50 border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto mb-6">
                   <Search size={24} className="text-ctp-subtext1" />
                 </div>
@@ -531,7 +530,7 @@ export default function GuidesClient({ initialGuides }) {
                   variant="secondary"
                   onClick={handleLoadMore}
                   rightIcon={<ChevronDown size={14} />}
-                  className="text-[10px] text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-text"
+                  className="text-[10px] text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-text shadow-sm"
                 >
                   Load more guides
                 </Button>

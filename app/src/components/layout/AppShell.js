@@ -46,7 +46,7 @@ export default function AppShell({ children }) {
       {/* Mobile Backdrop */}
       {isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-ctp-crust/80 backdrop-blur-sm z-[45] lg:hidden animate-in fade-in duration-300"
+          className="fixed inset-0 bg-ctp-base/80 backdrop-blur-sm z-[45] lg:hidden animate-in fade-in duration-300"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}

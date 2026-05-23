@@ -20,7 +20,16 @@
     ~~- [ ] **Settings:** Add components on the empty tabs on /settings and make them functional.~~
    ~~- [X] **Profile:** Make user details editable except email~~
     ~~- [ ] **Refator:** Implement global UI component reuse for consistency~~
-    - [ ] **Theme:** Add better color palettes for dark mode to improve contrast and readability 
+    ~~- [ ] **Theme:** Add better color palettes for dark mode to improve contrast and readability ~~
+    - [ ] **Icon:** Update the icon color gradient
+    - [ ] **Flash:** Add flash screen when navigating to another page and having slow loading
+    - [ ] **Skeleton:** Remove the skeleton on /profile and settings
+    - [ ] **Sidebar:** Increase side bar opacity for currently selected item
+    - [ ] **Community Feed:** Make Community Feed single horizontal card
+    - [ ] **Recent Updates:** Improve RecentlyUpdated style and laout on / and /guides
+    - [ ] **Buttons:** Review buttons variants usage on all pages
+    - [ ] **Hover:** Make hover overlays consistent
+    - [ ] **Tooltip:** Review all client pages and components that needs tooltip
 
 ## ✨ Features & Logic
 - [ ] **Recently Updated:**
@@ -31,6 +40,11 @@
     - ~~[X] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").~~
 ~~- [x] Implement user login using email and email verification~~
 ~~- [x] **Authentication:** Sign up using email and verification using OTP or verification link~~
+ - [ ] **Optimizations:**
+    - [ ] Improve /my-docs loading
+    - [ ] Refactor/clean up unused imports and use barrel import
+    - [ ] Rename /contact to /support
+
 
 ## 👤 User Dashboard (My Docs)
 ~~- [ ] **Rename:** Rebrand "User Progress" to **"My Docs"**.~~
@@ -56,6 +70,7 @@
 - [ ] **Caching:** Research about caching.
 ~~- [ ] **Sitemap:** Update sitemap and robot scripts to not include user-based and protected routes~~
 ~~- [ ] **Vercel:** Update vercel env variable to ZOHO_AUTH_EMAIL for unified auth related emails~~
+ - [ ] **Delete Account:** Implement delete account BE and FE
 - [ ] **Deployment:**
 
     ~~- [ ] Dockerize the application.~~
@@ -64,7 +79,12 @@
 ## 🐛 Bugs & Fixes
 - ~~[X] **AuthModal:** Fix bug where AuthModal continues to show after successful login.~~
 - ~~[X] **Clean Content:** Review and remove any legacy references in guide files.~~
+- [ ] **Hydration:** Rate page showing the unauthenticated "AUthentication Required" card when still hydrating
 
 ## 💡 Future Ideas
 ~~- [ ] **Service Rating:** Add a rating system for government services (could be a separate app).~~
   - [ ] **Admin Page:** Add admin page for CMS, Approvals, etc
+
+
+# Next Sprint:
+## Mobile view and Tagalog Translation

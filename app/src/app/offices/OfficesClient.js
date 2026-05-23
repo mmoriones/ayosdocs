@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { GuideIcon } from '@/lib/guideIcons';
 import PageHeader from '@/components/ui/PageHeader';
+import Banner from '@/components/ui/Banner';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
@@ -65,7 +66,7 @@ export default function OfficesClient() {
         description="Real-time community data on government branches and wait times."
         actions={
           <div className="bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
-            <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_rgba(4,165,229,0.5)]" />
+            <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_var(--sky-800)]" />
             <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Community Reports Active</span>
           </div>
         }
@@ -86,7 +87,7 @@ export default function OfficesClient() {
                 className={`px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
                   selectedAgency === agency
                     ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
-                    : 'bg-ctp-mantle text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
+                    : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
                 }`}
               >
                 {agency}
@@ -124,13 +125,13 @@ export default function OfficesClient() {
                   <OfficeCard key={office._id} office={office} router={router} />
                 ))
               ) : (
-                <Card background="mantle" className="text-center py-20 border-dashed">
+                <div className="text-center py-20 bg-ctp-mantle/50 rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
                   <div className="w-12 h-12 bg-ctp-base border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto mb-6 shadow-inner">
                     <Search size={22} className="text-ctp-subtext1" />
                   </div>
                   <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">No matching offices</h3>
                   <p className="text-xs text-ctp-subtext1 font-medium mt-1">Try broadening your search criteria.</p>
-                </Card>
+                </div>
               )}
             </div>
           </div>
@@ -164,25 +165,23 @@ export default function OfficesClient() {
               </button>
             </Card>
 
-            <section className="bg-ctp-sky-800 rounded-xl p-5 text-white relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-12 -mt-12 blur-3xl pointer-events-none" />
-              <div className="relative z-10 space-y-4">
-                <div className="flex items-center gap-3">
-                  <ShieldCheck size={18} strokeWidth={2.5} />
-                  <h3 className="text-[10px] font-bold uppercase tracking-widest opacity-90">Citizen Verified</h3>
-                </div>
-                <p className="text-[11px] font-medium leading-relaxed opacity-80">
-                  Join 1.2k+ citizens in improving government service transparency.
+            <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
+              <div className="p-4 border-b border-ctp-surface1 flex items-center gap-2">
+                <ShieldCheck size={14} className="text-ctp-green" />
+                <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Verified Insights</h3>
+              </div>
+              <div className="p-5 space-y-4 text-center">
+                <p className="text-[11px] font-medium leading-relaxed text-ctp-subtext1">
+                  Join 1.2k+ citizens in improving government service transparency with real-time reports.
                 </p>
                 <Button 
-                  variant="secondary"
                   onClick={() => router.push('/rate')}
-                  className="w-full bg-white !text-ctp-sky-800 hover:bg-white/90 border-none shadow-lg shadow-black/10"
+                  className="w-full shadow-lg shadow-ctp-sky-800/10"
                 >
-                  Post Report
+                  Post Experience
                 </Button>
               </div>
-            </section>
+            </Card>
           </aside>
         </div>
       </div>

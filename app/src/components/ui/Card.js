@@ -27,13 +27,13 @@ export default function Card({
 }) {
   const backgrounds = {
     base: 'bg-ctp-base',
-    mantle: 'bg-ctp-mantle',
-    crust: 'bg-ctp-crust'
+    mantle: 'bg-ctp-mantle/50',
+    crust: 'bg-ctp-crust/50'
   };
   const bgStyles = backgrounds[background] || backgrounds.base;
   const overflowClass = overflow === 'hidden' ? 'overflow-hidden' : 'overflow-visible';
   const interactiveStyles = (interactive || props.onClick) 
-    ? 'cursor-pointer hover:border-ctp-sky-800/30 hover:shadow-md hover:bg-ctp-mantle transition-all active:scale-[0.99]' 
+    ? 'cursor-pointer hover:border-ctp-sky-800/30 hover:shadow-md hover:bg-ctp-mantle/50 transition-all active:scale-[0.99]' 
     : '';
   
   return (

@@ -25,13 +25,13 @@ const RecentlyUpdated = ({ className = "" }) => {
   if (isLoading) {
     return (
       <div className={`w-full flex flex-col ${className}`}>
-        <div className="flex-1 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col p-3 space-y-3">
+        <div className="flex-1 bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col p-3 space-y-3">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="flex items-center gap-3.5">
-              <Skeleton className="w-8 h-8 rounded-lg shrink-0" />
+              <Skeleton className="w-8 h-8 rounded-lg shrink-0 opacity-40" />
               <div className="flex-1 space-y-2">
-                <Skeleton className="w-3/4 h-2.5" />
-                <Skeleton className="w-1/2 h-1.5" />
+                <Skeleton className="w-3/4 h-2.5 opacity-40" />
+                <Skeleton className="w-1/2 h-1.5 opacity-20" />
               </div>
             </div>
           ))}
@@ -42,18 +42,18 @@ const RecentlyUpdated = ({ className = "" }) => {
 
   return (
     <div className={`w-full flex flex-col ${className}`}>
-      <div className="flex-1 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">
+      <div className="flex-1 bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">
         {latestUpdates.length > 0 ? (
           latestUpdates.map((item, index) => (
             <div 
               key={item.slug}
               onClick={() => router.push(`/guides/${item.slug}`)}
               className={`
-                group flex items-center gap-4 p-3.5 cursor-pointer transition-all hover:bg-ctp-mantle/50 flex-1
+                group flex items-center gap-4 p-3.5 cursor-pointer transition-all hover:bg-ctp-mantle/70 flex-1
                 ${index !== latestUpdates.length - 1 ? 'border-b border-ctp-surface1' : ''}
               `}
             >
-              <div className="w-8 h-8 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 group-hover:border-ctp-sky-800/30 transition-colors shadow-sm">
+              <div className="w-8 h-8 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 group-hover:border-ctp-sky-800/30 transition-colors shadow-inner">
                 <GuideIcon slug={item.slug} className="w-4 h-4 text-ctp-sky-800" strokeWidth={2} />
               </div>
 
@@ -62,10 +62,10 @@ const RecentlyUpdated = ({ className = "" }) => {
                   {item.title}
                 </h3>
                 <div className="flex items-center gap-2.5 mt-1">
-                  <span className="text-[8px] font-bold text-ctp-sky-800 bg-ctp-sky-800/5 px-1.5 py-0.5 rounded border border-ctp-sky-800/20 uppercase tracking-[0.1em]">
+                  <span className="text-[8px] font-bold text-ctp-sky-800 bg-ctp-sky-800/[0.07] px-1.5 py-0.5 rounded border border-ctp-sky-800/20 uppercase tracking-[0.1em]">
                     {item.type || 'Updated'}
                   </span>
-                  <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em]">
+                  <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em] opacity-60">
                     {new Date(item.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </span>
                 </div>

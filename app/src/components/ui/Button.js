@@ -29,10 +29,10 @@ export default function Button({
   
   const variants = {
     primary: "bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white shadow-sm shadow-ctp-sky-800/10 disabled:bg-ctp-surface1 disabled:text-ctp-subtext1 disabled:shadow-none",
-    secondary: "bg-ctp-mantle border border-ctp-surface1 text-ctp-text hover:bg-ctp-crust hover:border-ctp-surface2 shadow-sm disabled:opacity-50",
-    outline: "bg-transparent border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle hover:border-ctp-surface2 disabled:opacity-50",
+    secondary: "bg-ctp-mantle/50 border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle hover:border-ctp-sky-800/30 shadow-sm disabled:opacity-50",
+    outline: "bg-transparent border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle/50 hover:border-ctp-sky-800/30 disabled:opacity-50",
     ghost: "bg-transparent text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 disabled:opacity-50",
-    danger: "bg-ctp-red/5 border border-ctp-red/20 text-ctp-red hover:bg-ctp-red hover:text-white disabled:opacity-50"
+    danger: "bg-ctp-red/5 border border-ctp-red/20 text-ctp-red hover:bg-ctp-red/[0.15] hover:border-ctp-red/50 disabled:opacity-50"
   };
 
   const sizes = {

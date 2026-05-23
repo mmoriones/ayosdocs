@@ -48,7 +48,6 @@ export default function SettingsClient() {
   const tabs = [
     { label: 'General', icon: Globe, description: 'Language and regional preferences' },
     { label: 'Appearance', icon: Palette, description: 'Themes and visual styling' },
-    { label: 'Notifications', icon: Bell, description: 'Email and push alerts' },
     { label: 'Privacy & Security', icon: Shield, description: 'Data and account protection' },
     { label: 'Password', icon: Lock, description: 'Security credentials' },
   ];
@@ -94,7 +93,7 @@ export default function SettingsClient() {
 
   return (
     <div className="bg-ctp-base font-sans text-ctp-text min-h-screen pb-20 transition-colors duration-300">
-      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/30 mb-8">
+      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50 mb-8">
         <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1">
             <h1 className="text-2xl font-bold tracking-tight text-ctp-text">Settings</h1>
@@ -124,12 +123,12 @@ export default function SettingsClient() {
                   onClick={() => setActiveTab(item.label)}
                   className={`group w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs transition-all duration-200 ${
                     activeTab === item.label 
-                      ? 'bg-ctp-sky-800/[0.06] text-ctp-sky-800' 
-                      : 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text'
+                      ? 'bg-ctp-sky-800/[0.08] text-ctp-sky-800' 
+                      : 'text-ctp-subtext1 hover:bg-ctp-mantle/50 hover:text-ctp-text'
                   }`}
                 >
                   <div className={`p-1.5 rounded transition-colors ${
-                    activeTab === item.label ? 'bg-ctp-sky-800 text-white' : 'bg-ctp-mantle group-hover:bg-ctp-base'
+                    activeTab === item.label ? 'bg-ctp-sky-800 text-white shadow-sm' : 'bg-ctp-mantle/50 group-hover:bg-ctp-base'
                   }`}>
                     <item.icon size={14} strokeWidth={activeTab === item.label ? 2.5 : 2} />
                   </div>
@@ -145,9 +144,9 @@ export default function SettingsClient() {
               <div className="mt-8 pt-6 border-t border-ctp-surface1">
                 <button 
                   onClick={() => window.location.href = '/api/auth/signout'}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs text-ctp-red bg-ctp-red/[0.04] hover:bg-ctp-red hover:text-white transition-all font-bold group"
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs text-ctp-red bg-ctp-red/[0.04] border border-ctp-red/10 hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all font-bold group"
                 >
-                  <div className="p-1.5 rounded bg-white/20 group-hover:bg-white/40">
+                  <div className="p-1.5 rounded bg-ctp-red/10 group-hover:bg-ctp-red/20 transition-colors">
                     <LogOut size={14} strokeWidth={2.5} />
                   </div>
                   <span>Logout</span>
@@ -185,12 +184,12 @@ function GeneralSection() {
   ];
 
   return (
-    <Card title="Regional Controls" background="base" overflow="visible" className="animate-in fade-in duration-500">
+    <Card title="Regional Controls" background="mantle" overflow="visible" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in duration-500">
       <div className="space-y-10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shadow-sm border border-ctp-sky-800/20">
+              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
                 <Languages size={14} strokeWidth={2.5} />
               </div>
               <h3 className="text-xs font-bold text-ctp-text uppercase tracking-widest">Interface Language</h3>
@@ -209,7 +208,7 @@ function GeneralSection() {
         <div className="pt-10 border-t border-ctp-surface1 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1">
             <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shadow-sm border border-ctp-sky-800/20">
+              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
                 <Calendar size={14} strokeWidth={2.5} />
               </div>
               <h3 className="text-xs font-bold text-ctp-text uppercase tracking-widest">System Date Format</h3>
@@ -242,7 +241,7 @@ function AppearanceSection() {
   ];
 
   return (
-    <Card title="Visual Theme" background="base" className="animate-in fade-in duration-500">
+    <Card title="Visual Theme" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in duration-500">
       <div className="space-y-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {themes.map((t) => (
@@ -251,12 +250,12 @@ function AppearanceSection() {
               onClick={() => setTheme(t.id)}
               className={`group relative p-4 rounded-xl border transition-all duration-300 text-left flex flex-col gap-3 ${
                 actualTheme === t.id 
-                  ? 'border-ctp-sky-800 bg-ctp-sky-800/[0.04] ring-4 ring-ctp-sky-800/5 shadow-sm' 
-                  : 'border-ctp-surface1 hover:border-ctp-surface2 bg-ctp-mantle/50'
+                  ? 'border-ctp-sky-800 bg-ctp-sky-800/[0.08] ring-4 ring-ctp-sky-800/5 shadow-sm' 
+                  : 'border-ctp-surface1 hover:border-ctp-sky-800/30 bg-ctp-base/50'
               }`}
             >
               <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
-                actualTheme === t.id ? 'bg-ctp-sky-800 text-white shadow-md' : 'bg-ctp-base text-ctp-subtext1 group-hover:text-ctp-sky-800 shadow-sm border border-ctp-surface1'
+                actualTheme === t.id ? 'bg-ctp-sky-800 text-white shadow-md' : 'bg-ctp-mantle text-ctp-subtext1 group-hover:text-ctp-sky-800 shadow-sm border border-ctp-surface1'
               }`}>
                 <t.icon size={16} strokeWidth={2.5} />
               </div>
@@ -268,7 +267,7 @@ function AppearanceSection() {
 
               {actualTheme === t.id && (
                 <div className="absolute top-4 right-4">
-                  <div className="w-1.5 h-1.5 rounded-full bg-ctp-sky-800 shadow-[0_0_8px_rgba(32,159,181,0.5)]" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-ctp-sky-800 shadow-[0_0_8px_var(--sky-800)]" />
                 </div>
               )}
             </button>
@@ -287,7 +286,7 @@ function NotificationsSection() {
   const [securityAlerts, setSecurityAlerts] = useState(true);
   
   return (
-    <Card title="Notifications" background="base" className="animate-in fade-in slide-in-from-bottom-3 duration-500">
+    <Card title="Notifications" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-500">
       <div className="space-y-10">
         <Switch
           checked={emailUpdates}
@@ -314,7 +313,7 @@ function NotificationsSection() {
 function PrivacySection() {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-500">
-      <Card title="Privacy & Security" background="base">
+      <Card title="Privacy & Security" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
         <div className="space-y-8">
           <div className="flex items-center justify-between">
             <div className="space-y-1.5">
@@ -329,14 +328,14 @@ function PrivacySection() {
               <h3 className="text-sm font-bold text-ctp-text uppercase tracking-wide">Activity Logs</h3>
               <p className="text-xs text-ctp-subtext1 font-medium">View your recent login activity and security events.</p>
             </div>
-            <Button variant="secondary" size="sm" className="font-bold text-[10px] uppercase tracking-widest">
+            <Button variant="secondary" size="sm" className="font-bold text-[10px] uppercase tracking-widest bg-ctp-base">
               View Logs
             </Button>
           </div>
         </div>
       </Card>
 
-      <Card title="Danger Zone" background="mantle" className="border-ctp-red/20">
+      <Card title="Danger Zone" background="mantle" className="bg-ctp-mantle/50 border-ctp-red/20 shadow-sm">
         <div className="space-y-6">
            <div className="flex items-center gap-3 text-ctp-red">
              <div className="p-2 rounded-lg bg-ctp-red/10">
@@ -348,7 +347,11 @@ function PrivacySection() {
              Deleting your account will permanently remove all your saved progress, favorites, and tracked bundles. This action is irreversible and all data will be purged within 30 days.
            </p>
            <div className="pt-4">
-             <Button variant="outline" className="border-ctp-red/30 text-ctp-red hover:bg-ctp-red hover:text-white hover:border-ctp-red w-full md:w-auto transition-all duration-300 font-bold text-[10px] uppercase tracking-[0.2em]" leftIcon={<Trash2 size={14} />}>
+             <Button 
+               variant="outline" 
+               className="border-ctp-red/30 text-ctp-red hover:bg-ctp-red/[0.15] hover:border-ctp-red/50 w-full md:w-auto transition-all duration-300 font-bold text-[10px] uppercase tracking-[0.2em]" 
+               leftIcon={<Trash2 size={14} />}
+             >
                Delete AyosDocs Account
              </Button>
            </div>
@@ -366,7 +369,7 @@ function PasswordSection({ user, showToast }) {
 
   if (isGoogleOnly) {
     return (
-      <Card title="Password Management" background="base" className="animate-in fade-in slide-in-from-bottom-3 duration-500">
+      <Card title="Password Management" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-500">
         <div className="flex flex-col items-center text-center space-y-8 py-10">
           <div className="w-20 h-20 rounded-3xl bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shadow-inner">
             <Shield size={40} />
@@ -378,7 +381,7 @@ function PasswordSection({ user, showToast }) {
             </p>
           </div>
           
-          <div className="w-full max-w-sm bg-ctp-mantle border border-ctp-surface1 rounded-2xl p-8 text-left shadow-sm">
+          <div className="w-full max-w-sm bg-ctp-base/50 border border-ctp-surface1 rounded-2xl p-8 text-left shadow-sm">
             <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] mb-5 border-b border-ctp-surface1 pb-3">Security Provider Details</p>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
@@ -387,12 +390,12 @@ function PasswordSection({ user, showToast }) {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-ctp-subtext1 uppercase">Status</span>
-                <Badge variant="green" className="text-[9px]">Active & Secure</Badge>
+                <Badge variant="green" className="text-[9px] bg-ctp-green/[0.07] border-ctp-green/20">Active & Secure</Badge>
               </div>
             </div>
             <button 
               onClick={() => window.open('https://myaccount.google.com/security', '_blank')}
-              className="mt-8 w-full py-3 bg-ctp-base border border-ctp-surface1 rounded-xl text-[10px] font-bold uppercase tracking-widest text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 transition-all flex items-center justify-center gap-2 group"
+              className="mt-8 w-full py-3 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-[10px] font-bold uppercase tracking-widest text-ctp-text hover:border-ctp-sky-800/30 hover:text-ctp-sky-800 transition-all flex items-center justify-center gap-2 group"
             >
               <span>Manage Google Account</span>
               <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -476,9 +479,9 @@ function ChangePasswordForm({ showToast }) {
 
   if (isSuccess) {
     return (
-      <Card title="Change Password" background="base" className="animate-in fade-in zoom-in-95 duration-500">
+      <Card title="Change Password" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in zoom-in-95 duration-500">
         <div className="flex flex-col items-center text-center space-y-8 py-16">
-          <div className="w-20 h-20 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 shadow-2xl shadow-green-500/20 ring-4 ring-green-500/5">
+          <div className="w-20 h-20 rounded-full bg-ctp-green/[0.07] border border-ctp-green/20 flex items-center justify-center text-ctp-green shadow-sm ring-4 ring-ctp-green/5">
             <CheckCircle2 size={40} />
           </div>
           <div className="space-y-3 max-w-md">
@@ -487,7 +490,7 @@ function ChangePasswordForm({ showToast }) {
               Your password has been securely updated. We&apos;ve synchronized your credentials across all platforms.
             </p>
           </div>
-          <Button variant="secondary" onClick={() => setIsSuccess(false)} className="px-10 font-bold uppercase tracking-widest text-[10px]">
+          <Button variant="secondary" onClick={() => setIsSuccess(false)} className="px-10 font-bold uppercase tracking-widest text-[10px] bg-ctp-base">
             Return to Settings
           </Button>
         </div>
@@ -498,11 +501,12 @@ function ChangePasswordForm({ showToast }) {
   return (
     <Card 
       title="Change Password" 
+      background="mantle"
       headerAction={<Badge variant="sky" className="text-[9px] uppercase tracking-widest">Secure Area</Badge>}
       footer={
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-ctp-mantle flex items-center justify-center text-ctp-subtext1 border border-ctp-surface1 shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-subtext1 border border-ctp-surface1 shrink-0 shadow-inner">
               <Shield size={14} />
             </div>
             <p className="text-[10px] text-ctp-subtext1 max-w-xs leading-relaxed font-bold uppercase tracking-wide">
@@ -520,7 +524,7 @@ function ChangePasswordForm({ showToast }) {
           </Button>
         </div>
       }
-      className="animate-in fade-in slide-in-from-bottom-3 duration-500"
+      className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-500"
     >
       <form id="change-password-form" onSubmit={handleSubmit} className="space-y-8 max-w-2xl">
         <Input
@@ -573,9 +577,9 @@ function ChangePasswordForm({ showToast }) {
  */
 function PlaceholderSection({ title, icon: Icon }) {
   return (
-    <Card title={title} className="animate-in fade-in slide-in-from-bottom-3 duration-500">
+    <Card title={title} background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-500">
       <div className="py-24 flex flex-col items-center text-center space-y-6">
-        <div className="w-20 h-20 rounded-3xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-subtext1 shadow-inner relative overflow-hidden">
+        <div className="w-20 h-20 rounded-3xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-subtext1 shadow-inner relative overflow-hidden">
           <Icon size={32} className="opacity-40" />
           <div className="absolute inset-0 bg-gradient-to-tr from-ctp-sky-800/5 to-transparent" />
         </div>
@@ -585,7 +589,7 @@ function PlaceholderSection({ title, icon: Icon }) {
             We&apos;re building something great. This settings module will be available in the next platform update.
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={() => window.location.href = '/updates'} className="font-bold text-[10px] uppercase tracking-widest">
+        <Button variant="outline" size="sm" onClick={() => window.location.href = '/updates'} className="font-bold text-[10px] uppercase tracking-widest bg-ctp-base">
           View Roadmap
         </Button>
       </div>

@@ -15,7 +15,7 @@ export default function TermsPage() {
         title="Terms of Use"
         description="Guidelines and rules for using the AyosDocs platform and services."
         actions={
-          <div className="bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
+          <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
             <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest text-ctp-mauve">Public Service</span>
           </div>
         }
@@ -23,7 +23,7 @@ export default function TermsPage() {
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8">
         <div className="max-w-4xl mx-auto space-y-10">
-          <section className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden">
+          <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden">
             <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
               <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Legal Agreement</h2>
               <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Last Updated: May 15, 2026</span>
@@ -36,7 +36,7 @@ export default function TermsPage() {
                 </p>
               </div>
 
-              <div className="p-6 bg-ctp-yellow/5 border border-ctp-yellow/20 rounded-xl flex items-center gap-6 shadow-inner">
+              <div className="p-6 bg-ctp-yellow/[0.04] border border-ctp-yellow/20 rounded-xl flex items-center gap-6 shadow-inner">
                 <div className="w-12 h-12 rounded-xl bg-ctp-base border border-ctp-yellow/20 flex items-center justify-center text-ctp-yellow shrink-0 shadow-sm">
                   <AlertTriangle size={24} strokeWidth={2.5} />
                 </div>
@@ -81,7 +81,7 @@ export default function TermsPage() {
           </section>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <aside className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-6 flex items-center gap-4 shadow-sm group">
+            <aside className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 flex items-center gap-4 shadow-sm group">
               <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shrink-0 shadow-inner group-hover:scale-105 transition-transform">
                 <Scale size={18} />
               </div>
@@ -90,7 +90,7 @@ export default function TermsPage() {
                 <p className="text-[10px] text-ctp-subtext1 font-medium leading-tight">Strict adherence to digital laws.</p>
               </div>
             </aside>
-            <aside className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-6 flex items-center gap-4 shadow-sm group">
+            <aside className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 flex items-center gap-4 shadow-sm group">
               <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-mauve shrink-0 shadow-inner group-hover:scale-105 transition-transform">
                 <Globe size={18} />
               </div>

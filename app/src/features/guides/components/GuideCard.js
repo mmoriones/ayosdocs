@@ -30,13 +30,13 @@ const GuideCard = ({
   // Styling based on high-density dashboard aesthetic
   const baseCardClass = `
     group bg-ctp-base rounded-xl border border-ctp-surface1
-    hover:border-ctp-sky-800/30 hover:bg-ctp-mantle hover:shadow-md transition-all 
+    hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 hover:shadow-md transition-all 
     active:scale-[0.99] relative flex flex-col h-full shadow-sm
   `;
 
   const listCardClass = `
     group bg-ctp-base rounded-xl p-4 border border-ctp-surface1
-    hover:border-ctp-sky-800/30 hover:bg-ctp-mantle hover:shadow-md transition-all 
+    hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 hover:shadow-md transition-all 
     active:scale-[0.99] relative flex items-center gap-5 shadow-sm
   `;
 
@@ -116,6 +116,7 @@ const GuideCard = ({
               onFavorite?.();
             }}
             size="sm"
+            tooltipProps={{ position: 'left' }}
             className="scale-90"
           />
         )}

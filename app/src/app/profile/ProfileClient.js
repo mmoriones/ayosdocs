@@ -74,7 +74,7 @@ export default function ProfileClient() {
 
   return (
     <div className="bg-ctp-base font-sans text-ctp-text min-h-screen pb-20">
-      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/30 mb-8">
+      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50 mb-8">
         <div className="max-w-[1600px] mx-auto">
           <div className="space-y-1">
             <h1 className="text-2xl font-bold tracking-tight text-ctp-text">Profile</h1>
@@ -91,6 +91,8 @@ export default function ProfileClient() {
             {/* Personal Information Section */}
             <Card 
               title="Personal Identity" 
+              background="mantle"
+              className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in duration-300"
               overflow="visible"
               headerAction={
                 !isEditing && status !== 'loading' && (
@@ -99,12 +101,12 @@ export default function ProfileClient() {
                     size="sm" 
                     onClick={() => setIsEditing(true)}
                     leftIcon={<Edit3 size={14} />}
+                    className="text-ctp-sky-800"
                   >
                     Modify
                   </Button>
                 )
               }
-              className="animate-in fade-in duration-300"
             >
               {status === 'loading' ? (
                  <div className="space-y-8">
@@ -134,7 +136,7 @@ export default function ProfileClient() {
                     />
                     <div className="absolute bottom-0 right-0 translate-x-1 translate-y-1 z-10">
                       <Tooltip content="Upload coming soon" position="top">
-                        <div className="p-1.5 bg-ctp-base border border-ctp-surface1 rounded bg-white shadow-sm text-ctp-sky-800 cursor-not-allowed">
+                        <div className="p-1.5 bg-ctp-base border border-ctp-surface1 rounded shadow-sm text-ctp-sky-800 cursor-not-allowed hover:bg-ctp-mantle transition-colors">
                           <Camera size={12} strokeWidth={2.5} />
                         </div>
                       </Tooltip>
@@ -210,7 +212,7 @@ export default function ProfileClient() {
             </Card>
 
             {/* Account Verification Section */}
-            <Card title="Security Status">
+            <Card title="Security Status" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
               {status === 'loading' ? (
                  <div className="flex flex-col md:flex-row md:items-center gap-6 p-5 rounded-lg border border-ctp-surface1/30">
                   <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
@@ -222,7 +224,7 @@ export default function ProfileClient() {
               ) : (
               <div className={`flex flex-col md:flex-row md:items-center gap-6 p-5 rounded-lg border ${
                 user?.isVerified 
-                  ? 'bg-ctp-green/[0.04] border-ctp-green/20' 
+                  ? 'bg-ctp-green/[0.07] border-ctp-green/20' 
                   : 'bg-ctp-yellow/[0.04] border-ctp-yellow/20'
               }`}>
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 shadow-sm border ${
@@ -241,7 +243,7 @@ export default function ProfileClient() {
                   </p>
                 </div>
                 {!user?.isVerified && (
-                  <Button variant="secondary" size="sm" className="whitespace-nowrap shadow-sm bg-white">
+                  <Button variant="secondary" size="sm" className="whitespace-nowrap shadow-sm bg-ctp-base">
                     Send Link
                   </Button>
                 )}
@@ -252,7 +254,7 @@ export default function ProfileClient() {
 
           {/* Sidebar Stats */}
           <div className="space-y-8">
-            <Card title="Account Overview" background="mantle" className="border-dashed">
+            <Card title="Account Overview" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm border-dashed">
               {status === 'loading' ? (
                  <div className="space-y-3">
                     <div className="flex justify-between items-center py-2 border-b border-ctp-surface1/50"><Skeleton className="w-16 h-2.5" /><Skeleton className="w-14 h-2.5" /></div>
@@ -282,7 +284,7 @@ export default function ProfileClient() {
 
                 <button 
                   onClick={() => signOut({ callbackUrl: '/' })}
-                  className="w-full mt-8 flex items-center justify-center gap-2 p-2.5 rounded-lg border border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red text-[10px] font-bold uppercase tracking-widest hover:bg-ctp-red hover:text-white transition-all group"
+                  className="w-full mt-8 flex items-center justify-center gap-2 p-2.5 rounded-lg border border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red text-[10px] font-bold uppercase tracking-widest hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all group"
                 >
                   <LogOut size={14} strokeWidth={3} className="transition-transform group-hover:-translate-x-0.5" />
                   Sign Out of Account
@@ -291,24 +293,24 @@ export default function ProfileClient() {
               )}
             </Card>
 
-            <div className="bg-ctp-sky-800 rounded-xl p-5 text-white relative overflow-hidden group shadow-lg shadow-ctp-sky-800/10">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8 blur-2xl pointer-events-none" />
-              <div className="relative z-10 space-y-4">
-                <div className="flex items-center gap-2.5">
-                  <Edit3 size={16} strokeWidth={2.5} />
-                  <h3 className="text-[10px] font-bold uppercase tracking-widest opacity-90">Guide Discovery</h3>
-                </div>
-                <p className="text-xs font-medium leading-relaxed opacity-80">
-                  Ready to track more? Explore our updated knowledge base.
+            <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm overflow-hidden group">
+              <div className="p-4 border-b border-ctp-surface1 flex items-center gap-2">
+                <Edit3 size={14} className="text-ctp-sky-800" />
+                <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Guide Discovery</h3>
+              </div>
+              <div className="p-5 space-y-4">
+                <p className="text-[11px] font-medium leading-relaxed text-ctp-subtext1">
+                  Ready to track more? Explore our updated knowledge base for the latest government requirements.
                 </p>
                 <Button 
+                  variant="secondary"
                   onClick={() => router.push('/guides')}
-                  className="w-full bg-white !text-ctp-sky-800 hover:bg-white/90 text-[10px] uppercase tracking-widest shadow-lg shadow-black/5"
+                  className="w-full text-[10px] uppercase tracking-widest shadow-lg shadow-ctp-sky-800/5"
                 >
                   Browse Guides
                 </Button>
               </div>
-            </div>
+            </Card>
           </div>
         </div>
       </div>

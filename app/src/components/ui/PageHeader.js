@@ -23,8 +23,8 @@ const PageHeader = ({
   iconClassName = "text-ctp-sky-800"
 }) => {
   return (
-    <div className={`bg-ctp-mantle border-b border-ctp-surface0 ${className}`}>
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div className={`bg-ctp-mantle/50 border-b border-ctp-surface1 ${className}`}>
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-6 lg:py-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-5 flex-1">
           {Icon && (
             <div className={`p-4 rounded-2xl shrink-0 border shadow-sm ${iconBoxClassName}`}>

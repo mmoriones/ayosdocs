@@ -21,7 +21,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
   return (
     <div 
       onClick={() => router.push(`/guides/${guide.slug}`)}
-      className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all group relative cursor-pointer"
+      className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/70 transition-all group relative cursor-pointer"
     >
       <div className="flex items-center gap-6">
         <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
@@ -35,7 +35,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
             </h3>
             <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-widest border ${
               status === 'Completed' 
-                ? 'bg-ctp-green/10 text-ctp-green border-ctp-green/20' 
+                ? 'bg-ctp-green/[0.07] text-ctp-green border-ctp-green/20' 
                 : 'bg-ctp-sky-800/10 text-ctp-sky-800 border-ctp-sky-800/20'
             }`}>
               {status}
@@ -43,7 +43,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
           </div>
           
           {status === 'Completed' ? (
-            <div className="flex items-center gap-2 text-ctp-green opacity-80">
+            <div className="flex items-center gap-2 text-ctp-green opacity-70">
               <Check size={12} strokeWidth={3} />
               <span className="text-[10px] font-bold uppercase tracking-widest">Requirement verified</span>
             </div>

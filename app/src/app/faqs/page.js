@@ -77,7 +77,7 @@ export default function FAQsPage() {
         title="Help Center"
         description="Find answers to common questions about requirements and tracking."
         actions={
-          <div className="bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3 text-ctp-sky-800">
+          <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3 text-ctp-sky-800">
             <Sparkles size={14} />
             <span className="text-[10px] font-bold uppercase tracking-widest text-ctp-subtext1">Instant answers</span>
           </div>
@@ -88,7 +88,7 @@ export default function FAQsPage() {
         <div className="flex flex-col lg:flex-row gap-10">
           {/* FAQ Sidebar */}
           <aside className="w-full lg:w-72 shrink-0 space-y-6">
-            <section className="bg-ctp-base rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
+            <section className="bg-ctp-mantle/50 rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
               <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50">
                 <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Categories</h3>
               </div>
@@ -99,8 +99,8 @@ export default function FAQsPage() {
                     onClick={() => setActiveCategory(cat)}
                     className={`w-full text-left px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                       activeCategory === cat 
-                        ? 'bg-ctp-sky-800 text-white shadow-sm' 
-                        : 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text'
+                        ? 'bg-ctp-sky-800 text-white shadow-md' 
+                        : 'text-ctp-subtext1 hover:bg-ctp-base hover:text-ctp-text'
                     }`}
                   >
                     {cat}
@@ -109,7 +109,7 @@ export default function FAQsPage() {
               </div>
             </section>
 
-            <section className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-6 space-y-4 shadow-sm">
+            <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 space-y-4 shadow-sm">
               <div className="flex items-center gap-3 text-ctp-mauve">
                 <MessageCircle size={18} strokeWidth={2.5} />
                 <h3 className="text-[10px] font-bold uppercase tracking-widest">Still Stuck?</h3>
@@ -117,7 +117,7 @@ export default function FAQsPage() {
               <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
                 Our support team is ready to assist you with specific documentation issues.
               </p>
-              <Link href="/contact" className="block w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-[10px] font-bold uppercase tracking-widest text-center hover:border-ctp-sky-800 transition-all shadow-sm">
+              <Link href="/contact" className="block w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-[10px] font-bold uppercase tracking-widest text-center hover:border-ctp-sky-800 hover:bg-ctp-mantle transition-all shadow-sm">
                 Contact Support
               </Link>
             </section>
@@ -138,7 +138,7 @@ export default function FAQsPage() {
                 filteredFAQs.map((faq) => (
                   <div 
                     key={faq.globalIdx}
-                    className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden group hover:border-ctp-sky-800/30 transition-all"
+                    className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden group hover:border-ctp-sky-800/30 transition-all"
                   >
                     <button
                       onClick={() => toggleFAQ(faq.globalIdx)}
@@ -148,13 +148,13 @@ export default function FAQsPage() {
                         <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest mb-1.5 block opacity-80">{faq.category}</span>
                         <h4 className="text-sm font-bold text-ctp-text tracking-tight group-hover:text-ctp-sky-800 transition-colors">{faq.q}</h4>
                       </div>
-                      <div className={`shrink-0 p-1.5 rounded-lg bg-ctp-mantle border border-ctp-surface1 text-ctp-subtext1 transition-transform duration-300 ${openIndex === faq.globalIdx ? 'rotate-180 text-ctp-sky-800 shadow-inner' : ''}`}>
+                      <div className={`shrink-0 p-1.5 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 transition-transform duration-300 ${openIndex === faq.globalIdx ? 'rotate-180 text-ctp-sky-800 shadow-inner' : ''}`}>
                         <ChevronDown size={16} />
                       </div>
                     </button>
                     {openIndex === faq.globalIdx && (
                       <div className="px-6 pb-6 pt-2 animate-in slide-in-from-top-2 duration-300">
-                        <div className="p-5 bg-ctp-mantle border border-ctp-surface1 rounded-lg">
+                        <div className="p-5 bg-ctp-base/50 border border-ctp-surface1 rounded-lg">
                           <p className="text-sm text-ctp-subtext1 leading-relaxed font-medium">{faq.a}</p>
                         </div>
                       </div>
@@ -162,7 +162,7 @@ export default function FAQsPage() {
                   </div>
                 ))
               ) : (
-                <div className="text-center py-20 bg-ctp-mantle rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
+                <div className="text-center py-20 bg-ctp-mantle/50 rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
                   <div className="w-14 h-14 bg-ctp-base rounded-xl flex items-center justify-center mx-auto mb-6 border border-ctp-surface1 shadow-inner shadow-sm">
                     <BookOpen size={24} className="text-ctp-subtext1" />
                   </div>

@@ -168,14 +168,14 @@ const GuidePageLayout = ({
   }, [headings]);
 
   return (
-    <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 pb-24">
+    <div className="max-w-[1600px] mx-auto px-4 lg:px-6 py-8 pb-24">
       <div className="grid grid-cols-12 gap-8 lg:gap-10">
         {/* MAIN CONTENT AREA */}
         <main className={`col-span-12 transition-all duration-300 ${isSidebarCollapsed ? 'lg:col-span-11' : 'lg:col-span-9'}`}>
           <div className="space-y-10">
             <div className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden">
               <header className="p-8 md:p-10 border-b border-ctp-surface1 bg-ctp-mantle/50 relative overflow-hidden">
-                <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(var(--sky-800)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+                <div className="absolute inset-0 opacity-[0.01] bg-[radial-gradient(var(--sky-800)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
                 
                 <div className="flex flex-col md:flex-row md:items-center gap-8 relative z-10">
                   <div className="p-4 rounded-xl bg-ctp-base shrink-0 w-fit shadow-sm border border-ctp-surface1">
@@ -298,7 +298,7 @@ const GuidePageLayout = ({
                     className="flex-1 flex justify-center gap-2"
                   >
                     <CheckSquare size={12} />
-                    Tracker
+                    <span className="hidden xl:inline">Tracker</span>
                   </Tab>
                   <Tab 
                     active={activeTab === 'toc'} 
@@ -306,7 +306,7 @@ const GuidePageLayout = ({
                     className="flex-1 flex justify-center gap-2"
                   >
                     <List size={12} />
-                    Content
+                    <span className="hidden xl:inline">Content</span>
                   </Tab>
                 </Tabs>
               )}
@@ -333,25 +333,6 @@ const GuidePageLayout = ({
               </div>
             )}
           </div>
-
-          {!isSidebarCollapsed && (
-            <button 
-              onClick={handleBookmark}
-              className={`bg-ctp-mantle border rounded-xl p-4 flex items-center gap-3 group hover:bg-ctp-base transition-all shadow-sm text-left w-full ${
-                isFavorite ? 'border-ctp-sky-800/30' : 'border-ctp-surface1'
-              }`}
-            >
-              <div className={`w-9 h-9 rounded-lg bg-ctp-base flex items-center justify-center border transition-transform group-hover:scale-105 ${
-                isFavorite ? 'text-ctp-sky-800 border-ctp-sky-800 shadow-inner' : 'text-ctp-sky-800 border-ctp-surface1'
-              }`}>
-                <Bookmark size={18} fill={isFavorite ? "currentColor" : "none"} />
-              </div>
-              <div className="min-w-0 flex-1">
-                <p className="text-xs font-bold text-ctp-text">{isFavorite ? 'Saved in favorites' : 'Bookmark guide'}</p>
-                <p className="text-[10px] text-ctp-subtext1 font-medium truncate">Save for offline access</p>
-              </div>
-            </button>
-          )}
         </aside>
       </div>
 

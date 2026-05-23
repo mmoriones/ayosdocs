@@ -26,7 +26,7 @@ import {
 } from 'lucide-react';
 
 import { ChecklistCard } from '@/features/guides/components/tracking';
-import { StartWithGoal, RecentExperiences, OnboardingBanner, TrendingWidget } from '@/features/guides/components/discovery';
+import { StartWithGoal, RecentExperiences, OnboardingBanner, TrendingWidget, RecentlyUpdated } from '@/features/guides/components/discovery';
 import { bundles } from '@/data/bundles';
 import StatsCard from '@/components/dashboard/StatsCard';
 import Adsense from '@/components/Adsense';
@@ -189,11 +189,9 @@ export default function HomeClient({ allGuides }) {
 
   return (
     <div className="bg-ctp-base font-sans text-ctp-text pb-20">
-      <div className="bg-ctp-mantle/50 border-b border-ctp-surface1">
         <PageHeader 
           title="Welcome to AyosDocs"
           description="Your comprehensive guide to Philippine government processes and requirements."
-          className="bg-transparent border-none py-6 lg:py-8"
           actions={
             isMounted && isLoggedIn && (
               <div className="flex items-center gap-3">
@@ -227,7 +225,6 @@ export default function HomeClient({ allGuides }) {
             )
           }
         />
-      </div>
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -586,6 +583,23 @@ export default function HomeClient({ allGuides }) {
                   </Button>
                 </Card>
               )}
+            </section>
+
+            {/* Recent Updates */}
+            <section className="space-y-4">
+              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
+                <div className="flex items-center gap-2">
+                  <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Recent Updates</h2>
+                  <Badge variant="sky" className="text-[8px] px-1.5 py-0">LATEST</Badge>
+                </div>
+                <Link 
+                  href="/updates"
+                  className="text-[9px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                >
+                  View All
+                </Link>
+              </div>
+              <RecentlyUpdated />
             </section>
 
             {/* Recent Experiences */}

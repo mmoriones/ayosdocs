@@ -15,15 +15,15 @@ export default function PrivacyPage() {
         title="Privacy Policy"
         description="Our commitment to protecting your personal information and tracking data."
         actions={
-          <div className="bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
-            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest text-ctp-sky-800">Verified Secure</span>
+          <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
+            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Privacy Standards</span>
           </div>
         }
       />
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8">
         <div className="max-w-4xl mx-auto space-y-10">
-          <section className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden">
+          <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden">
             <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
               <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Document Overview</h2>
               <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Effective: May 15, 2026</span>
@@ -38,8 +38,10 @@ export default function PrivacyPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-8 border-y border-ctp-surface1/50">
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-ctp-sky-800">
-                    <Lock size={16} />
+                  <div className="flex items-center gap-3">
+                    <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
+                      <Lock size={14} strokeWidth={2.5} />
+                    </div>
                     <h3 className="text-xs font-bold uppercase tracking-widest text-ctp-text">Data Security</h3>
                   </div>
                   <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed">
@@ -47,8 +49,10 @@ export default function PrivacyPage() {
                   </p>
                 </div>
                 <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-ctp-green">
-                    <CheckCircle2 size={16} />
+                  <div className="flex items-center gap-3">
+                    <div className="w-7 h-7 rounded-lg bg-ctp-green/[0.07] text-ctp-green flex items-center justify-center shadow-inner">
+                      <CheckCircle2 size={14} strokeWidth={2.5} />
+                    </div>
                     <h3 className="text-xs font-bold uppercase tracking-widest text-ctp-text">User Control</h3>
                   </div>
                   <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed">
@@ -89,7 +93,7 @@ export default function PrivacyPage() {
             </div>
           </section>
 
-          <aside className="bg-ctp-mantle border border-ctp-surface1 rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm group">
+          <aside className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm group">
             <div className="space-y-1">
               <h4 className="text-sm font-bold text-ctp-text uppercase tracking-tight">Questions about your data?</h4>
               <p className="text-xs text-ctp-subtext1 font-medium leading-tight">Reach out to our security team for clarification.</p>
