@@ -182,14 +182,17 @@ GuideCard.Skeleton = function GuideCardSkeleton({ viewMode = 'grid' }) {
            <Skeleton className="w-20 h-4" />
            <Skeleton className="w-20 h-4" />
         </div>
-        <Skeleton className="w-8 h-8 rounded-lg shrink-0 ml-2" />
+        <Skeleton className="w-7 h-7 rounded-lg shrink-0 ml-2" />
       </div>
     );
   }
 
   return (
-    <div className="bg-ctp-base rounded-xl border border-ctp-surface1 p-5 flex flex-col h-full shadow-sm space-y-4">
-      <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
+    <div className="bg-ctp-base rounded-xl border border-ctp-surface1 p-4 flex flex-col h-full shadow-sm space-y-4">
+      <div className="flex items-start justify-between">
+        <Skeleton className="w-9 h-9 rounded-lg shrink-0" />
+        <Skeleton className="w-7 h-7 rounded-lg opacity-40" />
+      </div>
       <div className="space-y-2.5 flex-1">
         <Skeleton className="w-24 h-3" />
         <Skeleton className="w-3/4 h-5" />

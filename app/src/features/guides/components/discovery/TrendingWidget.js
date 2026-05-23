@@ -130,10 +130,10 @@ TrendingWidget.Skeleton = function TrendingWidgetSkeleton({ variant = 'default' 
   }
 
   return (
-    <div className="bg-ctp-base rounded-lg border border-ctp-surface1 p-5 flex flex-col h-full w-full shadow-sm space-y-6">
+    <div className="bg-ctp-base rounded-lg border border-ctp-surface1 p-4 flex flex-col h-full w-full shadow-sm space-y-6">
       <div className="flex items-start justify-between">
         <Skeleton className="w-10 h-10 rounded-xl" />
-        <Skeleton className="w-6 h-6 rounded-lg opacity-40" />
+        <Skeleton className="w-8 h-8 rounded-lg opacity-40" />
       </div>
       
       <div className="flex-1 space-y-3">
@@ -147,7 +147,7 @@ TrendingWidget.Skeleton = function TrendingWidgetSkeleton({ variant = 'default' 
         </div>
       </div>
       
-      <div className="pt-4 border-t border-ctp-surface1/30 flex justify-between items-center">
+      <div className="mt-6 pt-4 border-t border-ctp-surface1/30 flex justify-between items-center">
         <div className="flex gap-3">
           <Skeleton className="w-10 h-2.5" />
           <Skeleton className="w-10 h-2.5" />

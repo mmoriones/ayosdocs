@@ -175,7 +175,7 @@ function GeneralSection() {
 
   const langOptions = [
     { label: 'English (US)', value: 'en' },
-    { label: 'Tagalog (Soon)', value: 'ph' }
+    { label: 'Tagalog (Soon)', value: 'ph', disabled: true }
   ];
 
   const formatOptions = [

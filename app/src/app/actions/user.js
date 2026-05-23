@@ -356,7 +356,7 @@ export async function toggleFavoriteAction(guideSlug) {
       isFavorite = true;
     } else {
       user.savedProgress[progressIndex].isFavorite = !user.savedProgress[progressIndex].isFavorite;
-      user.savedProgress[progressIndex].updatedAt = Date.now();
+      // Do not update updatedAt for favorite toggles to prevent UI jumping/rearranging
       isFavorite = user.savedProgress[progressIndex].isFavorite;
     }
     

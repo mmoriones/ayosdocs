@@ -322,42 +322,66 @@ export default function ProgressClient({ allGuides, isRestricted }) {
         <div className="flex flex-col lg:flex-row gap-10">
           <div className="flex-1 min-w-0 space-y-12">
             {(isLoading || status === 'loading') && !isRestricted ? (
-              <SummaryStats.Skeleton />
-            ) : (
-              <SummaryStats stats={stats} />
-            )}
-
-            {stats.activeBundles > 0 && (
-              <div className="bg-ctp-mantle border border-ctp-surface1 rounded-2xl p-6 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-ctp-sky-800/5 rounded-full -mr-20 -mt-20 blur-3xl pointer-events-none" />
-                <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-10">
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-ctp-sky-800 text-white flex items-center justify-center shadow-md shadow-ctp-sky-800/20">
-                        <BarChart3 size={16} strokeWidth={2.5} />
+              <>
+                <SummaryStats.Skeleton />
+                <div className="bg-ctp-mantle border border-ctp-surface1 rounded-2xl p-6 relative overflow-hidden">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-10">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <Skeleton className="w-8 h-8 rounded-lg" />
+                        <Skeleton className="w-32 h-3" />
                       </div>
-                      <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-ctp-sky-800">Workflow Analytics</h3>
+                      <Skeleton className="w-48 h-6" />
+                      <Skeleton className="w-64 h-3" />
                     </div>
-                    <p className="text-xl font-bold tracking-tight text-ctp-text leading-tight">Milestone Forecast</p>
-                    <p className="text-xs text-ctp-subtext1 font-medium max-w-xs">Aggregated resource estimates for your {stats.activeBundles} active life event bundles.</p>
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 md:gap-12 flex-1 max-w-xl">
-                    <div className="space-y-1">
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-ctp-subtext0">Est. Total Cost</span>
-                      <p className="text-2xl font-bold tracking-tighter text-ctp-text">{stats.aggregateRemaining.cost}</p>
-                    </div>
-                    <div className="space-y-1">
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-ctp-subtext0">Est. Time Left</span>
-                      <p className="text-2xl font-bold tracking-tighter text-ctp-text">{stats.aggregateRemaining.time}</p>
-                    </div>
-                    <div className="space-y-1">
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-ctp-subtext0">Overall Completion</span>
-                      <p className="text-2xl font-bold tracking-tighter text-ctp-sky-800">{Math.round((stats.completed / (stats.total || 1)) * 100)}%</p>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 md:gap-12 flex-1 max-w-xl">
+                      {[1, 2, 3].map(i => (
+                        <div key={i} className="space-y-2">
+                          <Skeleton className="w-16 h-2" />
+                          <Skeleton className="w-24 h-8" />
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
+            ) : (
+              <>
+                <SummaryStats stats={stats} />
+                
+                {stats.activeBundles > 0 && (
+                  <div className="bg-ctp-mantle border border-ctp-surface1 rounded-2xl p-6 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-ctp-sky-800/5 rounded-full -mr-20 -mt-20 blur-3xl pointer-events-none" />
+                    <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-10">
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-lg bg-ctp-sky-800 text-white flex items-center justify-center shadow-md shadow-ctp-sky-800/20">
+                            <BarChart3 size={16} strokeWidth={2.5} />
+                          </div>
+                          <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-ctp-sky-800">Workflow Analytics</h3>
+                        </div>
+                        <p className="text-xl font-bold tracking-tight text-ctp-text leading-tight">Milestone Forecast</p>
+                        <p className="text-xs text-ctp-subtext1 font-medium max-w-xs">Aggregated resource estimates for your {stats.activeBundles} active life event bundles.</p>
+                      </div>
+
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 md:gap-12 flex-1 max-w-xl">
+                        <div className="space-y-1">
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-ctp-subtext0">Est. Total Cost</span>
+                          <p className="text-2xl font-bold tracking-tighter text-ctp-text">{stats.aggregateRemaining.cost}</p>
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-ctp-subtext0">Est. Time Left</span>
+                          <p className="text-2xl font-bold tracking-tighter text-ctp-text">{stats.aggregateRemaining.time}</p>
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-ctp-subtext0">Overall Completion</span>
+                          <p className="text-2xl font-bold tracking-tighter text-ctp-sky-800">{Math.round((stats.completed / (stats.total || 1)) * 100)}%</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
 
             {/* Global Utilities Row */}

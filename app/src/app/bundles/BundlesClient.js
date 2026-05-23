@@ -221,29 +221,29 @@ const BundleCard = ({ bundle }) => {
 
 BundleCard.Skeleton = function BundleCardSkeleton() {
   return (
-    <div className="bg-ctp-base rounded-2xl p-5 border border-ctp-surface1 shadow-sm flex flex-col h-full space-y-4">
-      <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
+    <div className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm flex flex-col h-full space-y-4">
+      <Skeleton className="w-9 h-9 rounded-lg shrink-0" />
       <div className="space-y-2 flex-1">
-        <div className="flex gap-2">
-          <Skeleton className="w-12 h-3" />
+        <div className="flex gap-2.5">
+          <Skeleton className="w-12 h-3.5 rounded-md" />
           <Skeleton className="w-16 h-3" />
         </div>
         <Skeleton className="w-3/4 h-5" />
         <Skeleton className="w-full h-3" />
         <Skeleton className="w-full h-3" />
       </div>
-      <div className="pt-4 border-t border-ctp-surface1/50 space-y-2">
-        <Skeleton className="w-20 h-2" />
-        <div className="flex gap-1">
-          <Skeleton className="w-16 h-4" />
-          <Skeleton className="w-16 h-4" />
+      <div className="pt-4 border-t border-ctp-surface1/30 space-y-2.5">
+        <Skeleton className="w-20 h-2.5" />
+        <div className="flex gap-1.5">
+          <Skeleton className="w-16 h-4 rounded" />
+          <Skeleton className="w-16 h-4 rounded" />
         </div>
       </div>
-      <div className="pt-4 border-t border-ctp-surface1/50 flex justify-between">
+      <div className="mt-6 pt-4 border-t border-ctp-surface1/30 flex justify-between items-center">
         <div className="flex -space-x-1.5">
-          {[1, 2, 3].map(i => <Skeleton key={i} circle className="w-5 h-5 border border-ctp-surface1" />)}
+          {[1, 2, 3].map(i => <Skeleton key={i} circle className="w-4 h-4 border border-ctp-surface1" />)}
         </div>
-        <Skeleton className="w-16 h-3" />
+        <Skeleton className="w-16 h-2.5" />
       </div>
     </div>
   );

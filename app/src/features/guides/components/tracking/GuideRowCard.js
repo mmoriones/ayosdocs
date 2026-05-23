@@ -126,7 +126,7 @@ GuideRowCard.Skeleton = function GuideRowCardSkeleton() {
           </div>
           <Skeleton className="w-full h-1 rounded-full" />
         </div>
-        <Skeleton className="w-10 h-10 rounded-lg" />
+        <Skeleton className="w-8 h-8 rounded-lg" />
         <Skeleton className="w-8 h-8 rounded-lg" />
       </div>
     </div>

@@ -398,11 +398,20 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                       </div>
                       <div className="flex gap-10">
                         {isDataLoading ? (
-                          <div className="flex gap-10">
-                            <Skeleton className="w-20 h-8" />
-                            <Skeleton className="w-20 h-8" />
-                            <Skeleton className="w-20 h-8" />
-                          </div>
+                          <>
+                            <div className="text-center space-y-1">
+                              <Skeleton className="w-16 h-2 mx-auto" />
+                              <Skeleton className="w-24 h-6 mx-auto" />
+                            </div>
+                            <div className="text-center space-y-1">
+                              <Skeleton className="w-16 h-2 mx-auto" />
+                              <Skeleton className="w-24 h-6 mx-auto" />
+                            </div>
+                            <div className="text-center space-y-1">
+                              <Skeleton className="w-16 h-2 mx-auto" />
+                              <Skeleton className="w-24 h-6 mx-auto" />
+                            </div>
+                          </>
                         ) : (
                           <>
                             <div className="text-center">

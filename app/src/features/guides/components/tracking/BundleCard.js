@@ -87,23 +87,23 @@ BundleCard.Skeleton = function BundleCardSkeleton() {
           <div className="flex items-center justify-between gap-4">
             <div className="space-y-2 flex-1">
               <div className="flex gap-2">
-                <Skeleton className="w-16 h-3 rounded-md" />
-                <Skeleton className="w-16 h-3 rounded-md" />
+                <Skeleton className="w-16 h-3.5 rounded-md" />
+                <Skeleton className="w-16 h-3" />
               </div>
               <Skeleton className="w-3/4 h-5" />
             </div>
-            <Skeleton className="w-4 h-4 rounded-full shrink-0" />
+            <Skeleton className="w-4 h-4 rounded-md shrink-0" />
           </div>
           <div className="space-y-2">
              <div className="flex justify-between">
-               <Skeleton className="w-24 h-2" />
-               <Skeleton className="w-8 h-2" />
+               <Skeleton className="w-24 h-2.5" />
+               <Skeleton className="w-8 h-2.5" />
              </div>
-             <Skeleton className="w-full h-1 rounded-full" />
+             <Skeleton className="w-full h-1.5 rounded-full" />
           </div>
-          <div className="flex gap-2 pt-1">
-            <Skeleton className="w-12 h-3" />
-            <Skeleton className="w-12 h-3" />
+          <div className="flex gap-3 pt-1">
+            <Skeleton className="w-16 h-2.5" />
+            <Skeleton className="w-16 h-2.5" />
           </div>
         </div>
       </div>

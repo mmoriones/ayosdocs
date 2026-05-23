@@ -55,9 +55,12 @@ StatsCard.Skeleton = function StatsCardSkeleton() {
   return (
     <div className="flex items-center gap-4 py-1">
       <Skeleton className="w-11 h-11 rounded-xl shrink-0" />
-      <div className="flex-1 space-y-2">
-        <Skeleton className="w-12 h-5" />
-        <Skeleton className="w-20 h-2.5" />
+      <div className="flex-1 space-y-1.5 min-w-0">
+        <div className="flex items-center gap-2">
+          <Skeleton className="w-12 h-5" />
+          <Skeleton className="w-8 h-3 rounded" />
+        </div>
+        <Skeleton className="w-24 h-2.5 opacity-60" />
       </div>
     </div>
   );

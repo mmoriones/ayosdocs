@@ -70,13 +70,13 @@ SummaryStats.Skeleton = function SummaryStatsSkeleton() {
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
       {[1, 2, 3, 4].map((i) => (
         <div key={i} className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm space-y-4">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-4">
             <Skeleton className="w-10 h-10 rounded-lg" />
-            <Skeleton className="w-8 h-8 rounded-lg" />
+            <Skeleton className="w-12 h-8 rounded-lg" />
           </div>
           <div className="space-y-2">
-            <Skeleton className="w-20 h-3" />
-            <Skeleton className="w-24 h-2" />
+            <Skeleton className="w-20 h-2.5" />
+            <Skeleton className="w-24 h-2.5 opacity-60" />
           </div>
         </div>
       ))}

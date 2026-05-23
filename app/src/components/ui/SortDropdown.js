@@ -10,7 +10,7 @@ import { ChevronDown } from 'lucide-react';
  * @param {Object} props
  * @param {string} props.value - Current sort value.
  * @param {Function} props.onChange - Callback when value changes.
- * @param {Array<{label: string, value: string}>} props.options - List of sort options.
+ * @param {Array<{label: string, value: string, disabled?: boolean}>} props.options - List of sort options.
  * @param {string} [props.label="Sort:"] - Prefix label.
  * @param {string} [props.className=""] - Additional CSS classes.
  */
@@ -47,11 +47,19 @@ const SortDropdown = ({ value, onChange, options, label = "Sort:", className = "
             {options.map((option) => (
               <button
                 key={option.value}
-                onClick={() => { onChange(option.value); setIsOpen(false); }}
+                disabled={option.disabled}
+                onClick={() => { 
+                  if (!option.disabled) {
+                    onChange(option.value); 
+                    setIsOpen(false); 
+                  }
+                }}
                 className={`w-full text-left px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
                   value === option.value 
                     ? 'bg-ctp-sky-800 text-white shadow-sm' 
-                    : 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text'
+                    : option.disabled
+                      ? 'text-ctp-subtext1/40 cursor-not-allowed italic'
+                      : 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text'
                 }`}
               >
                 {option.label}

@@ -578,28 +578,28 @@ ChecklistCard.Skeleton = function ChecklistCardSkeleton({ isModal, isBare, inGui
     }`}>
       <div className={`${isModal ? "p-0" : "p-5 lg:p-6"} space-y-6 pb-0`}>
         <div className="flex items-center justify-between">
-          <Skeleton className="w-24 h-3" />
-          {!inGuidePage && <Skeleton className="w-20 h-3" />}
+          <Skeleton className="w-24 h-2.5" />
+          {!inGuidePage && <Skeleton className="w-20 h-2.5" />}
         </div>
         
         <div className="flex items-start gap-4">
           {!inGuidePage && <Skeleton className="w-11 h-11 rounded-lg shrink-0" />}
           <div className="space-y-2 flex-1">
             <Skeleton className="w-3/4 h-5" />
-            <Skeleton className="w-1/2 h-3" />
+            <Skeleton className="w-1/2 h-2.5" />
           </div>
         </div>
       </div>
 
       <div className="px-5 lg:px-6 mt-6">
-        <Skeleton className="w-full h-1 rounded-full" />
+        <Skeleton className="w-full h-1.5 rounded-full" />
       </div>
 
-      <div className="p-5 lg:p-6 space-y-4">
+      <div className="p-5 lg:p-6 space-y-5">
         {[1, 2, 3].map(i => (
           <div key={i} className="flex items-center gap-4 px-3">
-            <Skeleton className="w-5 h-5 rounded-full shrink-0" />
-            <Skeleton className="w-full h-4" />
+            <Skeleton className="w-4 h-4 rounded-md shrink-0 opacity-40" />
+            <Skeleton className="w-full h-3.5" />
           </div>
         ))}
       </div>

@@ -108,14 +108,14 @@ export default function ProfileClient() {
             >
               {status === 'loading' ? (
                  <div className="space-y-8">
-                    <div className="flex flex-col md:flex-row gap-8">
+                    <div className="flex flex-col md:flex-row gap-10">
                       <Skeleton className="w-20 h-20 rounded-xl shrink-0" />
-                      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
+                      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-1.5">
                           <Skeleton className="w-16 h-2.5 ml-1 opacity-50" />
                           <Skeleton className="w-full h-10 rounded-lg" />
                         </div>
-                        <div className="space-y-2 opacity-60">
+                        <div className="space-y-1.5 opacity-60">
                           <Skeleton className="w-16 h-2.5 ml-1 opacity-50" />
                           <Skeleton className="w-full h-10 rounded-lg" />
                         </div>
@@ -212,11 +212,11 @@ export default function ProfileClient() {
             {/* Account Verification Section */}
             <Card title="Security Status">
               {status === 'loading' ? (
-                 <div className="flex items-center gap-5 p-2">
+                 <div className="flex flex-col md:flex-row md:items-center gap-6 p-5 rounded-lg border border-ctp-surface1/30">
                   <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
                   <div className="flex-1 space-y-2">
-                    <Skeleton className="w-1/4 h-3" />
-                    <Skeleton className="w-full h-2.5" />
+                    <Skeleton className="w-24 h-3.5" />
+                    <Skeleton className="w-3/4 h-2.5" />
                   </div>
                 </div>
               ) : (
@@ -254,10 +254,10 @@ export default function ProfileClient() {
           <div className="space-y-8">
             <Card title="Account Overview" background="mantle" className="border-dashed">
               {status === 'loading' ? (
-                 <div className="space-y-4 py-2">
-                    <div className="flex justify-between items-center"><Skeleton className="w-16 h-2.5" /><Skeleton className="w-10 h-2.5" /></div>
-                    <div className="flex justify-between items-center"><Skeleton className="w-16 h-2.5" /><Skeleton className="w-14 h-2.5" /></div>
-                    <Skeleton className="w-full h-9 rounded-lg mt-4" />
+                 <div className="space-y-3">
+                    <div className="flex justify-between items-center py-2 border-b border-ctp-surface1/50"><Skeleton className="w-16 h-2.5" /><Skeleton className="w-14 h-2.5" /></div>
+                    <div className="flex justify-between items-center py-2"><Skeleton className="w-16 h-2.5" /><Skeleton className="w-14 h-2.5" /></div>
+                    <Skeleton className="w-full h-10 rounded-lg mt-8" />
                  </div>
               ) : (
               <>
