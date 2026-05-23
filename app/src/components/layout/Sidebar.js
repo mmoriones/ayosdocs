@@ -112,7 +112,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
       </div>
 
       {/* Footer / User */}
-      <div className="p-3 border-t border-ctp-surface1 bg-ctp-crust/50 overflow-hidden">
+      <div className="p-3 border-t border-ctp-surface1 overflow-hidden">
         <div className="space-y-1">
           {status === 'loading' ? (
             <div className="h-10 w-full" />

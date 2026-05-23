@@ -189,7 +189,7 @@ export default function HomeClient({ allGuides }) {
 
   return (
     <div className="bg-ctp-base font-sans text-ctp-text pb-20">
-      <div className="bg-ctp-mantle/30 border-b border-ctp-surface1">
+      <div className="bg-ctp-mantle/50 border-b border-ctp-surface1">
         <PageHeader 
           title="Welcome to AyosDocs"
           description="Your comprehensive guide to Philippine government processes and requirements."
@@ -199,7 +199,7 @@ export default function HomeClient({ allGuides }) {
               <div className="flex items-center gap-3">
                 <div className="hidden sm:flex items-center gap-4 pr-6 border-r border-ctp-surface1">
                   <div className="flex flex-col items-end">
-                     <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-60">Account Status</span>
+                     <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">Account Status</span>
                      <div className="flex items-center gap-1.5">
                         <span className={`text-[10px] font-bold uppercase ${isVerified ? 'text-ctp-green' : 'text-ctp-yellow'}`}>
                           {isVerified ? 'Verified' : 'Pending'}
@@ -208,7 +208,7 @@ export default function HomeClient({ allGuides }) {
                      </div>
                   </div>
                   <div className="flex flex-col items-end">
-                     <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-60">Auto-Save</span>
+                     <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">Auto-Save</span>
                      <div className="flex items-center gap-1.5">
                         <span className="text-[10px] font-bold text-ctp-sky-800 uppercase">Active</span>
                         <div className="w-1.5 h-1.5 rounded-full bg-ctp-sky-800 animate-pulse" />
@@ -234,10 +234,10 @@ export default function HomeClient({ allGuides }) {
           <Card 
             background="base" 
             interactive
-            className="relative overflow-hidden"
+            className="relative overflow-hidden group"
             onClick={() => router.push('/guides')}
           >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.01] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.03] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10 flex flex-col gap-6">
               <div className="flex items-start justify-between">
                 <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
@@ -259,10 +259,10 @@ export default function HomeClient({ allGuides }) {
           <Card 
             background="base" 
             interactive
-            className="relative overflow-hidden"
+            className="relative overflow-hidden group"
             onClick={() => router.push('/bundles')}
           >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.01] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.03] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10 flex flex-col gap-6">
               <div className="flex items-start justify-between">
                 <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
@@ -284,10 +284,10 @@ export default function HomeClient({ allGuides }) {
           <Card 
             background="base" 
             interactive
-            className="relative overflow-hidden"
+            className="relative overflow-hidden group"
             onClick={() => router.push('/offices')}
           >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.01] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.03] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10 flex flex-col gap-6">
               <div className="flex items-start justify-between">
                 <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
@@ -308,10 +308,10 @@ export default function HomeClient({ allGuides }) {
         </div>
 
         {/* Row 2: Dashboard Activity Summary */}
-        <Card noPadding className="border-ctp-surface1 relative group bg-ctp-mantle/[0.15]">
-          <div className="absolute inset-0 bg-gradient-to-r from-ctp-sky-800/[0.02] via-transparent to-ctp-sky-800/[0.02] pointer-events-none" />
+        <Card noPadding className="border-ctp-surface1 relative group">
+          <div className="absolute inset-0 bg-gradient-to-r from-ctp-sky-800/[0.01] via-transparent to-ctp-sky-800/[0.01] pointer-events-none" />
           
-          <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 divide-x divide-ctp-surface1/50 items-center">
+          <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 divide-x divide-ctp-surface1 items-center">
             {status === 'loading' || (isLoggedIn && isLoadingUserData) ? (
               <>
                 <div className="p-4 md:p-5 lg:p-6"><StatsCard.Skeleton /></div>
@@ -321,7 +321,7 @@ export default function HomeClient({ allGuides }) {
               </>
             ) : (
               <>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.02] transition-colors cursor-default">
+                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
                   <StatsCard 
                     label="Ongoing Guides" 
                     value={stats.active.toString()} 
@@ -330,7 +330,7 @@ export default function HomeClient({ allGuides }) {
                     trend={{ value: "+2", isUp: true }}
                   />
                 </div>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.02] transition-colors cursor-default">
+                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
                   <StatsCard 
                     label="Completed Tasks" 
                     value={stats.completed.toString()} 
@@ -338,14 +338,14 @@ export default function HomeClient({ allGuides }) {
                     isLocked={!isLoggedIn}
                   />
                 </div>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.02] transition-colors cursor-default">
+                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
                   <StatsCard 
                     label="Total Guides" 
                     value={allGuides.length.toString()} 
                     icon={BookOpen} 
                   />
                 </div>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.02] transition-colors cursor-default">
+                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
                   <StatsCard 
                     label="Community Reports" 
                     value="1.2k" 
@@ -432,10 +432,7 @@ export default function HomeClient({ allGuides }) {
                 </Link>
               </div>
 
-              <Card background="mantle" noPadding className="relative group overflow-hidden border-ctp-surface1 border-dashed">
-                {/* Visual Canvas Background */}
-                <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(var(--sky-800)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
-                
+              <Card background="base" noPadding className="relative group overflow-hidden border-ctp-surface1 border-dashed">
                 <div className="relative z-10 p-6 lg:p-10 flex flex-col gap-10">
                   {/* Primary Search Area */}
                   <div className="space-y-6 max-w-4xl">
@@ -478,7 +475,7 @@ export default function HomeClient({ allGuides }) {
                             setOfficeSearch(agency);
                             setTimeout(() => router.push(`/offices?search=${agency}`), 100);
                           }}
-                          className="px-2.5 py-1 rounded-md bg-ctp-mantle border border-ctp-surface1 text-[10px] font-bold text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/[0.03] transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
+                          className="px-2.5 py-1 rounded-md bg-ctp-mantle border border-ctp-surface1 text-[10px] font-bold text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/[0.05] transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
                         >
                           <div className="w-1 h-1 rounded-full bg-ctp-surface2 group-hover:bg-ctp-sky-800 transition-colors" />
                           {agency}
@@ -487,10 +484,10 @@ export default function HomeClient({ allGuides }) {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-8 border-t border-ctp-surface1/50">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-8 border-t border-ctp-surface1">
                     {/* Supporting Insight */}
                     <div className="lg:col-span-2">
-                       <div className="bg-ctp-sky-800/[0.04] border border-ctp-sky-800/10 rounded-xl p-5 flex gap-5 items-center relative overflow-hidden group/tip cursor-pointer hover:bg-ctp-sky-800/[0.06] transition-colors h-full shadow-sm">
+                       <div className="bg-ctp-sky-800/[0.04] border border-ctp-sky-800/10 rounded-xl p-5 flex gap-5 items-center relative overflow-hidden group/tip cursor-pointer hover:bg-ctp-sky-800/[0.08] transition-colors h-full shadow-sm">
                           <div className="w-10 h-10 rounded-xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm shrink-0 group-hover:bg-ctp-mantle transition-colors">
                              <Sparkles size={20} strokeWidth={2.5} />
                           </div>
@@ -505,7 +502,7 @@ export default function HomeClient({ allGuides }) {
                     </div>
 
                     {/* Performance Context */}
-                    <div className="space-y-4 flex flex-col justify-center border-l border-ctp-surface1/50 pl-8">
+                    <div className="space-y-4 flex flex-col justify-center border-l border-ctp-surface1 pl-8">
                         <div className="flex items-center justify-between">
                            <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Accuracy</span>
                            <span className="text-[11px] font-bold text-ctp-text">92%</span>
@@ -525,7 +522,7 @@ export default function HomeClient({ allGuides }) {
                   </div>
                 </div>
 
-                <div className="px-6 py-3 bg-ctp-crust/50 border-t border-ctp-surface1/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="px-6 py-3 border-t border-ctp-surface1 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <ShieldCheck size={14} className="text-ctp-green" strokeWidth={2.5} />
                     <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em]">Verified Community Intelligence Network</span>
@@ -608,10 +605,7 @@ export default function HomeClient({ allGuides }) {
         </div>
 
         <section className="py-12 border-t border-ctp-surface1">
-          <Card background="mantle" noPadding className="flex flex-col md:flex-row items-center justify-between gap-8 p-10 border-dashed relative overflow-hidden group">
-            {/* Subtle Accent matching other dashboard modules */}
-            <div className="absolute inset-0 bg-ctp-sky-800/[0.02] pointer-events-none" />
-            
+          <Card background="base" noPadding className="flex flex-col md:flex-row items-center justify-between gap-8 p-10 border-dashed relative overflow-hidden group">
             <div className="relative z-10 space-y-4 text-center md:text-left">
               <div className="space-y-1">
                 <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-[0.2em]">Support Channel</span>

@@ -28,6 +28,18 @@
   --color-ctp-mauve: var(--mauve);
   --color-ctp-teal: var(--teal);
 
+  --color-ctp-base: var(--ctp-base);
+  --color-ctp-mantle: var(--ctp-mantle);
+  --color-ctp-crust: var(--ctp-crust);
+  --color-ctp-text: var(--ctp-text);
+  --ctp-subtext1: var(--ctp-subtext1);
+  --ctp-subtext0: var(--ctp-subtext0);
+  --color-ctp-surface2: var(--ctp-surface2);
+  --color-ctp-surface1: var(--ctp-surface1);
+  --color-ctp-surface0: var(--ctp-surface0);
+  --color-ctp-subtext1: var(--ctp-subtext1);
+  --color-ctp-subtext0: var(--ctp-subtext0);
+
   /* Legacy mappings for backward compatibility if needed */
   --color-ctp-sapphire-200: var(--sky-50);
   --color-ctp-sapphire-500: var(--sky-300);
@@ -84,55 +96,57 @@
 
 @layer base {
   :root, .latte {
-    /* GitHub-inspired Light Palette - Base */
-    --ctp-base: #ffffff;
-    --ctp-mantle: #f6f8fa;
-    --ctp-crust: #eff1f3;
-    --ctp-text: #1f2328;
-    --ctp-subtext1: #656d76;
-    --ctp-subtext0: #6e7781;
-    --ctp-surface2: #afb8c1;
-    --ctp-surface1: #d0d7de;
-    --ctp-surface0: #d8dee4;
+    /* Catppuccin Latte - Base */
+    --ctp-base: #eff1f5;
+    --ctp-mantle: #e6e9ef;
+    --ctp-crust: #dce0e8;
+    --ctp-text: #4c4f69;
+    --ctp-subtext1: #5c5f77;
+    --ctp-subtext0: #6c6f85;
+    --ctp-surface2: #acb0be;
+    --ctp-surface1: #bcc0cc;
+    --ctp-surface0: #ccd0da;
 
-    /* Original AyosDocs Blue Palette (Teal-leaning) */
+    /* AyosDocs Blue Palette - Main Accent #209fb5 (Catppuccin Latte Sapphire) */
     --sky-10: #f0f9fa;
     --sky-50: #d0f0f4;
     --sky-300: #90cfea;
     --sky-800: #209fb5;
 
-    --green: #1a7f37;
-    --yellow: #9a6700;
-    --orange: #bc4c00;
-    --red: #cf222e;
-    --peach: #e36209;
-    --teal: #05998b;
-    --mauve: #8250df;
+    /* Catppuccin Latte Accents */
+    --green: #40a02b;
+    --yellow: #df8e1d;
+    --orange: #fe640b;
+    --red: #d20f39;
+    --peach: #fe640b;
+    --teal: #179299;
+    --mauve: #8839ef;
   }
 
   .mocha, .dark {
-    /* GitHub-inspired Dark Palette - Base */
-    --ctp-base: #0d1117;
-    --ctp-mantle: #161b22;
-    --ctp-crust: #010409;
-    --ctp-text: #c9d1d9;
+    /* Catppuccin Mocha - Comfort (GitHub-Inspired) */
+    --ctp-base: #0d1117;    /* GitHub's signature dark background */
+    --ctp-mantle: #161b22;  /* Slightly lighter for surface elevation */
+    --ctp-crust: #010409;   /* Deepest for inset areas */
+    --ctp-text: #c9d1d9;    /* Off-white to reduce eye strain (GitHub Default) */
     --ctp-subtext1: #8b949e;
     --ctp-subtext0: #6e7681;
     --ctp-surface2: #484f58;
     --ctp-surface1: #30363d;
     --ctp-surface0: #21262d;
 
-    /* Original AyosDocs Blue Palette (Teal-leaning) */
-    --sky-10: #101d23;
-    --sky-50: #1a3a44;
-    --sky-300: #74c7ec;
-    --sky-800: #209fb5;
+    /* AyosDocs Blue Palette - Desaturated for Comfort */
+    --sky-10: #121d26;
+    --sky-50: #1a3a4e;
+    --sky-300: #67b8c7; /* Desaturated teal for better focus */
+    --sky-800: #1a7f91; /* Deeper, more muted teal (Sapphire-Dark) to avoid "neon" effect */
 
-    --green: #3fb950;
-    --yellow: #d29922;
+    /* Catppuccin Mocha Accents - Desaturated for Readability */
+    --green: #56d364;
+    --yellow: #e3b341;
     --orange: #f0883e;
     --red: #f85149;
-    --peach: #fab387;
+    --peach: #f0883e;
     --teal: #39c5bb;
     --mauve: #bc8cff;
   }
@@ -157,8 +171,10 @@
   }
 
   input {
+    @apply bg-transparent text-ctp-text;
     font-family: inherit;
   }
+
 }
 
 @layer utilities {
