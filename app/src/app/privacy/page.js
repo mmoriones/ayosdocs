@@ -98,7 +98,7 @@ export default function PrivacyPage() {
               <h4 className="text-sm font-bold text-ctp-text uppercase tracking-tight">Questions about your data?</h4>
               <p className="text-xs text-ctp-subtext1 font-medium leading-tight">Reach out to our security team for clarification.</p>
             </div>
-            <Link href="/contact" className="px-6 py-2 bg-ctp-base border border-ctp-surface1 rounded-lg text-[10px] font-bold uppercase tracking-widest text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 transition-all shadow-sm active:scale-95">
+            <Link href="/support" className="px-6 py-2 bg-ctp-base border border-ctp-surface1 rounded-lg text-[10px] font-bold uppercase tracking-widest text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 transition-all shadow-sm active:scale-95">
               Contact Privacy Team
             </Link>
           </aside>

@@ -8,9 +8,10 @@ import PageHeader from '@/components/ui/PageHeader';
 import axios from 'axios';
 
 /**
- * ContactClient Component
+ * SupportClient Component
+ * Handles user inquiries and feedback via the support form.
  */
-export default function ContactClient() {
+export default function SupportClient() {
   const router = useRouter();
   const { showToast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,7 +56,7 @@ export default function ContactClient() {
     <div className="min-h-screen bg-ctp-base font-sans pb-20">
       <PageHeader 
         icon={Mail}
-        title="Contact Support"
+        title="AyosDocs Support"
         description="Have questions or feedback? Our team is here to help you."
         actions={
           <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3 text-ctp-green">

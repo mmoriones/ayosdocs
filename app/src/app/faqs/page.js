@@ -117,7 +117,7 @@ export default function FAQsPage() {
               <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
                 Our support team is ready to assist you with specific documentation issues.
               </p>
-              <Link href="/contact" className="block w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-[10px] font-bold uppercase tracking-widest text-center hover:border-ctp-sky-800 hover:bg-ctp-mantle transition-all shadow-sm">
+              <Link href="/support" className="block w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-[10px] font-bold uppercase tracking-widest text-center hover:border-ctp-sky-800 hover:bg-ctp-mantle transition-all shadow-sm">
                 Contact Support
               </Link>
             </section>

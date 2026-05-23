@@ -27,7 +27,7 @@ export default async function sitemap() {
     "/updates",
     "/about",
     "/faqs",
-    "/contact",
+    "/support",
     "/privacy",
     "/terms",
     "/coming-soon",

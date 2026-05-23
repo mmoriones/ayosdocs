@@ -59,7 +59,7 @@ const SortDropdown = ({ value, onChange, options, label = "Sort:", className = "
                     ? 'bg-ctp-sky-800 text-white shadow-md shadow-ctp-sky-800/10' 
                     : option.disabled
                       ? 'text-ctp-subtext1/40 cursor-not-allowed italic'
-                      : 'text-ctp-subtext1 hover:bg-ctp-base hover:text-ctp-text'
+                      : 'text-ctp-subtext1 hover:bg-ctp-base dark:hover:bg-ctp-surface0 hover:text-ctp-text'
                 }`}
               >
                 {option.label}

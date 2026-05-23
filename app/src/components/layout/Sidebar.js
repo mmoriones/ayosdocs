@@ -130,7 +130,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
                   signOut();
                   closeMobile?.();
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-ctp-subtext1 hover:bg-ctp-sky-800/[0.03] hover:text-ctp-text transition-all duration-200 group overflow-hidden whitespace-nowrap`}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-ctp-subtext1 hover:bg-ctp-sky-800/[0.05] hover:text-ctp-text transition-all duration-200 group overflow-hidden whitespace-nowrap`}
               >
                 <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-red transition-colors">
                   <LogOut size={20} />
@@ -160,7 +160,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
 
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className={`flex items-center gap-3 px-3 py-2.5 mt-2 rounded-lg text-ctp-subtext1 hover:bg-ctp-sky-800/[0.03] hover:text-ctp-text transition-all duration-200 group w-full overflow-hidden whitespace-nowrap`}
+          className={`flex items-center gap-3 px-3 py-2.5 mt-2 rounded-lg text-ctp-subtext1 hover:bg-ctp-sky-800/[0.05] hover:text-ctp-text transition-all duration-200 group w-full overflow-hidden whitespace-nowrap`}
         >
           <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-text">
             {isCollapsed ? <PanelRight size={20} /> : <PanelLeft size={20} />}

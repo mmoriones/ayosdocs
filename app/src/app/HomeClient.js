@@ -638,7 +638,7 @@ export default function HomeClient({ allGuides }) {
                 View FAQ
               </Button>
               <Button 
-                onClick={() => router.push('/contact')}
+                onClick={() => router.push('/support')}
                 className="px-8 shadow-lg shadow-ctp-sky-800/10"
               >
                 Contact Us

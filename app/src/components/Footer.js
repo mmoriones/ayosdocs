@@ -10,7 +10,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const links = [
-    { label: 'Support', href: '/contact' },
+    { label: 'Support', href: '/support' },
     { label: 'About', href: '/about' },
     { label: 'FAQs', href: '/faqs' },
     { label: 'Terms of Use', href: '/terms' },

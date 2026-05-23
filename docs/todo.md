@@ -21,10 +21,10 @@
    ~~- [X] **Profile:** Make user details editable except email~~
     ~~- [ ] **Refator:** Implement global UI component reuse for consistency~~
     ~~- [ ] **Theme:** Add better color palettes for dark mode to improve contrast and readability ~~
-    - [ ] **Icon:** Update the icon color gradient
+    ~~- [ ] **Icon:** Update the icon color gradient~~
     - [ ] **Flash:** Add flash screen when navigating to another page and having slow loading
     - [ ] **Skeleton:** Remove the skeleton on /profile and settings
-    - [ ] **Sidebar:** Increase side bar opacity for currently selected item
+    - [ ] **Sidebar:** Increase side bar opacity for hover and currently selected item
     - [ ] **Community Feed:** Make Community Feed single horizontal card
     - [ ] **Recent Updates:** Improve RecentlyUpdated style and laout on / and /guides
     - [ ] **Buttons:** Review buttons variants usage on all pages
@@ -41,7 +41,7 @@
 ~~- [x] Implement user login using email and email verification~~
 ~~- [x] **Authentication:** Sign up using email and verification using OTP or verification link~~
  - [ ] **Optimizations:**
-    - [ ] Improve /my-docs loading
+    - [ ] Improve /my-docs loading speed
     - [ ] Refactor/clean up unused imports and use barrel import
     - [ ] Rename /contact to /support
 
