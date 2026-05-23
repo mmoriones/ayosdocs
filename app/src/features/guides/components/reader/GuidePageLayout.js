@@ -169,7 +169,7 @@ const GuidePageLayout = ({
 
   return (
     <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 pb-24">
-      <div className="grid grid-cols-12 gap-8 lg:gap-10 items-start">
+      <div className="grid grid-cols-12 gap-8 lg:gap-10">
         {/* MAIN CONTENT AREA */}
         <main className={`col-span-12 transition-all duration-300 ${isSidebarCollapsed ? 'lg:col-span-11' : 'lg:col-span-9'}`}>
           <div className="space-y-10">
@@ -271,7 +271,7 @@ const GuidePageLayout = ({
         </main>
 
         {/* GUIDE TOOLS SIDEBAR */}
-        <aside className={`hidden lg:flex flex-col gap-6 sticky top-24 transition-all duration-300 ${isSidebarCollapsed ? 'col-span-1 w-16' : 'col-span-3'}`}>
+        <aside className={`hidden lg:flex flex-col gap-6 sticky top-24 self-start transition-all duration-300 ${isSidebarCollapsed ? 'col-span-1 w-16' : 'col-span-3'}`}>
           <div className="bg-ctp-base border border-ctp-surface1 rounded-xl shadow-sm flex flex-col max-h-[calc(100vh-120px)] overflow-hidden transition-all">
             <div className={`p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 shrink-0 transition-all ${isSidebarCollapsed ? 'pb-5' : 'pb-4'}`}>
               <div className={`flex items-center justify-between ${isSidebarCollapsed ? 'flex-col gap-6' : 'mb-4'}`}>

@@ -76,6 +76,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
             <BookmarkButton
               isFavorite={isFavorite}
               onClick={onFavorite}
+              variant="bare"
             />
             
             <DropdownMenu

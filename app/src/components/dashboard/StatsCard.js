@@ -17,7 +17,7 @@ export default function StatsCard({ label, value, icon: Icon, trend, isLocked = 
   return (
     <div className="flex items-center gap-4 py-1 group">
       {/* Icon Container - Refined Squircle with light tint */}
-      <div className="w-11 h-11 rounded-xl bg-ctp-sky-800/[0.06] flex items-center justify-center text-ctp-sky-800 border border-ctp-sky-800/10 group-hover:bg-ctp-sky-800 group-hover:text-white transition-all duration-300 shadow-sm shrink-0">
+      <div className="w-11 h-11 rounded-xl bg-ctp-sky-800/[0.06] flex items-center justify-center text-ctp-sky-800 border border-ctp-sky-800/10 group-hover:bg-ctp-sky-800/[0.12] transition-all duration-300 shadow-sm shrink-0">
         <Icon size={20} strokeWidth={2.5} />
       </div>
 

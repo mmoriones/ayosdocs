@@ -15,7 +15,7 @@ export default function OnboardingClient() {
 
   useEffect(() => {
     const completeOnboarding = async () => {
-      if (status !== 'authenticated') return;
+      if (status !== 'authenticated' || session?.user?.onboarded) return;
       
       try {
         const result = await updateOnboardingAction(true);
@@ -29,7 +29,7 @@ export default function OnboardingClient() {
     };
 
     completeOnboarding();
-  }, [status, update]);
+  }, [status, session?.user?.onboarded, update]);
 
   return (
     <div className="min-h-[85vh] flex items-center justify-center p-6 bg-ctp-base text-ctp-text">

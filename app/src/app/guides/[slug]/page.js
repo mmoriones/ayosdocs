@@ -72,10 +72,10 @@ export default async function GuidePage({ params }) {
           rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings]}
           components={{
             h2: ({ ...props }) => (
-              <h2 className="text-xl font-bold text-ctp-text mt-12 mb-5 tracking-tight border-b border-ctp-surface1 pb-2 uppercase tracking-widest" {...props} />
+              <h2 className="scroll-mt-24 text-xl font-bold text-ctp-text mt-12 mb-5 tracking-tight border-b border-ctp-surface1 pb-2 uppercase tracking-widest" {...props} />
             ),
             h3: ({ ...props }) => (
-              <h3 className="text-lg font-bold text-ctp-text mt-8 mb-4 tracking-tight" {...props} />
+              <h3 className="scroll-mt-24 text-lg font-bold text-ctp-text mt-8 mb-4 tracking-tight" {...props} />
             ),
             p: ({ ...props }) => (
               <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed mb-4" {...props} />

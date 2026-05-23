@@ -27,7 +27,7 @@ export default function NavItem({ href, icon: Icon, label, collapsed, active, on
       className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group ${
         isActive
           ? 'bg-ctp-sky-800/5 text-ctp-sky-800'
-          : 'text-ctp-subtext1 hover:bg-ctp-base hover:text-ctp-text'
+          : 'text-ctp-subtext1 hover:bg-ctp-sky-800/[0.03] hover:text-ctp-text'
       }`}
     >
       {/* Active Indicator Bar */}

@@ -27,6 +27,7 @@ import {
 
 import { ChecklistCard } from '@/features/guides/components/tracking';
 import { StartWithGoal, RecentExperiences, OnboardingBanner, TrendingWidget } from '@/features/guides/components/discovery';
+import { bundles } from '@/data/bundles';
 import StatsCard from '@/components/dashboard/StatsCard';
 import Adsense from '@/components/Adsense';
 import PageHeader from '@/components/ui/PageHeader';
@@ -42,7 +43,17 @@ import Skeleton from '@/components/ui/Skeleton';
 export default function HomeClient({ allGuides }) {
   const { activeGuideSlug, setActiveGuideSlug } = useWorkspace();
   const [officeSearch, setOfficeSearch] = useState('');
+  const [isMounted, setIsMounted] = useState(false);
   const { data: session, status } = useSession();
+
+  // Handle hydration
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsMounted(true);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
   const isLoggedIn = status === 'authenticated';
   const isVerified = session?.user?.isVerified;
   const { openAuthModal } = useAuthUI();
@@ -60,15 +71,17 @@ export default function HomeClient({ allGuides }) {
     enabled: isLoggedIn && isVerified,
   });
 
-  // Fetch top performing offices from DB (dynamically seeded)
-  const { data: topOffices = [], isLoading: isLoadingOffices } = useQuery({
-    queryKey: ['top-offices'],
+  // Fetch all offices from DB to show actual count and top performers
+  const { data: allOffices = [], isLoading: isLoadingOffices } = useQuery({
+    queryKey: ['all-offices'],
     queryFn: async () => {
       const response = await axios.get('/api/offices');
-      return response.data.slice(0, 5);
+      return response.data;
     },
     staleTime: 5 * 60 * 1000,
   });
+
+  const topOffices = useMemo(() => allOffices.slice(0, 5), [allOffices]);
 
   // Fetch trending guides from DB (dynamically seeded)
   const { data: trendingGuides = [], isLoading: isLoadingTrending } = useQuery({
@@ -178,15 +191,11 @@ export default function HomeClient({ allGuides }) {
     <div className="bg-ctp-base font-sans text-ctp-text pb-20">
       <div className="bg-ctp-mantle/30 border-b border-ctp-surface1">
         <PageHeader 
-          title={status === 'loading' 
-            ? 'Overview' 
-            : isLoggedIn 
-            ? `Welcome back, ${session.user.name?.split(' ')[0] || 'User'}` 
-            : 'Welcome to AyosDocs'}
-          description={isLoggedIn ? "Here's what's happening with your government applications." : "Your control center for Philippine government requirements."}
+          title="Welcome to AyosDocs"
+          description="Your comprehensive guide to Philippine government processes and requirements."
           className="bg-transparent border-none py-6 lg:py-8"
           actions={
-            isLoggedIn && (
+            isMounted && isLoggedIn && (
               <div className="flex items-center gap-3">
                 <div className="hidden sm:flex items-center gap-4 pr-6 border-r border-ctp-surface1">
                   <div className="flex flex-col items-end">
@@ -221,20 +230,20 @@ export default function HomeClient({ allGuides }) {
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-12">
-        {/* Row 1: Primary Discovery Tiles */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card 
             background="base" 
-            className="group cursor-pointer hover:border-ctp-sky-800/30 transition-all shadow-md relative overflow-hidden"
+            interactive
+            className="relative overflow-hidden"
             onClick={() => router.push('/guides')}
           >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.02] rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-700" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.01] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10 flex flex-col gap-6">
               <div className="flex items-start justify-between">
-                <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800 group-hover:text-white transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
                   <BookOpen size={24} strokeWidth={2} />
                 </div>
-                <Badge variant="sky" className="text-[8px] px-1.5 py-0 uppercase">84 Available Guides</Badge>
+                <Badge variant="sky" className="text-[8px] px-1.5 py-0 uppercase">{allGuides.length} Available Guides</Badge>
               </div>
               <div className="space-y-1">
                 <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Requirements Library</h3>
@@ -249,16 +258,17 @@ export default function HomeClient({ allGuides }) {
 
           <Card 
             background="base" 
-            className="group cursor-pointer hover:border-ctp-sky-800/30 transition-all shadow-md relative overflow-hidden"
+            interactive
+            className="relative overflow-hidden"
             onClick={() => router.push('/bundles')}
           >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.02] rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-700" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.01] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10 flex flex-col gap-6">
               <div className="flex items-start justify-between">
-                <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800 group-hover:text-white transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
                   <Layers size={24} strokeWidth={2} />
                 </div>
-                <Badge variant="sky" className="text-[8px] px-1.5 py-0 uppercase">12 Process Bundles</Badge>
+                <Badge variant="sky" className="text-[8px] px-1.5 py-0 uppercase">{bundles.length} Process Bundles</Badge>
               </div>
               <div className="space-y-1">
                 <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Goal Roadmaps</h3>
@@ -273,16 +283,17 @@ export default function HomeClient({ allGuides }) {
 
           <Card 
             background="base" 
-            className="group cursor-pointer hover:border-ctp-sky-800/30 transition-all shadow-md relative overflow-hidden"
+            interactive
+            className="relative overflow-hidden"
             onClick={() => router.push('/offices')}
           >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.02] rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform duration-700" />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.01] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
             <div className="relative z-10 flex flex-col gap-6">
               <div className="flex items-start justify-between">
-                <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800 group-hover:text-white transition-all duration-300">
+                <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
                   <MapPin size={24} strokeWidth={2} />
                 </div>
-                <Badge variant="sky" className="text-[8px] px-1.5 py-0 uppercase">512 Offices Tracked</Badge>
+                <Badge variant="sky" className="text-[8px] px-1.5 py-0 uppercase">{allOffices.length || '...'} Offices Tracked</Badge>
               </div>
               <div className="space-y-1">
                 <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Office Locator</h3>
@@ -298,7 +309,7 @@ export default function HomeClient({ allGuides }) {
 
         {/* Row 2: Dashboard Activity Summary */}
         <Card noPadding className="border-ctp-surface1 relative group bg-ctp-mantle/[0.15]">
-          <div className="absolute inset-0 bg-gradient-to-r from-ctp-sky-800/[0.03] via-transparent to-ctp-sky-800/[0.03] pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ctp-sky-800/[0.02] via-transparent to-ctp-sky-800/[0.02] pointer-events-none" />
           
           <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 divide-x divide-ctp-surface1/50 items-center">
             {status === 'loading' || (isLoggedIn && isLoadingUserData) ? (
@@ -310,7 +321,7 @@ export default function HomeClient({ allGuides }) {
               </>
             ) : (
               <>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
+                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.02] transition-colors cursor-default">
                   <StatsCard 
                     label="Ongoing Guides" 
                     value={stats.active.toString()} 
@@ -319,7 +330,7 @@ export default function HomeClient({ allGuides }) {
                     trend={{ value: "+2", isUp: true }}
                   />
                 </div>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
+                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.02] transition-colors cursor-default">
                   <StatsCard 
                     label="Completed Tasks" 
                     value={stats.completed.toString()} 
@@ -327,14 +338,14 @@ export default function HomeClient({ allGuides }) {
                     isLocked={!isLoggedIn}
                   />
                 </div>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
+                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.02] transition-colors cursor-default">
                   <StatsCard 
                     label="Total Guides" 
                     value={allGuides.length.toString()} 
                     icon={BookOpen} 
                   />
                 </div>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
+                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.02] transition-colors cursor-default">
                   <StatsCard 
                     label="Community Reports" 
                     value="1.2k" 
@@ -447,28 +458,29 @@ export default function HomeClient({ allGuides }) {
                           value={officeSearch}
                           onChange={(e) => setOfficeSearch(e.target.value)}
                           maxLength={100}
-                          className="bg-ctp-base border-ctp-surface1 h-12 text-sm shadow-sm ring-4 ring-ctp-sky-800/[0.01]"
+                          className="bg-ctp-base border-ctp-surface1 h-11 text-sm shadow-sm ring-4 ring-ctp-sky-800/[0.01]"
                         />
                       </div>
                       <Button 
                         onClick={handleOfficeSearch}
-                        className="h-12 px-8 text-xs shadow-xl shadow-ctp-sky-800/10"
+                        className="h-11 px-6 text-[10px] uppercase tracking-widest shadow-lg shadow-ctp-sky-800/10"
                       >
                         Check Status
                       </Button>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 pt-1">
-                      <span className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-widest">Trending:</span>
-                      {['PSA', 'DFA', 'NBI', 'LTO'].map((agency) => (
+                    <div className="flex flex-wrap items-center gap-2 pt-1">
+                      <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] mr-2">Quick Access:</span>
+                      {['PSA', 'DFA', 'NBI', 'SSS', 'LTO'].map((agency) => (
                         <button
                           key={agency}
                           onClick={() => {
                             setOfficeSearch(agency);
                             setTimeout(() => router.push(`/offices?search=${agency}`), 100);
                           }}
-                          className="px-4 py-2 rounded-lg bg-ctp-base border border-ctp-surface1 text-[11px] font-bold text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 transition-all shadow-sm active:scale-95"
+                          className="px-2.5 py-1 rounded-md bg-ctp-mantle border border-ctp-surface1 text-[10px] font-bold text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/[0.03] transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
                         >
+                          <div className="w-1 h-1 rounded-full bg-ctp-surface2 group-hover:bg-ctp-sky-800 transition-colors" />
                           {agency}
                         </button>
                       ))}

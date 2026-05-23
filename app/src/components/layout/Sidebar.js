@@ -31,8 +31,10 @@ import Skeleton from '@/components/ui/Skeleton';
  * @param {Function} props.setIsCollapsed - Callback to toggle desktop view.
  * @param {boolean} [props.isMobileOpen] - Controls visibility on small screens.
  * @param {Function} props.closeMobile - Callback to hide the sidebar on mobile.
+ * @param {boolean} [props.isMounted] - Controls whether animations are enabled.
+ * @param {string} [props.className] - Optional custom classes.
  */
-export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = false, closeMobile }) {
+export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = false, closeMobile, isMounted = true, className = "" }) {
   const { data: session, status } = useSession();
   const { openAuthModal } = useAuthUI();
   const isLoggedIn = status === 'authenticated';
@@ -51,11 +53,13 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
 
   return (
     <aside 
-      className={`fixed left-0 top-0 h-screen bg-ctp-mantle border-r border-ctp-surface1 z-50 flex flex-col transition-all duration-300 ${
+      className={`fixed left-0 top-0 h-screen bg-ctp-mantle border-r border-ctp-surface1 z-50 flex flex-col ${
+        isMounted ? 'transition-all duration-300' : 'transition-none'
+      } ${
         isCollapsed ? 'w-16' : 'w-64'
       } ${
         isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-      }`}
+      } ${className}`}
     >
       {/* Header / Logo */}
       <div className="h-16 flex items-center px-4 shrink-0 overflow-hidden">
@@ -126,7 +130,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
                   signOut();
                   closeMobile?.();
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-ctp-subtext1 hover:bg-ctp-base hover:text-ctp-text transition-all duration-200 group overflow-hidden whitespace-nowrap`}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-ctp-subtext1 hover:bg-ctp-sky-800/[0.03] hover:text-ctp-text transition-all duration-200 group overflow-hidden whitespace-nowrap`}
               >
                 <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-red transition-colors">
                   <LogOut size={20} />
@@ -156,7 +160,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
 
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className={`flex items-center gap-3 px-3 py-2.5 mt-2 rounded-lg text-ctp-subtext1 hover:bg-ctp-base hover:text-ctp-text transition-all duration-200 group w-full overflow-hidden whitespace-nowrap`}
+          className={`flex items-center gap-3 px-3 py-2.5 mt-2 rounded-lg text-ctp-subtext1 hover:bg-ctp-sky-800/[0.03] hover:text-ctp-text transition-all duration-200 group w-full overflow-hidden whitespace-nowrap`}
         >
           <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-text">
             {isCollapsed ? <PanelRight size={20} /> : <PanelLeft size={20} />}

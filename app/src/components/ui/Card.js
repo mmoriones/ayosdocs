@@ -9,6 +9,7 @@
  * @param {React.ReactNode} [props.headerAction]
  * @param {React.ReactNode} [props.footer]
  * @param {boolean} [props.noPadding=false]
+ * @param {boolean} [props.interactive=false] - Whether to apply hover effects.
  */
 export default function Card({
   children,
@@ -17,6 +18,7 @@ export default function Card({
   headerAction,
   footer,
   noPadding = false,
+  interactive = false,
   className = '',
   headerClassName = '',
   footerClassName = '',
@@ -30,10 +32,13 @@ export default function Card({
   };
   const bgStyles = backgrounds[background] || backgrounds.base;
   const overflowClass = overflow === 'hidden' ? 'overflow-hidden' : 'overflow-visible';
+  const interactiveStyles = (interactive || props.onClick) 
+    ? 'cursor-pointer hover:border-ctp-sky-800/30 hover:shadow-md hover:bg-ctp-mantle transition-all active:scale-[0.99]' 
+    : '';
   
   return (
     <div 
-      className={`rounded-xl border border-ctp-surface1 shadow-sm transition-all ${overflowClass} ${bgStyles} ${className}`}
+      className={`rounded-xl border border-ctp-surface1 shadow-sm transition-all ${overflowClass} ${bgStyles} ${interactiveStyles} ${className}`}
       {...props}
     >
       {title && (

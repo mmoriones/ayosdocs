@@ -18,7 +18,7 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
         <Link 
           href={`/guides/${guide.slug}`}
           onClick={onClick}
-          className="flex-1 flex items-center gap-3.5 p-3 rounded-lg border border-ctp-surface1 bg-ctp-base hover:bg-ctp-mantle/50 hover:border-ctp-sky-800/30 transition-all group"
+          className="flex-1 flex items-center gap-3.5 p-3 rounded-lg border border-ctp-surface1 bg-ctp-base hover:bg-ctp-mantle/50 hover:border-ctp-sky-800/30 hover:shadow-md active:scale-[0.99] transition-all group"
         >
           <div className="w-9 h-9 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-ctp-base transition-colors">
             <GuideIcon 
@@ -40,12 +40,13 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
         </Link>
         
         {onFavorite && (
-          <div className="absolute -right-2 -top-2 z-10 scale-90 opacity-0 group-hover:opacity-100 transition-all">
+          <div className="absolute -right-1 -top-1 z-10 opacity-0 group-hover:opacity-100 transition-all">
             <BookmarkButton
               isFavorite={isFavorite}
               onClick={onFavorite}
-              size="sm"
-              variant="circle"
+              size="md"
+              variant="bare"
+              tooltipProps={{ position: 'left' }}
             />
           </div>
         )}
@@ -56,7 +57,7 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
   return (
     <div 
       onClick={() => window.location.href = `/guides/${guide.slug}`}
-      className="bg-ctp-base rounded-lg border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/20 hover:bg-ctp-mantle/[0.4] transition-all duration-300 p-5 flex flex-col h-full group cursor-pointer relative overflow-hidden"
+      className="bg-ctp-base rounded-lg border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle hover:shadow-md active:scale-[0.99] transition-all duration-300 p-4 flex flex-col h-full group cursor-pointer relative"
     >
       <div className="flex items-start justify-between mb-6">
         <div className="w-10 h-10 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-base transition-colors duration-300">
@@ -69,12 +70,13 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
         </div>
         
         {onFavorite && (
-          <div className="scale-75 -mr-2 -mt-2 opacity-0 group-hover:opacity-100 transition-all">
+          <div className="opacity-0 group-hover:opacity-100 transition-all">
             <BookmarkButton
               isFavorite={isFavorite}
               onClick={onFavorite}
-              size="sm"
-              variant="circle"
+              size="md"
+              variant="bare"
+              tooltipProps={{ position: 'left' }}
             />
           </div>
         )}
