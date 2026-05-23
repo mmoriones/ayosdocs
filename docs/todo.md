@@ -1,7 +1,7 @@
 # AyosDocs Sprint Checklist 📋
 
 ## 🎨 Frontend & UI Refinements
-~~- [ ] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.~~
+~~- [X] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.~~
 - [ ] **Branding:** 
     ~~- [-] Fix logo and add government agency logos. (started)~~
     - ~~[X] Add consistent SVGs/Graphics across the platform.(used webp instead)~~
@@ -20,22 +20,22 @@
     ~~- [ ] **Settings:** Add components on the empty tabs on /settings and make them functional.~~
    ~~- [X] **Profile:** Make user details editable except email~~
     ~~- [ ] **Refator:** Implement global UI component reuse for consistency~~
-    ~~- [ ] **Theme:** Add better color palettes for dark mode to improve contrast and readability ~~
-    ~~- [ ] **Icon:** Update the icon color gradient~~
+    ~~- [X] **Theme:** Add better color palettes for dark mode to improve contrast and readability ~~
+    ~~- [X] **Icon:** Update the icon color gradient~~
     - [ ] **Flash:** Add flash screen when navigating to another page and having slow loading
     - [ ] **Skeleton:** Remove the skeleton on /profile and settings
-    - [ ] **Sidebar:** Increase side bar opacity for hover and currently selected item
-    - [ ] **Community Feed:** Make Community Feed single horizontal card
-    - [ ] **Recent Updates:** Improve RecentlyUpdated style and laout on / and /guides
+    ~~- [X] **Sidebar:** Increase side bar opacity for hover and currently selected item~~
+    ~~- [X] **Community Feed:** Make Community Feed single horizontal card~~
+    ~~- [X] **Recent Updates:** Improve RecentlyUpdated style and layout on / and /guides~~
     - [ ] **Buttons:** Review buttons variants usage on all pages
     - [ ] **Hover:** Make hover overlays consistent
     - [ ] **Tooltip:** Review all client pages and components that needs tooltip
-    - [ ] **Scroll:** Create a reusable button for horizontal scroll [ < > ]
+    ~~- [ ] **Scroll:** Create a reusable button for horizontal scroll [ < > ] and a reusable component for the indicator below the items on horizontal scroll~~
 
 ## ✨ Features & Logic
 - [ ] **Recently Updated:**
     ~~- [-] Replace dummy data in `RecentlyUpdated.jsx` with real content.~~
-    ~~- [ ] Implement "View all updates" page/logic.~~
+    ~~- [X] Implement "View all updates" page/logic.~~
     ~~- [ ] Connect to backend endpoint for update tracking.~~
 - [ ] **Onboarding:**
     - ~~[X] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").~~
@@ -44,11 +44,11 @@
  - [ ] **Optimizations:**
     - [ ] Improve /my-docs loading speed
     - [ ] Refactor/clean up unused imports and use barrel import
-    - [ ] Rename /contact to /support
+    ~~- [X] Rename /contact to /support~~
 
 
 ## 👤 User Dashboard (My Docs)
-~~- [ ] **Rename:** Rebrand "User Progress" to **"My Docs"**.~~
+~~- [X] **Rename:** Rebrand "User Progress" to **"My Docs"**.~~
 ~~- [ ] **Grouping:** Add functionality to create and edit custom guide groups (Requires new schema & endpoints).~~
 ~~- [ ] **Search:** Add search function within the dashboard.~~
 ~~- [ ] **Sorting:** Implement filters for All, In Progress, Completed, and Favorites.~~
@@ -80,7 +80,7 @@
 ## 🐛 Bugs & Fixes
 - ~~[X] **AuthModal:** Fix bug where AuthModal continues to show after successful login.~~
 - ~~[X] **Clean Content:** Review and remove any legacy references in guide files.~~
-- [ ] **Hydration:** Rate page showing the unauthenticated "AUthentication Required" card when still hydrating
+~~- [ ] **Hydration:** Rate page showing the unauthenticated "AUthentication Required" card when still hydrating~~
 
 ## 💡 Future Ideas
 ~~- [ ] **Service Rating:** Add a rating system for government services (could be a separate app).~~

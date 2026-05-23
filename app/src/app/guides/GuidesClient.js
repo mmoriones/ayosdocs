@@ -35,7 +35,6 @@ import Adsense from '@/components/Adsense';
 import { toggleFavoriteAction } from '@/app/actions/user';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
-import { RecentlyUpdated } from '@/features/guides/components/discovery';
 
 /**
  * GuidesClient Component
@@ -396,22 +395,6 @@ export default function GuidesClient({ initialGuides }) {
                   )}
                 </div>
               </div>
-
-              <Card background="mantle" className="border-ctp-surface1 shadow-sm bg-ctp-mantle/50">
-                <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3 mb-4">
-                  <div className="flex items-center gap-2">
-                    <TrendingUp size={14} className="text-ctp-sky-800" />
-                    <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Recent Updates</h3>
-                  </div>
-                  <Link 
-                    href="/updates"
-                    className="text-[9px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
-                  >
-                    View All
-                  </Link>
-                </div>
-                <RecentlyUpdated />
-              </Card>
             </div>
           </aside>
 

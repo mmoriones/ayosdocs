@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { 
   Star, 
   Clock, 
@@ -29,7 +29,7 @@ import PageHeader from '@/components/ui/PageHeader';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
 import { submitOfficeReportAction } from '@/app/actions/office';
-import { Tooltip, Card, Input, Button } from '@/components/ui';
+import { Tooltip, Card, Input, Button, Skeleton } from '@/components/ui';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 
@@ -116,9 +116,7 @@ export default function RateClient() {
   const { openAuthModal } = useAuthUI();
   const { showToast } = useToast();
   
-  const isLoggedIn = status === 'authenticated';
-  const isVerified = session?.user?.isVerified;
-  
+  const [isMounted, setIsMounted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [officeSearch, setOfficeSearch] = useState('');
@@ -147,105 +145,65 @@ export default function RateClient() {
     cleanliness: 0
   });
 
+  // Handle hydration
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsMounted(true);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const isLoggedIn = status === 'authenticated';
+  const isVerified = session?.user?.isVerified;
+
   const { data: offices = [], isLoading: isLoadingOffices } = useQuery({
     queryKey: ['offices-search', officeSearch],
     queryFn: async () => {
       if (officeSearch.length < 2) return [];
-      const response = await axios.get(`/api/offices?search=${officeSearch}`);
+      const response = await axios.get(`/api/offices?q=${encodeURIComponent(officeSearch)}`);
       return response.data;
     },
     enabled: officeSearch.length >= 2,
   });
 
   const handleRatingClick = (category, value) => {
-    if (!isLoggedIn) {
-      openAuthModal();
-      return;
-    }
-    if (!isVerified) {
-      showToast({
-        type: 'warning',
-        title: 'Verification Required',
-        message: 'Please verify your email to rate offices.'
-      });
-      return;
-    }
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       ratings: { ...prev.ratings, [category]: value }
     }));
   };
 
   const handleHoverRating = (category, value) => {
-    setHoverRatings(prev => ({ ...prev, [category]: value }));
+    setHoverRatings((prev) => ({ ...prev, [category]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!isLoggedIn) {
-      openAuthModal();
-      return;
-    }
-
-    if (!isVerified) {
-      showToast({
-        type: 'warning',
-        title: 'Verification Required',
-        message: 'Your account must be verified to publish reports.'
-      });
-      return;
-    }
-
     if (!selectedOffice) {
-      showToast({
-        type: 'error',
-        title: 'Office Required',
-        message: 'Please select a government office from the list.'
-      });
+      showToast({ type: 'warning', title: 'Office Required', message: 'Please select a government office first.' });
       return;
     }
 
-    // Check if ratings are filled
-    const allRatingsFilled = Object.values(formData.ratings).every(r => r > 0);
-    if (!allRatingsFilled) {
-      showToast({
-        type: 'error',
-        title: 'Ratings Required',
-        message: 'Please provide all performance ratings.'
-      });
+    if (Object.values(formData.ratings).some(v => v === 0)) {
+      showToast({ type: 'warning', title: 'Ratings Required', message: 'Please provide all performance ratings.' });
       return;
     }
 
     setIsSubmitting(true);
-    
     try {
       const result = await submitOfficeReportAction({
-        ...formData,
         officeId: selectedOffice._id,
+        ...formData
       });
 
       if (result.success) {
         setShowSuccess(true);
-        showToast({
-          type: 'success',
-          title: 'Report Submitted',
-          message: result.message
-        });
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        showToast({
-          type: 'error',
-          title: 'Submission Failed',
-          message: result.message
-        });
+        throw new Error(result.message);
       }
     } catch (error) {
-      showToast({
-        type: 'error',
-        title: 'Error',
-        message: 'An unexpected error occurred. Please try again.'
-      });
+      showToast({ type: 'error', title: 'Submission Failed', message: error.message || 'Failed to publish report.' });
     } finally {
       setIsSubmitting(false);
     }
@@ -297,6 +255,28 @@ export default function RateClient() {
     );
   }
 
+  // Handle initial hydration and loading states
+  if (!isMounted || status === 'loading') {
+    return (
+      <div className="min-h-screen bg-ctp-base font-sans pb-20">
+        <PageHeader 
+          icon={Star}
+          title="Report Experience"
+          description="Share real-world insights to help other Filipinos navigate this office better."
+        />
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8">
+           <div className="max-w-2xl mx-auto py-12">
+              <div className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-12 animate-pulse flex flex-col items-center gap-6">
+                 <div className="w-16 h-16 bg-ctp-base rounded-2xl border border-ctp-surface1" />
+                 <div className="h-6 w-48 bg-ctp-base rounded" />
+                 <div className="h-10 w-full max-w-sm bg-ctp-base rounded-lg" />
+              </div>
+           </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-ctp-base font-sans pb-20">
       <PageHeader 
@@ -314,7 +294,7 @@ export default function RateClient() {
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-10">
         
         {!isLoggedIn || !isVerified ? (
-          <div className="max-w-2xl mx-auto py-12">
+          <div className="max-w-2xl mx-auto py-12 animate-in fade-in duration-500">
             <div className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-12 text-center space-y-6 shadow-sm relative overflow-hidden group">
                <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(var(--sky-800)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
                <div className="w-16 h-16 bg-ctp-base border border-ctp-surface1 rounded-2xl flex items-center justify-center mx-auto text-ctp-subtext1 mb-4 shadow-inner relative z-10">
@@ -335,11 +315,11 @@ export default function RateClient() {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col lg:flex-row gap-10">
+          <div className="flex flex-col lg:flex-row gap-10 animate-in fade-in duration-500">
             <div className="flex-1 min-w-0 space-y-10">
               <form onSubmit={handleSubmit} className="space-y-10">
                 {/* Office Details */}
-                <Card title="Office Selection" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in duration-300" overflow="visible">
+                <Card title="Office Selection" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm" overflow="visible">
                   <div className="space-y-10">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                       <div className="space-y-4">
