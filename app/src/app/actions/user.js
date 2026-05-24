@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
+import RateLimit from "@/models/RateLimit";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { bundles } from "@/data/bundles";
@@ -649,3 +650,103 @@ export async function updateUserProfileAction(formData) {
     return { success: false, message: "Failed to update profile. Please try again later." };
   }
 }
+
+/**
+ * Soft-delete the current user's account (30-day grace period).
+ * Account-based rate limit: 2 attempts per 15 minutes.
+ */
+export async function deleteAccountAction() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return { success: false, message: "Not authenticated." };
+  }
+
+  const key = `rate_limit:account:${session.user.email}:delete-account`;
+  const windowMs = 15 * 60 * 1000;
+  const limit = 2;
+
+  await connectDB();
+  const now = new Date();
+  const existing = await RateLimit.findOne({ key });
+  if (existing) {
+    if (existing.expireAt < now) {
+      await RateLimit.deleteOne({ key });
+    } else if (existing.points >= limit) {
+      return { success: false, message: "Too many attempts. Please try again later." };
+    }
+  }
+
+  await RateLimit.findOneAndUpdate(
+    { key },
+    { $inc: { points: 1 }, $setOnInsert: { expireAt: new Date(now.getTime() + windowMs) } },
+    { upsert: true }
+  );
+
+  try {
+    const user = await User.findOne({ email: session.user.email });
+    if (!user) {
+      return { success: false, message: "User not found." };
+    }
+
+    user.deletedAt = new Date();
+    await user.save();
+
+    return { success: true, message: "Account scheduled for deletion. You have 30 days to change your mind by logging back in." };
+  } catch (error) {
+    console.error("Delete Account Action Error:", error);
+    return { success: false, message: "Failed to delete account. Please try again later." };
+  }
+}
+
+/**
+ * Cancel a pending account deletion.
+ */
+export async function cancelDeletionAction() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return { success: false, message: "Not authenticated." };
+  }
+
+  try {
+    await connectDB();
+    const user = await User.findOne({ email: session.user.email });
+    if (!user) {
+      return { success: false, message: "User not found." };
+    }
+
+    if (!user.deletedAt) {
+      return { success: false, message: "No pending deletion found." };
+    }
+
+    user.deletedAt = undefined;
+    await user.save();
+
+    return { success: true, message: "Account deletion canceled. Your account is fully restored." };
+  } catch (error) {
+    console.error("Cancel Deletion Action Error:", error);
+    return { success: false, message: "Failed to cancel deletion. Please try again later." };
+  }
+}
+
+/**
+ * Permanently delete accounts where the 30-day grace period has expired.
+ * For use by cron jobs or admin tasks.
+ */
+export async function cleanupDeletedAccountsAction() {
+  const session = await getServerSession(authOptions);
+  if (!session || session.user.role !== 'admin') {
+    return { success: false, message: "Unauthorized." };
+  }
+
+  try {
+    await connectDB();
+    const cutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+    const result = await User.deleteMany({ deletedAt: { $lte: cutoff } });
+    return { success: true, deletedCount: result.deletedCount };
+  } catch (error) {
+    console.error("Cleanup Accounts Error:", error);
+    return { success: false, message: "Cleanup failed." };
+  }
+}
+
+

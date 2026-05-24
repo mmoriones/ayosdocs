@@ -116,6 +116,10 @@
     --sky-700: #179299; /* Slightly darker/different for hover */
     --sky-800: #209fb5;
 
+    /* Danger palette - Muted red for buttons */
+    --danger: #c92a2a;
+    --danger-hover: #b02525;
+
     /* Catppuccin Latte Accents */
     --green: #40a02b;
     --yellow: #df8e1d;
@@ -145,6 +149,10 @@
     --sky-700: #2196a8; /* Muted hover state */
     --sky-800: #1a7f91; /* Deeper, more muted teal (Sapphire-Dark) to avoid "neon" effect */
     --sky-900: #126573; /* Even deeper for subtle contrast */
+
+    /* Danger palette - Muted for dark mode (avoids neon effect) */
+    --danger: #c93c3c;
+    --danger-hover: #b83030;
 
     /* Catppuccin Mocha Accents - Desaturated for Readability */
     --green: #56d364;

@@ -44,6 +44,8 @@ export const authOptions = {
           throw new Error("Invalid credentials");
         }
 
+        let restoredAccount = false;
+
         // 2. Account Lockout Check
         if (user.lockUntil && user.lockUntil > Date.now()) {
           const remainingMs = user.lockUntil - Date.now();
@@ -55,6 +57,20 @@ export const authOptions = {
           
           const remainingMinutes = Math.ceil(remainingMs / (60 * 1000));
           throw new Error(`Account temporarily locked. Try again in ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}.`);
+        }
+
+        // 3. Soft-Delete Check — restore within 30 days, reject after
+        if (user.deletedAt) {
+          const daysSinceDeletion = (Date.now() - user.deletedAt.getTime()) / (1000 * 60 * 60 * 24);
+          if (daysSinceDeletion >= 30) {
+            throw new Error("AccountPermanentlyDeleted");
+          }
+          // Within grace period — restore account
+          user.deletedAt = undefined;
+          user.loginAttempts = 0;
+          user.lockUntil = undefined;
+          await user.save();
+          restoredAccount = true;
         }
 
         if (!user.password && user.googleAuth) {
@@ -91,6 +107,7 @@ export const authOptions = {
           email: user.email,
           name: user.fullName,
           image: user.picture,
+          restoredAccount,
         };
       }
     }),
@@ -161,6 +178,30 @@ export const authOptions = {
       if (account.provider === "google") {
         await connectDB();
         const existingUser = await User.findOne({ email: user.email });
+
+        if (existingUser?.deletedAt) {
+          const daysSinceDeletion = (Date.now() - existingUser.deletedAt.getTime()) / (1000 * 60 * 60 * 24);
+          if (daysSinceDeletion >= 30) {
+            // Permanently deleted — delete old doc, create new one
+            await User.deleteOne({ _id: existingUser._id });
+            await User.create({
+              fullName: user.name,
+              email: user.email,
+              picture: user.image,
+              googleAuth: true,
+              isVerified: true,
+            });
+            user.isNewUser = true;
+            return true;
+          } else {
+            // Within grace period — restore account
+            existingUser.deletedAt = undefined;
+            existingUser.loginAttempts = 0;
+            existingUser.lockUntil = undefined;
+            await existingUser.save();
+            user.restoredAccount = true;
+          }
+        }
         
         if (!existingUser) {
           // New user registration via Google
@@ -190,6 +231,9 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.isNewUser = user.isNewUser;
+        if (user.restoredAccount) {
+          token.restoredAccount = true;
+        }
       }
       return token;
     },
@@ -206,6 +250,7 @@ export const authOptions = {
         session.user.isNewUser = token.isNewUser;
         session.user.hasPassword = !!dbUser.password;
         session.user.googleAuth = dbUser.googleAuth;
+        session.user.restoredAccount = token.restoredAccount || false;
       }
       return session;
     },

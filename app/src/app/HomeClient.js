@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useMemo, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -20,7 +20,9 @@ import {
   CheckCircle2,
   TrendingUp,
   Search,
-  ShieldCheck
+  ShieldCheck,
+  X,
+  AlertTriangle
 } from 'lucide-react';
 
 import { ChecklistCard } from '@/features/guides/components/tracking';
@@ -28,7 +30,7 @@ import { StartWithGoal, RecentExperiences, OnboardingBanner, TrendingWidget, Rec
 import { bundles } from '@/data/bundles';
 import StatsCard from '@/components/dashboard/StatsCard';
 import Adsense from '@/components/Adsense';
-import { PageHeader, Button, Card, Badge, Input } from '@/components/ui';
+import { PageHeader, Button, Card, Badge, Input, Modal } from '@/components/ui';
 
 /**
  * Dashboard Overview (Home).
@@ -36,18 +38,36 @@ import { PageHeader, Button, Card, Badge, Input } from '@/components/ui';
 export default function HomeClient({ allGuides }) {
   const { activeGuideSlug, setActiveGuideSlug } = useWorkspace();
   const [officeSearch, setOfficeSearch] = useState('');
+  const [restoreBannerDismissed, setRestoreBannerDismissed] = useState(false);
   const { data: session, status } = useSession();
-
-  const isLoggedIn = status === 'authenticated';
-  const isVerified = session?.user?.isVerified;
-  const pageTitle = !isLoggedIn ? 'Overview' : session?.user?.isNewUser ? 'Welcome to Ayosdocs' : `Welcome back, ${session?.user?.name}`;
-  const pageDescription = !isLoggedIn
-    ? 'Your comprehensive guide to Philippine government processes and requirements.'
-    : 'Pick up where you left off or explore new guides to get things done.';
+  const searchParams = useSearchParams();
   const { openAuthModal } = useAuthUI();
   const { showToast } = useToast();
   const queryClient = useQueryClient();
   const router = useRouter();
+
+  useEffect(() => {
+    const error = searchParams.get('error');
+    if (error) {
+      showToast({
+        type: 'error',
+        title: 'Authentication Error',
+        message: error === 'AccountPermanentlyDeleted' 
+          ? 'This account was permanently deleted and cannot be recovered.'
+          : error === 'verification_failed'
+          ? 'Email verification failed. The link may be expired.'
+          : 'Failed to sign in. Please try again.'
+      });
+    }
+  }, [searchParams, showToast]);
+
+  const isLoggedIn = status === 'authenticated';
+  const isVerified = session?.user?.isVerified;
+  const firstName = session?.user?.name?.split(' ')[0] || '';
+  const pageTitle = !isLoggedIn ? 'Overview' : session?.user?.isNewUser ? 'Welcome to Ayosdocs' : `Welcome back, ${firstName}`;
+  const pageDescription = !isLoggedIn
+    ? 'Your comprehensive guide to Philippine government processes and requirements.'
+    : 'Pick up where you left off or explore new guides to get things done.';
 
   // Fetch comprehensive user data (progress, bundles, etc.)
   const { data: userData, isLoading: isLoadingUserData } = useQuery({
@@ -195,6 +215,25 @@ export default function HomeClient({ allGuides }) {
             )
           }
         />
+
+      {session?.user?.restoredAccount && !restoreBannerDismissed && (
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-6">
+          <div className="relative bg-ctp-green/[0.07] border border-ctp-green/20 rounded-xl px-5 py-4 flex items-center gap-3 shadow-sm">
+            <div className="p-1.5 rounded-lg bg-ctp-green/10 shrink-0">
+              <CheckCircle2 size={16} className="text-ctp-green" />
+            </div>
+            <p className="text-xs font-medium text-ctp-text flex-1">
+              <span className="font-bold">Welcome back!</span> Your account has been restored. All your data is exactly as you left it.
+            </p>
+            <button
+              onClick={() => setRestoreBannerDismissed(true)}
+              className="p-1 rounded-lg text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface0 transition-colors shrink-0"
+            >
+              <X size={14} />
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

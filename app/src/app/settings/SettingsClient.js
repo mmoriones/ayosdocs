@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import { 
   Globe, 
   Lock, 
@@ -19,17 +20,20 @@ import {
   Languages,
   Settings,
   User,
-  LogOut
+  LogOut,
+  AlertTriangle
 } from 'lucide-react';
 import { useTheme, useToast } from '@/context';
-import { changePasswordAction } from '@/app/actions/user';
-import { Button, Input, Card, Badge, PageHeader, SortDropdown, Switch} from '@/components/ui';
+import { changePasswordAction, deleteAccountAction, cancelDeletionAction } from '@/app/actions/user';
+import { Button, Input, Card, Badge, PageHeader, SortDropdown, Switch, Modal } from '@/components/ui';
 
 /**
  * Settings client page with interactive tab management and security features.
  */
 export default function SettingsClient() {
   const [activeTab, setActiveTab] = useState('General');
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const { data: session, status } = useSession();
   const { showToast } = useToast();
   const user = session?.user;
@@ -50,7 +54,7 @@ export default function SettingsClient() {
       case 'Notifications':
         return <NotificationsSection />;
       case 'Privacy & Security':
-        return <PrivacySection />;
+        return <PrivacySection user={user} showToast={showToast} onDeleteClick={() => setShowDeleteConfirm(true)} />;
       case 'Password':
         return <PasswordSection user={user} showToast={showToast} />;
       default:
@@ -128,6 +132,82 @@ export default function SettingsClient() {
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      <Modal
+        isOpen={showDeleteConfirm}
+        onClose={() => setShowDeleteConfirm(false)}
+        size="sm"
+        contentClassName="border-ctp-red/20"
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2.5 rounded-xl bg-ctp-red/10 text-ctp-red">
+            <AlertTriangle size={20} />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Delete Account</h3>
+            <p className="text-[10px] text-ctp-subtext1 font-medium">This action cannot be undone</p>
+          </div>
+        </div>
+
+        <div className="space-y-4 mb-6">
+          <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
+            Are you sure you want to delete your account? Here&apos;s what will happen:
+          </p>
+          <ul className="space-y-2 text-xs text-ctp-subtext1">
+            <li className="flex items-start gap-2">
+              <span className="text-ctp-red mt-0.5">•</span>
+              <span className="font-medium">Your account will be deactivated immediately.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-ctp-red mt-0.5">•</span>
+              <span className="font-medium">You have <strong>30 days</strong> to change your mind. Logging back in within that period will restore your account.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-ctp-red mt-0.5">•</span>
+              <span className="font-medium">After 30 days, all your data will be permanently deleted.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="flex gap-3">
+          <Button
+            variant="outline"
+            onClick={() => setShowDeleteConfirm(false)}
+            className="flex-1 font-bold text-[10px] uppercase tracking-widest bg-ctp-base"
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="danger"
+            onClick={async () => {
+              setDeleting(true);
+              const result = await deleteAccountAction();
+              setDeleting(false);
+              setShowDeleteConfirm(false);
+              if (result.success) {
+                showToast({
+                  type: 'success',
+                  title: 'Account Scheduled for Deletion',
+                  message: 'You have 30 days to change your mind.'
+                });
+                await new Promise(r => setTimeout(r, 2000));
+                await signOut({ redirect: true, callbackUrl: '/' });
+              } else {
+                showToast({
+                  type: 'error',
+                  title: 'Failed',
+                  message: result.message
+                });
+              }
+            }}
+            disabled={deleting}
+            leftIcon={deleting ? undefined : <Trash2 size={14} />}
+          >
+            {deleting ? 'Deleting...' : 'Delete My Account'}
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 }
@@ -277,7 +357,7 @@ function NotificationsSection() {
 /**
  * Privacy and security settings.
  */
-function PrivacySection() {
+function PrivacySection({ user, showToast, onDeleteClick }) {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-500">
       <Card title="Privacy & Security" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
@@ -313,15 +393,16 @@ function PrivacySection() {
            <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
              Deleting your account will permanently remove all your saved progress, favorites, and tracked bundles. This action is irreversible and all data will be purged within 30 days.
            </p>
-           <div className="pt-4">
-             <Button 
-               variant="outline" 
-               className="border-ctp-red/30 text-ctp-red hover:bg-ctp-red/[0.15] hover:border-ctp-red/50 w-full md:w-auto transition-all duration-300 font-bold text-[10px] uppercase tracking-[0.2em]" 
-               leftIcon={<Trash2 size={14} />}
-             >
-               Delete AyosDocs Account
-             </Button>
-           </div>
+            <div className="pt-4">
+              <Button 
+                variant="danger"
+                onClick={onDeleteClick}
+                className="w-full md:w-auto"
+                leftIcon={<Trash2 size={14} />}
+              >
+                Delete AyosDocs Account
+              </Button>
+            </div>
         </div>
       </Card>
     </div>

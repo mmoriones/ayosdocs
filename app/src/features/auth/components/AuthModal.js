@@ -153,7 +153,12 @@ const AuthModal = ({ isOpen, onClose }) => {
       });
 
       if (result.error) {
-        if (result.error === 'GoogleAccountOnly') {
+        if (result.error === 'AccountPermanentlyDeleted') {
+          setStatusMessage({
+            type: 'error',
+            text: 'This account has been permanently deleted and can no longer be recovered.'
+          });
+        } else if (result.error === 'GoogleAccountOnly') {
           setStatusMessage({
             type: 'google-suggestion',
             text: 'It looks like you usually sign in with Google.'

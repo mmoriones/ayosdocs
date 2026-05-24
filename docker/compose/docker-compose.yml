@@ -9,6 +9,7 @@ services:
       - NEXTAUTH_URL=${NEXTAUTH_URL}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - CRON_SECRET=${CRON_SECRET}
       - NEXT_PUBLIC_ADSENSE_ENABLED=false
     depends_on:
       - mongodb
@@ -132,6 +133,19 @@ services:
       - ../../backups:/backups
       - ../../docker/monitoring/rclone.conf:/root/.config/rclone/rclone.conf:ro
     entrypoint: ["sh", "-c", "apk add --no-cache mongodb-tools rclone bash && echo '0 3 * * * /scripts/backup.sh' > /etc/crontabs/root && crond -f"]
+    networks:
+      - ayosdocs-network
+
+  account-cleanup:
+    container_name: ayosdocs-account-cleanup
+    image: alpine:latest
+    restart: always
+    depends_on:
+      - app
+    environment:
+      - CRON_SECRET=${CRON_SECRET}
+      - APP_URL=http://app:3000
+    entrypoint: ["sh", "-c", "apk add --no-cache curl bash && echo '0 2 * * * curl -sf -H \"Authorization: Bearer $CRON_SECRET\" $APP_URL/api/cron/cleanup-accounts' > /etc/crontabs/root && crond -f"]
     networks:
       - ayosdocs-network
 

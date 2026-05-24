@@ -42,7 +42,8 @@ const userSchema = new mongoose.Schema({
     lockUntil: {
         type: Date
     },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    deletedAt: { type: Date, default: null }
 });
 
 // Hash password before saving
