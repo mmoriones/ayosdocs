@@ -24,6 +24,7 @@ import { useToast } from '@/context';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';
+import ConfirmModal from '@/components/ConfirmModal';
 
 /**
  * BundleWorkflowClient Component
@@ -35,6 +36,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
   const isLoggedIn = status === 'authenticated';
   const isVerified = session?.user?.isVerified;
   const queryClient = useQueryClient();
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   // Fetch comprehensive user data
   const { data: userData, isLoading: isLoadingUserData } = useQuery({
@@ -122,6 +124,24 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
     }
   };
 
+  const handleStopTracking = async () => {
+    setIsLoading(true);
+    try {
+      const res = await stopBundleAction(bundle.id);
+      if (res.success) {
+        setIsTracked(false);
+        queryClient.invalidateQueries({ queryKey: ['user-data'] });
+        showToast({ type: 'success', title: 'Workflow Stopped', message: 'This bundle is no longer being tracked.' });
+      } else {
+        showToast({ type: 'error', title: 'Error', message: res.message });
+      }
+    } catch (error) {
+      showToast({ type: 'error', title: 'Error', message: 'Something went wrong. Please try again.' });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleToggleTracking = async () => {
     if (!isLoggedIn) {
       openAuthModal();
@@ -137,27 +157,21 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
       return;
     }
 
+    if (isTracked) {
+      setIsConfirmOpen(true);
+      return;
+    }
+
     setIsLoading(true);
     try {
-      if (isTracked) {
-        const res = await stopBundleAction(bundle.id);
-        if (res.success) {
-          setIsTracked(false);
-          queryClient.invalidateQueries({ queryKey: ['user-data'] });
-          showToast({ type: 'success', title: 'Workflow Stopped', message: 'This bundle is no longer being tracked.' });
-        } else {
-          showToast({ type: 'error', title: 'Error', message: res.message });
-        }
+      const res = await startBundleAction(bundle.id);
+      if (res.success) {
+        setIsTracked(true);
+        queryClient.invalidateQueries({ queryKey: ['user-data'] });
+        showToast({ type: 'success', title: 'Workflow Started', message: 'Workflow started and added to your dashboard.' });
+        router.refresh(); // Refresh to update server-side data if needed
       } else {
-        const res = await startBundleAction(bundle.id);
-        if (res.success) {
-          setIsTracked(true);
-          queryClient.invalidateQueries({ queryKey: ['user-data'] });
-          showToast({ type: 'success', title: 'Workflow Started', message: 'Workflow started and added to your dashboard.' });
-          router.refresh(); // Refresh to update server-side data if needed
-        } else {
-          showToast({ type: 'error', title: 'Error', message: res.message });
-        }
+        showToast({ type: 'error', title: 'Error', message: res.message });
       }
     } catch (error) {
       showToast({ type: 'error', title: 'Error', message: 'Something went wrong. Please try again.' });
@@ -532,6 +546,16 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
           </aside>
         </div>
       </div>
+
+      <ConfirmModal
+        isOpen={isConfirmOpen}
+        onClose={() => setIsConfirmOpen(false)}
+        onConfirm={handleStopTracking}
+        title="Stop tracking roadmap?"
+        message="Are you sure you want to stop tracking this life event bundle? This will remove the roadmap from your dashboard, but your individual guide progress will be saved."
+        confirmText="Stop Tracking"
+        variant="danger"
+      />
     </div>
   );
 }

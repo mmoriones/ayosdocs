@@ -1,14 +1,15 @@
-import { ChevronRight, Layers } from 'lucide-react';
+import { ChevronRight, Layers, Trash2, MoreVertical } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { getBundleIcon } from '@/lib/bundleIcons';
 import Skeleton from '@/components/ui/Skeleton';
 import ProgressBar from '@/components/ui/ProgressBar';
+import { DropdownMenu, DropdownMenuItem } from '@/components/ui';
 
 /**
  * BundleCard Component
  * Displays a life event bundle with aggregate progress.
  */
-const BundleCard = ({ bundle, progress }) => {
+const BundleCard = ({ bundle, progress, onDelete }) => {
   const router = useRouter();
   const percentage = Math.round((progress.completed / progress.total) * 100) || 0;
 
@@ -41,10 +42,35 @@ const BundleCard = ({ bundle, progress }) => {
               <h3 className="text-base font-bold text-ctp-text truncate tracking-tight group-hover:text-ctp-sky-800 transition-colors leading-tight">{bundle.title}</h3>
             </div>
             
-            <div className="text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-all group-hover:translate-x-0.5 shrink-0">
-              <ChevronRight size={16} strokeWidth={2.5} />
+            <div className="flex items-center gap-2 shrink-0">
+              {onDelete && (
+                <div onClick={(e) => e.stopPropagation()}>
+                  <DropdownMenu
+                    trigger={
+                      <button 
+                        className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface2 transition-all flex items-center justify-center active:scale-90"
+                      >
+                        <MoreVertical size={14} />
+                      </button>
+                    }
+                    align="right"
+                  >
+                    <DropdownMenuItem
+                      onClick={() => onDelete(bundle.id)}
+                      variant="danger"
+                      icon={Trash2}
+                    >
+                      Stop Tracking
+                    </DropdownMenuItem>
+                  </DropdownMenu>
+                </div>
+              )}
+              <div className="text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-all group-hover:translate-x-0.5">
+                <ChevronRight size={16} strokeWidth={2.5} />
+              </div>
             </div>
           </div>
+
           
           <div className="space-y-2.5">
             <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest">

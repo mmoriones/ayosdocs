@@ -16,7 +16,7 @@ import { SummaryStats, BundleCard, GuideRowCard, DashboardSidebar } from '@/feat
 import { SearchInput, SortDropdown, Skeleton, Card } from '@/components/ui';
 import { useToast } from '@/context';
 import ConfirmModal from '@/components/ConfirmModal';
-import { deleteProgressAction, toggleFavoriteAction } from '@/app/actions/user';
+import { deleteProgressAction, toggleFavoriteAction, stopBundleAction } from '@/app/actions/user';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
@@ -37,7 +37,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
   ];
 
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const [selectedSlug, setSelectedSlug] = useState(null);
+  const [confirmConfig, setConfirmConfig] = useState({ type: null, id: null });
   const [visibleCount, setVisibleCount] = useState(5);
   const queryClient = useQueryClient();
   const { showToast } = useToast();
@@ -79,6 +79,32 @@ export default function ProgressClient({ allGuides, isRestricted }) {
     }
   });
 
+  const stopBundleMutation = useMutation({
+    mutationFn: async (bundleId) => {
+      if (isRestricted) throw new Error("Verification required");
+      const result = await stopBundleAction(bundleId);
+      if (!result.success) throw new Error(result.message);
+      return result;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      showToast({
+        type: 'success',
+        title: 'Bundle Stopped',
+        message: 'You have stopped tracking this bundle.'
+      });
+    },
+    onError: (error) => {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: error.message === "Verification required" 
+          ? "Please verify your email to perform this action."
+          : (error.message || 'Failed to stop tracking bundle. Please try again.')
+      });
+    }
+  });
+
   const favoriteMutation = useMutation({
     mutationFn: async (slug) => {
       if (isRestricted) throw new Error("Verification required");
@@ -115,7 +141,20 @@ export default function ProgressClient({ allGuides, isRestricted }) {
       });
       return;
     }
-    setSelectedSlug(slug);
+    setConfirmConfig({ type: 'guide', id: slug });
+    setIsConfirmOpen(true);
+  };
+
+  const handleDeleteBundle = (bundleId) => {
+    if (isRestricted) {
+      showToast({
+        type: 'warning',
+        title: 'Verification Required',
+        message: 'Please verify your email to manage your bundles.'
+      });
+      return;
+    }
+    setConfirmConfig({ type: 'bundle', id: bundleId });
     setIsConfirmOpen(true);
   };
 
@@ -123,10 +162,13 @@ export default function ProgressClient({ allGuides, isRestricted }) {
     favoriteMutation.mutate(slug);
   };
 
-  const confirmDelete = () => {
-    if (selectedSlug) {
-      deleteMutation.mutate(selectedSlug);
+  const handleConfirmAction = () => {
+    if (confirmConfig.type === 'guide') {
+      deleteMutation.mutate(confirmConfig.id);
+    } else if (confirmConfig.type === 'bundle') {
+      stopBundleMutation.mutate(confirmConfig.id);
     }
+    setIsConfirmOpen(false);
   };
 
   const processedGuides = useMemo(() => {
@@ -432,6 +474,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                       key={item.bundle.id} 
                       bundle={item.bundle} 
                       progress={item} 
+                      onDelete={handleDeleteBundle}
                     />
                   ))
                 ) : !searchQuery && (
@@ -534,10 +577,14 @@ export default function ProgressClient({ allGuides, isRestricted }) {
       <ConfirmModal
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
-        onConfirm={confirmDelete}
-        title="Stop tracking?"
-        message="Are you sure you want to remove this guide? Your progress for this guide will be permanently deleted."
-        confirmText="Remove Guide"
+        onConfirm={handleConfirmAction}
+        title={confirmConfig.type === 'bundle' ? "Stop tracking bundle?" : "Stop tracking guide?"}
+        message={
+          confirmConfig.type === 'bundle' 
+            ? "Are you sure you want to stop tracking this life event bundle? This will remove the roadmap from your dashboard, but your individual guide progress will be saved."
+            : "Are you sure you want to remove this guide? Your progress for this guide will be permanently deleted."
+        }
+        confirmText={confirmConfig.type === 'bundle' ? "Stop Tracking" : "Remove Guide"}
         variant="danger"
       />
     </div>

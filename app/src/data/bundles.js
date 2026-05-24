@@ -13,7 +13,7 @@ export const bundles = [
       { 
         step: 1, 
         label: 'Foundational Documents', 
-        guides: ['psa-birth-certificate', 'national-id'] 
+        guides: ['first-time-job-seeker-certificate', 'psa-birth-certificate', 'national-id', 'cedula-ctc'] 
       },
       { 
         step: 2, 
@@ -41,13 +41,13 @@ export const bundles = [
       },
       { 
         step: 2, 
-        label: 'Travel Documents', 
-        guides: ['passport-appointment', 'nbi-clearance', 'dfa-apostille'] 
+        label: 'Travel & Health Docs', 
+        guides: ['passport-appointment', 'nbi-clearance', 'dfa-apostille', 'ofw-medical-exam'] 
       },
       { 
         step: 3, 
         label: 'Deployment Essentials', 
-        guides: ['owwa-membership'] 
+        guides: ['pdos-seminar', 'owwa-membership', 'dmw-e-registration', 'oec-registration'] 
       }
     ]
   },
@@ -61,7 +61,7 @@ export const bundles = [
       { 
         step: 1, 
         label: 'Required Certificates', 
-        guides: ['psa-birth-certificate', 'psa-cenomar'] 
+        guides: ['psa-birth-certificate', 'psa-cenomar', 'pre-marriage-counseling', 'parental-consent-advice'] 
       },
       { 
         step: 2, 
@@ -90,12 +90,12 @@ export const bundles = [
       { 
         step: 2, 
         label: 'Local Permits', 
-        guides: ['barangay-clearance', 'mayors-permit'] 
+        guides: ['cedula-ctc', 'barangay-clearance', 'mayors-permit'] 
       },
       { 
         step: 3, 
         label: 'Tax & Compliance', 
-        guides: ['bir-1901-registration'] 
+        guides: ['bir-1901-registration', 'bir-books-of-accounts', 'bir-official-receipts'] 
       }
     ]
   },
@@ -109,7 +109,7 @@ export const bundles = [
       { 
         step: 1, 
         label: 'Foundational ID', 
-        guides: ['national-id'] 
+        guides: ['national-id', 'psa-birth-certificate'] 
       },
       { 
         step: 2, 
@@ -119,7 +119,7 @@ export const bundles = [
       { 
         step: 3, 
         label: 'Supporting Evidence', 
-        guides: ['psa-birth-certificate'] 
+        guides: ['bank-certificate', 'certificate-of-employment', 'etravel-registration'] 
       }
     ]
   },
@@ -189,18 +189,18 @@ export const bundles = [
     flow: [
       { 
         step: 1, 
-        label: 'Primary Identity', 
-        guides: ['psa-birth-certificate'] 
+        label: 'Primary Civil Documents', 
+        guides: ['psa-birth-certificate', 'cedula-ctc'] 
       },
       { 
         step: 2, 
-        label: 'Secondary Verification', 
+        label: 'Local Verification', 
         guides: ['barangay-clearance'] 
       },
       { 
         step: 3, 
-        label: 'National Recognition', 
-        guides: ['national-id'] 
+        label: 'Choose Your Primary ID', 
+        guides: ['national-id', 'postal-id', 'passport-appointment', 'drivers-license', 'prc-id', 'voter-registration'] 
       }
     ]
   }

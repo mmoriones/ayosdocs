@@ -1,74 +1,76 @@
 # AyosDocs Sprint Checklist 📋
 
 ## 🎨 Frontend & UI Refinements
-~~- [X] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.~~
-~~- [X] **Branding:** ~~
-    ~~- [X] Fix logo and add government agency logos.~~
-    - ~~[X] Add consistent SVGs/Graphics across the platform.(used webp instead)~~
-- [ ] **Mobile Experience:** 
-    - ~~[X] Implement Home page Mobile view (refer to `home_wireframe_mobile.png`).~~
-        - ~~[X] Spcaing on H1 on Hero section (no spacing between "we" & "help")~~
-    - ~~[X] Modernize Mobile Menu to match new design~~
+- [x] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.
+- [x] **Branding:**
+    - [x] Fix logo and add government agency logos.
+    - [x] Add consistent SVGs/Graphics across the platform.(used webp instead)
+- [ ] **Mobile Experience:**
+    - [x] Implement Home page Mobile view (refer to `home_wireframe_mobile.png`).
+        - [x] Spcaing on H1 on Hero section (no spacing between "we" & "help")
+    - [x] Modernize Mobile Menu to match new design
     - [ ] Improve mobile view and overall UX (haptics/visual).
 - [ ] **Components:**
-    - ~~[X] **Auth Modal:** Improve loading states and spinners during authentication.~~
-    - ~~[X] **Home Page:** Improve `lastguideslug` handling (if empty, default to popular guides and update CTAs).~~
-~~    - [X] **UI:** Create reusable components for tips badges, close button, etc~~
-    ~~- [X] **Breadcrumbs:** Add navigation breadcrumbs (remove "back to my progress" links).~~
-    ~~- [X] **Adsense:** Create Adsense component with eligibility context (hidden by default).~~
-    - ~~[X] **ToastModal:** Optimize styles and add specific text for first-time login.~~
-        - ~~[X] Scroll actions still available when toast modal is open~~
-    ~~- [X] **Skeleton:** Add skeleton loading for dynamic UI components~~
-    ~~- [X] **Settings:** Add components on the empty tabs on /settings and make them functional.~~
-   ~~- [X] **Profile:** Make user details editable except email~~
-    ~~- [X] **Refator:** Implement global UI component reuse for consistency~~
-    ~~- [X] **Theme:** Add better color palettes for dark mode to improve contrast and readability ~~
-    ~~- [X] **Icon:** Update the icon color gradient~~
-    ~~- [X] **Skeleton:** Remove the skeleton on /profile and settings~~
-    ~~- [X] **Sidebar:** Increase side bar opacity for hover and currently selected item~~
-    ~~- [X] **Community Feed:** Make Community Feed single horizontal card~~
-    ~~- [X] **Recent Updates:** Improve RecentlyUpdated style and layout on / and /guides~~
+    - [x] **Auth Modal:** Improve loading states and spinners during authentication.
+    - [x] **Home Page:** Improve `lastguideslug` handling (if empty, default to popular guides and update CTAs).
+    - [x] **UI:** Create reusable components for tips badges, close button, etc
+    - [x] **Breadcrumbs:** Add navigation breadcrumbs (remove "back to my progress" links).
+    - [x] **Adsense:** Create Adsense component with eligibility context (hidden by default).
+    - [x] **ToastModal:** Optimize styles and add specific text for first-time login.
+        - [x] Scroll actions still available when toast modal is open
+    - [x] **Skeleton:** Add skeleton loading for dynamic UI components
+    - [x] **Settings:** Add components on the empty tabs on /settings and make them functional.
+    - [x] **Profile:** Make user details editable except email
+    - [x] **Refator:** Implement global UI component reuse for consistency
+    - [x] **Theme:** Add better color palettes for dark mode to improve contrast and readability
+    - [x] **Icon:** Update the icon color gradient
+    - [x] **Skeleton:** Remove the skeleton on /profile and settings
+    - [x] **Sidebar:** Increase side bar opacity for hover and currently selected item
+    - [x] **Community Feed:** Make Community Feed single horizontal card
+    - [x] **Recent Updates:** Improve RecentlyUpdated style and layout on / and /guides
     - [ ] **Buttons:** Review buttons variants usage on all pages
     - [ ] **Hover:** Make hover overlays consistent
     - [ ] **Tooltip:** Review all client pages and components that needs tooltip
-    ~~- [X] **Scroll:** Create a reusable button for horizontal scroll [ < > ] and a reusable component for the indicator below the items on horizontal scroll~~
+    - [x] **Scroll:** Create a reusable button for horizontal scroll [ < > ] and a reusable component for the indicator below the items on horizontal scroll
+    - [ ] **Close Button:** Create reusable close button UI component
 
 ## ✨ Features & Logic
-- ~~[X] **Onboarding UX:** If logged in but not onboarded, hide Community Feed to prioritize the onboarding banner.~~
-- ~~[X] **Guides Discovery:** Add back the **Cost Range** filter on the `/guides` page.~~
-- ~~[X] **My Docs:** Ensure data/progress updates trigger a refresh before displaying.~~
-~~- [X] **Recently Updated:**~~
-    ~~- [X] Replace dummy data in `RecentlyUpdated.jsx` with real content.~~
-    ~~- [X] Implement "View all updates" page/logic.~~
-    ~~- [X] Connect to backend endpoint for update tracking.~~
-~~- [X] **Onboarding:**~~
-    - ~~[X] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").~~
-~~- [x] Implement user login using email and email verification~~
-~~- [x] **Authentication:** Sign up using email and verification using OTP or verification link~~
- - [ ] **Optimizations:**
+- [x] **Onboarding UX:** If logged in but not onboarded, hide Community Feed to prioritize the onboarding banner.
+- [x] **Guides Discovery:** Add back the **Cost Range** filter on the `/guides` page.
+- [x] **My Docs:** Ensure data/progress updates trigger a refresh before displaying.
+- [x] **Recently Updated:**
+    - [x] Replace dummy data in `RecentlyUpdated.jsx` with real content.
+    - [x] Implement "View all updates" page/logic.
+    - [x] Connect to backend endpoint for update tracking.
+- [x] **Onboarding:**
+    - [x] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").
+- [x] Implement user login using email and email verification
+- [x] **Authentication:** Sign up using email and verification using OTP or verification link
+- [ ] **Tracking Indicator:** Show indicator on bundles/guides when they are being tracked
+- [x] **Stop Tracking Modal:** Add confirm modal when stopping bundle tracking
+- [ ] **Optimizations:**
     - [ ] Improve /my-docs loading speed
-    ~~- [X] Refactor/clean up unused imports and use barrel import~~
-    ~~- [X] Rename /contact to /support~~
-
+    - [x] Refactor/clean up unused imports and use barrel import
+    - [x] Rename /contact to /support
 
 ## 👤 User Dashboard (My Docs)
-~~- [X] **Rename:** Rebrand "User Progress" to **"My Docs"**.~~
-~~- [X] **Grouping:** Add functionality to create and edit custom guide groups (Requires new schema & endpoints).~~
-~~- [X] **Search:** Add search function within the dashboard.~~
-~~- [X] **Sorting:** Implement filters for All, In Progress, Completed, and Favorites.~~
+- [x] **Rename:** Rebrand "User Progress" to **"My Docs"**.
+- [x] **Grouping:** Add functionality to create and edit custom guide groups (Requires new schema & endpoints).
+- [x] **Search:** Add search function within the dashboard.
+- [x] **Sorting:** Implement filters for All, In Progress, Completed, and Favorites.
 
 ## ⚙️ Backend & Infrastructure
-- [ ] **Content:** Create all missing markdown guides needed for existing life-event bundles.
+- [x] **Content:** Create all missing markdown guides needed for existing life-event bundles.
 - [ ] **API Endpoints:**
-    ~~- [X] `/api/guides/recently-updated`~~
-    ~~- [x] `/api/contact` (Contact form submission)~~
-    ~~- [X] `/api/rate` (office rating submission)~~
-    ~~- [X] `/api/trending` (trending guides)~~
-- ~~[X] **Guide Management:** Remove "Related Guides" section from `.md` files (handle dynamically).~~
-~~- [X] **Versioning:** Track guide update dates in frontmatter or database.~~
--~~ [x] **Mail:** Integrate **Zoho Mail** for communications.~~
-~~- [X] **Forgot Password Flow:** Email infrastructure (setting up a service like Resend or a Gmail SMTP to send the mail) ~~
-~~- [x] **Email Verification** Add "guards" to pages to check if isVerified is true~~
+    - [x] `/api/guides/recently-updated`
+    - [x] `/api/contact` (Contact form submission)
+    - [x] `/api/rate` (office rating submission)
+    - [x] `/api/trending` (trending guides)
+- [x] **Guide Management:** Remove "Related Guides" section from `.md` files (handle dynamically).
+- [x] **Versioning:** Track guide update dates in frontmatter or database.
+- [x] **Mail:** Integrate **Zoho Mail** for communications.
+- [x] **Forgot Password Flow:** Email infrastructure (setting up a service like Resend or a Gmail SMTP to send the mail)
+- [x] **Email Verification** Add "guards" to pages to check if isVerified is true
 - [ ] **Testing:** Set up **Vitest + Testing Library** for unit/integration tests.
 - [ ] **End-to-End Testing:**
     - [ ] Verify **Guest Mode** (Public discovery, limited features).
@@ -78,25 +80,24 @@
 - [ ] **Grafana Dashboards:** Set up and configure dashboards for App performance, Docker container health, and Host metrics.
 - [ ] **SSL Security:** Implement **Cloudflare Origin Certificates** and switch to **Full (Strict)** SSL mode for end-to-end encryption.
 - [ ] **Caching:** Research about caching.
-~~- [X] **Sitemap:** Update sitemap and robot scripts to not include user-based and protected routes~~
-~~- [X] **Vercel:** Update vercel env variable to ZOHO_AUTH_EMAIL for unified auth related emails~~
-~~ - [X] **Delete Account:** Implement delete account BE and FE~~
+- [x] **Sitemap:** Update sitemap and robot scripts to not include user-based and protected routes
+- [x] **Vercel:** Update vercel env variable to ZOHO_AUTH_EMAIL for unified auth related emails
+- [x] **Delete Account:** Implement delete account BE and FE
 - [ ] **Deployment:**
-
-    ~~- [X] Dockerize the application.~~
-    ~~- [X] Setup CI/CD pipelines.~~
+    - [x] Dockerize the application.
+    - [x] Setup CI/CD pipelines.
 
 ## 🐛 Bugs & Fixes
-- ~~[X] **Auth Navigation:** Fix bug where canceling Google login or using the back button doesn't refresh the previous page/state.~~
-- ~~[X] **Tracking Logic:** Investigate bug where guides are occasionally tracked automatically without user interaction.~~
-- ~~[X] **AuthModal:** Fix bug where AuthModal continues to show after successful login.~~
-- ~~[X] **Clean Content:** Review and remove any legacy references in guide files.~~
-~~- [X] **Hydration:** Rate page showing the unauthenticated "AUthentication Required" card when still hydrating~~
+- [x] **Auth Navigation:** Fix bug where canceling Google login or using the back button doesn't refresh the previous page/state.
+- [x] **Tracking Logic:** Investigate bug where guides are occasionally tracked automatically without user interaction.
+- [x] **AuthModal:** Fix bug where AuthModal continues to show after successful login.
+- [x] **Clean Content:** Review and remove any legacy references in guide files.
+- [x] **Hydration:** Rate page showing the unauthenticated "AUthentication Required" card when still hydrating
+- [ ] **Hydration:** `/onboarding` page causes the sidebar to blink during hydration
 
 ## 💡 Future Ideas
-~~- [X] **Service Rating:** Add a rating system for government services (could be a separate app).~~
-  - [ ] **Admin Page:** Add admin page for CMS, Approvals, etc
-
+- [x] **Service Rating:** Add a rating system for government services (could be a separate app).
+- [ ] **Admin Page:** Add admin page for CMS, Approvals, etc
 
 # Next Sprint:
 ## Mobile view and Tagalog Translation
