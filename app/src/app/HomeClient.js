@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
@@ -36,19 +36,14 @@ import { PageHeader, Button, Card, Badge, Input } from '@/components/ui';
 export default function HomeClient({ allGuides }) {
   const { activeGuideSlug, setActiveGuideSlug } = useWorkspace();
   const [officeSearch, setOfficeSearch] = useState('');
-  const [isMounted, setIsMounted] = useState(false);
   const { data: session, status } = useSession();
-
-  // Handle hydration
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsMounted(true);
-    }, 0);
-    return () => clearTimeout(timer);
-  }, []);
 
   const isLoggedIn = status === 'authenticated';
   const isVerified = session?.user?.isVerified;
+  const pageTitle = !isLoggedIn ? 'Overview' : session?.user?.isNewUser ? 'Welcome to Ayosdocs' : `Welcome back, ${session?.user?.name}`;
+  const pageDescription = !isLoggedIn
+    ? 'Your comprehensive guide to Philippine government processes and requirements.'
+    : 'Pick up where you left off or explore new guides to get things done.';
   const { openAuthModal } = useAuthUI();
   const { showToast } = useToast();
   const queryClient = useQueryClient();
@@ -183,10 +178,10 @@ export default function HomeClient({ allGuides }) {
   return (
     <div className="bg-ctp-base font-sans text-ctp-text pb-20">
         <PageHeader 
-          title="Welcome to AyosDocs"
-          description="Your comprehensive guide to Philippine government processes and requirements."
+          title={pageTitle}
+          description={pageDescription}
           actions={
-            isMounted && isLoggedIn && (
+            isLoggedIn && (
               <div className="flex items-center gap-3">
                 <Button 
                   variant="secondary"
@@ -284,7 +279,7 @@ export default function HomeClient({ allGuides }) {
           <div className="absolute inset-0 bg-gradient-to-r from-ctp-sky-800/[0.01] via-transparent to-ctp-sky-800/[0.01] pointer-events-none" />
           
           <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 divide-x divide-ctp-surface1 items-center">
-            {status === 'loading' || (isLoggedIn && isLoadingUserData) ? (
+            {isLoggedIn && isLoadingUserData ? (
               <>
                 <div className="p-4 md:p-5 lg:p-6"><StatsCard.Skeleton /></div>
                 <div className="p-4 md:p-5 lg:p-6"><StatsCard.Skeleton /></div>
@@ -526,7 +521,7 @@ export default function HomeClient({ allGuides }) {
                 </Link>
               </div>
               
-              {status === 'loading' || (isLoggedIn && isLoadingUserData) ? (
+              {isLoggedIn && isLoadingUserData ? (
                 <ChecklistCard.Skeleton />
               ) : activeGuide ? (
                 <ChecklistCard

@@ -1,4 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import ConditionalLayout from "@/components/ConditionalLayout";
@@ -21,7 +23,9 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html
       lang="en"
@@ -29,7 +33,7 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-ctp-base text-ctp-text antialiased">
-        <Providers>
+        <Providers session={session}>
           <ConditionalLayout>
             {children}
           </ConditionalLayout>

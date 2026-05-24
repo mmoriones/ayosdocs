@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 import { useTheme, useToast } from '@/context';
 import { changePasswordAction } from '@/app/actions/user';
-import { Button, Input, Card, Skeleton, Badge, PageHeader, SortDropdown, Switch} from '@/components/ui';
+import { Button, Input, Card, Badge, PageHeader, SortDropdown, Switch} from '@/components/ui';
 
 /**
  * Settings client page with interactive tab management and security features.
@@ -40,28 +40,6 @@ export default function SettingsClient() {
     { label: 'Privacy & Security', icon: Shield, description: 'Data and account protection' },
     { label: 'Password', icon: Lock, description: 'Security credentials' },
   ];
-
-  if (status === 'loading') {
-    return (
-      <div className="bg-ctp-base font-sans text-ctp-text min-h-screen pb-20">
-        <PageHeader 
-          icon={Settings}
-          title="Settings"
-          description="Manage your account settings and preferences."
-        />
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-8">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <div className="lg:col-span-1 space-y-2">
-               {[1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} className="w-full h-14 rounded-xl opacity-20" />)}
-            </div>
-            <div className="lg:col-span-3">
-               <Card><div className="space-y-6 py-4"><Skeleton className="w-1/2 h-6" /><Skeleton className="w-full h-64 rounded-xl" /></div></Card>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   const renderActiveSection = () => {
     switch (activeTab) {

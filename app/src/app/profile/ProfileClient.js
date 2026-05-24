@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
-import { User, Mail, ShieldCheck, Calendar, Camera, LogOut, Loader2, CheckCircle2, Edit3 } from 'lucide-react';
+import { User, Mail, ShieldCheck, Calendar, Camera, LogOut, CheckCircle2, Edit3 } from 'lucide-react';
 import { useToast } from '@/context';
 import { updateUserProfileAction } from '@/app/actions/user';
-import { Button, Input, Card, Skeleton, Avatar, Tooltip } from '@/components/ui';
+import { Button, Input, Card, Avatar, Tooltip } from '@/components/ui';
 
 /**
  * Enhanced Profile client page with editable identity management.
@@ -103,23 +103,6 @@ export default function ProfileClient() {
                 )
               }
             >
-              {status === 'loading' ? (
-                 <div className="space-y-8">
-                    <div className="flex flex-col md:flex-row gap-10">
-                      <Skeleton className="w-20 h-20 rounded-xl shrink-0" />
-                      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="space-y-1.5">
-                          <Skeleton className="w-16 h-2.5 ml-1 opacity-50" />
-                          <Skeleton className="w-full h-10 rounded-lg" />
-                        </div>
-                        <div className="space-y-1.5 opacity-60">
-                          <Skeleton className="w-16 h-2.5 ml-1 opacity-50" />
-                          <Skeleton className="w-full h-10 rounded-lg" />
-                        </div>
-                      </div>
-                    </div>
-                 </div>
-              ) : (
               <div className="space-y-8">
                 <div className="flex flex-col md:flex-row md:items-start gap-10">
                   <div className="relative w-20 h-20 shrink-0">
@@ -203,20 +186,10 @@ export default function ProfileClient() {
                   </div>
                 </div>
               </div>
-              )}
             </Card>
 
             {/* Account Verification Section */}
             <Card title="Security Status" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
-              {status === 'loading' ? (
-                 <div className="flex flex-col md:flex-row md:items-center gap-6 p-5 rounded-lg border border-ctp-surface1/30">
-                  <Skeleton className="w-10 h-10 rounded-lg shrink-0" />
-                  <div className="flex-1 space-y-2">
-                    <Skeleton className="w-24 h-3.5" />
-                    <Skeleton className="w-3/4 h-2.5" />
-                  </div>
-                </div>
-              ) : (
               <div className={`flex flex-col md:flex-row md:items-center gap-6 p-5 rounded-lg border ${
                 user?.isVerified 
                   ? 'bg-ctp-green/[0.07] border-ctp-green/20' 
@@ -243,49 +216,38 @@ export default function ProfileClient() {
                   </Button>
                 )}
               </div>
-              )}
             </Card>
           </div>
 
           {/* Sidebar Stats */}
           <div className="space-y-8">
             <Card title="Account Overview" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm border-dashed">
-              {status === 'loading' ? (
-                 <div className="space-y-3">
-                    <div className="flex justify-between items-center py-2 border-b border-ctp-surface1/50"><Skeleton className="w-16 h-2.5" /><Skeleton className="w-14 h-2.5" /></div>
-                    <div className="flex justify-between items-center py-2"><Skeleton className="w-16 h-2.5" /><Skeleton className="w-14 h-2.5" /></div>
-                    <Skeleton className="w-full h-10 rounded-lg mt-8" />
-                 </div>
-              ) : (
-              <>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between py-2 border-b border-ctp-surface1/50">
-                    <div className="flex items-center gap-2.5 text-ctp-subtext1">
-                      <Calendar size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-                      <span className="text-[10px] font-bold uppercase tracking-widest">Joined</span>
-                    </div>
-                    <span className="text-[11px] font-bold text-ctp-text uppercase">May 2026</span>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between py-2 border-b border-ctp-surface1/50">
+                  <div className="flex items-center gap-2.5 text-ctp-subtext1">
+                    <Calendar size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
+                    <span className="text-[10px] font-bold uppercase tracking-widest">Joined</span>
                   </div>
-                  <div className="flex items-center justify-between py-2">
-                    <div className="flex items-center gap-2.5 text-ctp-subtext1">
-                      <ShieldCheck size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-                      <span className="text-[10px] font-bold uppercase tracking-widest">Type</span>
-                    </div>
-                    <span className="text-[11px] font-bold text-ctp-sky-800 uppercase">
-                      {session?.user?.googleAuth && session?.user?.hasPassword ? 'Hybrid' : session?.user?.googleAuth ? 'Google' : 'Local'}
-                    </span>
-                  </div>
+                  <span className="text-[11px] font-bold text-ctp-text uppercase">May 2026</span>
                 </div>
+                <div className="flex items-center justify-between py-2">
+                  <div className="flex items-center gap-2.5 text-ctp-subtext1">
+                    <ShieldCheck size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
+                    <span className="text-[10px] font-bold uppercase tracking-widest">Type</span>
+                  </div>
+                  <span className="text-[11px] font-bold text-ctp-sky-800 uppercase">
+                    {session?.user?.googleAuth && session?.user?.hasPassword ? 'Hybrid' : session?.user?.googleAuth ? 'Google' : 'Local'}
+                  </span>
+                </div>
+              </div>
 
-                <button 
-                  onClick={() => signOut({ callbackUrl: '/' })}
-                  className="w-full mt-8 flex items-center justify-center gap-2 p-2.5 rounded-lg border border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red text-[10px] font-bold uppercase tracking-widest hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all group"
-                >
-                  <LogOut size={14} strokeWidth={3} className="transition-transform group-hover:-translate-x-0.5" />
-                  Sign Out of Account
-                </button>
-              </>
-              )}
+              <button 
+                onClick={() => signOut({ callbackUrl: '/' })}
+                className="w-full mt-8 flex items-center justify-center gap-2 p-2.5 rounded-lg border border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red text-[10px] font-bold uppercase tracking-widest hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all group"
+              >
+                <LogOut size={14} strokeWidth={3} className="transition-transform group-hover:-translate-x-0.5" />
+                Sign Out of Account
+              </button>
             </Card>
 
             <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm overflow-hidden group">

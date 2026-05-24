@@ -2,7 +2,7 @@
 
 ## 🎨 Frontend & UI Refinements
 ~~- [X] **Modernization Phase 2:** Revamp `UserProgress`, `AllGuides`, and Info pages to match the new home page design.~~
-- [ ] **Branding:** 
+~~- [ ] **Branding:** ~~
     ~~- [-] Fix logo and add government agency logos. (started)~~
     - ~~[X] Add consistent SVGs/Graphics across the platform.(used webp instead)~~
 - [ ] **Mobile Experience:** 
@@ -11,7 +11,7 @@
     - ~~[ ] Modernize Mobile Menu to match new design~~
     - [ ] Improve mobile view and overall UX (haptics/visual).
 - [ ] **Components:**
-    - [ ] **UI:** Create reusable components for tips badges, close button, etc
+~~    - [ ] **UI:** Create reusable components for tips badges, close button, etc~~
     ~~- [ ] **Breadcrumbs:** Add navigation breadcrumbs (remove "back to my progress" links).~~
     ~~- [ ] **Adsense:** Create Adsense component with eligibility context (hidden by default).~~
     - ~~[X] **ToastModal:** Optimize styles and add specific text for first-time login.~~
@@ -22,8 +22,7 @@
     ~~- [ ] **Refator:** Implement global UI component reuse for consistency~~
     ~~- [X] **Theme:** Add better color palettes for dark mode to improve contrast and readability ~~
     ~~- [X] **Icon:** Update the icon color gradient~~
-    - [ ] **Flash:** Add flash screen when navigating to another page and having slow loading
-    - [ ] **Skeleton:** Remove the skeleton on /profile and settings
+    ~~- [X] **Skeleton:** Remove the skeleton on /profile and settings~~
     ~~- [X] **Sidebar:** Increase side bar opacity for hover and currently selected item~~
     ~~- [X] **Community Feed:** Make Community Feed single horizontal card~~
     ~~- [X] **Recent Updates:** Improve RecentlyUpdated style and layout on / and /guides~~
@@ -33,17 +32,17 @@
     ~~- [ ] **Scroll:** Create a reusable button for horizontal scroll [ < > ] and a reusable component for the indicator below the items on horizontal scroll~~
 
 ## ✨ Features & Logic
-- [ ] **Recently Updated:**
+~~- [ ] **Recently Updated:**~~
     ~~- [-] Replace dummy data in `RecentlyUpdated.jsx` with real content.~~
     ~~- [X] Implement "View all updates" page/logic.~~
     ~~- [ ] Connect to backend endpoint for update tracking.~~
-- [ ] **Onboarding:**
+~~- [ ] **Onboarding:**~~
     - ~~[X] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").~~
 ~~- [x] Implement user login using email and email verification~~
 ~~- [x] **Authentication:** Sign up using email and verification using OTP or verification link~~
  - [ ] **Optimizations:**
     - [ ] Improve /my-docs loading speed
-    - [ ] Refactor/clean up unused imports and use barrel import
+    ~~- [ ] Refactor/clean up unused imports and use barrel import~~
     ~~- [X] Rename /contact to /support~~
 
 

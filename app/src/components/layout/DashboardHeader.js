@@ -96,12 +96,7 @@ export default function DashboardHeader({ onMenuClick }) {
           )}
         </button>
 
-        {status === 'loading' ? (
-          <div className="flex items-center gap-3 ml-2">
-            <div className="w-8 h-8 rounded-lg bg-ctp-mantle border border-ctp-surface1 animate-pulse" />
-            <div className="w-8 h-8 rounded-full bg-ctp-mantle border border-ctp-surface1 animate-pulse" />
-          </div>
-        ) : !session ? (
+        {!session ? (
           <button 
             onClick={openAuthModal}
             className="px-5 py-1.5 bg-ctp-sky-800 text-white rounded-lg text-sm font-bold hover:bg-ctp-sky-800/90 transition-all shadow-sm shadow-ctp-sky-800/20 active:scale-95 ml-2"

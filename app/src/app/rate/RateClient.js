@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
   Star, 
   Clock, 
@@ -111,7 +111,6 @@ export default function RateClient() {
   const { openAuthModal } = useAuthUI();
   const { showToast } = useToast();
   
-  const [isMounted, setIsMounted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [officeSearch, setOfficeSearch] = useState('');
@@ -139,14 +138,6 @@ export default function RateClient() {
     management: 0,
     cleanliness: 0
   });
-
-  // Handle hydration
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsMounted(true);
-    }, 0);
-    return () => clearTimeout(timer);
-  }, []);
 
   const isLoggedIn = status === 'authenticated';
   const isVerified = session?.user?.isVerified;
@@ -245,28 +236,6 @@ export default function RateClient() {
               Submit Another
             </button>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Handle initial hydration and loading states
-  if (!isMounted || status === 'loading') {
-    return (
-      <div className="min-h-screen bg-ctp-base font-sans pb-20">
-        <PageHeader 
-          icon={Star}
-          title="Report Experience"
-          description="Share real-world insights to help other Filipinos navigate this office better."
-        />
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8">
-           <div className="max-w-2xl mx-auto py-12">
-              <div className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-12 animate-pulse flex flex-col items-center gap-6">
-                 <div className="w-16 h-16 bg-ctp-base rounded-2xl border border-ctp-surface1" />
-                 <div className="h-6 w-48 bg-ctp-base rounded" />
-                 <div className="h-10 w-full max-w-sm bg-ctp-base rounded-lg" />
-              </div>
-           </div>
         </div>
       </div>
     );

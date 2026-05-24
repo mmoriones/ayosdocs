@@ -267,7 +267,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
   // Find the first incomplete stage
   const activeStage = stageStats.find(s => !s.completed)?.step || bundle.flow.length;
 
-  const isDataLoading = status === 'loading' || (isLoggedIn && isLoadingUserData);
+  const isDataLoading = isLoggedIn && isLoadingUserData;
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans pb-24 text-ctp-text">
@@ -285,28 +285,22 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
           </div>
 
           <div className="flex items-center gap-6">
-            {status === 'loading' ? (
-              <div className="h-10 w-32 rounded-lg bg-ctp-mantle border border-ctp-surface1 shadow-inner" />
-            ) : (
-              <>
-                <div className="hidden md:flex flex-col items-end">
-                  <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Global Progress</span>
-                  <span className="text-xs font-bold text-ctp-text">{isTracked ? (stageStats.every(s => s.completed) ? 'Completed' : 'In Progress') : 'Not Active'}</span>
-                </div>
-                <button 
-                  onClick={handleToggleTracking}
-                  disabled={isLoading}
-                  className={`px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest shadow-sm active:scale-95 transition-all flex items-center gap-2 ${
-                    isTracked 
-                      ? 'bg-ctp-mantle border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-red hover:border-ctp-red/30' 
-                      : 'bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90'
-                  }`}
-                >
-                  {isLoading ? <Loader2 size={14} className="animate-spin" /> : isTracked ? <PauseCircle size={14} /> : <PlayCircle size={14} />}
-                  <span>{isTracked ? 'Stop Roadmap' : 'Start Roadmap'}</span>
-                </button>
-              </>
-            )}
+              <div className="hidden md:flex flex-col items-end">
+                <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Global Progress</span>
+                <span className="text-xs font-bold text-ctp-text">{isTracked ? (stageStats.every(s => s.completed) ? 'Completed' : 'In Progress') : 'Not Active'}</span>
+              </div>
+              <button 
+                onClick={handleToggleTracking}
+                disabled={isLoading}
+                className={`px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest shadow-sm active:scale-95 transition-all flex items-center gap-2 ${
+                  isTracked 
+                    ? 'bg-ctp-mantle border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-red hover:border-ctp-red/30' 
+                    : 'bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90'
+                }`}
+              >
+                {isLoading ? <Loader2 size={14} className="animate-spin" /> : isTracked ? <PauseCircle size={14} /> : <PlayCircle size={14} />}
+                <span>{isTracked ? 'Stop Roadmap' : 'Start Roadmap'}</span>
+              </button>
           </div>
         </div>
       </div>

@@ -305,7 +305,6 @@ export default function ProgressClient({ allGuides, isRestricted }) {
             <p className="text-xs text-ctp-subtext1 font-medium">Manage your active workflows and tracked government procedures.</p>
           </div>
           <div className="flex items-center gap-3">
-            {status !== 'loading' && (
               <button 
                 onClick={() => router.push('/guides')}
                 className="px-5 py-2 bg-ctp-sky-800 text-white rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-ctp-sky-800/90 transition-all flex items-center gap-2 shadow-sm shadow-ctp-sky-800/20 active:scale-95"
@@ -313,7 +312,6 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                 <Plus size={14} strokeWidth={2.5} />
                 <span>New Tracker</span>
               </button>
-            )}
           </div>
         </div>
       </div>
@@ -321,7 +319,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 w-full">
         <div className="flex flex-col lg:flex-row gap-10">
           <div className="flex-1 min-w-0 space-y-12">
-            {(isLoading || status === 'loading') && !isRestricted ? (
+            {isLoading && !isRestricted ? (
               <>
                 <SummaryStats.Skeleton />
                 <div className="bg-ctp-mantle border border-ctp-surface1 rounded-2xl p-6 relative overflow-hidden">

@@ -214,7 +214,7 @@ const ChecklistCard = ({
 
   const cardLabel = inGuidePage ? "Requirements Tracker" : "Your Progress";
 
-  if (isLoadingProgress || status === 'loading') {
+  if (isLoadingProgress) {
     return <ChecklistCard.Skeleton isModal={isModal} isBare={isBare} inGuidePage={inGuidePage} />;
   }
 

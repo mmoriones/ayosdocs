@@ -10,7 +10,7 @@ const AuthUIContext = createContext();
 
 export const useAuthUI = () => useContext(AuthUIContext);
 
-export default function Providers({ children }) {
+export default function Providers({ children, session }) {
   // We initialize QueryClient inside the component to avoid sharing it across requests on the server.
   // Using useState ensures it's created only once during the lifetime of the component.
   const [queryClient] = useState(() => new QueryClient({
@@ -29,7 +29,7 @@ export default function Providers({ children }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SessionProvider>
+      <SessionProvider session={session}>
         <ThemeProvider>
           <ToastProvider>
             <SearchProvider>
