@@ -8,7 +8,7 @@ category: Business Registration
 agency: LGU
 difficulty: Moderate
 estimatedTime: 3 Days to 2 Weeks
-costRange: ₱500–₱2000
+costRange: ₱500–₱2,000
 tags:
 - Mayor's Permit
 - Business Permit

@@ -49,6 +49,8 @@ export default function ProgressClient({ allGuides, isRestricted }) {
       return response.data;
     },
     enabled: !isRestricted,
+    staleTime: 0,
+    refetchOnMount: 'always',
   });
 
   const deleteMutation = useMutation({

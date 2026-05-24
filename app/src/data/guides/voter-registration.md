@@ -8,7 +8,7 @@ category: Government ID
 agency: COMELEC
 difficulty: Easy
 estimatedTime: Same Day to Several Weeks
-costRange: Usually Free
+costRange: Free
 tags:
 - Voter Registration
 - COMELEC

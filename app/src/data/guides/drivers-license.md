@@ -8,7 +8,7 @@ category: Government ID
 agency: LTO
 difficulty: Moderate
 estimatedTime: 1-8 Weeks
-costRange: ₱2,000–₱8,000
+costRange: ₱2,000+
 tags:
 - Driver's License
 - LTO

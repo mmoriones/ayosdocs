@@ -44,6 +44,8 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
       return response.data;
     },
     enabled: isLoggedIn && isVerified,
+    staleTime: 0,
+    refetchOnMount: 'always',
   });
 
   const favoriteMutation = useMutation({
@@ -141,6 +143,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
         const res = await stopBundleAction(bundle.id);
         if (res.success) {
           setIsTracked(false);
+          queryClient.invalidateQueries({ queryKey: ['user-data'] });
           showToast({ type: 'success', title: 'Workflow Stopped', message: 'This bundle is no longer being tracked.' });
         } else {
           showToast({ type: 'error', title: 'Error', message: res.message });
@@ -149,6 +152,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
         const res = await startBundleAction(bundle.id);
         if (res.success) {
           setIsTracked(true);
+          queryClient.invalidateQueries({ queryKey: ['user-data'] });
           showToast({ type: 'success', title: 'Workflow Started', message: 'Workflow started and added to your dashboard.' });
           router.refresh(); // Refresh to update server-side data if needed
         } else {

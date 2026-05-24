@@ -8,7 +8,7 @@ category: Government ID
 agency: BIR
 difficulty: Moderate
 estimatedTime: Same Day to Several Weeks
-costRange: ₱0–₱1,500+
+costRange: Under ₱500
 tags:
 - BIR
 - TIN

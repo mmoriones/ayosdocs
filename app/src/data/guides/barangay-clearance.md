@@ -8,7 +8,7 @@ category: Government Clearance
 agency: LGU
 difficulty: Easy
 estimatedTime: 30 Minutes to 1 Day
-costRange: Under ₱300
+costRange: Under ₱500
 tags:
 - Barangay Clearance
 - Barangay Certificate

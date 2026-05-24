@@ -8,7 +8,7 @@ category: Essential Documents
 agency: DFA
 difficulty: Moderate
 estimatedTime: Same Day to 5 Days
-costRange: Under ₱2000
+costRange: ₱500–₱2,000
 tags:
 - DFA
 - Apostille

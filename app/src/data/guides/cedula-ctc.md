@@ -8,7 +8,7 @@ category: Essential Documents
 agency: LGU
 difficulty: Easy
 estimatedTime: 10 Minutes to 1 Day
-costRange: ₱20–₱5,000+
+costRange: Under ₱500
 tags:
 - Cedula
 - Community Tax Certificate

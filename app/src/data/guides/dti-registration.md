@@ -8,7 +8,7 @@ category: Business Registration
 agency: DTI
 difficulty: Easy
 estimatedTime: Same Day to 3 Days
-costRange: Under ₱2000
+costRange: ₱500–₱2,000
 tags:
 - DTI
 - Business Name Registration

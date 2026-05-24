@@ -8,7 +8,7 @@ category: Government ID
 agency: OWWA
 difficulty: Moderate
 estimatedTime: Same Day to Several Weeks
-costRange: ₱1,000–₱2,500
+costRange: ₱500–₱2,000
 tags:
 - OWWA
 - OFW

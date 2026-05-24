@@ -8,7 +8,7 @@ category: Government Clearance
 agency: PNP
 difficulty: Easy
 estimatedTime: Same Day to 1 Week
-costRange: Under ₱300
+costRange: Under ₱500
 tags:
 - Police Clearance
 - National Police Clearance

@@ -8,7 +8,7 @@ category: Government ID
 agency: LGU
 difficulty: Easy
 estimatedTime: Same Day to 2 Weeks
-costRange: Usually Free
+costRange: Free
 tags:
 - PWD ID
 - Person with Disability

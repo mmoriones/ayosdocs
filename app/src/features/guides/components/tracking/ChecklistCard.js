@@ -117,6 +117,7 @@ const ChecklistCard = ({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['progress', slug] });
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
     },
     onError: (error) => {
       console.error("Save error:", error.message);
@@ -191,7 +192,7 @@ const ChecklistCard = ({
 
   // Snappier Debounced Auto-save
   useEffect(() => {
-    if (!isLoggedIn || !isVerified || !slug || !steps.length) return;
+    if (!isLoggedIn || !isVerified || !slug || !steps.length || isLoadingProgress) return;
 
     const completedTaskIndices = steps
       .map((s, i) => (s.completed ? i : null))
@@ -205,7 +206,10 @@ const ChecklistCard = ({
       saveMutation.mutate(completedTaskIndices);
     }, 600);
 
-    return () => clearTimeout(timeout);
+    // We don't clear the timeout here to ensure that even if the user navigates away, 
+    // the mutation still has a chance to fire (as long as the JS environment persists).
+    // This fixes the "My Docs not refreshing" issue where quick navigation canceled saves.
+    return () => {};
   }, [steps, isLoggedIn, isVerified, slug, savedData?.completedTasks, saveMutation.mutate]);
 
   const completedCount = steps.filter((s) => s.completed).length;

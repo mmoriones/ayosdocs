@@ -46,6 +46,10 @@ export default function HomeClient({ allGuides }) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
+  const isLoggedIn = status === 'authenticated';
+  const isVerified = session?.user?.isVerified;
+  const firstName = session?.user?.name?.split(' ')[0] || '';
+
   useEffect(() => {
     const error = searchParams.get('error');
     if (error) {
@@ -61,14 +65,6 @@ export default function HomeClient({ allGuides }) {
     }
   }, [searchParams, showToast]);
 
-  const isLoggedIn = status === 'authenticated';
-  const isVerified = session?.user?.isVerified;
-  const firstName = session?.user?.name?.split(' ')[0] || '';
-  const pageTitle = !isLoggedIn ? 'Overview' : session?.user?.isNewUser ? 'Welcome to Ayosdocs' : `Welcome back, ${firstName}`;
-  const pageDescription = !isLoggedIn
-    ? 'Your comprehensive guide to Philippine government processes and requirements.'
-    : 'Pick up where you left off or explore new guides to get things done.';
-
   // Fetch comprehensive user data (progress, bundles, etc.)
   const { data: userData, isLoading: isLoadingUserData } = useQuery({
     queryKey: ['user-data'],
@@ -77,7 +73,18 @@ export default function HomeClient({ allGuides }) {
       return response.data;
     },
     enabled: isLoggedIn && isVerified,
+    staleTime: 0,
+    refetchOnMount: 'always',
   });
+
+  const hasProgress = (userData?.savedProgress && userData.savedProgress.length > 0) || activeGuideSlug;
+  
+  const pageTitle = !isLoggedIn ? 'Overview' : session?.user?.isNewUser ? 'Welcome to Ayosdocs' : `Welcome back, ${firstName}`;
+  const pageDescription = !isLoggedIn
+    ? 'Your comprehensive guide to Philippine government processes and requirements.'
+    : hasProgress
+    ? 'Pick up where you left off or explore new guides to get things done.'
+    : 'Start your journey by exploring our comprehensive library of government guides.';
 
   // Fetch all offices from DB to show actual count and top performers
   const { data: allOffices = [], isLoading: isLoadingOffices } = useQuery({
@@ -571,6 +578,38 @@ export default function HomeClient({ allGuides }) {
                   inGuidePage={false}
                   isModal={false}
                 />
+              ) : trendingGuides.length > 0 ? (
+                <Card background="mantle" className="border-ctp-sky-800/20 py-8 text-center space-y-4 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-2">
+                    <Badge variant="sky" className="text-[7px] px-1.5 py-0 uppercase tracking-widest">Suggested</Badge>
+                  </div>
+                  <div className="w-10 h-10 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-lg flex items-center justify-center mx-auto text-ctp-sky-800 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                    <Sparkles size={20} strokeWidth={2} />
+                  </div>
+                  <div className="space-y-1 px-4">
+                    <p className="font-bold text-ctp-text text-sm tracking-tight">{trendingGuides[0].title}</p>
+                    <p className="text-[10px] text-ctp-subtext1 max-w-xs mx-auto font-medium leading-relaxed">
+                      Most Filipinos start with this roadmap. Ready to begin your application?
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-2 px-6 pt-2">
+                    <Button 
+                      size="sm"
+                      onClick={() => router.push(`/guides/${trendingGuides[0].slug}`)}
+                      className="w-full text-[9px] uppercase tracking-widest shadow-md shadow-ctp-sky-800/10"
+                    >
+                      Start This Guide
+                    </Button>
+                    <Button 
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => router.push('/guides')}
+                      className="text-ctp-subtext1 hover:text-ctp-sky-800 font-bold text-[8px] uppercase tracking-widest transition-colors"
+                    >
+                      Or Browse All Library
+                    </Button>
+                  </div>
+                </Card>
               ) : (
                 <Card background="mantle" className="border-dashed py-10 text-center space-y-4">
                   <div className="w-10 h-10 bg-ctp-base border border-ctp-surface1 rounded-lg flex items-center justify-center mx-auto text-ctp-subtext1 shadow-inner">
@@ -611,19 +650,21 @@ export default function HomeClient({ allGuides }) {
               <RecentlyUpdated />
             </section>
 
-            {/* Recent Experiences */}
-            <section className="space-y-6">
-              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Community Feed</h2>
-                <Link 
-                  href="/offices"
-                  className="text-[9px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
-                >
-                  View All
-                </Link>
-              </div>
-              <RecentExperiences limit={5} />
-            </section>
+            {/* Recent Experiences - Hidden for non-onboarded auth users to focus on tutorial */}
+            {(onboarded || !isLoggedIn) && (
+              <section className="space-y-6">
+                <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
+                  <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Community Feed</h2>
+                  <Link 
+                    href="/offices"
+                    className="text-[9px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                  >
+                    View All
+                  </Link>
+                </div>
+                <RecentExperiences limit={5} />
+              </section>
+            )}
 
             {!onboarded && isLoggedIn && (
               <OnboardingBanner />

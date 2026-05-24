@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { CheckCircle, ArrowRight, ShieldCheck, Cloud, Layout, Sparkles } from 'lucide-react';
+import { useQueryClient } from '@tanstack/react-query';
 import { updateOnboardingAction } from '@/app/actions/user';
 
 /**
@@ -12,6 +13,7 @@ import { updateOnboardingAction } from '@/app/actions/user';
 export default function OnboardingClient() {
   const { data: session, status, update } = useSession();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const completeOnboarding = async () => {
@@ -22,6 +24,8 @@ export default function OnboardingClient() {
         if (result.success) {
           // Update the session to reflect the new onboarding status
           await update({ onboarded: true });
+          // Invalidate user data to refresh dashboard
+          queryClient.invalidateQueries({ queryKey: ['user-data'] });
         }
       } catch (error) {
         console.error("Failed to update onboarding status:", error);
@@ -29,7 +33,7 @@ export default function OnboardingClient() {
     };
 
     completeOnboarding();
-  }, [status, session?.user?.onboarded, update]);
+  }, [status, session?.user?.onboarded, update, queryClient]);
 
   return (
     <div className="min-h-[85vh] flex items-center justify-center p-6 bg-ctp-base text-ctp-text">

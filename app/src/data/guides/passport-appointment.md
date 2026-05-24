@@ -8,7 +8,7 @@ category: Government ID
 agency: DFA
 difficulty: Moderate
 estimatedTime: 1-3 Days
-costRange: ₱500–₱2000
+costRange: ₱500–₱2,000
 tags:
 - Passport
 - DFA

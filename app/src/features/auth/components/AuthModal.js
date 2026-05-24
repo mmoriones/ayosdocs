@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { X, Loader2, Mail, Lock, User as UserIcon, ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
 import { signIn, useSession } from 'next-auth/react';
 import { useToast } from "@/context";
@@ -112,10 +112,46 @@ const AuthModal = ({ isOpen, onClose }) => {
     return () => clearTimeout(timer);
   }, [formData.email, mode]); // Mode is needed to know whether to check lockout or existence
 
+  // Refs for tracking/cancelling in-progress Google sign-in
+  const isExchangingRef = useRef(false);
+  useEffect(() => { isExchangingRef.current = isExchanging; });
+  const safetyTimerRef = useRef(null);
+  const focusHandlerRef = useRef(null);
+
+  const cleanupGoogleSignIn = useCallback(() => {
+    clearTimeout(safetyTimerRef.current);
+    safetyTimerRef.current = null;
+    if (focusHandlerRef.current) {
+      window.removeEventListener('focus', focusHandlerRef.current);
+      focusHandlerRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleReset = (event) => {
+      // event.persisted is true when the page is restored from bfcache
+      if (event?.persisted) {
+        if (isExchangingRef.current) {
+          // Page was in the middle of a sign-in flow and got restored from bfcache
+          // (e.g. user pressed back from Google OAuth). Reload to get a clean state
+          // instead of showing a blank page due to stale RSC/React state.
+          window.location.reload();
+        } else {
+          setIsExchanging(false);
+        }
+      }
+    };
+
+    window.addEventListener('pageshow', handleReset);
+    return () => window.removeEventListener('pageshow', handleReset);
+  }, []);
+
   useEffect(() => {
     if (!isOpen) {
-      // Reset state when closing
-      setTimeout(() => {
+      cleanupGoogleSignIn();
+      // Reset state after closing animation
+      const timer = setTimeout(() => {
+        setIsExchanging(false);
         setMode('initial');
         setShowPassword(false);
         setShowConfirmPassword(false);
@@ -123,15 +159,48 @@ const AuthModal = ({ isOpen, onClose }) => {
         setEmailTaken(null);
         setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
       }, 300);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
   const handleGoogleLogin = async () => {
+    // Clean up any pending sign-in first (e.g. if user clicked close and re-opened)
+    cleanupGoogleSignIn();
+
     setIsExchanging(true);
     setStatusMessage(null);
+    
+    // Safety reset: if the user cancels or closes the Google popup/redirect, 
+    // and returns to our window, we should eventually reset the state.
+    safetyTimerRef.current = setTimeout(() => {
+      setIsExchanging(false);
+    }, 15000);
+
+    // Listen for window focus to catch when user returns from a canceled/closed popup
+    const handleFocus = () => {
+      // Small delay to allow NextAuth state to possibly update first
+      setTimeout(() => {
+        setIsExchanging(false);
+        window.removeEventListener('focus', handleFocus);
+        clearTimeout(safetyTimerRef.current);
+      }, 500);
+    };
+    focusHandlerRef.current = handleFocus;
+    window.addEventListener('focus', handleFocus);
+
     try {
-      await signIn('google');
+      const result = await signIn('google', { callbackUrl: window.location.href });
+      
+      if (result?.error) {
+        cleanupGoogleSignIn();
+        setIsExchanging(false);
+        setStatusMessage({
+          type: 'error',
+          text: result.error
+        });
+      }
     } catch (error) {
+      cleanupGoogleSignIn();
       console.error("Login error:", error);
       setStatusMessage({
         type: 'error',
@@ -405,9 +474,12 @@ const AuthModal = ({ isOpen, onClose }) => {
     >
       <div className="relative">
         <button
-          onClick={onClose}
-          disabled={isExchanging}
-          className="absolute top-5 right-5 z-50 p-2 rounded-full text-ctp-subtext1 hover:bg-ctp-surface1 hover:text-ctp-text transition-all active:scale-95 disabled:opacity-50 border border-transparent hover:border-ctp-surface1"
+          onClick={() => {
+            cleanupGoogleSignIn();
+            setIsExchanging(false);
+            onClose();
+          }}
+          className="absolute top-5 right-5 z-[60] p-2 rounded-full text-ctp-subtext1 hover:bg-ctp-surface1 hover:text-ctp-text transition-all active:scale-95 border border-transparent hover:border-ctp-surface1"
           aria-label="Close modal"
         >
           <X size={18} />
@@ -426,11 +498,31 @@ const AuthModal = ({ isOpen, onClose }) => {
 
         <div className="p-8 pt-10 relative">
           {isExchanging && (
-            <div className="absolute inset-0 z-20 bg-ctp-mantle/80 backdrop-blur-[2px] flex flex-col items-center justify-center">
-              <div className="flex flex-col items-center">
-                <Loader2 className="w-8 h-8 animate-spin text-ctp-sky-800 mb-3" strokeWidth={2.5} />
-                <h3 className="text-base font-bold text-ctp-text">Processing...</h3>
-                <p className="text-xs font-medium text-ctp-subtext1 mt-1">Please wait a moment</p>
+            <div className="absolute inset-0 z-50 bg-ctp-base flex flex-col items-center justify-center animate-in fade-in duration-500">
+              <div className="flex flex-col items-center max-w-xs text-center">
+                <div className="relative mb-8">
+                  <div className="w-20 h-20 rounded-3xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center relative z-10 shadow-xl overflow-hidden group">
+                    <Image 
+                      src="/favicon.svg" 
+                      alt="AyosDocs" 
+                      width={48} 
+                      height={48} 
+                      className="animate-pulse-slow"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-ctp-sky-800/10 via-transparent to-transparent opacity-50" />
+                  </div>
+                  <div className="absolute -inset-4 bg-ctp-sky-800/5 rounded-[40px] blur-2xl animate-pulse" />
+                </div>
+                
+                <div className="space-y-1.5">
+                  <h3 className="text-xl font-bold text-ctp-text tracking-tight uppercase">AyosDocs</h3>
+                  <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.25em] opacity-60">Securing your session</p>
+                </div>
+
+                <div className="mt-10 w-48 h-1 bg-ctp-surface0 rounded-full overflow-hidden relative">
+                   <div className="absolute inset-0 bg-ctp-sky-800/10" />
+                   <div className="h-full bg-ctp-sky-800 animate-progress-loading shadow-[0_0_8px_var(--sky-800)]" />
+                </div>
               </div>
             </div>
           )}

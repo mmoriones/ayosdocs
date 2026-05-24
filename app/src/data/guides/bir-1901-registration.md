@@ -8,7 +8,7 @@ category: Business Registration
 agency: BIR
 difficulty: Moderate
 estimatedTime: 1 Day to 2 Weeks
-costRange: Under ₱2000
+costRange: ₱500–₱2,000
 tags:
 - BIR
 - BIR Form 1901

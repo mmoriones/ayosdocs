@@ -60,6 +60,13 @@
   --animate-toast-progress: toastProgress 5s linear forwards;
   --animate-shake: shake 0.5s ease-in-out;
   --animate-pulse-slow: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-progress-loading: progressLoading 2s ease-in-out infinite;
+
+  @keyframes progressLoading {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+  }
 
   @keyframes toastProgress {
     0% { transform: scaleX(1); }

@@ -8,7 +8,7 @@ category: Government ID
 agency: PHLPost
 difficulty: Easy
 estimatedTime: Same Day to 1 Month
-costRange: ₱550–₱650
+costRange: ₱500–₱2,000
 tags:
 - Postal ID
 - PHLPost

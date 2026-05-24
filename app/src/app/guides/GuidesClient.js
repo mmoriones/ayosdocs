@@ -386,6 +386,33 @@ export default function GuidesClient({ initialGuides }) {
                     </div>
                   )}
                 </div>
+
+                {/* Cost Range Filter */}
+                <div className="space-y-3 border-t border-ctp-surface1 pt-4">
+                  <button onClick={() => toggleFilterSection('costRange')} className="flex items-center justify-between w-full group">
+                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] cursor-pointer group-hover:text-ctp-text">Cost Range</label>
+                    <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.costRange ? 'rotate-180' : ''}`} />
+                  </button>
+                  {expandedFilters.costRange && (
+                    <div className="space-y-2.5 pl-1">
+                      {['All Costs', 'Free', 'Under ₱500', '₱500–₱2,000', '₱2,000+'].map((cost) => (
+                        <label key={cost} className="flex items-center gap-3 cursor-pointer group">
+                          <div className="relative flex items-center justify-center">
+                            <input 
+                              type="radio" 
+                              name="cost" 
+                              checked={selectedCost === cost}
+                              onChange={() => setSelectedCost(cost)}
+                              className="peer appearance-none w-3.5 h-3.5 rounded-full border border-ctp-surface1 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer" 
+                            />
+                            <div className="absolute w-1.5 h-1.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+                          </div>
+                          <span className="text-[11px] text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-medium">{cost}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </aside>
