@@ -424,7 +424,7 @@ export default function HomeClient({ allGuides }) {
                   Browse Roadmaps
                 </Link>
               </div>
-              <StartWithGoal />
+              <StartWithGoal trackedBundles={userData?.trackedBundles} />
             </section>
 
             {/* Community Intelligence Module - Search Prioritized */}

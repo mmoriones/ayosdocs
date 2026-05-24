@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { GuideIcon } from '@/lib/guideIcons';
 import { Eye, ArrowRight, ShieldCheck } from 'lucide-react';
-import { Skeleton, BookmarkButton } from '@/components/ui';
+import { Skeleton, BookmarkButton, TrackingIndicator } from '@/components/ui';
 
 /**
  * Popular guides widget.
@@ -11,6 +11,7 @@ import { Skeleton, BookmarkButton } from '@/components/ui';
  */
 const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, onFavorite }) => {
   const isFavorite = progress?.isFavorite || false;
+  const isTracking = !!progress;
 
   if (variant === 'compact') {
     return (
@@ -29,9 +30,14 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
             />
           </div>
           <div className="flex-1 min-w-0">
-            <h4 className="text-sm font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
-              {guide.shortTitle || guide.title}
-            </h4>
+            <div className="flex items-center gap-2 mb-0.5">
+              <h4 className="text-sm font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
+                {guide.shortTitle || guide.title}
+              </h4>
+              {isTracking && (
+                <TrackingIndicator variant="guide" label="Active" className="shrink-0" />
+              )}
+            </div>
             <p className="text-[9px] text-ctp-subtext0 uppercase tracking-[0.1em] font-bold mt-0.5">
               {guide.agency}
             </p>
@@ -69,17 +75,22 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
           />
         </div>
         
-        {onFavorite && (
-          <div className="opacity-0 group-hover:opacity-100 transition-all">
-            <BookmarkButton
-              isFavorite={isFavorite}
-              onClick={onFavorite}
-              size="md"
-              variant="bare"
-              tooltipProps={{ position: 'left' }}
-            />
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          {isTracking && (
+            <TrackingIndicator variant="guide" />
+          )}
+          {onFavorite && (
+            <div className="opacity-0 group-hover:opacity-100 transition-all">
+              <BookmarkButton
+                isFavorite={isFavorite}
+                onClick={onFavorite}
+                size="md"
+                variant="bare"
+                tooltipProps={{ position: 'left' }}
+              />
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="flex-1 space-y-3">

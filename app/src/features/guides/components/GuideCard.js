@@ -4,7 +4,7 @@ import { Clock, DollarSign, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { GuideIcon } from '@/lib/guideIcons';
-import { Skeleton, BookmarkButton } from '@/components/ui';
+import { Skeleton, BookmarkButton, TrackingIndicator } from '@/components/ui';
 
 /**
  * Unified GuideCard Component
@@ -26,6 +26,7 @@ const GuideCard = ({
   const router = useRouter();
   const isList = viewMode === 'list';
   const isFavorite = progress?.isFavorite || false;
+  const isTracking = !!progress;
   
   // Styling based on high-density dashboard aesthetic
   const baseCardClass = `
@@ -53,6 +54,9 @@ const GuideCard = ({
               <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest bg-ctp-sky-800/5 px-1.5 py-0.5 rounded border border-ctp-sky-800/20">
                 {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
               </span>
+            )}
+            {isTracking && (
+              <TrackingIndicator variant="guide" />
             )}
             <span className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-80">
               Updated {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Recently"}
@@ -123,11 +127,16 @@ const GuideCard = ({
       </div>
 
       <div className="flex-1">
-        {showAgency && (
-          <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-ctp-sky-800/[0.08] text-ctp-sky-800 text-[8px] font-bold uppercase tracking-[0.1em] mb-2 border border-ctp-sky-800/20">
-            {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
-          </div>
-        )}
+        <div className="flex items-center gap-2 mb-2">
+          {showAgency && (
+            <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-ctp-sky-800/[0.08] text-ctp-sky-800 text-[8px] font-bold uppercase tracking-[0.1em] border border-ctp-sky-800/20">
+              {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
+            </div>
+          )}
+          {isTracking && (
+            <TrackingIndicator variant="guide" />
+          )}
+        </div>
         <h3 className={`text-sm font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight ${showDescription ? 'mb-1' : 'mb-0'}`}>
           {guide.shortTitle || guide.title}
         </h3>
@@ -157,7 +166,7 @@ const GuideCard = ({
             {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Updated Recently"}
           </span>
           <div className="text-ctp-sky-800 font-bold text-[8px] uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-            Open
+            {isTracking ? 'Go to Workspace' : 'Open'}
             <ArrowRight size={10} strokeWidth={4} />
           </div>
         </div>

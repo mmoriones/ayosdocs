@@ -18,3 +18,4 @@ export { default as Switch } from './Switch';
 export { default as BookmarkButton } from './BookmarkButton';
 export { default as DropdownMenu, DropdownMenuItem } from './DropdownMenu';
 export { Tabs, Tab, TabPanel } from './Tabs';
+export { default as TrackingIndicator } from './TrackingIndicator';

@@ -1,7 +1,9 @@
 'use client';
-
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { useQuery } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 import { 
   ArrowRight, 
   Sparkles,
@@ -10,7 +12,7 @@ import {
   CheckCircle2,
   Plus
 } from 'lucide-react';
-import { PageHeader, Button, SearchInput, SortDropdown, Skeleton, Badge } from '@/components/ui'
+import { PageHeader, Button, SearchInput, SortDropdown, Skeleton, Badge, TrackingIndicator } from '@/components/ui'
 import { getBundleIcon } from '@/lib/bundleIcons';
 
 /**
@@ -18,9 +20,23 @@ import { getBundleIcon } from '@/lib/bundleIcons';
  * Discovery page for Requirement Bundles.
  */
 export default function BundlesClient({ initialBundles }) {
+  const { data: session, status: authStatus } = useSession();
+  const isLoggedIn = authStatus === 'authenticated';
+  const isVerified = session?.user?.isVerified;
+
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('Default');
+
+  // Fetch user data to check for tracked bundles
+  const { data: userData } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: async () => {
+      const response = await axios.get('/api/user/all-data');
+      return response.data;
+    },
+    enabled: isLoggedIn && isVerified,
+  });
 
   const sortOptions = [
     { label: 'Default', value: 'Default' },
@@ -120,9 +136,10 @@ export default function BundlesClient({ initialBundles }) {
           {/* BUNDLES GRID */}
           {filteredBundles.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredBundles.map((bundle) => (
-              <BundleCard key={bundle.id} bundle={bundle} />
-            ))}
+            {filteredBundles.map((bundle) => {
+              const isTracking = userData?.trackedBundles?.some(b => b.bundleId === bundle.id);
+              return <BundleCard key={bundle.id} bundle={bundle} isTracking={isTracking} />;
+            })}
           </div>
         ) : (
           <div className="text-center py-24 bg-ctp-mantle/50 rounded-xl border border-dashed border-ctp-surface1 shadow-sm">
@@ -147,7 +164,7 @@ export default function BundlesClient({ initialBundles }) {
   );
 }
 
-const BundleCard = ({ bundle }) => {
+const BundleCard = ({ bundle, isTracking }) => {
   const totalGuides = bundle.flow.reduce((acc, step) => acc + step.guides.length, 0);
 
   return (
@@ -155,8 +172,14 @@ const BundleCard = ({ bundle }) => {
       href={`/bundles/${bundle.id}`}
       className="group bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/20 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden"
     >
-      <div className="w-9 h-9 rounded-lg bg-ctp-mantle flex items-center justify-center mb-5 border border-ctp-surface1 group-hover:bg-ctp-base transition-colors duration-300 shrink-0 shadow-sm">
-        {getBundleIcon(bundle.id, { size: 18, className: "text-ctp-sky-800" })}
+      <div className="flex items-start justify-between mb-5">
+        <div className="w-9 h-9 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 group-hover:bg-ctp-base transition-colors duration-300 shrink-0 shadow-sm">
+          {getBundleIcon(bundle.id, { size: 18, className: "text-ctp-sky-800" })}
+        </div>
+        
+        {isTracking && (
+          <TrackingIndicator variant="bundle" pulse />
+        )}
       </div>
 
       <div className="flex-1 space-y-4">
@@ -201,7 +224,7 @@ const BundleCard = ({ bundle }) => {
           ))}
         </div>
         <div className="text-ctp-sky-800 font-bold text-[8px] uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-          View roadmap
+          {isTracking ? 'Resume Roadmap' : 'View roadmap'}
           <ArrowRight size={10} strokeWidth={4} />
         </div>
       </div>

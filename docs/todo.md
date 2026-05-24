@@ -5,11 +5,10 @@
 - [x] **Branding:**
     - [x] Fix logo and add government agency logos.
     - [x] Add consistent SVGs/Graphics across the platform.(used webp instead)
-- [ ] **Mobile Experience:**
+- [x] **Mobile Experience:**
     - [x] Implement Home page Mobile view (refer to `home_wireframe_mobile.png`).
         - [x] Spcaing on H1 on Hero section (no spacing between "we" & "help")
     - [x] Modernize Mobile Menu to match new design
-    - [ ] Improve mobile view and overall UX (haptics/visual).
 - [ ] **Components:**
     - [x] **Auth Modal:** Improve loading states and spinners during authentication.
     - [x] **Home Page:** Improve `lastguideslug` handling (if empty, default to popular guides and update CTAs).
@@ -46,8 +45,11 @@
     - [x] Implement actual "onboarded" trigger (e.g., after clicking "See how it works").
 - [x] Implement user login using email and email verification
 - [x] **Authentication:** Sign up using email and verification using OTP or verification link
-- [ ] **Tracking Indicator:** Show indicator on bundles/guides when they are being tracked
+- [x] **Tracking Indicator:** Show indicator on bundles/guides when they are being tracked
 - [x] **Stop Tracking Modal:** Add confirm modal when stopping bundle tracking
+- [ ] **Standardization:**
+    - [ ] Standardize terms used
+    - [ ] Standardize knowledge base since it has a lot of categories now for quick
 - [ ] **Optimizations:**
     - [ ] Improve /my-docs loading speed
     - [x] Refactor/clean up unused imports and use barrel import
