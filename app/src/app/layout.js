@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import ConditionalLayout from "@/components/ConditionalLayout";
@@ -34,11 +35,10 @@ export default async function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col bg-ctp-base text-ctp-text antialiased">
         <Providers session={session}>
-          <ConditionalLayout>
-            {children}
-          </ConditionalLayout>
+          <ConditionalLayout>{children}</ConditionalLayout>
         </Providers>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
     </html>
   );
 }
