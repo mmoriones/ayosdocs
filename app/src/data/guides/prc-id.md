@@ -1,4 +1,5 @@
 ---
+shortTitle: PRC ID
 title: How to Get a PRC ID (Initial Registration)
 slug: prc-id
 description: Register your professional license and obtain your PRC ID through the LERIS online portal after passing the board exam.

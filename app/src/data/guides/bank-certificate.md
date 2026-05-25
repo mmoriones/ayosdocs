@@ -1,4 +1,5 @@
 ---
+shortTitle: Bank Certificate
 title: How to Get a Bank Certificate or Statement
 slug: bank-certificate
 description: Request official proof of your financial capacity for visa applications, loans, or school requirements in the Philippines.

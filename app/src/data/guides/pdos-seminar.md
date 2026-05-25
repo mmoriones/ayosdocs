@@ -1,4 +1,5 @@
 ---
+shortTitle: PDOS Seminar
 title: How to Attend the PDOS Seminar (OWWA/DMW)
 slug: pdos-seminar
 description: Complete the mandatory Pre-Departure Orientation Seminar (PDOS) required for all departing Overseas Filipino Workers.

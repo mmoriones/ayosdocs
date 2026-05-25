@@ -1,4 +1,5 @@
 ---
+shortTitle: DMW E-Registration
 title: How to Register and Verify an OFW Contract (DMW E-Registration)
 slug: dmw-e-registration
 description: Complete your DMW E-Registration and contract verification process for direct-hired or agency-hired OFW positions.

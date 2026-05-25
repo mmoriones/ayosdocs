@@ -1,4 +1,5 @@
 ---
+shortTitle: Pre-Marriage Counseling
 title: How to Get a Pre-Marriage Counseling (PMOC) Certificate
 slug: pre-marriage-counseling
 description: Complete the mandatory Pre-Marriage Orientation and Counseling (PMOC) required for obtaining a marriage license in the Philippines.

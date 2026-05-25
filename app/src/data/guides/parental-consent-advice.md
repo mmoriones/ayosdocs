@@ -1,4 +1,5 @@
 ---
+shortTitle: Parental Consent / Advice
 title: Parental Consent vs. Parental Advice for Marriage
 slug: parental-consent-advice
 description: Understand the legal requirements for parental involvement in Philippine marriages for applicants aged 18 to 25.

@@ -284,7 +284,7 @@ export default function GuidesClient({ initialGuides }) {
 
       {/* QUICK CATEGORY PILLS */}
       <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[64px] z-40 backdrop-blur-md bg-ctp-base/80">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-3 flex items-center gap-3 overflow-x-auto no-scrollbar">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-3 flex items-center gap-2 overflow-x-auto no-scrollbar">
           <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
             <Filter size={14} className="text-ctp-subtext1" />
             <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Categories</span>
@@ -293,7 +293,7 @@ export default function GuidesClient({ initialGuides }) {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-lg text-ui-tiny font-bold uppercase tracking-ui-tight transition-all whitespace-nowrap border ${
+              className={`px-3 py-1.5 rounded-md text-ui-tiny font-bold uppercase tracking-ui-tight transition-all whitespace-nowrap border ${
                 selectedCategory === cat
                   ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
                   : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'

@@ -1,5 +1,6 @@
 ---
 title: [Insert Full Title Here]
+shortTitle: [Short Name for Cards]
 slug: [insert-kebab-case-slug]
 description: [Insert a 1-2 sentence SEO-friendly description here.]
 lastUpdated: 2026-05-14

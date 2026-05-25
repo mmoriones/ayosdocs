@@ -1,4 +1,5 @@
 ---
+shortTitle: Certificate of Employment
 title: How to Get a Certificate of Employment (COE)
 slug: certificate-of-employment
 description: Request an official Certificate of Employment with compensation and leave details for visa, loan, or legal purposes.

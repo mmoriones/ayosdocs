@@ -1,4 +1,5 @@
 ---
+shortTitle: eTravel Registration
 title: How to Register for eTravel (Arrival/Departure)
 slug: etravel-registration
 description: Complete the mandatory digital travel declaration for all passengers entering or leaving the Philippines.

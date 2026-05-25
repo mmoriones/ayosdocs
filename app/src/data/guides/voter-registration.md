@@ -1,4 +1,5 @@
 ---
+shortTitle: Voter's Certification
 title: How to Get a Voter's Certification
 slug: voter-registration
 description: Obtain your official Voter's Certification, a valid primary ID and proof of registration while Voter ID cards are discontinued.

@@ -1,4 +1,5 @@
 ---
+shortTitle: BIR Authority to Print
 title: How to Get BIR Authority to Print (Invoices)
 slug: bir-official-receipts
 description: Apply for the mandatory Authority to Print (ATP) for your business invoices and receipts under the Ease of Paying Taxes Act.

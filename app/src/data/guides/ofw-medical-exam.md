@@ -1,4 +1,5 @@
 ---
+shortTitle: OFW Medical Exam
 title: How to Get an OFW Medical Exam (PEME)
 slug: ofw-medical-exam
 description: Complete the mandatory Pre-Employment Medical Examination (PEME) at DOH-accredited clinics for your overseas deployment.

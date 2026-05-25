@@ -1,4 +1,5 @@
 ---
+shortTitle: First-Time Job Seeker
 title: How to Get a First-Time Job Seeker Certificate (RA 11261)
 slug: first-time-job-seeker-certificate
 description: Avail of free government documents and clearances for your first employment under the First-Time Jobseekers Assistance Act.

@@ -1,4 +1,5 @@
 ---
+shortTitle: BIR Books of Accounts
 title: How to Register BIR Books of Accounts
 slug: bir-books-of-accounts
 description: Register and maintain your mandatory manual or digital books of accounts for tax compliance in the Philippines.

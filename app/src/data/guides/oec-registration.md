@@ -1,4 +1,5 @@
 ---
+shortTitle: OEC / OFW Pass
 title: How to Get an OEC / OFW Pass (DMW Mobile App)
 slug: oec-registration
 description: Secure your digital exit clearance (OFW Pass) through the DMW Mobile App for your overseas deployment.

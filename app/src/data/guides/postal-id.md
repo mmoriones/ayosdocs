@@ -1,4 +1,5 @@
 ---
+shortTitle: Postal ID
 title: How to Get an Improved Postal ID
 slug: postal-id
 description: Obtain your digitized Postal ID, one of the fastest and most accessible primary IDs in the Philippines.
