@@ -231,7 +231,7 @@ export default function RateClient() {
                   isAnonymous: false
                 });
               }}
-              className="w-full py-3 rounded-lg font-bold uppercase tracking-widest text-ui-micro text-ctp-subtext1 bg-ctp-base/50 hover:bg-ctp-mantle transition-all border border-ctp-surface1"
+              className="click-ripple w-full py-3 rounded-lg font-bold uppercase tracking-widest text-ui-micro text-ctp-subtext1 bg-ctp-base/50 hover:bg-ctp-mantle transition-all border border-ctp-surface1 active:scale-[0.97]"
             >
               Submit Another
             </button>
@@ -313,7 +313,7 @@ export default function RateClient() {
                                         key={office._id}
                                         type="button"
                                         onClick={() => setSelectedOffice(office)}
-                                        className="w-full px-4 py-3.5 text-left hover:bg-ctp-base transition-all flex items-center justify-between group"
+                                        className="click-ripple w-full px-4 py-3.5 text-left hover:bg-ctp-base transition-all flex items-center justify-between group active:scale-[0.97]"
                                       >
                                         <div className="min-w-0">
                                           <h4 className="text-ui-micro font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight truncate">{office.name}</h4>
@@ -345,7 +345,7 @@ export default function RateClient() {
                               <button 
                                 type="button"
                                 onClick={() => { setSelectedOffice(null); setOfficeSearch(''); }}
-                                className="px-3 py-1.5 rounded-md bg-ctp-base border border-ctp-surface1 text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest hover:border-ctp-sky-800/30 transition-all shadow-sm"
+                                className="click-ripple px-3 py-1.5 rounded-md bg-ctp-base border border-ctp-surface1 text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest hover:border-ctp-sky-800/30 transition-all shadow-sm active:scale-[0.97]"
                               >
                                 Change
                               </button>

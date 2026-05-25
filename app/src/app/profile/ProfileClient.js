@@ -92,11 +92,9 @@ export default function ProfileClient() {
               headerAction={
                 !isEditing && status !== 'loading' && (
                   <Button 
-                    variant="ghost" 
-                    size="sm" 
+                    variant="link"
                     onClick={() => setIsEditing(true)}
                     leftIcon={<Edit3 size={14} />}
-                    className="text-ctp-sky-800"
                   >
                     Modify
                   </Button>
@@ -241,13 +239,14 @@ export default function ProfileClient() {
                 </div>
               </div>
 
-              <button 
+              <Button 
+                variant="outline"
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="w-full mt-8 flex items-center justify-center gap-2 p-2.5 rounded-lg border border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red text-ui-micro font-bold uppercase tracking-widest hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all group"
+                className="w-full mt-8 flex items-center justify-center gap-2 border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 text-ui-micro font-bold uppercase tracking-widest"
+                leftIcon={<LogOut size={14} strokeWidth={3} className="transition-transform group-hover:-translate-x-0.5" />}
               >
-                <LogOut size={14} strokeWidth={3} className="transition-transform group-hover:-translate-x-0.5" />
                 Sign Out of Account
-              </button>
+              </Button>
             </Card>
 
             <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm overflow-hidden group">

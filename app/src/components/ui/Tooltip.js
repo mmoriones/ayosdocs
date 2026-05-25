@@ -17,7 +17,7 @@ export default function Tooltip({
   content,
   children,
   position = 'top',
-  delay = 500,
+  delay = 200,
   disabled = false,
   className = '',
   contentClassName = '',

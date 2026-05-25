@@ -24,7 +24,7 @@ const Footer = () => {
           <div key={link.label} className="flex items-center gap-4">
             <Link 
               href={link.href} 
-              className="hover:text-ctp-sky-800 transition-colors font-medium"
+              className="active:scale-[0.97] transition-all hover:text-ctp-sky-800 font-medium"
             >
               {link.label}
             </Link>

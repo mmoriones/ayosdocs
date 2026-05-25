@@ -245,6 +245,19 @@
   .card-minimal-hover {
     @apply hover:border-ctp-surface2 hover:shadow-lg dark:hover:bg-ctp-surface0;
   }
+
+  /* Interactive Elements Feedback */
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-px hover:shadow-lg active:translate-y-0;
+  }
+
+  .click-ripple {
+    @apply relative overflow-hidden after:absolute after:inset-0 after:bg-white/10 after:opacity-0 after:transition-opacity active:after:opacity-100;
+  }
+
+  .hover-overlay {
+    @apply relative overflow-hidden before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity hover:before:opacity-[0.03];
+  }
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -299,8 +312,8 @@
 }
 
 .prose-ctp a {
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
   transition: all 0.2s ease;
 }
 

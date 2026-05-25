@@ -46,7 +46,7 @@ export default function DashboardHeader({ onMenuClick }) {
         </button>
         
         <nav className="hidden md:flex items-center gap-1.5 text-sm">
-          <Link href="/" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-colors px-2 py-1 rounded-md hover:bg-ctp-sky-800/5">
+          <Link href="/" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-all px-2 py-1 rounded-md hover:bg-ctp-sky-800/5 active:scale-[0.97]">
             AyosDocs
           </Link>
           {breadcrumbs.map((bc, i) => (
@@ -54,7 +54,7 @@ export default function DashboardHeader({ onMenuClick }) {
               <span className="text-ctp-surface2 font-light">/</span>
               <Link 
                 href={bc.href}
-                className={`px-2 py-1 rounded-md transition-all ${
+                className={`px-2 py-1 rounded-md transition-all active:scale-[0.97] ${
                   i === breadcrumbs.length - 1 
                     ? "font-bold text-ctp-text bg-ctp-surface0/30" 
                     : "text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 font-medium"

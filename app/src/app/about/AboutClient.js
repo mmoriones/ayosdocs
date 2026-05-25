@@ -2,6 +2,7 @@
 
 import PageHeader from '@/components/ui/PageHeader';
 import { Info, Target, Eye, Sparkles, ShieldCheck, Heart } from 'lucide-react';
+import { Button } from '@/components/ui';
 
 /**
  * AboutClient Component
@@ -98,12 +99,13 @@ export default function AboutClient() {
                   <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed">
                     AyosDocs is built for the community. Share your experiences and help others navigate their requirements better.
                   </p>
-                  <button 
+                  <Button 
                     onClick={() => window.location.href = '/rate'}
-                    className="w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg font-bold text-ui-micro uppercase tracking-widest text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all shadow-sm active:scale-[0.98]"
+                    variant="secondary"
+                    className="w-full bg-ctp-base"
                   >
                     Write a Review
-                  </button>
+                  </Button>
                </div>
             </div>
           </aside>

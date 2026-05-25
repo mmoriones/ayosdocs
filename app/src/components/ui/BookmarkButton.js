@@ -62,7 +62,7 @@ export default function BookmarkButton({
     >
       <button 
         onClick={handleClick}
-        className={`${sizes[size]} ${rounding} transition-all flex items-center justify-center active:scale-95 ${variantClasses[variant] || variantClasses.square}`}
+        className={`click-ripple ${sizes[size]} ${rounding} transition-all flex items-center justify-center ${variantClasses[variant] || variantClasses.square}`}
         aria-label={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
       >
         <Bookmark 

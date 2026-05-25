@@ -8,6 +8,7 @@ export { default as HorizontalScrollContainer } from './HorizontalScrollContaine
 export { default as Input } from './Input';
 export { default as PageHeader } from './PageHeader';
 export { default as SearchInput } from './SearchInput';
+export { default as SelectionPill } from './SelectionPill';
 export { default as Skeleton } from './Skeleton';
 export { default as SortDropdown } from './SortDropdown';
 export { default as Modal } from './Modal';

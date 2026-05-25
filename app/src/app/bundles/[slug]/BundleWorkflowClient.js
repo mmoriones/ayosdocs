@@ -310,7 +310,7 @@ export default function BundleClient({ bundle, allGuides, initialIsTracked, save
               <button 
                 onClick={handleToggleTracking}
                 disabled={isLoading}
-                className={`px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest shadow-sm active:scale-95 transition-all flex items-center gap-2 ${
+                className={`hover-lift click-ripple px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest shadow-sm flex items-center gap-2 ${
                   isTracked 
                     ? 'bg-ctp-mantle border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-red hover:border-ctp-red/30' 
                     : 'bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90'
@@ -342,7 +342,7 @@ export default function BundleClient({ bundle, allGuides, initialIsTracked, save
               <button 
                 onClick={handleResendVerification}
                 disabled={isResending}
-                className="px-5 py-2 bg-ctp-yellow/10 text-ctp-yellow rounded-lg font-bold text-ui-micro uppercase tracking-widest hover:bg-ctp-yellow/20 transition-all shadow-sm shrink-0 flex items-center gap-2"
+                className="hover-lift click-ripple px-5 py-2 bg-ctp-yellow/10 text-ctp-yellow rounded-lg font-bold text-ui-micro uppercase tracking-widest hover:bg-ctp-yellow/20 shadow-sm shrink-0 flex items-center gap-2"
               >
                 {isResending ? (
                   <>

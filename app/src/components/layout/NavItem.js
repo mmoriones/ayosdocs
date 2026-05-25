@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Tooltip } from '@/components/ui';
 
 /**
  * Responsive navigation link for the sidebar.
@@ -20,11 +21,11 @@ export default function NavItem({ href, icon: Icon, label, collapsed, active, on
   const pathname = usePathname();
   const isActive = active ?? (href === '/' ? pathname === '/' : pathname.startsWith(href));
 
-  return (
+  const content = (
     <Link
       href={href}
       onClick={onClick}
-      className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group ${
+      className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group active:scale-[0.98] ${
         isActive
           ? 'bg-ctp-sky-800/[0.08] text-ctp-sky-800'
           : 'text-ctp-subtext1 hover:bg-ctp-sky-800/[0.05] hover:text-ctp-text'
@@ -48,4 +49,14 @@ export default function NavItem({ href, icon: Icon, label, collapsed, active, on
       )}
     </Link>
   );
+
+  if (collapsed) {
+    return (
+      <Tooltip content={label} position="right" delay={100}>
+        {content}
+      </Tooltip>
+    );
+  }
+
+  return content;
 }

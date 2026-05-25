@@ -33,7 +33,7 @@ export default function Card({
   const bgStyles = backgrounds[background] || backgrounds.base;
   const overflowClass = overflow === 'hidden' ? 'overflow-hidden' : 'overflow-visible';
   const interactiveStyles = (interactive || props.onClick) 
-    ? 'cursor-pointer hover:border-ctp-sky-800/30 hover:shadow-md hover:bg-ctp-mantle/50 transition-all active:scale-[0.99]' 
+    ? 'cursor-pointer hover:border-ctp-sky-800/30 hover:shadow-lg hover:bg-ctp-mantle/50 transition-all hover:-translate-y-px active:translate-y-0 active:scale-[0.99] relative overflow-hidden after:absolute after:inset-0 after:bg-white/5 after:opacity-0 after:transition-opacity active:after:opacity-100 hover:z-10' 
     : '';
   
   return (

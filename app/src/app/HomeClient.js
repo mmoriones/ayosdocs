@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
@@ -378,12 +377,12 @@ export default function HomeClient({ allGuides }) {
               <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Trending Guides</h2>
               <Badge variant="sky" className="px-1.5 py-0">POPULAR</Badge>
             </div>
-            <Link 
-              href="/guides"
-              className="text-ui-detail font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+            <Button 
+              variant="link"
+              onClick={() => router.push('/guides')}
             >
               Explore All
-            </Link>
+            </Button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {isLoadingTrending ? (
@@ -417,12 +416,12 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-6">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                 <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Life Event Goals</h2>
-                <Link 
-                  href="/bundles"
-                  className="text-ui-detail font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                <Button 
+                  variant="link"
+                  onClick={() => router.push('/bundles')}
                 >
                   Browse Bundles
-                </Link>
+                </Button>
               </div>
               <StartWithGoal trackedBundles={userData?.trackedBundles} />
             </section>
@@ -437,12 +436,12 @@ export default function HomeClient({ allGuides }) {
                     <span className="text-ui-micro font-bold text-ctp-green uppercase tracking-ui-caps">Live: 512 Reviews Today</span>
                   </div>
                 </div>
-                <Link 
-                  href="/offices"
-                  className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                <Button 
+                  variant="link"
+                  onClick={() => router.push('/offices')}
                 >
                   Office Network
-                </Link>
+                </Button>
               </div>
 
               <Card background="base" noPadding className="relative group overflow-hidden border-ctp-surface1 border-dashed">
@@ -488,7 +487,7 @@ export default function HomeClient({ allGuides }) {
                             setOfficeSearch(agency);
                             setTimeout(() => router.push(`/offices?search=${agency}`), 100);
                           }}
-                          className="px-2.5 py-1 rounded-md bg-ctp-mantle border border-ctp-surface1 text-ui-detail font-bold text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/[0.05] transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
+                          className="hover-lift click-ripple px-2.5 py-1 rounded-md bg-ctp-mantle border border-ctp-surface1 text-ui-detail font-bold text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/[0.05] shadow-sm flex items-center gap-1.5"
                         >
                           <div className="w-1.5 h-1.5 rounded-full bg-ctp-surface2 group-hover:bg-ctp-sky-800 transition-colors" />
                           {agency}
@@ -526,7 +525,7 @@ export default function HomeClient({ allGuides }) {
                         </div>
                         <button 
                           onClick={() => router.push('/rate')}
-                          className="w-full mt-2 py-3 bg-ctp-sky-800 text-white rounded-lg text-ui-micro font-bold uppercase tracking-ui-caps hover:bg-ctp-sky-700 transition-all shadow-md shadow-ctp-sky-800/10 flex items-center justify-center gap-2 active:scale-95"
+                          className="hover-lift click-ripple w-full mt-2 py-3 bg-ctp-sky-800 text-white rounded-lg text-ui-micro font-bold uppercase tracking-ui-caps hover:bg-ctp-sky-700 shadow-md shadow-ctp-sky-800/10 flex items-center justify-center gap-2"
                         >
                           Share Experience
                           <MessageSquare size={12} strokeWidth={3} />
@@ -540,9 +539,9 @@ export default function HomeClient({ allGuides }) {
                     <ShieldCheck size={14} className="text-ctp-green" strokeWidth={2.5} />
                     <span className="text-ui-detail font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Verified Community Intelligence Network</span>
                   </div>
-                  <button className="text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps hover:underline decoration-2">
+                  <Button variant="link">
                     How it works
-                  </button>
+                  </Button>
                 </div>
               </Card>
             </section>
@@ -559,12 +558,12 @@ export default function HomeClient({ allGuides }) {
                   <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Active Guide</h2>
                   <Badge variant="sky" className="px-1.5 py-0">TRACKING</Badge>
                 </div>
-                <Link 
-                  href="/my-docs"
-                  className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                <Button 
+                  variant="link"
+                  onClick={() => router.push('/my-docs')}
                 >
                   View All
-                </Link>
+                </Button>
               </div>
               
               {isLoggedIn && isLoadingUserData ? (
@@ -640,12 +639,12 @@ export default function HomeClient({ allGuides }) {
                   <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Recent Updates</h2>
                   <Badge variant="sky" className="px-1.5 py-0">LATEST</Badge>
                 </div>
-                <Link 
-                  href="/updates"
-                  className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                <Button 
+                  variant="link"
+                  onClick={() => router.push('/updates')}
                 >
                   View All
-                </Link>
+                </Button>
               </div>
               <RecentlyUpdated />
             </section>
@@ -655,12 +654,12 @@ export default function HomeClient({ allGuides }) {
               <section className="space-y-6">
                 <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                   <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Community Feed</h2>
-                  <Link 
-                    href="/offices"
-                    className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                  <Button 
+                    variant="link"
+                    onClick={() => router.push('/offices')}
                   >
                     View All
-                  </Link>
+                  </Button>
                 </div>
                 <RecentExperiences limit={5} />
               </section>

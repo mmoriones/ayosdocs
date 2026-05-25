@@ -300,7 +300,7 @@ const ChecklistCard = ({
         <div className="relative z-10 px-5 pb-5 pt-1">
           <button 
             onClick={() => router.push(`/guides/${slug}`)}
-            className="w-full h-10 bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white rounded-lg text-ui-detail font-bold uppercase tracking-[0.2em] shadow-lg shadow-ctp-sky-800/10 transition-all active:scale-[0.97] flex items-center justify-center gap-3 group/btn"
+            className="hover-lift click-ripple w-full h-10 bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white rounded-lg text-ui-detail font-bold uppercase tracking-[0.2em] shadow-lg shadow-ctp-sky-800/10 flex items-center justify-center gap-3 group/btn"
           >
             Resume Guide
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" strokeWidth={3} />
@@ -336,13 +336,14 @@ const ChecklistCard = ({
             </div>
             
             {!inGuidePage && (
-              <button 
+              <Button 
+                variant="link"
                 onClick={() => router.push('/my-docs')}
-                className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-sky-300 transition-colors flex items-center gap-1"
+                className="flex items-center gap-1"
               >
                 Workspace
                 <ChevronRight size={10} strokeWidth={4} />
-              </button>
+              </Button>
             )}
           </div>
 
@@ -429,7 +430,7 @@ const ChecklistCard = ({
                   <div 
                     key={index}
                     onClick={() => handleStepAction(index)}
-                    className={`flex items-start gap-3.5 px-3 py-2 rounded-lg transition-all duration-200 group
+                    className={`click-ripple flex items-start gap-3.5 px-3 py-2 rounded-lg transition-all duration-200 group
                       ${step.completed ? "bg-ctp-sky-800/[0.03]" : ""}
                       ${isNextStep ? "bg-ctp-sky-800/[0.03]" : ""}
                       ${isClickable ? "cursor-pointer hover:bg-ctp-mantle/60" : "cursor-default"}
@@ -477,7 +478,7 @@ const ChecklistCard = ({
         {nextStep && !inGuidePage && !isModal && (
           <div className="px-5 lg:px-6 mb-6 mt-4">
             <div 
-              className="flex items-start gap-3.5 p-3.5 rounded-lg border border-ctp-surface1 bg-ctp-mantle/30 cursor-pointer hover:border-ctp-sky-800/20 transition-all shadow-sm group shadow-inner"
+              className="hover-lift click-ripple flex items-start gap-3.5 p-3.5 rounded-lg border border-ctp-surface1 bg-ctp-mantle/30 cursor-pointer hover:border-ctp-sky-800/20 shadow-sm group shadow-inner"
               onClick={() => router.push(`/guides/${slug}`)}
             >
               <div className="shrink-0">

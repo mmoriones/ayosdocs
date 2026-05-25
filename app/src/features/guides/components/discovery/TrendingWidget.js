@@ -1,9 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { GuideIcon } from '@/lib/guideIcons';
 import { Eye, ArrowRight, ShieldCheck } from 'lucide-react';
-import { Skeleton, BookmarkButton, TrackingIndicator } from '@/components/ui';
+import { Skeleton, BookmarkButton, TrackingIndicator, Card } from '@/components/ui';
 
 /**
  * Popular guides widget.
@@ -15,13 +14,17 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
 
   if (variant === 'compact') {
     return (
-      <div className="group relative flex items-center">
-        <Link 
-          href={`/guides/${guide.slug}`}
-          onClick={onClick}
-          className="flex-1 flex items-center gap-3.5 p-3 rounded-lg border border-ctp-surface1 bg-ctp-base hover:bg-ctp-mantle/50 hover:border-ctp-sky-800/30 hover:shadow-md active:scale-[0.99] transition-all group"
+      <div className="group relative">
+        <Card
+          onClick={(e) => {
+            if (onClick) onClick(e);
+            window.location.href = `/guides/${guide.slug}`;
+          }}
+          interactive
+          noPadding
+          className="p-3 flex items-center gap-3.5 relative overflow-hidden"
         >
-          <div className="w-9 h-9 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-ctp-base transition-colors">
+          <div className="w-9 h-9 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center shrink-0 shadow-sm group-hover:bg-ctp-base transition-colors relative z-10">
             <GuideIcon 
               slug={guide.slug} 
               agency={guide.agency} 
@@ -29,7 +32,7 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
               strokeWidth={1.5}
             />
           </div>
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 relative z-10">
             <div className="flex items-center gap-2 mb-0.5">
               <h4 className="text-ui-label font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
                 {guide.shortTitle || guide.title}
@@ -42,11 +45,11 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
               {guide.agency}
             </p>
           </div>
-          <ArrowRight size={14} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-1 transition-all" />
-        </Link>
+          <ArrowRight size={14} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-1 transition-all relative z-10" />
+        </Card>
         
         {onFavorite && (
-          <div className="absolute -right-1 -top-1 z-10 opacity-0 group-hover:opacity-100 transition-all">
+          <div className="absolute -right-1 -top-1 z-20 opacity-0 group-hover:opacity-100 transition-all">
             <BookmarkButton
               isFavorite={isFavorite}
               onClick={onFavorite}
@@ -61,11 +64,13 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
   }
 
   return (
-    <div 
+    <Card 
       onClick={() => window.location.href = `/guides/${guide.slug}`}
-      className="bg-ctp-base rounded-lg border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle hover:shadow-md active:scale-[0.99] transition-all duration-300 p-4 flex flex-col h-full group cursor-pointer relative"
+      interactive
+      noPadding
+      className="p-4 flex flex-col h-full group relative overflow-hidden"
     >
-      <div className="flex items-start justify-between mb-6">
+      <div className="flex items-start justify-between mb-6 relative z-10">
         <div className="w-10 h-10 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-base transition-colors duration-300">
           <GuideIcon 
             slug={guide.slug} 
@@ -93,7 +98,7 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
         </div>
       </div>
 
-      <div className="flex-1 space-y-3">
+      <div className="flex-1 space-y-3 relative z-10">
         <div className="space-y-1">
           <h3 className="text-ui-label font-bold text-ctp-text tracking-tight leading-snug group-hover:text-ctp-sky-800 transition-colors">
             {guide.shortTitle || guide.title}
@@ -108,7 +113,7 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
         </p>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-ctp-surface1/30 flex items-center justify-between">
+      <div className="mt-6 pt-4 border-t border-ctp-surface1/30 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-3">
            <div className="flex items-center gap-1 text-ctp-subtext1">
               <Eye size={10} strokeWidth={2.5} />
@@ -122,7 +127,7 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
         </div>
         <ArrowRight size={14} className="text-ctp-surface2 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all" />
       </div>
-    </div>
+    </Card>
   );
 };
 

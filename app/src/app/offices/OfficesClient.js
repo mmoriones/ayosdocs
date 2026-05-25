@@ -16,7 +16,7 @@ import {
   Filter
 } from 'lucide-react';
 import { GuideIcon } from '@/lib/guideIcons';
-import { PageHeader, Banner, Button, Card, Badge, SearchInput, Skeleton } from '@/components/ui'
+import { PageHeader, Banner, Button, Card, Badge, SearchInput, Skeleton, SelectionPill } from '@/components/ui'
 import HolidayAlert from '@/components/HolidayAlert';
 
 
@@ -65,23 +65,19 @@ export default function OfficesClient() {
       {/* QUICK CATEGORY PILLS */}
       <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[64px] z-40 backdrop-blur-md bg-ctp-base/80">
         <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2 flex items-center justify-between gap-8">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar flex-1">
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar flex-1 py-1 -my-1">
             <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
               <Filter size={12} className="text-ctp-subtext1" />
               <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Agencies</span>
             </div>
             {agencies.map((agency) => (
-              <button
+              <SelectionPill
                 key={agency}
+                selected={selectedAgency === agency}
                 onClick={() => setSelectedAgency(agency)}
-                className={`px-3 py-1.5 rounded-md text-ui-tiny font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
-                  selectedAgency === agency
-                    ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
-                    : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
-                }`}
               >
                 {agency}
-              </button>
+              </SelectionPill>
             ))}
           </div>
 
@@ -135,7 +131,7 @@ export default function OfficesClient() {
               
               <div className="divide-y divide-ctp-surface1/30">
                 {bestPerformingOffices.map((office, i) => (
-                  <div key={office._id} className="flex items-center gap-3.5 p-4 hover:bg-ctp-mantle/50 transition-colors group cursor-pointer">
+                  <div key={office._id} className="flex items-center gap-3.5 p-4 hover:bg-ctp-mantle/50 transition-colors group">
                     <div className="w-7 h-7 rounded bg-ctp-mantle border border-ctp-surface1 text-ctp-surface2 flex items-center justify-center text-ui-tiny font-bold group-hover:text-ctp-sky-800 transition-colors">
                       0{i + 1}
                     </div>
@@ -147,12 +143,13 @@ export default function OfficesClient() {
                 ))}
               </div>
               
-              <button 
+              <Button 
+                variant="link"
                 onClick={() => router.push('/coming-soon')}
-                className="w-full p-3 bg-ctp-mantle/50 border-t border-ctp-surface1 text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest hover:bg-ctp-sky-800 hover:text-white transition-all"
+                className="w-full p-3 border-t border-ctp-surface1 text-ui-micro uppercase tracking-widest"
               >
                 View Analytics
-              </button>
+              </Button>
             </Card>
 
             <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
@@ -195,7 +192,7 @@ const OfficeCard = ({ office, router }) => {
   }[office.stats.avgWaitTime || 'N/A'];
 
   return (
-    <Card className="group hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden p-0" noPadding>
+    <Card interactive onClick={() => router.push('/coming-soon')} noPadding className="group flex flex-col h-full p-0">
       <div className="p-4 flex flex-col md:flex-row gap-5 md:items-start">
         <div className="flex md:flex-col items-center gap-3">
           <div className="w-11 h-11 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:bg-ctp-base transition-colors duration-300 shadow-sm">
@@ -246,13 +243,10 @@ const OfficeCard = ({ office, router }) => {
             {office.stats.totalReports > 0 ? `${office.stats.totalReports} Citizen Reports` : 'No reports yet'}
           </span>
         </div>
-        <button 
-          onClick={() => router.push('/coming-soon')}
-          className="text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
-        >
+        <div className="text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-all pointer-events-none">
           Details
           <ArrowRight size={10} strokeWidth={4} />
-        </button>
+        </div>
       </div>
     </Card>
   );

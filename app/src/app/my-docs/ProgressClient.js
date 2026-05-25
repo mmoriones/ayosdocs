@@ -351,7 +351,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
           <div className="flex items-center gap-3">
               <button 
                 onClick={() => router.push('/guides')}
-                className="px-5 py-2 bg-ctp-sky-800 text-white rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-ctp-sky-800/90 transition-all flex items-center gap-2 shadow-sm shadow-ctp-sky-800/20 active:scale-95"
+                className="hover-lift click-ripple px-5 py-2 bg-ctp-sky-800 text-white rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2 shadow-sm shadow-ctp-sky-800/20"
               >
                 <Plus size={14} strokeWidth={2.5} />
                 <span>New Tracker</span>
@@ -457,7 +457,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                 </div>
                 <button 
                   onClick={() => router.push('/bundles')}
-                  className="text-ui-micro text-ctp-sky-800 font-bold uppercase tracking-widest hover:text-ctp-sky-300 transition-colors"
+                  className="text-ui-micro text-ctp-sky-800 font-bold uppercase tracking-widest hover:text-ctp-sky-300 transition-colors active:scale-[0.97]"
                 >
                   Browse Bundles
                 </button>
@@ -480,7 +480,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                 ) : !searchQuery && (
                   <button 
                     onClick={() => router.push('/bundles')}
-                    className="w-full py-10 bg-ctp-mantle border border-dashed border-ctp-surface1 rounded-2xl text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-sky-800/5 transition-all flex flex-col items-center justify-center gap-4 group"
+                    className="click-ripple active:scale-[0.97] w-full py-10 bg-ctp-mantle border border-dashed border-ctp-surface1 rounded-2xl text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-sky-800/5 transition-all flex flex-col items-center justify-center gap-4 group"
                   >
                     <div className="w-12 h-12 rounded-xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center group-hover:scale-105 transition-transform shadow-sm">
                       <Plus size={24} className="text-ctp-subtext1 group-hover:text-ctp-sky-800" strokeWidth={2.5} />
@@ -497,17 +497,17 @@ export default function ProgressClient({ allGuides, isRestricted }) {
             <div className="space-y-8 pb-12">
               <div className="flex flex-col gap-6">
                 <div className="flex items-center justify-between border-b border-ctp-surface1">
-                  <div className="flex items-center gap-8 overflow-x-auto no-scrollbar -mb-px">
+                  <div className="flex items-center gap-1 overflow-x-auto no-scrollbar -mb-px">
                     {['All', 'In Progress', 'Completed', 'Favorites'].map((tab) => {
                       const isActive = activeTab === tab;
                       return (
                         <button
                           key={tab}
                           onClick={() => setActiveTab(tab)}
-                          className={`pb-3.5 px-1 text-ui-micro font-bold uppercase tracking-widest transition-all whitespace-nowrap border-b-2 ${
+                          className={`click-ripple active:scale-[0.97] px-4 py-2 text-ui-micro font-bold uppercase tracking-widest transition-all whitespace-nowrap rounded-t-lg ${
                             isActive
-                              ? 'border-ctp-sky-800 text-ctp-sky-800'
-                              : 'border-transparent text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface1'
+                              ? 'bg-ctp-sky-800 text-white'
+                              : 'text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle/50'
                           }`}
                         >
                           {tab}
@@ -516,13 +516,13 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                     })}
                   </div>
 
-                  <Link href="/guides" className="text-ui-micro text-ctp-sky-800 font-bold uppercase tracking-widest hover:text-ctp-sky-300 transition-colors pb-3.5 px-2">
-                    Knowledge Base
+                  <Link href="/guides" className="text-ui-micro text-ctp-sky-800 font-bold uppercase tracking-widest hover:text-ctp-sky-300 transition-colors pb-3.5 px-2 active:scale-[0.97]">
+                    Browse Guides
                   </Link>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Tracked Procedures</h2>
+                  <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Tracked Guides</h2>
                   <span className="px-2 py-0.5 rounded-md bg-ctp-sky-800/5 text-ctp-sky-800 text-ui-micro font-bold border border-ctp-sky-800/10">
                     {filteredGuides.length}
                   </span>
@@ -552,14 +552,14 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                     </div>
                     <h3 className="text-base font-bold text-ctp-text uppercase tracking-widest">No tracker activity</h3>
                     <p className="text-sm text-ctp-subtext1 font-medium mt-1">Pick a guide to start tracking your requirements.</p>
-                    <Link href="/guides" className="mt-8 inline-block px-8 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold uppercase text-ui-micro tracking-widest shadow-sm shadow-ctp-sky-800/20 active:scale-95 transition-all">Explore all guides</Link>
+                    <Link href="/guides" className="hover-lift click-ripple mt-8 inline-block px-8 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold uppercase text-ui-micro tracking-widest shadow-sm shadow-ctp-sky-800/20 transition-all">Explore all guides</Link>
                   </Card>
                 )}
                 
                 {filteredGuides.length > displayedGuides.length && (
                   <button 
                     onClick={() => setVisibleCount(prev => prev + 5)}
-                    className="w-full py-5 text-ui-micro font-bold text-ctp-sky-800 hover:text-ctp-sky-300 uppercase tracking-widest transition-colors border border-dashed border-ctp-surface1 rounded-2xl bg-ctp-mantle/50 hover:bg-ctp-mantle active:scale-[0.99] mt-4"
+                    className="click-ripple active:scale-[0.97] w-full py-5 text-ui-micro font-bold text-ctp-sky-800 hover:text-ctp-sky-300 uppercase tracking-widest transition-colors border border-dashed border-ctp-surface1 rounded-2xl bg-ctp-mantle/50 hover:bg-ctp-mantle mt-4"
                   >
                     Load more activity
                   </button>

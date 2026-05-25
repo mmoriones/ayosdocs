@@ -27,11 +27,11 @@
     - [x] **Sidebar:** Increase side bar opacity for hover and currently selected item
     - [x] **Community Feed:** Make Community Feed single horizontal card
     - [x] **Recent Updates:** Improve RecentlyUpdated style and layout on / and /guides
-    - [ ] **Buttons:** Review buttons variants usage on all pages
-    - [ ] **Hover:** Make hover overlays consistent
+    - [x] **Buttons:** Review buttons variants usage on all pages
+    - [x] **Hover:** Make hover overlays consistent
+    - [x] Click: Add ripple or click visual indicator 
     - [ ] **Tooltip:** Review all client pages and components that needs tooltip
     - [x] **Scroll:** Create a reusable button for horizontal scroll [ < > ] and a reusable component for the indicator below the items on horizontal scroll
-    - [ ] **Close Button:** Create reusable close button UI component
 
 ## ✨ Features & Logic
 - [x] **Onboarding UX:** If logged in but not onboarded, hide Community Feed to prioritize the onboarding banner.
@@ -47,9 +47,9 @@
 - [x] **Authentication:** Sign up using email and verification using OTP or verification link
 - [x] **Tracking Indicator:** Show indicator on bundles/guides when they are being tracked
 - [x] **Stop Tracking Modal:** Add confirm modal when stopping bundle tracking
-- [ ] **Standardization:**
-    - [ ] Standardize terms used
-    - [ ] Standardize knowledge base since it has a lot of categories now for quick
+- [x] **Standardization:**
+    - [x] Standardize terms used
+    - [x] Standardize knowledge base since it has a lot of categories now for quick
 - [ ] **Optimizations:**
     - [ ] Improve /my-docs loading speed
     - [x] Refactor/clean up unused imports and use barrel import

@@ -24,10 +24,9 @@ const DashboardSidebar = () => {
         <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
           <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Reminders</h3>
           <Button 
-            variant="ghost"
-            size="sm"
+            variant="link"
             onClick={() => router.push('/coming-soon')}
-            className="text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest hover:underline px-0 py-0 h-auto"
+            className="text-ui-tiny uppercase tracking-widest"
           >
             View all
           </Button>
@@ -81,10 +80,9 @@ const DashboardSidebar = () => {
         </div>
         
         <Button 
-          variant="ghost"
-          size="sm"
+          variant="link"
           onClick={() => router.push('/coming-soon')}
-          className="w-full rounded-none border-t border-ctp-surface1 text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-text transition-colors"
+          className="w-full rounded-none border-t border-ctp-surface1 text-ui-tiny uppercase tracking-widest py-3"
         >
           View recommendations
         </Button>
@@ -121,10 +119,9 @@ const DashboardSidebar = () => {
         </div>
 
         <Button 
-          variant="ghost"
-          size="sm"
+          variant="link"
           onClick={() => router.push('/coming-soon')}
-          className="w-full rounded-none border-t border-ctp-surface1 text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-text transition-colors"
+          className="w-full rounded-none border-t border-ctp-surface1 text-ui-tiny uppercase tracking-widest py-3"
         >
           View detailed log
         </Button>

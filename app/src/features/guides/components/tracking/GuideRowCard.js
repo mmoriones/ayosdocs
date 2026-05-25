@@ -1,9 +1,9 @@
 'use client';
 
-import { Trash2, Check } from 'lucide-react';
+import { Trash2, Check, MoreVertical } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { GuideIcon } from '@/lib/guideIcons';
-import { Skeleton, ProgressBar, DropdownMenu, DropdownMenuItem, BookmarkButton } from '@/components/ui';
+import { Skeleton, ProgressBar, DropdownMenu, DropdownMenuItem, BookmarkButton, Tooltip } from '@/components/ui';
 
 /**
  * GuideRowCard Component
@@ -21,7 +21,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
   return (
     <div 
       onClick={() => router.push(`/guides/${guide.slug}`)}
-      className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/70 transition-all group relative cursor-pointer"
+      className="click-ripple bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/70 transition-all hover:-translate-y-px active:translate-y-0 active:scale-[0.99] group relative cursor-pointer"
     >
       <div className="flex items-center gap-6">
         <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
@@ -79,27 +79,31 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
               variant="bare"
             />
             
-            <DropdownMenu
-              trigger={
-                <button 
-                  className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface2 transition-all flex items-center justify-center active:scale-90"
+            <div onClick={(e) => e.stopPropagation()}>
+              <Tooltip content="Options">
+                <DropdownMenu
+                  trigger={
+                    <button 
+                      className="click-ripple w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface2 transition-all flex items-center justify-center active:scale-90"
+                    >
+                      <MoreVertical size={14} />
+                    </button>
+                  }
+                  align="right"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-                </button>
-              }
-              align="right"
-            >
-              <DropdownMenuItem
-                onClick={(e) => { 
-                  e.stopPropagation(); 
-                  onDelete(); 
-                }}
-                variant="danger"
-                icon={Trash2}
-              >
-                Stop Tracking
-              </DropdownMenuItem>
-            </DropdownMenu>
+                  <DropdownMenuItem
+                    onClick={(e) => { 
+                      e.stopPropagation(); 
+                      onDelete(); 
+                    }}
+                    variant="danger"
+                    icon={Trash2}
+                  >
+                    Stop Tracking
+                  </DropdownMenuItem>
+                </DropdownMenu>
+              </Tooltip>
+            </div>
           </div>
         </div>
       </div>

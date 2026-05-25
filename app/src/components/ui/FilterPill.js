@@ -16,7 +16,7 @@ const FilterPill = ({ label, onClear, className = "" }) => {
       <span className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest">{label}</span>
       <button 
         onClick={onClear}
-        className="text-ctp-subtext1 hover:text-ctp-peach transition-colors outline-none"
+        className="click-ripple text-ctp-subtext1 hover:text-ctp-peach transition-colors outline-none"
       >
         <X size={10} strokeWidth={3} />
       </button>

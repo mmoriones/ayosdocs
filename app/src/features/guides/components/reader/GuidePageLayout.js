@@ -188,7 +188,7 @@ const GuidePageLayout = ({
                         />
                         <button 
                           onClick={handleShare}
-                          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle transition-all shadow-sm active:scale-95 font-bold text-xs"
+                          className="hover-lift click-ripple flex items-center gap-2 px-4 py-2 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle shadow-sm font-bold text-xs"
                         >
                           <Share2 size={16} />
                           <span>Share</span>
@@ -277,7 +277,7 @@ const GuidePageLayout = ({
                 <Tooltip content={isSidebarCollapsed ? "Expand tools" : "Collapse tools"} position="left">
                   <button 
                     onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-                    className="p-1.5 rounded-lg text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-mantle transition-all active:scale-95"
+                    className="hover-overlay click-ripple p-1.5 rounded-lg text-ctp-subtext1 hover:text-ctp-text"
                   >
                     {isSidebarCollapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
                   </button>

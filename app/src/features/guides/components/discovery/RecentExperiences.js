@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Star, ArrowRight } from 'lucide-react';
 import { GuideIcon } from '@/lib/guideIcons';
-import { Skeleton, HorizontalScrollContainer } from '@/components/ui';
+import { Skeleton, HorizontalScrollContainer, Card } from '@/components/ui';
 
 /**
  * Revamped RecentExperiences component.
@@ -47,9 +47,9 @@ const RecentExperiences = ({ className = "", limit = 3 }) => {
 
   if (reports.length === 0) {
     return (
-      <div className={`w-full bg-ctp-mantle/50 border border-dashed border-ctp-surface1 rounded-xl p-8 text-center flex flex-col items-center gap-4 ${className}`}>
+      <Card background="mantle" noPadding className={`w-full p-8 text-center flex flex-col items-center gap-4 border-dashed ${className}`}>
          <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">No reports yet</p>
-      </div>
+      </Card>
     );
   }
 
@@ -58,12 +58,15 @@ const RecentExperiences = ({ className = "", limit = 3 }) => {
   return (
     <HorizontalScrollContainer itemCount={itemsCount} className={className}>
       {reports.slice(0, limit).map((report) => (
-        <div
+        <Card
           key={report.id}
           onClick={() => router.push('/offices')}
-          className="flex-none w-[280px] snap-start group bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-5 hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all cursor-pointer shadow-sm relative overflow-hidden flex flex-col gap-4 min-h-[160px]"
+          interactive
+          background="mantle"
+          noPadding
+          className="flex-none w-[280px] snap-start p-5 relative overflow-hidden flex flex-col gap-4 min-h-[160px]"
         >
-          <div className="flex items-start justify-between min-w-0">
+          <div className="flex items-start justify-between min-w-0 relative z-10">
             <div className="flex items-center gap-3.5 flex-1 min-w-0">
               <div className="w-10 h-10 rounded-xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center shrink-0 group-hover:bg-ctp-mantle transition-colors shadow-inner">
                 <GuideIcon agency={report.agency} className="w-5 h-5 text-ctp-sky-800" strokeWidth={1.5} />
@@ -85,12 +88,12 @@ const RecentExperiences = ({ className = "", limit = 3 }) => {
           </div>
 
           {report.comment && (
-            <p className="text-ui-micro text-ctp-subtext1 line-clamp-2 italic leading-relaxed opacity-90 group-hover:text-ctp-text transition-colors">
+            <p className="text-ui-micro text-ctp-subtext1 line-clamp-2 italic leading-relaxed opacity-90 group-hover:text-ctp-text transition-colors relative z-10">
               &quot;{report.comment}&quot;
             </p>
           )}
 
-          <div className="flex items-center justify-between pt-4 border-t border-ctp-surface1/50 mt-auto">
+          <div className="flex items-center justify-between pt-4 border-t border-ctp-surface1/50 mt-auto relative z-10">
             <div className="flex items-center gap-3">
               <span className={`text-ui-micro font-bold uppercase tracking-widest ${
                 report.waitTime === '< 1 hr' ? 'text-ctp-green' : 'text-ctp-sky-800'
@@ -108,11 +111,10 @@ const RecentExperiences = ({ className = "", limit = 3 }) => {
                <ArrowRight size={10} strokeWidth={3} className="group-hover:translate-x-0.5 transition-transform" />
             </div>
           </div>
-        </div>
+        </Card>
       ))}
     </HorizontalScrollContainer>
   );
 };
 
 export default RecentExperiences;
-;

@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle, HelpCircle, ShieldAlert } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useToast } from '@/context';
+import { Button } from '@/components/ui';
 
 /**
  * Onboarding banner for the dashboard.
@@ -74,17 +75,14 @@ const OnboardingBanner = () => {
         </div>
 
         <div className="pt-2">
-          <button 
+          <Button 
             onClick={handleAction}
-            className={`w-full font-bold px-6 py-2.5 rounded-lg transition-all shadow-sm flex items-center justify-center gap-2 active:scale-[0.98] text-xs tracking-wide ${
-              isLoggedIn && !isVerified 
-                ? 'bg-ctp-surface1 text-ctp-subtext1 cursor-not-allowed border border-ctp-surface2' 
-                : 'bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-ctp-base shadow-lg shadow-ctp-sky-800/20'
-            }`}
+            disabled={isLoggedIn && !isVerified}
+            className={`w-full text-xs tracking-wide ${isLoggedIn && !isVerified ? 'border border-ctp-surface2' : 'shadow-lg shadow-ctp-sky-800/20'}`}
+            rightIcon={<ArrowRight size={14} />}
           >
-            <span>{isLoggedIn && !isVerified ? "Verification Required" : "Launch Tutorial"}</span>
-            <ArrowRight size={14} />
-          </button>
+            {isLoggedIn && !isVerified ? "Verification Required" : "Launch Tutorial"}
+          </Button>
         </div>
       </div>
     </div>

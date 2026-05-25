@@ -18,7 +18,7 @@ const RelatedGuides = ({ currentSlug, category, allGuides }) => {
         <Link
           key={g.slug}
           href={`/guides/${g.slug}`}
-          className="flex items-center gap-4 p-4 rounded-xl bg-ctp-base border border-ctp-surface1 hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 transition-all group shadow-sm"
+          className="hover-lift click-ripple flex items-center gap-4 p-4 rounded-xl bg-ctp-base border border-ctp-surface1 hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 group shadow-sm"
         >
           <div className="w-10 h-10 shrink-0 bg-ctp-mantle rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform border border-ctp-surface1">
             <GuideIcon 

@@ -26,6 +26,7 @@ import {
 import { useTheme, useToast } from '@/context';
 import { changePasswordAction, deleteAccountAction, cancelDeletionAction } from '@/app/actions/user';
 import { Button, Input, Card, Badge, PageHeader, SortDropdown, Switch, Modal } from '@/components/ui';
+import ConfirmModal from '@/components/ConfirmModal';
 
 /**
  * Settings client page with interactive tab management and security features.
@@ -33,6 +34,7 @@ import { Button, Input, Card, Badge, PageHeader, SortDropdown, Switch, Modal } f
 export default function SettingsClient() {
   const [activeTab, setActiveTab] = useState('General');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const { data: session, status } = useSession();
   const { showToast } = useToast();
@@ -92,7 +94,7 @@ export default function SettingsClient() {
                 <button
                   key={item.label}
                   onClick={() => setActiveTab(item.label)}
-                  className={`group w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs transition-all duration-200 ${
+                  className={`click-ripple active:scale-[0.97] group w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs transition-all duration-200 ${
                     activeTab === item.label 
                       ? 'bg-ctp-sky-800/[0.08] text-ctp-sky-800' 
                       : 'text-ctp-subtext1 hover:bg-ctp-mantle/50 hover:text-ctp-text'
@@ -114,8 +116,8 @@ export default function SettingsClient() {
               
               <div className="mt-8 pt-6 border-t border-ctp-surface1">
                 <button 
-                  onClick={() => window.location.href = '/api/auth/signout'}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs text-ctp-red bg-ctp-red/[0.04] border border-ctp-red/10 hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all font-bold group"
+                  onClick={() => setShowLogoutConfirm(true)}
+                  className="click-ripple active:scale-[0.97] w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs text-ctp-red bg-ctp-red/[0.04] border border-ctp-red/10 hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all font-bold group"
                 >
                   <div className="p-1.5 rounded bg-ctp-red/10 group-hover:bg-ctp-red/20 transition-colors">
                     <LogOut size={14} strokeWidth={2.5} />
@@ -208,6 +210,16 @@ export default function SettingsClient() {
           </Button>
         </div>
       </Modal>
+
+      <ConfirmModal
+        isOpen={showLogoutConfirm}
+        onClose={() => setShowLogoutConfirm(false)}
+        onConfirm={() => signOut({ callbackUrl: '/' })}
+        title="Sign out?"
+        message="Are you sure you want to sign out of your account?"
+        confirmText="Sign Out"
+        variant="warning"
+      />
     </div>
   );
 }
@@ -295,7 +307,7 @@ function AppearanceSection() {
             <button
               key={t.id}
               onClick={() => setTheme(t.id)}
-              className={`group relative p-4 rounded-xl border transition-all duration-300 text-left flex flex-col gap-3 ${
+              className={`click-ripple active:scale-[0.97] group relative p-4 rounded-xl border transition-all duration-300 text-left flex flex-col gap-3 ${
                 actualTheme === t.id 
                   ? 'border-ctp-sky-800 bg-ctp-sky-800/[0.08] ring-4 ring-ctp-sky-800/5 shadow-sm' 
                   : 'border-ctp-surface1 hover:border-ctp-sky-800/30 bg-ctp-base/50'
@@ -443,7 +455,7 @@ function PasswordSection({ user, showToast }) {
             </div>
             <button 
               onClick={() => window.open('https://myaccount.google.com/security', '_blank')}
-              className="mt-8 w-full py-3 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-ui-micro font-bold uppercase tracking-widest text-ctp-text hover:border-ctp-sky-800/30 hover:text-ctp-sky-800 transition-all flex items-center justify-center gap-2 group"
+              className="click-ripple active:scale-[0.97] mt-8 w-full py-3 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-ui-micro font-bold uppercase tracking-widest text-ctp-text hover:border-ctp-sky-800/30 hover:text-ctp-sky-800 transition-all flex items-center justify-center gap-2 group"
             >
               <span>Manage Google Account</span>
               <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />

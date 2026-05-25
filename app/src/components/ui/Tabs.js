@@ -29,7 +29,7 @@ export function Tab({ active, onClick, children, className = '' }) {
   return (
     <button
       onClick={onClick}
-      className={`px-5 py-1.5 rounded-md text-ui-tiny font-bold uppercase tracking-widest transition-all whitespace-nowrap ${
+      className={`click-ripple px-5 py-1.5 rounded-md text-ui-tiny font-bold uppercase tracking-widest whitespace-nowrap ${
         active
           ? 'bg-ctp-sky-800 text-white shadow-sm'
           : 'text-ctp-subtext1 hover:text-ctp-text hover:bg-ctp-surface0'

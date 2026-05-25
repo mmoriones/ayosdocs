@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@/context';
 import { Mail, MessageCircle, Send, Loader2, Globe, Clock, Sparkles } from 'lucide-react';
 import PageHeader from '@/components/ui/PageHeader';
+import { Button } from '@/components/ui';
 import axios from 'axios';
 
 /**
@@ -123,23 +124,15 @@ export default function SupportClient() {
                     />
                   </div>
                   <div className="md:col-span-2 flex justify-end">
-                    <button 
+                    <Button 
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-8 py-3 bg-ctp-sky-800 text-white rounded-lg font-bold text-xs uppercase tracking-widest shadow-lg shadow-ctp-sky-800/20 hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                      isLoading={isSubmitting}
+                      className="px-8"
+                      leftIcon={isSubmitting ? null : <Send size={16} />}
                     >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 size={16} className="animate-spin" />
-                          <span>Sending...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Send size={16} />
-                          <span>Send Message</span>
-                        </>
-                      )}
-                    </button>
+                      Send Message
+                    </Button>
                   </div>
                 </form>
               </div>
@@ -188,9 +181,15 @@ export default function SupportClient() {
               </p>
               <div className="flex flex-wrap gap-2 pt-1">
                 {['Facebook', 'Twitter', 'Instagram'].map(social => (
-                  <button key={social} className="px-3 py-1.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ui-micro font-bold uppercase tracking-widest text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 transition-all">
+                  <Button 
+                    key={social} 
+                    variant="secondary"
+                    size="sm"
+                    className="bg-ctp-base"
+                    onClick={() => {}}
+                  >
                     {social}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </section>

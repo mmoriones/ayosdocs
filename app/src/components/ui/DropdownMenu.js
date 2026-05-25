@@ -34,6 +34,11 @@ export default function DropdownMenu({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handlePointerDown = (e) => {
+    // Stop at pointer level to prevent CSS :active on parent elements
+    e.stopPropagation();
+  };
+
   const handleToggle = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -57,7 +62,7 @@ export default function DropdownMenu({
 
   return (
     <div className={`relative inline-flex ${className}`} ref={dropdownRef}>
-      <div onClick={handleToggle} className="cursor-pointer">
+      <div onPointerDown={handlePointerDown} onClick={handleToggle} className="cursor-pointer">
         {trigger}
       </div>
 

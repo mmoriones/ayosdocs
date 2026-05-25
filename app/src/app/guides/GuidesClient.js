@@ -23,7 +23,7 @@ import {
   Filter
 } from 'lucide-react';
 import GuideCard from '@/features/guides/components/GuideCard';
-import { Card, PageHeader, Button, SearchInput, SortDropdown, FilterPill, Banner } from '@/components/ui';
+import { Card, PageHeader, Button, SearchInput, SortDropdown, FilterPill, Banner, Tooltip, SelectionPill } from '@/components/ui';
 import { toggleFavoriteAction } from '@/app/actions/user';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
@@ -290,17 +290,14 @@ export default function GuidesClient({ initialGuides }) {
             <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Categories</span>
           </div>
           {categories.map((cat) => (
-            <button
+            <SelectionPill
               key={cat}
+              selected={selectedCategory === cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1.5 rounded-md text-ui-tiny font-bold uppercase tracking-ui-tight transition-all whitespace-nowrap border ${
-                selectedCategory === cat
-                  ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
-                  : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
-              }`}
+              className="tracking-ui-tight"
             >
               {cat}
-            </button>
+            </SelectionPill>
           ))}
         </div>
       </div>
@@ -314,10 +311,8 @@ export default function GuidesClient({ initialGuides }) {
                 <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                   <h2 className="text-xs font-bold text-ctp-subtext0 uppercase tracking-ui-caps">Filters</h2>
                   <Button 
-                    variant="ghost"
-                    size="sm"
+                    variant="link"
                     onClick={resetFilters}
-                    className="text-xs text-ctp-sky-800 font-bold uppercase tracking-ui-caps px-1 py-1 h-auto"
                   >
                     Clear
                   </Button>
@@ -325,7 +320,7 @@ export default function GuidesClient({ initialGuides }) {
 
                 {/* Agency Filter */}
                 <div className="space-y-3">
-                  <button onClick={() => toggleFilterSection('agency')} className="flex items-center justify-between w-full group">
+                  <button onClick={() => toggleFilterSection('agency')} className="click-ripple flex items-center justify-between w-full group">
                     <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps cursor-pointer group-hover:text-ctp-text">Agency</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.agency ? 'rotate-180' : ''}`} />
                   </button>
@@ -336,7 +331,7 @@ export default function GuidesClient({ initialGuides }) {
 
                 {/* Difficulty Filter */}
                 <div className="space-y-3">
-                  <button onClick={() => toggleFilterSection('difficulty')} className="flex items-center justify-between w-full group">
+                  <button onClick={() => toggleFilterSection('difficulty')} className="click-ripple flex items-center justify-between w-full group">
                     <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps cursor-pointer group-hover:text-ctp-text">Difficulty</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.difficulty ? 'rotate-180' : ''}`} />
                   </button>
@@ -362,7 +357,7 @@ export default function GuidesClient({ initialGuides }) {
 
                 {/* Processing Time Filter */}
                 <div className="space-y-3">
-                  <button onClick={() => toggleFilterSection('estimatedTime')} className="flex items-center justify-between w-full group">
+                  <button onClick={() => toggleFilterSection('estimatedTime')} className="click-ripple flex items-center justify-between w-full group">
                     <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps cursor-pointer group-hover:text-ctp-text">Time</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.estimatedTime ? 'rotate-180' : ''}`} />
                   </button>
@@ -389,7 +384,7 @@ export default function GuidesClient({ initialGuides }) {
 
                 {/* Cost Range Filter */}
                 <div className="space-y-3 border-t border-ctp-surface1 pt-4">
-                  <button onClick={() => toggleFilterSection('costRange')} className="flex items-center justify-between w-full group">
+                  <button onClick={() => toggleFilterSection('costRange')} className="click-ripple flex items-center justify-between w-full group">
                     <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps cursor-pointer group-hover:text-ctp-text">Cost Range</label>
                     <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.costRange ? 'rotate-180' : ''}`} />
                   </button>
@@ -442,12 +437,16 @@ export default function GuidesClient({ initialGuides }) {
                   options={sortOptions} 
                 />
                 <div className="flex items-center bg-ctp-mantle/50 border border-ctp-surface1 p-1 rounded-lg shadow-sm">
-                  <button onClick={() => handleViewModeChange('grid')} className={`p-1.5 rounded-md transition-all ${viewMode === 'grid' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
-                    <LayoutGrid size={18} />
-                  </button>
-                  <button onClick={() => handleViewModeChange('list')} className={`p-1.5 rounded-md transition-all ${viewMode === 'list' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
-                    <List size={18} />
-                  </button>
+                  <Tooltip content="Grid View">
+                    <button onClick={() => handleViewModeChange('grid')} className={`click-ripple p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text border border-transparent'}`}>
+                      <LayoutGrid size={18} />
+                    </button>
+                  </Tooltip>
+                  <Tooltip content="List View">
+                    <button onClick={() => handleViewModeChange('list')} className={`click-ripple p-1.5 rounded-md transition-colors ${viewMode === 'list' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text border border-transparent'}`}>
+                      <List size={18} />
+                    </button>
+                  </Tooltip>
                 </div>
               </div>
             </div>
@@ -472,10 +471,9 @@ export default function GuidesClient({ initialGuides }) {
                    <FilterPill label={selectedCost} onClear={() => setSelectedCost('All Costs')} />
                 )}
                 <Button 
-                  variant="ghost"
-                  size="sm"
+                  variant="link"
                   onClick={resetFilters}
-                  className="text-xs font-bold text-ctp-orange uppercase tracking-widest hover:underline px-2 py-0 h-auto hover:bg-ctp-orange/10"
+                  className="text-ctp-orange hover:text-ctp-orange/80"
                 >
                   Clear All
                 </Button>
@@ -561,7 +559,7 @@ const SidebarDropdown = ({ value, onChange, options }) => {
     <div className="relative w-full" ref={dropdownRef}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between gap-3 bg-ctp-base border rounded-lg px-3 py-2.5 text-xs font-bold text-ctp-text transition-all active:scale-[0.98] ${
+        className={`hover-lift click-ripple w-full flex items-center justify-between gap-3 bg-ctp-base border rounded-lg px-3 py-2.5 text-xs font-bold text-ctp-text transition-all ${
           isOpen ? 'border-ctp-sky-800 ring-2 ring-ctp-sky-800/10' : 'border-ctp-surface1 hover:border-ctp-sky-800 shadow-sm'
         }`}
       >

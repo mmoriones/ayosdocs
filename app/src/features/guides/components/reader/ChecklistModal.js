@@ -33,7 +33,7 @@ const ChecklistModal = ({ isOpen, onClose, title, children, maxHeight = "85vh" }
           <h3 className="font-bold text-lg text-ctp-text tracking-tight">{title}</h3>
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-ctp-base text-ctp-subtext1 hover:text-ctp-text transition-colors border border-ctp-surface1 shadow-sm"
+            className="click-ripple p-2 rounded-full bg-ctp-base text-ctp-subtext1 hover:text-ctp-text transition-colors border border-ctp-surface1 shadow-sm"
           >
             <X size={18} />
           </button>

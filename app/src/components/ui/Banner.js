@@ -60,7 +60,7 @@ const Banner = ({
       {onClose && (
         <button 
           onClick={onClose}
-          className={`transition-colors flex-shrink-0 mt-0.5 outline-none focus:ring-2 focus:ring-current/10 rounded ${closeButtonVariants[variant]}`}
+          className={`click-ripple transition-colors flex-shrink-0 mt-0.5 outline-none focus:ring-2 focus:ring-current/10 rounded ${closeButtonVariants[variant]}`}
         >
           <X size={14} />
         </button>

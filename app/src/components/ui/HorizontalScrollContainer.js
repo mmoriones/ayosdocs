@@ -62,7 +62,7 @@ export default function HorizontalScrollContainer({ children, itemCount, classNa
       <div 
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex overflow-x-auto pb-1 gap-3 scrollbar-hide snap-x snap-mandatory"
+        className="flex overflow-x-auto py-4 -my-4 px-1 -mx-1 gap-3 scrollbar-hide snap-x snap-mandatory"
       >
         {children}
       </div>

@@ -58,7 +58,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
         
         <button
           onClick={() => router.push("/")}
-          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-xl transition-all duration-200 active:scale-95 ${
+          className={`click-ripple flex-1 flex flex-col items-center justify-center py-2.5 rounded-xl transition-all duration-200 ${
             isHomeActive 
               ? "bg-ctp-sky-800 text-ctp-base shadow-sm" 
               : "text-ctp-subtext1 hover:bg-ctp-surface0"
@@ -72,7 +72,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
 
         <button
           onClick={onOpenTOC}
-          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-xl transition-all duration-200 active:scale-95 ${
+          className={`click-ripple flex-1 flex flex-col items-center justify-center py-2.5 rounded-xl transition-all duration-200 ${
             isTOCOpen 
               ? "bg-ctp-sky-800 text-ctp-base shadow-sm" 
               : "text-ctp-subtext1 hover:bg-ctp-surface0"
@@ -86,7 +86,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
 
         <button
           onClick={onOpenChecklist}
-          className={`flex-1 flex flex-col items-center justify-center py-2.5 rounded-xl transition-all duration-200 active:scale-95 ${
+          className={`click-ripple flex-1 flex flex-col items-center justify-center py-2.5 rounded-xl transition-all duration-200 ${
             isChecklistOpen 
               ? "bg-ctp-sky-800 text-ctp-base shadow-sm" 
               : "text-ctp-subtext1 hover:bg-ctp-surface0"

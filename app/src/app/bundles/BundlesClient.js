@@ -12,7 +12,7 @@ import {
   CheckCircle2,
   Plus
 } from 'lucide-react';
-import { PageHeader, Button, SearchInput, SortDropdown, Skeleton, Badge, TrackingIndicator } from '@/components/ui'
+import { PageHeader, Button, SearchInput, SortDropdown, Skeleton, Badge, TrackingIndicator, SelectionPill } from '@/components/ui'
 import { getBundleIcon } from '@/lib/bundleIcons';
 
 /**
@@ -88,17 +88,13 @@ export default function BundlesClient({ initialBundles }) {
             <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Goals</span>
           </div>
           {categories.map((cat) => (
-            <button
+            <SelectionPill
               key={cat}
+              selected={selectedCategory === cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1.5 rounded-md text-ui-tiny font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
-                selectedCategory === cat
-                  ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
-                  : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
-              }`}
             >
               {cat}
-            </button>
+            </SelectionPill>
           ))}
         </div>
       </div>
@@ -170,7 +166,7 @@ const BundleCard = ({ bundle, isTracking }) => {
   return (
     <Link 
       href={`/bundles/${bundle.id}`}
-      className="group bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/20 hover:bg-ctp-mantle/50 transition-all flex flex-col h-full relative overflow-hidden"
+      className="hover-lift click-ripple group bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/20 hover:bg-ctp-mantle/50 flex flex-col h-full"
     >
       <div className="flex items-start justify-between mb-5">
         <div className="w-9 h-9 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 group-hover:bg-ctp-base transition-colors duration-300 shrink-0 shadow-sm">

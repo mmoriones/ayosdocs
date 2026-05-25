@@ -1,9 +1,7 @@
 import { ChevronRight, Layers, Trash2, MoreVertical } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { getBundleIcon } from '@/lib/bundleIcons';
-import Skeleton from '@/components/ui/Skeleton';
-import ProgressBar from '@/components/ui/ProgressBar';
-import { DropdownMenu, DropdownMenuItem } from '@/components/ui';
+import { Skeleton, ProgressBar, DropdownMenu, DropdownMenuItem, Card } from '@/components/ui';
 
 /**
  * BundleCard Component
@@ -14,11 +12,14 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
   const percentage = Math.round((progress.completed / progress.total) * 100) || 0;
 
   return (
-    <div 
+    <Card 
       onClick={() => router.push(`/bundles/${bundle.id}`)}
-      className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 shadow-sm hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/70 transition-all group cursor-pointer relative overflow-hidden flex flex-col h-full"
+      background="mantle"
+      interactive
+      noPadding
+      className="p-5 flex flex-col h-full overflow-hidden"
     >
-      <div className="flex gap-5 items-start">
+      <div className="flex gap-5 items-start relative z-10">
         <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center group-hover:scale-105 transition-transform border border-ctp-surface1 shrink-0 shadow-inner">
           {getBundleIcon(bundle.id, { size: 20, className: "text-ctp-sky-800" })}
         </div>
@@ -48,7 +49,7 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
                   <DropdownMenu
                     trigger={
                       <button 
-                        className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface2 transition-all flex items-center justify-center active:scale-90"
+                        className="click-ripple w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface2 transition-all flex items-center justify-center active:scale-90"
                       >
                         <MoreVertical size={14} />
                       </button>
@@ -100,7 +101,7 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
