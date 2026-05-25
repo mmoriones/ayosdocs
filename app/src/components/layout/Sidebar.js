@@ -2,18 +2,18 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';
-import { 
-  Home, 
-  BookOpen, 
-  Layers, 
-  MapPin, 
+import {
+  Home,
+  BookOpen,
+  Layers,
+  MapPin,
   PanelLeft,
   PanelRight,
-  CheckSquare, 
-  Settings, 
-  LogOut, 
+  CheckSquare,
+  Settings,
+  LogOut,
   LogIn,
   User
 } from 'lucide-react';
@@ -32,7 +32,7 @@ import NavItem from './NavItem';
  * @param {boolean} [props.isMounted] - Controls whether animations are enabled.
  * @param {string} [props.className] - Optional custom classes.
  */
-export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = false, closeMobile, isMounted = true, className = "" }) {
+export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = false, closeMobile, isMounted = true, className = "", onLogoutClick }) {
   const { data: session, status } = useSession();
   const { openAuthModal } = useAuthUI();
   const isLoggedIn = status === 'authenticated';
@@ -122,10 +122,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
                 onClick={closeMobile}
               />
               <button
-                onClick={() => {
-                  signOut();
-                  closeMobile?.();
-                }}
+                onClick={onLogoutClick}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-ctp-subtext1 hover:bg-ctp-sky-800/[0.05] hover:text-ctp-text transition-all duration-200 group overflow-hidden whitespace-nowrap`}
               >
                 <div className="shrink-0 text-ctp-subtext0 group-hover:text-ctp-red transition-colors">

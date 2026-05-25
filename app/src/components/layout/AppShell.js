@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
 import Footer from '@/components/Footer';
+import { SignOutModal } from '@/components/ui';
 
 /**
  * Primary layout wrapper for the application dashboard.
@@ -20,6 +21,7 @@ export default function AppShell({ children }) {
     isMounted: false
   });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   
   // Restore preference from localStorage on mount
   useEffect(() => {
@@ -59,6 +61,7 @@ export default function AppShell({ children }) {
           closeMobile={() => setIsMobileMenuOpen(false)}
           className={!isMounted ? '!transition-none' : ''}
           isMounted={isMounted}
+          onLogoutClick={() => setShowLogoutConfirm(true)}
         />
       </div>
       
@@ -69,7 +72,7 @@ export default function AppShell({ children }) {
           isCollapsed ? 'lg:pl-16' : 'lg:pl-64'
         }`}
       >
-        <DashboardHeader onMenuClick={toggleMobileMenu} />
+        <DashboardHeader onMenuClick={toggleMobileMenu} onLogoutClick={() => setShowLogoutConfirm(true)} />
         
         <main className="flex-1">
           {children}
@@ -77,6 +80,12 @@ export default function AppShell({ children }) {
 
         <Footer />
       </div>
+
+      <SignOutModal
+        isOpen={showLogoutConfirm}
+        onClose={() => setShowLogoutConfirm(false)}
+        onSignOut={() => setIsMobileMenuOpen(false)}
+      />
     </div>
   );
 }

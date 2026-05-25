@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useTheme, useSearch } from "@/context";
 import { useSyncExternalStore } from "react";
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { SearchInput, Avatar, DropdownMenu, DropdownMenuItem } from '@/components/ui';
 import { useAuthUI } from '@/components/Providers';
 
@@ -18,7 +18,7 @@ const getServerSnapshot = () => false;
  * central search trigger, theme toggling, and account actions.
  * Automatically adapts UI for guest vs authenticated states.
  */
-export default function DashboardHeader({ onMenuClick }) {
+export default function DashboardHeader({ onMenuClick, onLogoutClick }) {
   const pathname = usePathname();
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
@@ -84,7 +84,7 @@ export default function DashboardHeader({ onMenuClick }) {
       <div className="flex items-center gap-2">
         <button 
           onClick={toggleTheme}
-          className="p-2 text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 rounded-lg transition-all"
+          className="p-2 text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 rounded-lg transition-all active:scale-[0.97]"
           aria-label="Toggle theme"
         >
           {!mounted ? (
@@ -140,7 +140,7 @@ export default function DashboardHeader({ onMenuClick }) {
               <div className="h-px bg-ctp-surface1 my-1" />
               
               <DropdownMenuItem 
-                onClick={() => signOut({ callbackUrl: '/' })} 
+                onClick={onLogoutClick}
                 icon={LogOut}
                 className="!text-ctp-red hover:!bg-ctp-red/5"
               >

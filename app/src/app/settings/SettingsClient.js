@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 import { useTheme, useToast } from '@/context';
 import { changePasswordAction, deleteAccountAction, cancelDeletionAction } from '@/app/actions/user';
-import { Button, Input, Card, Badge, PageHeader, SortDropdown, Switch, Modal } from '@/components/ui';
+import { Button, Input, Card, Badge, PageHeader, SortDropdown, Switch, Modal, SignOutModal } from '@/components/ui';
 import ConfirmModal from '@/components/ConfirmModal';
 
 /**
@@ -211,14 +211,9 @@ export default function SettingsClient() {
         </div>
       </Modal>
 
-      <ConfirmModal
+      <SignOutModal
         isOpen={showLogoutConfirm}
         onClose={() => setShowLogoutConfirm(false)}
-        onConfirm={() => signOut({ callbackUrl: '/' })}
-        title="Sign out?"
-        message="Are you sure you want to sign out of your account?"
-        confirmText="Sign Out"
-        variant="warning"
       />
     </div>
   );

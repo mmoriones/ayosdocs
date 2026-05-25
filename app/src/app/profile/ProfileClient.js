@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { User, Mail, ShieldCheck, Calendar, Camera, LogOut, CheckCircle2, Edit3 } from 'lucide-react';
 import { useToast } from '@/context';
 import { updateUserProfileAction } from '@/app/actions/user';
-import { Button, Input, Card, Avatar, Tooltip } from '@/components/ui';
+import { Button, Input, Card, Avatar, Tooltip, SignOutModal } from '@/components/ui';
 
 /**
  * Enhanced Profile client page with editable identity management.
@@ -19,6 +19,7 @@ export default function ProfileClient() {
   const [newName, setNewName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   // Sync state when session data changes and we are not editing
   if (user?.name && !isEditing && newName !== user.name) {
@@ -239,9 +240,9 @@ export default function ProfileClient() {
                 </div>
               </div>
 
-              <Button 
+              <Button
                 variant="outline"
-                onClick={() => signOut({ callbackUrl: '/' })}
+                onClick={() => setShowLogoutConfirm(true)}
                 className="w-full mt-8 flex items-center justify-center gap-2 border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 text-ui-micro font-bold uppercase tracking-widest"
                 leftIcon={<LogOut size={14} strokeWidth={3} className="transition-transform group-hover:-translate-x-0.5" />}
               >
@@ -270,6 +271,11 @@ export default function ProfileClient() {
           </div>
         </div>
       </div>
+
+      <SignOutModal
+        isOpen={showLogoutConfirm}
+        onClose={() => setShowLogoutConfirm(false)}
+      />
     </div>
   );
 }
