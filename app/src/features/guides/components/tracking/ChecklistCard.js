@@ -111,11 +111,15 @@ const ChecklistCard = ({
 
   const saveMutation = useMutation({
     mutationFn: async (completedTaskIndices) => {
+      // Update interaction time to block incoming server syncs during mutation
+      lastInteractionRef.current = Date.now();
       const result = await updateProgressAction(slug, completedTaskIndices);
       if (!result.success) throw new Error(result.message);
       return result;
     },
     onSuccess: () => {
+      // Extend grace period after successful save to allow for data re-fetch
+      lastInteractionRef.current = Date.now();
       queryClient.invalidateQueries({ queryKey: ['progress', slug] });
       queryClient.invalidateQueries({ queryKey: ['user-data'] });
     },
@@ -160,7 +164,7 @@ const ChecklistCard = ({
         setSteps(nextStepsFromData);
       }, 0);
     }
-  }, [savedData?.completedTasks, slug]); // slug dependency ensures it runs on new guide
+  }, [savedData?.completedTasks, slug, steps]); // Added steps to deps to ensure accurate comparison
 
   const nextStepIndex = steps.findIndex((s) => !s.completed);
   const nextStep = nextStepIndex !== -1 ? steps[nextStepIndex] : null;
@@ -206,10 +210,7 @@ const ChecklistCard = ({
       saveMutation.mutate(completedTaskIndices);
     }, 600);
 
-    // We don't clear the timeout here to ensure that even if the user navigates away, 
-    // the mutation still has a chance to fire (as long as the JS environment persists).
-    // This fixes the "My Docs not refreshing" issue where quick navigation canceled saves.
-    return () => {};
+    return () => clearTimeout(timeout);
   }, [steps, isLoggedIn, isVerified, slug, savedData?.completedTasks, saveMutation.mutate]);
 
   const completedCount = steps.filter((s) => s.completed).length;
