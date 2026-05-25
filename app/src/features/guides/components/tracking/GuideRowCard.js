@@ -54,7 +54,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
             </div>
           ) : (
             <p className="text-ui-micro font-bold text-ctp-subtext0 uppercase tracking-widest opacity-60">
-              Ready to start workflow
+              Ready to start bundle
             </p>
           )}
         </div>

@@ -301,7 +301,7 @@ const ChecklistCard = ({
             onClick={() => router.push(`/guides/${slug}`)}
             className="w-full h-10 bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white rounded-lg text-ui-detail font-bold uppercase tracking-[0.2em] shadow-lg shadow-ctp-sky-800/10 transition-all active:scale-[0.97] flex items-center justify-center gap-3 group/btn"
           >
-            Resume Roadmap
+            Resume Guide
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" strokeWidth={3} />
           </button>
         </div>
@@ -502,7 +502,7 @@ const ChecklistCard = ({
               onClick={() => router.push(`/guides/${slug}`)}
               className="w-full text-ui-detail uppercase tracking-widest h-10 shadow-lg shadow-ctp-sky-800/10"
             >
-              Resume Roadmap
+              Resume Guide
             </Button>
           </div>
         )}

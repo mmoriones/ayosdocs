@@ -21,7 +21,7 @@ const OnboardingBanner = () => {
       showToast({
         type: 'warning',
         title: 'Verification Required',
-        message: 'Please verify your email to start the onboarding workflow.'
+        message: 'Please verify your email to start the onboarding bundle.'
       });
       return;
     }

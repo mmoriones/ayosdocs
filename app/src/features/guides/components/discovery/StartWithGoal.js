@@ -51,7 +51,7 @@ const StartWithGoal = ({ trackedBundles = [] }) => {
 
             <div className="flex items-center gap-8 shrink-0 sm:border-l sm:border-ctp-surface1/50 sm:pl-8 h-8">
               <div className="flex flex-col">
-                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Roadmap Steps</span>
+                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Bundle Steps</span>
                 <span className="text-ui-micro font-bold text-ctp-text">{bundle.flow.length} STAGES</span>
               </div>
               <div className="flex items-center gap-1 text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-ui-caps group-hover:translate-x-0.5 transition-transform">

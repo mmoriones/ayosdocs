@@ -10,7 +10,7 @@ const SummaryStats = ({ stats }) => {
     { 
       label: 'Active Bundles', 
       value: stats.activeBundles || 0, 
-      sub: 'Workflows active', 
+      sub: 'Bundles active', 
       icon: Clock, 
       color: 'text-ctp-sky-800', 
       bg: 'bg-ctp-sky-800/10',

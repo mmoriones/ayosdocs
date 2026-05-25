@@ -57,7 +57,7 @@ export default function OfficesClient() {
         actions={
           <div className="bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_var(--sky-800)]" />
-            <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Community Reports Active</span>
+            <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Office Reviews Active</span>
           </div>
         }
       />

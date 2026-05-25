@@ -98,6 +98,15 @@ The project is structured as a monorepo-style workspace to separate application 
 
 ## Development Conventions
 
+### Terminology Standard
+To maintain clarity across the platform, use these canonical terms in both UI and code:
+- **Guide:** An individual document procedure (e.g., "Passport Guide").
+- **Bundle:** A collection of guides for a life event (e.g., "First Job Bundle"). Avoid using "Workflow" or "Roadmap" in user-facing labels.
+- **Step:** An individual item in a checklist.
+- **Review:** User-submitted feedback about an office (formerly "Reports").
+- **Office:** A physical government branch.
+- **Agency:** The governing body (e.g., "DFA", "PSA").
+
 ### UI Standards
 -   **Reusable Components:** Use standardized components for consistent UI.
     -   `PageHeader`: Mandatory for all main discovery pages (Guides, Bundles, Offices).

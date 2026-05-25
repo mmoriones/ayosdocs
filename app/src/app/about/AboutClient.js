@@ -34,7 +34,7 @@ export default function AboutClient() {
                   AyosDocs was born from a simple observation: navigating Philippine government requirements shouldn&apos;t feel like a full-time job. We believe that public services should be accessible to everyone, and the first step to accessibility is clear, actionable information.
                 </p>
                 <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed">
-                  Our platform breaks down complex permits, IDs, and licenses into manageable, step-by-step workflows. By gathering data from official sources and adding community insights, we provide a clearer picture of what to expect before you even step into an office.
+                  Our platform breaks down complex permits, IDs, and licenses into manageable, step-by-step guides. By gathering data from official sources and adding community insights, we provide a clearer picture of what to expect before you even step into an office.
                 </p>
               </div>
             </section>
@@ -102,7 +102,7 @@ export default function AboutClient() {
                     onClick={() => window.location.href = '/rate'}
                     className="w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg font-bold text-ui-micro uppercase tracking-widest text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all shadow-sm active:scale-[0.98]"
                   >
-                    Submit a Report
+                    Write a Review
                   </button>
                </div>
             </div>

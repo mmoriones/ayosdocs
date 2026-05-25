@@ -254,7 +254,7 @@ export default function GuidesClient({ initialGuides }) {
     <div className="min-h-screen bg-ctp-base font-sans flex flex-col transition-colors duration-300">
       <PageHeader 
         icon={FileText}
-        title="Knowledge Base"
+        title="Guide Library"
         description="Step-by-step procedures for Philippine government requirements."
         actions={
           <div className="flex items-center gap-4">

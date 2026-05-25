@@ -27,10 +27,10 @@ import { useAuthUI } from '@/components/Providers';
 import ConfirmModal from '@/components/ConfirmModal';
 
 /**
- * BundleWorkflowClient Component
- * Visualizes a sequential roadmap for a requirement bundle.
+ * BundleClient Component
+ * Visualizes a sequential series of guides for a life event bundle.
  */
-export default function BundleWorkflowClient({ bundle, allGuides, initialIsTracked, savedProgress = [] }) {
+export default function BundleClient({ bundle, allGuides, initialIsTracked, savedProgress = [] }) {
   const { data: session, status } = useSession();
   const { openAuthModal } = useAuthUI();
   const isLoggedIn = status === 'authenticated';
@@ -131,7 +131,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
       if (res.success) {
         setIsTracked(false);
         queryClient.invalidateQueries({ queryKey: ['user-data'] });
-        showToast({ type: 'success', title: 'Workflow Stopped', message: 'This bundle is no longer being tracked.' });
+        showToast({ type: 'success', title: 'Bundle Stopped', message: 'This bundle is no longer being tracked.' });
       } else {
         showToast({ type: 'error', title: 'Error', message: res.message });
       }
@@ -152,7 +152,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
       showToast({
         type: 'warning',
         title: 'Verification Required',
-        message: 'Please verify your email to track requirement bundles.'
+        message: 'Please verify your email to track bundles.'
       });
       return;
     }
@@ -168,7 +168,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
       if (res.success) {
         setIsTracked(true);
         queryClient.invalidateQueries({ queryKey: ['user-data'] });
-        showToast({ type: 'success', title: 'Workflow Started', message: 'Workflow started and added to your dashboard.' });
+        showToast({ type: 'success', title: 'Bundle Started', message: 'This bundle has been added to your dashboard.' });
         router.refresh(); // Refresh to update server-side data if needed
       } else {
         showToast({ type: 'error', title: 'Error', message: res.message });
@@ -317,7 +317,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                 }`}
               >
                 {isLoading ? <Loader2 size={14} className="animate-spin" /> : isTracked ? <PauseCircle size={14} /> : <PlayCircle size={14} />}
-                <span>{isTracked ? 'Stop Roadmap' : 'Start Roadmap'}</span>
+                <span>{isTracked ? 'Stop Bundle' : 'Start Bundle'}</span>
               </button>
           </div>
         </div>
@@ -335,7 +335,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                 <div className="space-y-0.5 text-center md:text-left">
                   <h3 className="text-base font-bold text-ctp-text tracking-tight">Email Verification Required</h3>
                   <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed">
-                    You can view this roadmap, but syncing progress requires a verified email.
+                    You can view this bundle, but syncing progress requires a verified email.
                   </p>
                 </div>
               </div>
@@ -372,7 +372,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                       {bundle.category}
                     </span>
                     <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest opacity-80">
-                      Roadmap View
+                      Bundle View
                     </span>
                   </div>
                   <h1 className="text-3xl font-bold text-ctp-text tracking-tight leading-none">
@@ -396,7 +396,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                       <div className="absolute inset-0 bg-ctp-sky-800/[0.01] pointer-events-none" />
                       <div className="relative z-10 space-y-1">
                         <h4 className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest">Resource Forecast</h4>
-                        <p className="text-sm font-bold text-ctp-text">Estimated workflow requirements</p>
+                        <p className="text-sm font-bold text-ctp-text">Estimated bundle requirements</p>
                       </div>
                       <div className="relative z-10 flex gap-10">
                         {isDataLoading ? (
@@ -551,8 +551,8 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={handleStopTracking}
-        title="Stop tracking roadmap?"
-        message="Are you sure you want to stop tracking this life event bundle? This will remove the roadmap from your dashboard, but your individual guide progress will be saved."
+        title="Stop tracking bundle?"
+        message="Are you sure you want to stop tracking this life event bundle? This will remove the bundle from your dashboard, but your individual guide progress will be saved."
         confirmText="Stop Tracking"
         variant="danger"
       />

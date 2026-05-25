@@ -346,7 +346,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
         <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1">
             <h1 className="text-2xl font-bold tracking-tight text-ctp-text">Workspace</h1>
-            <p className="text-xs text-ctp-subtext1 font-medium">Manage your active workflows and tracked government procedures.</p>
+            <p className="text-xs text-ctp-subtext1 font-medium">Manage your active bundles and tracked government procedures.</p>
           </div>
           <div className="flex items-center gap-3">
               <button 
@@ -400,7 +400,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                           <div className="w-8 h-8 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
                             <BarChart3 size={16} strokeWidth={2.5} />
                           </div>
-                          <h3 className="text-ui-subhead font-bold uppercase tracking-[0.15em] text-ctp-sky-800">Workflow Analytics</h3>
+                          <h3 className="text-ui-subhead font-bold uppercase tracking-[0.15em] text-ctp-sky-800">Bundle Analytics</h3>
                         </div>
                         <p className="text-xl font-bold tracking-tight text-ctp-text leading-tight">Milestone Forecast</p>
                         <p className="text-xs text-ctp-subtext1 font-medium max-w-xs leading-relaxed">Aggregated resource estimates for your {stats.activeBundles} active life event bundles.</p>
@@ -459,7 +459,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                   onClick={() => router.push('/bundles')}
                   className="text-ui-micro text-ctp-sky-800 font-bold uppercase tracking-widest hover:text-ctp-sky-300 transition-colors"
                 >
-                  Browse Roadmaps
+                  Browse Bundles
                 </button>
               </div>
 
@@ -486,7 +486,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                       <Plus size={24} className="text-ctp-subtext1 group-hover:text-ctp-sky-800" strokeWidth={2.5} />
                     </div>
                     <div className="space-y-1">
-                      <span className="block text-ui-detail font-bold uppercase tracking-widest">Start a new roadmap</span>
+                      <span className="block text-ui-detail font-bold uppercase tracking-widest">Start a new bundle</span>
                       <p className="text-ui-detail opacity-60 font-medium">Bundled requirements for marriage, business, and more.</p>
                     </div>
                   </button>
@@ -581,7 +581,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
         title={confirmConfig.type === 'bundle' ? "Stop tracking bundle?" : "Stop tracking guide?"}
         message={
           confirmConfig.type === 'bundle' 
-            ? "Are you sure you want to stop tracking this life event bundle? This will remove the roadmap from your dashboard, but your individual guide progress will be saved."
+            ? "Are you sure you want to stop tracking this life event bundle? This will remove the bundle from your dashboard, but your individual guide progress will be saved."
             : "Are you sure you want to remove this guide? Your progress for this guide will be permanently deleted."
         }
         confirmText={confirmConfig.type === 'bundle' ? "Stop Tracking" : "Remove Guide"}

@@ -479,7 +479,7 @@ export default function RateClient() {
                       ) : (
                         <>
                           <Zap size={16} />
-                          <span>Submit Community Report</span>
+                          <span>Submit Office Review</span>
                         </>
                       )}
                    </button>

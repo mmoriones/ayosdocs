@@ -1,6 +1,6 @@
 import { bundles } from '@/data/bundles';
 import { getAllGuides } from '@/lib/guides';
-import BundleWorkflowClient from './BundleWorkflowClient';
+import BundleClient from './BundleWorkflowClient';
 import { notFound } from 'next/navigation';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
@@ -14,12 +14,12 @@ export async function generateMetadata({ params }) {
   if (!bundle) return { title: 'Bundle Not Found' };
   
   return {
-    title: `${bundle.title} | AyosDocs Workflow`,
+    title: `${bundle.title} | AyosDocs Bundle`,
     description: bundle.description,
   };
 }
 
-export default async function BundleWorkflowPage({ params }) {
+export default async function BundlePage({ params }) {
   const { slug } = await params;
   const bundle = bundles.find(b => b.id === slug);
   
@@ -38,11 +38,11 @@ export default async function BundleWorkflowPage({ params }) {
     savedProgress = JSON.parse(JSON.stringify(user?.savedProgress || []));
   }
 
-  // Get all guides to pass metadata (title, icons, etc.) to the workflow view
+  // Get all guides to pass metadata (title, icons, etc.) to the bundle view
   const allGuides = getAllGuides(true);
 
   return (
-    <BundleWorkflowClient 
+    <BundleClient 
       bundle={bundle} 
       allGuides={allGuides} 
       initialIsTracked={isTracked} 

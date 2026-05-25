@@ -176,7 +176,7 @@ export default function HomeClient({ allGuides }) {
 
   const onboarded = session?.user?.onboarded ?? false;
 
-  // Logic to determine which guide to feature in the "Active Workflow"
+  // Logic to determine which guide to feature in the "Active Guide"
   const activeGuide = useMemo(() => {
     // 1. Prioritize the global context (recently clicked/viewed)
     if (activeGuideSlug) {
@@ -259,7 +259,7 @@ export default function HomeClient({ allGuides }) {
                 <Badge variant="sky" className="px-1.5 py-0 uppercase">{allGuides.length} Available Guides</Badge>
               </div>
               <div className="space-y-1">
-                <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Requirements Library</h3>
+                <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Guide Library</h3>
                 <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Browse step-by-step procedures for all government documents.</p>
               </div>
               <div className="flex items-center gap-1.5 text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps pt-2">
@@ -281,10 +281,10 @@ export default function HomeClient({ allGuides }) {
                 <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
                   <Layers size={24} strokeWidth={2} />
                 </div>
-                <Badge variant="sky" className="px-1.5 py-0 uppercase">{bundles.length} Process Bundles</Badge>
+                <Badge variant="sky" className="px-1.5 py-0 uppercase">{bundles.length} Bundles</Badge>
               </div>
               <div className="space-y-1">
-                <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Goal Roadmaps</h3>
+                <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Goal Bundles</h3>
                 <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Accomplish life goals like starting a business or getting married.</p>
               </div>
               <div className="flex items-center gap-1.5 text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps pt-2">
@@ -310,7 +310,7 @@ export default function HomeClient({ allGuides }) {
               </div>
               <div className="space-y-1">
                 <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Office Locator</h3>
-                <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Check real-time branch wait times and community reports.</p>
+                <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Check real-time branch wait times and office reviews.</p>
               </div>
               <div className="flex items-center gap-1.5 text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps pt-2">
                 Find a Branch
@@ -360,7 +360,7 @@ export default function HomeClient({ allGuides }) {
                 </div>
                 <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
                   <StatsCard 
-                    label="Community Reports" 
+                    label="Office Reviews" 
                     value="1.2k" 
                     icon={TrendingUp} 
                     trend={{ value: "12%", isUp: true }}
@@ -371,11 +371,11 @@ export default function HomeClient({ allGuides }) {
           </div>
         </Card>
 
-        {/* Trending Roadmaps - Dynamic from DB */}
+        {/* Trending Bundles - Dynamic from DB */}
         <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
             <div className="flex items-center gap-3">
-              <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Trending Roadmaps</h2>
+              <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Trending Guides</h2>
               <Badge variant="sky" className="px-1.5 py-0">POPULAR</Badge>
             </div>
             <Link 
@@ -404,13 +404,13 @@ export default function HomeClient({ allGuides }) {
                 );
               })
             ) : (
-              <p className="col-span-full text-center py-10 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Discovering roadmap trends...</p>
+              <p className="col-span-full text-center py-10 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Discovering guide trends...</p>
             )}
           </div>
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Main Column: Workflow & Intelligence */}
+          {/* Main Column: Bundles & Intelligence */}
           <div className="lg:col-span-2 space-y-12">
             
             {/* Life Event Bundles - Primary Position */}
@@ -421,7 +421,7 @@ export default function HomeClient({ allGuides }) {
                   href="/bundles"
                   className="text-ui-detail font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                 >
-                  Browse Roadmaps
+                  Browse Bundles
                 </Link>
               </div>
               <StartWithGoal trackedBundles={userData?.trackedBundles} />
@@ -434,14 +434,14 @@ export default function HomeClient({ allGuides }) {
                   <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Community Intelligence</h2>
                   <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-ctp-green/[0.08] border border-ctp-green/20">
                     <div className="w-1.5 h-1.5 rounded-full bg-ctp-green animate-pulse shadow-[0_0_8px_rgba(166,227,161,0.5)]" />
-                    <span className="text-ui-micro font-bold text-ctp-green uppercase tracking-ui-caps">Live: 512 Reports Today</span>
+                    <span className="text-ui-micro font-bold text-ctp-green uppercase tracking-ui-caps">Live: 512 Reviews Today</span>
                   </div>
                 </div>
                 <Link 
                   href="/offices"
                   className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                 >
-                  Global Network
+                  Office Network
                 </Link>
               </div>
 
@@ -457,7 +457,7 @@ export default function HomeClient({ allGuides }) {
                         <h3 className="text-xl font-bold tracking-tight text-ctp-text uppercase">Find any office</h3>
                       </div>
                       <p className="text-ui-subhead text-ctp-subtext1 font-medium max-w-xl">
-                        Search government branches to see real-time wait times and latest community reports.
+                        Search government branches to see real-time wait times and latest office reviews.
                       </p>
                     </div>
 
@@ -552,11 +552,11 @@ export default function HomeClient({ allGuides }) {
           {/* Sidebar Column: Tracking & Feed */}
           <div className="space-y-12">
             
-            {/* Active Workflow - Moved to Sidebar to narrow width */}
+            {/* Active Guide - Moved to Sidebar to narrow width */}
             <section className="space-y-4">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Current Focus</h2>
+                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Active Guide</h2>
                   <Badge variant="sky" className="px-1.5 py-0">TRACKING</Badge>
                 </div>
                 <Link 
@@ -589,7 +589,7 @@ export default function HomeClient({ allGuides }) {
                   <div className="space-y-1 px-4">
                     <p className="font-bold text-ctp-text text-ui-subhead tracking-tight">{trendingGuides[0].title}</p>
                     <p className="text-ui-detail text-ctp-subtext1 max-w-xs mx-auto font-medium leading-relaxed">
-                      Most Filipinos start with this roadmap. Ready to begin your application?
+                      Most Filipinos start with this guide. Ready to begin your application?
                     </p>
                   </div>
                   <div className="flex flex-col gap-2 px-6 pt-2">

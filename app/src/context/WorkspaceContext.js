@@ -6,7 +6,7 @@ const WorkspaceContext = createContext();
 
 /**
  * WorkspaceProvider
- * Manages global application state related to the user's active workflow and context.
+ * Manages global application state related to the user's active guide and context.
  */
 export function WorkspaceProvider({ children }) {
   const [activeGuideSlug, setActiveGuideSlugState] = useState(null);

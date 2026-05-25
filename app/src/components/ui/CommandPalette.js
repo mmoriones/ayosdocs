@@ -147,7 +147,7 @@ export default function CommandPalette() {
               {filteredItems.map((item, index) => {
                 const Icon = item.icon || (item.type === 'guide' ? BookOpen : Layers);
                 const isSelected = index === selectedIndex;
-                const isActiveWorkflow = item.isActive;
+                const isActiveGuide = item.isActive;
                 
                 return (
                   <button
@@ -166,7 +166,7 @@ export default function CommandPalette() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold truncate">{item.title}</span>
-                        {isActiveWorkflow ? (
+                        {isActiveGuide ? (
                           <span className="px-1.5 py-0.5 rounded border border-ctp-sky-800/30 bg-ctp-sky-800/10 text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest flex items-center gap-1 shadow-sm">
                             <Sparkles size={8} />
                             Active

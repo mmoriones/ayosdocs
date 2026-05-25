@@ -425,7 +425,7 @@ export async function startBundleAction(bundleId) {
     revalidatePath("/bundles");
     revalidatePath(`/bundles/${bundleId}`);
 
-    return { success: true, message: "Workflow started and added to your dashboard" };
+    return { success: true, message: "Bundle started and added to your dashboard" };
   } catch (error) {
     console.error("Start Bundle Action Error:", error);
     return { success: false, message: "Internal Server Error" };
@@ -456,7 +456,7 @@ export async function stopBundleAction(bundleId) {
     revalidatePath("/bundles");
     revalidatePath(`/bundles/${bundleId}`);
 
-    return { success: true, message: "Workflow stopped" };
+    return { success: true, message: "Bundle stopped" };
   } catch (error) {
     console.error("Stop Bundle Action Error:", error);
     return { success: false, message: "Internal Server Error" };

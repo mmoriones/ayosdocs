@@ -70,12 +70,12 @@ export default function BundlesClient({ initialBundles }) {
     <div className="min-h-screen bg-ctp-base font-sans transition-colors duration-300">
       <PageHeader 
         icon={Layers}
-        title="Requirement Bundles"
+        title="Bundles"
         description="Goal-oriented document groups for life events and business needs."
         actions={
           <div className="bg-ctp-base/50 backdrop-blur-sm px-5 py-2.5 rounded-xl border border-ctp-surface1 shadow-sm flex items-center gap-3">
             <Sparkles size={14} className="text-ctp-sky-800" />
-            <span className="text-ui-tiny font-bold text-ctp-subtext0 uppercase tracking-[0.2em]">Ready-to-use workflows</span>
+            <span className="text-ui-tiny font-bold text-ctp-subtext0 uppercase tracking-[0.2em]">Ready-to-use bundles</span>
           </div>
         }
       />
@@ -128,7 +128,7 @@ export default function BundlesClient({ initialBundles }) {
                 leftIcon={<Plus size={14} strokeWidth={3} />}
                 className="group text-ui-micro h-10"
               >
-                Custom Workflow
+                Custom Bundle
               </Button>
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function BundlesClient({ initialBundles }) {
             </div>
             <h3 className="text-lg font-bold text-ctp-text uppercase tracking-widest">No bundles matched</h3>
             <p className="text-xs text-ctp-subtext1 mt-2 max-w-md mx-auto font-medium">
-              We&apos;re constantly building new roadmaps. Try adjusting your search.
+              We&apos;re constantly building new bundles. Try adjusting your search.
             </p>
             <Button 
               onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
@@ -199,7 +199,7 @@ const BundleCard = ({ bundle, isTracking }) => {
         </div>
 
         <div className="pt-4 border-t border-ctp-surface1/30 space-y-2.5">
-          <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Workflow Preview:</p>
+          <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Bundle Preview:</p>
           <div className="flex flex-wrap gap-1.5">
             {bundle.flow.flatMap(s => s.guides).slice(0, 2).map((guide, idx) => (
               <span key={idx} className="text-ui-micro font-bold text-ctp-text bg-ctp-mantle px-1.5 py-0.5 rounded border border-ctp-surface1 truncate max-w-[110px] uppercase tracking-tight">
@@ -224,7 +224,7 @@ const BundleCard = ({ bundle, isTracking }) => {
           ))}
         </div>
         <div className="text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-          {isTracking ? 'Resume Roadmap' : 'View roadmap'}
+          {isTracking ? 'Resume Bundle' : 'View bundle'}
           <ArrowRight size={10} strokeWidth={4} />
         </div>
       </div>

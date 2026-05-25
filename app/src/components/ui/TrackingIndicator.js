@@ -4,7 +4,7 @@ import React from 'react';
 
 /**
  * TrackingIndicator Component
- * A GitHub/Cloudflare inspired status indicator for active workflows and guides.
+ * A status indicator for active bundles and guides.
  * 
  * @param {Object} props
  * @param {'guide' | 'bundle'} props.variant - The type of item being tracked.

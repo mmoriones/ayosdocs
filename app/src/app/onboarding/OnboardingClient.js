@@ -62,7 +62,7 @@ export default function OnboardingClient() {
             { icon: Cloud, title: "Cloud Sync Active", desc: "INSTANT DATA BACKUP" },
             { icon: Layout, title: "Goal Tracking", desc: "MAJOR LIFE EVENTS" },
             { icon: ShieldCheck, title: "Secure Identity", desc: "ENCRYPTED ACCESS" },
-            { icon: Sparkles, title: "Smart Logic", desc: "GUIDED WORKFLOWS" }
+            { icon: Sparkles, title: "Smart Logic", desc: "GUIDED BUNDLES" }
           ].map((item, i) => (
             <div key={i} className="p-4 bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl space-y-3 text-left hover:border-ctp-sky-800/20 transition-all group shadow-sm">
               <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-mantle transition-colors">
