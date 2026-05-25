@@ -167,10 +167,22 @@ Always check if the certification has the **Raised Dry Seal** before leaving; wi
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For information on voter registration periods and precinct status, please visit the official COMELEC channels:
+
+*   **Official Website:** [Commission on Elections (COMELEC)](https://www.comelec.gov.ph)
+*   **Online Portal:** [COMELEC ITD Portal](https://itd.comelec.gov.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Can I get a physical Voter ID card?
 No. COMELEC has stopped printing plastic IDs to transition to the National ID system. The Certification is the only official document they issue now.
 
 ### Does the certification expire?
 Technically, it proves your status at the time of issuance. Some agencies (like the DFA) may require it to be issued within the last **six (6) months**.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

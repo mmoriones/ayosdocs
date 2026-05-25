@@ -174,10 +174,23 @@ Always have a screenshot of your QR code ready before you land, as airport Wi-Fi
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+To ensure you are using the official and free registration portal, always use the following links:
+
+*   **Official Portal:** [Official eTravel Portal](https://etravel.gov.ph)
+*   **Government App:** [eGovPH Official Website](https://e.gov.ph)
+*   **Agency Information:** [Bureau of Immigration (BI)](https://immigration.gov.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Do infants need an eTravel QR code?
 Yes, every passenger, including children and infants, must have their own individual eTravel QR code.
 
 ### Do foreign tourists need a QR code to leave the PH?
 No, the departure eTravel registration is currently only mandatory for Filipino citizens. Foreigners only need it for arrival.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

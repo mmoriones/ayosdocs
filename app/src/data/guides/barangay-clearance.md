@@ -312,7 +312,16 @@ Some applicants recommend avoiding peak days such as Mondays and Fridays.
 
 ---
 
-## 13. Frequently Asked Questions
+## 13. Official Sources & External Links
+
+For official updates and specific local requirements, residents are encouraged to visit their respective City or Municipal Hall's official website or visit their Barangay Hall in person.
+
+*   **Local Government Unit (LGU):** Visit your City or Municipal website for community announcements.
+*   **Barangay Office:** Coordination with your local barangay officials is the best way to confirm current fees and requirements.
+
+---
+
+## 14. Frequently Asked Questions
 
 ### Is a Barangay Clearance the same as a Barangay Certificate?
 
@@ -337,3 +346,6 @@ Yes. Students commonly request Barangay Clearances for scholarships, school requ
 ### Do I need a cedula?
 
 Some barangays may require a Community Tax Certificate (Cedula) depending on local rules and application purpose.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

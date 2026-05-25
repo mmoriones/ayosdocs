@@ -181,10 +181,21 @@ Always keep a copy of your verified contract and OEC/OFW Pass in your email or c
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the most accurate and up-to-date information, please refer to:
+*   [Department of Migrant Workers (DMW)](https://www.dmw.gov.ph)
+*   [DMW Online Services Portal](https://onlineservices.dmw.gov.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Can I register without a job yet?
 Yes, you can create a profile and complete the PEOS. You only need the contract details when you are ready for deployment.
 
 ### Is E-Registration the same as the OFW Pass?
 No. E-Registration is the **system** where your data is stored. The OFW Pass is the **digital document** (QR Code) generated based on that data.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

@@ -306,6 +306,12 @@ Applicants with “No Hit” status commonly receive clearance on the same day.
 
 ---
 
+## Official Sources & External Links
+
+*   [National Police Clearance System (NPCS)](https://clearance.pnp.gov.ph)
+
+---
+
 ## 8. Fees
 
 | Item | Estimated Cost |
@@ -417,3 +423,7 @@ Many applicants report that valid ID and payment confirmation are usually suffic
 ### Is digital National ID accepted?
 
 Some applicants reported that digital National IDs were accepted at certain stations, although acceptance may vary.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.
+hough acceptance may vary.

@@ -331,7 +331,15 @@ Some applicants report shorter waiting times at barangay offices compared to cit
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the most accurate and up-to-date information, please refer to:
+*   Your respective **City or Municipal Hall website**
+*   Visit your local **City/Municipal Treasurer's Office** or **Barangay Hall**
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Is a Cedula required for employment?
 
@@ -356,3 +364,6 @@ No. A Cedula is proof of community tax payment, while Barangay Clearance certifi
 ### Can students get a Cedula?
 
 Yes, depending on the purpose and local government requirements.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

@@ -227,7 +227,15 @@ Always review your application before final submission.
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the most accurate and up-to-date information, please refer to:
+*   [Department of Trade and Industry (DTI)](https://www.dti.gov.ph)
+*   [DTI Business Name Registration System (BNRS)](https://bnrs.dti.gov.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Is DTI registration required for all businesses?
 DTI registration is generally required for sole proprietorship businesses using a business name other than the owner's legal name.
@@ -240,10 +248,13 @@ Yes. DTI allows online renewal through the BNRS portal.
 
 ### Is DTI registration the same as a business permit?
 No. DTI registration only registers the business name. You still need:
-* Barangay Clearance
-* Mayor's Permit
-* BIR Registration
-* Other permits if applicable
+*   Barangay Clearance
+*   Mayor's Permit
+*   BIR Registration
+*   Other permits if applicable
 
 ### Can online sellers register with DTI?
 Yes. Many online businesses and sellers register their business names with DTI.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

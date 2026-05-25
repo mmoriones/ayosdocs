@@ -163,10 +163,21 @@ Always review the information on the certificate for typos before leaving the Ba
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the most accurate and up-to-date information, please refer to:
+*   Your local **Barangay Hall website** or visit the **Barangay Office** directly.
+*   [Republic Act No. 11261 (First-Time Jobseekers Assistance Act)](https://www.officialgazette.gov.ph/2019/04/10/republic-act-no-11261/)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Is there an age limit?
 No, as long as you are a first-time job seeker, you can avail of the benefits regardless of age.
 
 ### Can I get a free Passport with this?
 No, the Passport fee is **not** included in the list of waived fees under RA 11261.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

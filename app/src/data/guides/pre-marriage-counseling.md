@@ -170,10 +170,22 @@ Always check the specific seminar days of your LGU (e.g., "Every Tuesday and Thu
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+Couples are advised to coordinate with their specific LGU for the current seminar schedule and registration procedures:
+
+*   **Local Government Unit (LGU):** Visit the official website or City/Municipal Hall of your place of residence.
+*   **Population Commission:** [POPCOM Official Website](https://www.popcom.gov.ph) (For family planning guidelines).
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Can we attend the seminar in a different city?
 Generally, you must attend the seminar in the same city/municipality where you are applying for the marriage license.
 
 ### Is the certificate valid forever?
 No, it is typically valid for **six (6) months**. You must apply for your marriage license within this period.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

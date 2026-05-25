@@ -171,10 +171,23 @@ Always review your QR code status at least 48 hours before your flight.
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the latest advisories on the OFW Pass and airport procedures, please refer to:
+
+*   **Official Website:** [Department of Migrant Workers (DMW)](https://www.dmw.gov.ph)
+*   **Online Services:** [DMW Online Services Portal](https://onlineservices.dmw.gov.ph)
+*   **Mobile App Support:** Check the DMW Mobile App "Help" section for technical assistance.
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Do I still need to print the OEC?
 No, the digital QR code on your phone is sufficient. However, having a printed backup is recommended for peace of mind.
 
 ### What if my status is Red?
 A Red status means there is an issue with your records (e.g., missing contract verification or expired medical). You must contact the DMW or your agency to resolve the issue.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

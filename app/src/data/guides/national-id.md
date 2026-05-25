@@ -271,6 +271,12 @@ Schedules and availability may vary by region.
 
 ---
 
+## Official Sources & External Links
+
+*   [Philippine Identification System (PhilSys)](https://philsys.gov.ph)
+
+---
+
 ## 8. Fees
 
 | Item | Cost |
@@ -370,3 +376,6 @@ You may request a replacement, subject to verification and applicable replacemen
 ### Can I use the National ID for banking?
 
 Yes. Many banks and financial institutions accept the National ID as valid proof of identity.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

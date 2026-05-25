@@ -171,10 +171,21 @@ Always double-check the spelling of your name and position before the document i
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the most accurate and up-to-date information, please refer to:
+*   Contact your **Company's Human Resources (HR) Department** or employer directly.
+*   Refer to your **Company's Internal HR Portal** (e.g., Workday, Sprout, Darwinbox).
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Can I be charged for a COE?
 No. According to DOLE, the issuance of a COE is a right of the employee and must be provided free of charge.
 
 ### Does a COE expire?
 For visa purposes, most embassies consider a COE "stale" if it was issued more than **3 months** ago.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

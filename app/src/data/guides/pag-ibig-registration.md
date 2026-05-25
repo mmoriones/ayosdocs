@@ -329,6 +329,12 @@ It may also support cashless transactions and loan proceeds disbursement.
 
 ---
 
+## Official Sources & External Links
+
+*   [Pag-IBIG Fund Official Website](https://www.pagibigfund.gov.ph)
+
+---
+
 ## 11. Fees
 
 | Item | Estimated Cost |
@@ -422,3 +428,6 @@ No. The Loyalty Card Plus is optional but provides additional features and conve
 ### Can OFWs register online?
 
 Yes. OFWs may register using Virtual PAG-IBIG and other online services.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

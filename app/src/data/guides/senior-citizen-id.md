@@ -218,7 +218,16 @@ Always review your application before final submission.
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the latest updates on senior citizen privileges and local registration procedures, please refer to:
+
+*   **National Commission:** [National Commission of Senior Citizens (NCSC)](https://ncsc.gov.ph)
+*   **Local Government Unit (LGU):** Visit the official website or Office for Senior Citizens Affairs (OSCA) of your City or Municipality.
+
+---
+
+## 15. Frequently Asked Questions
 
 ### What age qualifies for a Senior Citizen ID?
 Filipino citizens aged 60 years old and above may qualify.
@@ -238,3 +247,6 @@ Qualified seniors may receive:
 
 ### Can the Senior Citizen ID be used nationwide?
 Yes. The ID and privileges are generally recognized nationwide.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

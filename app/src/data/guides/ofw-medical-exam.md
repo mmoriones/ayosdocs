@@ -175,10 +175,23 @@ Always ensure the name on your medical certificate exactly matches your passport
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For a list of currently accredited clinics and health advisories for OFWs, please visit:
+
+*   **Official Website:** [Department of Migrant Workers (DMW)](https://www.dmw.gov.ph)
+*   **DOH Health Facilities:** [Department of Health (DOH)](https://doh.gov.ph)
+*   **Wafid Services:** [Wafid (for GCC bound workers)](https://wafid.com)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### How long is the medical certificate valid?
 Most OFW medical certificates are valid for **three (3) months** from the date of issuance.
 
 ### What if I get an "Unfit to Work" result?
 You will be given a chance to undergo treatment or "re-evaluation" depending on the condition. Some conditions (like HIV or Hepatitis B for certain countries) are permanent disqualifications.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

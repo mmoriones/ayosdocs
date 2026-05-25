@@ -172,10 +172,22 @@ Always use the parent's name exactly as it appears on their valid ID.
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the legal templates and specific local requirements for marriage licensing, please refer to:
+
+*   **Local Government Unit (LGU):** Visit the official website or City/Municipal Hall where you are applying for a marriage license.
+*   **PSA Census:** [PSA Official Website](https://psa.gov.ph) (For civil registry guidelines).
+
+---
+
+## 15. Frequently Asked Questions
 
 ### What if I am 25 or older?
 You no longer need parental consent or advice. You can apply for a marriage license independently.
 
 ### Can a sibling give consent?
 Only if they are your legally appointed guardian. Otherwise, only parents (or surviving parent) can provide the required consent/advice.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

@@ -278,6 +278,12 @@ Some employers may also process membership registration for employees.
 
 ---
 
+## Official Sources & External Links
+
+*   [PhilHealth Official Website](https://www.philhealth.gov.ph)
+
+---
+
 ## 8. Fees
 
 | Item | Cost |
@@ -385,3 +391,6 @@ Yes. Individuals may apply as voluntary members even without formal employment.
 ### Can I use the PhilHealth ID as a valid ID?
 
 The PhilHealth ID may be accepted in some transactions, but acceptance depends on the institution or agency involved.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

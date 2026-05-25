@@ -167,11 +167,20 @@ Always keep your official receipt; you will need to present it to the mailman wh
 *   Wear a dark-colored shirt with a collar for the best photo result.
 
 ---
+## 14. Official Sources & External Links
 
-## 14. Frequently Asked Questions
+For more information on the Improved Postal ID, please visit:
+- [PHLPost Official Website](https://www.phlpost.gov.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### How long is the Postal ID valid?
 It is valid for **three (3) years** for Filipinos and **one (1) year** for foreigners.
 
 ### Can I apply even if I am unemployed?
 Yes. The Postal ID does not require proof of income or employment.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

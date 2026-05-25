@@ -175,10 +175,21 @@ Always check the serial numbers on your printed booklets against the ATP to ensu
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the most accurate and up-to-date information, please refer to:
+*   [Bureau of Internal Revenue (BIR)](https://www.bir.gov.ph)
+*   [BIR Online Registration and Update System (ORUS)](https://orus.bir.gov.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Can I use generic "Receipt" booklets from bookstores?
 No. For a registered business, only invoices/receipts printed with an official ATP and serial numbers are valid for tax purposes.
 
 ### Do Invoices expire?
 Invoices no longer have a 5-year expiration date (as of RR 6-2022). You can use them until the booklets are consumed.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

@@ -209,6 +209,8 @@ Applicants may monitor their application through:
 * Email notifications
 * Accredited printer updates
 
+💡 Tip: If you applied through ORUS, keep a record of your Transaction Reference Number (TRN) to easily track the progress of your application online.
+
 ---
 
 ## 11. Common Problems Encountered
@@ -244,7 +246,17 @@ Always review your application before final submission.
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the most reliable information on tax registration and business compliance, please refer to the official BIR channels:
+
+*   **Official Website:** [Bureau of Internal Revenue (BIR)](https://www.bir.gov.ph)
+*   **Online Portal:** [BIR ORUS (Online Registration and Update System)](https://orus.bir.gov.ph)
+*   **Inquiries:** You may also visit your assigned Revenue District Office (RDO) for direct assistance.
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Who should use BIR Form 1901?
 BIR Form 1901 is commonly used by sole proprietors, freelancers, professionals, and self-employed individuals.
@@ -260,3 +272,6 @@ Some registrations may be processed through BIR ORUS depending on eligibility an
 
 ### What is BIR Form 2303?
 BIR Form 2303 is the Certificate of Registration (COR) issued after successful business registration.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

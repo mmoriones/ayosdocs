@@ -308,6 +308,12 @@ Verify all card details before leaving.
 
 ---
 
+## Official Sources & External Links
+
+*   [Overseas Workers Welfare Administration (OWWA)](https://www.owwa.gov.ph)
+
+---
+
 ## 10. Fees
 
 | Item | Estimated Cost |
@@ -403,3 +409,6 @@ Applicants generally need active OWWA membership before applying for the e-Card.
 ### Is the OWWA e-Card a valid government ID?
 
 The card may be accepted for certain government and OFW-related transactions, although acceptance policies may vary by institution.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

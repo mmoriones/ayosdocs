@@ -172,10 +172,21 @@ Always keep your books updated. The BIR requires entries to be made daily or at 
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the most accurate and up-to-date information, please refer to:
+*   [Bureau of Internal Revenue (BIR)](https://www.bir.gov.ph)
+*   [BIR Online Registration and Update System (ORUS)](https://orus.bir.gov.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Do I need to register new books every year?
 No. For manual books, you only register a new set once the current volumes are completely full.
 
 ### Can I use Excel as my books?
 You can, but this is classified as **Loose-Leaf** or **Computerized** and requires prior approval (Permit to Use) from the BIR before you can use it for official records.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

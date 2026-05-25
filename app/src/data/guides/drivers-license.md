@@ -462,7 +462,15 @@ Some applicants recommend arriving before opening hours to reduce waiting times.
 
 ---
 
-## 15. Frequently Asked Questions
+## 15. Official Sources & External Links
+
+For the most accurate and up-to-date information, please refer to:
+*   [Land Transportation Office (LTO)](https://lto.gov.ph)
+*   [LTO Land Transport Management System (LTMS) Portal](https://portal.lto.gov.ph)
+
+---
+
+## 16. Frequently Asked Questions
 
 ### Can I drive alone with a Student Permit?
 
@@ -487,3 +495,6 @@ Some branches allow applicants to use personal vehicles provided documents are c
 ### Is a Driver’s License accepted as a valid ID?
 
 Yes. The Driver’s License is widely accepted as a primary government-issued ID.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

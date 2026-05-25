@@ -228,7 +228,16 @@ Always review your application before final submission.
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+To stay informed about your rights under the Expanded Solo Parents Welfare Act, please visit:
+
+*   **Social Welfare:** [Department of Social Welfare and Development (DSWD)](https://www.dswd.gov.ph)
+*   **Local Government Unit (LGU):** Visit the official website or City/Municipal Social Welfare and Development Office of your place of residence.
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Who qualifies as a solo parent?
 Qualified solo parents include individuals solely responsible for child care due to death, separation, abandonment, annulment, or similar circumstances recognized by law.
@@ -244,3 +253,6 @@ Yes. Eligible employees may receive solo parent leave benefits under Philippine 
 
 ### Are there discounts available for solo parents?
 Qualified solo parents may receive discounts on selected baby and child-related products and services under current laws and regulations.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

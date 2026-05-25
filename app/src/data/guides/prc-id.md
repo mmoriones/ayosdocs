@@ -172,10 +172,23 @@ Always check the "Mandatory Requirements" for your specific profession, as some 
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+To ensure you are using the official LERIS portal for your registration or renewal, please visit:
+
+*   **Official Website:** [Professional Regulation Commission (PRC)](https://www.prc.gov.ph)
+*   **Online Portal:** [PRC LERIS Portal](https://online.prc.gov.ph)
+*   **Verification:** [PRC Verification System](https://online.prc.gov.ph/Verification)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### How long is the PRC ID valid?
 It is valid for **three (3) years** and is renewable on your birth month.
 
 ### Can I send a representative for initial registration?
 Generally, no. Initial registration requires a personal signature in the professional roster (signing the book). Renewals, however, can be done by a representative with an SPA.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

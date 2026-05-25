@@ -166,10 +166,23 @@ Always keep your original PDOS certificate; you may need to show it at the airpo
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the latest schedules and online PDOS registration, please refer to:
+
+*   **Official Website:** [Department of Migrant Workers (DMW)](https://www.dmw.gov.ph)
+*   **Welfare Agency:** [Overseas Workers Welfare Administration (OWWA)](https://owwa.gov.ph)
+*   **Online Services:** [DMW Online Services Portal](https://onlineservices.dmw.gov.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Is the PDOS certificate valid forever?
 No, it is generally tied to your current contract and destination. If you move to a different country or get a new employer after a long break, you may need to attend again.
 
 ### Can I skip PDOS if I've worked abroad before?
 If you are returning to the **same country** and **same employer**, you are usually exempt. If either has changed, you must attend a new session.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

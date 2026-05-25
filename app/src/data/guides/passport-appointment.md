@@ -389,7 +389,17 @@ Carefully review all information before submission.
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+To ensure you are using the official appointment system and avoiding scams, please use the following links:
+
+*   **Official Appointment Portal:** [DFA Passport Appointment](https://passport.gov.ph)
+*   **Agency Website:** [Department of Foreign Affairs (DFA)](https://www.dfa.gov.ph)
+*   **Requirements Guide:** [DFA Passport Requirements](https://consular.dfa.gov.ph/passport)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Can I walk in without an appointment?
 
@@ -410,3 +420,6 @@ You may need to book a new schedule depending on DFA policies.
 ### Is courier delivery required?
 
 No. Applicants may choose either courier delivery or office pickup when available.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

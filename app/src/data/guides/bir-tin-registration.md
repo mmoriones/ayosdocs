@@ -417,7 +417,15 @@ Some applicants recommend using ORUS first before visiting the RDO to reduce pro
 
 ---
 
-## 16. Frequently Asked Questions
+## 16. Official Sources & External Links
+
+For the most accurate and up-to-date information, please refer to:
+*   [Bureau of Internal Revenue (BIR)](https://www.bir.gov.ph)
+*   [BIR Online Registration and Update System (ORUS)](https://orus.bir.gov.ph)
+
+---
+
+## 17. Frequently Asked Questions
 
 ### Is TIN registration free?
 
@@ -442,3 +450,6 @@ Yes. Certain services are available through the ORUS online system. ([orus.bir.g
 ### What happens if I lose my TIN?
 
 You may request verification or replacement assistance from the BIR.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

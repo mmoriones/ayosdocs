@@ -168,6 +168,12 @@ Applications are generally filed where the business establishment is physically 
 
 ---
 
+## Official Sources & External Links
+
+*   [City/Municipal Hall Website](https://www.gov.ph/services/lgu) (or visit your respective local city/municipal hall)
+
+---
+
 ## 8. Fees
 
 | Item | Estimated Cost |
@@ -248,3 +254,6 @@ Yes. Corporations and partnerships generally require SEC registration and additi
 
 ### What happens if I renew late?
 Late renewal may result in penalties, surcharges, and additional interest charges.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

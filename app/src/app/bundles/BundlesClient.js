@@ -126,7 +126,7 @@ export default function BundlesClient({ initialBundles }) {
               <Button 
                 onClick={() => window.location.href = '/coming-soon'}
                 leftIcon={<Plus size={14} strokeWidth={3} />}
-                className="group text-ui-tiny h-10"
+                className="group text-ui-micro h-10"
               >
                 Custom Workflow
               </Button>
@@ -152,7 +152,7 @@ export default function BundlesClient({ initialBundles }) {
             </p>
             <Button 
               onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
-              className="mt-8 px-8 uppercase text-ui-tiny tracking-widest"
+              className="mt-8 px-8 uppercase text-ui-micro tracking-widest"
             >
               Reset Search
             </Button>

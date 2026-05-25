@@ -155,6 +155,12 @@ Applications are usually filed in the city or municipality where either applican
 
 ---
 
+## Official Sources & External Links
+
+*   [City/Municipal Hall Website](https://www.gov.ph/services/lgu) (or visit your respective local city/municipal hall)
+
+---
+
 ## 8. Fees
 
 | Item | Estimated Cost |
@@ -235,3 +241,6 @@ Applications are usually filed where either applicant resides, depending on LGU 
 
 ### Is the 10-day waiting period mandatory?
 Yes. The publication period is required by Philippine law for most marriage license applications.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.

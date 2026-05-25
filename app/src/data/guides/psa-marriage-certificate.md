@@ -371,7 +371,15 @@ Some couples report faster availability when the Local Civil Registry performs e
 
 ---
 
-## 13. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+To request your PSA Marriage Certificate online or book an appointment, visit:
+- [PSAHelpline Official Portal](https://psahelpline.ph)
+- [PSA Serbilis Official Portal](https://www.psaserbilis.com.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Is a Marriage Certificate the same as a Marriage Contract?
 
@@ -396,3 +404,7 @@ You may need to coordinate with the Local Civil Registry Office where the marria
 ### Is the PSA digital e-certificate valid?
 
 Yes. PSA digital e-certificates include verification systems and are legally recognized.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.
+e verification systems and are legally recognized.

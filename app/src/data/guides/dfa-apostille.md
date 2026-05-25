@@ -30,147 +30,107 @@ checklist:
 
 ## 1. What is DFA Apostille Authentication?
 
-DFA Apostille Authentication is the process of certifying Philippine-issued documents for use in foreign countries that are members of the Apostille Convention.
+**DFA Apostille Authentication** is the official process of certifying Philippine-issued public documents for use in foreign countries that are members of the **Apostille Convention**.
 
-The Department of Foreign Affairs (DFA) issues an Apostille certificate attached to the document, confirming the authenticity of the signature, seal, or stamp appearing on the public document.
+Since May 2019, the Philippines has used the Apostille system, which replaced the traditional **"Red Ribbon"** authentication. Once a document is apostilled by the Department of Foreign Affairs (DFA), it no longer needs to be authenticated by the foreign embassy of the destination country (if that country is also an Apostille member).
 
 The Apostille is commonly used for:
-* Overseas employment requirements
-* Immigration and visa applications
-* Foreign school enrollment
-* Marriage abroad
-* International legal transactions
+*   Overseas employment requirements (NBI, Diplomas)
+*   Immigration and visa applications
+*   Foreign school enrollment (Transcript of Records)
+*   Marriage abroad (PSA Birth/Cenomar)
+*   International legal and corporate transactions
 
 ---
 
 ## 2. Who Needs This?
 
 You may need DFA Apostille Authentication if you are:
-- Applying for work or study abroad
-- Submitting Philippine documents to foreign governments
-- Processing immigration or visa applications
-- Getting married overseas
-- Using legal or corporate documents internationally
+- Applying for work, internship, or study in another country.
+- Submitting Philippine legal documents to foreign government agencies.
+- Processing family or work-based immigration.
+- Getting married to a foreign national overseas.
+- Using corporate documents (DTI/SEC) for international business.
 
 ---
 
 ## 3. Benefits of Having DFA Apostille Authentication
 
-### International Recognition of Documents
-Apostilled documents are generally accepted in countries that are members of the Apostille Convention.
+### International Legal Recognition
+An Apostille certificate confirms the authenticity of the signature and seal on your document, making it legally valid in over 120 member countries.
 
-### Faster Foreign Document Processing
-Foreign agencies can more easily verify authenticated Philippine documents.
+### Faster Processing Abroad
+By removing the need for "Consularization" at foreign embassies, the Apostille system saves you significant time and money during international applications.
 
-### Replacement for Traditional “Red Ribbon”
-The Apostille system replaced the former DFA “Red Ribbon” authentication process for participating countries.
+### Unified Standard
+The Apostille follows a globally recognized format, ensuring that your Philippine documents are treated with the same weight as local documents in the host country.
 
 ---
 
 ## 4. Requirements
 
 ### Primary Requirements
-* Original document to be apostilled
-* Valid government-issued ID
-* Confirmed DFA appointment
-* Photocopy of the document and ID
+*   **Original Document to be Authenticated:** Must be the official version (e.g., PSA security paper, NBI clearance with dry seal).
+*   **Valid Government-issued ID:** Original and one photocopy.
+*   **Confirmed DFA Appointment:** Printed appointment code.
 
-### Additional Requirements (if applicable)
-Depending on the document type:
-* PSA-issued civil registry documents
-* Certified true copies
-* CHED, DepEd, TESDA, or school authentication
-* Special Power of Attorney (SPA)
-* Authorization letter for representatives
+### Specific Document Prerequisites
+Most documents require a **prior certification** before they can be apostilled:
+*   **School Records (TOR/Diploma):** Must have a Certification, Authentication, and Verification (CAV) from CHED, DepEd, or TESDA.
+*   **NBI Clearance:** Must be the original "Personal Copy" version with a dry seal.
+*   **PSA Certificates:** Must be on PSA security paper.
+*   **Business Documents:** Must be certified by the DTI or SEC.
 
-💡 Tip: Some documents must first be authenticated or certified by another agency before DFA Apostille processing.
+💡 **Pro Tip:** Check if your destination country is an Apostille member. If they are **NOT** (e.g., Canada, China - though some regions vary), you still need the traditional authentication process.
 
 ---
 
 ## 5. Application Methods
 
-DFA Apostille services are generally processed through appointment-based walk-in applications.
+### Online Appointment (Official Portal)
+The standard way is to book a slot via the official DFA Apostille portal.
 
-### Online Application
-Applicants must usually:
-* Book appointments online
-* Encode personal and document details
-* Select processing schedules
+### DFA "Courtesy Lane"
+Available for Senior Citizens, PWDs, pregnant women, and OFWs with valid contracts. No appointment is usually needed for these groups at selected sites like DFA Aseana.
 
-Online submission alone does not usually complete the apostille process.
-
-### Walk-In Application
-Applicants must personally visit the selected DFA Consular Office or Apostille site to:
-* Submit documents
-* Pay fees
-* Claim authenticated documents
-
-Some DFA sites may accommodate limited courtesy lanes.
+### e-Apostille (New for 2026)
+The DFA has introduced the **e-Apostille** for selected documents (like digital PSA certificates). This allows for a completely paperless authentication process for participating countries.
 
 ---
 
 ## 6. Step-by-Step Application Process
 
 ### Step 1 – Verify Document Eligibility
-Ensure the document is eligible for Apostille processing.
-
-Examples include:
-* PSA certificates
-* NBI Clearance
-* School records
-* Court documents
-* Business documents
-
-Some records require prior certification from issuing agencies.
+Ensure your document has the necessary CAV or agency certification. The DFA will reject documents that haven't been pre-certified by the issuing body.
 
 ---
 
 ### Step 2 – Book a DFA Appointment
-Schedule an appointment through the DFA Apostille appointment system.
-
-Choose:
-* DFA branch
-* Date and time slot
-* Processing type (regular or expedited)
+Visit the [DFA Apostille Portal](https://apostille.dfa.gov.ph). Choose your preferred branch (Aseana, SM Megamall, SM Manila, etc.) and time slot.
 
 ---
 
-### Step 3 – Prepare Documentary Requirements
-Prepare:
-* Original documents
-* Valid IDs
-* Photocopies
-* Appointment confirmation
-
-Bring all required supporting certifications if applicable.
+### Step 3 – Pay the Fees Online
+Most branches now require online payment. Regular processing is **₱100**, and expedited is **₱200** per document.
 
 ---
 
-### Step 4 – Submit Documents and Pay Fees
-Proceed to the DFA office on your appointment date.
-
-Submit your documents and pay the applicable authentication fees.
-
-Official receipts will be issued after payment.
+### Step 4 – Appearance and Submission
+Go to the DFA branch on your appointment date. Submit your documents and have your ID verified. You will receive a claim stub.
 
 ---
 
-### Step 5 – Claim the Apostilled Documents
-Return on the release date or follow DFA release instructions.
-
-Verify all details on the Apostille certificate before leaving the office.
+### Step 5 – Claim the Apostille Certificate
+Return on the release date to pick up your document. It will have a security sticker (Apostille) attached to the back or a separate certificate leaf.
 
 ---
 
-## 7. Where to Apply
+## 7. Official Sources & External Links
 
-Applicants may process DFA Apostille Authentication at:
-- DFA Consular Offices
-- DFA ASEANA Office
-- Selected DFA Satellite Offices
-- DFA online appointment portal
-
-Processing locations may vary depending on document type and regional availability.
+For the most accurate information and to book your appointment, visit:
+- [Official DFA Apostille Portal](https://apostille.dfa.gov.ph)
+- [Department of Foreign Affairs (DFA) Main Website](https://www.dfa.gov.ph)
+- [List of Apostille Convention Member Countries](https://www.hcch.net/en/instruments/conventions/status-table/?cid=41)
 
 ---
 
@@ -178,79 +138,35 @@ Processing locations may vary depending on document type and regional availabili
 
 | Item | Estimated Cost |
 |---|---|
-| Regular Apostille Processing | ₱100 per document |
-| Expedited Apostille Processing | ₱200 per document |
-| Photocopying and Printing | ₱20–₱100 |
-| Courier or Delivery Fees (if applicable) | ₱100–₱500 |
-| **Total** | **₱100–₱800+** |
+| Regular Processing (4-5 Days) | ₱100.00 |
+| Expedited Processing (Same/Next Day) | ₱200.00 |
+| **Courier/Delivery (Optional)** | **₱150 – ₱250** |
 
 ---
 
-## 9. Processing Time
+## 9. Common Problems Encountered
 
-Typical processing timelines include:
-* Regular processing: 3–5 business days
-* Expedited processing: Same day to 2 business days
-* Additional agency verification: Extra processing time may apply
+- **Missing CAV:** The most common reason for rejection. Ensure your school records have been "CAV-ed" by the proper education agency first.
+- **Unrecognized Destination:** If the country you are moving to doesn't recognize Apostilles, the DFA will issue a different type of authentication certificate.
 
 ---
 
-## 10. Tracking or Status Updates
+## 10. Tips for Faster Processing
 
-Applicants may monitor their application through:
-* DFA appointment portal
-* DFA inquiry counters
-* SMS or email notifications
-* Courier tracking services (if delivery option is available)
+*   **Use DFA Aseana for Expedited:** The main office in Aseana often has the most slots for expedited (same-day) processing.
+*   **Batch Your Documents:** If you need multiple documents apostilled (e.g., TOR, NBI, Birth Cert), book them all in one appointment to save on trips.
+*   **Select Courier Delivery:** If you don't want to return to the DFA office, most branches offer a courier service (LBC/Wexpress) for a small fee.
 
 ---
 
-## 11. Common Problems Encountered
+## 11. Frequently Asked Questions
 
-Applicants may experience:
-- Invalid or damaged documents
-- Missing agency certifications
-- Incorrect names or document details
-- Missed appointments
-- Delayed release due to verification requirements
+### Can I still get a "Red Ribbon"?
+Technically, no. The Apostille sticker has replaced the gold seal and red ribbon for most countries. However, for non-Apostille countries, a similar-looking authentication certificate is still used.
 
----
-
-## 12. Common Mistakes to Avoid
-
-- Bringing unofficial or laminated documents
-- Forgetting photocopies and valid IDs
-- Booking appointments with incorrect details
-- Assuming all countries accept Apostille documents
-- Waiting until the last minute before international deadlines
-
-Always review your application before final submission.
+### Does the Apostille certificate expire?
+The Apostille itself does not have an expiration date. However, the **underlying document** (like an NBI clearance) might expire, which would make the Apostille effectively invalid.
 
 ---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with the Department of Foreign Affairs (DFA). While we strive for accuracy, government policies and fees can change. We recommend always verifying details with official government portals before proceeding.
 
-## 13. Tips for Faster Processing
-
-* Verify if your destination country accepts Apostille documents
-* Book appointments early due to limited slots
-* Prepare multiple photocopies of all documents
-* Organize documents by type before submission
-* Double-check all names and dates for consistency
-
----
-
-## 14. Frequently Asked Questions
-
-### What is an Apostille?
-An Apostille is an international certification verifying the authenticity of a public document for use abroad.
-
-### Did Apostille replace the DFA Red Ribbon?
-Yes. The Apostille system replaced the traditional DFA Red Ribbon process for participating countries.
-
-### Can I apostille PSA documents?
-Yes. PSA-issued civil registry documents are among the most commonly apostilled records.
-
-### Is personal appearance required?
-Generally yes, although authorized representatives may process applications with proper authorization.
-
-### Are Apostille documents accepted worldwide?
-Only countries that are members of the Apostille Convention generally recognize Apostille certificates.

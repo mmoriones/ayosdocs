@@ -208,7 +208,15 @@ Always review your application before final submission.
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+To request your PSA CENOMAR online or book an appointment, visit:
+- [PSAHelpline Official Portal](https://psahelpline.ph)
+- [PSA Serbilis Official Portal](https://www.psaserbilis.com.ph)
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Is a CENOMAR required for marriage in the Philippines?
 Yes. Most Local Civil Registry Offices require a PSA CENOMAR before issuing a marriage license.
@@ -223,4 +231,9 @@ Validity depends on the requesting institution. Many offices accept documents is
 Yes. PSA now offers e-Certificate services for eligible applicants.
 
 ### What happens if I previously had a marriage record?
+Instead of a CENOMAR, PSA may issue an Advisory on Marriage.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.
+usly had a marriage record?
 Instead of a CENOMAR, PSA may issue an Advisory on Marriage.

@@ -348,7 +348,17 @@ Some applicants recommend calling the PDAO office first because requirements may
 
 ---
 
-## 13. Frequently Asked Questions
+## 13. Official Sources & External Links
+
+For the latest PWD laws and nationwide guidelines, visit:
+- [National Council on Disability Affairs (NCDA)](https://ncda.gov.ph)
+- [Department of Health (DOH) PWD Registry](https://pwd.doh.gov.ph)
+
+Note: For actual applications, please visit your local **Persons with Disability Affairs Office (PDAO)** at your City or Municipal Hall.
+
+---
+
+## 14. Frequently Asked Questions
 
 ### Is the PWD ID free?
 
@@ -371,5 +381,11 @@ Yes. Valid PWD IDs issued by authorized LGUs are generally recognized nationwide
 Yes, provided authorization and supporting documents are submitted.
 
 ### Does the PWD ID expire?
+
+Policies vary by LGU. Some IDs may require periodic renewal or record updates.
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.
+ Does the PWD ID expire?
 
 Policies vary by LGU. Some IDs may require periodic renewal or record updates.

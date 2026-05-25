@@ -145,6 +145,8 @@ Typical processing timelines include:
 
 There is no tracking system for these requests as they are usually handled immediately at the branch.
 
+💡 Tip: If you are requesting via online banking, you can usually check the status of your request in the "Transaction History" or "Service Requests" section of your bank's mobile app.
+
 ---
 
 ## 11. Common Problems Encountered
@@ -172,10 +174,22 @@ Always double-check that the document has the bank's official dry seal or stamp 
 
 ---
 
-## 14. Frequently Asked Questions
+## 14. Official Sources & External Links
+
+For the most accurate and up-to-date information, we recommend contacting your bank branch directly or visiting their official website.
+
+*   **Bank Branch:** Visit your branch of account for physical certificates and statements.
+*   **Online Banking:** Check your bank's official mobile app or web portal for digital statements.
+
+---
+
+## 15. Frequently Asked Questions
 
 ### Does a Bank Certificate expire?
 Embassies usually require certificates to be issued within **1 to 3 months** of your application date.
 
 ### Can I get a certificate from a branch where I didn't open the account?
 Most modern banks (BPI, BDO) allow "inter-branch" requests, but some smaller banks may still require you to go to your "home branch."
+
+---
+**Disclaimer:** AyosDocs is an independent information platform and is **not affiliated** with any government agency. While we strive for accuracy, policies and fees can change. We recommend always verifying details with official government portals or offices before proceeding.
