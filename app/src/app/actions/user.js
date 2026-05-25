@@ -243,13 +243,19 @@ export async function updateProgressAction(guideSlug, completedTasks) {
     // Remove all instances of this guideSlug (including duplicates)
     user.savedProgress = user.savedProgress.filter(p => p.guideSlug !== guideSlug);
 
-    // Add a single clean entry
-    user.savedProgress.push({ 
-      guideSlug, 
-      completedTasks,
-      isFavorite,
-      updatedAt: Date.now()
-    });
+    // If progress is 0 (empty string or only commas) AND it's not a favorite, don't add it back
+    // This effectively "untracks" the guide if the user clears it and it's not a favorite
+    const cleanProgress = completedTasks ? completedTasks.split(',').filter(s => s !== "").join(',') : "";
+    
+    if (cleanProgress || isFavorite) {
+      // Add a single clean entry
+      user.savedProgress.push({ 
+        guideSlug, 
+        completedTasks: cleanProgress,
+        isFavorite,
+        updatedAt: Date.now()
+      });
+    }
 
     // Explicitly mark as modified for nested array updates
     user.markModified('savedProgress');
@@ -364,13 +370,19 @@ export async function toggleFavoriteAction(guideSlug) {
     // Remove all instances of this guideSlug (including duplicates)
     user.savedProgress = user.savedProgress.filter(p => p.guideSlug !== guideSlug);
 
-    // Add a single clean entry
-    user.savedProgress.push({
-      guideSlug,
-      completedTasks,
-      isFavorite,
-      updatedAt
-    });
+    // If there is progress OR it is being set to favorite, keep/add the entry
+    // If progress is 0 and it's being unfavorited, we don't add it back (effectively untracking it)
+    const cleanProgress = completedTasks ? completedTasks.split(',').filter(s => s !== "").join(',') : "";
+
+    if (cleanProgress || isFavorite) {
+      // Add a single clean entry
+      user.savedProgress.push({
+        guideSlug,
+        completedTasks: cleanProgress,
+        isFavorite,
+        updatedAt
+      });
+    }
     
     // Explicitly mark as modified for nested array updates
     user.markModified('savedProgress');
