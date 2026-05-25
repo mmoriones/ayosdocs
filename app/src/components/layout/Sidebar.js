@@ -80,7 +80,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
       {/* Navigation */}
       <div className="flex-1 overflow-y-auto py-4 px-3 space-y-8 custom-scrollbar overflow-x-hidden">
         <div className="space-y-1">
-          <h3 className={`px-4 text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em] mb-3 transition-opacity duration-300 whitespace-nowrap ${isCollapsed ? 'opacity-0' : 'opacity-100'}`}>
+          <h3 className={`px-4 text-ui-micro font-bold text-ctp-subtext0 uppercase tracking-[0.15em] mb-3 transition-opacity duration-300 whitespace-nowrap ${isCollapsed ? 'opacity-0' : 'opacity-100'}`}>
             Discovery
           </h3>
           {navItems.map((item) => (
@@ -95,7 +95,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
 
         {isLoggedIn && (
           <div className="space-y-1">
-            <h3 className={`px-4 text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em] mb-3 transition-opacity duration-300 whitespace-nowrap ${isCollapsed ? 'opacity-0' : 'opacity-100'}`}>
+            <h3 className={`px-4 text-ui-micro font-bold text-ctp-subtext0 uppercase tracking-[0.15em] mb-3 transition-opacity duration-300 whitespace-nowrap ${isCollapsed ? 'opacity-0' : 'opacity-100'}`}>
               Workspace
             </h3>
             {authItems.map((item) => (

@@ -29,7 +29,7 @@ export default function ComingSoon() {
         </div>
 
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-md text-ctp-sky-800 text-[10px] font-bold uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-md text-ctp-sky-800 text-ui-micro font-bold uppercase tracking-widest">
             <Construction size={12} />
             Feature Brewing
           </div>
@@ -47,7 +47,7 @@ export default function ComingSoon() {
                <ShieldCheck size={18} />
             </div>
             <div>
-              <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Coming Next</h3>
+              <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Coming Next</h3>
               <p className="text-xs font-bold text-ctp-text leading-tight tracking-tight">Requirement Bundles</p>
             </div>
           </div>
@@ -56,7 +56,7 @@ export default function ComingSoon() {
                <Timer size={18} />
             </div>
             <div>
-              <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Coming Soon</h3>
+              <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Coming Soon</h3>
               <p className="text-xs font-bold text-ctp-text leading-tight tracking-tight">Stay Tuned!</p>
             </div>
           </div>
@@ -65,20 +65,20 @@ export default function ComingSoon() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
           <button 
             onClick={() => router.push('/')}
-            className="w-full sm:w-auto group flex items-center justify-center gap-2 px-8 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold text-[10px] uppercase tracking-widest shadow-md hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all"
+            className="w-full sm:w-auto group flex items-center justify-center gap-2 px-8 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold text-ui-micro uppercase tracking-widest shadow-md hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all"
           >
             <Home size={14} />
             Dashboard
           </button>
           <button 
             onClick={() => router.back()}
-            className="w-full sm:w-auto px-8 py-2.5 bg-ctp-base text-ctp-subtext1 border border-ctp-surface1 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-ctp-mantle hover:text-ctp-text active:scale-[0.98] transition-all shadow-sm"
+            className="w-full sm:w-auto px-8 py-2.5 bg-ctp-base text-ctp-subtext1 border border-ctp-surface1 rounded-lg font-bold text-ui-micro uppercase tracking-widest hover:bg-ctp-mantle hover:text-ctp-text active:scale-[0.98] transition-all shadow-sm"
           >
             Previous Page
           </button>
         </div>
 
-        <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-[0.3em] pt-8 opacity-40">
+        <p className="text-ui-tiny text-ctp-subtext1 font-bold uppercase tracking-[0.3em] pt-8 opacity-40">
           AyosDocs Engine v1.0.4
         </p>
       </div>

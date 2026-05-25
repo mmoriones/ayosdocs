@@ -62,7 +62,7 @@ export default function Tooltip({
       {children}
       {isVisible && (
         <div className={`absolute z-[200] pointer-events-none animate-in fade-in zoom-in-95 duration-150 ${positions[position]} ${contentClassName}`}>
-          <div className="bg-ctp-crust text-ctp-text text-[10px] font-bold uppercase tracking-widest px-2.5 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
+          <div className="bg-ctp-crust text-ctp-text text-ui-tiny font-bold uppercase tracking-widest px-2.5 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
             {content}
           </div>
           <div className={`absolute ${arrows[position]}`} />

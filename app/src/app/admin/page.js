@@ -35,7 +35,7 @@ export default async function AdminPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
           <div className="relative p-6 bg-gray-800/50 rounded-xl border border-gray-700 opacity-60 grayscale-[0.5]">
-            <div className="absolute top-3 right-3 px-2 py-0.5 rounded text-[10px] font-bold bg-gray-700 text-gray-400 uppercase tracking-widest">
+            <div className="absolute top-3 right-3 px-2 py-0.5 rounded text-ui-micro font-bold bg-gray-700 text-gray-400 uppercase tracking-widest">
               Coming Soon
             </div>
             <h3 className="text-xl font-bold text-gray-500">User Management</h3>
@@ -43,7 +43,7 @@ export default async function AdminPage() {
           </div>
           
           <div className="relative p-6 bg-gray-800/50 rounded-xl border border-gray-700 opacity-60 grayscale-[0.5]">
-            <div className="absolute top-3 right-3 px-2 py-0.5 rounded text-[10px] font-bold bg-gray-700 text-gray-400 uppercase tracking-widest">
+            <div className="absolute top-3 right-3 px-2 py-0.5 rounded text-ui-micro font-bold bg-gray-700 text-gray-400 uppercase tracking-widest">
               Coming Soon
             </div>
             <h3 className="text-xl font-bold text-gray-500">Guide Editor</h3>

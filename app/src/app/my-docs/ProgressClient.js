@@ -400,7 +400,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                           <div className="w-8 h-8 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
                             <BarChart3 size={16} strokeWidth={2.5} />
                           </div>
-                          <h3 className="text-[10px] font-bold uppercase tracking-[0.15em] text-ctp-sky-800">Workflow Analytics</h3>
+                          <h3 className="text-ui-subhead font-bold uppercase tracking-[0.15em] text-ctp-sky-800">Workflow Analytics</h3>
                         </div>
                         <p className="text-xl font-bold tracking-tight text-ctp-text leading-tight">Milestone Forecast</p>
                         <p className="text-xs text-ctp-subtext1 font-medium max-w-xs leading-relaxed">Aggregated resource estimates for your {stats.activeBundles} active life event bundles.</p>
@@ -408,15 +408,15 @@ export default function ProgressClient({ allGuides, isRestricted }) {
 
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 md:gap-12 flex-1 max-w-xl">
                         <div className="space-y-1">
-                          <span className="text-[9px] font-bold uppercase tracking-widest text-ctp-subtext1">Est. Total Cost</span>
+                          <span className="text-ui-tiny font-bold uppercase tracking-widest text-ctp-subtext1">Est. Total Cost</span>
                           <p className="text-2xl font-bold tracking-tighter text-ctp-text">{stats.aggregateRemaining.cost}</p>
                         </div>
                         <div className="space-y-1">
-                          <span className="text-[9px] font-bold uppercase tracking-widest text-ctp-subtext1">Est. Time Left</span>
+                          <span className="text-ui-tiny font-bold uppercase tracking-widest text-ctp-subtext1">Est. Time Left</span>
                           <p className="text-2xl font-bold tracking-tighter text-ctp-text">{stats.aggregateRemaining.time}</p>
                         </div>
                         <div className="space-y-1">
-                          <span className="text-[9px] font-bold uppercase tracking-widest text-ctp-subtext1">Overall Progress</span>
+                          <span className="text-ui-tiny font-bold uppercase tracking-widest text-ctp-subtext1">Overall Progress</span>
                           <p className="text-2xl font-bold tracking-tighter text-ctp-sky-800">{Math.round((stats.completed / (stats.total || 1)) * 100)}%</p>
                         </div>
                       </div>
@@ -437,7 +437,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                 />
               </div>
               <div className="shrink-0 flex items-center gap-3">
-                <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest hidden md:block">Sort By:</span>
+                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest hidden md:block">Sort By:</span>
                 <SortDropdown 
                   value={sortBy} 
                   onChange={setSortBy} 
@@ -451,13 +451,13 @@ export default function ProgressClient({ allGuides, isRestricted }) {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Goal Bundles</h2>
-                  <span className="px-2 py-0.5 rounded-md bg-ctp-sky-800/5 text-ctp-sky-800 text-[10px] font-bold border border-ctp-sky-800/10">
+                  <span className="px-2 py-0.5 rounded-md bg-ctp-sky-800/5 text-ctp-sky-800 text-ui-micro font-bold border border-ctp-sky-800/10">
                     {bundleProgress.length}
                   </span>
                 </div>
                 <button 
                   onClick={() => router.push('/bundles')}
-                  className="text-[10px] text-ctp-sky-800 font-bold uppercase tracking-widest hover:text-ctp-sky-300 transition-colors"
+                  className="text-ui-micro text-ctp-sky-800 font-bold uppercase tracking-widest hover:text-ctp-sky-300 transition-colors"
                 >
                   Browse Roadmaps
                 </button>
@@ -486,8 +486,8 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                       <Plus size={24} className="text-ctp-subtext1 group-hover:text-ctp-sky-800" strokeWidth={2.5} />
                     </div>
                     <div className="space-y-1">
-                      <span className="block text-[10px] font-bold uppercase tracking-widest">Start a new roadmap</span>
-                      <p className="text-[10px] opacity-60 font-medium">Bundled requirements for marriage, business, and more.</p>
+                      <span className="block text-ui-detail font-bold uppercase tracking-widest">Start a new roadmap</span>
+                      <p className="text-ui-detail opacity-60 font-medium">Bundled requirements for marriage, business, and more.</p>
                     </div>
                   </button>
                 )}
@@ -504,7 +504,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                         <button
                           key={tab}
                           onClick={() => setActiveTab(tab)}
-                          className={`pb-3.5 px-1 text-[10px] font-bold uppercase tracking-widest transition-all whitespace-nowrap border-b-2 ${
+                          className={`pb-3.5 px-1 text-ui-micro font-bold uppercase tracking-widest transition-all whitespace-nowrap border-b-2 ${
                             isActive
                               ? 'border-ctp-sky-800 text-ctp-sky-800'
                               : 'border-transparent text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface1'
@@ -516,14 +516,14 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                     })}
                   </div>
 
-                  <Link href="/guides" className="text-[10px] text-ctp-sky-800 font-bold uppercase tracking-widest hover:text-ctp-sky-300 transition-colors pb-3.5 px-2">
+                  <Link href="/guides" className="text-ui-micro text-ctp-sky-800 font-bold uppercase tracking-widest hover:text-ctp-sky-300 transition-colors pb-3.5 px-2">
                     Knowledge Base
                   </Link>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Tracked Procedures</h2>
-                  <span className="px-2 py-0.5 rounded-md bg-ctp-sky-800/5 text-ctp-sky-800 text-[10px] font-bold border border-ctp-sky-800/10">
+                  <span className="px-2 py-0.5 rounded-md bg-ctp-sky-800/5 text-ctp-sky-800 text-ui-micro font-bold border border-ctp-sky-800/10">
                     {filteredGuides.length}
                   </span>
                 </div>
@@ -551,15 +551,15 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                        <List size={28} className="text-ctp-subtext1" strokeWidth={1.5} />
                     </div>
                     <h3 className="text-base font-bold text-ctp-text uppercase tracking-widest">No tracker activity</h3>
-                    <p className="text-xs text-ctp-subtext1 font-medium mt-1">Pick a guide to start tracking your requirements.</p>
-                    <Link href="/guides" className="mt-8 inline-block px-8 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold uppercase text-[10px] tracking-widest shadow-sm shadow-ctp-sky-800/20 active:scale-95 transition-all">Explore all guides</Link>
+                    <p className="text-sm text-ctp-subtext1 font-medium mt-1">Pick a guide to start tracking your requirements.</p>
+                    <Link href="/guides" className="mt-8 inline-block px-8 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold uppercase text-ui-micro tracking-widest shadow-sm shadow-ctp-sky-800/20 active:scale-95 transition-all">Explore all guides</Link>
                   </Card>
                 )}
                 
                 {filteredGuides.length > displayedGuides.length && (
                   <button 
                     onClick={() => setVisibleCount(prev => prev + 5)}
-                    className="w-full py-5 text-[10px] font-bold text-ctp-sky-800 hover:text-ctp-sky-300 uppercase tracking-widest transition-colors border border-dashed border-ctp-surface1 rounded-2xl bg-ctp-mantle/50 hover:bg-ctp-mantle active:scale-[0.99] mt-4"
+                    className="w-full py-5 text-ui-micro font-bold text-ctp-sky-800 hover:text-ctp-sky-300 uppercase tracking-widest transition-colors border border-dashed border-ctp-surface1 rounded-2xl bg-ctp-mantle/50 hover:bg-ctp-mantle active:scale-[0.99] mt-4"
                   >
                     Load more activity
                   </button>

@@ -178,7 +178,7 @@ const GuidePageLayout = ({
                   
                   <div className="space-y-4 flex-1">
                     <div className="flex flex-wrap items-center justify-between gap-4">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-ctp-sky-800/10 text-ctp-sky-800 text-[10px] font-bold uppercase tracking-widest border border-ctp-sky-800/20">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-ctp-sky-800/10 text-ctp-sky-800 text-ui-tiny font-bold uppercase tracking-widest border border-ctp-sky-800/20">
                         {category || 'GUIDE'}
                       </span>
                       <div className="flex items-center gap-2">
@@ -202,22 +202,22 @@ const GuidePageLayout = ({
 
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                       <div className="flex flex-col gap-1">
-                        <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Agency</span>
+                        <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">Agency</span>
                         <span className="text-xs font-bold text-ctp-text">{agency || 'National Government'}</span>
                       </div>
                       <div className="w-px h-8 bg-ctp-surface1 hidden sm:block" />
                       <div className="flex flex-col gap-1">
-                        <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Updated</span>
+                        <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">Updated</span>
                         <span className="text-xs font-bold text-ctp-text">{lastUpdated}</span>
                       </div>
                       <div className="w-px h-8 bg-ctp-surface1 hidden sm:block" />
                       <div className="flex flex-col gap-1">
-                        <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Read Time</span>
+                        <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">Read Time</span>
                         <span className="text-xs font-bold text-ctp-text">{readTime}</span>
                       </div>
                       <div className="w-px h-8 bg-ctp-surface1 hidden sm:block" />
                       <div className="flex flex-col gap-1">
-                        <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Difficulty</span>
+                        <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">Difficulty</span>
                         <div className="flex items-center gap-1.5 text-xs font-bold text-ctp-sky-800">
                           <Sparkles size={12} />
                           <span>{difficulty}</span>
@@ -270,7 +270,7 @@ const GuidePageLayout = ({
             <div className={`p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 shrink-0 transition-all ${isSidebarCollapsed ? 'pb-5' : 'pb-4'}`}>
               <div className={`flex items-center justify-between ${isSidebarCollapsed ? 'flex-col gap-6' : 'mb-4'}`}>
                 {!isSidebarCollapsed && (
-                  <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+                  <h3 className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">
                     Guide Tools
                   </h3>
                 )}

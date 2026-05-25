@@ -44,8 +44,8 @@ export default function SearchInput({
       />
       {showShortcut && (
         <div className="absolute right-3 top-1/2 -translate-y-1/2 hidden md:flex items-center gap-1 pointer-events-none">
-          <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-crust text-[10px] font-sans text-ctp-subtext0 uppercase">⌘</kbd>
-          <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-crust text-[10px] font-sans text-ctp-subtext0 uppercase">K</kbd>
+          <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-crust text-ui-tiny font-sans text-ctp-subtext0 uppercase">⌘</kbd>
+          <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-crust text-ui-tiny font-sans text-ctp-subtext0 uppercase">K</kbd>
         </div>
       )}
     </div>

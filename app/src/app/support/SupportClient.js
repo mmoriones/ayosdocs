@@ -61,7 +61,7 @@ export default function SupportClient() {
         actions={
           <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3 text-ctp-green">
             <Clock size={14} />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-ctp-subtext1">Avg. response: 24h</span>
+            <span className="text-ui-micro font-bold uppercase tracking-widest text-ctp-subtext1">Avg. response: 24h</span>
           </div>
         }
       />
@@ -75,13 +75,13 @@ export default function SupportClient() {
                 <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Send a Message</h2>
                 <div className="flex items-center gap-2 text-ctp-sky-800">
                   <Sparkles size={14} />
-                  <span className="text-[10px] font-bold uppercase tracking-widest">Priority support</span>
+                  <span className="text-ui-micro font-bold uppercase tracking-widest">Priority support</span>
                 </div>
               </div>
               <div className="p-8">
                 <form className="grid grid-cols-1 md:grid-cols-2 gap-8" onSubmit={handleSubmit}>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Full Name</label>
+                    <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Full Name</label>
                     <input
                       required
                       type="text"
@@ -95,7 +95,7 @@ export default function SupportClient() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Email Address</label>
+                    <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Email Address</label>
                     <input
                       required
                       type="email"
@@ -109,7 +109,7 @@ export default function SupportClient() {
                     />
                   </div>
                   <div className="md:col-span-2 space-y-2">
-                    <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Message</label>
+                    <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest ml-1">Message</label>
                     <textarea
                       required
                       name="message"
@@ -150,7 +150,7 @@ export default function SupportClient() {
           <aside className="space-y-6">
             <section className="bg-ctp-mantle/50 rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
               <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50">
-                <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Support Channels</h3>
+                <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Support Channels</h3>
               </div>
               
               <div className="divide-y divide-ctp-surface1/50">
@@ -161,7 +161,7 @@ export default function SupportClient() {
                   <div className="min-w-0">
                     <h4 className="text-sm font-bold text-ctp-text tracking-tight">Email Support</h4>
                     <p className="text-xs font-bold text-ctp-sky-800 mt-1 truncate">support@ayosdocs.com</p>
-                    <p className="text-[10px] text-ctp-subtext1 mt-1 font-medium leading-tight">Direct response line.</p>
+                    <p className="text-ui-micro text-ctp-subtext1 mt-1 font-medium leading-tight">Direct response line.</p>
                   </div>
                 </div>
 
@@ -172,7 +172,7 @@ export default function SupportClient() {
                   <div className="min-w-0">
                     <h4 className="text-sm font-bold text-ctp-text tracking-tight">Help Center</h4>
                     <p className="text-xs font-bold text-ctp-sky-800 mt-1 truncate cursor-pointer hover:underline" onClick={() => router.push('/faqs')}>Explore FAQs</p>
-                    <p className="text-[10px] text-ctp-subtext1 mt-1 font-medium leading-tight">Instant guide assistance.</p>
+                    <p className="text-ui-micro text-ctp-subtext1 mt-1 font-medium leading-tight">Instant guide assistance.</p>
                   </div>
                 </div>
               </div>
@@ -181,14 +181,14 @@ export default function SupportClient() {
             <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 space-y-4 shadow-sm">
               <div className="flex items-center gap-3 text-ctp-mauve">
                 <MessageCircle size={18} strokeWidth={2.5} />
-                <h3 className="text-[10px] font-bold uppercase tracking-widest">Social Channels</h3>
+                <h3 className="text-ui-micro font-bold uppercase tracking-widest">Social Channels</h3>
               </div>
               <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
                 Follow our official channels for the latest guide updates and holiday alerts.
               </p>
               <div className="flex flex-wrap gap-2 pt-1">
                 {['Facebook', 'Twitter', 'Instagram'].map(social => (
-                  <button key={social} className="px-3 py-1.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-[10px] font-bold uppercase tracking-widest text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 transition-all">
+                  <button key={social} className="px-3 py-1.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ui-micro font-bold uppercase tracking-widest text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 transition-all">
                     {social}
                   </button>
                 ))}

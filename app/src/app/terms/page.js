@@ -16,7 +16,7 @@ export default function TermsPage() {
         description="Guidelines and rules for using the AyosDocs platform and services."
         actions={
           <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
-            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest text-ctp-mauve">Public Service</span>
+            <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest text-ctp-mauve">Public Service</span>
           </div>
         }
       />
@@ -26,7 +26,7 @@ export default function TermsPage() {
           <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden">
             <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
               <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Legal Agreement</h2>
-              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Last Updated: May 15, 2026</span>
+              <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">Last Updated: May 15, 2026</span>
             </div>
             
             <div className="p-8 md:p-12 space-y-12">
@@ -87,7 +87,7 @@ export default function TermsPage() {
               </div>
               <div className="min-w-0">
                 <h4 className="text-xs font-bold text-ctp-text uppercase tracking-widest">Compliance</h4>
-                <p className="text-[10px] text-ctp-subtext1 font-medium leading-tight">Strict adherence to digital laws.</p>
+                <p className="text-ui-micro text-ctp-subtext1 font-medium leading-tight">Strict adherence to digital laws.</p>
               </div>
             </aside>
             <aside className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 flex items-center gap-4 shadow-sm group">
@@ -96,7 +96,7 @@ export default function TermsPage() {
               </div>
               <div className="min-w-0">
                 <h4 className="text-xs font-bold text-ctp-text uppercase tracking-widest">Accessibility</h4>
-                <p className="text-[10px] text-ctp-subtext1 font-medium leading-tight">Information for every citizen.</p>
+                <p className="text-ui-micro text-ctp-subtext1 font-medium leading-tight">Information for every citizen.</p>
               </div>
             </aside>
           </div>

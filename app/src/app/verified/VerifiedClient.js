@@ -59,7 +59,7 @@ export default function VerifiedClient() {
         <div className="flex flex-col gap-3 relative z-10 pt-4">
           <button
             onClick={() => router.push("/")}
-            className="group w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white font-bold py-3 rounded-lg transition-all shadow-md active:scale-[0.98] text-[10px] uppercase tracking-widest flex items-center justify-center gap-2"
+            className="group w-full bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white font-bold py-3 rounded-lg transition-all shadow-md active:scale-[0.98] text-ui-micro uppercase tracking-widest flex items-center justify-center gap-2"
           >
             <Home size={14} />
             Enter My Dashboard
@@ -67,7 +67,7 @@ export default function VerifiedClient() {
           </button>
         </div>
 
-        <p className="text-[9px] font-bold text-ctp-subtext1 mt-6 uppercase tracking-widest animate-pulse opacity-60">
+        <p className="text-ui-tiny font-bold text-ctp-subtext1 mt-6 uppercase tracking-widest animate-pulse opacity-60">
           Auto-redirecting shortly...
         </p>
       </div>

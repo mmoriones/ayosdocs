@@ -49,7 +49,7 @@ function LoginForm() {
         <h2 className="text-2xl font-bold tracking-tight text-ctp-text uppercase">
           Admin Portal
         </h2>
-        <p className="mt-2 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">
+        <p className="mt-2 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">
           Authenticated Access Only
         </p>
       </div>
@@ -74,7 +74,7 @@ function LoginForm() {
         </button>
         
         <div className="text-center pt-4">
-          <Link href="/" className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-sky-800 transition-colors inline-flex items-center gap-2">
+          <Link href="/" className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-sky-800 transition-colors inline-flex items-center gap-2">
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3"><path d="M10 19l-7-7m0 0l7-7m-7 7h18" strokeLinecap="round" strokeLinejoin="round"/></svg>
             Return to Website
           </Link>

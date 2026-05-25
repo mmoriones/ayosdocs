@@ -407,7 +407,7 @@ const ChecklistCard = ({
               <AlertTriangle size={14} className="text-ctp-yellow shrink-0" />
               <div className="flex-1 min-w-0">
                 <p className="text-ui-micro font-bold text-ctp-text uppercase tracking-tight">Sync Restricted</p>
-                <p className="text-ui-micro text-ctp-subtext1 font-medium mt-0.5 leading-tight">Verify email to save progress.</p>
+                <p className="text-ui-detail text-ctp-subtext1 font-medium mt-0.5 leading-tight">Verify email to save progress.</p>
               </div>
             </div>
           </div>
@@ -452,7 +452,7 @@ const ChecklistCard = ({
                     
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className={`text-ui-micro font-bold leading-tight transition-colors tracking-tight
+                        <p className={`text-ui-label font-bold leading-tight transition-colors tracking-tight
                           ${step.completed ? "text-ctp-subtext1 line-through opacity-50 font-medium" : "text-ctp-text"}
                           ${isNextStep ? "text-ctp-sky-800" : ""}
                           ${isUpcoming ? "text-ctp-subtext1 opacity-60 font-medium" : ""}
@@ -460,7 +460,7 @@ const ChecklistCard = ({
                           {step.task}
                         </p>
                         {isNextStep && (
-                          <span className="px-1 py-0 rounded bg-ctp-sky-800/10 text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest shrink-0 border border-ctp-sky-800/20">
+                          <span className="px-1 py-0 rounded bg-ctp-sky-800/10 text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest shrink-0 border border-ctp-sky-800/20">
                             ACTIVE
                           </span>
                         )}
@@ -485,7 +485,7 @@ const ChecklistCard = ({
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-ui-micro font-bold text-ctp-text line-clamp-1 tracking-tight">{nextStep.task}</p>
+                <p className="text-ui-label font-bold text-ctp-text line-clamp-1 tracking-tight">{nextStep.task}</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                    <div className="w-1 h-1 rounded-full bg-ctp-sky-800 animate-pulse" />
                    <p className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-[0.15em]">Next Requirement</p>

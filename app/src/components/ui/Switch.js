@@ -42,7 +42,7 @@ export default function Switch({
             <span className="text-sm font-semibold text-ctp-text">{label}</span>
           )}
           {description && (
-            <span className="text-[11px] font-medium text-ctp-subtext0">{description}</span>
+            <span className="text-ui-micro font-medium text-ctp-subtext0">{description}</span>
           )}
         </div>
       )}

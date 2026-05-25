@@ -56,8 +56,8 @@ const SummaryStats = ({ stats }) => {
             <span className="text-2xl font-bold text-ctp-text tracking-tight leading-none">{item.value}</span>
           </div>
           <div className="space-y-1">
-            <h4 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest leading-none">{item.label}</h4>
-            <p className="text-[10px] font-bold text-ctp-subtext0 opacity-50 uppercase tracking-tight">{item.sub}</p>
+            <h4 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest leading-none">{item.label}</h4>
+            <p className="text-ui-micro font-bold text-ctp-subtext0 opacity-50 uppercase tracking-tight">{item.sub}</p>
           </div>
         </div>
       ))}

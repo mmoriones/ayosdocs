@@ -65,7 +65,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
           }`}
         >
           <Home size={18} strokeWidth={2} />
-          <span className={`text-[10px] mt-1 tracking-wide ${isHomeActive ? "font-bold" : "font-medium"}`}>
+          <span className={`text-ui-tiny mt-1 tracking-wide ${isHomeActive ? "font-bold" : "font-medium"}`}>
             Home
           </span>
         </button>
@@ -79,7 +79,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
           }`}
         >
           {isTOCOpen ? <X size={18} strokeWidth={2} /> : <List size={18} strokeWidth={2} />}
-          <span className={`text-[10px] mt-1 tracking-wide ${isTOCOpen ? "font-bold" : "font-medium"}`}>
+          <span className={`text-ui-tiny mt-1 tracking-wide ${isTOCOpen ? "font-bold" : "font-medium"}`}>
             {isTOCOpen ? "Close" : "TOC"}
           </span>
         </button>
@@ -93,7 +93,7 @@ const MobileBottomNav = ({ onOpenTOC, onOpenChecklist, isTOCOpen, isChecklistOpe
           }`}
         >
           {isChecklistOpen ? <X size={18} strokeWidth={2} /> : <CheckSquare size={18} strokeWidth={2} />}
-          <span className={`text-[10px] mt-1 tracking-wide ${isChecklistOpen ? "font-bold" : "font-medium"}`}>
+          <span className={`text-ui-tiny mt-1 tracking-wide ${isChecklistOpen ? "font-bold" : "font-medium"}`}>
             {isChecklistOpen ? "Close" : "Checklist"}
           </span>
         </button>

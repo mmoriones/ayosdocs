@@ -66,7 +66,7 @@ export default function VerificationBanner() {
         <button
           onClick={handleResend}
           disabled={isResending || isSent}
-          className="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-ctp-yellow-800 text-ctp-base text-[11px] sm:text-[12px] font-bold hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+          className="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-ctp-yellow-800 text-ctp-base text-ui-micro sm:text-ui-detail font-bold hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
         >
           {isResending ? (
             <>

@@ -19,7 +19,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full border-t border-ctp-surface1 bg-ctp-base px-6 py-4">
-      <div className="max-w-[1600px] mx-auto flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] text-ctp-subtext1">
+      <div className="max-w-[1600px] mx-auto flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-ui-label text-ctp-subtext1">
         {links.map((link, index) => (
           <div key={link.label} className="flex items-center gap-4">
             <Link 

@@ -166,14 +166,14 @@ export default function ProfileClient() {
                     ) : (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="space-y-1.5">
-                          <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Legal Name</label>
+                          <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Legal Name</label>
                           <div className="flex items-center gap-3 px-3.5 py-2.5 bg-ctp-mantle/50 border border-ctp-surface1 rounded-lg text-sm font-bold text-ctp-text">
                             <User size={16} className="text-ctp-sky-800" strokeWidth={2.5} />
                             <span>{user?.name}</span>
                           </div>
                         </div>
                         <div className="space-y-1.5 opacity-80 min-w-0">
-                          <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Email Address</label>
+                          <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Email Address</label>
                           <Tooltip content={user?.email} className="w-full">
                             <div className="flex items-center gap-3 px-3.5 py-2.5 bg-ctp-crust/30 border border-ctp-surface1 rounded-lg text-sm font-bold text-ctp-subtext1 overflow-hidden">
                               <Mail size={16} className="text-ctp-surface2 shrink-0" strokeWidth={2.5} />
@@ -226,16 +226,16 @@ export default function ProfileClient() {
                 <div className="flex items-center justify-between py-2 border-b border-ctp-surface1/50">
                   <div className="flex items-center gap-2.5 text-ctp-subtext1">
                     <Calendar size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">Joined</span>
+                    <span className="text-ui-micro font-bold uppercase tracking-widest">Joined</span>
                   </div>
-                  <span className="text-[11px] font-bold text-ctp-text uppercase">May 2026</span>
+                  <span className="text-ui-micro font-bold text-ctp-text uppercase">May 2026</span>
                 </div>
                 <div className="flex items-center justify-between py-2">
                   <div className="flex items-center gap-2.5 text-ctp-subtext1">
                     <ShieldCheck size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">Type</span>
+                    <span className="text-ui-micro font-bold uppercase tracking-widest">Type</span>
                   </div>
-                  <span className="text-[11px] font-bold text-ctp-sky-800 uppercase">
+                  <span className="text-ui-micro font-bold text-ctp-sky-800 uppercase">
                     {session?.user?.googleAuth && session?.user?.hasPassword ? 'Hybrid' : session?.user?.googleAuth ? 'Google' : 'Local'}
                   </span>
                 </div>
@@ -243,7 +243,7 @@ export default function ProfileClient() {
 
               <button 
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="w-full mt-8 flex items-center justify-center gap-2 p-2.5 rounded-lg border border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red text-[10px] font-bold uppercase tracking-widest hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all group"
+                className="w-full mt-8 flex items-center justify-center gap-2 p-2.5 rounded-lg border border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red text-ui-micro font-bold uppercase tracking-widest hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all group"
               >
                 <LogOut size={14} strokeWidth={3} className="transition-transform group-hover:-translate-x-0.5" />
                 Sign Out of Account
@@ -253,16 +253,16 @@ export default function ProfileClient() {
             <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm overflow-hidden group">
               <div className="p-4 border-b border-ctp-surface1 flex items-center gap-2">
                 <Edit3 size={14} className="text-ctp-sky-800" />
-                <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Guide Discovery</h3>
+                <h3 className="text-ui-subhead font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Guide Discovery</h3>
               </div>
               <div className="p-5 space-y-4">
-                <p className="text-[11px] font-medium leading-relaxed text-ctp-subtext1">
+                <p className="text-ui-detail font-medium leading-relaxed text-ctp-subtext1">
                   Ready to track more? Explore our updated knowledge base for the latest government requirements.
                 </p>
                 <Button 
                   variant="secondary"
                   onClick={() => router.push('/guides')}
-                  className="w-full text-[10px] uppercase tracking-widest shadow-lg shadow-ctp-sky-800/5"
+                  className="w-full text-ui-micro uppercase tracking-widest shadow-lg shadow-ctp-sky-800/5"
                 >
                   Browse Guides
                 </Button>

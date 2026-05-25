@@ -27,14 +27,14 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
           <div className="flex items-center justify-between gap-4">
             <div className="space-y-1 min-w-0">
               <div className="flex items-center gap-2">
-                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-widest border ${
+                <span className={`text-ui-tiny font-bold px-1.5 py-0.5 rounded uppercase tracking-widest border ${
                   percentage === 100 
                     ? 'bg-ctp-green/[0.07] text-ctp-green border-ctp-green/20' 
                     : 'bg-ctp-sky-800/10 text-ctp-sky-800 border-ctp-sky-800/20'
                 }`}>
                   {percentage === 100 ? 'Completed' : 'In Progress'}
                 </span>
-                <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest flex items-center gap-1.5">
+                <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest flex items-center gap-1.5">
                   <Layers size={12} className="text-ctp-subtext0" />
                   {bundle.flow.length} Stages
                 </span>
@@ -73,7 +73,7 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
 
           
           <div className="space-y-2.5">
-            <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest">
+            <div className="flex items-center justify-between text-ui-micro font-bold uppercase tracking-widest">
               <span className="text-ctp-subtext1 opacity-80">{progress.completed} of {progress.total} guides</span>
               <span className="text-ctp-sky-800">{percentage}%</span>
             </div>
@@ -90,12 +90,12 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
               return (
                 <div key={idx} className="flex items-center gap-1.5 opacity-80">
                    <div className={`w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-ctp-sky-800 animate-pulse' : 'bg-ctp-surface1'}`} />
-                   <span className={`text-[9px] font-bold uppercase tracking-tight ${isCurrent ? 'text-ctp-text' : 'text-ctp-subtext1'}`}>{step.label}</span>
+                   <span className={`text-ui-tiny font-bold uppercase tracking-tight ${isCurrent ? 'text-ctp-text' : 'text-ctp-subtext1'}`}>{step.label}</span>
                 </div>
               );
             })}
             {bundle.flow.length > 3 && (
-              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">+{bundle.flow.length - 3}</span>
+              <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">+{bundle.flow.length - 3}</span>
             )}
           </div>
         </div>

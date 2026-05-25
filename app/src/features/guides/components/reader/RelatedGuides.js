@@ -32,7 +32,7 @@ const RelatedGuides = ({ currentSlug, category, allGuides }) => {
             <span className="text-ctp-text text-sm font-bold group-hover:text-ctp-sky-800 transition-colors line-clamp-1 tracking-tight">
               {g.title}
             </span>
-            <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest truncate">
+            <p className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest truncate">
               {g.agency}
             </p>
           </div>

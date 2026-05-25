@@ -75,7 +75,7 @@ export default function BundlesClient({ initialBundles }) {
         actions={
           <div className="bg-ctp-base/50 backdrop-blur-sm px-5 py-2.5 rounded-xl border border-ctp-surface1 shadow-sm flex items-center gap-3">
             <Sparkles size={14} className="text-ctp-sky-800" />
-            <span className="text-[11px] font-bold text-ctp-subtext0 uppercase tracking-[0.2em]">Ready-to-use workflows</span>
+            <span className="text-ui-tiny font-bold text-ctp-subtext0 uppercase tracking-[0.2em]">Ready-to-use workflows</span>
           </div>
         }
       />
@@ -91,7 +91,7 @@ export default function BundlesClient({ initialBundles }) {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
+              className={`px-3 py-1.5 rounded-md text-ui-tiny font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
                 selectedCategory === cat
                   ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
                   : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
@@ -126,7 +126,7 @@ export default function BundlesClient({ initialBundles }) {
               <Button 
                 onClick={() => window.location.href = '/coming-soon'}
                 leftIcon={<Plus size={14} strokeWidth={3} />}
-                className="group"
+                className="group text-ui-tiny h-10"
               >
                 Custom Workflow
               </Button>
@@ -152,7 +152,7 @@ export default function BundlesClient({ initialBundles }) {
             </p>
             <Button 
               onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
-              className="mt-8 px-8 uppercase text-[10px] tracking-widest"
+              className="mt-8 px-8 uppercase text-ui-tiny tracking-widest"
             >
               Reset Search
             </Button>
@@ -185,29 +185,29 @@ const BundleCard = ({ bundle, isTracking }) => {
       <div className="flex-1 space-y-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2.5">
-            <Badge variant="sky" className="px-1">{bundle.category}</Badge>
-            <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em] opacity-60">
+            <Badge variant="sky" className="px-1 text-ui-micro">{bundle.category}</Badge>
+            <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.1em] opacity-60">
               {bundle.flow.length} Stages
             </span>
           </div>
-          <h3 className="text-sm font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors tracking-tight leading-tight">
+          <h3 className="text-base font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors tracking-tight leading-tight">
             {bundle.title}
           </h3>
-          <p className="text-[11px] text-ctp-subtext1 leading-relaxed line-clamp-2 font-medium opacity-80">
+          <p className="text-ui-detail text-ctp-subtext1 leading-relaxed line-clamp-2 font-medium opacity-80">
             {bundle.description}
           </p>
         </div>
 
         <div className="pt-4 border-t border-ctp-surface1/30 space-y-2.5">
-          <p className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Workflow Preview:</p>
+          <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Workflow Preview:</p>
           <div className="flex flex-wrap gap-1.5">
             {bundle.flow.flatMap(s => s.guides).slice(0, 2).map((guide, idx) => (
-              <span key={idx} className="text-[8px] font-bold text-ctp-text bg-ctp-mantle px-1.5 py-0.5 rounded border border-ctp-surface1 truncate max-w-[110px] uppercase tracking-tight">
+              <span key={idx} className="text-ui-micro font-bold text-ctp-text bg-ctp-mantle px-1.5 py-0.5 rounded border border-ctp-surface1 truncate max-w-[110px] uppercase tracking-tight">
                 {guide.replace(/-/g, ' ')}
               </span>
             ))}
             {totalGuides > 2 && (
-              <span className="text-[8px] font-bold text-ctp-subtext1 px-1 py-0.5 uppercase tracking-widest">
+              <span className="text-ui-micro font-bold text-ctp-subtext1 px-1 py-0.5 uppercase tracking-widest">
                 +{totalGuides - 2}
               </span>
             )}
@@ -223,7 +223,7 @@ const BundleCard = ({ bundle, isTracking }) => {
             </div>
           ))}
         </div>
-        <div className="text-ctp-sky-800 font-bold text-[8px] uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+        <div className="text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
           {isTracking ? 'Resume Roadmap' : 'View roadmap'}
           <ArrowRight size={10} strokeWidth={4} />
         </div>

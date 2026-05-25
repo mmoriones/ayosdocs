@@ -36,7 +36,7 @@ export default function UpdatesClient({ initialUpdates }) {
         actions={
           <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
              <History size={14} className="text-ctp-sky-800" />
-             <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Real-time Tracker</span>
+             <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Real-time Tracker</span>
           </div>
         }
       />
@@ -51,14 +51,14 @@ export default function UpdatesClient({ initialUpdates }) {
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-ctp-subtext1">
                 <Filter size={14} />
-                <h3 className="text-[10px] font-bold uppercase tracking-widest">Filter by category</h3>
+                <h3 className="text-ui-micro font-bold uppercase tracking-widest">Filter by category</h3>
               </div>
               <div className="flex flex-wrap lg:flex-col gap-2">
                 {categories.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setFilter(cat)}
-                    className={`px-4 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest text-left transition-all border ${
+                    className={`px-4 py-2 rounded-lg text-ui-micro font-bold uppercase tracking-widest text-left transition-all border ${
                       filter === cat
                         ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-md'
                         : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
@@ -71,8 +71,8 @@ export default function UpdatesClient({ initialUpdates }) {
             </div>
 
             <div className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 space-y-4 shadow-sm">
-               <h4 className="text-[10px] font-bold text-ctp-text uppercase tracking-[0.2em]">Update Policy</h4>
-               <p className="text-[11px] text-ctp-subtext1 leading-relaxed font-medium">
+               <h4 className="text-ui-micro font-bold text-ctp-text uppercase tracking-[0.2em]">Update Policy</h4>
+               <p className="text-ui-micro text-ctp-subtext1 leading-relaxed font-medium">
                  Guides are timestamped whenever a major requirement, fee, or procedure change is verified.
                </p>
             </div>
@@ -93,8 +93,8 @@ export default function UpdatesClient({ initialUpdates }) {
                       </div>
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                           <span className="text-[9px] font-bold text-ctp-sky-800 bg-ctp-sky-800/[0.07] px-1.5 py-0.5 rounded border border-ctp-sky-800/20 uppercase tracking-widest">Updated</span>
-                           <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">{update.category}</span>
+                           <span className="text-ui-tiny font-bold text-ctp-sky-800 bg-ctp-sky-800/[0.07] px-1.5 py-0.5 rounded border border-ctp-sky-800/20 uppercase tracking-widest">Updated</span>
+                           <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">{update.category}</span>
                         </div>
                         <h3 className="text-lg font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors tracking-tight leading-none">{update.title}</h3>
                       </div>
@@ -104,11 +104,11 @@ export default function UpdatesClient({ initialUpdates }) {
                       <div className="flex flex-col items-end">
                          <div className="flex items-center gap-2 text-ctp-subtext1">
                             <Calendar size={12} />
-                            <span className="text-[10px] font-bold uppercase tracking-widest">
+                            <span className="text-ui-micro font-bold uppercase tracking-widest">
                               {new Date(update.lastUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                             </span>
                          </div>
-                         <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-1 opacity-60">Verified Change</p>
+                         <p className="text-ui-tiny text-ctp-subtext1 font-bold uppercase tracking-widest mt-1 opacity-60">Verified Change</p>
                       </div>
                       <ArrowRight size={20} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-1 transition-all" />
                     </div>

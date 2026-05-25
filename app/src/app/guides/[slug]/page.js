@@ -111,7 +111,7 @@ export default async function GuidePage({ params }) {
               <thead className="bg-ctp-mantle/50" {...props} />
             ),
             th: ({ ...props }) => (
-              <th className="px-5 py-3 text-left text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest border-b border-ctp-surface1" {...props} />
+              <th className="px-5 py-3 text-left text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest border-b border-ctp-surface1" {...props} />
             ),
             td: ({ ...props }) => (
               <td className="px-5 py-4 text-xs text-ctp-text border-b border-ctp-surface1 font-medium last:border-b-0" {...props} />

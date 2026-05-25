@@ -32,7 +32,7 @@ const SortDropdown = ({ value, onChange, options, label = "Sort:", className = "
     <div className={`relative shrink-0 ${className}`} ref={dropdownRef}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-3 bg-ctp-mantle/50 border rounded-lg px-4 py-2 text-[10px] font-bold text-ctp-text transition-all shadow-sm active:scale-95 ${
+        className={`flex items-center gap-3 bg-ctp-mantle/50 border rounded-lg px-4 py-2 text-ui-tiny font-bold text-ctp-text transition-all shadow-sm active:scale-95 ${
           isOpen ? 'border-ctp-sky-800 ring-4 ring-ctp-sky-800/5' : 'border-ctp-surface1 hover:border-ctp-sky-800/30'
         }`}
       >
@@ -54,7 +54,7 @@ const SortDropdown = ({ value, onChange, options, label = "Sort:", className = "
                     setIsOpen(false); 
                   }
                 }}
-                className={`w-full text-left px-3 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${
+                className={`w-full text-left px-3 py-2.5 rounded-lg text-ui-tiny font-bold uppercase tracking-widest transition-all ${
                   value === option.value 
                     ? 'bg-ctp-sky-800 text-white shadow-md shadow-ctp-sky-800/10' 
                     : option.disabled

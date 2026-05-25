@@ -16,7 +16,7 @@ export default function AboutClient() {
         description="Our mission to simplify government requirements for every Filipino."
         actions={
           <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
-            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Version 1.0.4</span>
+            <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Version 1.0.4</span>
           </div>
         }
       />
@@ -44,7 +44,7 @@ export default function AboutClient() {
               <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">
                 <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-3">
                   <Target size={16} className="text-ctp-sky-800" />
-                  <h2 className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">Our Mission</h2>
+                  <h2 className="text-ui-micro font-bold text-ctp-text uppercase tracking-widest">Our Mission</h2>
                 </div>
                 <div className="p-8 flex-1">
                   <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed">
@@ -56,7 +56,7 @@ export default function AboutClient() {
               <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden flex flex-col">
                 <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-3">
                   <Eye size={16} className="text-ctp-mauve" />
-                  <h2 className="text-[10px] font-bold text-ctp-text uppercase tracking-widest">Our Vision</h2>
+                  <h2 className="text-ui-micro font-bold text-ctp-text uppercase tracking-widest">Our Vision</h2>
                 </div>
                 <div className="p-8 flex-1">
                   <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed">
@@ -69,7 +69,7 @@ export default function AboutClient() {
 
           <aside className="space-y-6">
             <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 space-y-6 shadow-sm">
-              <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Why AyosDocs?</h3>
+              <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Why AyosDocs?</h3>
               <div className="space-y-5">
                 {[
                   { icon: ShieldCheck, title: "Official Sources", desc: "Data verified against current gov mandates." },
@@ -82,7 +82,7 @@ export default function AboutClient() {
                     </div>
                     <div className="space-y-0.5">
                       <h4 className="text-xs font-bold text-ctp-text">{item.title}</h4>
-                      <p className="text-[10px] text-ctp-subtext1 font-medium leading-tight">{item.desc}</p>
+                      <p className="text-ui-micro text-ctp-subtext1 font-medium leading-tight">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -93,14 +93,14 @@ export default function AboutClient() {
                <div className="relative z-10 space-y-4">
                   <div className="flex items-center gap-2.5 text-ctp-sky-800">
                     <Sparkles size={16} strokeWidth={2.5} />
-                    <h3 className="text-[10px] font-bold uppercase tracking-widest">Get Involved</h3>
+                    <h3 className="text-ui-micro font-bold uppercase tracking-widest">Get Involved</h3>
                   </div>
                   <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed">
                     AyosDocs is built for the community. Share your experiences and help others navigate their requirements better.
                   </p>
                   <button 
                     onClick={() => window.location.href = '/rate'}
-                    className="w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg font-bold text-[10px] uppercase tracking-widest text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all shadow-sm active:scale-[0.98]"
+                    className="w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg font-bold text-ui-micro uppercase tracking-widest text-ctp-sky-800 hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all shadow-sm active:scale-[0.98]"
                   >
                     Submit a Report
                   </button>

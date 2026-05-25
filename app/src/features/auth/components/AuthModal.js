@@ -516,7 +516,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                 
                 <div className="space-y-1.5">
                   <h3 className="text-xl font-bold text-ctp-text tracking-tight uppercase">AyosDocs</h3>
-                  <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.25em] opacity-60">Securing your session</p>
+                  <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.25em] opacity-60">Securing your session</p>
                 </div>
 
                 <div className="mt-10 w-48 h-1 bg-ctp-surface0 rounded-full overflow-hidden relative">
@@ -644,7 +644,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                     />
                   </div>
                   {isFieldInvalid('fullName') && (
-                    <p className="text-[10px] font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                    <p className="text-ui-micro font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
                       {getFieldError('fullName')}
                     </p>
                   )}
@@ -670,7 +670,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                   />
                 </div>
                 {isFieldInvalid('email') && (
-                  <p className="text-[10px] font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                  <p className="text-ui-micro font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
                     {getFieldError('email')}
                   </p>
                 )}
@@ -704,7 +704,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                     </button>
                   </div>
                   {isFieldInvalid('password') && (
-                    <p className="text-[10px] font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                    <p className="text-ui-micro font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
                       {getFieldError('password')}
                     </p>
                   )}
@@ -713,7 +713,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                       <button 
                         type="button"
                         onClick={() => setMode('forgot-password')}
-                        className="text-[11px] font-bold text-ctp-subtext1 hover:text-ctp-sky-800 transition-colors"
+                        className="text-ui-micro font-bold text-ctp-subtext1 hover:text-ctp-sky-800 transition-colors"
                       >
                         Forgot password?
                       </button>
@@ -751,7 +751,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                     </button>
                   </div>
                   {isFieldInvalid('confirmPassword') && (
-                    <p className="text-[10px] font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                    <p className="text-ui-micro font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
                       {getFieldError('confirmPassword')}
                     </p>
                   )}
@@ -796,7 +796,7 @@ const AuthModal = ({ isOpen, onClose }) => {
             </form>
           )}
 
-          <p className="mt-8 text-center text-[10px] font-medium text-ctp-subtext0 leading-relaxed px-6 uppercase tracking-wider opacity-60">
+          <p className="mt-8 text-center text-ui-micro font-medium text-ctp-subtext0 leading-relaxed px-6 uppercase tracking-wider opacity-60">
             By continuing, you agree to our <span className="underline cursor-pointer hover:text-ctp-sky-800">Terms</span> and <span className="underline cursor-pointer hover:text-ctp-sky-800">Privacy</span>.
           </p>
         </div>

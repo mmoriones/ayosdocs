@@ -33,7 +33,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
             <h3 className="text-base font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors tracking-tight leading-none">
               {guide.title}
             </h3>
-            <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-widest border ${
+            <span className={`text-ui-tiny font-bold px-1.5 py-0.5 rounded uppercase tracking-widest border ${
               status === 'Completed' 
                 ? 'bg-ctp-green/[0.07] text-ctp-green border-ctp-green/20' 
                 : 'bg-ctp-sky-800/10 text-ctp-sky-800 border-ctp-sky-800/20'
@@ -45,15 +45,15 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
           {status === 'Completed' ? (
             <div className="flex items-center gap-2 text-ctp-green opacity-70">
               <Check size={12} strokeWidth={3} />
-              <span className="text-[10px] font-bold uppercase tracking-widest">Requirement verified</span>
+              <span className="text-ui-micro font-bold uppercase tracking-widest">Requirement verified</span>
             </div>
           ) : nextStep ? (
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest">Up next:</span>
+              <span className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest">Up next:</span>
               <p className="text-xs text-ctp-subtext1 truncate font-medium">{nextStep.task}</p>
             </div>
           ) : (
-            <p className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-widest opacity-60">
+            <p className="text-ui-micro font-bold text-ctp-subtext0 uppercase tracking-widest opacity-60">
               Ready to start workflow
             </p>
           )}
@@ -61,7 +61,7 @@ const GuideRowCard = ({ guide, progress, steps = [], onDelete, onFavorite }) => 
 
         <div className="hidden md:flex items-center gap-8 shrink-0 px-4">
           <div className="w-40 space-y-2">
-            <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-widest">
+            <div className="flex items-center justify-between text-ui-tiny font-bold uppercase tracking-widest">
               <span className="text-ctp-subtext1 opacity-60">{progress.completedCount}/{progress.totalCount} steps</span>
               <span className="text-ctp-text">{percentage}%</span>
             </div>

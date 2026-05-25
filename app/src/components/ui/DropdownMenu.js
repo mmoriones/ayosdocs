@@ -98,7 +98,7 @@ export function DropdownMenuItem({
         // but the parent handles stopPropagation to the outside world.
         onClick?.(e);
       }}
-      className={`w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${variants[variant]} ${className}`}
+      className={`w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-lg text-ui-micro font-bold uppercase tracking-widest transition-all ${variants[variant]} ${className}`}
     >
       {Icon && <Icon size={14} />}
       {children}

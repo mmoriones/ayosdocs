@@ -13,7 +13,7 @@ import { X } from 'lucide-react';
 const FilterPill = ({ label, onClear, className = "" }) => {
   return (
     <div className={`flex items-center gap-2 px-2 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-lg group animate-in fade-in zoom-in-95 duration-200 ${className}`}>
-      <span className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest">{label}</span>
+      <span className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest">{label}</span>
       <button 
         onClick={onClear}
         className="text-ctp-subtext1 hover:text-ctp-peach transition-colors outline-none"

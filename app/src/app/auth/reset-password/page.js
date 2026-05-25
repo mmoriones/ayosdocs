@@ -81,7 +81,7 @@ function ResetPasswordForm() {
       className="w-full max-w-md animate-slide-down"
       noPadding
       footer={
-        <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest text-center">
+        <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest text-center">
           Secure Password Reset System
         </p>
       }

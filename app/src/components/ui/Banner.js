@@ -50,11 +50,11 @@ const Banner = ({
     <div className={`border rounded-lg p-3 flex gap-3.5 animate-in fade-in slide-in-from-top-1 duration-200 ${variants[variant]} ${className.includes('items-') ? '' : 'items-start'} ${className}`}>
       {Icon && (
         <div className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 border border-current/10 bg-ctp-base shadow-sm ${iconVariants[variant]} ${className.includes('items-center') ? '' : 'mt-0.5'}`}>
-          <Icon size={12} strokeWidth={3} />
+          <Icon size={16} strokeWidth={2.5} />
         </div>
       )}
-      <div className="flex-1 text-[11px] font-medium leading-relaxed">
-        {title && <span className="font-bold uppercase tracking-widest text-[9px] mr-1.5 opacity-80">{title}:</span>}
+      <div className="flex-1 text-ui-label font-medium leading-relaxed">
+        {title && <span className="font-bold uppercase tracking-widest text-ui-micro mr-1.5 opacity-80">{title}:</span>}
         {children}
       </div>
       {onClose && (

@@ -375,7 +375,7 @@ export default function HomeClient({ allGuides }) {
         <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
             <div className="flex items-center gap-3">
-              <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Trending Roadmaps</h2>
+              <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Trending Roadmaps</h2>
               <Badge variant="sky" className="px-1.5 py-0">POPULAR</Badge>
             </div>
             <Link 
@@ -416,7 +416,7 @@ export default function HomeClient({ allGuides }) {
             {/* Life Event Bundles - Primary Position */}
             <section className="space-y-6">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Life Event Goals</h2>
+                <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Life Event Goals</h2>
                 <Link 
                   href="/bundles"
                   className="text-ui-detail font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
@@ -431,7 +431,7 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                 <div className="flex items-center gap-3">
-                  <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Community Intelligence</h2>
+                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Community Intelligence</h2>
                   <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-ctp-green/[0.08] border border-ctp-green/20">
                     <div className="w-1.5 h-1.5 rounded-full bg-ctp-green animate-pulse shadow-[0_0_8px_rgba(166,227,161,0.5)]" />
                     <span className="text-ui-micro font-bold text-ctp-green uppercase tracking-ui-caps">Live: 512 Reports Today</span>
@@ -556,7 +556,7 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Current Focus</h2>
+                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Current Focus</h2>
                   <Badge variant="sky" className="px-1.5 py-0">TRACKING</Badge>
                 </div>
                 <Link 
@@ -588,7 +588,7 @@ export default function HomeClient({ allGuides }) {
                   </div>
                   <div className="space-y-1 px-4">
                     <p className="font-bold text-ctp-text text-ui-subhead tracking-tight">{trendingGuides[0].title}</p>
-                    <p className="text-ui-micro text-ctp-subtext1 max-w-xs mx-auto font-medium leading-relaxed">
+                    <p className="text-ui-detail text-ctp-subtext1 max-w-xs mx-auto font-medium leading-relaxed">
                       Most Filipinos start with this roadmap. Ready to begin your application?
                     </p>
                   </div>
@@ -616,7 +616,7 @@ export default function HomeClient({ allGuides }) {
                     <BookOpen size={20} strokeWidth={1.5} />
                   </div>
                   <div className="space-y-1">
-                    <p className="font-bold text-ctp-text text-ui-subhead">No active focus</p>
+                    <p className="font-bold text-ctp-text text-base">No active focus</p>
                     <p className="text-ui-micro text-ctp-subtext1 max-w-xs mx-auto px-4 font-medium">
                       Start tracking a procedure to see it here.
                     </p>
@@ -637,7 +637,7 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Recent Updates</h2>
+                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Recent Updates</h2>
                   <Badge variant="sky" className="px-1.5 py-0">LATEST</Badge>
                 </div>
                 <Link 
@@ -654,7 +654,7 @@ export default function HomeClient({ allGuides }) {
             {(onboarded || !isLoggedIn) && (
               <section className="space-y-6">
                 <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                  <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Community Feed</h2>
+                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Community Feed</h2>
                   <Link 
                     href="/offices"
                     className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"

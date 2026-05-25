@@ -287,13 +287,13 @@ export default function GuidesClient({ initialGuides }) {
         <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-3 flex items-center gap-3 overflow-x-auto no-scrollbar">
           <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
             <Filter size={14} className="text-ctp-subtext1" />
-            <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Categories</span>
+            <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Categories</span>
           </div>
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-lg text-ui-micro font-bold uppercase tracking-ui-tight transition-all whitespace-nowrap border ${
+              className={`px-4 py-2 rounded-lg text-ui-tiny font-bold uppercase tracking-ui-tight transition-all whitespace-nowrap border ${
                 selectedCategory === cat
                   ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
                   : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
@@ -515,7 +515,7 @@ export default function GuidesClient({ initialGuides }) {
                 <div className="w-16 h-16 bg-ctp-base/50 border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto mb-6">
                   <Search size={28} className="text-ctp-subtext1" />
                 </div>
-                <h3 className="text-xl font-bold text-ctp-text tracking-tight uppercase">No guides found</h3>
+                <h3 className="text-base font-bold text-ctp-text tracking-tight uppercase">No guides found</h3>
                 <p className="text-sm text-ctp-subtext1 font-medium mt-1">Try adjusting your filters or search terms.</p>
                 <Button 
                   onClick={resetFilters} 

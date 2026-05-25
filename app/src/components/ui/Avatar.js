@@ -20,7 +20,7 @@ export default function Avatar({
   className = '',
 }) {
   const sizes = {
-    sm: 'w-8 h-8 text-[10px]',
+    sm: 'w-8 h-8 text-ui-micro',
     md: 'w-10 h-10 text-xs',
     lg: 'w-14 h-14 text-sm',
     xl: 'w-20 h-20 text-base',

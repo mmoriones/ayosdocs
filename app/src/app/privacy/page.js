@@ -16,7 +16,7 @@ export default function PrivacyPage() {
         description="Our commitment to protecting your personal information and tracking data."
         actions={
           <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
-            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Privacy Standards</span>
+            <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Privacy Standards</span>
           </div>
         }
       />
@@ -26,7 +26,7 @@ export default function PrivacyPage() {
           <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden">
             <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
               <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Document Overview</h2>
-              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Effective: May 15, 2026</span>
+              <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">Effective: May 15, 2026</span>
             </div>
             
             <div className="p-8 md:p-12 space-y-12">
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
               <h4 className="text-sm font-bold text-ctp-text uppercase tracking-tight">Questions about your data?</h4>
               <p className="text-xs text-ctp-subtext1 font-medium leading-tight">Reach out to our security team for clarification.</p>
             </div>
-            <Link href="/support" className="px-6 py-2 bg-ctp-base border border-ctp-surface1 rounded-lg text-[10px] font-bold uppercase tracking-widest text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 transition-all shadow-sm active:scale-95">
+            <Link href="/support" className="px-6 py-2 bg-ctp-base border border-ctp-surface1 rounded-lg text-ui-micro font-bold uppercase tracking-widest text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 transition-all shadow-sm active:scale-95">
               Contact Privacy Team
             </Link>
           </aside>

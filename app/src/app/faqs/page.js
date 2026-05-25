@@ -78,7 +78,7 @@ export default function FAQsPage() {
         actions={
           <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3 text-ctp-sky-800">
             <Sparkles size={14} />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-ctp-subtext1">Instant answers</span>
+            <span className="text-ui-micro font-bold uppercase tracking-widest text-ctp-subtext1">Instant answers</span>
           </div>
         }
       />
@@ -89,7 +89,7 @@ export default function FAQsPage() {
           <aside className="w-full lg:w-72 shrink-0 space-y-6">
             <section className="bg-ctp-mantle/50 rounded-xl border border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
               <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50">
-                <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Categories</h3>
+                <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Categories</h3>
               </div>
               <div className="p-2 space-y-1">
                 {['All', ...faqData.map(f => f.category)].map(cat => (
@@ -111,12 +111,12 @@ export default function FAQsPage() {
             <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 space-y-4 shadow-sm">
               <div className="flex items-center gap-3 text-ctp-mauve">
                 <MessageCircle size={18} strokeWidth={2.5} />
-                <h3 className="text-[10px] font-bold uppercase tracking-widest">Still Stuck?</h3>
+                <h3 className="text-ui-micro font-bold uppercase tracking-widest">Still Stuck?</h3>
               </div>
               <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
                 Our support team is ready to assist you with specific documentation issues.
               </p>
-              <Link href="/support" className="block w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-[10px] font-bold uppercase tracking-widest text-center hover:border-ctp-sky-800 hover:bg-ctp-mantle transition-all shadow-sm">
+              <Link href="/support" className="block w-full py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ui-micro font-bold uppercase tracking-widest text-center hover:border-ctp-sky-800 hover:bg-ctp-mantle transition-all shadow-sm">
                 Contact Support
               </Link>
             </section>
@@ -144,7 +144,7 @@ export default function FAQsPage() {
                       className="w-full px-6 py-5 flex items-center justify-between text-left gap-4"
                     >
                       <div className="min-w-0">
-                        <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest mb-1.5 block opacity-80">{faq.category}</span>
+                        <span className="text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest mb-1.5 block opacity-80">{faq.category}</span>
                         <h4 className="text-sm font-bold text-ctp-text tracking-tight group-hover:text-ctp-sky-800 transition-colors">{faq.q}</h4>
                       </div>
                       <div className={`shrink-0 p-1.5 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 transition-transform duration-300 ${openIndex === faq.globalIdx ? 'rotate-180 text-ctp-sky-800 shadow-inner' : ''}`}>

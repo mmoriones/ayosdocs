@@ -75,8 +75,8 @@ export default function SettingsClient() {
               <User size={14} strokeWidth={2.5} />
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="text-[10px] font-bold text-ctp-text leading-tight truncate">{user?.name || 'Guest'}</span>
-              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-tight truncate">{user?.email || 'No Email'}</span>
+              <span className="text-ui-micro font-bold text-ctp-text leading-tight truncate">{user?.name || 'Guest'}</span>
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-tight truncate">{user?.email || 'No Email'}</span>
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@ export default function SettingsClient() {
           {/* Navigation Sidebar */}
           <div className="lg:col-span-1">
             <nav className="flex flex-col gap-1 sticky top-24">
-              <p className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.2em] px-3 mb-3">Preferences</p>
+              <p className="text-ui-micro font-bold text-ctp-subtext0 uppercase tracking-[0.2em] px-3 mb-3">Preferences</p>
               {tabs.map((item) => (
                 <button
                   key={item.label}
@@ -146,7 +146,7 @@ export default function SettingsClient() {
           </div>
           <div>
             <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Delete Account</h3>
-            <p className="text-[10px] text-ctp-subtext1 font-medium">This action cannot be undone</p>
+            <p className="text-ui-micro text-ctp-subtext1 font-medium">This action cannot be undone</p>
           </div>
         </div>
 
@@ -174,7 +174,7 @@ export default function SettingsClient() {
           <Button
             variant="outline"
             onClick={() => setShowDeleteConfirm(false)}
-            className="flex-1 font-bold text-[10px] uppercase tracking-widest bg-ctp-base"
+            className="flex-1 font-bold text-ui-micro uppercase tracking-widest bg-ctp-base"
           >
             Cancel
           </Button>
@@ -239,7 +239,7 @@ function GeneralSection() {
               <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
                 <Languages size={14} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xs font-bold text-ctp-text uppercase tracking-widest">Interface Language</h3>
+              <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Interface Language</h3>
             </div>
             <p className="text-xs text-ctp-subtext1 font-medium ml-9 opacity-80">Localized content and system notifications.</p>
           </div>
@@ -258,7 +258,7 @@ function GeneralSection() {
               <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
                 <Calendar size={14} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xs font-bold text-ctp-text uppercase tracking-widest">System Date Format</h3>
+              <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">System Date Format</h3>
             </div>
             <p className="text-xs text-ctp-subtext1 font-medium ml-9 opacity-80">Global date formatting across all trackers.</p>
           </div>
@@ -309,7 +309,7 @@ function AppearanceSection() {
               
               <div>
                 <p className={`text-xs font-bold tracking-tight uppercase ${actualTheme === t.id ? 'text-ctp-sky-800' : 'text-ctp-text'}`}>{t.label}</p>
-                <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60">{t.description}</p>
+                <p className="text-ui-micro text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60">{t.description}</p>
               </div>
 
               {actualTheme === t.id && (
@@ -375,7 +375,7 @@ function PrivacySection({ user, showToast, onDeleteClick }) {
               <h3 className="text-sm font-bold text-ctp-text uppercase tracking-wide">Activity Logs</h3>
               <p className="text-xs text-ctp-subtext1 font-medium">View your recent login activity and security events.</p>
             </div>
-            <Button variant="secondary" size="sm" className="font-bold text-[10px] uppercase tracking-widest bg-ctp-base">
+            <Button variant="secondary" size="sm" className="font-bold text-ui-micro uppercase tracking-widest bg-ctp-base">
               View Logs
             </Button>
           </div>
@@ -430,20 +430,20 @@ function PasswordSection({ user, showToast }) {
           </div>
           
           <div className="w-full max-w-sm bg-ctp-base/50 border border-ctp-surface1 rounded-2xl p-8 text-left shadow-sm">
-            <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] mb-5 border-b border-ctp-surface1 pb-3">Security Provider Details</p>
+            <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] mb-5 border-b border-ctp-surface1 pb-3">Security Provider Details</p>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-ctp-subtext1 uppercase">Method</span>
+                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase">Method</span>
                 <span className="text-xs font-bold text-ctp-sky-800">Google OAuth 2.0</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-ctp-subtext1 uppercase">Status</span>
-                <Badge variant="green" className="text-[9px] bg-ctp-green/[0.07] border-ctp-green/20">Active & Secure</Badge>
+                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase">Status</span>
+                <Badge variant="green" className="text-ui-tiny bg-ctp-green/[0.07] border-ctp-green/20">Active & Secure</Badge>
               </div>
             </div>
             <button 
               onClick={() => window.open('https://myaccount.google.com/security', '_blank')}
-              className="mt-8 w-full py-3 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-[10px] font-bold uppercase tracking-widest text-ctp-text hover:border-ctp-sky-800/30 hover:text-ctp-sky-800 transition-all flex items-center justify-center gap-2 group"
+              className="mt-8 w-full py-3 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-ui-micro font-bold uppercase tracking-widest text-ctp-text hover:border-ctp-sky-800/30 hover:text-ctp-sky-800 transition-all flex items-center justify-center gap-2 group"
             >
               <span>Manage Google Account</span>
               <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -538,7 +538,7 @@ function ChangePasswordForm({ showToast }) {
               Your password has been securely updated. We&apos;ve synchronized your credentials across all platforms.
             </p>
           </div>
-          <Button variant="secondary" onClick={() => setIsSuccess(false)} className="px-10 font-bold uppercase tracking-widest text-[10px] bg-ctp-base">
+          <Button variant="secondary" onClick={() => setIsSuccess(false)} className="px-10 font-bold uppercase tracking-widest text-ui-micro bg-ctp-base">
             Return to Settings
           </Button>
         </div>
@@ -550,14 +550,14 @@ function ChangePasswordForm({ showToast }) {
     <Card 
       title="Change Password" 
       background="mantle"
-      headerAction={<Badge variant="sky" className="text-[9px] uppercase tracking-widest">Secure Area</Badge>}
+      headerAction={<Badge variant="sky" className="text-ui-tiny uppercase tracking-widest">Secure Area</Badge>}
       footer={
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-subtext1 border border-ctp-surface1 shrink-0 shadow-inner">
               <Shield size={14} />
             </div>
-            <p className="text-[10px] text-ctp-subtext1 max-w-xs leading-relaxed font-bold uppercase tracking-wide">
+            <p className="text-ui-micro text-ctp-subtext1 max-w-xs leading-relaxed font-bold uppercase tracking-wide">
               Security Notice: You will be signed out of all other devices upon completion.
             </p>
           </div>
@@ -566,7 +566,7 @@ function ChangePasswordForm({ showToast }) {
             form="change-password-form"
             disabled={isSubmitting || !isFormValid()}
             isLoading={isSubmitting}
-            className="px-10 font-bold text-[11px] uppercase tracking-[0.2em]"
+            className="px-10 font-bold text-ui-micro uppercase tracking-[0.2em]"
           >
             Update Credentials
           </Button>
@@ -637,7 +637,7 @@ function PlaceholderSection({ title, icon: Icon }) {
             We&apos;re building something great. This settings module will be available in the next platform update.
           </p>
         </div>
-        <Button variant="outline" size="sm" onClick={() => window.location.href = '/updates'} className="font-bold text-[10px] uppercase tracking-widest bg-ctp-base">
+        <Button variant="outline" size="sm" onClick={() => window.location.href = '/updates'} className="font-bold text-ui-micro uppercase tracking-widest bg-ctp-base">
           View Roadmap
         </Button>
       </div>

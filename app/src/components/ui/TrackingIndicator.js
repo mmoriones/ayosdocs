@@ -39,7 +39,7 @@ const TrackingIndicator = ({
   return (
     <div className={`inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded border transition-all ${current.container} ${className}`}>
       <div className={`w-1 h-1 rounded-full ${current.dot} ${pulse ? 'animate-pulse' : ''}`} />
-      <span className="text-[8px] font-bold uppercase tracking-[0.15em] leading-none">
+      <span className="text-ui-tiny font-bold uppercase tracking-[0.15em] leading-none">
         {label || current.text}
       </span>
     </div>

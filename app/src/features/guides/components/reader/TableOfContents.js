@@ -48,7 +48,7 @@ const TableOfContents = ({ headings, onItemClick, activeId }) => {
               
               if (onItemClick) onItemClick(h.id);
             }}
-            className={`block py-2 px-3 rounded-lg text-xs transition-all tracking-tight ${
+            className={`block py-2 px-3 rounded-lg text-ui-label transition-all tracking-tight ${
               activeId === h.id
                 ? "bg-ctp-sky-800/10 text-ctp-sky-800 font-semibold border border-ctp-sky-800/20"
                 : "text-ctp-subtext1 font-medium hover:bg-ctp-base hover:text-ctp-sky-800"

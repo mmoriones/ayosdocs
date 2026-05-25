@@ -74,11 +74,11 @@ const GuideCard = ({
 
         {showMeta && (
           <div className="hidden md:flex items-center gap-4 shrink-0 border-l border-ctp-surface1 pl-6 h-10">
-            <div className="flex items-center gap-1.5 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">
+            <div className="flex items-center gap-1.5 text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps">
               <Clock size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
               <span>{guide.estimatedTime || "1-3 days"}</span>
             </div>
-            <div className="flex items-center gap-1.5 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">
+            <div className="flex items-center gap-1.5 text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps">
               <DollarSign size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
               <span>{guide.costRange || "Free"}</span>
             </div>
@@ -149,7 +149,7 @@ const GuideCard = ({
         )}
 
         {showMeta && (
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps mb-4">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps mb-4">
             <div className="flex items-center gap-1.5 min-w-0">
               <Clock size={12} className="text-ctp-sky-800 shrink-0" strokeWidth={3} />
               <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>

@@ -40,7 +40,7 @@ export default function ProgressBar({
         />
       </div>
       {showLabel && (
-        <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] shrink-0">
+        <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-[0.15em] shrink-0">
           {Math.round(clampedValue)}%
         </span>
       )}

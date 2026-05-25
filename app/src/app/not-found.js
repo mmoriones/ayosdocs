@@ -25,7 +25,7 @@ export default function NotFound() {
 
         {/* Minimalist Text Content */}
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-md text-ctp-sky-800 text-[10px] font-bold uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-md text-ctp-sky-800 text-ui-micro font-bold uppercase tracking-widest">
             <Compass size={12} />
             Error Code 404
           </div>
@@ -41,21 +41,21 @@ export default function NotFound() {
         <div className="flex flex-col gap-3 pt-4">
           <button 
             onClick={() => router.push('/')}
-            className="group w-full py-3 bg-ctp-sky-800 text-white rounded-lg font-bold text-[10px] uppercase tracking-widest shadow-lg shadow-ctp-sky-800/10 hover:bg-ctp-sky-800/90 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+            className="group w-full py-3 bg-ctp-sky-800 text-white rounded-lg font-bold text-ui-micro uppercase tracking-widest shadow-lg shadow-ctp-sky-800/10 hover:bg-ctp-sky-800/90 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
           >
             <Home size={14} />
             Go to Dashboard
           </button>
           <button 
             onClick={() => router.back()}
-            className="w-full py-3 bg-ctp-base text-ctp-subtext1 border border-ctp-surface1 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-ctp-mantle/50 hover:text-ctp-text transition-all active:scale-[0.98] shadow-sm flex items-center justify-center gap-2"
+            className="w-full py-3 bg-ctp-base text-ctp-subtext1 border border-ctp-surface1 rounded-lg font-bold text-ui-micro uppercase tracking-widest hover:bg-ctp-mantle/50 hover:text-ctp-text transition-all active:scale-[0.98] shadow-sm flex items-center justify-center gap-2"
           >
             <ArrowLeft size={14} />
             Previous Page
           </button>
         </div>
 
-        <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-[0.3em] opacity-40">
+        <p className="text-ui-tiny text-ctp-subtext1 font-bold uppercase tracking-[0.3em] opacity-40">
           AyosDocs Engine v1.0.4
         </p>
       </div>

@@ -298,13 +298,13 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
             </div>
             <div className="min-w-0">
               <h2 className="text-sm font-bold text-ctp-text truncate tracking-tight">{bundle.title}</h2>
-              <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest block leading-none">{bundle.category}</span>
+              <span className="text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest block leading-none">{bundle.category}</span>
             </div>
           </div>
 
           <div className="flex items-center gap-6">
               <div className="hidden md:flex flex-col items-end">
-                <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Global Progress</span>
+                <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">Global Progress</span>
                 <span className="text-xs font-bold text-ctp-text">{isTracked ? (stageStats.every(s => s.completed) ? 'Completed' : 'In Progress') : 'Not Active'}</span>
               </div>
               <button 
@@ -342,7 +342,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
               <button 
                 onClick={handleResendVerification}
                 disabled={isResending}
-                className="px-5 py-2 bg-ctp-yellow/10 text-ctp-yellow rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-ctp-yellow/20 transition-all shadow-sm shrink-0 flex items-center gap-2"
+                className="px-5 py-2 bg-ctp-yellow/10 text-ctp-yellow rounded-lg font-bold text-ui-micro uppercase tracking-widest hover:bg-ctp-yellow/20 transition-all shadow-sm shrink-0 flex items-center gap-2"
               >
                 {isResending ? (
                   <>
@@ -368,10 +368,10 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                 </div>
                 <div className="space-y-1">
                   <div className="flex items-center gap-3">
-                    <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest px-2 py-0.5 bg-ctp-sky-800/5 rounded border border-ctp-sky-800/20">
+                    <span className="text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest px-2 py-0.5 bg-ctp-sky-800/5 rounded border border-ctp-sky-800/20">
                       {bundle.category}
                     </span>
-                    <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-80">
+                    <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest opacity-80">
                       Roadmap View
                     </span>
                   </div>
@@ -395,7 +395,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                    <div className="relative ml-20 bg-ctp-mantle/50 border border-ctp-surface1 rounded-2xl p-6 mb-12 shadow-sm flex flex-col md:flex-row gap-8 items-center justify-between overflow-hidden">
                       <div className="absolute inset-0 bg-ctp-sky-800/[0.01] pointer-events-none" />
                       <div className="relative z-10 space-y-1">
-                        <h4 className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest">Resource Forecast</h4>
+                        <h4 className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest">Resource Forecast</h4>
                         <p className="text-sm font-bold text-ctp-text">Estimated workflow requirements</p>
                       </div>
                       <div className="relative z-10 flex gap-10">
@@ -417,15 +417,15 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                         ) : (
                           <>
                             <div className="text-center">
-                              <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Total Cost</p>
+                              <p className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Total Cost</p>
                               <p className="text-lg font-bold text-ctp-text leading-none">{analytics.cost.total}</p>
                             </div>
                             <div className="text-center">
-                              <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Time Investment</p>
+                              <p className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Time Investment</p>
                               <p className="text-lg font-bold text-ctp-text leading-none">{analytics.time.total}</p>
                             </div>
                             <div className="text-center">
-                              <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Guides Left</p>
+                              <p className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Guides Left</p>
                               <p className="text-lg font-bold text-ctp-text leading-none">{totalGuides - analytics.completedGuides}</p>
                             </div>
                           </>
@@ -456,12 +456,12 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                       <div className={`space-y-6 transition-all duration-500 ${isLocked ? 'opacity-40 grayscale pointer-events-none' : 'opacity-100'}`}>
                         <div className="space-y-1">
                           <div className="flex items-center gap-3">
-                            <h2 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-70">Stage {step.step}</h2>
+                            <h2 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest opacity-70">Stage {step.step}</h2>
                             {step.completed && (
-                              <span className="px-2 py-0.5 bg-ctp-green/[0.07] text-ctp-green border border-ctp-green/20 rounded text-[9px] font-bold uppercase tracking-widest">Complete</span>
+                              <span className="px-2 py-0.5 bg-ctp-green/[0.07] text-ctp-green border border-ctp-green/20 rounded text-ui-tiny font-bold uppercase tracking-widest">Complete</span>
                             )}
                             {isCurrent && (
-                              <span className="px-2 py-0.5 bg-ctp-sky-800/10 text-ctp-sky-800 border border-ctp-sky-800/20 rounded text-[9px] font-bold uppercase tracking-widest animate-pulse">Current Focus</span>
+                              <span className="px-2 py-0.5 bg-ctp-sky-800/10 text-ctp-sky-800 border border-ctp-sky-800/20 rounded text-ui-tiny font-bold uppercase tracking-widest animate-pulse">Current Focus</span>
                             )}
                           </div>
                           <h3 className="text-xl font-bold text-ctp-text tracking-tight">{step.label}</h3>
@@ -503,7 +503,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                  <div className="w-10 h-10 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
                    <Info size={20} strokeWidth={2.5} />
                  </div>
-                 <h3 className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">Requirement Tips</h3>
+                 <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em]">Requirement Tips</h3>
                </div>
                
                <div className="space-y-4">
@@ -518,7 +518,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                      </div>
                      <div className="space-y-1">
                        <h4 className="text-xs font-bold text-ctp-text">{tip.title}</h4>
-                       <p className="text-[10px] text-ctp-subtext1 leading-relaxed">{tip.desc}</p>
+                       <p className="text-ui-micro text-ctp-subtext1 leading-relaxed">{tip.desc}</p>
                      </div>
                    </div>
                  ))}
@@ -528,16 +528,16 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
             <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
               <div className="p-4 border-b border-ctp-surface1 flex items-center gap-2">
                 <Building2 size={14} className="text-ctp-sky-800" />
-                <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Regional Offices</h3>
+                <h3 className="text-ui-micro font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Regional Offices</h3>
               </div>
               <div className="p-5 space-y-4">
-                <p className="text-[11px] font-medium leading-relaxed text-ctp-subtext1">
+                <p className="text-ui-micro font-medium leading-relaxed text-ctp-subtext1">
                   Most documents in this bundle can be processed at local municipal centers or integrated SM Mall service hubs.
                 </p>
                 <Button 
                   variant="secondary"
                   onClick={() => router.push('/offices')}
-                  className="w-full text-[10px] uppercase tracking-widest"
+                  className="w-full text-ui-micro uppercase tracking-widest"
                 >
                   Find nearest office
                 </Button>

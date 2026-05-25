@@ -57,7 +57,7 @@ export default function OfficesClient() {
         actions={
           <div className="bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
             <div className="w-2 h-2 rounded-full bg-ctp-sky-800 animate-pulse shadow-[0_0_8px_var(--sky-800)]" />
-            <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Community Reports Active</span>
+            <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Community Reports Active</span>
           </div>
         }
       />
@@ -74,7 +74,7 @@ export default function OfficesClient() {
               <button
                 key={agency}
                 onClick={() => setSelectedAgency(agency)}
-                className={`px-3 py-1.5 rounded-md text-[9px] font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
+                className={`px-3 py-1.5 rounded-md text-ui-tiny font-bold uppercase tracking-[0.1em] transition-all whitespace-nowrap border ${
                   selectedAgency === agency
                     ? 'bg-ctp-sky-800 text-white border-ctp-sky-800 shadow-sm'
                     : 'bg-ctp-mantle/50 text-ctp-subtext1 border-ctp-surface1 hover:border-ctp-sky-800/30 hover:text-ctp-sky-800'
@@ -119,8 +119,8 @@ export default function OfficesClient() {
                   <div className="w-12 h-12 bg-ctp-base border border-ctp-surface1 rounded-xl flex items-center justify-center mx-auto mb-6 shadow-inner">
                     <Search size={22} className="text-ctp-subtext1" />
                   </div>
-                  <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">No matching offices</h3>
-                  <p className="text-xs text-ctp-subtext1 font-medium mt-1">Try broadening your search criteria.</p>
+                  <h3 className="text-base font-bold text-ctp-text uppercase tracking-widest">No matching offices</h3>
+                  <p className="text-sm text-ctp-subtext1 font-medium mt-1">Try broadening your search criteria.</p>
                 </div>
               )}
             </div>
@@ -130,18 +130,18 @@ export default function OfficesClient() {
             <Card background="base" noPadding className="flex flex-col">
               <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center gap-2">
                 <TrendingUp size={14} className="text-ctp-sky-800" />
-                <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Top Performers</h3>
+                <h3 className="text-ui-subhead font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Top Performers</h3>
               </div>
               
               <div className="divide-y divide-ctp-surface1/30">
                 {bestPerformingOffices.map((office, i) => (
                   <div key={office._id} className="flex items-center gap-3.5 p-4 hover:bg-ctp-mantle/50 transition-colors group cursor-pointer">
-                    <div className="w-7 h-7 rounded bg-ctp-mantle border border-ctp-surface1 text-ctp-surface2 flex items-center justify-center text-[9px] font-bold group-hover:text-ctp-sky-800 transition-colors">
+                    <div className="w-7 h-7 rounded bg-ctp-mantle border border-ctp-surface1 text-ctp-surface2 flex items-center justify-center text-ui-tiny font-bold group-hover:text-ctp-sky-800 transition-colors">
                       0{i + 1}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-[11px] font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors uppercase leading-tight">{office.name}</h4>
-                      <p className="text-[8px] text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 opacity-60">{office.agency} • {office.stats.avgRating} ★</p>
+                      <h4 className="text-ui-detail font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors uppercase leading-tight">{office.name}</h4>
+                      <p className="text-ui-micro text-ctp-subtext1 font-bold uppercase tracking-widest mt-0.5 opacity-60">{office.agency} • {office.stats.avgRating} ★</p>
                     </div>
                   </div>
                 ))}
@@ -149,7 +149,7 @@ export default function OfficesClient() {
               
               <button 
                 onClick={() => router.push('/coming-soon')}
-                className="w-full p-3 bg-ctp-mantle/50 border-t border-ctp-surface1 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:bg-ctp-sky-800 hover:text-white transition-all"
+                className="w-full p-3 bg-ctp-mantle/50 border-t border-ctp-surface1 text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest hover:bg-ctp-sky-800 hover:text-white transition-all"
               >
                 View Analytics
               </button>
@@ -158,10 +158,10 @@ export default function OfficesClient() {
             <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
               <div className="p-4 border-b border-ctp-surface1 flex items-center gap-2">
                 <ShieldCheck size={14} className="text-ctp-green" />
-                <h3 className="text-[10px] font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Verified Insights</h3>
+                <h3 className="text-ui-subhead font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Verified Insights</h3>
               </div>
               <div className="p-5 space-y-4 text-center">
-                <p className="text-[11px] font-medium leading-relaxed text-ctp-subtext1">
+                <p className="text-ui-detail font-medium leading-relaxed text-ctp-subtext1">
                   Join 1.2k+ citizens in improving government service transparency with real-time reports.
                 </p>
                 <Button 
@@ -212,7 +212,7 @@ const OfficeCard = ({ office, router }) => {
               </h3>
               <div className="flex items-center gap-2 mt-1 text-ctp-subtext1">
                 <MapPin size={10} className="text-ctp-sky-800" />
-                <span className="text-[9px] font-bold uppercase tracking-[0.1em]">{office.city}, {office.province}</span>
+                <span className="text-ui-micro font-bold uppercase tracking-[0.1em]">{office.city}, {office.province}</span>
               </div>
             </div>
             
@@ -222,7 +222,7 @@ const OfficeCard = ({ office, router }) => {
                   <Star size={12} className="fill-ctp-yellow text-ctp-yellow" />
                   <span className="text-sm font-bold text-ctp-text">{office.stats.avgRating?.toFixed(1) || '0.0'}</span>
                 </div>
-                <p className="text-[8px] text-ctp-subtext1 font-bold uppercase tracking-[0.1em] mt-0.5 whitespace-nowrap opacity-60">{office.stats.totalReports} interactions</p>
+                <p className="text-ui-micro text-ctp-subtext1 font-bold uppercase tracking-[0.1em] mt-0.5 whitespace-nowrap opacity-60">{office.stats.totalReports} interactions</p>
               </div>
               <div className="h-6 w-px bg-ctp-surface1 hidden md:block" />
               <div className="flex flex-col items-center min-w-[70px] gap-0.5">
@@ -233,8 +233,8 @@ const OfficeCard = ({ office, router }) => {
           </div>
 
           <div className="flex flex-col gap-1">
-             <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em]">Address:</p>
-             <p className="text-[11px] text-ctp-text font-medium leading-relaxed opacity-80 line-clamp-1">{office.address}</p>
+             <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.1em]">Address:</p>
+             <p className="text-ui-micro text-ctp-text font-medium leading-relaxed opacity-80 line-clamp-1">{office.address}</p>
           </div>
         </div>
       </div>
@@ -242,13 +242,13 @@ const OfficeCard = ({ office, router }) => {
       <div className="px-4 py-2.5 bg-ctp-mantle/30 border-t border-ctp-surface1/50 flex items-center justify-between">
         <div className="flex items-center gap-2 opacity-80">
           <Users size={12} className="text-ctp-subtext1" />
-          <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+          <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">
             {office.stats.totalReports > 0 ? `${office.stats.totalReports} Citizen Reports` : 'No reports yet'}
           </span>
         </div>
         <button 
           onClick={() => router.push('/coming-soon')}
-          className="text-ctp-sky-800 font-bold text-[9px] uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+          className="text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
         >
           Details
           <ArrowRight size={10} strokeWidth={4} />

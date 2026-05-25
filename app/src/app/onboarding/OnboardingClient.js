@@ -51,7 +51,7 @@ export default function OnboardingClient() {
             <h1 className="text-3xl font-bold text-ctp-text tracking-tight uppercase">
               System Ready
             </h1>
-            <p className="text-[13px] text-ctp-subtext1 font-medium leading-relaxed max-w-sm mx-auto">
+            <p className="text-ui-label text-ctp-subtext1 font-medium leading-relaxed max-w-sm mx-auto">
               Welcome, <span className="text-ctp-text font-bold uppercase">{session?.user?.name?.split(' ')[0] || 'Citizen'}</span>. Your secure government documentation workspace has been successfully initialized.
             </p>
           </div>
@@ -70,7 +70,7 @@ export default function OnboardingClient() {
               </div>
               <div className="space-y-0.5">
                 <h4 className="font-bold text-xs text-ctp-text uppercase tracking-tight">{item.title}</h4>
-                <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] opacity-60 leading-tight">{item.desc}</p>
+                <p className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-[0.15em] opacity-60 leading-tight">{item.desc}</p>
               </div>
             </div>
           ))}

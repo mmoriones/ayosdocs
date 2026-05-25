@@ -141,7 +141,7 @@ export default function CommandPalette() {
             </div>
           ) : filteredItems.length > 0 ? (
             <div className="space-y-1 px-2">
-              <div className="px-3 py-2 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+              <div className="px-3 py-2 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">
                 {query ? 'Search Results' : 'Suggested Actions'}
               </div>
               {filteredItems.map((item, index) => {
@@ -167,12 +167,12 @@ export default function CommandPalette() {
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold truncate">{item.title}</span>
                         {isActiveWorkflow ? (
-                          <span className="px-1.5 py-0.5 rounded border border-ctp-sky-800/30 bg-ctp-sky-800/10 text-[8px] font-bold text-ctp-sky-800 uppercase tracking-widest flex items-center gap-1 shadow-sm">
+                          <span className="px-1.5 py-0.5 rounded border border-ctp-sky-800/30 bg-ctp-sky-800/10 text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest flex items-center gap-1 shadow-sm">
                             <Sparkles size={8} />
                             Active
                           </span>
                         ) : (
-                          <span className={`text-[9px] px-1.5 py-0.5 rounded border uppercase tracking-widest font-bold ${
+                          <span className={`text-ui-tiny px-1.5 py-0.5 rounded border uppercase tracking-widest font-bold ${
                             isSelected ? 'border-white/30 bg-white/10' : 'border-ctp-surface1 bg-ctp-crust text-ctp-subtext1'
                           }`}>
                             {item.type}
@@ -198,19 +198,19 @@ export default function CommandPalette() {
           )}
         </div>
 
-        <div className="px-4 py-3 bg-ctp-mantle/50 border-t border-ctp-surface1 flex items-center justify-between text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+        <div className="px-4 py-3 bg-ctp-mantle/50 border-t border-ctp-surface1 flex items-center justify-between text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-base text-[9px]">ENTER</kbd>
+              <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-base text-ui-tiny">ENTER</kbd>
               to select
             </span>
             <span className="flex items-center gap-1.5">
-              <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-base text-[9px]">↑↓</kbd>
+              <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-base text-ui-tiny">↑↓</kbd>
               to navigate
             </span>
           </div>
           <span className="flex items-center gap-1.5">
-            <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-base text-[9px]">ESC</kbd>
+            <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-base text-ui-tiny">ESC</kbd>
             to close
           </span>
         </div>
