@@ -43,7 +43,7 @@ export default function Card({
     >
       {title && (
         <div className={`px-6 py-4 border-b border-ctp-surface1 flex items-center justify-between bg-ctp-mantle/50 ${headerClassName}`}>
-          <h2 className="text-sm font-bold tracking-tight text-ctp-text uppercase tracking-widest">{title}</h2>
+          <h2 className="text-ui-label font-bold tracking-tight text-ctp-text uppercase tracking-widest">{title}</h2>
           {headerAction && <div className="animate-in fade-in duration-300">{headerAction}</div>}
         </div>
       )}

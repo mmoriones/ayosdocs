@@ -229,7 +229,7 @@ export default function HomeClient({ allGuides }) {
             <div className="p-1.5 rounded-lg bg-ctp-green/10 shrink-0">
               <CheckCircle2 size={16} className="text-ctp-green" />
             </div>
-            <p className="text-xs font-medium text-ctp-text flex-1">
+            <p className="text-ui-detail font-medium text-ctp-text flex-1">
               <span className="font-bold">Welcome back!</span> Your account has been restored. All your data is exactly as you left it.
             </p>
             <button
@@ -256,13 +256,13 @@ export default function HomeClient({ allGuides }) {
                 <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
                   <BookOpen size={24} strokeWidth={2} />
                 </div>
-                <Badge variant="sky" className="text-[8px] px-1.5 py-0 uppercase">{allGuides.length} Available Guides</Badge>
+                <Badge variant="sky" className="px-1.5 py-0 uppercase">{allGuides.length} Available Guides</Badge>
               </div>
               <div className="space-y-1">
                 <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Requirements Library</h3>
-                <p className="text-[11px] text-ctp-subtext1 font-medium leading-relaxed">Browse step-by-step procedures for all government documents.</p>
+                <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Browse step-by-step procedures for all government documents.</p>
               </div>
-              <div className="flex items-center gap-1.5 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest pt-2">
+              <div className="flex items-center gap-1.5 text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps pt-2">
                 Browse Library
                 <ArrowRight size={10} strokeWidth={4} className="group-hover:translate-x-1 transition-transform" />
               </div>
@@ -281,13 +281,13 @@ export default function HomeClient({ allGuides }) {
                 <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
                   <Layers size={24} strokeWidth={2} />
                 </div>
-                <Badge variant="sky" className="text-[8px] px-1.5 py-0 uppercase">{bundles.length} Process Bundles</Badge>
+                <Badge variant="sky" className="px-1.5 py-0 uppercase">{bundles.length} Process Bundles</Badge>
               </div>
               <div className="space-y-1">
                 <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Goal Roadmaps</h3>
-                <p className="text-[11px] text-ctp-subtext1 font-medium leading-relaxed">Accomplish life goals like starting a business or getting married.</p>
+                <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Accomplish life goals like starting a business or getting married.</p>
               </div>
-              <div className="flex items-center gap-1.5 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest pt-2">
+              <div className="flex items-center gap-1.5 text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps pt-2">
                 Start Planning
                 <ArrowRight size={10} strokeWidth={4} className="group-hover:translate-x-1 transition-transform" />
               </div>
@@ -306,13 +306,13 @@ export default function HomeClient({ allGuides }) {
                 <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
                   <MapPin size={24} strokeWidth={2} />
                 </div>
-                <Badge variant="sky" className="text-[8px] px-1.5 py-0 uppercase">{allOffices.length || '...'} Offices Tracked</Badge>
+                <Badge variant="sky" className="px-1.5 py-0 uppercase">{allOffices.length || '...'} Offices Tracked</Badge>
               </div>
               <div className="space-y-1">
                 <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Office Locator</h3>
-                <p className="text-[11px] text-ctp-subtext1 font-medium leading-relaxed">Check real-time branch wait times and community reports.</p>
+                <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Check real-time branch wait times and community reports.</p>
               </div>
-              <div className="flex items-center gap-1.5 text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest pt-2">
+              <div className="flex items-center gap-1.5 text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps pt-2">
                 Find a Branch
                 <ArrowRight size={10} strokeWidth={4} className="group-hover:translate-x-1 transition-transform" />
               </div>
@@ -375,12 +375,12 @@ export default function HomeClient({ allGuides }) {
         <section className="space-y-6">
           <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
             <div className="flex items-center gap-3">
-              <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Trending Roadmaps</h2>
-              <Badge variant="sky" className="text-[10px] px-1.5 py-0">POPULAR</Badge>
+              <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Trending Roadmaps</h2>
+              <Badge variant="sky" className="px-1.5 py-0">POPULAR</Badge>
             </div>
             <Link 
               href="/guides"
-              className="text-[10px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+              className="text-ui-detail font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
             >
               Explore All
             </Link>
@@ -404,7 +404,7 @@ export default function HomeClient({ allGuides }) {
                 );
               })
             ) : (
-              <p className="col-span-full text-center py-10 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">Discovering roadmap trends...</p>
+              <p className="col-span-full text-center py-10 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Discovering roadmap trends...</p>
             )}
           </div>
         </section>
@@ -416,10 +416,10 @@ export default function HomeClient({ allGuides }) {
             {/* Life Event Bundles - Primary Position */}
             <section className="space-y-6">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Life Event Goals</h2>
+                <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Life Event Goals</h2>
                 <Link 
                   href="/bundles"
-                  className="text-[10px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                  className="text-ui-detail font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                 >
                   Browse Roadmaps
                 </Link>
@@ -431,15 +431,15 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                 <div className="flex items-center gap-3">
-                  <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Community Intelligence</h2>
+                  <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Community Intelligence</h2>
                   <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-ctp-green/[0.08] border border-ctp-green/20">
                     <div className="w-1.5 h-1.5 rounded-full bg-ctp-green animate-pulse shadow-[0_0_8px_rgba(166,227,161,0.5)]" />
-                    <span className="text-[8px] font-bold text-ctp-green uppercase tracking-widest">Live: 512 Reports Today</span>
+                    <span className="text-ui-micro font-bold text-ctp-green uppercase tracking-ui-caps">Live: 512 Reports Today</span>
                   </div>
                 </div>
                 <Link 
                   href="/offices"
-                  className="text-[10px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                  className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                 >
                   Global Network
                 </Link>
@@ -456,7 +456,7 @@ export default function HomeClient({ allGuides }) {
                         </div>
                         <h3 className="text-xl font-bold tracking-tight text-ctp-text uppercase">Find any office</h3>
                       </div>
-                      <p className="text-sm text-ctp-subtext1 font-medium max-w-xl">
+                      <p className="text-ui-subhead text-ctp-subtext1 font-medium max-w-xl">
                         Search government branches to see real-time wait times and latest community reports.
                       </p>
                     </div>
@@ -468,19 +468,19 @@ export default function HomeClient({ allGuides }) {
                           value={officeSearch}
                           onChange={(e) => setOfficeSearch(e.target.value)}
                           maxLength={100}
-                          className="bg-ctp-base border-ctp-surface1 h-11 text-sm shadow-sm ring-4 ring-ctp-sky-800/[0.01]"
+                          className="bg-ctp-base border-ctp-surface1 h-11 text-ui-subhead shadow-sm ring-4 ring-ctp-sky-800/[0.01]"
                         />
                       </div>
                       <Button 
                         onClick={handleOfficeSearch}
-                        className="h-11 px-6 text-[10px] uppercase tracking-widest shadow-lg shadow-ctp-sky-800/10"
+                        className="h-11 px-6 text-ui-micro uppercase tracking-ui-caps shadow-lg shadow-ctp-sky-800/10"
                       >
                         Check Status
                       </Button>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2 pt-1">
-                      <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] mr-2">Quick Access:</span>
+                      <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps mr-2">Quick Access:</span>
                       {['PSA', 'DFA', 'NBI', 'SSS', 'LTO'].map((agency) => (
                         <button
                           key={agency}
@@ -488,9 +488,9 @@ export default function HomeClient({ allGuides }) {
                             setOfficeSearch(agency);
                             setTimeout(() => router.push(`/offices?search=${agency}`), 100);
                           }}
-                          className="px-2.5 py-1 rounded-md bg-ctp-mantle border border-ctp-surface1 text-[10px] font-bold text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/[0.05] transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
+                          className="px-2.5 py-1 rounded-md bg-ctp-mantle border border-ctp-surface1 text-ui-detail font-bold text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/[0.05] transition-all shadow-sm active:scale-95 flex items-center gap-1.5"
                         >
-                          <div className="w-1 h-1 rounded-full bg-ctp-surface2 group-hover:bg-ctp-sky-800 transition-colors" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-ctp-surface2 group-hover:bg-ctp-sky-800 transition-colors" />
                           {agency}
                         </button>
                       ))}
@@ -505,8 +505,8 @@ export default function HomeClient({ allGuides }) {
                              <Sparkles size={20} strokeWidth={2.5} />
                           </div>
                           <div className="space-y-1 pr-4 min-w-0">
-                             <p className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest">Community Pro-Tip</p>
-                             <p className="text-sm text-ctp-text font-medium leading-relaxed">
+                             <p className="text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps">Community Pro-Tip</p>
+                             <p className="text-ui-subhead text-ctp-text font-medium leading-relaxed">
                                <span className="font-bold">DFA Aseana:</span> Most users report shortest queues on <span className="underline decoration-ctp-sky-800/30 underline-offset-4 font-bold">Tuesday mornings</span>.
                              </p>
                           </div>
@@ -517,16 +517,16 @@ export default function HomeClient({ allGuides }) {
                     {/* Performance Context */}
                     <div className="space-y-4 flex flex-col justify-center border-l border-ctp-surface1 pl-8">
                         <div className="flex items-center justify-between">
-                           <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Accuracy</span>
-                           <span className="text-[11px] font-bold text-ctp-text">92%</span>
+                           <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Accuracy</span>
+                           <span className="text-ui-subhead font-bold text-ctp-text">92%</span>
                         </div>
                         <div className="flex items-center justify-between">
-                           <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">Daily Reports</span>
-                           <span className="text-[11px] font-bold text-ctp-text">512</span>
+                           <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Daily Reports</span>
+                           <span className="text-ui-subhead font-bold text-ctp-text">512</span>
                         </div>
                         <button 
                           onClick={() => router.push('/rate')}
-                          className="w-full mt-2 py-3 bg-ctp-sky-800 text-white rounded-lg text-[9px] font-bold uppercase tracking-widest hover:bg-ctp-sky-700 transition-all shadow-md shadow-ctp-sky-800/10 flex items-center justify-center gap-2 active:scale-95"
+                          className="w-full mt-2 py-3 bg-ctp-sky-800 text-white rounded-lg text-ui-micro font-bold uppercase tracking-ui-caps hover:bg-ctp-sky-700 transition-all shadow-md shadow-ctp-sky-800/10 flex items-center justify-center gap-2 active:scale-95"
                         >
                           Share Experience
                           <MessageSquare size={12} strokeWidth={3} />
@@ -538,9 +538,9 @@ export default function HomeClient({ allGuides }) {
                 <div className="px-6 py-3 border-t border-ctp-surface1 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <ShieldCheck size={14} className="text-ctp-green" strokeWidth={2.5} />
-                    <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em]">Verified Community Intelligence Network</span>
+                    <span className="text-ui-detail font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Verified Community Intelligence Network</span>
                   </div>
-                  <button className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:underline decoration-2">
+                  <button className="text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps hover:underline decoration-2">
                     How it works
                   </button>
                 </div>
@@ -556,12 +556,12 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Current Focus</h2>
-                  <Badge variant="sky" className="text-[8px] px-1.5 py-0">TRACKING</Badge>
+                  <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Current Focus</h2>
+                  <Badge variant="sky" className="px-1.5 py-0">TRACKING</Badge>
                 </div>
                 <Link 
                   href="/my-docs"
-                  className="text-[9px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                  className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                 >
                   View All
                 </Link>
@@ -581,14 +581,14 @@ export default function HomeClient({ allGuides }) {
               ) : trendingGuides.length > 0 ? (
                 <Card background="mantle" className="border-ctp-sky-800/20 py-8 text-center space-y-4 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-2">
-                    <Badge variant="sky" className="text-[7px] px-1.5 py-0 uppercase tracking-widest">Suggested</Badge>
+                    <Badge variant="sky" className="px-1.5 py-0 uppercase tracking-ui-caps">Suggested</Badge>
                   </div>
                   <div className="w-10 h-10 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-lg flex items-center justify-center mx-auto text-ctp-sky-800 shadow-sm group-hover:scale-110 transition-transform duration-500">
                     <Sparkles size={20} strokeWidth={2} />
                   </div>
                   <div className="space-y-1 px-4">
-                    <p className="font-bold text-ctp-text text-sm tracking-tight">{trendingGuides[0].title}</p>
-                    <p className="text-[10px] text-ctp-subtext1 max-w-xs mx-auto font-medium leading-relaxed">
+                    <p className="font-bold text-ctp-text text-ui-subhead tracking-tight">{trendingGuides[0].title}</p>
+                    <p className="text-ui-micro text-ctp-subtext1 max-w-xs mx-auto font-medium leading-relaxed">
                       Most Filipinos start with this roadmap. Ready to begin your application?
                     </p>
                   </div>
@@ -596,7 +596,7 @@ export default function HomeClient({ allGuides }) {
                     <Button 
                       size="sm"
                       onClick={() => router.push(`/guides/${trendingGuides[0].slug}`)}
-                      className="w-full text-[9px] uppercase tracking-widest shadow-md shadow-ctp-sky-800/10"
+                      className="w-full text-ui-micro uppercase tracking-ui-caps shadow-md shadow-ctp-sky-800/10"
                     >
                       Start This Guide
                     </Button>
@@ -604,7 +604,7 @@ export default function HomeClient({ allGuides }) {
                       variant="ghost"
                       size="sm"
                       onClick={() => router.push('/guides')}
-                      className="text-ctp-subtext1 hover:text-ctp-sky-800 font-bold text-[8px] uppercase tracking-widest transition-colors"
+                      className="text-ctp-subtext1 hover:text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-ui-caps transition-colors"
                     >
                       Or Browse All Library
                     </Button>
@@ -616,8 +616,8 @@ export default function HomeClient({ allGuides }) {
                     <BookOpen size={20} strokeWidth={1.5} />
                   </div>
                   <div className="space-y-1">
-                    <p className="font-bold text-ctp-text text-sm">No active focus</p>
-                    <p className="text-[10px] text-ctp-subtext1 max-w-xs mx-auto px-4 font-medium">
+                    <p className="font-bold text-ctp-text text-ui-subhead">No active focus</p>
+                    <p className="text-ui-micro text-ctp-subtext1 max-w-xs mx-auto px-4 font-medium">
                       Start tracking a procedure to see it here.
                     </p>
                   </div>
@@ -625,7 +625,7 @@ export default function HomeClient({ allGuides }) {
                     variant="ghost"
                     size="sm"
                     onClick={() => router.push('/guides')}
-                    className="text-ctp-sky-800 font-bold text-[9px] uppercase tracking-widest"
+                    className="text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-ui-caps"
                   >
                     Browse Library
                   </Button>
@@ -637,12 +637,12 @@ export default function HomeClient({ allGuides }) {
             <section className="space-y-4">
               <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Recent Updates</h2>
-                  <Badge variant="sky" className="text-[8px] px-1.5 py-0">LATEST</Badge>
+                  <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Recent Updates</h2>
+                  <Badge variant="sky" className="px-1.5 py-0">LATEST</Badge>
                 </div>
                 <Link 
                   href="/updates"
-                  className="text-[9px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                  className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                 >
                   View All
                 </Link>
@@ -654,10 +654,10 @@ export default function HomeClient({ allGuides }) {
             {(onboarded || !isLoggedIn) && (
               <section className="space-y-6">
                 <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                  <h2 className="text-sm font-bold uppercase tracking-widest text-ctp-text">Community Feed</h2>
+                  <h2 className="text-ui-subhead font-bold uppercase tracking-ui-caps text-ctp-text">Community Feed</h2>
                   <Link 
                     href="/offices"
-                    className="text-[9px] font-bold uppercase tracking-widest text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
+                    className="text-ui-micro font-bold uppercase tracking-ui-caps text-ctp-sky-800 hover:text-ctp-sky-300 transition-colors"
                   >
                     View All
                   </Link>
@@ -678,10 +678,10 @@ export default function HomeClient({ allGuides }) {
           <Card background="base" noPadding className="flex flex-col md:flex-row items-center justify-between gap-8 p-10 border-dashed relative overflow-hidden group">
             <div className="relative z-10 space-y-4 text-center md:text-left">
               <div className="space-y-1">
-                <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-[0.2em]">Support Channel</span>
+                <span className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-ui-caps">Support Channel</span>
                 <h3 className="text-xl font-bold tracking-tight text-ctp-text uppercase">Need further assistance?</h3>
               </div>
-              <p className="text-[13px] text-ctp-subtext1 max-w-lg font-medium leading-relaxed">
+              <p className="text-ui-detail text-ctp-subtext1 max-w-lg font-medium leading-relaxed">
                 Our specialized Help Center and verified community contributors are here to help you navigate through complex government requirements and procedures.
               </p>
             </div>

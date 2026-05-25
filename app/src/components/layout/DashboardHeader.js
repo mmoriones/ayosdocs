@@ -123,8 +123,8 @@ export default function DashboardHeader({ onMenuClick }) {
               }
             >
               <div className="px-3 py-2.5 border-b border-ctp-surface1 bg-ctp-mantle/30">
-                <p className="text-[10px] font-bold text-ctp-text truncate">{user?.name}</p>
-                <p className="text-[9px] font-medium text-ctp-subtext1 truncate">{user?.email}</p>
+                <p className="text-xs font-bold text-ctp-text truncate">{user?.name}</p>
+                <p className="text-[11px] font-medium text-ctp-subtext1 truncate">{user?.email}</p>
               </div>
 
               <DropdownMenuItem onClick={() => router.push('/profile')} icon={User}>

@@ -235,12 +235,12 @@ const ChecklistCard = ({
                 <GuideIcon slug={slug} agency={agency} className="w-5 h-5" strokeWidth={2} />
              </div>
              <div className="min-w-0">
-                <h4 className="text-[13px] font-bold text-ctp-text tracking-tight truncate leading-tight uppercase">
+                <h4 className="text-ui-label font-bold text-ctp-text tracking-tight truncate leading-tight uppercase">
                   {title}
                 </h4>
                 <div className="flex items-center gap-2 mt-0.5">
-                   <Badge variant="sky" className="px-1 py-0 text-[7px]">{agency || "National"}</Badge>
-                   <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Live Tracker</span>
+                   <Badge variant="sky" className="px-1 py-0">{agency || "National"}</Badge>
+                   <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Live Tracker</span>
                 </div>
              </div>
           </div>
@@ -257,7 +257,7 @@ const ChecklistCard = ({
         <div className="relative z-10 px-5 py-5 bg-ctp-base/40">
            <div className="flex items-center gap-3">
               <div className="px-2 py-0.5 rounded-md bg-ctp-sky-800/[0.06] border border-ctp-sky-800/10 shadow-sm shrink-0 min-w-[38px] text-center">
-                 <span className="text-[10px] font-bold text-ctp-sky-800">{progressPercent}%</span>
+                 <span className="text-ui-detail font-bold text-ctp-sky-800">{progressPercent}%</span>
               </div>
               <div className="flex-1 h-3 bg-ctp-mantle/50 rounded-full border border-ctp-surface1 overflow-hidden relative shadow-inner">
                  <div 
@@ -270,27 +270,27 @@ const ChecklistCard = ({
         {/* Instrumentation Grid */}
         <div className="relative z-10 px-5 py-4 grid grid-cols-2 gap-y-4 gap-x-6 border-t border-ctp-surface1/30">
            <div className="space-y-1">
-              <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Monitor Status</span>
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Monitor Status</span>
               <div className="flex items-center gap-2">
                  <div className="w-1.5 h-1.5 rounded-full bg-ctp-green animate-pulse shadow-[0_0_6px_rgba(166,227,161,0.4)]" />
-                 <span className="text-[10px] font-bold text-ctp-text uppercase tracking-tight">Active</span>
+                 <span className="text-ui-detail font-bold text-ctp-text uppercase tracking-tight">Active</span>
               </div>
            </div>
            <div className="space-y-1">
-              <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Task Verification</span>
-              <p className="text-[10px] font-bold text-ctp-text uppercase tracking-tight">{completedCount} / {totalSteps}</p>
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Task Verification</span>
+              <p className="text-ui-detail font-bold text-ctp-text uppercase tracking-tight">{completedCount} / {totalSteps}</p>
            </div>
            <div className="space-y-1">
-              <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Cloud Backup</span>
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Cloud Backup</span>
               <div className="flex items-center gap-1.5">
                  <ShieldCheck className="w-3.5 h-3.5 text-ctp-sky-800" strokeWidth={2.5} />
-                 <span className="text-[10px] font-bold text-ctp-text uppercase tracking-tight">Synced</span>
+                 <span className="text-ui-detail font-bold text-ctp-text uppercase tracking-tight">Synced</span>
               </div>
            </div>
            <div className="space-y-1">
-              <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Priority Level</span>
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Priority Level</span>
               <div className="flex items-center gap-1.5">
-                 <span className="text-[10px] font-bold text-ctp-sky-800 uppercase tracking-tight">Normal</span>
+                 <span className="text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-tight">Normal</span>
               </div>
            </div>
         </div>
@@ -299,7 +299,7 @@ const ChecklistCard = ({
         <div className="relative z-10 px-5 pb-5 pt-1">
           <button 
             onClick={() => router.push(`/guides/${slug}`)}
-            className="w-full h-10 bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white rounded-lg text-[10px] font-bold uppercase tracking-[0.2em] shadow-lg shadow-ctp-sky-800/10 transition-all active:scale-[0.97] flex items-center justify-center gap-3 group/btn"
+            className="w-full h-10 bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white rounded-lg text-ui-detail font-bold uppercase tracking-[0.2em] shadow-lg shadow-ctp-sky-800/10 transition-all active:scale-[0.97] flex items-center justify-center gap-3 group/btn"
           >
             Resume Roadmap
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" strokeWidth={3} />
@@ -318,17 +318,17 @@ const ChecklistCard = ({
         <div className={`${isModal ? "p-4" : "p-5 lg:p-6"} bg-ctp-mantle/[0.2] border-b border-ctp-surface1/50 rounded-t-xl`}>
           <div className="flex items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-3">
-              <h3 className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] leading-none">
+              <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.15em] leading-none">
                 {cardLabel}
               </h3>
               {isLoggedIn && (
                 <div className="flex items-center gap-1.5">
                   {!isVerified ? (
-                    <Badge variant="yellow" icon={AlertTriangle} className="text-[8px] px-1 py-0">Pending</Badge>
+                    <Badge variant="yellow" icon={AlertTriangle} className="px-1 py-0">Pending</Badge>
                   ) : saveMutation.isPending ? (
-                    <Badge variant="sky" icon={Loader2} className="text-[8px] px-1 py-0 animate-spin">Syncing</Badge>
+                    <Badge variant="sky" icon={Loader2} className="px-1 py-0 animate-spin">Syncing</Badge>
                   ) : (
-                    <Badge variant="green" icon={ShieldCheck} className="text-[8px] px-1 py-0">Verified</Badge>
+                    <Badge variant="green" icon={ShieldCheck} className="px-1 py-0">Verified</Badge>
                   )}
                 </div>
               )}
@@ -337,7 +337,7 @@ const ChecklistCard = ({
             {!inGuidePage && (
               <button 
                 onClick={() => router.push('/my-docs')}
-                className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-sky-300 transition-colors flex items-center gap-1"
+                className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest hover:text-ctp-sky-300 transition-colors flex items-center gap-1"
               >
                 Workspace
                 <ChevronRight size={10} strokeWidth={4} />
@@ -361,11 +361,11 @@ const ChecklistCard = ({
                 )}
                 
                 <div className="flex items-center gap-2">
-                   <p className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest leading-none">
+                   <p className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest leading-none">
                      {isLoggedIn ? `${completedCount} of ${totalSteps} verified` : "Manual Tracking"}
                    </p>
                    <div className="w-1 h-1 rounded-full bg-ctp-surface1" />
-                   <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">
+                   <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">
                      {progressPercent === 100 ? 'Finalized' : 'In Progress'}
                    </span>
                 </div>
@@ -388,7 +388,7 @@ const ChecklistCard = ({
         <div className={`${(isModal || isBare) ? "px-0 pb-3" : "px-5 py-4"} border-b border-ctp-surface1/30 bg-ctp-base/40`}>
            <div className="flex items-center gap-3">
               <div className="px-2 py-0.5 rounded-md bg-ctp-sky-800/[0.06] border border-ctp-sky-800/10 shadow-sm shrink-0 min-w-[38px] text-center">
-                 <span className="text-[10px] font-bold text-ctp-sky-800">{progressPercent}%</span>
+                 <span className="text-ui-detail font-bold text-ctp-sky-800">{progressPercent}%</span>
               </div>
               <div className="flex-1 h-2 bg-ctp-mantle/50 rounded-full border border-ctp-surface1 overflow-hidden relative shadow-inner">
                  <div 
@@ -406,8 +406,8 @@ const ChecklistCard = ({
             <div className="bg-ctp-yellow/[0.04] border border-ctp-yellow/20 rounded-lg p-2.5 flex items-center gap-3 transition-all shadow-sm">
               <AlertTriangle size={14} className="text-ctp-yellow shrink-0" />
               <div className="flex-1 min-w-0">
-                <p className="text-[9px] font-bold text-ctp-text uppercase tracking-tight">Sync Restricted</p>
-                <p className="text-[8px] text-ctp-subtext1 font-medium mt-0.5 leading-tight">Verify email to save progress.</p>
+                <p className="text-ui-micro font-bold text-ctp-text uppercase tracking-tight">Sync Restricted</p>
+                <p className="text-ui-micro text-ctp-subtext1 font-medium mt-0.5 leading-tight">Verify email to save progress.</p>
               </div>
             </div>
           </div>
@@ -444,7 +444,7 @@ const ChecklistCard = ({
                           <div className="w-1 h-1 rounded-full bg-ctp-sky-800 animate-pulse" />
                         </div>
                       ) : (
-                        <div className="w-4 h-4 rounded-full border border-ctp-surface1 bg-ctp-mantle flex items-center justify-center text-[8px] font-bold text-ctp-subtext1 transition-colors group-hover:border-ctp-surface2 group-hover:text-ctp-text">
+                        <div className="w-4 h-4 rounded-full border border-ctp-surface1 bg-ctp-mantle flex items-center justify-center text-ui-micro font-bold text-ctp-subtext1 transition-colors group-hover:border-ctp-surface2 group-hover:text-ctp-text">
                           {index + 1}
                         </div>
                       )}
@@ -452,7 +452,7 @@ const ChecklistCard = ({
                     
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className={`text-[11px] font-bold leading-tight transition-colors tracking-tight
+                        <p className={`text-ui-micro font-bold leading-tight transition-colors tracking-tight
                           ${step.completed ? "text-ctp-subtext1 line-through opacity-50 font-medium" : "text-ctp-text"}
                           ${isNextStep ? "text-ctp-sky-800" : ""}
                           ${isUpcoming ? "text-ctp-subtext1 opacity-60 font-medium" : ""}
@@ -460,7 +460,7 @@ const ChecklistCard = ({
                           {step.task}
                         </p>
                         {isNextStep && (
-                          <span className="px-1 py-0 rounded bg-ctp-sky-800/10 text-[7px] font-bold text-ctp-sky-800 uppercase tracking-widest shrink-0 border border-ctp-sky-800/20">
+                          <span className="px-1 py-0 rounded bg-ctp-sky-800/10 text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-widest shrink-0 border border-ctp-sky-800/20">
                             ACTIVE
                           </span>
                         )}
@@ -485,10 +485,10 @@ const ChecklistCard = ({
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[11px] font-bold text-ctp-text line-clamp-1 tracking-tight">{nextStep.task}</p>
+                <p className="text-ui-micro font-bold text-ctp-text line-clamp-1 tracking-tight">{nextStep.task}</p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                    <div className="w-1 h-1 rounded-full bg-ctp-sky-800 animate-pulse" />
-                   <p className="text-[8px] font-bold text-ctp-sky-800 uppercase tracking-[0.15em]">Next Requirement</p>
+                   <p className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-[0.15em]">Next Requirement</p>
                 </div>
               </div>
               <ArrowRight size={12} className="text-ctp-surface2 self-center group-hover:translate-x-0.5 group-hover:text-ctp-sky-800 transition-all" strokeWidth={3} />
@@ -500,7 +500,7 @@ const ChecklistCard = ({
           <div className="px-5 lg:px-6 pb-6 pt-2 mt-auto">
             <Button 
               onClick={() => router.push(`/guides/${slug}`)}
-              className="w-full text-[10px] uppercase tracking-widest h-10 shadow-lg shadow-ctp-sky-800/10"
+              className="w-full text-ui-detail uppercase tracking-widest h-10 shadow-lg shadow-ctp-sky-800/10"
             >
               Resume Roadmap
             </Button>
@@ -513,11 +513,11 @@ const ChecklistCard = ({
               <Button 
                 onClick={openAuthModal}
                 leftIcon={<UserPlus size={14} strokeWidth={2.5} />}
-                className="w-full text-[10px] uppercase tracking-widest shadow-lg shadow-ctp-sky-800/10"
+                className="w-full text-ui-detail uppercase tracking-widest shadow-lg shadow-ctp-sky-800/10"
               >
                 Setup Tracking
               </Button>
-              <div className="flex items-center justify-center gap-1.5 text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">
+              <div className="flex items-center justify-center gap-1.5 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps opacity-60">
                 <ShieldCheck size={12} className="text-ctp-green" />
                 <span>Identity Sync Verified</span>
               </div>

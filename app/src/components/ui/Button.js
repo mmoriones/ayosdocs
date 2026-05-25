@@ -36,9 +36,9 @@ export default function Button({
   };
 
   const sizes = {
-    sm: "px-3 py-1.5 text-[11px] uppercase tracking-wider",
-    md: "px-5 py-2.5 text-xs uppercase tracking-widest",
-    lg: "px-8 py-3.5 text-sm uppercase tracking-widest"
+    sm: "px-3 py-1.5 text-xs uppercase tracking-ui-caps",
+    md: "px-5 py-2.5 text-ui-label uppercase tracking-ui-caps",
+    lg: "px-8 py-3.5 text-base uppercase tracking-ui-caps"
   };
 
   const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;

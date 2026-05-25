@@ -47,7 +47,7 @@ const RecentlyUpdated = ({ className = "" }) => {
          <div className="w-10 h-10 rounded-xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-subtext1 shadow-inner">
             <GuideIcon slug="none" className="w-5 h-5 opacity-40" />
          </div>
-         <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">No recent updates</p>
+         <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">No recent updates</p>
       </div>
     );
   }
@@ -66,10 +66,10 @@ const RecentlyUpdated = ({ className = "" }) => {
                 <GuideIcon slug={item.slug} className="w-5 h-5 text-ctp-sky-800" strokeWidth={2} />
               </div>
               <div className="min-w-0 flex-1">
-                <h4 className="text-[12px] font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
+                <h4 className="text-ui-detail font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
                   {item.title}
                 </h4>
-                <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60 truncate mt-1">
+                <p className="text-ui-detail font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60 truncate mt-1">
                   {item.agency}
                 </p>
               </div>
@@ -78,10 +78,10 @@ const RecentlyUpdated = ({ className = "" }) => {
 
           <div className="flex items-center justify-between pt-4 border-t border-ctp-surface1/50 mt-auto">
             <div className="flex items-center gap-2.5">
-              <span className="text-[8px] font-bold text-ctp-sky-800 bg-ctp-sky-800/[0.05] px-2 py-0.5 rounded border border-ctp-sky-800/10 uppercase tracking-[0.1em]">
+              <span className="text-ui-micro font-bold text-ctp-sky-800 bg-ctp-sky-800/[0.05] px-2 py-0.5 rounded border border-ctp-sky-800/10 uppercase tracking-[0.1em]">
                 {item.type || 'Updated'}
               </span>
-              <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-[0.1em] opacity-40">
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-tight opacity-40">
                 {new Date(item.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
               </span>
             </div>

@@ -51,14 +51,14 @@ const GuideCard = ({
         <div className="flex-1 min-w-0 py-0.5">
           <div className="flex items-center gap-3 mb-1">
             {showAgency && (
-              <span className="text-[9px] font-bold text-ctp-sky-800 uppercase tracking-widest bg-ctp-sky-800/5 px-1.5 py-0.5 rounded border border-ctp-sky-800/20">
+              <span className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-ui-caps bg-ctp-sky-800/5 px-1.5 py-0.5 rounded border border-ctp-sky-800/20">
                 {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
               </span>
             )}
             {isTracking && (
               <TrackingIndicator variant="guide" />
             )}
-            <span className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-80">
+            <span className="text-ui-micro text-ctp-subtext1 font-bold uppercase tracking-ui-caps opacity-80">
               Updated {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Recently"}
             </span>
           </div>
@@ -74,11 +74,11 @@ const GuideCard = ({
 
         {showMeta && (
           <div className="hidden md:flex items-center gap-4 shrink-0 border-l border-ctp-surface1 pl-6 h-10">
-            <div className="flex items-center gap-1.5 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+            <div className="flex items-center gap-1.5 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">
               <Clock size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
               <span>{guide.estimatedTime || "1-3 days"}</span>
             </div>
-            <div className="flex items-center gap-1.5 text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">
+            <div className="flex items-center gap-1.5 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">
               <DollarSign size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
               <span>{guide.costRange || "Free"}</span>
             </div>
@@ -112,42 +112,44 @@ const GuideCard = ({
           <GuideIcon slug={guide.slug} agency={guide.agency} className="w-5 h-5 text-ctp-sky-800" strokeWidth={1.5} />
         </div>
         
-        {showBookmark && (
-          <BookmarkButton
-            isFavorite={isFavorite}
-            onClick={(e) => {
-              e.preventDefault();
-              onFavorite?.();
-            }}
-            size="sm"
-            tooltipProps={{ position: 'left' }}
-            className="scale-90"
-          />
-        )}
+        <div className="flex items-center gap-2">
+           {isTracking && (
+             <TrackingIndicator variant="guide" />
+           )}
+           {showBookmark && (
+             <BookmarkButton
+               isFavorite={isFavorite}
+               onClick={(e) => {
+                 e.preventDefault();
+                 onFavorite?.();
+               }}
+               size="sm"
+               tooltipProps={{ position: 'left' }}
+               className="scale-90"
+             />
+           )}
+        </div>
       </div>
 
       <div className="flex-1">
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 mb-2.5">
           {showAgency && (
-            <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-ctp-sky-800/[0.08] text-ctp-sky-800 text-[8px] font-bold uppercase tracking-[0.1em] border border-ctp-sky-800/20">
+            <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-ctp-sky-800/[0.08] text-ctp-sky-800 text-ui-micro font-bold uppercase tracking-ui-caps border border-ctp-sky-800/20">
               {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
             </div>
           )}
-          {isTracking && (
-            <TrackingIndicator variant="guide" />
-          )}
         </div>
-        <h3 className={`text-sm font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight ${showDescription ? 'mb-1' : 'mb-0'}`}>
+        <h3 className={`text-base font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight ${showDescription ? 'mb-1.5' : 'mb-0'}`}>
           {guide.shortTitle || guide.title}
         </h3>
         {showDescription && (
-          <p className="text-[11px] text-ctp-subtext1 line-clamp-2 mb-4 font-medium leading-relaxed opacity-80">
+          <p className="text-xs text-ctp-subtext1 line-clamp-2 mb-4 font-medium leading-relaxed opacity-80">
             {guide.description}
           </p>
         )}
 
         {showMeta && (
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-4">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps mb-4">
             <div className="flex items-center gap-1.5 min-w-0">
               <Clock size={12} className="text-ctp-sky-800 shrink-0" strokeWidth={3} />
               <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>
@@ -162,10 +164,10 @@ const GuideCard = ({
 
       {showFooter && (
         <div className="pt-3 border-t border-ctp-surface1/30 flex items-center justify-between mt-auto">
-          <span className="text-[8px] text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60">
-            {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Updated Recently"}
+          <span className="text-ui-micro text-ctp-subtext1 font-bold uppercase tracking-ui-caps opacity-60">
+            {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Recently"}
           </span>
-          <div className="text-ctp-sky-800 font-bold text-[8px] uppercase tracking-widest flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+          <div className="text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-ui-caps flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
             {isTracking ? 'Go to Workspace' : 'Open'}
             <ArrowRight size={10} strokeWidth={4} />
           </div>

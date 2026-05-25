@@ -31,14 +31,14 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-0.5">
-              <h4 className="text-sm font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
+              <h4 className="text-ui-label font-bold text-ctp-text truncate group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight">
                 {guide.shortTitle || guide.title}
               </h4>
               {isTracking && (
                 <TrackingIndicator variant="guide" label="Active" className="shrink-0" />
               )}
             </div>
-            <p className="text-[9px] text-ctp-subtext0 uppercase tracking-[0.1em] font-bold mt-0.5">
+            <p className="text-ui-micro text-ctp-subtext0 uppercase tracking-[0.1em] font-bold mt-0.5">
               {guide.agency}
             </p>
           </div>
@@ -95,15 +95,15 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
 
       <div className="flex-1 space-y-3">
         <div className="space-y-1">
-          <h3 className="text-sm font-bold text-ctp-text tracking-tight leading-snug group-hover:text-ctp-sky-800 transition-colors">
+          <h3 className="text-ui-label font-bold text-ctp-text tracking-tight leading-snug group-hover:text-ctp-sky-800 transition-colors">
             {guide.shortTitle || guide.title}
           </h3>
-          <p className="text-[9px] text-ctp-subtext1 font-bold uppercase tracking-[0.15em] opacity-60">
+          <p className="text-ui-micro text-ctp-subtext1 font-bold uppercase tracking-ui-caps opacity-60">
             {guide.agency}
           </p>
         </div>
         
-        <p className="text-[11px] text-ctp-subtext1 font-medium leading-relaxed line-clamp-2">
+        <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed line-clamp-2">
           {guide.description}
         </p>
       </div>
@@ -112,12 +112,12 @@ const TrendingWidget = ({ guide, stats, progress, variant = 'default', onClick, 
         <div className="flex items-center gap-3">
            <div className="flex items-center gap-1 text-ctp-subtext1">
               <Eye size={10} strokeWidth={2.5} />
-              <span className="text-[8px] font-bold uppercase tracking-widest">{stats?.views || '1.2k'}</span>
+              <span className="text-ui-micro font-bold uppercase tracking-widest">{stats?.views || '1.2k'}</span>
            </div>
            <div className="w-px h-2 bg-ctp-surface1" />
            <div className="flex items-center gap-1 text-ctp-green">
               <ShieldCheck size={10} strokeWidth={2.5} />
-              <span className="text-[8px] font-bold uppercase tracking-widest">98%</span>
+              <span className="text-ui-micro font-bold uppercase tracking-widest">98%</span>
            </div>
         </div>
         <ArrowRight size={14} className="text-ctp-surface2 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all" />

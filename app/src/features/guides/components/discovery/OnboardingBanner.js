@@ -37,13 +37,13 @@ const OnboardingBanner = () => {
         
         <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-2">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-ctp-sky-800/10 border border-ctp-sky-800/20 text-ctp-sky-800 text-[10px] font-bold uppercase tracking-widest">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-ctp-sky-800/10 border border-ctp-sky-800/20 text-ctp-sky-800 text-ui-detail font-bold uppercase tracking-widest">
               <HelpCircle size={12} />
               <span>Getting Started</span>
             </div>
             
             {isLoggedIn && !isVerified && (
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-ctp-yellow/10 border border-ctp-yellow/20 text-ctp-yellow-800 text-[10px] font-bold uppercase tracking-widest">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-ctp-yellow/10 border border-ctp-yellow/20 text-ctp-yellow-800 text-ui-detail font-bold uppercase tracking-widest">
                 <ShieldAlert size={12} />
                 <span>Verify Email</span>
               </div>
@@ -67,7 +67,7 @@ const OnboardingBanner = () => {
             ].map((text, i) => (
               <div key={i} className="flex items-center gap-2 group/item opacity-80">
                 <CheckCircle size={12} className="text-ctp-sky-800" strokeWidth={2.5} />
-                <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest">{text}</span>
+                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">{text}</span>
               </div>
             ))}
           </div>

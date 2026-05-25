@@ -48,7 +48,7 @@ const RecentExperiences = ({ className = "", limit = 3 }) => {
   if (reports.length === 0) {
     return (
       <div className={`w-full bg-ctp-mantle/50 border border-dashed border-ctp-surface1 rounded-xl p-8 text-center flex flex-col items-center gap-4 ${className}`}>
-         <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest">No reports yet</p>
+         <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">No reports yet</p>
       </div>
     );
   }
@@ -69,10 +69,10 @@ const RecentExperiences = ({ className = "", limit = 3 }) => {
                 <GuideIcon agency={report.agency} className="w-5 h-5 text-ctp-sky-800" strokeWidth={1.5} />
               </div>
               <div className="min-w-0 flex-1">
-                <h4 className="text-[12px] font-bold text-ctp-text leading-tight group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight truncate">
+                <h4 className="text-ui-detail font-bold text-ctp-text leading-tight group-hover:text-ctp-sky-800 transition-colors uppercase tracking-tight truncate">
                   {report.officeName}
                 </h4>
-                <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60 truncate mt-1">
+                <p className="text-ui-detail font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60 truncate mt-1">
                   {report.location}
                 </p>
               </div>
@@ -80,31 +80,31 @@ const RecentExperiences = ({ className = "", limit = 3 }) => {
 
             <div className="flex items-center gap-1 bg-ctp-yellow/[0.05] border border-ctp-yellow/20 px-1.5 py-0.5 rounded-md h-5 shrink-0">
               <Star size={10} className="fill-ctp-yellow text-ctp-yellow" />
-              <span className="text-[10px] font-bold text-ctp-text leading-none">{report.rating}</span>
+              <span className="text-ui-detail font-bold text-ctp-text leading-none">{report.rating}</span>
             </div>
           </div>
 
           {report.comment && (
-            <p className="text-[11px] text-ctp-subtext1 line-clamp-2 italic leading-relaxed opacity-90 group-hover:text-ctp-text transition-colors">
+            <p className="text-ui-micro text-ctp-subtext1 line-clamp-2 italic leading-relaxed opacity-90 group-hover:text-ctp-text transition-colors">
               &quot;{report.comment}&quot;
             </p>
           )}
 
           <div className="flex items-center justify-between pt-4 border-t border-ctp-surface1/50 mt-auto">
             <div className="flex items-center gap-3">
-              <span className={`text-[9px] font-bold uppercase tracking-widest ${
+              <span className={`text-ui-micro font-bold uppercase tracking-widest ${
                 report.waitTime === '< 1 hr' ? 'text-ctp-green' : 'text-ctp-sky-800'
               }`}>
                 {report.waitTime}
               </span>
               <div className="w-px h-2 bg-ctp-surface1" />
-              <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-40">
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps opacity-40">
                  {new Date(report.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
               </span>
             </div>
 
             <div className="flex items-center gap-1 text-ctp-sky-800 opacity-0 group-hover:opacity-100 transition-opacity">
-               <span className="text-[8px] font-bold uppercase tracking-widest">Details</span>
+               <span className="text-ui-micro font-bold uppercase tracking-widest">Details</span>
                <ArrowRight size={10} strokeWidth={3} className="group-hover:translate-x-0.5 transition-transform" />
             </div>
           </div>
@@ -115,3 +115,4 @@ const RecentExperiences = ({ className = "", limit = 3 }) => {
 };
 
 export default RecentExperiences;
+;

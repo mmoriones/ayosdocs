@@ -68,7 +68,7 @@ export default function OfficesClient() {
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar flex-1">
             <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
               <Filter size={12} className="text-ctp-subtext1" />
-              <span className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em]">Agencies</span>
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Agencies</span>
             </div>
             {agencies.map((agency) => (
               <button
@@ -226,7 +226,7 @@ const OfficeCard = ({ office, router }) => {
               </div>
               <div className="h-6 w-px bg-ctp-surface1 hidden md:block" />
               <div className="flex flex-col items-center min-w-[70px] gap-0.5">
-                <span className="text-[8px] font-bold uppercase tracking-widest opacity-60">Wait</span>
+                <span className="text-ui-micro font-bold uppercase tracking-ui-caps opacity-60">Wait</span>
                 <Badge variant={waitTimeVariant} className="px-1 py-0">{waitTimeLabel}</Badge>
               </div>
             </div>
@@ -301,3 +301,4 @@ OfficeCard.Skeleton = function OfficeCardSkeleton() {
     </div>
   );
 };
+;

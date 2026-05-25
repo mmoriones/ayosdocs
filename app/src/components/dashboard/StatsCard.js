@@ -27,7 +27,7 @@ export default function StatsCard({ label, value, icon: Icon, trend, isLocked = 
             {isLocked ? '—' : value}
           </p>
           {trend && !isLocked && (
-            <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${
+            <span className={`text-ui-micro font-bold px-1.5 py-0.5 rounded border ${
               trend.isUp 
                 ? 'bg-ctp-green/[0.08] text-ctp-green border-ctp-green/20' 
                 : 'bg-ctp-yellow/[0.08] text-ctp-yellow border-ctp-yellow/20'
@@ -36,7 +36,7 @@ export default function StatsCard({ label, value, icon: Icon, trend, isLocked = 
             </span>
           )}
         </div>
-        <p className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] mt-1 truncate">
+        <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps mt-1 truncate">
           {label}
         </p>
       </div>
@@ -44,7 +44,7 @@ export default function StatsCard({ label, value, icon: Icon, trend, isLocked = 
       {isLocked && (
         <div className="hidden sm:flex items-center gap-1.5 px-2 py-1 bg-ctp-mantle border border-ctp-surface1 rounded text-ctp-subtext1 opacity-60">
           <Lock size={10} strokeWidth={3} />
-          <span className="text-[8px] font-bold uppercase tracking-widest">Locked</span>
+          <span className="text-ui-micro font-bold uppercase tracking-ui-caps">Locked</span>
         </div>
       )}
     </div>

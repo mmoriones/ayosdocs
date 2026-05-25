@@ -27,8 +27,8 @@ export default function Badge({
   };
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 border text-[9px] font-bold uppercase tracking-[0.12em] ${rounded ? 'rounded-full' : 'rounded-md'} ${variants[variant]} ${className}`}>
-      {Icon && <Icon size={10} strokeWidth={2.5} />}
+    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 border text-ui-tiny font-bold uppercase tracking-ui-caps ${rounded ? 'rounded-full' : 'rounded-md'} ${variants[variant]} ${className}`}>
+      {Icon && <Icon size={12} strokeWidth={2.5} />}
       {children}
     </span>
   );

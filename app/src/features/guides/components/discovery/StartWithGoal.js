@@ -35,15 +35,15 @@ const StartWithGoal = ({ trackedBundles = [] }) => {
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <h3 className="text-[13px] font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors tracking-tight truncate uppercase">
+                  <h3 className="text-ui-label font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors tracking-tight truncate uppercase">
                     {bundle.title}
                   </h3>
-                  <Badge variant="sky" className="px-1 py-0 text-[7px]">{bundle.category}</Badge>
+                  <Badge variant="sky" className="px-1 py-0">{bundle.category}</Badge>
                   {isTracking && (
                     <TrackingIndicator variant="bundle" pulse />
                   )}
                 </div>
-                <p className="text-[11px] text-ctp-subtext1 font-medium truncate opacity-80">
+                <p className="text-ui-detail text-ctp-subtext1 font-medium truncate opacity-80">
                   {bundle.description}
                 </p>
               </div>
@@ -51,10 +51,10 @@ const StartWithGoal = ({ trackedBundles = [] }) => {
 
             <div className="flex items-center gap-8 shrink-0 sm:border-l sm:border-ctp-surface1/50 sm:pl-8 h-8">
               <div className="flex flex-col">
-                <span className="text-[8px] font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Roadmap Steps</span>
-                <span className="text-[11px] font-bold text-ctp-text">{bundle.flow.length} STAGES</span>
+                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest opacity-60">Roadmap Steps</span>
+                <span className="text-ui-micro font-bold text-ctp-text">{bundle.flow.length} STAGES</span>
               </div>
-              <div className="flex items-center gap-1 text-ctp-sky-800 font-bold text-[8px] uppercase tracking-widest group-hover:translate-x-0.5 transition-transform">
+              <div className="flex items-center gap-1 text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-ui-caps group-hover:translate-x-0.5 transition-transform">
                 {isTracking ? 'Resume' : 'View'}
                 <ArrowRight size={14} className="text-ctp-surface2 group-hover:text-ctp-sky-800 transition-all" strokeWidth={3} />
               </div>

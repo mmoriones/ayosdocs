@@ -31,7 +31,7 @@ export default function Input({
   return (
     <div className={`space-y-1.5 ${containerClassName}`}>
       {label && (
-        <label className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">
+        <label className="text-ui-detail font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">
           {label}
         </label>
       )}
@@ -76,7 +76,7 @@ export default function Input({
       {hasError && (
         <div className="flex items-center gap-1.5 ml-1 animate-in fade-in slide-in-from-top-1 duration-200">
           <AlertCircle size={10} className="text-ctp-red" />
-          <p className="text-[9px] font-bold text-ctp-red uppercase tracking-wide">
+          <p className="text-ui-micro font-bold text-ctp-red uppercase tracking-wide">
             {error}
           </p>
         </div>

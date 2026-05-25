@@ -2,6 +2,18 @@
 @import "@catppuccin/tailwindcss/mocha.css";
 @plugin "@tailwindcss/typography";
 
+:root {
+  /* Semantic Typography Scale - Global */
+  --ui-tiny: 9px;
+  --ui-micro: 11px;
+  --ui-detail: 12px;
+  --ui-label: 13px;
+  --ui-subhead: 14px;
+  
+  --ui-tracking-caps: 0.12em;
+  --ui-tracking-tight: -0.01em;
+}
+
 @theme {
   --color-accent-50: var(--sky-50);
   --color-accent-300: var(--sky-300);
@@ -102,6 +114,14 @@
     50% { opacity: 0.5; }
   }
 }
+
+@utility text-ui-tiny { font-size: var(--ui-tiny); }
+@utility text-ui-micro { font-size: var(--ui-micro); }
+@utility text-ui-detail { font-size: var(--ui-detail); }
+@utility text-ui-label { font-size: var(--ui-label); }
+@utility text-ui-subhead { font-size: var(--ui-subhead); }
+@utility tracking-ui-caps { letter-spacing: var(--ui-tracking-caps); }
+@utility tracking-ui-tight { letter-spacing: var(--ui-tracking-tight); }
 
 @layer base {
   :root, .latte {
