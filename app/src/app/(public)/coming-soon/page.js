@@ -13,7 +13,7 @@ export default function ComingSoon() {
   const router = useRouter();
 
   return (
-    <div className="h-screen bg-ctp-base flex items-center justify-center px-6 overflow-hidden relative selection:bg-ctp-sky-800/30">
+    <div className="min-h-full flex items-center justify-center px-6 py-20 overflow-hidden relative selection:bg-ctp-sky-800/30">
       
       {/* Background Decorative Glow (Cloudflare-style) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[700px] h-[500px] opacity-[0.06] pointer-events-none">

@@ -70,7 +70,7 @@ export default function FAQsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-ctp-base font-sans pb-20">
+    <div className="min-h-full pb-20 animate-in fade-in duration-500">
       <PageHeader 
         icon={HelpCircle}
         title="Help Center"

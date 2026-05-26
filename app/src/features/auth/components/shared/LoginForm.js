@@ -17,54 +17,58 @@ export function LoginForm({
   getFieldError
 }) {
   return (
-    <form onSubmit={onSubmit} className="space-y-1 w-full">
-      <Input
-        label="Email address"
-        name="email"
-        type="email"
-        placeholder="email@example.com"
-        required
-        leftIcon={Mail}
-        value={formData.email}
-        onChange={onInputChange}
-        error={getFieldError('email')}
-        disabled={isExchanging}
-      />
+    <form onSubmit={onSubmit} className="space-y-4 w-full">
+      <div className="space-y-1">
+        <div className="px-1">
+          <label className="text-[13px] font-bold text-ctp-text">Email</label>
+        </div>
+        <Input
+          name="email"
+          type="email"
+          placeholder="your@email.com"
+          required
+          value={formData.email}
+          onChange={onInputChange}
+          error={getFieldError('email')}
+          disabled={isExchanging}
+          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
+        />
+      </div>
 
       <div className="space-y-1">
+        <div className="flex items-center justify-between px-1">
+          <label className="text-[13px] font-bold text-ctp-text">Password</label>
+          <button 
+            type="button"
+            onClick={onForgotPassword}
+            disabled={isExchanging}
+            className="text-[13px] font-medium text-ctp-sky-800 hover:underline transition-all disabled:opacity-50"
+          >
+            Forgot password?
+          </button>
+        </div>
         <Input
-          label="Password"
           name="password"
           type="password"
           placeholder="••••••••"
           required
-          leftIcon={Lock}
           value={formData.password}
           onChange={onInputChange}
           error={getFieldError('password')}
           disabled={isExchanging}
+          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
         />
-        
-        <div className="flex justify-end px-1">
-          <Button 
-            variant="link"
-            onClick={onForgotPassword}
-            disabled={isExchanging}
-            className="font-bold lowercase normal-case first-letter:uppercase"
-          >
-            Forgot password?
-          </Button>
-        </div>
       </div>
 
-      <Button
-        type="submit"
-        disabled={isExchanging || !isFormValid()}
-        className="w-full py-3 h-auto text-sm font-bold rounded-lg shadow-md active:scale-[0.98] transition-all mt-2"
-        rightIcon={<ArrowRight size={16} />}
-      >
-        Sign In
-      </Button>
+      <div className="pt-2">
+        <Button
+          type="submit"
+          disabled={isExchanging || !isFormValid()}
+          className="w-full h-11 text-[13px] font-bold rounded-lg shadow-sm active:scale-[0.98] transition-all bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white"
+        >
+          Sign in
+        </Button>
+      </div>
     </form>
   );
 }

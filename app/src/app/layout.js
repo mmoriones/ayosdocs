@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import { ThemeProvider } from "@/context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,11 +34,13 @@ export default async function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-ctp-base text-ctp-text antialiased">
-        <Providers session={session}>
-          {children}
-        </Providers>
+        <ThemeProvider>
+          <Providers session={session}>
+            {children}
+          </Providers>
+        </ThemeProvider>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
     </html>
   );
 }

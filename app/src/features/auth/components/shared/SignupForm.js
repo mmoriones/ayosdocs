@@ -16,69 +16,76 @@ export function SignupForm({
   getFieldError
 }) {
   return (
-    <form onSubmit={onSubmit} className="space-y-1 w-full">
-      <Input
-        label="Full Name"
-        name="fullName"
-        type="text"
-        placeholder="Juan Dela Cruz"
-        required
-        leftIcon={UserIcon}
-        value={formData.fullName}
-        onChange={onInputChange}
-        error={getFieldError('fullName')}
-        disabled={isExchanging}
-      />
-
-      <Input
-        label="Email address"
-        name="email"
-        type="email"
-        placeholder="juan@example.com"
-        required
-        leftIcon={Mail}
-        value={formData.email}
-        onChange={onInputChange}
-        error={getFieldError('email')}
-        disabled={isExchanging}
-      />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <form onSubmit={onSubmit} className="space-y-4 w-full">
+      <div className="space-y-1">
+        <label className="text-[13px] font-bold text-ctp-text px-1">Full Name</label>
         <Input
-          label="Password"
+          name="fullName"
+          type="text"
+          placeholder="Juan Dela Cruz"
+          required
+          value={formData.fullName}
+          onChange={onInputChange}
+          error={getFieldError('fullName')}
+          disabled={isExchanging}
+          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
+        />
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-[13px] font-bold text-ctp-text px-1">Email</label>
+        <Input
+          name="email"
+          type="email"
+          placeholder="your@email.com"
+          required
+          value={formData.email}
+          onChange={onInputChange}
+          error={getFieldError('email')}
+          disabled={isExchanging}
+          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
+        />
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-[13px] font-bold text-ctp-text px-1">Password</label>
+        <Input
           name="password"
           type="password"
-          placeholder="••••••••"
+          placeholder="Min. 8 characters"
           required
-          leftIcon={Lock}
           value={formData.password}
           onChange={onInputChange}
           error={getFieldError('password')}
           disabled={isExchanging}
+          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
         />
-        
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-[13px] font-bold text-ctp-text px-1">Confirm Password</label>
         <Input
-          label="Confirm Password"
           name="confirmPassword"
           type="password"
-          placeholder="••••••••"
+          placeholder="Confirm your password"
           required
-          leftIcon={Lock}
           value={formData.confirmPassword}
           onChange={onInputChange}
           error={getFieldError('confirmPassword')}
           disabled={isExchanging}
+          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
         />
       </div>
 
-      <Button
-        type="submit"
-        disabled={isExchanging || !isFormValid()}
-        className="w-full py-3 h-auto text-sm font-bold rounded-lg shadow-md active:scale-[0.98] transition-all mt-2"
-        rightIcon={<ArrowRight size={16} />}
-      >
-        Create Account
-      </Button>
+      <div className="pt-2">
+        <Button
+          type="submit"
+          disabled={isExchanging || !isFormValid()}
+          className="w-full h-11 text-[13px] font-bold rounded-lg shadow-sm active:scale-[0.98] transition-all bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white"
+        >
+          Sign up
+        </Button>
+      </div>
     </form>
   );
 }

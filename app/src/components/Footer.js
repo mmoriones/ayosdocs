@@ -24,6 +24,8 @@ const Footer = () => {
           <div key={link.label} className="flex items-center gap-4">
             <Link 
               href={link.href} 
+              target="_blank"
+              rel="noopener noreferrer"
               className="active:scale-[0.97] transition-all hover:text-ctp-sky-800 font-medium"
             >
               {link.label}

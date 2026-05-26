@@ -19,46 +19,46 @@ export function SocialProviders({
 
   return (
     <div className="space-y-4 w-full">
-      <div className={isPage ? "grid grid-cols-2 gap-3" : "space-y-4"}>
+      <div className={isPage ? "grid grid-cols-2 gap-3" : "space-y-3"}>
         <button
           onClick={onGoogleLogin}
           disabled={isExchanging}
-          className={`w-full flex items-center justify-center gap-3 bg-ctp-base border border-ctp-surface1 hover:bg-ctp-mantle text-ctp-text font-semibold rounded-xl transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 ${
-            isPage ? 'py-3.5 text-[10px] uppercase tracking-widest' : 'py-3.5'
+          className={`w-full flex items-center justify-center gap-2.5 bg-ctp-base border border-ctp-surface1 hover:border-ctp-surface2 hover:bg-ctp-mantle text-ctp-text font-bold rounded-lg transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 ${
+            isPage ? 'py-2.5 text-[13px]' : 'py-3'
           }`}
         >
           <Image
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             alt="Google"
-            width={isPage ? 14 : 18}
-            height={isPage ? 14 : 18}
+            width={16}
+            height={16}
           />
-          {isPage ? 'Google' : 'Continue with Google'}
+          Google
         </button>
 
         {onGuestClick && (
           <button
             onClick={onGuestClick}
             disabled={isExchanging}
-            className={`w-full flex items-center justify-center gap-3 bg-ctp-base border border-ctp-surface1 hover:bg-ctp-mantle text-ctp-text font-semibold rounded-xl transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 ${
-              isPage ? 'py-3.5 text-[10px] uppercase tracking-widest' : 'py-3.5'
+            className={`w-full flex items-center justify-center gap-2.5 bg-ctp-base border border-ctp-surface1 hover:border-ctp-surface2 hover:bg-ctp-mantle text-ctp-text font-bold rounded-lg transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 ${
+              isPage ? 'py-2.5 text-[13px]' : 'py-3'
             }`}
           >
-            <User size={isPage ? 14 : 18} className="text-ctp-subtext1" />
-            {isPage ? 'Guest' : 'Continue as Guest'}
+            <User size={16} className="text-ctp-text" />
+            Guest
           </button>
         )}
       </div>
 
       {showEmailOption && (
         <>
-          <div className="relative my-6">
+          <div className="relative py-2">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t border-ctp-surface1"></span>
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className={`${isPage ? 'bg-ctp-base' : 'bg-ctp-mantle'} px-2 text-ctp-subtext1 font-semibold`}>
-                Or continue with
+            <div className="relative flex justify-center text-[11px]">
+              <span className={`${isPage ? 'bg-ctp-base' : 'bg-ctp-mantle'} px-4 text-ctp-subtext1 font-medium`}>
+                or
               </span>
             </div>
           </div>
@@ -66,12 +66,12 @@ export function SocialProviders({
           <button
             onClick={onEmailClick}
             disabled={isExchanging}
-            className={`w-full flex items-center justify-center gap-3 bg-ctp-surface0 hover:bg-ctp-surface1 text-ctp-text font-semibold rounded-xl transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 ${
-              isPage ? 'py-3 text-xs uppercase tracking-widest' : 'py-3.5'
+            className={`w-full flex items-center justify-center gap-2.5 bg-ctp-base border border-ctp-surface1 hover:border-ctp-surface2 hover:bg-ctp-mantle text-ctp-text font-bold rounded-lg transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 ${
+              isPage ? 'py-3 text-[13px]' : 'py-3.5'
             }`}
           >
-            <Mail size={isPage ? 14 : 18} className="text-ctp-subtext1" />
-            Email and Password
+            <Mail size={16} className="text-ctp-text" />
+            Continue with Email
           </button>
         </>
       )}
