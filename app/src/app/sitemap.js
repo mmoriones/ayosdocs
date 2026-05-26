@@ -25,6 +25,7 @@ export default async function sitemap() {
     "/bundles",
     "/offices",
     "/updates",
+    "/rate",
     "/about",
     "/faqs",
     "/support",
