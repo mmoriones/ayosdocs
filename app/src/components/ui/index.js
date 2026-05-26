@@ -18,6 +18,8 @@ export { default as Avatar } from './Avatar';
 export { default as Tooltip } from './Tooltip';
 export { default as Switch } from './Switch';
 export { default as BookmarkButton } from './BookmarkButton';
+export { default as Checkbox } from './Checkbox';
 export { default as DropdownMenu, DropdownMenuItem } from './DropdownMenu';
+export { default as Label } from './Label';
 export { Tabs, Tab, TabPanel } from './Tabs';
 export { default as TrackingIndicator } from './TrackingIndicator';

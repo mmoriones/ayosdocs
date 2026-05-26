@@ -113,8 +113,8 @@ export const authOptions = {
     }),
   ],
   pages: {
-    signIn: '/',
-    error: '/',
+    signIn: '/login',
+    error: '/login',
   },
   // Support multiple subdomains and proxies
   trustHost: true,

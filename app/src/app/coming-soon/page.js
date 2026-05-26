@@ -2,84 +2,94 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { Rocket, Construction, Home, ArrowLeft, Timer, Sparkles, ShieldCheck } from 'lucide-react';
+import { Rocket, Home, ArrowLeft, Timer, ShieldCheck, Layers } from 'lucide-react';
+import { Button, Card, Badge } from '@/components/ui';
 
 /**
  * ComingSoon Page Component
+ * Simplified placeholder for upcoming features.
  */
 export default function ComingSoon() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-ctp-base flex items-center justify-center px-6 py-20 font-sans text-ctp-text">
-      <div className="max-w-xl w-full text-center space-y-12 animate-in fade-in zoom-in-95 duration-500">
+    <div className="h-screen bg-ctp-base flex items-center justify-center px-6 overflow-hidden relative selection:bg-ctp-sky-800/30">
+      
+      {/* Background Decorative Glow (Cloudflare-style) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[700px] h-[500px] opacity-[0.06] pointer-events-none">
+        <div className="absolute top-0 right-0 w-[60%] h-[60%] bg-ctp-sky-800 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-ctp-mauve rounded-full blur-[80px]" />
+      </div>
+
+      <div className="max-w-xl w-full text-center space-y-8 animate-in fade-in zoom-in-95 duration-700 relative z-10">
         
-        <div className="relative">
-          <div className="absolute inset-0 bg-ctp-sky-800/10 blur-3xl rounded-full scale-150 animate-pulse" />
-          <div className="relative flex justify-center">
-            <div className="w-20 h-20 bg-ctp-mantle rounded-2xl shadow-xl shadow-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 border border-ctp-surface1 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-ctp-sky-800/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full" />
-              <Rocket size={32} className="relative z-10 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" strokeWidth={1.5} />
-            </div>
-            
-            <div className="absolute -top-4 -right-4 w-7 h-7 bg-ctp-peach/10 rounded-xl flex items-center justify-center text-ctp-peach animate-bounce delay-75 shadow-sm border border-ctp-peach/20">
-               <Sparkles size={14} />
-            </div>
+        {/* Visual Header */}
+        <div className="flex justify-center">
+          <div className="w-16 h-16 bg-ctp-mantle rounded-2xl shadow-xl flex items-center justify-center text-ctp-sky-800 border border-ctp-surface1 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-ctp-sky-800/5 scale-0 group-hover:scale-100 transition-transform duration-500 rounded-full" />
+            <Rocket size={28} className="relative z-10 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" strokeWidth={1.5} />
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-md text-ctp-sky-800 text-ui-micro font-bold uppercase tracking-widest">
-            <Construction size={12} />
-            Feature Brewing
+        {/* Text Content */}
+        <div className="space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-ctp-mantle border border-ctp-surface1 rounded-md text-ctp-subtext1 text-[10px] font-bold uppercase tracking-[0.2em]">
+            New Features
           </div>
-          <h1 className="text-3xl font-bold text-ctp-text tracking-tight uppercase tracking-widest">
-            Almost Ready for You
+          <h1 className="text-3xl font-bold text-ctp-text tracking-tight uppercase tracking-widest leading-tight">
+            Building something <span className="text-ctp-sky-800">new</span>
           </h1>
-          <p className="text-ctp-subtext1 text-sm max-w-sm mx-auto leading-relaxed font-medium">
-            We&apos;re currently polishing this feature to make your government documentation journey even smoother.
+          <p className="text-ctp-subtext1 text-sm max-w-sm mx-auto leading-relaxed font-medium opacity-80">
+            We&apos;re currently getting this part ready to make your government tasks even easier to manage.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-lg mx-auto text-left">
-          <div className="bg-ctp-mantle/50 p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4 hover:border-ctp-sky-800/30 transition-all group">
-            <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
-               <ShieldCheck size={18} />
+        {/* Feature Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md mx-auto text-left">
+          <Card background="mantle" className="p-4 border-ctp-surface1 shadow-sm group hover:border-ctp-sky-800/30 transition-all">
+            <div className="flex items-center justify-between mb-2">
+              <div className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 group-hover:scale-105 transition-transform">
+                 <Layers size={16} />
+              </div>
+              <Badge variant="sky" className="text-[8px] px-1.5 font-black uppercase tracking-widest">Next</Badge>
             </div>
-            <div>
-              <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Coming Next</h3>
-              <p className="text-xs font-bold text-ctp-text leading-tight tracking-tight">Requirement Bundles</p>
+            <h3 className="text-xs font-bold text-ctp-text tracking-tight uppercase">Document Bundles</h3>
+            <p className="text-[10px] text-ctp-subtext1 font-medium leading-tight opacity-70">Checklists for your life milestones.</p>
+          </Card>
+
+          <Card background="mantle" className="p-4 border-ctp-surface1 shadow-sm group hover:border-ctp-mauve/30 transition-all">
+            <div className="flex items-center justify-between mb-2">
+              <div className="w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-mauve group-hover:scale-105 transition-transform">
+                 <Timer size={16} />
+              </div>
+              <Badge variant="mauve" className="text-[8px] px-1.5 font-black uppercase tracking-widest">Planned</Badge>
             </div>
-          </div>
-          <div className="bg-ctp-mantle/50 p-5 rounded-xl border border-ctp-surface1 shadow-sm flex items-start gap-4 hover:border-ctp-sky-800/30 transition-all group">
-            <div className="w-9 h-9 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-peach shrink-0 group-hover:scale-105 transition-transform shadow-inner">
-               <Timer size={18} />
-            </div>
-            <div>
-              <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest mb-1">Coming Soon</h3>
-              <p className="text-xs font-bold text-ctp-text leading-tight tracking-tight">Stay Tuned!</p>
-            </div>
-          </div>
+            <h3 className="text-xs font-bold text-ctp-text tracking-tight uppercase">Reminders</h3>
+            <p className="text-[10px] text-ctp-subtext1 font-medium leading-tight opacity-70">Never miss an ID renewal again.</p>
+          </Card>
         </div>
 
+        {/* Navigation Actions */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
-          <button 
+          <Button 
             onClick={() => router.push('/')}
-            className="w-full sm:w-auto group flex items-center justify-center gap-2 px-8 py-2.5 bg-ctp-sky-800 text-white rounded-lg font-bold text-ui-micro uppercase tracking-widest shadow-md hover:bg-ctp-sky-800/90 active:scale-[0.98] transition-all"
+            className="w-full sm:w-auto px-8 shadow-lg shadow-ctp-sky-800/10 uppercase text-xs tracking-widest py-3 h-auto"
+            leftIcon={<Home size={14} />}
           >
-            <Home size={14} />
             Dashboard
-          </button>
-          <button 
+          </Button>
+          <Button 
+            variant="secondary"
             onClick={() => router.back()}
-            className="w-full sm:w-auto px-8 py-2.5 bg-ctp-base text-ctp-subtext1 border border-ctp-surface1 rounded-lg font-bold text-ui-micro uppercase tracking-widest hover:bg-ctp-mantle hover:text-ctp-text active:scale-[0.98] transition-all shadow-sm"
+            className="w-full sm:w-auto px-8 uppercase text-xs tracking-widest py-3 h-auto"
+            leftIcon={<ArrowLeft size={14} />}
           >
-            Previous Page
-          </button>
+            Go Back
+          </Button>
         </div>
 
-        <p className="text-ui-tiny text-ctp-subtext1 font-bold uppercase tracking-[0.3em] pt-8 opacity-40">
-          AyosDocs Engine v1.0.4
+        <p className="text-ui-tiny text-ctp-subtext1 font-bold uppercase tracking-[0.4em] pt-4 opacity-30">
+          AyosDocs v1.0.4
         </p>
       </div>
     </div>

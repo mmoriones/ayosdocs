@@ -1,465 +1,33 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState, useRef, useCallback } from "react";
-import { X, Loader2, Mail, Lock, User as UserIcon, ArrowLeft, Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
-import { signIn, useSession } from 'next-auth/react';
-import { useToast } from "@/context";
-import { registerUserAction, checkEmailAction, checkRateLimitAction, requestPasswordResetAction } from "@/app/actions/user";
-import { Modal } from '@/components/ui';
+import { X, ArrowLeft, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Modal, Button } from '@/components/ui';
+import { useAuthLogic } from '../hooks/useAuthLogic';
+import { SocialProviders, LoginForm, SignupForm, ForgotPasswordForm } from './shared';
 
 const AuthModal = ({ isOpen, onClose }) => {
-  const { status } = useSession();
-  const { showToast } = useToast();
-  const [isExchanging, setIsExchanging] = useState(false);
-  const [mode, setMode] = useState('initial'); // 'initial', 'login', 'signup', 'forgot-password'
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [statusMessage, setStatusMessage] = useState(null); // { type: 'error' | 'success', text: string }
-  const [emailTaken, setEmailTaken] = useState(null); // null, 'email', 'google'
-  const [isCheckingEmail, setIsCheckingEmail] = useState(false);
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+  const {
+    mode,
+    changeMode,
+    isExchanging,
+    statusMessage,
+    handleGoogleLogin,
+    handleEmailLogin,
+    handleEmailSignUp,
+    handleForgotPasswordSubmit,
+    formData,
+    handleInputChange,
+    isFormValid,
+    getFieldError,
+    cleanupGoogleSignIn
+  } = useAuthLogic({ 
+    isOpen, 
+    onClose,
+    onSuccess: onClose 
   });
 
-  useEffect(() => {
-    if (status === 'authenticated' && isOpen) {
-      onClose();
-    }
-  }, [status, isOpen, onClose]);
-
-  // 1. Pre-check rate limits when modal opens or mode changes
-  useEffect(() => {
-    if (!isOpen || mode === 'initial') return;
-
-    const checkLimits = async () => {
-      const action = mode === 'signup' ? 'register' : 'login';
-      const limit = mode === 'signup' ? 3 : 5;
-      
-      try {
-        const result = await checkRateLimitAction(action, limit);
-        if (!result.success) {
-          const resetTime = result.resetTime ? new Date(result.resetTime) : null;
-          if (!resetTime) return;
-
-          const remainingMs = resetTime.getTime() - Date.now();
-          if (remainingMs <= 0) {
-            setStatusMessage(null);
-            return;
-          }
-
-          if (mode === 'signup') {
-            const remainingMinutes = Math.ceil(remainingMs / (60 * 1000));
-            setStatusMessage({
-              type: 'error',
-              text: `Too many registration attempts. Please try again in about ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}.`
-            });
-          } else {
-            const remainingSeconds = Math.ceil(remainingMs / 1000);
-            setStatusMessage({
-              type: 'error',
-              text: `Too many login attempts. Please try again in ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''}.`
-            });
-          }
-        }
-      } catch (error) {
-        console.error("Check rate limit error:", error);
-      }
-    };
-
-    checkLimits();
-  }, [isOpen, mode]);
-
-  // 2. Debounced email check
-  useEffect(() => {
-    // Only proceed if we have a potentially valid email
-    if (!formData.email || !formData.email.includes('@')) {
-      return;
-    }
-
-    const timer = setTimeout(async () => {
-      setIsCheckingEmail(true);
-      try {
-        const result = await checkEmailAction(formData.email);
-        
-        if (mode === 'signup') {
-          if (result.exists) {
-            setEmailTaken(result.isGoogle ? 'google' : 'email');
-          } else {
-            setEmailTaken(null);
-          }
-        } else if (mode === 'login') {
-          if (result.locked) {
-            setStatusMessage({
-              type: 'error',
-              text: result.lockoutMessage
-            });
-          } else {
-            // Only clear if it's currently showing a lockout message for THIS email
-            setStatusMessage(prev => (prev?.text.includes('Account temporarily locked') ? null : prev));
-          }
-        }
-      } catch (err) {
-        console.error("Email check error:", err);
-      } finally {
-        setIsCheckingEmail(false);
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [formData.email, mode]); // Mode is needed to know whether to check lockout or existence
-
-  // Refs for tracking/cancelling in-progress Google sign-in
-  const isExchangingRef = useRef(false);
-  useEffect(() => { isExchangingRef.current = isExchanging; });
-  const safetyTimerRef = useRef(null);
-  const focusHandlerRef = useRef(null);
-
-  const cleanupGoogleSignIn = useCallback(() => {
-    clearTimeout(safetyTimerRef.current);
-    safetyTimerRef.current = null;
-    if (focusHandlerRef.current) {
-      window.removeEventListener('focus', focusHandlerRef.current);
-      focusHandlerRef.current = null;
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleReset = (event) => {
-      // event.persisted is true when the page is restored from bfcache
-      if (event?.persisted) {
-        if (isExchangingRef.current) {
-          // Page was in the middle of a sign-in flow and got restored from bfcache
-          // (e.g. user pressed back from Google OAuth). Reload to get a clean state
-          // instead of showing a blank page due to stale RSC/React state.
-          window.location.reload();
-        } else {
-          setIsExchanging(false);
-        }
-      }
-    };
-
-    window.addEventListener('pageshow', handleReset);
-    return () => window.removeEventListener('pageshow', handleReset);
-  }, []);
-
-  useEffect(() => {
-    if (!isOpen) {
-      cleanupGoogleSignIn();
-      // Reset state after closing animation
-      const timer = setTimeout(() => {
-        setIsExchanging(false);
-        setMode('initial');
-        setShowPassword(false);
-        setShowConfirmPassword(false);
-        setStatusMessage(null);
-        setEmailTaken(null);
-        setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isOpen]);
-
-  const handleGoogleLogin = async () => {
-    // Clean up any pending sign-in first (e.g. if user clicked close and re-opened)
-    cleanupGoogleSignIn();
-
-    setIsExchanging(true);
-    setStatusMessage(null);
-    
-    // Safety reset: if the user cancels or closes the Google popup/redirect, 
-    // and returns to our window, we should eventually reset the state.
-    safetyTimerRef.current = setTimeout(() => {
-      setIsExchanging(false);
-    }, 15000);
-
-    // Listen for window focus to catch when user returns from a canceled/closed popup
-    const handleFocus = () => {
-      // Small delay to allow NextAuth state to possibly update first
-      setTimeout(() => {
-        setIsExchanging(false);
-        window.removeEventListener('focus', handleFocus);
-        clearTimeout(safetyTimerRef.current);
-      }, 500);
-    };
-    focusHandlerRef.current = handleFocus;
-    window.addEventListener('focus', handleFocus);
-
-    try {
-      const result = await signIn('google', { callbackUrl: window.location.href });
-      
-      if (result?.error) {
-        cleanupGoogleSignIn();
-        setIsExchanging(false);
-        setStatusMessage({
-          type: 'error',
-          text: result.error
-        });
-      }
-    } catch (error) {
-      cleanupGoogleSignIn();
-      console.error("Login error:", error);
-      setStatusMessage({
-        type: 'error',
-        text: 'Google login failed. Please try again.'
-      });
-      setIsExchanging(false);
-    }
-  };
-
-  const handleEmailLogin = async (e) => {
-    e.preventDefault();
-    setIsExchanging(true);
-    setStatusMessage(null);
-    try {
-      const result = await signIn('credentials', {
-        redirect: false,
-        email: formData.email,
-        password: formData.password
-      });
-
-      if (result.error) {
-        if (result.error === 'AccountPermanentlyDeleted') {
-          setStatusMessage({
-            type: 'error',
-            text: 'This account has been permanently deleted and can no longer be recovered.'
-          });
-        } else if (result.error === 'GoogleAccountOnly') {
-          setStatusMessage({
-            type: 'google-suggestion',
-            text: 'It looks like you usually sign in with Google.'
-          });
-        } else {
-          const isRateLimited = result.error.includes('Too many') || result.error.includes('locked');
-          setStatusMessage({
-            type: 'error',
-            text: result.error === 'CredentialsSignin' ? 'Invalid credentials' : result.error
-          });
-          
-          if (isRateLimited) {
-            showToast({
-              type: 'error',
-              title: 'Security Alert',
-              message: result.error
-            });
-          }
-        }
-      } else {
-        // Success handled by useEffect session status
-      }
-    } catch (error) {
-      setStatusMessage({
-        type: 'error',
-        text: 'An unexpected error occurred.'
-      });
-    } finally {
-      setIsExchanging(false);
-    }
-  };
-
-  const handleEmailSignUp = async (e) => {
-    e.preventDefault();
-    
-    if (emailTaken) return;
-
-    if (formData.password !== formData.confirmPassword) {
-      setStatusMessage({
-        type: 'error',
-        text: 'Passwords do not match.'
-      });
-      return;
-    }
-
-    setIsExchanging(true);
-    setStatusMessage(null);
-    try {
-      const data = new FormData();
-      data.append('fullName', formData.fullName);
-      data.append('email', formData.email);
-      data.append('password', formData.password);
-
-      const result = await registerUserAction(data);
-
-      if (result.success) {
-        setStatusMessage({
-          type: 'success',
-          text: result.message
-        });
-        // Clear sensitive data but keep email for login
-        setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
-        setTimeout(() => setMode('login'), 5000);
-      } else {
-        const isRateLimited = result.message.includes('Too many');
-        setStatusMessage({
-          type: 'error',
-          text: result.message
-        });
-
-        if (isRateLimited) {
-          showToast({
-            type: 'error',
-            title: 'Action Throttled',
-            message: result.message
-          });
-        }
-      }
-    } catch (error) {
-      setStatusMessage({
-        type: 'error',
-        text: 'Something went wrong. Please try again.'
-      });
-    } finally {
-      setIsExchanging(false);
-    }
-  };
-
-  const handleForgotPasswordSubmit = async (e) => {
-    e.preventDefault();
-    setIsExchanging(true);
-    setStatusMessage(null);
-    try {
-      const result = await requestPasswordResetAction(formData.email);
-      if (result.success) {
-        setStatusMessage({
-          type: 'success',
-          text: 'Success! A reset link has been sent to your email.'
-        });
-      } else {
-        setStatusMessage({
-          type: 'error',
-          text: result.message
-        });
-      }
-    } catch (error) {
-      setStatusMessage({
-        type: 'error',
-        text: 'An unexpected error occurred.'
-      });
-    } finally {
-      setIsExchanging(false);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    if (statusMessage) setStatusMessage(null);
-    const { name, value } = e.target;
-    
-    // Clear email taken status immediately when user changes email
-    if (name === 'email') {
-      setEmailTaken(null);
-    }
-
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const changeMode = async (newMode) => {
-    setMode(newMode);
-    setStatusMessage(null);
-    setEmailTaken(null);
-    setFormData({ fullName: '', email: '', password: '', confirmPassword: '' });
-    setShowPassword(false);
-    setShowConfirmPassword(false);
-
-    // Immediate rate limit check
-    if (newMode === 'signup' || newMode === 'login') {
-      const action = newMode === 'signup' ? 'register' : 'login';
-      const limit = newMode === 'signup' ? 3 : 5;
-      
-      try {
-        const result = await checkRateLimitAction(action, limit);
-        if (!result.success) {
-          const remainingMs = result.resetTime ? new Date(result.resetTime).getTime() - Date.now() : 60 * 1000;
-          
-          if (newMode === 'signup') {
-            const remainingMinutes = Math.max(1, Math.ceil(remainingMs / (60 * 1000)));
-            setStatusMessage({
-              type: 'error',
-              text: `Too many registration attempts. Please try again in ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}.`
-            });
-          } else {
-            const remainingSeconds = Math.max(1, Math.ceil(remainingMs / 1000));
-            setStatusMessage({
-              type: 'error',
-              text: `Too many login attempts. Please try again in ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''}.`
-            });
-          }
-        }
-      } catch (error) {
-        console.error("Check rate limit error:", error);
-      }
-    }
-  };
-
-  const isFormValid = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const nameRegex = /^[a-zA-Z\s.\-&']+$/;
-
-    if (mode === 'login') {
-      return (
-        emailRegex.test(formData.email) &&
-        formData.password.length >= 8
-      );
-    }
-
-    if (mode === 'signup') {
-      return (
-        formData.fullName.trim().length >= 2 &&
-        nameRegex.test(formData.fullName) &&
-        emailRegex.test(formData.email) &&
-        formData.password.length >= 8 &&
-        formData.password === formData.confirmPassword &&
-        !emailTaken &&
-        !isCheckingEmail
-      );
-    }
-
-    if (mode === 'forgot-password') {
-      return emailRegex.test(formData.email);
-    }
-
-    return true;
-  };
-
-  const isFieldInvalid = (fieldName) => {
-    return getFieldError(fieldName) !== '';
-  };
-
-  const getFieldError = (fieldName) => {
-    const value = formData[fieldName];
-    if (!value || value.length === 0) return '';
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const nameRegex = /^[a-zA-Z\s.\-&']+$/;
-
-    switch (fieldName) {
-      case 'fullName':
-        if (value.trim().length < 2) return 'Name must be at least 2 characters';
-        if (!nameRegex.test(value)) return 'Name contains invalid characters';
-        return '';
-      case 'email':
-        if (!emailRegex.test(value)) return 'Please enter a valid email address';
-        if (mode === 'signup') {
-          if (emailTaken === 'email') return 'Email already registered';
-          if (emailTaken === 'google') return 'Email linked to Google account';
-        }
-        return '';
-      case 'password':
-        if (mode === 'login') return '';
-        return value.length < 8 ? 'Password must be at least 8 characters' : '';
-      case 'confirmPassword':
-        return value !== formData.password ? 'Passwords do not match' : '';
-      default:
-        return '';
-    }
-  };
-
-  if (!isOpen || status === 'authenticated') return null;
+  if (!isOpen) return null;
 
   return (
     <Modal
@@ -476,7 +44,6 @@ const AuthModal = ({ isOpen, onClose }) => {
         <button
           onClick={() => {
             cleanupGoogleSignIn();
-            setIsExchanging(false);
             onClose();
           }}
           className="absolute top-5 right-5 z-[60] p-2 rounded-full text-ctp-subtext1 hover:bg-ctp-surface1 hover:text-ctp-text transition-all active:scale-95 border border-transparent hover:border-ctp-surface1"
@@ -513,7 +80,7 @@ const AuthModal = ({ isOpen, onClose }) => {
                   </div>
                   <div className="absolute -inset-4 bg-ctp-sky-800/5 rounded-[40px] blur-2xl animate-pulse" />
                 </div>
-                
+
                 <div className="space-y-1.5">
                   <h3 className="text-xl font-bold text-ctp-text tracking-tight uppercase">AyosDocs</h3>
                   <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.25em] opacity-60">Securing your session</p>
@@ -577,223 +144,60 @@ const AuthModal = ({ isOpen, onClose }) => {
           )}
 
           {mode === 'initial' ? (
-            <div className="space-y-4">
-              <button
-                onClick={handleGoogleLogin}
-                disabled={isExchanging}
-                className="w-full flex items-center justify-center gap-3 bg-ctp-base border border-ctp-surface1 hover:bg-ctp-mantle text-ctp-text font-semibold py-3.5 rounded-xl transition-all active:scale-[0.98] shadow-sm disabled:opacity-50"
-              >
-                <Image
-                  src="https://www.svgrepo.com/show/475656/google-color.svg"
-                  alt="Google"
-                  width={18}
-                  height={18}
-                  className="w-4.5 h-4.5"
-                />
-                Continue with Google
-              </button>
-
-              <div className="relative my-6">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-ctp-surface1"></span>
-                </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-ctp-mantle px-2 text-ctp-subtext1 font-semibold">Or continue with</span>
-                </div>
-              </div>
-
-              <button
-                onClick={() => changeMode('login')}
-                disabled={isExchanging}
-                className="w-full flex items-center justify-center gap-3 bg-ctp-surface0 hover:bg-ctp-surface1 text-ctp-text font-semibold py-3.5 rounded-xl transition-all active:scale-[0.98] shadow-sm disabled:opacity-50"
-              >
-                <Mail size={18} className="text-ctp-subtext1" />
-                Email and Password
-              </button>
-
-              <p className="text-center text-sm text-ctp-subtext1 mt-4">
-                Don&apos;t have an account?{' '}
-                <button 
-                  onClick={() => changeMode('signup')}
-                  className="text-ctp-sky-800 font-bold hover:underline"
-                >
-                  Sign up
-                </button>
-              </p>
-            </div>
+            <SocialProviders 
+              onGoogleLogin={handleGoogleLogin}
+              onEmailClick={() => changeMode('login')}
+              isExchanging={isExchanging}
+              variant="modal"
+            />
+          ) : mode === 'login' ? (
+            <LoginForm 
+              formData={formData}
+              onInputChange={handleInputChange}
+              onSubmit={handleEmailLogin}
+              onForgotPassword={() => changeMode('forgot-password')}
+              isExchanging={isExchanging}
+              isFormValid={isFormValid}
+              getFieldError={getFieldError}
+            />
+          ) : mode === 'signup' ? (
+            <SignupForm 
+              formData={formData}
+              onInputChange={handleInputChange}
+              onSubmit={handleEmailSignUp}
+              isExchanging={isExchanging}
+              isFormValid={isFormValid}
+              getFieldError={getFieldError}
+            />
           ) : (
-            <form onSubmit={mode === 'login' ? handleEmailLogin : mode === 'signup' ? handleEmailSignUp : handleForgotPasswordSubmit} className="space-y-4">
-              {mode === 'signup' && (
-                <div className="space-y-1">
-                  <div className="relative">
-                    <UserIcon className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('fullName') ? 'text-ctp-red' : 'text-ctp-subtext1'}`} />
-                    <input
-                      type="text"
-                      name="fullName"
-                      placeholder="Full Name"
-                      required
-                      maxLength={70}
-                      autoComplete="off"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-4 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
-                        isFieldInvalid('fullName') 
-                          ? 'border-ctp-red/50 focus:border-ctp-red' 
-                          : 'border-ctp-surface1 focus:border-ctp-sky-800'
-                        }`}
-                    />
-                  </div>
-                  {isFieldInvalid('fullName') && (
-                    <p className="text-ui-micro font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
-                      {getFieldError('fullName')}
-                    </p>
-                  )}
-                </div>
-              )}
-              
-              <div className="space-y-1">
-                <div className="relative">
-                  <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('email') ? 'text-ctp-red' : 'text-ctp-subtext1'}`} />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email address"
-                    required
-                    maxLength={100}
-                    autoComplete="off"
-                    value={formData.email}                    onChange={handleInputChange}
-                    className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-4 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
-                      isFieldInvalid('email') 
-                        ? 'border-ctp-red/50 focus:border-ctp-red' 
-                        : 'border-ctp-surface1 focus:border-ctp-sky-800'
-                      }`}
-                  />
-                </div>
-                {isFieldInvalid('email') && (
-                  <p className="text-ui-micro font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
-                    {getFieldError('email')}
-                  </p>
-                )}
-              </div>
+            <ForgotPasswordForm 
+              formData={formData}
+              onInputChange={handleInputChange}
+              onSubmit={handleForgotPasswordSubmit}
+              isExchanging={isExchanging}
+              isFormValid={isFormValid}
+              getFieldError={getFieldError}
+            />
+          )}
 
-              {mode !== 'forgot-password' && (
-                <div className="space-y-1">
-                  <div className="relative">
-                    <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('password') ? 'text-ctp-red' : 'text-ctp-subtext1'}`} />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name="password"
-                      placeholder="Password"
-                      required
-                      minLength={8}
-                      maxLength={128}
-                      autoComplete="off"
-                      value={formData.password}                    onChange={handleInputChange}
-                      className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-12 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
-                        isFieldInvalid('password') 
-                          ? 'border-ctp-red/50 focus:border-ctp-red' 
-                          : 'border-ctp-surface1 focus:border-ctp-sky-800'
-                        }`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('password') ? 'text-ctp-red/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
-                    >
-                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
-                  </div>
-                  {isFieldInvalid('password') && (
-                    <p className="text-ui-micro font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
-                      {getFieldError('password')}
-                    </p>
-                  )}
-                  {mode === 'login' && (
-                    <div className="flex justify-end px-1">
-                      <button 
-                        type="button"
-                        onClick={() => setMode('forgot-password')}
-                        className="text-ui-micro font-bold text-ctp-subtext1 hover:text-ctp-sky-800 transition-colors"
-                      >
-                        Forgot password?
-                      </button>
-                    </div>
-                  )}
-                </div>
+          {mode !== 'initial' && mode !== 'forgot-password' && (
+            <div className="text-center text-sm text-ctp-subtext1 mt-4 flex flex-col sm:flex-row items-center justify-center gap-1">
+              {mode === 'login' ? (
+                <>
+                  <p>Don&apos;t have an account?</p>
+                  <Button variant="link" onClick={() => changeMode('signup')}>
+                    Sign up
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <p>Already have an account?</p>
+                  <Button variant="link" onClick={() => changeMode('login')}>
+                    Sign in
+                  </Button>
+                </>
               )}
-
-              {mode === 'signup' && (
-                <div className="space-y-1">
-                  <div className="relative">
-                    <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isFieldInvalid('confirmPassword') ? 'text-ctp-red' : 'text-ctp-subtext1'}`} />
-                    <input
-                      type={showConfirmPassword ? "text" : "password"}
-                      name="confirmPassword"
-                      placeholder="Confirm Password"
-                      required
-                      minLength={8}
-                      maxLength={128}
-                      autoComplete="off"
-                      value={formData.confirmPassword}
-                      onChange={handleInputChange}
-                      className={`w-full bg-ctp-base border rounded-xl py-3.5 pl-12 pr-12 text-ctp-text text-sm outline-none transition-all placeholder:text-ctp-subtext0 ${
-                        isFieldInvalid('confirmPassword') 
-                          ? 'border-ctp-red/50 focus:border-ctp-red' 
-                          : 'border-ctp-surface1 focus:border-ctp-sky-800'
-                      }`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${isFieldInvalid('confirmPassword') ? 'text-ctp-red/70' : 'text-ctp-subtext1 hover:text-ctp-text'}`}
-                    >
-                      {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
-                  </div>
-                  {isFieldInvalid('confirmPassword') && (
-                    <p className="text-ui-micro font-bold text-ctp-red ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
-                      {getFieldError('confirmPassword')}
-                    </p>
-                  )}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={isExchanging || !isFormValid()}
-                className="w-full bg-ctp-sky-800 hover:bg-ctp-sky-700 disabled:bg-ctp-surface1 disabled:text-ctp-subtext1 disabled:cursor-not-allowed disabled:shadow-none text-white font-bold py-3.5 rounded-xl transition-all active:scale-[0.98] shadow-md mt-2"
-              >
-                {mode === 'login' ? 'Sign In' : mode === 'signup' ? 'Create Account' : 'Send Reset Link'}
-              </button>
-
-              {mode !== 'forgot-password' && (
-                <p className="text-center text-sm text-ctp-subtext1 mt-4">
-                  {mode === 'login' ? (
-                    <>
-                      Don&apos;t have an account?{' '}
-                      <button 
-                        type="button"
-                        onClick={() => changeMode('signup')}
-                        className="text-ctp-sky-800 font-bold hover:underline"
-                      >
-                        Sign up
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      Already have an account?{' '}
-                      <button 
-                        type="button"
-                        onClick={() => changeMode('login')}
-                        className="text-ctp-sky-800 font-bold hover:underline"
-                      >
-                        Sign in
-                      </button>
-                    </>
-                  )}
-                </p>
-              )}
-            </form>
+            </div>
           )}
 
           <p className="mt-8 text-center text-ui-micro font-medium text-ctp-subtext0 leading-relaxed px-6 uppercase tracking-wider opacity-60">
@@ -806,3 +210,4 @@ const AuthModal = ({ isOpen, onClose }) => {
 };
 
 export default AuthModal;
+
