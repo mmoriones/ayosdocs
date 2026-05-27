@@ -25,7 +25,8 @@ export function useAuthLogic({
   const { showToast } = useToast();
   
   const [mode, setMode] = useState(initialMode);
-  const [isExchanging, setIsExchanging] = useState(false);
+  const [exchangingMethod, setExchangingMethod] = useState(null);
+  const isExchanging = exchangingMethod !== null;
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [statusMessage, setStatusMessage] = useState(null);
@@ -144,16 +145,16 @@ export function useAuthLogic({
 
   const handleGoogleLogin = async () => {
     cleanupGoogleSignIn();
-    setIsExchanging(true);
+    setExchangingMethod('google');
     setStatusMessage(null);
     
     safetyTimerRef.current = setTimeout(() => {
-      setIsExchanging(false);
+      setExchangingMethod(null);
     }, 15000);
 
     const handleFocus = () => {
       setTimeout(() => {
-        setIsExchanging(false);
+        setExchangingMethod(null);
         window.removeEventListener('focus', handleFocus);
         clearTimeout(safetyTimerRef.current);
       }, 500);
@@ -168,7 +169,7 @@ export function useAuthLogic({
       
       if (result?.error) {
         cleanupGoogleSignIn();
-        setIsExchanging(false);
+        setExchangingMethod(null);
         setStatusMessage({
           type: 'error',
           text: result.error
@@ -181,13 +182,13 @@ export function useAuthLogic({
         type: 'error',
         text: 'Google login failed. Please try again.'
       });
-      setIsExchanging(false);
+      setExchangingMethod(null);
     }
   };
 
   const handleEmailLogin = async (e) => {
     if (e) e.preventDefault();
-    setIsExchanging(true);
+    setExchangingMethod('email');
     setStatusMessage(null);
     try {
       const result = await signIn('credentials', {
@@ -229,7 +230,7 @@ export function useAuthLogic({
         text: 'An unexpected error occurred.'
       });
     } finally {
-      setIsExchanging(false);
+      setExchangingMethod(null);
     }
   };
 
@@ -245,7 +246,7 @@ export function useAuthLogic({
       return;
     }
 
-    setIsExchanging(true);
+    setExchangingMethod('signup');
     setStatusMessage(null);
     try {
       const data = new FormData();
@@ -283,13 +284,13 @@ export function useAuthLogic({
         text: 'Something went wrong. Please try again.'
       });
     } finally {
-      setIsExchanging(false);
+      setExchangingMethod(null);
     }
   };
 
   const handleForgotPasswordSubmit = async (e) => {
     if (e) e.preventDefault();
-    setIsExchanging(true);
+    setExchangingMethod('reset');
     setStatusMessage(null);
     try {
       const result = await requestPasswordResetAction(formData.email);
@@ -310,7 +311,7 @@ export function useAuthLogic({
         text: 'An unexpected error occurred.'
       });
     } finally {
-      setIsExchanging(false);
+      setExchangingMethod(null);
     }
   };
 
@@ -398,7 +399,7 @@ export function useAuthLogic({
     setMode,
     changeMode,
     isExchanging,
-    setIsExchanging,
+    exchangingMethod,
     statusMessage,
     setStatusMessage,
     formData,

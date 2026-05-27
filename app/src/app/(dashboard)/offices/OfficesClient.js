@@ -16,7 +16,7 @@ import {
   Filter
 } from 'lucide-react';
 import { GuideIcon } from '@/lib/guideIcons';
-import { PageHeader, Banner, Button, Card, Badge, SearchInput, Skeleton, SelectionPill } from '@/components/ui'
+import { DashboardPageHeader, Banner, Button, Card, Badge, SearchInput, Skeleton, SelectionPill } from '@/components/ui'
 import HolidayAlert from '@/components/HolidayAlert';
 
 
@@ -50,7 +50,7 @@ export default function OfficesClient() {
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans flex flex-col transition-colors duration-300 text-ctp-text">
-      <PageHeader 
+      <DashboardPageHeader 
         icon={Building2}
         title="Office Insights"
         description="Real-time community data on government branches and wait times."

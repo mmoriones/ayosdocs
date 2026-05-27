@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import {
@@ -12,9 +12,9 @@ import {
   Button,
 } from '@/components/ui';
 import { useAuthLogic } from '@/features/auth/hooks/useAuthLogic';
-import { SocialProviders, LoginForm } from '@/features/auth/components/shared';
+import { SocialProviders, SignupForm } from '@/features/auth/components/shared';
 
-export default function LoginPage() {
+export default function SignupPage() {
   const router = useRouter();
   const { status } = useSession();
 
@@ -23,15 +23,23 @@ export default function LoginPage() {
     exchangingMethod,
     statusMessage,
     handleGoogleLogin,
-    handleEmailLogin,
+    handleEmailSignUp,
     formData,
     handleInputChange,
     isFormValid,
     getFieldError,
   } = useAuthLogic({
-    initialMode: 'login',
+    initialMode: 'signup',
     onSuccess: () => router.push('/')
   });
+
+  // Navigate to login after successful signup
+  useEffect(() => {
+    if (statusMessage?.type === 'success') {
+      const timer = setTimeout(() => router.push('/login'), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [statusMessage, router]);
 
   if (status !== 'unauthenticated') {
     return null;
@@ -48,7 +56,7 @@ export default function LoginPage() {
         <div className="bg-ctp-base border border-ctp-surface1 rounded-xl p-8 md:p-10 shadow-sm">
           <div className="flex flex-col items-center text-center mb-8">
             <h1 className="text-[28px] font-bold text-ctp-text tracking-tight">
-              Sign in to AyosDocs
+              Sign up to AyosDocs
             </h1>
           </div>
 
@@ -56,8 +64,6 @@ export default function LoginPage() {
             <div className={`mb-8 p-4 rounded-xl border flex flex-col gap-3 animate-in fade-in zoom-in-95 duration-200 ${
               statusMessage.type === 'error'
                 ? 'bg-ctp-red/10 border-ctp-red/20 text-ctp-red'
-                : statusMessage.type === 'google-suggestion'
-                ? 'bg-ctp-sky-800/10 border-ctp-sky-800/20 text-ctp-sky-800'
                 : 'bg-ctp-green/10 border-ctp-green/20 text-ctp-green'
             }`}>
               <div className="flex items-start gap-3">
@@ -68,34 +74,14 @@ export default function LoginPage() {
                 )}
                 <p className="text-[13px] font-bold leading-tight">{statusMessage.text}</p>
               </div>
-
-              {statusMessage.type === 'google-suggestion' && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  leftIcon={
-                    <Image
-                      src="https://www.svgrepo.com/show/475656/google-color.svg"
-                      alt="Google"
-                      width={14}
-                      height={14}
-                    />
-                  }
-                  onClick={handleGoogleLogin}
-                  className="w-full border-ctp-sky-800/30 text-ctp-sky-800 text-[11px] font-bold uppercase tracking-widest"
-                >
-                  Use Google Account
-                </Button>
-              )}
             </div>
           )}
 
           <div className="space-y-5">
-            <LoginForm
+            <SignupForm
               formData={formData}
               onInputChange={handleInputChange}
-              onSubmit={handleEmailLogin}
-              onForgotPassword={() => router.push('/forgot-password')}
+              onSubmit={handleEmailSignUp}
               isExchanging={isExchanging}
               exchangingMethod={exchangingMethod}
               isFormValid={isFormValid}
@@ -123,9 +109,9 @@ export default function LoginPage() {
 
           <div className="mt-8 text-center">
             <p className="text-[14px] text-ctp-subtext1 font-medium">
-              Don&apos;t have an account?{' '}
-              <Link href="/signup" className="text-ctp-sky-800 hover:underline font-bold transition-colors">
-                Sign up
+              Already have an account?{' '}
+              <Link href="/login" className="text-ctp-sky-800 hover:underline font-bold transition-colors">
+                Sign in
               </Link>
             </p>
           </div>

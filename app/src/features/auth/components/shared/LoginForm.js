@@ -13,11 +13,12 @@ export function LoginForm({
   onSubmit, 
   onForgotPassword, 
   isExchanging, 
+  exchangingMethod,
   isFormValid,
   getFieldError
 }) {
   return (
-    <form onSubmit={onSubmit} className="space-y-4 w-full">
+    <form onSubmit={onSubmit} className="space-y-3.5 w-full">
       <div className="space-y-1">
         <div className="px-1">
           <label className="text-[13px] font-bold text-ctp-text">Email</label>
@@ -27,6 +28,7 @@ export function LoginForm({
           type="email"
           placeholder="your@email.com"
           required
+          maxLength={100}
           value={formData.email}
           onChange={onInputChange}
           error={getFieldError('email')}
@@ -52,6 +54,8 @@ export function LoginForm({
           type="password"
           placeholder="••••••••"
           required
+          minLength={8}
+          maxLength={128}
           value={formData.password}
           onChange={onInputChange}
           error={getFieldError('password')}
@@ -60,9 +64,10 @@ export function LoginForm({
         />
       </div>
 
-      <div className="pt-2">
+      <div className="pt-1">
         <Button
           type="submit"
+          isLoading={exchangingMethod === 'email'}
           disabled={isExchanging || !isFormValid()}
           className="w-full h-11 text-[13px] font-bold rounded-lg shadow-sm active:scale-[0.98] transition-all bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white"
         >

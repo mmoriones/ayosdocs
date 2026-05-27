@@ -12,7 +12,7 @@ import {
   CheckCircle2,
   Plus
 } from 'lucide-react';
-import { PageHeader, Button, SearchInput, SortDropdown, Skeleton, Badge, TrackingIndicator, SelectionPill } from '@/components/ui'
+import { DashboardPageHeader, Button, SearchInput, SortDropdown, Skeleton, Badge, TrackingIndicator, SelectionPill } from '@/components/ui'
 import { getBundleIcon } from '@/lib/bundleIcons';
 
 /**
@@ -68,7 +68,7 @@ export default function BundlesClient({ initialBundles }) {
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans transition-colors duration-300">
-      <PageHeader 
+      <DashboardPageHeader 
         icon={Layers}
         title="Bundles"
         description="Goal-oriented document groups for life events and business needs."

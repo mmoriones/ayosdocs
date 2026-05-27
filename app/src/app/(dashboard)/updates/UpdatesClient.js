@@ -11,7 +11,7 @@ import {
   Info
 } from 'lucide-react';
 import Link from 'next/link';
-import { PageHeader, Banner } from '@/components/ui';
+import { DashboardPageHeader, Banner } from '@/components/ui';
 import { GuideIcon } from '@/lib/guideIcons';
 
 /**
@@ -29,7 +29,7 @@ export default function UpdatesClient({ initialUpdates }) {
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans pb-20">
-      <PageHeader 
+      <DashboardPageHeader 
         icon={Bell}
         title="Recent Updates"
         description="Chronological feed of changes to government requirements and guides."
@@ -85,7 +85,7 @@ export default function UpdatesClient({ initialUpdates }) {
                   <Link 
                     key={update.slug}
                     href={`/guides/${update.slug}`}
-                    className="group bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-ctp-sky-800/30 hover:bg-ctp-mantle transition-all shadow-sm"
+                    className="group bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-ctp-sky-800/30 hover:bg-ctp-mantle hover:shadow-lg hover:-translate-y-px active:translate-y-0 active:scale-[0.99] transition-all shadow-sm relative overflow-hidden after:absolute after:inset-0 after:bg-white/5 after:opacity-0 after:transition-opacity active:after:opacity-100"
                   >
                     <div className="flex items-center gap-6">
                       <div className="w-14 h-14 rounded-xl bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:scale-105 transition-transform shadow-inner">

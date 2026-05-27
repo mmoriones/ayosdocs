@@ -13,6 +13,8 @@ export default function robots() {
         "/settings",
         "/verified",
         "/login",
+        "/signup",
+        "/forgot-password",
       ],
     },
     sitemap: "https://ayosdocs.com/sitemap.xml",

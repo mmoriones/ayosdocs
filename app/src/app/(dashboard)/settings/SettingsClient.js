@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 import { useTheme, useToast } from '@/context';
 import { changePasswordAction, deleteAccountAction, cancelDeletionAction } from '@/app/actions/user';
-import { Button, Input, Card, Badge, PageHeader, SortDropdown, Switch, Modal, SignOutModal } from '@/components/ui';
+import { Button, Input, Card, Badge, DashboardPageHeader, SortDropdown, Switch, Modal, SignOutModal } from '@/components/ui';
 import ConfirmModal from '@/components/ConfirmModal';
 
 /**

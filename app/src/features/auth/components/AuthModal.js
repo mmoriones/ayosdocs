@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { X, ArrowLeft, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Modal, Button } from '@/components/ui';
 import { useAuthLogic } from '../hooks/useAuthLogic';
@@ -11,6 +12,7 @@ const AuthModal = ({ isOpen, onClose }) => {
     mode,
     changeMode,
     isExchanging,
+    exchangingMethod,
     statusMessage,
     handleGoogleLogin,
     handleEmailLogin,
@@ -63,37 +65,7 @@ const AuthModal = ({ isOpen, onClose }) => {
           </button>
         )}
 
-        <div className="p-8 pt-10 relative">
-          {isExchanging && (
-            <div className="absolute inset-0 z-50 bg-ctp-base flex flex-col items-center justify-center animate-in fade-in duration-500">
-              <div className="flex flex-col items-center max-w-xs text-center">
-                <div className="relative mb-8">
-                  <div className="w-20 h-20 rounded-3xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center relative z-10 shadow-xl overflow-hidden group">
-                    <Image 
-                      src="/favicon.svg" 
-                      alt="AyosDocs" 
-                      width={48} 
-                      height={48} 
-                      className="animate-pulse-slow"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-ctp-sky-800/10 via-transparent to-transparent opacity-50" />
-                  </div>
-                  <div className="absolute -inset-4 bg-ctp-sky-800/5 rounded-[40px] blur-2xl animate-pulse" />
-                </div>
-
-                <div className="space-y-1.5">
-                  <h3 className="text-xl font-bold text-ctp-text tracking-tight uppercase">AyosDocs</h3>
-                  <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.25em] opacity-60">Securing your session</p>
-                </div>
-
-                <div className="mt-10 w-48 h-1 bg-ctp-surface0 rounded-full overflow-hidden relative">
-                   <div className="absolute inset-0 bg-ctp-sky-800/10" />
-                   <div className="h-full bg-ctp-sky-800 animate-progress-loading shadow-[0_0_8px_var(--sky-800)]" />
-                </div>
-              </div>
-            </div>
-          )}
-
+        <div className="p-8 pt-10">
           <div className="mb-6 text-center">
             <h2 className="text-2xl font-bold text-ctp-text tracking-tight">
               {mode === 'initial' ? 'Sign in to AyosDocs' : mode === 'login' ? 'Welcome Back' : mode === 'signup' ? 'Create Account' : 'Reset Password'}
@@ -148,6 +120,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               onGoogleLogin={handleGoogleLogin}
               onEmailClick={() => changeMode('login')}
               isExchanging={isExchanging}
+              exchangingMethod={exchangingMethod}
               variant="modal"
             />
           ) : mode === 'login' ? (
@@ -157,6 +130,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               onSubmit={handleEmailLogin}
               onForgotPassword={() => changeMode('forgot-password')}
               isExchanging={isExchanging}
+              exchangingMethod={exchangingMethod}
               isFormValid={isFormValid}
               getFieldError={getFieldError}
             />
@@ -166,6 +140,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               onInputChange={handleInputChange}
               onSubmit={handleEmailSignUp}
               isExchanging={isExchanging}
+              exchangingMethod={exchangingMethod}
               isFormValid={isFormValid}
               getFieldError={getFieldError}
             />
@@ -175,6 +150,7 @@ const AuthModal = ({ isOpen, onClose }) => {
               onInputChange={handleInputChange}
               onSubmit={handleForgotPasswordSubmit}
               isExchanging={isExchanging}
+              exchangingMethod={exchangingMethod}
               isFormValid={isFormValid}
               getFieldError={getFieldError}
             />
@@ -200,8 +176,11 @@ const AuthModal = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          <p className="mt-8 text-center text-ui-micro font-medium text-ctp-subtext0 leading-relaxed px-6 uppercase tracking-wider opacity-60">
-            By continuing, you agree to our <span className="underline cursor-pointer hover:text-ctp-sky-800">Terms</span> and <span className="underline cursor-pointer hover:text-ctp-sky-800">Privacy</span>.
+           <p className="text-center text-[11px] text-ctp-subtext1 leading-relaxed mt-6">
+            By continuing, I agree to AyosDocs&apos;s{' '}
+            <Link href="/terms" target="_blank" rel="noopener noreferrer" className="text-ctp-sky-800 hover:underline">terms</Link>,{' '}
+            <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="text-ctp-sky-800 hover:underline">privacy policy</Link>, and{' '}
+            <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="text-ctp-sky-800 hover:underline">cookie policy</Link>.
           </p>
         </div>
       </div>

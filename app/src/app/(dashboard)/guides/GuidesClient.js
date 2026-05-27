@@ -23,7 +23,7 @@ import {
   Filter
 } from 'lucide-react';
 import GuideCard from '@/features/guides/components/GuideCard';
-import { Card, PageHeader, Button, SearchInput, SortDropdown, FilterPill, Banner, Tooltip, SelectionPill } from '@/components/ui';
+import { Card, DashboardPageHeader, Button, SearchInput, SortDropdown, FilterPill, Banner, Tooltip, SelectionPill } from '@/components/ui';
 import { toggleFavoriteAction } from '@/app/actions/user';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
@@ -252,7 +252,7 @@ export default function GuidesClient({ initialGuides }) {
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans flex flex-col transition-colors duration-300">
-      <PageHeader 
+      <DashboardPageHeader 
         icon={FileText}
         title="Guide Library"
         description="Step-by-step procedures for Philippine government requirements."

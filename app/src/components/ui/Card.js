@@ -1,10 +1,8 @@
-'use client';
-
 /**
  * Standardized Card component for containers and sections.
  * 
  * @param {Object} props
- * @param {'base' | 'mantle'} [props.background='base']
+ * @param {'base' | 'mantle' | 'crust'} [props.background='base']
  * @param {string} [props.title]
  * @param {React.ReactNode} [props.headerAction]
  * @param {React.ReactNode} [props.footer]

@@ -12,16 +12,18 @@ export function ForgotPasswordForm({
   onInputChange, 
   onSubmit, 
   isExchanging, 
+  exchangingMethod,
   isFormValid,
   getFieldError
 }) {
   return (
-    <form onSubmit={onSubmit} className="space-y-4 w-full">
+    <form onSubmit={onSubmit} className="space-y-3.5 w-full">
       <Input
         name="email"
         type="email"
         placeholder="Email address"
         required
+        maxLength={100}
         leftIcon={Mail}
         value={formData.email}
         onChange={onInputChange}
@@ -31,8 +33,9 @@ export function ForgotPasswordForm({
 
       <Button
         type="submit"
+        isLoading={exchangingMethod === 'reset'}
         disabled={isExchanging || !isFormValid()}
-        className="w-full py-3.5 h-auto text-sm font-bold rounded-xl shadow-md active:scale-[0.98] transition-all mt-2"
+        className="w-full h-11 text-[13px] font-bold rounded-lg shadow-sm active:scale-[0.98] transition-all bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white mt-1"
         rightIcon={<ArrowRight size={18} />}
       >
         Send Reset Link

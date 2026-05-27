@@ -1,5 +1,5 @@
-import PageHeader from '@/components/ui/PageHeader';
-import { Shield, Lock, CheckCircle2 } from 'lucide-react';
+import { PublicPageHeader, Card, Badge, Button } from '@/components/ui';
+import { Shield, Lock, CheckCircle2, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata = {
@@ -10,25 +10,25 @@ export const metadata = {
 export default function PrivacyPage() {
   return (
     <div className="min-h-full pb-20 animate-in fade-in duration-500">
-      <PageHeader 
+      <PublicPageHeader 
         icon={Shield}
         title="Privacy Policy"
         description="Our commitment to protecting your personal information and tracking data."
         actions={
-          <div className="bg-ctp-mantle/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-ctp-surface1 shadow-sm flex items-center gap-3">
-            <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Privacy Standards</span>
-          </div>
+          <Badge variant="sky">Privacy Standards</Badge>
         }
       />
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8">
+      <div className="max-w-5xl mx-auto px-6 lg:px-10 mt-8">
         <div className="max-w-4xl mx-auto space-y-10">
-          <section className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl shadow-sm overflow-hidden">
-            <div className="p-6 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
-              <h2 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Document Overview</h2>
-              <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">Effective: May 15, 2026</span>
-            </div>
-            
+          <Card 
+            title="Document Overview"
+            background="mantle"
+            headerAction={
+              <Badge variant="slate">Effective: May 15, 2026</Badge>
+            }
+            noPadding
+          >
             <div className="p-8 md:p-12 space-y-12">
               <div className="space-y-4">
                 <p className="text-sm text-ctp-subtext1 font-medium leading-relaxed italic">
@@ -91,17 +91,29 @@ export default function PrivacyPage() {
                 </div>
               </div>
             </div>
-          </section>
+          </Card>
 
-          <aside className="bg-ctp-mantle/50 border border-ctp-surface1 rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm group">
-            <div className="space-y-1">
-              <h4 className="text-sm font-bold text-ctp-text uppercase tracking-tight">Questions about your data?</h4>
-              <p className="text-xs text-ctp-subtext1 font-medium leading-tight">Reach out to our security team for clarification.</p>
+          <Card background="mantle" className="group relative overflow-hidden">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+              <div className="flex items-center gap-5">
+                <div className="w-12 h-12 rounded-xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-mauve shrink-0 shadow-inner group-hover:scale-110 transition-transform duration-500">
+                  <MessageCircle size={24} strokeWidth={1.5} />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Questions about your data?</h4>
+                  <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed max-w-sm">
+                    Our security team is here to help clarify how your information is handled and protected.
+                  </p>
+                </div>
+              </div>
+              <Button as={Link} href="/support" variant="secondary" className="bg-ctp-base px-8 w-full md:w-auto shadow-sm">
+                Contact Privacy Team
+              </Button>
             </div>
-            <Link href="/support" className="px-6 py-2 bg-ctp-base border border-ctp-surface1 rounded-lg text-ui-micro font-bold uppercase tracking-widest text-ctp-subtext1 hover:text-ctp-sky-800 hover:border-ctp-sky-800/30 transition-all shadow-sm active:scale-95">
-              Contact Privacy Team
-            </Link>
-          </aside>
+            
+            {/* Subtle Decorative Element */}
+            <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-ctp-mauve/5 blur-3xl rounded-full" />
+          </Card>
         </div>
       </div>
     </div>

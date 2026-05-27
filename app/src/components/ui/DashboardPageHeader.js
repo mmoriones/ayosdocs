@@ -13,7 +13,7 @@ import React from 'react';
  * @param {string} [props.iconBoxClassName] - Additional CSS classes for the icon container.
  * @param {string} [props.iconClassName] - Additional CSS classes for the icon.
  */
-const PageHeader = ({ 
+const DashboardPageHeader = ({ 
   icon: Icon, 
   title, 
   description, 
@@ -51,4 +51,4 @@ const PageHeader = ({
   );
 };
 
-export default PageHeader;
+export default DashboardPageHeader;

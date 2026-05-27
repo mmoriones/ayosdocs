@@ -29,7 +29,7 @@ import { StartWithGoal, RecentExperiences, OnboardingBanner, TrendingWidget, Rec
 import { bundles } from '@/data/bundles';
 import StatsCard from '@/components/dashboard/StatsCard';
 import Adsense from '@/components/Adsense';
-import { PageHeader, Button, Card, Badge, Input, Modal } from '@/components/ui';
+import { DashboardPageHeader, Button, Card, Badge, Input, Modal } from '@/components/ui';
 
 /**
  * Dashboard Overview (Home).
@@ -203,7 +203,7 @@ export default function HomeClient({ allGuides }) {
 
   return (
     <div className="bg-ctp-base font-sans text-ctp-text pb-20">
-        <PageHeader 
+        <DashboardPageHeader 
           title={pageTitle}
           description={pageDescription}
           actions={

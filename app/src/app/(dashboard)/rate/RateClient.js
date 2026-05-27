@@ -24,7 +24,7 @@ import axios from 'axios';
 import { useToast } from '@/context';
 import { useAuthUI } from '@/components/Providers';
 import { submitOfficeReportAction } from '@/app/actions/office';
-import { Tooltip, Card, Input, Button, PageHeader } from '@/components/ui';
+import { Tooltip, Card, Input, Button, DashboardPageHeader } from '@/components/ui';
 
 const STAR_VALUES = [1, 2, 3, 4, 5];
 
@@ -243,7 +243,7 @@ export default function RateClient() {
 
   return (
     <div className="min-h-screen bg-ctp-base font-sans pb-20">
-      <PageHeader 
+      <DashboardPageHeader 
         icon={Star}
         title="Report Experience"
         description="Share real-world insights to help other Filipinos navigate this office better."

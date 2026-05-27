@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Mail, User } from 'lucide-react';
+import { Loader2, Mail, User } from 'lucide-react';
 
 /**
  * SocialProviders Component
@@ -12,6 +12,7 @@ export function SocialProviders({
   onEmailClick, 
   onGuestClick,
   isExchanging,
+  exchangingMethod,
   showEmailOption = true,
   variant = 'modal' // 'modal' or 'page'
 }) {
@@ -23,29 +24,33 @@ export function SocialProviders({
         <button
           onClick={onGoogleLogin}
           disabled={isExchanging}
-          className={`w-full flex items-center justify-center gap-2.5 bg-ctp-base border border-ctp-surface1 hover:border-ctp-surface2 hover:bg-ctp-mantle text-ctp-text font-bold rounded-lg transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 ${
+          className={`w-full flex items-center justify-center gap-2.5 bg-ctp-base border border-ctp-surface1 hover:border-ctp-surface2 hover:bg-ctp-mantle text-ctp-text font-normal rounded-lg transition-all active:scale-[0.98] shadow-sm disabled:cursor-not-allowed ${
             isPage ? 'py-2.5 text-[13px]' : 'py-3'
           }`}
         >
-          <Image
-            src="https://www.svgrepo.com/show/475656/google-color.svg"
-            alt="Google"
-            width={16}
-            height={16}
-          />
-          Google
+          {exchangingMethod === 'google' ? (
+            <Loader2 size={16} className="animate-spin" />
+          ) : (
+            <Image
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              width={16}
+              height={16}
+            />
+          )}
+          Continue with Google
         </button>
 
         {onGuestClick && (
           <button
             onClick={onGuestClick}
             disabled={isExchanging}
-            className={`w-full flex items-center justify-center gap-2.5 bg-ctp-base border border-ctp-surface1 hover:border-ctp-surface2 hover:bg-ctp-mantle text-ctp-text font-bold rounded-lg transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 ${
+            className={`w-full flex items-center justify-center gap-2.5 bg-ctp-base border border-ctp-surface1 hover:border-ctp-surface2 hover:bg-ctp-mantle text-ctp-text font-normal rounded-lg transition-all active:scale-[0.98] shadow-sm disabled:cursor-not-allowed ${
               isPage ? 'py-2.5 text-[13px]' : 'py-3'
             }`}
           >
             <User size={16} className="text-ctp-text" />
-            Guest
+            Continue as Guest
           </button>
         )}
       </div>
@@ -66,7 +71,7 @@ export function SocialProviders({
           <button
             onClick={onEmailClick}
             disabled={isExchanging}
-            className={`w-full flex items-center justify-center gap-2.5 bg-ctp-base border border-ctp-surface1 hover:border-ctp-surface2 hover:bg-ctp-mantle text-ctp-text font-bold rounded-lg transition-all active:scale-[0.98] shadow-sm disabled:opacity-50 ${
+            className={`w-full flex items-center justify-center gap-2.5 bg-ctp-base border border-ctp-surface1 hover:border-ctp-surface2 hover:bg-ctp-mantle text-ctp-text font-normal rounded-lg transition-all active:scale-[0.98] shadow-sm disabled:cursor-not-allowed ${
               isPage ? 'py-3 text-[13px]' : 'py-3.5'
             }`}
           >

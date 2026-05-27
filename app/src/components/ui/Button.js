@@ -1,11 +1,11 @@
-'use client';
-
 import { Loader2 } from 'lucide-react';
 
 /**
  * Standardized Button component.
+ * Supports polymorphic rendering via the 'as' prop.
  * 
  * @param {Object} props
+ * @param {React.ElementType} [props.as='button']
  * @param {'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'link'} [props.variant='primary']
  * @param {'sm' | 'md' | 'lg'} [props.size='md']
  * @param {boolean} [props.isLoading=false]
@@ -13,6 +13,7 @@ import { Loader2 } from 'lucide-react';
  * @param {React.ReactNode} [props.rightIcon]
  */
 export default function Button({ 
+  as: Component = 'button',
   children, 
   variant = 'primary', 
   size = 'md',
@@ -31,12 +32,11 @@ export default function Button({
   const shapeStyles = isLink ? "active:scale-[0.97]" : "rounded-lg active:scale-[0.98]";
   const liftStyles = "hover:-translate-y-px hover:shadow-lg active:translate-y-0";
   const rippleStyles = "relative overflow-hidden after:absolute after:inset-0 after:bg-white/10 after:opacity-0 after:transition-opacity active:after:opacity-100";
-  const overlayStyles = "relative overflow-hidden before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity hover:before:opacity-[0.03]";
-
+  
   const enableFeedback = !disabled && !isLoading;
 
   const variants = {
-    primary: "bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white shadow-ctp-sky-800/10 disabled:bg-ctp-surface1 disabled:text-ctp-subtext1 disabled:shadow-none",
+    primary: "bg-ctp-sky-800 hover:bg-ctp-sky-700 text-white shadow-ctp-sky-800/10",
     secondary: "bg-ctp-mantle/50 border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle hover:border-ctp-sky-800/30 disabled:opacity-50",
     outline: "bg-transparent border border-ctp-surface1 text-ctp-text hover:bg-ctp-mantle/50 hover:border-ctp-sky-800/30 disabled:opacity-50",
     ghost: "bg-transparent text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 disabled:opacity-50",
@@ -57,13 +57,15 @@ export default function Button({
 
   const combinedClassName = `${baseStyles} ${shapeStyles} ${feedbackStyles} ${variants[variant]} ${sizes[isLink ? 'link' : size]} ${className}`;
 
+  // If used as a button, include the type prop
+  const componentProps = Component === 'button' ? { type, ...props } : props;
+
   return (
-    <button
-      type={type}
+    <Component
       disabled={disabled || isLoading}
       onClick={onClick}
       className={combinedClassName}
-      {...props}
+      {...componentProps}
     >
       {isLoading ? (
         <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -76,6 +78,6 @@ export default function Button({
       {!isLoading && rightIcon && (
         <span className="ml-2">{rightIcon}</span>
       )}
-    </button>
+    </Component>
   );
 }

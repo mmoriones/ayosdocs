@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { FileSearch, ArrowLeft, Home, Compass } from 'lucide-react';
+import { FileSearch, Home, Compass } from 'lucide-react';
 import { Button } from '@/components/ui';
 
 /**
@@ -47,14 +47,6 @@ export default function NotFound() {
             leftIcon={<Home size={14} />}
           >
             Go to Dashboard
-          </Button>
-          <Button 
-            variant="secondary"
-            onClick={() => router.back()}
-            className="w-full uppercase text-xs tracking-widest py-3.5 h-auto"
-            leftIcon={<ArrowLeft size={14} />}
-          >
-            Go Back
           </Button>
         </div>
 
