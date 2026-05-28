@@ -164,23 +164,23 @@ function GuestView() {
             <div 
               key={bundle.id}
               style={{ background: bundle.bg }}
-              className="relative min-w-[190px] h-[260px] rounded-[32px] px-5 pt-5 pb-0 flex flex-col snap-start shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-white/50 active:scale-[0.98] transition-transform cursor-pointer overflow-hidden group"
+              className="relative min-w-[190px] h-[260px] rounded-[32px] px-5 py-5 flex flex-col justify-center gap-3 snap-start shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-white/50 active:scale-[0.98] transition-transform cursor-pointer overflow-hidden group"
               onClick={() => router.push(`/bundles/${bundle.id}`)}
             >
-              {/* Illustration Container - Slightly smaller for better balance */}
-              <div className="relative w-full h-28 shrink-0 mb-3 px-4 transform group-hover:scale-110 transition-transform duration-500">
+              {/* Illustration Container */}
+              <div className="relative w-full h-20 shrink-0 px-4 transform group-hover:scale-110 transition-transform duration-500">
                 <Image 
                   src={bundle.image} 
                   alt={bundle.title} 
                   fill 
+                  sizes="200px"
                   className="object-contain object-bottom drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.12)]"
                   priority={bundle.id === 'first-job'}
                 />
               </div>
 
               {/* Content Row */}
-              <div className="flex flex-col flex-1 mt-auto">
-                <div className="space-y-1">
+              <div className="space-y-1">
                   <h4 className="font-bold text-[#1C1C1E] text-[16px] leading-tight line-clamp-2">
                     {bundle.title.split(' / ')[0]}
                   </h4>
@@ -188,7 +188,6 @@ function GuestView() {
                     {bundle.description}
                   </p>
                 </div>
-              </div>
             </div>
           ))}
         </div>
@@ -218,11 +217,12 @@ function GuestView() {
           style={{ background: 'radial-gradient(circle at top right, #f8f9ff, #eef3ff)' }}
         >
           <div className="flex items-center gap-6">
-            <div className="w-24 h-24 shrink-0 relative">
+             <div className="w-24 h-24 shrink-0 relative">
                <Image 
                 src="/assets/lock.webp" 
                 alt="Lock" 
                 fill 
+                sizes="96px"
                 className="object-contain drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.1)]"
               />
             </div>
