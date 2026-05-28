@@ -3,6 +3,7 @@
 import { Bell, Menu, Sun, Moon, User, Settings, LogOut, ShieldCheck } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme, useSearch } from "@/context";
 import { useSyncExternalStore } from "react";
 import { useSession } from 'next-auth/react';
@@ -38,13 +39,21 @@ export default function DashboardHeader({ onMenuClick, onLogoutClick }) {
   return (
     <header className="h-16 border-b border-ctp-surface1 bg-ctp-base/80 backdrop-blur-md sticky top-0 z-40 px-6 flex items-center justify-between">
       <div className="flex items-center gap-4">
-        <button 
-          onClick={onMenuClick}
-          className="lg:hidden p-2 -ml-2 text-ctp-subtext1 hover:text-ctp-text active:scale-95 transition-all"
-        >
-          <Menu size={20} />
-        </button>
+        {/* LOGO (Mobile Only) */}
+        <Link href="/" className="lg:hidden flex items-center gap-2">
+          <Image
+            src="/favicon.svg"
+            alt="AyosDocs"
+            width={28}
+            height={28}
+            className="shrink-0"
+          />
+          <span className="text-sm font-black tracking-tight text-ctp-text">
+            Ayos<span className="text-ctp-sky-800">Docs</span>
+          </span>
+        </Link>
         
+        {/* BREADCRUMBS (Desktop Only) */}
         <nav className="hidden md:flex items-center gap-1.5 text-sm">
           <Link href="/" className="text-ctp-subtext1 hover:text-ctp-sky-800 font-medium transition-all px-2 py-1 rounded-md hover:bg-ctp-sky-800/5 active:scale-[0.97]">
             AyosDocs
@@ -67,19 +76,21 @@ export default function DashboardHeader({ onMenuClick, onLogoutClick }) {
         </nav>
       </div>
 
-      <div className="flex-1 max-w-lg px-8 hidden sm:block">
-        <div className="relative group">
-          <SearchInput 
-            value=""
-            onChange={() => {}}
-            onClick={toggleSearch}
-            placeholder="Search guides, offices, requirements..."
-            variant="standard"
-            showShortcut={true}
-            className="bg-ctp-mantle/50 border-ctp-surface1 group-hover:border-ctp-sky-800/30 transition-all"
-          />
+      {session && (
+        <div className="flex-1 max-w-lg px-8 hidden sm:block">
+          <div className="relative group">
+            <SearchInput 
+              value=""
+              onChange={() => {}}
+              onClick={toggleSearch}
+              placeholder="Search guides, offices, requirements..."
+              variant="standard"
+              showShortcut={true}
+              className="bg-ctp-mantle/50 border-ctp-surface1 group-hover:border-ctp-sky-800/30 transition-all"
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="flex items-center gap-2">
         <button 

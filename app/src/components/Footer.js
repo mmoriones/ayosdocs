@@ -4,40 +4,75 @@ import Link from 'next/link';
 
 /**
  * Unified application footer.
- * Features a minimalistic single-row layout with vertical dividers.
+ * Updated to only include existing pages and sections.
  */
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const links = [
-    { label: 'Support', href: '/support' },
-    { label: 'About', href: '/about' },
-    { label: 'FAQs', href: '/faqs' },
-    { label: 'Terms of Use', href: '/terms' },
-    { label: 'Privacy Policy', href: '/privacy' },
+  const footerGroups = [
+    {
+      title: 'Platform',
+      links: [
+        { label: 'Guides', href: '/guides' },
+        { label: 'Bundles', href: '/bundles' },
+        { label: 'Offices', href: '/offices' },
+        { label: 'Updates', href: '/updates' },
+      ],
+    },
+    {
+      title: 'Support',
+      links: [
+        { label: 'Help Center', href: '/support' },
+        { label: 'FAQs', href: '/faqs' },
+        { label: 'Feedback', href: '/rate' },
+      ],
+    },
+    {
+      title: 'Legal',
+      links: [
+        { label: 'Terms of Service', href: '/terms' },
+        { label: 'Privacy Policy', href: '/privacy' },
+      ],
+    },
   ];
 
   return (
-    <footer className="w-full border-t border-ctp-surface1 bg-transparent px-6 py-4">
-      <div className="max-w-[1600px] mx-auto flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-ui-label text-ctp-subtext1">
-        {links.map((link, index) => (
-          <div key={link.label} className="flex items-center gap-4">
-            <Link 
-              href={link.href} 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="active:scale-[0.97] transition-all hover:text-ctp-sky-800 font-medium"
-            >
-              {link.label}
-            </Link>
-            {index < links.length - 1 && (
-              <div className="h-4 w-px bg-ctp-surface1" />
-            )}
-          </div>
-        ))}
-        <div className="flex items-center gap-4">
-          <div className="h-4 w-px bg-ctp-surface1" />
-          <div className="font-medium whitespace-nowrap">
+    <footer className="w-full bg-[#F8F9FF] pt-16 pb-24 px-6 rounded-t-[48px] border-t border-white shadow-[0_-12px_40px_rgba(0,0,0,0.02)]">
+      <div className="max-w-[1200px] mx-auto flex flex-col items-center">
+        {/* Top Section: Brand & Slogan */}
+        <div className="flex flex-col items-center text-center mb-12">
+          <h2 className="text-[40px] font-black text-[#0038A8] tracking-tight mb-2">AyosDocs</h2>
+          <p className="text-[17px] font-medium text-slate-500">
+            Making government processes simple.
+          </p>
+        </div>
+
+        {/* Links Grid */}
+        <div className="grid grid-cols-3 w-full max-w-2xl gap-x-8 gap-y-12 mb-16 px-4">
+          {footerGroups.map((group) => (
+            <div key={group.title} className="flex flex-col gap-6">
+              <h3 className="text-[16px] font-bold text-[#1C1C1E]">
+                {group.title}
+              </h3>
+              <ul className="flex flex-col gap-4">
+                {group.links.map((link) => (
+                  <li key={link.label}>
+                    <Link 
+                      href={link.href}
+                      className="text-[15px] font-medium text-slate-500 hover:text-[#0038A8] transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Section: Copyright */}
+        <div className="flex flex-col items-center pt-8 border-t border-slate-100 w-full max-w-2xl">
+          <div className="text-[15px] font-medium text-slate-400">
             © {currentYear} AyosDocs, Inc.
           </div>
         </div>

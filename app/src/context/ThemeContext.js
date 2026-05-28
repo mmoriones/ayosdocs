@@ -1,11 +1,9 @@
 'use client';
 
 import { ThemeProvider as NextThemesProvider, useTheme as useNextTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 
 /**
  * Custom ThemeProvider wrapper using next-themes.
- * It handles the attribute switching between Catppuccin themes (latte/mocha).
  */
 export const ThemeProvider = ({ children }) => {
   return (
@@ -14,11 +12,6 @@ export const ThemeProvider = ({ children }) => {
       defaultTheme="system" 
       enableSystem
       disableTransitionOnChange
-      // Mapping standard themes to Catppuccin flavors used in globals.css
-      value={{
-        light: 'latte',
-        dark: 'mocha'
-      }}
     >
       {children}
     </NextThemesProvider>

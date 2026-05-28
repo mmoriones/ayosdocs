@@ -19,6 +19,7 @@ const GuideCard = ({
   showDescription = true,
   showBookmark = false,
   showFooter = true,
+  isSpotlight = false,
   stats = null,
   onFavorite,
   className = ""
@@ -30,62 +31,62 @@ const GuideCard = ({
   
   // Styling based on high-density dashboard aesthetic
   const baseCardClass = `
-    group bg-ctp-base rounded-xl border border-ctp-surface1
-    hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 hover:shadow-lg transition-all 
-    active:scale-[0.98] hover:-translate-y-px active:translate-y-0 relative flex flex-col h-full shadow-sm
+    group bg-ctp-mantle rounded-3xl border border-ctp-surface1/50
+    hover:soft-shadow-lg hover:-translate-y-1 transition-all duration-300
+    active:scale-[0.98] active:translate-y-0 relative flex flex-col h-full shadow-sm
+    ${isSpotlight ? 'md:flex-row md:items-center gap-8 p-10' : 'p-8'}
   `;
 
   const listCardClass = `
-    group bg-ctp-base rounded-xl p-4 border border-ctp-surface1
-    hover:border-ctp-sky-800/30 hover:bg-ctp-mantle/50 hover:shadow-lg transition-all 
-    active:scale-[0.98] hover:-translate-y-px active:translate-y-0 relative flex items-center gap-5 shadow-sm
+    group bg-ctp-mantle rounded-3xl p-6 border border-ctp-surface1/50
+    hover:soft-shadow-lg hover:-translate-y-1 transition-all duration-300
+    active:scale-[0.98] active:translate-y-0 relative flex items-center gap-6 shadow-sm
   `;
 
   if (isList) {
     return (
-      <Link href={`/guides/${guide.slug}`} className={`${listCardClass} ${className}`}>
-        <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center shrink-0 border border-ctp-surface1 group-hover:scale-105 transition-transform duration-300">
-          <GuideIcon slug={guide.slug} agency={guide.agency} className="w-7 h-7 text-ctp-sky-800" strokeWidth={1.5} />
+      <Link href={`/guides/${guide.slug}`} className={`${listCardClass} ${className} overflow-hidden group/card`}>
+        {/* GHOST WATERMARK ICON for List View */}
+        <div className="absolute -right-6 -top-6 opacity-[0.02] pointer-events-none group-hover/card:scale-110 transition-transform duration-700">
+          <GuideIcon slug={guide.slug} agency={guide.agency} size={120} strokeWidth={1} />
         </div>
 
-        <div className="flex-1 min-w-0 py-0.5">
-          <div className="flex items-center gap-3 mb-1">
+        <div className="flex-1 min-w-0 py-0.5 relative z-10">
+          <div className="flex items-center gap-3 mb-2">
             {showAgency && (
-              <span className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-ui-caps bg-ctp-sky-800/5 px-1.5 py-0.5 rounded border border-ctp-sky-800/20">
+              <span className="text-[10px] font-black text-ctp-sky-800 uppercase tracking-widest bg-ctp-sky-800/5 px-2 py-0.5 rounded-full border border-ctp-sky-800/20">
                 {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
               </span>
             )}
             {isTracking && (
               <TrackingIndicator variant="guide" />
             )}
-            <span className="text-ui-micro text-ctp-subtext1 font-bold uppercase tracking-ui-caps opacity-80">
-              Updated {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Recently"}
-            </span>
           </div>
-          <h3 className={`text-base font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight truncate ${!showDescription ? 'mb-0' : 'mb-0.5'}`}>
+          <h3 className="text-xl font-black text-ctp-text group-hover/card:text-ctp-sky-800 transition-colors leading-tight tracking-tighter truncate">
             {guide.shortTitle || guide.title}
           </h3>
-          {showDescription && (
-            <p className="text-xs text-ctp-subtext1 line-clamp-1 font-medium leading-relaxed opacity-90">
-              {guide.description}
-            </p>
-          )}
         </div>
 
         {showMeta && (
-          <div className="hidden md:flex items-center gap-4 shrink-0 border-l border-ctp-surface1 pl-6 h-10">
-            <div className="flex items-center gap-1.5 text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps">
-              <Clock size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-              <span>{guide.estimatedTime || "1-3 days"}</span>
+          <div className="hidden md:flex items-center gap-8 shrink-0 border-l border-ctp-surface1/50 pl-8 h-12 relative z-10">
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-0.5">Time</span>
+              <div className="flex items-center gap-1.5 text-xs font-bold text-ctp-text">
+                <Clock size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
+                <span>{guide.estimatedTime || "1-3 days"}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps">
-              <DollarSign size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-              <span>{guide.costRange || "Free"}</span>
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-0.5">Cost</span>
+              <div className="flex items-center gap-1.5 text-xs font-bold text-ctp-text">
+                <DollarSign size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
+                <span>{guide.costRange || "Free"}</span>
+              </div>
             </div>
           </div>
         )}
 
-        <div className="shrink-0 ml-2 flex items-center gap-3">
+        <div className="shrink-0 ml-4 flex items-center gap-4 relative z-10">
           {showBookmark && (
             <BookmarkButton
               isFavorite={isFavorite}
@@ -93,10 +94,12 @@ const GuideCard = ({
                 e.preventDefault();
                 onFavorite?.();
               }}
-              size="sm"
+              size="md"
             />
           )}
-          <ArrowRight size={16} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 group-hover:translate-x-0.5 transition-all" strokeWidth={2.5} />
+          <div className="w-10 h-10 rounded-full bg-ctp-base flex items-center justify-center border border-ctp-surface1 group-hover/card:bg-ctp-sky-800 group-hover/card:text-white transition-all duration-300">
+            <ArrowRight size={18} className="group-hover/card:translate-x-0.5 transition-all" strokeWidth={2.5} />
+          </div>
         </div>
       </Link>
     );
@@ -105,14 +108,21 @@ const GuideCard = ({
   return (
     <div 
       onClick={() => router.push(`/guides/${guide.slug}`)}
-      className={`${baseCardClass} p-4 cursor-pointer ${className}`}
+      className={`${baseCardClass} cursor-pointer ${className} overflow-hidden group/card`}
     >
-      <div className="flex items-start justify-between mb-4">
-        <div className="w-9 h-9 rounded-lg bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 group-hover:bg-ctp-base transition-colors duration-300 shrink-0 shadow-sm">
-          <GuideIcon slug={guide.slug} agency={guide.agency} className="w-5 h-5 text-ctp-sky-800" strokeWidth={1.5} />
-        </div>
+      {/* GHOST WATERMARK ICON */}
+      <div className="absolute -right-6 -top-6 opacity-[0.03] pointer-events-none rotate-12 group-hover/card:rotate-6 group-hover/card:scale-110 transition-all duration-700 ease-out">
+        <GuideIcon slug={guide.slug} agency={guide.agency} size={isSpotlight ? 180 : 130} strokeWidth={1} />
+      </div>
+
+      <div className="flex items-start justify-between mb-4 relative z-10">
+        {showAgency && (
+          <div className="inline-flex items-center px-2.5 py-1 rounded-full bg-ctp-sky-800/5 text-ctp-sky-800 text-[10px] font-black uppercase tracking-widest border border-ctp-sky-800/20">
+            {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
+          </div>
+        )}
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3 ml-auto">
            {isTracking && (
              <TrackingIndicator variant="guide" />
            )}
@@ -123,53 +133,46 @@ const GuideCard = ({
                  e.preventDefault();
                  onFavorite?.();
                }}
-               size="sm"
+               size="md"
                tooltipProps={{ position: 'left' }}
-               className="scale-90"
              />
            )}
         </div>
       </div>
 
-      <div className="flex-1">
-        <div className="flex items-center gap-2 mb-2.5">
-          {showAgency && (
-            <div className="inline-flex items-center px-1.5 py-0.5 rounded bg-ctp-sky-800/[0.08] text-ctp-sky-800 text-ui-micro font-bold uppercase tracking-ui-caps border border-ctp-sky-800/20">
-              {Array.isArray(guide.agency) ? guide.agency[0] : (guide.agency || "National")}
-            </div>
-          )}
-        </div>
-        <h3 className={`text-base font-bold text-ctp-text group-hover:text-ctp-sky-800 transition-colors leading-tight tracking-tight ${showDescription ? 'mb-1.5' : 'mb-0'}`}>
+      <div className={`flex-1 relative z-10 ${isSpotlight ? 'md:pr-12' : ''}`}>
+        <h3 className={`${isSpotlight ? 'text-3xl md:text-4xl' : 'text-2xl'} font-black text-ctp-text group-hover/card:text-ctp-sky-800 transition-colors leading-tight tracking-tighter mb-6`}>
           {guide.shortTitle || guide.title}
         </h3>
-        {showDescription && (
-          <p className="text-xs text-ctp-subtext1 line-clamp-2 mb-4 font-medium leading-relaxed opacity-80">
-            {guide.description}
-          </p>
-        )}
 
         {showMeta && (
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps mb-4">
-            <div className="flex items-center gap-1.5 min-w-0">
-              <Clock size={12} className="text-ctp-sky-800 shrink-0" strokeWidth={3} />
-              <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>
+          <div className={`flex flex-wrap items-center ${isSpotlight ? 'gap-x-12' : 'gap-x-8'} gap-y-4 mb-2`}>
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1 opacity-70">Processing Time</span>
+              <div className="flex items-center gap-2 text-sm font-bold text-ctp-text">
+                <Clock size={16} className="text-ctp-sky-800 shrink-0" strokeWidth={2.5} />
+                <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 min-w-0">
-              <DollarSign size={12} className="text-ctp-sky-800 shrink-0" strokeWidth={3} />
-              <span className="truncate">{guide.costRange || "Free"}</span>
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1 opacity-70">Estimated Cost</span>
+              <div className="flex items-center gap-2 text-sm font-bold text-ctp-text">
+                <DollarSign size={16} className="text-ctp-sky-800 shrink-0" strokeWidth={2.5} />
+                <span className="truncate">{guide.costRange || "Free"}</span>
+              </div>
             </div>
           </div>
         )}
       </div>
 
       {showFooter && (
-        <div className="pt-3 border-t border-ctp-surface1/30 flex items-center justify-between mt-auto">
-          <span className="text-ui-micro text-ctp-subtext1 font-bold uppercase tracking-ui-caps opacity-60">
-            {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Recently"}
+        <div className={`pt-8 border-t border-ctp-surface1/50 flex items-center justify-between mt-auto relative z-10 ${isSpotlight ? 'md:pt-0 md:border-t-0 md:border-l md:pl-12 md:flex-col md:justify-center md:items-end gap-6' : ''}`}>
+          <span className="text-xs text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60">
+            {guide.lastUpdated ? new Date(guide.lastUpdated).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Recently Updated"}
           </span>
-          <div className="text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-ui-caps flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-            {isTracking ? 'Go to Workspace' : 'Open'}
-            <ArrowRight size={10} strokeWidth={4} />
+          <div className={`${isSpotlight ? 'bg-ctp-sky-800 text-white px-8 py-4 rounded-full shadow-lg shadow-ctp-sky-800/20' : 'text-ctp-sky-800'} font-black text-xs uppercase tracking-widest flex items-center gap-3 group-hover/card:translate-x-1 transition-all`}>
+            {isTracking ? 'Continue' : 'View Guide'}
+            <ArrowRight size={16} strokeWidth={3} />
           </div>
         </div>
       )}
@@ -180,7 +183,7 @@ const GuideCard = ({
 GuideCard.Skeleton = function GuideCardSkeleton({ viewMode = 'grid' }) {
   if (viewMode === 'list') {
     return (
-      <div className="bg-ctp-base rounded-xl p-4 border border-ctp-surface1 flex items-center gap-5 shadow-sm w-full">
+      <div className="bg-ctp-mantle rounded-xl p-4 flex items-center gap-5 shadow-sm w-full">
         <Skeleton className="w-12 h-12 rounded-lg shrink-0" />
         <div className="flex-1 space-y-2">
           <div className="flex gap-2">
@@ -200,7 +203,7 @@ GuideCard.Skeleton = function GuideCardSkeleton({ viewMode = 'grid' }) {
   }
 
   return (
-    <div className="bg-ctp-base rounded-xl border border-ctp-surface1 p-4 flex flex-col h-full shadow-sm space-y-4">
+    <div className="bg-ctp-mantle rounded-xl p-4 flex flex-col h-full shadow-sm space-y-4">
       <div className="flex items-start justify-between">
         <Skeleton className="w-9 h-9 rounded-lg shrink-0" />
         <Skeleton className="w-7 h-7 rounded-lg opacity-40" />

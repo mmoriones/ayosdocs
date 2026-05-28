@@ -15,7 +15,7 @@
     <linearGradient
        id="linearGradient1">
       <stop
-         style="stop-color:#126573;stop-opacity:1;"
+         style="stop-color:#0D5663;stop-opacity:1;"
          offset="0"
          id="stop1" />
       <stop
@@ -26,11 +26,11 @@
     <linearGradient
        id="linearGradient6">
       <stop
-         style="stop-color:#56944b;stop-opacity:1;"
+         style="stop-color:#418F17;stop-opacity:1;"
          offset="0"
          id="stop6" />
       <stop
-         style="stop-color:#98cc84;stop-opacity:1;"
+         style="stop-color:#54B520;stop-opacity:1;"
          offset="1"
          id="stop7" />
     </linearGradient>

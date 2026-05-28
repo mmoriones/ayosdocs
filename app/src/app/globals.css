@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "@catppuccin/tailwindcss/mocha.css";
 @plugin "@tailwindcss/typography";
 
 :root {
@@ -15,55 +14,29 @@
 }
 
 @theme {
-  --color-accent-50: var(--sky-50);
-  --color-accent-300: var(--sky-300);
-  --color-accent-800: var(--sky-800);
-  --color-accent: var(--sky-800);
-
-  /* Brand Colors - Mapped to Sky for the new clean look */
-  --color-brand-50: var(--sky-50);
-  --color-brand-300: var(--sky-300);
-  --color-brand-800: var(--sky-800);
-  --color-brand: var(--sky-800);
-
-  --color-ctp-sky-10: var(--sky-10);
-  --color-ctp-sky-50: var(--sky-50);
-  --color-ctp-sky-300: var(--sky-300);
-  --color-ctp-sky-700: var(--sky-700);
-  --color-ctp-sky-800: var(--sky-800);
-  --color-ctp-sky-900: var(--sky-900);
-  --color-ctp-sky: var(--sky-800);
-
-  --color-ctp-green: var(--green);
-  --color-ctp-yellow: var(--yellow);
-  --color-ctp-orange: var(--orange);
-  --color-ctp-red: var(--red);
-  --color-ctp-peach: var(--peach);
-  --color-ctp-mauve: var(--mauve);
-  --color-ctp-teal: var(--teal);
+  /* Brand Colors - Philippine Blue & Sun Gold */
+  --color-brand-blue: #0038A8;
+  --color-brand-gold: #FFD700;
+  
+  --color-accent: var(--color-brand-blue);
+  
+  --color-ctp-sky: var(--color-brand-blue);
+  --color-ctp-yellow: var(--color-brand-gold);
 
   --color-ctp-base: var(--ctp-base);
   --color-ctp-mantle: var(--ctp-mantle);
   --color-ctp-crust: var(--ctp-crust);
   --color-ctp-text: var(--ctp-text);
-  --ctp-subtext1: var(--ctp-subtext1);
-  --ctp-subtext0: var(--ctp-subtext0);
   --color-ctp-surface2: var(--ctp-surface2);
   --color-ctp-surface1: var(--ctp-surface1);
   --color-ctp-surface0: var(--ctp-surface0);
   --color-ctp-subtext1: var(--ctp-subtext1);
   --color-ctp-subtext0: var(--ctp-subtext0);
 
-  /* Legacy mappings for backward compatibility if needed */
-  --color-ctp-sapphire-200: var(--sky-50);
-  --color-ctp-sapphire-500: var(--sky-300);
-  --color-ctp-sapphire-800: var(--sky-800);
-  --color-ctp-sapphire: var(--sky-800);
-
-  --color-ctp-blue-200: var(--sky-50);
-  --color-ctp-blue-500: var(--sky-300);
-  --color-ctp-blue-800: var(--sky-800);
-  --color-ctp-blue: var(--sky-800);
+  /* iOS Radii */
+  --radius-ios: 24px;
+  --radius-ios-lg: 32px;
+  --radius-ios-sm: 16px;
 
   /* Animation */
   --animate-blob: blob 7s infinite;
@@ -124,91 +97,75 @@
 @utility tracking-ui-tight { letter-spacing: var(--ui-tracking-tight); }
 
 @layer base {
-  :root, .latte {
-    /* Catppuccin Latte - Base */
-    --ctp-base: #eff1f5;
-    --ctp-mantle: #e6e9ef;
-    --ctp-crust: #dce0e8;
-    --ctp-text: #4c4f69;
-    --ctp-subtext1: #5c5f77;
-    --ctp-subtext0: #6c6f85;
-    --ctp-surface2: #acb0be;
-    --ctp-surface1: #bcc0cc;
-    --ctp-surface0: #ccd0da;
+  :root, .light {
+    /* iOS System Gray 6 Background */
+    --ctp-base: #F2F2F7;
+    --ctp-mantle: #FFFFFF;
+    --ctp-crust: #E5E5EA;
+    --ctp-text: #1C1C1E;
+    --ctp-subtext1: #3A3A3C;
+    --ctp-subtext0: #8E8E93;
+    --ctp-surface2: #AEAEB2;
+    --ctp-surface1: #D1D1D6;
+    --ctp-surface0: #E5E5EA;
 
-    /* AyosDocs Blue Palette - Main Accent #209fb5 (Catppuccin Latte Sapphire) */
-    --sky-10: #f0f9fa;
-    --sky-50: #d0f0f4;
-    --sky-300: #90cfea;
-    --sky-700: #179299; /* Slightly darker/different for hover */
-    --sky-800: #209fb5;
+    /* Danger */
+    --danger: #FF3B30;
+    --danger-hover: #D70015;
 
-    /* Danger palette - Muted red for buttons */
-    --danger: #c92a2a;
-    --danger-hover: #b02525;
-
-    /* Catppuccin Latte Accents */
-    --green: #40a02b;
-    --yellow: #df8e1d;
-    --orange: #fe640b;
-    --red: #d20f39;
-    --peach: #fe640b;
-    --teal: #179299;
-    --mauve: #8839ef;
+    /* Semantic palette */
+    --green: #34C759;
+    --yellow: #FFCC00;
+    --orange: #FF9500;
+    --red: #FF3B30;
+    --peach: #FFD60A;
+    --teal: #30B0C7;
+    --mauve: #AF52DE;
   }
 
-  .mocha, .dark {
-    /* Catppuccin Mocha - Comfort (GitHub-Inspired) */
-    --ctp-base: #0d1117;    /* GitHub's signature dark background */
-    --ctp-mantle: #161b22;  /* Slightly lighter for surface elevation */
-    --ctp-crust: #010409;   /* Deepest for inset areas */
-    --ctp-text: #c9d1d9;    /* Off-white to reduce eye strain (GitHub Default) */
-    --ctp-subtext1: #8b949e;
-    --ctp-subtext0: #6e7681;
-    --ctp-surface2: #484f58;
-    --ctp-surface1: #30363d;
-    --ctp-surface0: #21262d;
+  .dark {
+    --ctp-base: #000000;
+    --ctp-mantle: #1C1C1E;
+    --ctp-crust: #000000;
+    --ctp-text: #FFFFFF;
+    --ctp-subtext1: #E5E5EA;
+    --ctp-subtext0: #8E8E93;
+    --ctp-surface2: #636366;
+    --ctp-surface1: #3A3A3C;
+    --ctp-surface0: #2C2C2E;
 
-    /* AyosDocs Blue Palette - Desaturated for Comfort */
-    --sky-10: #121d26;
-    --sky-50: #1a3a4e;
-    --sky-300: #67b8c7; /* Desaturated teal for better focus */
-    --sky-700: #2196a8; /* Muted hover state */
-    --sky-800: #1a7f91; /* Deeper, more muted teal (Sapphire-Dark) to avoid "neon" effect */
-    --sky-900: #126573; /* Even deeper for subtle contrast */
+    /* Danger */
+    --danger: #FF453A;
+    --danger-hover: #D70015;
 
-    /* Danger palette - Muted for dark mode (avoids neon effect) */
-    --danger: #c93c3c;
-    --danger-hover: #b83030;
+    /* Semantic palette */
+    --green: #30D158;
+    --yellow: #FFD60A;
+    --orange: #FF9F0A;
+    --red: #FF453A;
+    --peach: #FFD60A;
+    --teal: #64D2FF;
+    --mauve: #BF5AF2;
+  }
 
-    /* Catppuccin Mocha Accents - Desaturated for Readability */
-    --green: #56d364;
-    --yellow: #e3b341;
-    --orange: #f0883e;
-    --red: #f85149;
-    --peach: #f0883e;
-    --teal: #39c5bb;
-    --mauve: #bc8cff;
+  html, body {
+    background-color: #f2f4fc !important;
+    background-image: 
+      radial-gradient(at 0% 0%, #f5f8fe 0%, transparent 50%), 
+      radial-gradient(at 100% 0%, #f4f6fd 0%, transparent 50%), 
+      radial-gradient(at 0% 100%, #f0f4fc 0%, transparent 50%), 
+      radial-gradient(at 100% 100%, #f2f4fc 0%, transparent 50%) !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    min-height: 100% !important;
   }
 
   body {
-    @apply bg-ctp-base text-ctp-text font-sans antialiased overflow-x-hidden;
+    @apply text-ctp-text font-sans antialiased overflow-x-hidden;
     margin: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Nuclear Autofill Fix */
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    -webkit-text-fill-color: var(--ctp-text) !important;
-    -webkit-box-shadow: 0 0 0px 1000px var(--ctp-base) inset !important;
-    box-shadow: 0 0 0px 1000px var(--ctp-base) inset !important;
-    transition: background-color 5000s ease-in-out 0s;
-    font-family: inherit !important;
-    font-size: 0.875rem !important; /* Matches text-sm */
-  }
 
   input {
     @apply bg-transparent text-ctp-text;
@@ -218,16 +175,41 @@
 }
 
 @layer utilities {
-  .soft-shadow {
-    box-shadow: 0 20px 50px rgba(32, 159, 181, 0.08);
-  }
-  
-  .soft-shadow-hover:hover {
-    box-shadow: 0 30px 60px rgba(32, 159, 181, 0.12);
+  .bg-ios-gradient {
+    background-color: #f2f4fc;
+    background-image: 
+      radial-gradient(at 0% 0%, #f5f8fe 0px, transparent 50%), 
+      radial-gradient(at 100% 0%, #f4f6fd 0px, transparent 50%), 
+      radial-gradient(at 100% 100%, #f2f4fc 0px, transparent 50%), 
+      radial-gradient(at 0% 100%, #f0f4fc 0px, transparent 50%);
+    background-attachment: fixed;
+    background-size: cover;
   }
 
+  .soft-shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .soft-shadow-lg {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+  
   .glass {
-    @apply bg-ctp-base/70 backdrop-blur-md border border-ctp-surface1;
+    @apply bg-ctp-mantle/70 backdrop-blur-xl border border-ctp-surface1/30;
+  }
+
+  .squircle {
+    border-radius: var(--radius-ios);
+    /* For true continuous corner radius in supported browsers */
+    mask-image: paint(squircle);
+  }
+
+  .squircle-lg {
+    border-radius: var(--radius-ios-lg);
+  }
+
+  .squircle-sm {
+    border-radius: var(--radius-ios-sm);
   }
 
   .scrollbar-hide::-webkit-scrollbar {
@@ -238,25 +220,12 @@
     scrollbar-width: none;
   }
 
-  .card-minimal {
-    @apply bg-ctp-mantle border border-ctp-surface1 rounded-xl transition-all duration-200;
+  .card-ios {
+    @apply bg-ctp-mantle rounded-[24px] shadow-sm transition-all duration-300;
   }
 
-  .card-minimal-hover {
-    @apply hover:border-ctp-surface2 hover:shadow-lg dark:hover:bg-ctp-surface0;
-  }
-
-  /* Interactive Elements Feedback */
-  .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-px hover:shadow-lg active:translate-y-0;
-  }
-
-  .click-ripple {
-    @apply relative overflow-hidden after:absolute after:inset-0 after:bg-white/10 after:opacity-0 after:transition-opacity active:after:opacity-100;
-  }
-
-  .hover-overlay {
-    @apply relative overflow-hidden before:absolute before:inset-0 before:bg-current before:opacity-0 before:transition-opacity hover:before:opacity-[0.03];
+  .card-ios-hover {
+    @apply hover:shadow-md hover:scale-[1.01] active:scale-[0.98];
   }
 }
 
@@ -271,10 +240,6 @@
 .custom-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-ctp-surface1/50;
   border-radius: 20px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  @apply bg-ctp-surface2;
 }
 
 /* High-Density Dashboard Utilities */

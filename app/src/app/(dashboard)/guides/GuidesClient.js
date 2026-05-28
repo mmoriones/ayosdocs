@@ -41,28 +41,25 @@ export default function GuidesClient({ initialGuides }) {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
 
-  const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('Most Popular');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const sortOptions = [
     { label: 'Most Popular', value: 'Most Popular' },
-    { label: 'Alphabetical', value: 'Alphabetical' },
     { label: 'Recently Updated', value: 'Recently Updated' }
   ];
   const [viewMode, setViewMode] = useState('grid'); // Default to grid for hydration consistency
   const [showTip, setShowTip] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedDifficulties, setSelectedDifficulties] = useState(['All Levels']);
   const [selectedTime, setSelectedTime] = useState('All Durations');
   const [selectedCost, setSelectedCost] = useState('All Costs');
   const [selectedAgency, setSelectedAgency] = useState('All Agencies');
   const [visibleCount, setVisibleCount] = useState(6);
   
   const [expandedFilters, setExpandedFilters] = useState({
-    difficulty: true,
-    estimatedTime: true,
-    costRange: true,
-    agency: true
+    agency: false,
+    estimatedTime: false,
+    costRange: false
   });
 
   // Fetch comprehensive user data
@@ -141,7 +138,7 @@ export default function GuidesClient({ initialGuides }) {
     setTimeout(() => {
       setVisibleCount(prev => prev !== 6 ? 6 : prev);
     }, 0);
-  }, [searchQuery, selectedCategory, selectedAgency, selectedDifficulties, selectedTime, selectedCost, sortBy]);
+  }, [searchQuery, selectedCategory, selectedAgency, selectedTime, selectedCost, sortBy]);
 
   const categories = useMemo(() => ['All', ...new Set(initialGuides.map(g => g.category).filter(Boolean))], [initialGuides]);
   const agencies = useMemo(() => {
@@ -197,9 +194,6 @@ export default function GuidesClient({ initialGuides }) {
 
       const matchesCategory = selectedCategory === 'All' || guide.category === selectedCategory;
       const matchesAgency = selectedAgency === 'All Agencies' || guideAgencies.includes(selectedAgency);
-      const matchesDifficulty = 
-        selectedDifficulties.includes('All Levels') || 
-        selectedDifficulties.includes(guide.difficulty);
       const matchesTime = 
         selectedTime === 'All Durations' || 
         guide.estimatedTime === selectedTime;
@@ -207,40 +201,23 @@ export default function GuidesClient({ initialGuides }) {
         selectedCost === 'All Costs' || 
         guide.costRange === selectedCost;
 
-      return matchesSearch && matchesCategory && matchesAgency && matchesDifficulty && matchesTime && matchesCost;
+      return matchesSearch && matchesCategory && matchesAgency && matchesTime && matchesCost;
     });
 
-    if (sortBy === 'Alphabetical') {
-      result.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortBy === 'Recently Updated') {
+    if (sortBy === 'Recently Updated') {
       result.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
-    } else if (sortBy === 'Most Popular') {
+    } else {
+      // Default / Most Popular - placeholder logic (could be improved with actual analytics)
       result.sort((a, b) => a.title.localeCompare(b.title));
     }
 
     return result;
-  }, [initialGuides, searchQuery, selectedCategory, selectedAgency, selectedDifficulties, selectedTime, selectedCost, sortBy]);
+  }, [initialGuides, searchQuery, selectedCategory, selectedAgency, selectedTime, selectedCost, sortBy]);
 
   const clearSearch = () => setSearchQuery('');
 
-  const handleDifficultyChange = (level) => {
-    if (level === 'All Levels') {
-      setSelectedDifficulties(['All Levels']);
-      return;
-    }
-
-    setSelectedDifficulties(prev => {
-      const current = prev.includes('All Levels') ? [] : prev;
-      const newDifficulties = current.includes(level)
-        ? current.filter(d => d !== level)
-        : [...current, level];
-      return newDifficulties.length === 0 ? ['All Levels'] : newDifficulties;
-    });
-  };
-
   const resetFilters = () => {
     setSelectedCategory('All');
-    setSelectedDifficulties(['All Levels']);
     setSelectedTime('All Durations');
     setSelectedCost('All Costs');
     setSelectedAgency('All Agencies');
@@ -255,231 +232,140 @@ export default function GuidesClient({ initialGuides }) {
       <DashboardPageHeader 
         icon={FileText}
         title="Guide Library"
-        description="Step-by-step procedures for Philippine government requirements."
-        actions={
-          <div className="flex items-center gap-4">
-            <div className="hidden xl:flex items-center gap-4 text-ui-detail font-semibold text-ctp-subtext0 uppercase tracking-ui-caps border-r border-ctp-surface1 pr-6">
-              <span className="flex items-center gap-2">
-                <FileText size={14} className="text-ctp-sky-800" />
-                {initialGuides.length} Guides
-              </span>
-              <span className="flex items-center gap-2">
-                <Building2 size={14} className="text-ctp-mauve" />
-                {agencies.length} Agencies
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2 bg-ctp-base/50 backdrop-blur-sm px-4 py-2 rounded-full border border-ctp-surface1 shadow-sm">
-              <TrendingUp size={14} className="text-ctp-sky-800" />
-              <span className="text-ui-micro text-ctp-subtext0 font-semibold uppercase tracking-ui-caps">
-                Trending:
-              </span>
-              <span className="text-ui-micro text-ctp-text font-medium">
-                Passport, NBI, SSS
-              </span>
-            </div>
-          </div>
-        }
+        description="Find step-by-step procedures for Philippine government requirements."
+        isCentered={true}
       />
 
-      {/* QUICK CATEGORY PILLS */}
-      <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[64px] z-40 backdrop-blur-md bg-ctp-base/80">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-3 flex items-center gap-2 overflow-x-auto no-scrollbar">
-          <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
-            <Filter size={14} className="text-ctp-subtext1" />
-            <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Categories</span>
-          </div>
-          {categories.map((cat) => (
-            <SelectionPill
-              key={cat}
-              selected={selectedCategory === cat}
-              onClick={() => setSelectedCategory(cat)}
-              className="tracking-ui-tight"
-            >
-              {cat}
-            </SelectionPill>
-          ))}
-        </div>
-      </div>
-
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8 w-full">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* LEFT SIDEBAR */}
-          <aside className="hidden lg:block w-64 shrink-0">
-            <div className="sticky top-40 space-y-6">
-              <div className="bg-ctp-mantle/50 rounded-xl p-5 border border-ctp-surface1 space-y-6 shadow-sm">
-                <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                  <h2 className="text-xs font-bold text-ctp-subtext0 uppercase tracking-ui-caps">Filters</h2>
-                  <Button 
-                    variant="link"
-                    onClick={resetFilters}
-                  >
-                    Clear
-                  </Button>
-                </div>
-
-                {/* Agency Filter */}
-                <div className="space-y-3">
-                  <button onClick={() => toggleFilterSection('agency')} className="click-ripple flex items-center justify-between w-full group">
-                    <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps cursor-pointer group-hover:text-ctp-text">Agency</label>
-                    <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.agency ? 'rotate-180' : ''}`} />
-                  </button>
-                  {expandedFilters.agency && (
-                    <SidebarDropdown value={selectedAgency} onChange={setSelectedAgency} options={agencyOptions} />
-                  )}
-                </div>
-
-                {/* Difficulty Filter */}
-                <div className="space-y-3">
-                  <button onClick={() => toggleFilterSection('difficulty')} className="click-ripple flex items-center justify-between w-full group">
-                    <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps cursor-pointer group-hover:text-ctp-text">Difficulty</label>
-                    <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.difficulty ? 'rotate-180' : ''}`} />
-                  </button>
-                  {expandedFilters.difficulty && (
-                    <div className="space-y-2.5 pl-1">
-                      {['All Levels', 'Easy', 'Moderate', 'Complex'].map((level) => (
-                        <label key={level} className="flex items-center gap-3 cursor-pointer group">
-                          <div className="relative flex items-center justify-center">
-                            <input 
-                              type="checkbox" 
-                              checked={selectedDifficulties.includes(level)}
-                              onChange={() => handleDifficultyChange(level)}
-                              className="peer appearance-none w-4 h-4 rounded border border-ctp-surface1 bg-ctp-base checked:bg-ctp-sky-800 checked:border-ctp-sky-800 transition-all cursor-pointer" 
-                            />
-                            <X className="absolute w-3 h-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" strokeWidth={3} />
-                          </div>
-                          <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-semibold">{level}</span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Processing Time Filter */}
-                <div className="space-y-3">
-                  <button onClick={() => toggleFilterSection('estimatedTime')} className="click-ripple flex items-center justify-between w-full group">
-                    <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps cursor-pointer group-hover:text-ctp-text">Time</label>
-                    <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.estimatedTime ? 'rotate-180' : ''}`} />
-                  </button>
-                  {expandedFilters.estimatedTime && (
-                    <div className="space-y-3 pl-1">
-                      {['All Durations', 'Same Day', '1-3 Days', '3-7 Days', '1 Week+'].map((time) => (
-                        <label key={time} className="flex items-center gap-3 cursor-pointer group">
-                          <div className="relative flex items-center justify-center">
-                            <input 
-                              type="radio" 
-                              name="time" 
-                              checked={selectedTime === time}
-                              onChange={() => setSelectedTime(time)}
-                              className="peer appearance-none w-4 h-4 rounded-full border border-ctp-surface1 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer" 
-                            />
-                            <div className="absolute w-2 h-2 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
-                          </div>
-                          <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-medium">{time}</span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Cost Range Filter */}
-                <div className="space-y-3 border-t border-ctp-surface1 pt-4">
-                  <button onClick={() => toggleFilterSection('costRange')} className="click-ripple flex items-center justify-between w-full group">
-                    <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps cursor-pointer group-hover:text-ctp-text">Cost Range</label>
-                    <ChevronDown size={14} className={`text-ctp-subtext1 transition-transform duration-300 ${expandedFilters.costRange ? 'rotate-180' : ''}`} />
-                  </button>
-                  {expandedFilters.costRange && (
-                    <div className="space-y-3 pl-1">
-                      {['All Costs', 'Free', 'Under ₱500', '₱500–₱2,000', '₱2,000+'].map((cost) => (
-                        <label key={cost} className="flex items-center gap-3 cursor-pointer group">
-                          <div className="relative flex items-center justify-center">
-                            <input 
-                              type="radio" 
-                              name="cost" 
-                              checked={selectedCost === cost}
-                              onChange={() => setSelectedCost(cost)}
-                              className="peer appearance-none w-4 h-4 rounded-full border border-ctp-surface1 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer" 
-                            />
-                            <div className="absolute w-2 h-2 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
-                          </div>
-                          <span className="text-xs text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-medium">{cost}</span>
-                        </label>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </aside>
-
-          {/* MAIN CONTENT AREA */}
-          <main className="flex-1 min-w-0">
-            <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 mb-10">
-              <div className="flex-1 max-w-2xl relative">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-10 w-full">
+        {/* BORDERLESS COMMAND CENTER */}
+        <div className="mb-20 space-y-12">
+          <div className="flex flex-col items-center gap-10">
+            {/* Centered Search Bar */}
+            <div className="w-full max-w-2xl group">
+              <div className="bg-ctp-mantle soft-shadow rounded-3xl transition-all duration-300 group-focus-within:soft-shadow-lg border border-transparent group-focus-within:border-ctp-sky-800/10">
                 <SearchInput
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for documents, processes, or agencies..."
+                  className="!border-none !shadow-none !bg-transparent !py-4 !px-8"
                 />
-                {searchQuery && (
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                    <span className="text-xs font-bold text-ctp-subtext1 uppercase tracking-widest bg-ctp-base px-2 py-1 rounded border border-ctp-surface1">
-                      {filteredGuides.length} {filteredGuides.length === 1 ? 'result' : 'results'}
-                    </span>
-                  </div>
-                )}
+              </div>
+            </div>
+            
+            {/* Centered Controls Row */}
+            <div className="flex flex-wrap items-center justify-center gap-8">
+              <SortDropdown 
+                value={sortBy} 
+                onChange={setSortBy} 
+                options={sortOptions} 
+                className="!border-none !bg-transparent !shadow-none font-black text-xs uppercase tracking-widest hover:text-ctp-sky-800 transition-colors"
+              />
+              
+              <div className="flex items-center gap-2">
+                <Tooltip content="Grid View">
+                  <button onClick={() => handleViewModeChange('grid')} className={`click-ripple p-2 rounded-xl transition-all ${viewMode === 'grid' ? 'text-ctp-sky-800 scale-110' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
+                    <LayoutGrid size={22} />
+                  </button>
+                </Tooltip>
+                <Tooltip content="List View">
+                  <button onClick={() => handleViewModeChange('list')} className={`click-ripple p-2 rounded-xl transition-all ${viewMode === 'list' ? 'text-ctp-sky-800 scale-110' : 'text-ctp-subtext1 hover:text-ctp-text'}`}>
+                    <List size={22} />
+                  </button>
+                </Tooltip>
               </div>
 
-              <div className="flex items-center gap-3">
-                <SortDropdown 
-                  value={sortBy} 
-                  onChange={setSortBy} 
-                  options={sortOptions} 
-                />
-                <div className="flex items-center bg-ctp-mantle/50 border border-ctp-surface1 p-1 rounded-lg shadow-sm">
-                  <Tooltip content="Grid View">
-                    <button onClick={() => handleViewModeChange('grid')} className={`click-ripple p-1.5 rounded-md transition-colors ${viewMode === 'grid' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text border border-transparent'}`}>
-                      <LayoutGrid size={18} />
-                    </button>
-                  </Tooltip>
-                  <Tooltip content="List View">
-                    <button onClick={() => handleViewModeChange('list')} className={`click-ripple p-1.5 rounded-md transition-colors ${viewMode === 'list' ? 'bg-ctp-base text-ctp-sky-800 shadow-sm border border-ctp-surface1' : 'text-ctp-subtext1 hover:text-ctp-text border border-transparent'}`}>
-                      <List size={18} />
-                    </button>
-                  </Tooltip>
+              <button
+                onClick={() => setExpandedFilters(prev => ({ 
+                  agency: !prev.agency, 
+                  estimatedTime: !prev.estimatedTime, 
+                  costRange: !prev.costRange 
+                }))}
+                className={`flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] transition-all py-2 px-4 rounded-xl ${
+                  Object.values(expandedFilters).every(v => v) 
+                    ? 'text-ctp-sky-800 bg-ctp-sky-800/5' 
+                    : 'text-ctp-subtext1 hover:text-ctp-text'
+                }`}
+              >
+                <Filter size={16} />
+                {Object.values(expandedFilters).every(v => v) ? 'Hide Filters' : 'Advanced Filters'}
+              </button>
+            </div>
+          </div>
+
+          {/* Centered Categories Row */}
+          <div className="flex justify-center">
+            <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-2 px-6 bg-ctp-mantle/50 rounded-full border border-ctp-surface1/30">
+              {categories.map((cat) => (
+                <SelectionPill
+                  key={cat}
+                  selected={selectedCategory === cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className="!py-2 !px-6 !text-[10px] !rounded-full"
+                >
+                  {cat}
+                </SelectionPill>
+              ))}
+            </div>
+          </div>
+
+          {/* Expandable Filter Panel - Borderless & Integrated */}
+          {Object.values(expandedFilters).every(v => v) && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 py-12 px-6 animate-in fade-in slide-in-from-top-4 duration-500 border-t border-ctp-surface1/30">
+              {/* Agency Filter */}
+              <div className="space-y-6">
+                <label className="text-[10px] font-black text-ctp-subtext1 uppercase tracking-[0.25em] block mb-6 text-center">Agency</label>
+                <SidebarDropdown value={selectedAgency} onChange={setSelectedAgency} options={agencyOptions} />
+              </div>
+
+              {/* Time Filter */}
+              <div className="space-y-6 text-center">
+                <label className="text-[10px] font-black text-ctp-subtext1 uppercase tracking-[0.25em] block mb-6">Processing Time</label>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {['All Durations', 'Same Day', '1-3 Days', '3-7 Days', '1 Week+'].map((time) => (
+                    <label key={time} className="flex items-center gap-2 cursor-pointer group">
+                      <div className="relative flex items-center justify-center">
+                        <input 
+                          type="radio" 
+                          name="time" 
+                          checked={selectedTime === time}
+                          onChange={() => setSelectedTime(time)}
+                          className="peer appearance-none w-5 h-5 rounded-full border border-ctp-surface1 bg-ctp-base checked:bg-ctp-sky-800 transition-all cursor-pointer" 
+                        />
+                        <div className="absolute w-2.5 h-2.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+                      </div>
+                      <span className="text-[10px] text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-bold uppercase tracking-widest">{time}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Cost Filter */}
+              <div className="space-y-6 text-center">
+                <label className="text-[10px] font-black text-ctp-subtext1 uppercase tracking-[0.25em] block mb-6">Estimated Cost</label>
+                <div className="flex flex-wrap justify-center gap-4">
+                  {['All Costs', 'Free', 'Under ₱500', '₱500–₱2,000', '₱2,000+'].map((cost) => (
+                    <label key={cost} className="flex items-center gap-2 cursor-pointer group">
+                      <div className="relative flex items-center justify-center">
+                        <input 
+                          type="radio" 
+                          name="cost" 
+                          checked={selectedCost === cost}
+                          onChange={() => setSelectedCost(cost)}
+                          className="peer appearance-none w-5 h-5 rounded-full border border-ctp-surface1 bg-ctp-base checked:border-ctp-sky-800 transition-all cursor-pointer" 
+                        />
+                        <div className="absolute w-2.5 h-2.5 rounded-full bg-ctp-sky-800 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
+                      </div>
+                      <span className="text-[10px] text-ctp-subtext1 group-hover:text-ctp-text transition-colors font-bold uppercase tracking-widest">{cost}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
             </div>
+          )}
+        </div>
 
-            {/* Active Filters Bar */}
-            {(selectedCategory !== 'All' || selectedAgency !== 'All Agencies' || !selectedDifficulties.includes('All Levels') || selectedTime !== 'All Durations' || selectedCost !== 'All Costs') && (
-              <div className="mb-8 flex flex-wrap items-center gap-3">
-                <span className="text-xs font-bold text-ctp-subtext1 uppercase tracking-widest mr-2">Active Filters:</span>
-                {selectedCategory !== 'All' && (
-                   <FilterPill label={selectedCategory} onClear={() => setSelectedCategory('All')} />
-                )}
-                {selectedAgency !== 'All Agencies' && (
-                   <FilterPill label={selectedAgency} onClear={() => setSelectedAgency('All Agencies')} />
-                )}
-                {!selectedDifficulties.includes('All Levels') && selectedDifficulties.map(d => (
-                   <FilterPill key={d} label={d} onClear={() => handleDifficultyChange(d)} />
-                ))}
-                {selectedTime !== 'All Durations' && (
-                   <FilterPill label={selectedTime} onClear={() => setSelectedTime('All Durations')} />
-                )}
-                {selectedCost !== 'All Costs' && (
-                   <FilterPill label={selectedCost} onClear={() => setSelectedCost('All Costs')} />
-                )}
-                <Button 
-                  variant="link"
-                  onClick={resetFilters}
-                  className="text-ctp-orange hover:text-ctp-orange/80"
-                >
-                  Clear All
-                </Button>
-              </div>
-            )}
-
+        {/* GUIDES GRID */}
+        <div className="flex-1 min-w-0">
             {showTip && (
               <Banner variant="sky" icon={Bookmark} title="Tip" onClose={() => setShowTip(false)} className="mb-8">
                 Bookmark guides you need and track your progress in My Docs.
@@ -487,13 +373,15 @@ export default function GuidesClient({ initialGuides }) {
             )}
 
             {filteredGuides.length > 0 ? (
-              <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
+              <div className={`grid gap-x-8 gap-y-12 ${viewMode === 'grid' ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                 {isLoggedIn && isLoadingUserData ? (
                   Array.from({ length: 6 }).map((_, i) => (
                     <GuideCard.Skeleton key={i} viewMode={viewMode} />
                   ))
-                ) : filteredGuides.slice(0, visibleCount).map((guide) => {
+                ) : filteredGuides.slice(0, visibleCount).map((guide, index) => {
                   const progress = userData?.savedProgress?.find(p => p.guideSlug === guide.slug);
+                  const isSpotlight = viewMode === 'grid' && index === 0 && searchQuery === '' && selectedCategory === 'All' && selectedAgency === 'All Agencies';
+                  
                   return (
                     <GuideCard 
                       key={guide.slug} 
@@ -502,7 +390,9 @@ export default function GuidesClient({ initialGuides }) {
                       viewMode={viewMode} 
                       showAgency={true}
                       showBookmark={true}
+                      isSpotlight={isSpotlight}
                       onFavorite={() => handleFavoriteGuide(guide.slug)}
+                      className={isSpotlight ? 'md:col-span-2' : ''}
                     />
                   );
                 })}
@@ -525,22 +415,26 @@ export default function GuidesClient({ initialGuides }) {
             )}
 
             {filteredGuides.length > visibleCount && (
-              <div className="mt-12 text-center pb-12">
+              <div className="mt-20 flex flex-col items-center gap-8 pb-20">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-1.5 rounded-full bg-ctp-sky-800 shadow-sm shadow-ctp-sky-800/20" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-ctp-surface1" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-ctp-surface1" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-ctp-surface1" />
+                </div>
                 <Button 
-                  variant="secondary"
+                  variant="link"
                   onClick={handleLoadMore}
-                  rightIcon={<ChevronDown size={14} />}
-                  className="text-xs text-ctp-subtext1 uppercase tracking-widest hover:text-ctp-text shadow-sm"
+                  className="text-xs font-black uppercase tracking-[0.3em] text-ctp-subtext1 hover:text-ctp-sky-800 transition-all"
                 >
-                  Load more guides
+                  Discover More
                 </Button>
               </div>
             )}
-          </main>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }
 
 const SidebarDropdown = ({ value, onChange, options }) => {

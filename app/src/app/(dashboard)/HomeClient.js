@@ -1,707 +1,462 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useAuthUI } from '@/components/Providers';
-import { useWorkspace, useToast } from '@/context';
-import { toggleFavoriteAction } from '@/app/actions/user';
 import { 
-  ArrowRight, 
-  MapPin, 
-  Clock, 
-  Sparkles, 
-  MessageSquare, 
-  BookOpen, 
-  Layers, 
-  CheckCircle2,
-  TrendingUp,
-  Search,
-  ShieldCheck,
-  X,
-  AlertTriangle
+  Search, 
+  Bell, 
+  ChevronRight, 
+  Bookmark, 
+  CheckCircle2, 
+  LayoutGrid,
+  Briefcase,
+  Heart,
+  Store,
+  Book,
+  Layers,
+  User,
+  Home,
+  Baby,
+  Umbrella,
+  Lock
 } from 'lucide-react';
-
-import { ChecklistCard } from '@/features/guides/components/tracking';
-import { StartWithGoal, RecentExperiences, OnboardingBanner, TrendingWidget, RecentlyUpdated } from '@/features/guides/components/discovery';
+import Image from 'next/image';
 import { bundles } from '@/data/bundles';
-import StatsCard from '@/components/dashboard/StatsCard';
-import Adsense from '@/components/Adsense';
-import { DashboardPageHeader, Button, Card, Badge, Input, Modal } from '@/components/ui';
 
-/**
- * Dashboard Overview (Home).
- */
 export default function HomeClient({ allGuides }) {
-  const { activeGuideSlug, setActiveGuideSlug } = useWorkspace();
-  const [officeSearch, setOfficeSearch] = useState('');
-  const [restoreBannerDismissed, setRestoreBannerDismissed] = useState(false);
-  const { data: session, status } = useSession();
-  const searchParams = useSearchParams();
-  const { openAuthModal } = useAuthUI();
-  const { showToast } = useToast();
-  const queryClient = useQueryClient();
-  const router = useRouter();
-
+  const { status, data: session } = useSession();
   const isLoggedIn = status === 'authenticated';
-  const isVerified = session?.user?.isVerified;
-  const firstName = session?.user?.name?.split(' ')[0] || '';
+  const firstName = session?.user?.name?.split(' ')[0] || 'Juan';
 
-  useEffect(() => {
-    const error = searchParams.get('error');
-    if (error) {
-      showToast({
-        type: 'error',
-        title: 'Authentication Error',
-        message: error === 'AccountPermanentlyDeleted' 
-          ? 'This account was permanently deleted and cannot be recovered.'
-          : error === 'verification_failed'
-          ? 'Email verification failed. The link may be expired.'
-          : 'Failed to sign in. Please try again.'
-      });
-    }
-  }, [searchParams, showToast]);
-
-  // Fetch comprehensive user data (progress, bundles, etc.)
   const { data: userData, isLoading: isLoadingUserData } = useQuery({
     queryKey: ['user-data'],
     queryFn: async () => {
       const response = await axios.get('/api/user/all-data');
       return response.data;
     },
-    enabled: isLoggedIn && isVerified,
-    staleTime: 0,
-    refetchOnMount: 'always',
+    enabled: isLoggedIn,
   });
 
-  const hasProgress = (userData?.savedProgress && userData.savedProgress.length > 0) || activeGuideSlug;
-  
-  const pageTitle = !isLoggedIn ? 'Overview' : session?.user?.isNewUser ? 'Welcome to Ayosdocs' : `Welcome back, ${firstName}`;
-  const pageDescription = !isLoggedIn
-    ? 'Your comprehensive guide to Philippine government processes and requirements.'
-    : hasProgress
-    ? 'Pick up where you left off or explore new guides to get things done.'
-    : 'Start your journey by exploring our comprehensive library of government guides.';
+  return (
+    <div className="min-h-screen pb-32 font-sans selection:bg-[#0038A8]/10 lg:pt-0">
+      {isLoggedIn ? (
+        <UserView 
+          firstName={firstName} 
+          userData={userData} 
+          isLoading={isLoadingUserData}
+          allGuides={allGuides}
+          session={session}
+        />
+      ) : (
+        <GuestView />
+      )}
+    </div>
+  );
+}
 
-  // Fetch all offices from DB to show actual count and top performers
-  const { data: allOffices = [], isLoading: isLoadingOffices } = useQuery({
-    queryKey: ['all-offices'],
-    queryFn: async () => {
-      const response = await axios.get('/api/offices');
-      return response.data;
-    },
-    staleTime: 5 * 60 * 1000,
-  });
+function GuestView() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { openAuthModal } = useAuthUI();
+  const router = useRouter();
 
-  const topOffices = useMemo(() => allOffices.slice(0, 5), [allOffices]);
+  // Select the 4 essential bundles with specific backgrounds
+  const essentialBundles = useMemo(() => {
+    const config = [
+      { id: 'first-job', bg: 'radial-gradient(circle at top right, #d9e6fd, #dae6fe)', image: '/assets/job.webp' },
+      { id: 'travel-tourist', bg: 'radial-gradient(circle at top right, #eeeafd, #eeecfd)', image: '/assets/travel.webp' },
+      { id: 'wedding', bg: 'radial-gradient(circle at top right, #fdedf5, #fdecf4)', image: '/assets/marriage.webp' },
+      { id: 'foundational-docs', bg: 'radial-gradient(circle at top right, #f4f5f9, #f5f6fa)', image: '/assets/general.webp' }
+    ];
+    return config.map(item => {
+      const bundle = bundles.find(b => b.id === item.id);
+      return bundle ? { ...bundle, bg: item.bg, image: item.image } : null;
+    }).filter(Boolean);
+  }, []);
 
-  // Fetch trending guides from DB (dynamically seeded)
-  const { data: trendingGuides = [], isLoading: isLoadingTrending } = useQuery({
-    queryKey: ['trending-guides'],
-    queryFn: async () => {
-      const response = await axios.get('/api/guides/trending');
-      return response.data;
-    },
-    staleTime: 5 * 60 * 1000,
-  });
-
-  const favoriteMutation = useMutation({
-    mutationFn: async (slug) => {
-      if (!isLoggedIn) {
-        openAuthModal();
-        return;
-      }
-      if (!isVerified) {
-        showToast({
-          type: 'warning',
-          title: 'Verification Required',
-          message: 'Please verify your email to favorite guides.'
-        });
-        return;
-      }
-      const result = await toggleFavoriteAction(slug);
-      if (!result.success) throw new Error(result.message);
-      return result;
-    },
-    onSuccess: (data) => {
-      if (!data) return;
-      queryClient.invalidateQueries({ queryKey: ['user-data'] });
-      showToast({
-        type: 'success',
-        title: data.isFavorite ? 'Added to Favorites' : 'Removed from Favorites',
-        message: data.message
-      });
-    },
-    onError: (error) => {
-      showToast({
-        type: 'error',
-        title: 'Error',
-        message: error.message || 'Failed to update favorite. Please try again.'
-      });
+  const handleScroll = (e) => {
+    const { scrollLeft, scrollWidth, clientWidth } = e.target;
+    const itemWidth = 190 + 16; // 190 width + gap-4 (16px)
+    
+    // Check if we've reached the end of the scroll
+    if (scrollLeft + clientWidth >= scrollWidth - 10) {
+      setActiveIndex(essentialBundles.length - 1);
+      return;
     }
-  });
 
-  const handleFavoriteGuide = (slug) => {
-    favoriteMutation.mutate(slug);
+    const index = Math.round(scrollLeft / itemWidth);
+    if (index !== activeIndex && index >= 0 && index < essentialBundles.length) {
+      setActiveIndex(index);
+    }
   };
 
-  // Calculate stats based on real progress data
-  const stats = useMemo(() => {
-    if (!userData?.savedProgress) return { active: 0, completed: 0 };
-
-    let active = 0;
-    let completed = 0;
-
-    userData.savedProgress.forEach(progress => {
-      const guide = allGuides.find(g => g.slug === progress.guideSlug);
-      if (!guide || !guide.checklist) return;
-
-      const completedCount = progress.completedTasks 
-        ? progress.completedTasks.split(',').filter(s => s !== "").length 
-        : 0;
-
-      // If it's in the list, it's tracked. If it's 100%, it's completed. Otherwise active.
-      if (completedCount === guide.checklist.length) {
-        completed++;
-      } else {
-        active++;
-      }
-    });
-
-    return { active, completed };
-  }, [userData, allGuides]);
-
-  const onboarded = session?.user?.onboarded ?? false;
-
-  // Logic to determine which guide to feature in the "Active Guide"
-  const activeGuide = useMemo(() => {
-    // 1. Prioritize the global context (recently clicked/viewed)
-    if (activeGuideSlug) {
-      const contextGuide = allGuides.find(g => g.slug === activeGuideSlug);
-      if (contextGuide) return contextGuide;
-    }
-
-    // 2. Fallback to latest database progress for auth users
-    if (userData?.savedProgress && userData.savedProgress.length > 0) {
-      const mostRecent = userData.savedProgress[userData.savedProgress.length - 1];
-      return allGuides.find(g => g.slug === mostRecent.guideSlug);
-    }
-
-    return null;
-  }, [userData, allGuides, activeGuideSlug]);
-
-  const handleOfficeSearch = (e) => {
-    e?.preventDefault();
-    if (!officeSearch.trim()) {
-      router.push('/offices');
-    } else {
-      router.push(`/offices?q=${encodeURIComponent(officeSearch)}`);
+  const scrollTo = (index) => {
+    const container = document.getElementById('bundle-carousel');
+    if (container) {
+      const itemWidth = 190 + 16;
+      container.scrollTo({
+        left: index * itemWidth,
+        behavior: 'smooth'
+      });
+      setActiveIndex(index);
     }
   };
 
   return (
-    <div className="bg-ctp-base font-sans text-ctp-text pb-20">
-        <DashboardPageHeader 
-          title={pageTitle}
-          description={pageDescription}
-          actions={
-            isLoggedIn && (
-              <div className="flex items-center gap-3">
-                <Button 
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => router.push('/profile')}
-                  className="shadow-sm border-dashed"
-                >
-                  My Profile
-                </Button>
-              </div>
-            )
-          }
-        />
+    <div className="flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-md mx-auto">
+      {/* Header */}
+      <header className="px-6 pt-8 pb-4 flex justify-between items-center lg:hidden">
+        <h1 className="text-2xl font-black text-[#0038A8] tracking-tight">AyosDocs</h1>
+        <button 
+          onClick={() => openAuthModal()}
+          className="h-11 px-5 rounded-full flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-white/50 active:scale-95 transition-all group"
+          style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(248, 249, 255, 1) 100%)' }}
+        >
+          <User size={18} className="text-[#0038A8]" strokeWidth={2.5} />
+          <span className="text-[14px] font-bold text-[#0038A8]">Sign in</span>
+        </button>
+      </header>
 
-      {session?.user?.restoredAccount && !restoreBannerDismissed && (
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-6">
-          <div className="relative bg-ctp-green/[0.07] border border-ctp-green/20 rounded-xl px-5 py-4 flex items-center gap-3 shadow-sm">
-            <div className="p-1.5 rounded-lg bg-ctp-green/10 shrink-0">
-              <CheckCircle2 size={16} className="text-ctp-green" />
-            </div>
-            <p className="text-ui-detail font-medium text-ctp-text flex-1">
-              <span className="font-bold">Welcome back!</span> Your account has been restored. All your data is exactly as you left it.
-            </p>
-            <button
-              onClick={() => setRestoreBannerDismissed(true)}
-              className="p-1 rounded-lg text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface0 transition-colors shrink-0"
-            >
-              <X size={14} />
-            </button>
-          </div>
+      {/* Hero Title - Forced to 3 rows */}
+      <section className="px-6 py-8">
+        <h2 className="text-[34px] font-bold leading-[1.1] tracking-tight text-[#1C1C1E] max-w-[320px]">
+          Make government processes simple, <span className="text-[#0038A8]">together.</span>
+        </h2>
+      </section>
+
+      {/* Modern Search Bar */}
+      <section className="px-6 mb-12">
+        <div className="relative group">
+          <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#0038A8] transition-colors" size={20} />
+          <input
+            type="text"
+            placeholder="What do you need to get done today?"
+            className="w-full h-16 pl-14 pr-6 bg-white rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-[2px] border-white text-[15px] font-medium placeholder:text-gray-400 focus:outline-none transition-all"
+          />
         </div>
-      )}
+      </section>
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 mt-8 space-y-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card 
-            background="base" 
-            interactive
-            className="relative overflow-hidden group"
-            onClick={() => router.push('/guides')}
-          >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.03] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
-            <div className="relative z-10 flex flex-col gap-6">
-              <div className="flex items-start justify-between">
-                <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
-                  <BookOpen size={24} strokeWidth={2} />
-                </div>
-                <Badge variant="sky" className="px-1.5 py-0 uppercase">{allGuides.length} Available Guides</Badge>
-              </div>
-              <div className="space-y-1">
-                <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Guide Library</h3>
-                <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Browse step-by-step procedures for all government documents.</p>
-              </div>
-              <div className="flex items-center gap-1.5 text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps pt-2">
-                Browse Library
-                <ArrowRight size={10} strokeWidth={4} className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </Card>
-
-          <Card 
-            background="base" 
-            interactive
-            className="relative overflow-hidden group"
+      {/* Horizontal Bundles Scroll */}
+      <section className="mb-12">
+        <div className="px-6 mb-6 flex justify-between items-end">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-[19px] font-bold text-[#1C1C1E]">Start Here</h3>
+            <p className="text-[13px] font-medium text-gray-400">Life Event Bundles</p>
+          </div>
+          <button 
             onClick={() => router.push('/bundles')}
+            className="text-[14px] font-bold text-[#0038A8] pb-0.5 active:opacity-60 transition-opacity"
           >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.03] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
-            <div className="relative z-10 flex flex-col gap-6">
-              <div className="flex items-start justify-between">
-                <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
-                  <Layers size={24} strokeWidth={2} />
-                </div>
-                <Badge variant="sky" className="px-1.5 py-0 uppercase">{bundles.length} Bundles</Badge>
-              </div>
-              <div className="space-y-1">
-                <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Goal Bundles</h3>
-                <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Accomplish life goals like starting a business or getting married.</p>
-              </div>
-              <div className="flex items-center gap-1.5 text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps pt-2">
-                Start Planning
-                <ArrowRight size={10} strokeWidth={4} className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </Card>
-
-          <Card 
-            background="base" 
-            interactive
-            className="relative overflow-hidden group"
-            onClick={() => router.push('/offices')}
-          >
-            <div className="absolute top-0 right-0 w-24 h-24 bg-ctp-sky-800/[0.03] rounded-full -mr-12 -mt-12 group-hover:scale-110 transition-transform duration-700" />
-            <div className="relative z-10 flex flex-col gap-6">
-              <div className="flex items-start justify-between">
-                <div className="w-12 h-12 rounded-xl bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm group-hover:bg-ctp-sky-800/10 transition-all duration-300">
-                  <MapPin size={24} strokeWidth={2} />
-                </div>
-                <Badge variant="sky" className="px-1.5 py-0 uppercase">{allOffices.length || '...'} Offices Tracked</Badge>
-              </div>
-              <div className="space-y-1">
-                <h3 className="font-bold text-base tracking-tight text-ctp-text uppercase">Office Locator</h3>
-                <p className="text-ui-detail text-ctp-subtext1 font-medium leading-relaxed">Check real-time branch wait times and office reviews.</p>
-              </div>
-              <div className="flex items-center gap-1.5 text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps pt-2">
-                Find a Branch
-                <ArrowRight size={10} strokeWidth={4} className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </Card>
+            View all
+          </button>
         </div>
-
-        {/* Row 2: Dashboard Activity Summary */}
-        <Card noPadding className="border-ctp-surface1 relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-ctp-sky-800/[0.01] via-transparent to-ctp-sky-800/[0.01] pointer-events-none" />
-          
-          <div className="relative z-10 grid grid-cols-2 lg:grid-cols-4 divide-x divide-ctp-surface1 items-center">
-            {isLoggedIn && isLoadingUserData ? (
-              <>
-                <div className="p-4 md:p-5 lg:p-6"><StatsCard.Skeleton /></div>
-                <div className="p-4 md:p-5 lg:p-6"><StatsCard.Skeleton /></div>
-                <div className="p-4 md:p-5 lg:p-6"><StatsCard.Skeleton /></div>
-                <div className="p-4 md:p-5 lg:p-6"><StatsCard.Skeleton /></div>
-              </>
-            ) : (
-              <>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
-                  <StatsCard 
-                    label="Ongoing Guides" 
-                    value={stats.active.toString()} 
-                    icon={Clock} 
-                    isLocked={!isLoggedIn}
-                    trend={{ value: "+2", isUp: true }}
-                  />
-                </div>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
-                  <StatsCard 
-                    label="Completed Tasks" 
-                    value={stats.completed.toString()} 
-                    icon={CheckCircle2} 
-                    isLocked={!isLoggedIn}
-                  />
-                </div>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
-                  <StatsCard 
-                    label="Total Guides" 
-                    value={allGuides.length.toString()} 
-                    icon={BookOpen} 
-                  />
-                </div>
-                <div className="p-4 md:p-5 lg:p-6 hover:bg-ctp-sky-800/[0.03] transition-colors cursor-default">
-                  <StatsCard 
-                    label="Office Reviews" 
-                    value="1.2k" 
-                    icon={TrendingUp} 
-                    trend={{ value: "12%", isUp: true }}
-                  />
-                </div>
-              </>
-            )}
-          </div>
-        </Card>
-
-        {/* Trending Bundles - Dynamic from DB */}
-        <section className="space-y-6">
-          <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-            <div className="flex items-center gap-3">
-              <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Trending Guides</h2>
-              <Badge variant="sky" className="px-1.5 py-0">POPULAR</Badge>
-            </div>
-            <Button 
-              variant="link"
-              onClick={() => router.push('/guides')}
+        
+        <div 
+          id="bundle-carousel"
+          onScroll={handleScroll}
+          className="flex overflow-x-auto gap-4 px-6 scrollbar-hide snap-x snap-mandatory pb-6 scroll-pl-6"
+        >
+          {essentialBundles.map((bundle) => (
+            <div 
+              key={bundle.id}
+              style={{ background: bundle.bg }}
+              className="relative min-w-[190px] h-[260px] rounded-[32px] px-5 pt-5 pb-0 flex flex-col snap-start shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-white/50 active:scale-[0.98] transition-transform cursor-pointer overflow-hidden group"
+              onClick={() => router.push(`/bundles/${bundle.id}`)}
             >
-              Explore All
-            </Button>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {isLoadingTrending ? (
-              Array.from({ length: 5 }).map((_, i) => (
-                <TrendingWidget.Skeleton key={i} />
-              ))
-            ) : trendingGuides.length > 0 ? (
-              trendingGuides.map((guide) => {
-                const progress = userData?.savedProgress?.find(p => p.guideSlug === guide.slug);
-                return (
-                  <TrendingWidget 
-                    key={guide.slug} 
-                    guide={guide} 
-                    progress={progress}
-                    stats={guide.stats}
-                    onFavorite={() => handleFavoriteGuide(guide.slug)}
-                  />
-                );
-              })
-            ) : (
-              <p className="col-span-full text-center py-10 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Discovering guide trends...</p>
-            )}
-          </div>
-        </section>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Main Column: Bundles & Intelligence */}
-          <div className="lg:col-span-2 space-y-12">
-            
-            {/* Life Event Bundles - Primary Position */}
-            <section className="space-y-6">
-              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Life Event Goals</h2>
-                <Button 
-                  variant="link"
-                  onClick={() => router.push('/bundles')}
-                >
-                  Browse Bundles
-                </Button>
-              </div>
-              <StartWithGoal trackedBundles={userData?.trackedBundles} />
-            </section>
-
-            {/* Community Intelligence Module - Search Prioritized */}
-            <section className="space-y-4">
-              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                <div className="flex items-center gap-3">
-                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Community Intelligence</h2>
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-ctp-green/[0.08] border border-ctp-green/20">
-                    <div className="w-1.5 h-1.5 rounded-full bg-ctp-green animate-pulse shadow-[0_0_8px_rgba(166,227,161,0.5)]" />
-                    <span className="text-ui-micro font-bold text-ctp-green uppercase tracking-ui-caps">Live: 512 Reviews Today</span>
-                  </div>
-                </div>
-                <Button 
-                  variant="link"
-                  onClick={() => router.push('/offices')}
-                >
-                  Office Network
-                </Button>
-              </div>
-
-              <Card background="base" noPadding className="relative group overflow-hidden border-ctp-surface1 border-dashed">
-                <div className="relative z-10 p-6 lg:p-10 flex flex-col gap-10">
-                  {/* Primary Search Area */}
-                  <div className="space-y-6 max-w-4xl">
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-ctp-sky-800 text-white flex items-center justify-center shadow-lg shadow-ctp-sky-800/20">
-                          <Search size={20} strokeWidth={3} />
-                        </div>
-                        <h3 className="text-xl font-bold tracking-tight text-ctp-text uppercase">Find any office</h3>
-                      </div>
-                      <p className="text-ui-subhead text-ctp-subtext1 font-medium max-w-xl">
-                        Search government branches to see real-time wait times and latest office reviews.
-                      </p>
-                    </div>
-
-                    <div className="flex flex-col md:flex-row gap-3">
-                      <div className="flex-1">
-                        <Input 
-                          placeholder="e.g. DFA Aseana, NBI Manila, PSA East Avenue..." 
-                          value={officeSearch}
-                          onChange={(e) => setOfficeSearch(e.target.value)}
-                          maxLength={100}
-                          className="bg-ctp-base border-ctp-surface1 h-11 text-ui-subhead shadow-sm ring-4 ring-ctp-sky-800/[0.01]"
-                        />
-                      </div>
-                      <Button 
-                        onClick={handleOfficeSearch}
-                        className="h-11 px-6 text-ui-micro uppercase tracking-ui-caps shadow-lg shadow-ctp-sky-800/10"
-                      >
-                        Check Status
-                      </Button>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-2 pt-1">
-                      <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps mr-2">Quick Access:</span>
-                      {['PSA', 'DFA', 'NBI', 'SSS', 'LTO'].map((agency) => (
-                        <button
-                          key={agency}
-                          onClick={() => {
-                            setOfficeSearch(agency);
-                            setTimeout(() => router.push(`/offices?search=${agency}`), 100);
-                          }}
-                          className="hover-lift click-ripple px-2.5 py-1 rounded-md bg-ctp-mantle border border-ctp-surface1 text-ui-detail font-bold text-ctp-text hover:border-ctp-sky-800 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/[0.05] shadow-sm flex items-center gap-1.5"
-                        >
-                          <div className="w-1.5 h-1.5 rounded-full bg-ctp-surface2 group-hover:bg-ctp-sky-800 transition-colors" />
-                          {agency}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-8 border-t border-ctp-surface1">
-                    {/* Supporting Insight */}
-                    <div className="lg:col-span-2">
-                       <div className="bg-ctp-sky-800/[0.04] border border-ctp-sky-800/10 rounded-xl p-5 flex gap-5 items-center relative overflow-hidden group/tip cursor-pointer hover:bg-ctp-sky-800/[0.08] transition-colors h-full shadow-sm">
-                          <div className="w-10 h-10 rounded-xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-sky-800 shadow-sm shrink-0 group-hover:bg-ctp-mantle transition-colors">
-                             <Sparkles size={20} strokeWidth={2.5} />
-                          </div>
-                          <div className="space-y-1 pr-4 min-w-0">
-                             <p className="text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-ui-caps">Community Pro-Tip</p>
-                             <p className="text-ui-subhead text-ctp-text font-medium leading-relaxed">
-                               <span className="font-bold">DFA Aseana:</span> Most users report shortest queues on <span className="underline decoration-ctp-sky-800/30 underline-offset-4 font-bold">Tuesday mornings</span>.
-                             </p>
-                          </div>
-                          <ArrowRight size={18} className="ml-auto text-ctp-sky-800 opacity-20 group-hover/tip:opacity-100 group-hover/tip:translate-x-1 transition-all" />
-                       </div>
-                    </div>
-
-                    {/* Performance Context */}
-                    <div className="space-y-4 flex flex-col justify-center border-l border-ctp-surface1 pl-8">
-                        <div className="flex items-center justify-between">
-                           <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Accuracy</span>
-                           <span className="text-ui-subhead font-bold text-ctp-text">92%</span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                           <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Daily Reports</span>
-                           <span className="text-ui-subhead font-bold text-ctp-text">512</span>
-                        </div>
-                        <button 
-                          onClick={() => router.push('/rate')}
-                          className="hover-lift click-ripple w-full mt-2 py-3 bg-ctp-sky-800 text-white rounded-lg text-ui-micro font-bold uppercase tracking-ui-caps hover:bg-ctp-sky-700 shadow-md shadow-ctp-sky-800/10 flex items-center justify-center gap-2"
-                        >
-                          Share Experience
-                          <MessageSquare size={12} strokeWidth={3} />
-                        </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="px-6 py-3 border-t border-ctp-surface1 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck size={14} className="text-ctp-green" strokeWidth={2.5} />
-                    <span className="text-ui-detail font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Verified Community Intelligence Network</span>
-                  </div>
-                  <Button variant="link">
-                    How it works
-                  </Button>
-                </div>
-              </Card>
-            </section>
-
-          </div>
-
-          {/* Sidebar Column: Tracking & Feed */}
-          <div className="space-y-12">
-            
-            {/* Active Guide - Moved to Sidebar to narrow width */}
-            <section className="space-y-4">
-              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Active Guide</h2>
-                  <Badge variant="sky" className="px-1.5 py-0">TRACKING</Badge>
-                </div>
-                <Button 
-                  variant="link"
-                  onClick={() => router.push('/my-docs')}
-                >
-                  View All
-                </Button>
-              </div>
-              
-              {isLoggedIn && isLoadingUserData ? (
-                <ChecklistCard.Skeleton />
-              ) : activeGuide ? (
-                <ChecklistCard
-                  title={activeGuide.title}
-                  initialSteps={activeGuide.checklist?.map(task => ({ task }))}
-                  slug={activeGuide.slug}
-                  agency={activeGuide.agency}
-                  inGuidePage={false}
-                  isModal={false}
+              {/* Illustration Container - Taller for narrow cards */}
+              <div className="relative w-full h-32 shrink-0 mb-3 transform group-hover:scale-110 transition-transform duration-500">
+                <Image 
+                  src={bundle.image} 
+                  alt={bundle.title} 
+                  fill 
+                  className="object-contain object-bottom drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.12)]"
+                  priority={bundle.id === 'first-job'}
                 />
-              ) : trendingGuides.length > 0 ? (
-                <Card background="mantle" className="border-ctp-sky-800/20 py-8 text-center space-y-4 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 p-2">
-                    <Badge variant="sky" className="px-1.5 py-0 uppercase tracking-ui-caps">Suggested</Badge>
-                  </div>
-                  <div className="w-10 h-10 bg-ctp-sky-800/10 border border-ctp-sky-800/20 rounded-lg flex items-center justify-center mx-auto text-ctp-sky-800 shadow-sm group-hover:scale-110 transition-transform duration-500">
-                    <Sparkles size={20} strokeWidth={2} />
-                  </div>
-                  <div className="space-y-1 px-4">
-                    <p className="font-bold text-ctp-text text-ui-subhead tracking-tight">{trendingGuides[0].title}</p>
-                    <p className="text-ui-detail text-ctp-subtext1 max-w-xs mx-auto font-medium leading-relaxed">
-                      Most Filipinos start with this guide. Ready to begin your application?
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-2 px-6 pt-2">
-                    <Button 
-                      size="sm"
-                      onClick={() => router.push(`/guides/${trendingGuides[0].slug}`)}
-                      className="w-full text-ui-micro uppercase tracking-ui-caps shadow-md shadow-ctp-sky-800/10"
-                    >
-                      Start This Guide
-                    </Button>
-                    <Button 
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => router.push('/guides')}
-                      className="text-ctp-subtext1 hover:text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-ui-caps transition-colors"
-                    >
-                      Or Browse All Library
-                    </Button>
-                  </div>
-                </Card>
-              ) : (
-                <Card background="mantle" className="border-dashed py-10 text-center space-y-4">
-                  <div className="w-10 h-10 bg-ctp-base border border-ctp-surface1 rounded-lg flex items-center justify-center mx-auto text-ctp-subtext1 shadow-inner">
-                    <BookOpen size={20} strokeWidth={1.5} />
-                  </div>
-                  <div className="space-y-1">
-                    <p className="font-bold text-ctp-text text-base">No active focus</p>
-                    <p className="text-ui-micro text-ctp-subtext1 max-w-xs mx-auto px-4 font-medium">
-                      Start tracking a procedure to see it here.
-                    </p>
-                  </div>
-                  <Button 
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => router.push('/guides')}
-                    className="text-ctp-sky-800 font-bold text-ui-micro uppercase tracking-ui-caps"
-                  >
-                    Browse Library
-                  </Button>
-                </Card>
-              )}
-            </section>
-
-            {/* Recent Updates */}
-            <section className="space-y-4">
-              <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Recent Updates</h2>
-                  <Badge variant="sky" className="px-1.5 py-0">LATEST</Badge>
-                </div>
-                <Button 
-                  variant="link"
-                  onClick={() => router.push('/updates')}
-                >
-                  View All
-                </Button>
               </div>
-              <RecentlyUpdated />
-            </section>
 
-            {/* Recent Experiences - Hidden for non-onboarded auth users to focus on tutorial */}
-            {(onboarded || !isLoggedIn) && (
-              <section className="space-y-6">
-                <div className="flex items-center justify-between border-b border-ctp-surface1 pb-3">
-                  <h2 className="text-base font-bold uppercase tracking-ui-caps text-ctp-text">Community Feed</h2>
-                  <Button 
-                    variant="link"
-                    onClick={() => router.push('/offices')}
-                  >
-                    View All
-                  </Button>
+              {/* Content Row */}
+              <div className="flex flex-col flex-1 mt-auto">
+                <div className="space-y-1">
+                  <h4 className="font-bold text-[#1C1C1E] text-[16px] leading-tight line-clamp-2">
+                    {bundle.title.split(' / ')[0]}
+                  </h4>
+                  <p className="text-[11px] font-medium text-gray-500 leading-tight line-clamp-2">
+                    {bundle.description}
+                  </p>
                 </div>
-                <RecentExperiences limit={5} />
-              </section>
-            )}
-
-            {!onboarded && isLoggedIn && (
-              <OnboardingBanner />
-            )}
-            
-            <Adsense variant="display" />
-          </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <section className="py-12 border-t border-ctp-surface1">
-          <Card background="base" noPadding className="flex flex-col md:flex-row items-center justify-between gap-8 p-10 border-dashed relative overflow-hidden group">
-            <div className="relative z-10 space-y-4 text-center md:text-left">
-              <div className="space-y-1">
-                <span className="text-ui-micro font-bold text-ctp-sky-800 uppercase tracking-ui-caps">Support Channel</span>
-                <h3 className="text-xl font-bold tracking-tight text-ctp-text uppercase">Need further assistance?</h3>
-              </div>
-              <p className="text-ui-detail text-ctp-subtext1 max-w-lg font-medium leading-relaxed">
-                Our specialized Help Center and verified community contributors are here to help you navigate through complex government requirements and procedures.
+        {/* Functional Pagination Dots */}
+        <div className="flex justify-center gap-1.5 mt-4">
+          {essentialBundles.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => scrollTo(idx)}
+              className={`transition-all duration-300 rounded-full ${
+                activeIndex === idx 
+                  ? 'w-6 h-1.5 bg-[#0038A8]' 
+                  : 'w-1.5 h-1.5 bg-gray-300'
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Auth Action Section */}
+      <section className="px-6 mb-12">
+        <button 
+          onClick={() => openAuthModal()}
+          className="w-full rounded-[32px] py-6 px-7 flex items-center justify-between shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-white/50 active:scale-[0.98] transition-all"
+          style={{ background: 'radial-gradient(circle at top right, #f8f9ff, #eef3ff)' }}
+        >
+          <div className="flex items-center gap-6">
+            <div className="w-24 h-24 shrink-0 relative">
+               <Image 
+                src="/assets/lock.webp" 
+                alt="Lock" 
+                fill 
+                className="object-contain drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.1)]"
+              />
+            </div>
+            <div className="text-left space-y-1">
+              <h4 className="font-bold text-[#1C1C1E] text-base">Sign in to AyosDocs</h4>
+              <p className="text-[12px] font-medium text-gray-400 leading-tight">
+                Save your progress and access your documents anywhere.
               </p>
             </div>
-            <div className="relative z-10 flex flex-wrap items-center justify-center gap-3">
-              <Button 
-                variant="secondary"
-                onClick={() => router.push('/faqs')}
-                className="px-8 border-dashed shadow-sm"
-              >
-                View FAQ
-              </Button>
-              <Button 
-                onClick={() => router.push('/support')}
-                className="px-8 shadow-lg shadow-ctp-sky-800/10"
-              >
-                Contact Us
-              </Button>
-            </div>
-          </Card>
-        </section>
-      </div>
+          </div>
+          <ChevronRight size={22} className="text-[#0038A8] shrink-0 opacity-30" strokeWidth={2.5} />
+        </button>
+      </section>
+
+      {/* Trending / Community Insights Section */}
+      <section className="px-6 pb-12">
+        <div className="mb-6 flex justify-between items-end">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-[19px] font-bold text-[#1C1C1E]">Trending Now</h3>
+            <p className="text-[13px] font-medium text-gray-400">Most searched by the community</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <TrendingCard 
+            title="Passport Renewal" 
+            agency="DFA" 
+            trend="+12%" 
+            icon={<Book size={20} className="text-[#0038A8]" />}
+            bg="bg-[#E8F1FF]"
+          />
+          <TrendingCard 
+            title="NBI Clearance" 
+            agency="NBI" 
+            trend="+8%" 
+            icon={<CheckCircle2 size={20} className="text-[#34C759]" />}
+            bg="bg-[#EAF9EE]"
+          />
+          <TrendingCard 
+            title="PSA Birth Cert" 
+            agency="PSA" 
+            trend="+15%" 
+            icon={<Layers size={20} className="text-[#AF52DE]" />}
+            bg="bg-[#F4EBFF]"
+          />
+          <TrendingCard 
+            title="Driver's License" 
+            agency="LTO" 
+            trend="+5%" 
+            icon={<Search size={20} className="text-[#FFCC00]" />}
+            bg="bg-[#FFF8E1]"
+          />
+        </div>
+      </section>
     </div>
+  );
+}
+
+function TrendingCard({ title, agency, trend, icon, bg }) {
+  const router = useRouter();
+  return (
+    <button 
+      onClick={() => router.push('/guides')}
+      className="bg-white rounded-[28px] p-5 text-left border border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] active:scale-[0.97] transition-all group"
+    >
+      <div className={`w-11 h-11 ${bg} rounded-[14px] flex items-center justify-center mb-4 shadow-sm`}>
+        {icon}
+      </div>
+      <div className="space-y-0.5">
+        <h5 className="font-bold text-[#1C1C1E] text-[14px] leading-tight line-clamp-1">{title}</h5>
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tight">{agency}</span>
+          <span className="text-[10px] font-black text-[#34C759]">{trend}</span>
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function UserView({ firstName, userData, isLoading, allGuides, session }) {
+  const router = useRouter();
+
+  const activeGuidesCount = useMemo(() => {
+    return userData?.savedProgress?.filter(p => {
+       const total = allGuides.find(g => g.slug === p.guideSlug)?.checklist?.length || 0;
+       const done = p.completedTasks?.split(',').filter(Boolean).length || 0;
+       return done < total;
+    }).length || 0;
+  }, [userData, allGuides]);
+
+  return (
+    <div className="flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-md mx-auto">
+      {/* Header */}
+      <header className="px-6 pt-6 pb-4 flex justify-between items-center lg:hidden">
+        <h1 className="text-2xl font-black text-[#0038A8] tracking-tight">AyosDocs</h1>
+        <div className="flex items-center gap-3">
+          <button className="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-white active:scale-95 transition-transform">
+            <Bell size={22} className="text-[#1C1C1E]" strokeWidth={1.5} />
+          </button>
+          <div className="w-11 h-11 rounded-full bg-[#0038A8]/10 overflow-hidden border-[3px] border-white shadow-md active:scale-95 transition-transform">
+             {session?.user?.image ? (
+               <Image src={session.user.image} width={44} height={44} alt="Profile" className="object-cover" />
+             ) : (
+               <div className="w-full h-full flex items-center justify-center text-[#0038A8]">
+                 <LayoutGrid size={20} />
+               </div>
+             )}
+          </div>
+        </div>
+      </header>
+
+      {/* Personalized Greeting */}
+      <section className="px-6 py-6">
+        <h2 className="text-[34px] font-bold tracking-tight text-[#1C1C1E]">
+          Mabuhay, {firstName}!
+        </h2>
+        <p className="text-[15px] font-medium text-gray-400 mt-1">
+          Here&apos;s what&apos;s happening with your government processes.
+        </p>
+      </section>
+
+      {/* 3-Column Stats Grid */}
+      <section className="px-6 grid grid-cols-3 gap-3.5 mb-10">
+        <StatCard 
+          icon={<LayoutGrid size={22} className="text-[#0038A8]" strokeWidth={2.5} />} 
+          bg="bg-[#E8F1FF]" 
+          value={activeGuidesCount} 
+          label="Active Guides" 
+        />
+        <StatCard 
+          icon={<CheckCircle2 size={22} className="text-[#34C759]" strokeWidth={2.5} />} 
+          bg="bg-[#EAF9EE]" 
+          value={userData?.savedProgress?.length || 0} 
+          label="Completed" 
+        />
+        <StatCard 
+          icon={<Bookmark size={22} className="text-[#AF52DE]" fill="currentColor" />} 
+          bg="bg-[#F4EBFF]" 
+          value={userData?.favorites?.length || 0} 
+          label="Saved" 
+        />
+      </section>
+
+      {/* Resume Section */}
+      <section className="px-6 mb-10">
+        <h3 className="text-[19px] font-bold text-[#1C1C1E] mb-5">Continue Where You Left Off</h3>
+        <button 
+          onClick={() => router.push('/guides/passport-appointment')}
+          className="w-full bg-white rounded-[36px] p-6 flex items-center shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-white active:scale-[0.99] transition-all group"
+        >
+          {/* Passport Thumbnail Placeholder */}
+          <div className="w-18 h-24 bg-[#001D4A] rounded-xl shadow-lg flex flex-col items-center justify-center p-2.5 mr-6 shrink-0 border border-white/10">
+             <div className="w-full text-center text-[6px] font-bold text-white/40 uppercase mb-1">Pilipinas</div>
+             <div className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center mb-1">
+                <div className="w-5 h-5 bg-[#FFCC00] rounded-full blur-[2px]"></div>
+             </div>
+             <div className="w-full text-center text-[6px] font-bold text-white/40 uppercase">Pasaporte</div>
+          </div>
+          
+          <div className="flex-1 text-left min-w-0">
+            <h4 className="font-bold text-[#1C1C1E] text-[17px] leading-tight truncate">Passport Renewal</h4>
+            <p className="text-[13px] font-medium text-gray-400 mt-0.5">DFA</p>
+          </div>
+
+          <div className="relative w-16 h-16 flex items-center justify-center mr-3">
+             <svg className="w-full h-full transform -rotate-90">
+                <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="5" fill="transparent" className="text-[#F2F2F7]" />
+                <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="5" fill="transparent" strokeDasharray={175.9} strokeDashoffset={175.9 * (1 - 0.65)} className="text-[#FFCC00] rounded-full" />
+             </svg>
+             <span className="absolute text-[13px] font-black text-[#1C1C1E]">65%</span>
+          </div>
+          <ChevronRight size={22} className="text-gray-300 group-hover:text-[#0038A8] transition-colors" strokeWidth={2.5} />
+        </button>
+      </section>
+
+      {/* 2x2 Favorites Grid */}
+      <section className="px-6 pb-10">
+        <h3 className="text-[19px] font-bold text-[#1C1C1E] mb-5">Your Favorite Bundles</h3>
+        <div className="grid grid-cols-2 gap-4">
+          <BundleGridCard 
+            title="Starting a Business" 
+            docs="10 documents" 
+            bgColor="bg-[#EBF3FF]" 
+            icon={<Store size={24} className="text-[#0038A8]" />} 
+          />
+          <BundleGridCard 
+            title="Buying a Property" 
+            docs="8 documents" 
+            bgColor="bg-[#EBF9F1]" 
+            icon={<Home size={24} className="text-[#34C759]" />} 
+          />
+          <BundleGridCard 
+            title="Having Baby" 
+            docs="11 documents" 
+            bgColor="bg-[#FFF8E1]" 
+            icon={<Baby size={24} className="text-[#FFCC00]" />} 
+          />
+          <BundleGridCard 
+            title="Retirement" 
+            docs="7 documents" 
+            bgColor="bg-[#F8F1FF]" 
+            icon={<Umbrella size={24} className="text-[#AF52DE]" />} 
+          />
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function StatCard({ icon, bg, value, label }) {
+  return (
+    <div className="bg-white rounded-[28px] p-5 flex flex-col items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-white">
+      <div className={`w-11 h-11 ${bg} rounded-[14px] flex items-center justify-center mb-4 shadow-sm`}>
+         {icon}
+      </div>
+      <span className="text-[22px] font-black text-[#1C1C1E]">{value}</span>
+      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mt-1 text-center">{label}</span>
+    </div>
+  );
+}
+
+function BundleGridCard({ title, docs, bgColor, icon }) {
+  return (
+    <button className="bg-white rounded-[32px] p-6 text-left shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-white active:scale-[0.97] transition-all group">
+      <div className={`w-16 h-14 ${bgColor} rounded-[18px] flex items-center justify-center mb-5 border border-black/5 shadow-inner`}>
+        {icon}
+      </div>
+      <div className="space-y-1 pr-2">
+        <h5 className="font-bold text-[#1C1C1E] text-[15px] leading-[1.2]">{title}</h5>
+        <p className="text-[11px] font-medium text-gray-400">{docs}</p>
+      </div>
+      <div className="flex justify-end mt-2">
+        <ChevronRight size={16} className="text-gray-200 group-hover:text-[#0038A8] transition-colors" strokeWidth={2.5} />
+      </div>
+    </button>
   );
 }

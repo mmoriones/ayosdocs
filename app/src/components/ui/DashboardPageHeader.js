@@ -18,24 +18,46 @@ const DashboardPageHeader = ({
   title, 
   description, 
   actions,
+  isCentered = false,
   className = "",
   iconBoxClassName = "bg-ctp-sky-800/10 border-ctp-sky-800/20",
   iconClassName = "text-ctp-sky-800"
 }) => {
+  if (isCentered) {
+    return (
+      <div className={`relative overflow-hidden ${className}`}>
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-16 lg:py-20 flex flex-col items-center text-center relative z-10">
+          <h1 className="text-4xl md:text-6xl font-black text-ctp-text tracking-tighter leading-tight">
+            {title}
+          </h1>
+          <p className="text-ctp-subtext1 text-sm md:text-lg font-bold mt-4 max-w-xl opacity-60 uppercase tracking-[0.2em]">
+            {description}
+          </p>
+
+          {actions && (
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-10">
+              {actions}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`bg-ctp-mantle/50 border-b border-ctp-surface1 ${className}`}>
       <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-6 lg:py-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-5 flex-1">
           {Icon && (
-            <div className={`p-4 rounded-2xl shrink-0 border shadow-sm ${iconBoxClassName}`}>
-              <Icon className={iconClassName} size={24} />
+            <div className={`p-5 rounded-3xl shrink-0 border shadow-sm ${iconBoxClassName}`}>
+              <Icon className={iconClassName} size={28} />
             </div>
           )}
           <div>
-            <h1 className="text-2xl font-bold text-ctp-text tracking-tight uppercase">
+            <h1 className="text-3xl font-bold text-ctp-text tracking-tight">
               {title}
             </h1>
-            <p className="text-ctp-subtext1 text-sm font-medium mt-1">
+            <p className="text-ctp-subtext1 text-base font-medium mt-1.5 opacity-80">
               {description}
             </p>
           </div>

@@ -38,8 +38,8 @@ export default function SearchInput({
         onChange={onChange}
         placeholder={placeholder}
         maxLength={100}
-        className={`w-full bg-ctp-base border border-ctp-surface1 rounded-xl focus:outline-none focus:border-ctp-sky-800 focus:ring-1 focus:ring-ctp-sky-800 transition-all placeholder:text-ctp-subtext0 font-medium ${
-          isCompact ? 'py-1.5 pl-9 pr-3 text-xs' : 'py-2.5 pl-11 pr-4 text-sm'
+        className={`w-full bg-ctp-base border border-ctp-surface1 rounded-2xl focus:outline-none focus:border-ctp-sky-800 focus:ring-2 focus:ring-ctp-sky-800/10 transition-all placeholder:text-ctp-subtext1 font-medium ${
+          isCompact ? 'py-2 pl-10 pr-4 text-xs' : 'py-3.5 pl-12 pr-6 text-sm'
         }`}
       />
       {showShortcut && (

@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
+import BottomNav from './BottomNav';
 import Footer from '@/components/Footer';
 import { SignOutModal } from '@/components/ui';
 
 /**
  * Primary layout wrapper for the application dashboard.
- * Coordinates global navigation (Sidebar, Header), responsive transitions,
+ * Coordinates global navigation (Sidebar, Header, BottomNav), responsive transitions,
  * and the main content area with a unified footer.
  * 
  * @param {Object} props
@@ -44,7 +45,7 @@ export default function AppShell({ children }) {
   const { isCollapsed, isMounted } = layout;
 
   return (
-    <div className={`min-h-screen bg-ctp-base flex ${!isMounted ? 'opacity-0' : 'animate-in fade-in duration-500'}`}>
+    <div className={`min-h-screen flex ${!isMounted ? 'opacity-0' : 'animate-in fade-in duration-500'}`}>
       {/* Mobile Backdrop */}
       {isMobileMenuOpen && (
         <div 
@@ -53,7 +54,8 @@ export default function AppShell({ children }) {
         />
       )}
 
-      <div className={!isMounted ? 'transition-none' : ''}>
+      {/* DESKTOP SIDEBAR */}
+      <div className={`hidden lg:block ${!isMounted ? 'transition-none' : ''}`}>
         <Sidebar 
           isCollapsed={isCollapsed} 
           setIsCollapsed={handleToggleCollapse} 
@@ -66,13 +68,15 @@ export default function AppShell({ children }) {
       </div>
       
       <div 
-        className={`flex-1 flex flex-col min-w-0 bg-ctp-base ${
+        className={`flex-1 flex flex-col min-w-0 ${
           !isMounted ? 'transition-none' : 'transition-all duration-300'
         } ${
           isCollapsed ? 'lg:pl-16' : 'lg:pl-64'
-        }`}
+        } pb-24 lg:pb-0`}
       >
-        <DashboardHeader onMenuClick={toggleMobileMenu} onLogoutClick={() => setShowLogoutConfirm(true)} />
+        <div className="hidden lg:block sticky top-0 z-40">
+          <DashboardHeader onMenuClick={toggleMobileMenu} onLogoutClick={() => setShowLogoutConfirm(true)} />
+        </div>
         
         <main className="flex-1">
           {children}
@@ -80,6 +84,9 @@ export default function AppShell({ children }) {
 
         <Footer />
       </div>
+
+      {/* MOBILE BOTTOM NAVIGATION */}
+      <BottomNav />
 
       <SignOutModal
         isOpen={showLogoutConfirm}

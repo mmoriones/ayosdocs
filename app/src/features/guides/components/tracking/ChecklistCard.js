@@ -29,6 +29,8 @@ const ChecklistCard = ({
   initialSteps, 
   slug, 
   agency,
+  estimatedTime,
+  costRange,
   inGuidePage = false, 
   isModal = false,
   isBare = false 
@@ -268,32 +270,28 @@ const ChecklistCard = ({
               </div>
            </div>
         </div>
-        {/* Instrumentation Grid */}
-        <div className="relative z-10 px-5 py-4 grid grid-cols-2 gap-y-4 gap-x-6 border-t border-ctp-surface1/30">
-           <div className="space-y-1">
-              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Monitor Status</span>
-              <div className="flex items-center gap-2">
-                 <div className="w-1.5 h-1.5 rounded-full bg-ctp-green animate-pulse shadow-[0_0_6px_rgba(166,227,161,0.4)]" />
-                 <span className="text-ui-detail font-bold text-ctp-text uppercase tracking-tight">Active</span>
-              </div>
-           </div>
-           <div className="space-y-1">
-              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Task Verification</span>
-              <p className="text-ui-detail font-bold text-ctp-text uppercase tracking-tight">{completedCount} / {totalSteps}</p>
-           </div>
-           <div className="space-y-1">
-              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Cloud Backup</span>
-              <div className="flex items-center gap-1.5">
-                 <ShieldCheck className="w-3.5 h-3.5 text-ctp-sky-800" strokeWidth={2.5} />
-                 <span className="text-ui-detail font-bold text-ctp-text uppercase tracking-tight">Synced</span>
-              </div>
-           </div>
-           <div className="space-y-1">
-              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Priority Level</span>
-              <div className="flex items-center gap-1.5">
-                 <span className="text-ui-detail font-bold text-ctp-sky-800 uppercase tracking-tight">Normal</span>
-              </div>
-           </div>
+        {/* Guide Metadata Row */}
+        <div className="relative z-10 px-5 py-4 border-t border-ctp-surface1/30">
+          <div className="grid grid-cols-4 gap-4">
+            <div className="space-y-1">
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Next Step</span>
+              <p className="text-ui-detail font-bold text-ctp-text truncate" title={nextStep?.task}>
+                {nextStep ? nextStep.task : (progressPercent === 100 ? 'All done!' : '—')}
+              </p>
+            </div>
+            <div className="space-y-1">
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Est. Time</span>
+              <p className="text-ui-detail font-bold text-ctp-text">{estimatedTime || '—'}</p>
+            </div>
+            <div className="space-y-1">
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Steps</span>
+              <p className="text-ui-detail font-bold text-ctp-text">{completedCount} / {totalSteps}</p>
+            </div>
+            <div className="space-y-1">
+              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] opacity-70">Cost</span>
+              <p className="text-ui-detail font-bold text-ctp-text">{costRange || '—'}</p>
+            </div>
+          </div>
         </div>
 
         {/* Action Bar */}
@@ -558,14 +556,16 @@ ChecklistCard.Skeleton = function ChecklistCardSkeleton({ isModal, isBare, inGui
            </div>
         </div>
 
-        {/* Instrumentation Grid Skeleton */}
-        <div className="px-5 py-4 grid grid-cols-2 gap-y-6 gap-x-6 border-t border-ctp-surface1/30">
-           {[1, 2, 3, 4].map(i => (
-             <div key={i} className="space-y-2">
-               <Skeleton className="w-12 h-2 opacity-60" />
-               <Skeleton className="w-16 h-3" />
-             </div>
-           ))}
+        {/* Guide Metadata Skeleton */}
+        <div className="px-5 py-4 border-t border-ctp-surface1/30">
+          <div className="grid grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="space-y-2">
+                <Skeleton className="w-12 h-2 opacity-60" />
+                <Skeleton className="w-16 h-3" />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Action Bar Skeleton */}
