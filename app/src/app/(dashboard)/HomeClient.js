@@ -167,8 +167,8 @@ function GuestView() {
               className="relative min-w-[190px] h-[260px] rounded-[32px] px-5 pt-5 pb-0 flex flex-col snap-start shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-white/50 active:scale-[0.98] transition-transform cursor-pointer overflow-hidden group"
               onClick={() => router.push(`/bundles/${bundle.id}`)}
             >
-              {/* Illustration Container - Taller for narrow cards */}
-              <div className="relative w-full h-32 shrink-0 mb-3 transform group-hover:scale-110 transition-transform duration-500">
+              {/* Illustration Container - Slightly smaller for better balance */}
+              <div className="relative w-full h-28 shrink-0 mb-3 px-4 transform group-hover:scale-110 transition-transform duration-500">
                 <Image 
                   src={bundle.image} 
                   alt={bundle.title} 
