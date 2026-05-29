@@ -115,28 +115,28 @@
 
     /* Semantic palette */
     --green: #34C759;
-    --yellow: #FFCC00;
+    --yellow: #FFD700;
     --orange: #FF9500;
     --red: #FF3B30;
     --peach: #FFD60A;
     --teal: #30B0C7;
     --mauve: #AF52DE;
 
-    /* 3D Asset Theme Palette */
-    --theme-blue-dark: #C5D8FC;
-    --theme-blue-light: #D9E6FD;
-    --theme-purple-dark: #E0DAFC;
-    --theme-purple-light: #F5F3FE;
-    --theme-green-dark: #C4EAE6;
-    --theme-green-light: #E8F7F5;
-    --theme-orange-dark: #F9D5BD;
-    --theme-orange-light: #FDEFE3;
-    --theme-gold-dark: #F9E1A3;
-    --theme-gold-light: #FDF3D5;
-    --theme-pink-dark: #F9D0DF;
-    --theme-pink-light: #FDEDF5;
-    --theme-gray-dark: #D1D1D6;
-    --theme-gray-light: #E5E5EA;
+    /* 3D Asset Theme Palette - Subtlized */
+    --theme-blue-dark: #EDF4FF;
+    --theme-blue-light: #F8FAFF;
+    --theme-purple-dark: #F5F1FF;
+    --theme-purple-light: #FAF8FF;
+    --theme-green-dark: #EAF9EE;
+    --theme-green-light: #F6FDF8;
+    --theme-orange-dark: #FFF4E5;
+    --theme-orange-light: #FFFBF5;
+    --theme-gold-dark: #FFF9E0;
+    --theme-gold-light: #FFFCF2;
+    --theme-pink-dark: #FFEFF5;
+    --theme-pink-light: #FFF9FC;
+    --theme-gray-dark: #F2F2F7;
+    --theme-gray-light: #F9F9FB;
   }
 
   .dark {

@@ -10,7 +10,7 @@ const bundleIconMap = {
   'ofw': '/assets/bundles/Ofw.webp',
   'wedding': '/assets/bundles/Marriage.webp',
   'business': '/assets/bundles/Business.webp',
-  'college-graduation': '/assets/icons/GraduationCap.webp',
+  'college-graduation': '/assets/guides/GraduationCap.webp',
   'travel-tourist': '/assets/bundles/Travel.webp',
   'senior-citizen': '/assets/bundles/SeniorCouple.webp',
   'pwd-benefits': '/assets/bundles/WheelChair.webp',

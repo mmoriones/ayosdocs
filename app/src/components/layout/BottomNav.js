@@ -20,7 +20,7 @@ export default function BottomNav() {
   return (
     <nav 
       className="fixed bottom-8 left-6 right-6 backdrop-blur-md border border-white/50 rounded-[40px] shadow-[0_20px_50px_rgba(0,56,168,0.1)] z-[60] lg:hidden overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 255, 0.8) 100%)' }}
+      style={{ background: 'linear-gradient(to top, rgba(248, 250, 255, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%)' }}
     >
       {/* Glossy Top Edge Highlight */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent" />

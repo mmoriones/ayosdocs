@@ -13,7 +13,7 @@ export function WorkspaceProvider({ children }) {
 
   // Initialize from localStorage on mount
   useEffect(() => {
-    const saved = localStorage.getItem('lastGuideSlug');
+    const saved = localStorage.getItem('ayosdocs_last_viewed_guide');
     if (saved) {
       setTimeout(() => {
         setActiveGuideSlugState(saved);
@@ -24,7 +24,7 @@ export function WorkspaceProvider({ children }) {
   const setActiveGuideSlug = useCallback((slug) => {
     if (!slug) return;
     setActiveGuideSlugState(slug);
-    localStorage.setItem('lastGuideSlug', slug);
+    localStorage.setItem('ayosdocs_last_viewed_guide', slug);
   }, []);
 
   return (
