@@ -41,7 +41,6 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
     { href: '/', icon: Home, label: 'Overview' },
     { href: '/guides', icon: BookOpen, label: 'Guides' },
     { href: '/bundles', icon: Layers, label: 'Bundles' },
-    { href: '/offices', icon: MapPin, label: 'Offices' },
   ];
 
   const authItems = [

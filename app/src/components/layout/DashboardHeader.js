@@ -83,7 +83,7 @@ export default function DashboardHeader({ onMenuClick, onLogoutClick }) {
               value=""
               onChange={() => {}}
               onClick={toggleSearch}
-              placeholder="Search guides, offices, requirements..."
+              placeholder="Search guides, requirements, bundles..."
               variant="standard"
               showShortcut={true}
               className="bg-ctp-mantle/50 border-ctp-surface1 group-hover:border-ctp-sky-800/30 transition-all"

@@ -15,7 +15,6 @@ const Footer = () => {
       links: [
         { label: 'Guides', href: '/guides' },
         { label: 'Bundles', href: '/bundles' },
-        { label: 'Offices', href: '/offices' },
         { label: 'Updates', href: '/updates' },
       ],
     },
@@ -24,7 +23,6 @@ const Footer = () => {
       links: [
         { label: 'Help Center', href: '/support' },
         { label: 'FAQs', href: '/faqs' },
-        { label: 'Feedback', href: '/rate' },
       ],
     },
     {

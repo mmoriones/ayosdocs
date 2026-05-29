@@ -121,6 +121,22 @@
     --peach: #FFD60A;
     --teal: #30B0C7;
     --mauve: #AF52DE;
+
+    /* 3D Asset Theme Palette */
+    --theme-blue-dark: #C5D8FC;
+    --theme-blue-light: #D9E6FD;
+    --theme-purple-dark: #E0DAFC;
+    --theme-purple-light: #F5F3FE;
+    --theme-green-dark: #C4EAE6;
+    --theme-green-light: #E8F7F5;
+    --theme-orange-dark: #F9D5BD;
+    --theme-orange-light: #FDEFE3;
+    --theme-gold-dark: #F9E1A3;
+    --theme-gold-light: #FDF3D5;
+    --theme-pink-dark: #F9D0DF;
+    --theme-pink-light: #FDEDF5;
+    --theme-gray-dark: #D1D1D6;
+    --theme-gray-light: #E5E5EA;
   }
 
   .dark {
@@ -149,10 +165,10 @@
   }
 
   html, body {
-    background-color: #f2f4fc !important;
+    background-color: #f2f2f7 !important;
     background-image: 
-      radial-gradient(at 0% 0%, #f5f8fe 0%, transparent 50%), 
-      radial-gradient(at 100% 0%, #f4f6fd 0%, transparent 50%), 
+      radial-gradient(at 0% 0%, #fbfcff 0%, transparent 50%), 
+      radial-gradient(at 100% 0%, #f4f7ff 0%, transparent 50%), 
       radial-gradient(at 0% 100%, #f0f4fc 0%, transparent 50%), 
       radial-gradient(at 100% 100%, #f2f4fc 0%, transparent 50%) !important;
     background-attachment: fixed !important;

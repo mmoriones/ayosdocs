@@ -24,24 +24,24 @@ export default function Card({
   ...props
 }) {
   const backgrounds = {
-    base: 'bg-ctp-base',
-    mantle: 'bg-ctp-mantle/50',
-    crust: 'bg-ctp-crust/50'
+    base: 'bg-white',
+    mantle: 'bg-gray-50/50',
+    crust: 'bg-[#F2F2F7]'
   };
   const bgStyles = backgrounds[background] || backgrounds.base;
   const overflowClass = overflow === 'hidden' ? 'overflow-hidden' : 'overflow-visible';
   const interactiveStyles = (interactive || props.onClick) 
-    ? 'cursor-pointer hover:border-ctp-sky-800/30 hover:shadow-lg hover:bg-ctp-mantle/50 transition-all hover:-translate-y-px active:translate-y-0 active:scale-[0.99] relative overflow-hidden after:absolute after:inset-0 after:bg-white/5 after:opacity-0 after:transition-opacity active:after:opacity-100 hover:z-10' 
-    : '';
+    ? 'cursor-pointer hover:border-white hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] border-white/50 relative overflow-hidden after:absolute after:inset-0 after:bg-black/5 after:opacity-0 after:transition-opacity active:after:opacity-100' 
+    : 'border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)]';
   
   return (
     <div 
-      className={`rounded-xl border border-ctp-surface1 shadow-sm transition-all ${overflowClass} ${bgStyles} ${interactiveStyles} ${className}`}
+      className={`rounded-[28px] lg:rounded-[32px] border ${overflowClass} ${bgStyles} ${interactiveStyles} ${className}`}
       {...props}
     >
       {title && (
-        <div className={`px-6 py-4 border-b border-ctp-surface1 flex items-center justify-between bg-ctp-mantle/50 ${headerClassName}`}>
-          <h2 className="text-ui-label font-bold tracking-tight text-ctp-text uppercase tracking-widest">{title}</h2>
+        <div className={`px-6 py-5 border-b border-gray-100 flex items-center justify-between ${headerClassName}`}>
+          <h2 className="text-[17px] font-bold tracking-tight text-[#1C1C1E]">{title}</h2>
           {headerAction && <div className="animate-in fade-in duration-300">{headerAction}</div>}
         </div>
       )}
@@ -53,7 +53,7 @@ export default function Card({
       )}
 
       {footer && (
-        <div className={`px-6 py-4 bg-ctp-mantle/50 border-t border-ctp-surface1 ${footerClassName}`}>
+        <div className={`px-6 py-4 bg-gray-50/30 border-t border-gray-100 ${footerClassName}`}>
           {footer}
         </div>
       )}

@@ -13,19 +13,17 @@ import {
   Bookmark, 
   CheckCircle2, 
   LayoutGrid,
-  Briefcase,
-  Heart,
   Store,
-  Book,
-  Layers,
   User,
   Home,
   Baby,
   Umbrella,
-  Lock
 } from 'lucide-react';
 import Image from 'next/image';
 import { bundles } from '@/data/bundles';
+import { bundleStyles, iconStyles, THEMES } from '@/lib/assetStyles';
+import { Card, Button, Input, Badge } from '@/components/ui';
+import { GuideIcon } from '@/lib/guideIcons';
 
 export default function HomeClient({ allGuides }) {
   const { status, data: session } = useSession();
@@ -41,6 +39,20 @@ export default function HomeClient({ allGuides }) {
     enabled: isLoggedIn,
   });
 
+  // Select 4 trending guides dynamically for the guest view
+  const trendingGuides = useMemo(() => {
+    const slugs = [
+      { slug: 'passport-appointment', trend: '+12%' },
+      { slug: 'nbi-clearance', trend: '+8%' },
+      { slug: 'psa-birth-certificate', trend: '+15%' },
+      { slug: 'drivers-license', trend: '+5%' }
+    ];
+    return slugs.map(item => {
+      const guide = allGuides.find(g => g.slug === item.slug);
+      return guide ? { ...guide, trend: item.trend } : null;
+    }).filter(Boolean);
+  }, [allGuides]);
+
   return (
     <div className="min-h-screen pb-32 font-sans selection:bg-[#0038A8]/10 lg:pt-0">
       {isLoggedIn ? (
@@ -52,13 +64,13 @@ export default function HomeClient({ allGuides }) {
           session={session}
         />
       ) : (
-        <GuestView />
+        <GuestView trendingGuides={trendingGuides} />
       )}
     </div>
   );
 }
 
-function GuestView() {
+function GuestView({ trendingGuides }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(0);
   const { openAuthModal } = useAuthUI();
@@ -67,14 +79,15 @@ function GuestView() {
   // Select the 4 essential bundles with specific backgrounds
   const essentialBundles = useMemo(() => {
     const config = [
-      { id: 'first-job', bg: 'radial-gradient(circle at top right, #d9e6fd, #dae6fe)', image: '/assets/job.webp' },
-      { id: 'travel-tourist', bg: 'radial-gradient(circle at top right, #eeeafd, #eeecfd)', image: '/assets/travel.webp' },
-      { id: 'wedding', bg: 'radial-gradient(circle at top right, #fdedf5, #fdecf4)', image: '/assets/marriage.webp' },
-      { id: 'foundational-docs', bg: 'radial-gradient(circle at top right, #f4f5f9, #f5f6fa)', image: '/assets/general.webp' }
+      { id: 'first-job', image: '/assets/bundles/Job.webp' },
+      { id: 'travel-tourist', image: '/assets/bundles/Travel.webp' },
+      { id: 'wedding', image: '/assets/bundles/Marriage.webp' },
+      { id: 'foundational-docs', image: '/assets/bundles/GeneralIdentity.webp' }
     ];
     return config.map(item => {
       const bundle = bundles.find(b => b.id === item.id);
-      return bundle ? { ...bundle, bg: item.bg, image: item.image } : null;
+      const style = bundleStyles[item.id] || bundleStyles['foundational-docs'];
+      return bundle ? { ...bundle, bg: style.gradient, image: item.image } : null;
     }).filter(Boolean);
   }, []);
 
@@ -107,198 +120,233 @@ function GuestView() {
   };
 
   return (
-    <div className="flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-md mx-auto">
+    <div className="flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-[1600px] mx-auto">
       {/* Header */}
       <header className="px-6 pt-8 pb-4 flex justify-between items-center lg:hidden">
         <h1 className="text-2xl font-black text-[#0038A8] tracking-tight">AyosDocs</h1>
-        <button 
+        <Button 
+          variant="secondary"
+          size="sm"
           onClick={() => openAuthModal()}
-          className="h-11 px-5 rounded-full flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-white/50 active:scale-95 transition-all group"
-          style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(248, 249, 255, 1) 100%)' }}
+          leftIcon={<User size={18} strokeWidth={2.5} />}
+          className="h-11 rounded-full shadow-sm"
         >
-          <User size={18} className="text-[#0038A8]" strokeWidth={2.5} />
-          <span className="text-[14px] font-bold text-[#0038A8]">Sign in</span>
-        </button>
+          Sign in
+        </Button>
       </header>
 
-      {/* Hero Title - Forced to 3 rows */}
-      <section className="px-6 py-8">
-        <h2 className="text-[34px] font-bold leading-[1.1] tracking-tight text-[#1C1C1E] max-w-[320px]">
+      {/* Hero Title */}
+      <section className="px-6 py-8 lg:py-12">
+        <h2 className="text-[34px] lg:text-[48px] font-bold leading-[1.1] tracking-tight text-[#1C1C1E] max-w-[600px]">
           Make government processes simple, <span className="text-[#0038A8]">together.</span>
         </h2>
       </section>
 
       {/* Modern Search Bar */}
-      <section className="px-6 mb-12">
-        <div className="relative group">
-          <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#0038A8] transition-colors" size={20} />
-          <input
-            type="text"
-            placeholder="What do you need to get done today?"
-            className="w-full h-16 pl-14 pr-6 bg-white rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] border-[2px] border-white text-[15px] font-medium placeholder:text-gray-400 focus:outline-none transition-all"
-          />
-        </div>
+      <section className="px-6 mb-12 max-w-2xl">
+        <Input 
+          placeholder="What do you need to get done today?"
+          leftIcon={Search}
+          className="h-16"
+        />
       </section>
 
-      {/* Horizontal Bundles Scroll */}
+      {/* Bundles Section */}
       <section className="mb-12">
-        <div className="px-6 mb-6 flex justify-between items-end">
+        <div className="px-6 mb-6 flex justify-between items-end lg:px-10">
           <div className="flex flex-col gap-1">
-            <h3 className="text-[19px] font-bold text-[#1C1C1E]">Start Here</h3>
-            <p className="text-[13px] font-medium text-gray-400">Life Event Bundles</p>
+            <h3 className="text-[19px] lg:text-[24px] font-bold text-[#1C1C1E]">Start Here</h3>
+            <p className="text-[13px] lg:text-[15px] font-medium text-gray-400">Life Event Bundles</p>
           </div>
           <button 
             onClick={() => router.push('/bundles')}
-            className="text-[14px] font-bold text-[#0038A8] pb-0.5 active:opacity-60 transition-opacity"
+            className="text-[14px] lg:text-[16px] font-bold text-[#0038A8] pb-0.5 active:opacity-60 transition-opacity"
           >
             View all
           </button>
         </div>
         
-        <div 
-          id="bundle-carousel"
-          onScroll={handleScroll}
-          className="flex overflow-x-auto gap-4 px-6 scrollbar-hide snap-x snap-mandatory pb-6 scroll-pl-6"
-        >
+        {/* Carousel for Mobile, Grid for Desktop */}
+        <div className="lg:hidden">
+          <div 
+            id="bundle-carousel"
+            onScroll={handleScroll}
+            className="flex overflow-x-auto gap-4 px-6 scrollbar-hide snap-x snap-mandatory pb-6 scroll-pl-6"
+          >
+            {essentialBundles.map((bundle) => (
+              <Card 
+                key={bundle.id}
+                interactive
+                onClick={() => router.push(`/bundles/${bundle.id}`)}
+                style={{ background: bundle.bg }}
+                className="relative min-w-[190px] h-[260px] flex flex-col justify-center gap-3 snap-start !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
+              >
+                {/* Illustration Container */}
+                <div className="relative w-full h-16 shrink-0 px-4 transform group-hover:scale-110 transition-transform duration-500">
+                  <Image 
+                    src={bundle.image} 
+                    alt={bundle.title} 
+                    fill 
+                    sizes="200px"
+                    className="object-contain object-bottom drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.12)]"
+                    priority={bundle.id === 'first-job'}
+                  />
+                </div>
+
+                {/* Content Row */}
+                <div className="space-y-1">
+                    <h4 className="font-bold text-[#1C1C1E] text-[16px] leading-tight line-clamp-2">
+                      {bundle.title.split(' / ')[0]}
+                    </h4>
+                    <p className="text-[11px] font-medium text-gray-500 leading-tight line-clamp-2">
+                      {bundle.description}
+                    </p>
+                  </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* Functional Pagination Dots */}
+          <div className="flex justify-center gap-1.5 mt-4">
+            {essentialBundles.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => scrollTo(idx)}
+                className={`transition-all duration-300 rounded-full ${
+                  activeIndex === idx 
+                    ? 'w-6 h-1.5 bg-[#0038A8]' 
+                    : 'w-1.5 h-1.5 bg-gray-300'
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Grid */}
+        <div className="hidden lg:grid grid-cols-4 gap-6 px-10">
           {essentialBundles.map((bundle) => (
-            <div 
+            <Card 
               key={bundle.id}
-              style={{ background: bundle.bg }}
-              className="relative min-w-[190px] h-[260px] rounded-[32px] px-5 py-5 flex flex-col justify-center gap-3 snap-start shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-white/50 active:scale-[0.98] transition-transform cursor-pointer overflow-hidden group"
+              interactive
               onClick={() => router.push(`/bundles/${bundle.id}`)}
+              style={{ background: bundle.bg }}
+              className="relative h-[300px] flex flex-col justify-center gap-6 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
             >
               {/* Illustration Container */}
-              <div className="relative w-full h-20 shrink-0 px-4 transform group-hover:scale-110 transition-transform duration-500">
+              <div className="relative w-full h-28 shrink-0 transform group-hover:scale-110 transition-transform duration-500">
                 <Image 
                   src={bundle.image} 
                   alt={bundle.title} 
                   fill 
-                  sizes="200px"
-                  className="object-contain object-bottom drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.12)]"
-                  priority={bundle.id === 'first-job'}
+                  sizes="300px"
+                  className="object-contain object-bottom drop-shadow-[-10px_12px_16px_rgba(0,0,0,0.12)]"
                 />
               </div>
 
               {/* Content Row */}
-              <div className="space-y-1">
-                  <h4 className="font-bold text-[#1C1C1E] text-[16px] leading-tight line-clamp-2">
-                    {bundle.title.split(' / ')[0]}
-                  </h4>
-                  <p className="text-[11px] font-medium text-gray-500 leading-tight line-clamp-2">
-                    {bundle.description}
-                  </p>
-                </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Functional Pagination Dots */}
-        <div className="flex justify-center gap-1.5 mt-4">
-          {essentialBundles.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => scrollTo(idx)}
-              className={`transition-all duration-300 rounded-full ${
-                activeIndex === idx 
-                  ? 'w-6 h-1.5 bg-[#0038A8]' 
-                  : 'w-1.5 h-1.5 bg-gray-300'
-              }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
+              <div className="space-y-2">
+                <h4 className="font-bold text-[#1C1C1E] text-[20px] leading-tight">
+                  {bundle.title.split(' / ')[0]}
+                </h4>
+                <p className="text-[13px] font-medium text-gray-500 leading-tight">
+                  {bundle.description}
+                </p>
+              </div>
+            </Card>
           ))}
         </div>
       </section>
 
       {/* Auth Action Section */}
-      <section className="px-6 mb-12">
-        <button 
+      <section className="px-6 mb-12 lg:px-10">
+        <Card 
+          interactive
           onClick={() => openAuthModal()}
-          className="w-full rounded-[32px] py-6 px-7 flex items-center justify-between shadow-[0_12px_40px_rgba(0,0,0,0.06)] border border-white/50 active:scale-[0.98] transition-all"
-          style={{ background: 'radial-gradient(circle at top right, #f8f9ff, #eef3ff)' }}
+          style={{ background: 'radial-gradient(circle at bottom right, #bbd6fd, #e8f1ff)' }}
+          className="w-full max-w-3xl border-white/50 flex flex-row items-center justify-between no-padding"
+          noPadding
         >
-          <div className="flex items-center gap-6">
-             <div className="w-24 h-24 shrink-0 relative">
+          <div className="flex items-center gap-6 lg:gap-10 p-6 lg:p-10">
+             <div className="w-14 h-14 lg:w-20 lg:h-20 shrink-0 relative">
                <Image 
-                src="/assets/lock.webp" 
+                src="/assets/icons/Lock.webp" 
                 alt="Lock" 
                 fill 
-                sizes="96px"
+                sizes="(max-width: 1024px) 56px, 80px"
                 className="object-contain drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.1)]"
               />
             </div>
-            <div className="text-left space-y-1">
-              <h4 className="font-bold text-[#1C1C1E] text-base">Sign in to AyosDocs</h4>
-              <p className="text-[12px] font-medium text-gray-400 leading-tight">
+            <div className="text-left space-y-1 lg:space-y-2">
+              <h4 className="font-bold text-[#1C1C1E] text-base lg:text-xl">Sign in to AyosDocs</h4>
+              <p className="text-[12px] lg:text-[14px] font-medium text-gray-400 leading-tight">
                 Save your progress and access your documents anywhere.
               </p>
             </div>
           </div>
-          <ChevronRight size={22} className="text-[#0038A8] shrink-0 opacity-30" strokeWidth={2.5} />
-        </button>
+          <div className="pr-6 lg:pr-10">
+            <ChevronRight size={22} className="text-[#0038A8] shrink-0 opacity-30" strokeWidth={2.5} />
+          </div>
+        </Card>
       </section>
 
       {/* Trending / Community Insights Section */}
-      <section className="px-6 pb-12">
+      <section className="px-6 pb-12 lg:px-10">
         <div className="mb-6 flex justify-between items-end">
           <div className="flex flex-col gap-1">
-            <h3 className="text-[19px] font-bold text-[#1C1C1E]">Trending Now</h3>
-            <p className="text-[13px] font-medium text-gray-400">Most searched by the community</p>
+            <h3 className="text-[19px] lg:text-[24px] font-bold text-[#1C1C1E]">Trending Now</h3>
+            <p className="text-[13px] lg:text-[15px] font-medium text-gray-400">Most searched by the community</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          <TrendingCard 
-            title="Passport Renewal" 
-            agency="DFA" 
-            trend="+12%" 
-            icon={<Book size={20} className="text-[#0038A8]" />}
-            bg="bg-[#E8F1FF]"
-          />
-          <TrendingCard 
-            title="NBI Clearance" 
-            agency="NBI" 
-            trend="+8%" 
-            icon={<CheckCircle2 size={20} className="text-[#34C759]" />}
-            bg="bg-[#EAF9EE]"
-          />
-          <TrendingCard 
-            title="PSA Birth Cert" 
-            agency="PSA" 
-            trend="+15%" 
-            icon={<Layers size={20} className="text-[#AF52DE]" />}
-            bg="bg-[#F4EBFF]"
-          />
-          <TrendingCard 
-            title="Driver's License" 
-            agency="LTO" 
-            trend="+5%" 
-            icon={<Search size={20} className="text-[#FFCC00]" />}
-            bg="bg-[#FFF8E1]"
-          />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+          {trendingGuides.map((guide, idx) => {
+            const themes = [THEMES.BLUE, THEMES.PURPLE, THEMES.GREEN, THEMES.ORANGE];
+            const theme = themes[idx % themes.length];
+            return (
+              <TrendingCard 
+                key={guide.slug}
+                title={guide.shortTitle || guide.title.split(' / ')[0]} 
+                agency={guide.agency} 
+                trend={guide.trend} 
+                slug={guide.slug}
+                theme={theme}
+              />
+            );
+          })}
         </div>
       </section>
     </div>
   );
 }
 
-function TrendingCard({ title, agency, trend, icon, bg }) {
+function TrendingCard({ title, agency, trend, slug, theme }) {
   const router = useRouter();
+  
   return (
-    <button 
-      onClick={() => router.push('/guides')}
-      className="bg-white rounded-[28px] p-5 text-left border border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] active:scale-[0.97] transition-all group"
+    <Card 
+      interactive
+      onClick={() => router.push(`/guides/${slug}`)}
+      style={{ background: theme.gradient }}
+      className="p-5 text-left !border-white/60 flex flex-col h-full shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
+      noPadding
     >
-      <div className={`w-11 h-11 ${bg} rounded-[14px] flex items-center justify-center mb-4 shadow-sm`}>
-        {icon}
+      <div className="mb-5">
+        <GuideIcon 
+          slug={slug} 
+          agency={agency} 
+          size={36} 
+          className="drop-shadow-[-4px_6px_10px_rgba(0,0,0,0.1)]" 
+        />
       </div>
-      <div className="space-y-0.5">
+      <div className="space-y-0.5 mt-auto">
         <h5 className="font-bold text-[#1C1C1E] text-[14px] leading-tight line-clamp-1">{title}</h5>
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tight">{agency}</span>
+          <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{agency}</span>
           <span className="text-[10px] font-black text-[#34C759]">{trend}</span>
         </div>
       </div>
-    </button>
+    </Card>
   );
 }
 

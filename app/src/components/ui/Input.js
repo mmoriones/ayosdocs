@@ -30,19 +30,19 @@ export default function Input({
   const hasError = !!error;
 
   return (
-    <div className={`space-y-1 ${containerClassName}`}>
+    <div className={`space-y-1.5 ${containerClassName}`}>
       {label && (
-        <label className="text-ui-detail font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">
+        <label className="text-[13px] font-bold text-gray-500 ml-5">
           {label}
         </label>
       )}
 
       <div className="relative group">
         {LeftIcon && (
-          <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${
-            disabled ? 'text-ctp-surface2' : hasError ? 'text-ctp-red' : 'text-ctp-subtext1 group-focus-within:text-ctp-sky-800'
+          <div className={`absolute left-5 top-1/2 -translate-y-1/2 transition-colors ${
+            disabled ? 'text-gray-300' : hasError ? 'text-[#FF3B30]' : 'text-gray-400 group-focus-within:text-[#0038A8]'
           }`}>
-            <LeftIcon size={18} strokeWidth={2} />
+            <LeftIcon size={18} strokeWidth={2.5} />
           </div>
         )}
 
@@ -50,14 +50,14 @@ export default function Input({
           type={inputType}
           disabled={disabled}
           className={`
-            w-full bg-ctp-base border rounded-lg py-3.5 text-sm text-ctp-text outline-none transition-all placeholder:text-ctp-subtext0
-            ${LeftIcon ? 'pl-12' : 'pl-4'}
-            ${isPassword ? 'pr-12' : 'pr-4'}
+            w-full bg-white border-[2px] rounded-full py-4 text-[15px] text-[#1C1C1E] outline-none transition-all placeholder:text-gray-400
+            ${LeftIcon ? 'pl-14' : 'pl-6'}
+            ${isPassword ? 'pr-14' : 'pr-6'}
             ${hasError 
-              ? 'border-ctp-red/50 focus:border-ctp-red focus:ring-4 focus:ring-ctp-red/5' 
-              : 'border-ctp-surface1 focus:border-ctp-sky-800 focus:ring-4 focus:ring-ctp-sky-800/5'
+              ? 'border-[#FF3B30]/50 focus:border-[#FF3B30] focus:ring-4 focus:ring-[#FF3B30]/5' 
+              : 'border-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:border-[#0038A8]/20 focus:ring-4 focus:ring-[#0038A8]/5'
             }
-            ${disabled ? 'opacity-50 cursor-not-allowed bg-ctp-mantle' : 'hover:border-ctp-surface2'}
+            ${disabled ? 'opacity-50 cursor-not-allowed bg-gray-50' : 'hover:border-gray-100'}
             ${className}
           `}
           {...props}
@@ -76,9 +76,9 @@ export default function Input({
 
       <div className="min-h-[20px] pt-1">
         {hasError && (
-          <div className="flex items-center gap-1.5 ml-4 animate-in fade-in slide-in-from-top-1 duration-200">
-            <AlertCircle size={10} className="text-ctp-red" />
-            <p className="text-ui-micro font-bold text-ctp-red uppercase tracking-wide">
+          <div className="flex items-center gap-1.5 ml-6 animate-in fade-in slide-in-from-top-1 duration-200">
+            <AlertCircle size={11} className="text-[#FF3B30]" />
+            <p className="text-[11px] font-bold text-[#FF3B30]">
               {error}
             </p>
           </div>

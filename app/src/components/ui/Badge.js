@@ -16,18 +16,16 @@ export default function Badge({
   className = "" 
 }) {
   const variants = {
-    sky: "bg-ctp-sky-800/[0.08] text-ctp-sky-800 border-ctp-sky-800/20",
-    teal: "bg-ctp-teal/[0.08] text-ctp-teal border-ctp-teal/20",
-    green: "bg-ctp-green/[0.08] text-ctp-green border-ctp-green/20",
-    yellow: "bg-ctp-yellow/[0.08] text-ctp-yellow border-ctp-yellow/20",
-    red: "bg-ctp-red/[0.08] text-ctp-red border-ctp-red/20",
-    mauve: "bg-ctp-mauve/[0.08] text-ctp-mauve border-ctp-mauve/20",
-    slate: "bg-ctp-surface0/50 text-ctp-subtext1 border-ctp-surface1",
-    surface: "bg-ctp-surface0 text-ctp-subtext1 border-ctp-surface1",
+    sky: "bg-[#0038A8]/10 text-[#0038A8] border-[#0038A8]/10",
+    green: "bg-[#34C759]/10 text-[#34C759] border-[#34C759]/10",
+    yellow: "bg-[#FFCC00]/10 text-[#FF9500] border-[#FFCC00]/10",
+    red: "bg-[#FF3B30]/10 text-[#FF3B30] border-[#FF3B30]/10",
+    purple: "bg-[#AF52DE]/10 text-[#AF52DE] border-[#AF52DE]/10",
+    gray: "bg-gray-100 text-gray-500 border-gray-200",
   };
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 border text-ui-tiny font-bold uppercase tracking-ui-caps ${rounded ? 'rounded-full' : 'rounded-md'} ${variants[variant]} ${className}`}>
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 border text-[11px] font-bold ${rounded ? 'rounded-full' : 'rounded-[8px]'} ${variants[variant]} ${className}`}>
       {Icon && <Icon size={12} strokeWidth={2.5} />}
       {children}
     </span>
