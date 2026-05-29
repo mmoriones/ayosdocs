@@ -524,25 +524,6 @@ export default function BundleClient({ bundle, allGuides, initialIsTracked, save
                  ))}
                </div>
             </section>
-
-            <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
-              <div className="p-4 border-b border-ctp-surface1 flex items-center gap-2">
-                <Building2 size={14} className="text-ctp-sky-800" />
-                <h3 className="text-ui-micro font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Regional Offices</h3>
-              </div>
-              <div className="p-5 space-y-4">
-                <p className="text-ui-micro font-medium leading-relaxed text-ctp-subtext1">
-                  Most documents in this bundle can be processed at local municipal centers or integrated SM Mall service hubs.
-                </p>
-                <Button 
-                  variant="secondary"
-                  onClick={() => router.push('/offices')}
-                  className="w-full text-ui-micro uppercase tracking-widest"
-                >
-                  Find nearest office
-                </Button>
-              </div>
-            </Card>
           </aside>
         </div>
       </div>

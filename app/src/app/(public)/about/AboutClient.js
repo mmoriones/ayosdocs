@@ -1,6 +1,6 @@
 'use client';
 
-import { PublicPageHeader, Button, Card, Badge } from '@/components/ui';
+import { PublicPageHeader, Card, Badge } from '@/components/ui';
 import { Info, Target, Eye, Sparkles, ShieldCheck, Heart } from 'lucide-react';
 
 /**
@@ -81,24 +81,7 @@ export default function AboutClient() {
               </div>
             </Card>
 
-            <Card background="mantle" className="relative overflow-hidden group">
-               <div className="relative z-10 space-y-4">
-                  <div className="flex items-center gap-2.5 text-ctp-sky-800">
-                    <Sparkles size={16} strokeWidth={2.5} />
-                    <h3 className="text-ui-micro font-bold uppercase tracking-widest">Get Involved</h3>
-                  </div>
-                  <p className="text-xs text-ctp-subtext1 font-medium leading-relaxed">
-                    AyosDocs is built for the community. Share your experiences and help others navigate their requirements better.
-                  </p>
-                  <Button 
-                    onClick={() => window.location.href = '/rate'}
-                    variant="secondary"
-                    className="w-full bg-ctp-base"
-                  >
-                    Write a Review
-                  </Button>
-               </div>
-            </Card>
+
           </aside>
         </div>
       </div>

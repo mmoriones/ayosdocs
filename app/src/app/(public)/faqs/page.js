@@ -11,7 +11,7 @@ const faqData = [
     questions: [
       {
         q: "What is AyosDocs?",
-        a: "AyosDocs is a platform that simplifies Philippine government document applications. We provide step-by-step guides, requirements checklists, and community-reported wait times."
+        a: "AyosDocs is a platform that simplifies Philippine government document applications. We provide step-by-step guides and requirements checklists."
       },
       {
         q: "Is AyosDocs an official government website?",
@@ -37,12 +37,8 @@ const faqData = [
     ]
   },
   {
-    category: 'Guides & Offices',
+    category: 'Guides',
     questions: [
-      {
-        q: "How accurate is the wait time data?",
-        a: "Wait times are crowdsourced from recent community reports. While they provide a good estimate, actual processing times may vary based on specific office conditions."
-      },
       {
         q: "Can I suggest a new guide?",
         a: "Absolutely! We're always looking to expand our library. You can reach out to us via the Contact page with your suggestions."
