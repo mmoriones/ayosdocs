@@ -82,7 +82,7 @@ export default function BundlesClient({ initialBundles }) {
 
       {/* QUICK CATEGORY PILLS */}
       <div className="bg-ctp-base border-b border-ctp-surface1 sticky top-[64px] z-40 backdrop-blur-md bg-ctp-base/80">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2 flex items-center gap-3 overflow-x-auto no-scrollbar">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-2 flex items-center gap-3 overflow-x-auto scrollbar-hide">
           <div className="flex items-center gap-2 pr-4 border-r border-ctp-surface1 shrink-0">
             <Filter size={12} className="text-ctp-subtext1" />
             <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-ui-caps">Goals</span>

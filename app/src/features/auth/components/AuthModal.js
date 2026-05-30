@@ -68,13 +68,13 @@ const AuthModal = ({ isOpen, onClose }) => {
         <div className="p-8 pt-10">
           <div className="mb-6 text-center">
             <h2 className="text-2xl font-bold text-ctp-text tracking-tight">
-              {mode === 'initial' ? 'Sign in to AyosDocs' : mode === 'login' ? 'Welcome Back' : mode === 'signup' ? 'Create Account' : 'Reset Password'}
+              {mode === 'initial' ? 'Login to AyosDocs' : mode === 'login' ? 'Welcome Back' : mode === 'signup' ? 'Create Account' : 'Reset Password'}
             </h2>
             <p className="text-sm font-medium text-ctp-subtext1 mt-2 leading-relaxed px-4">
               {mode === 'initial' 
                 ? 'Save your progress and access your checklists across all your devices.'
                 : mode === 'login'
-                ? 'Sign in with your email and password to continue.'
+                ? 'Login with your email and password to continue.'
                 : mode === 'signup'
                 ? 'Join AyosDocs to start tracking your government requirements.'
                 : 'Enter your email address and we\'ll send you a link to reset your password.'}

@@ -1,14 +1,33 @@
 'use client';
 
-export default function Checkbox({ id, checked = false, onCheckedChange, className = '', ...props }) {
+import { Check } from 'lucide-react';
+
+/**
+ * Custom High-Fidelity Checkbox component.
+ */
+export default function Checkbox({ id, checked = false, onCheckedChange, className = '' }) {
   return (
-    <input
-      type="checkbox"
+    <button
+      type="button"
       id={id}
-      checked={checked}
-      onChange={(e) => onCheckedChange?.(e.target.checked)}
-      className={`w-4 h-4 rounded border-ctp-surface1 text-ctp-sky-800 focus:ring-ctp-sky-800/20 focus:ring-2 bg-ctp-base ${className}`}
-      {...props}
-    />
+      role="checkbox"
+      aria-checked={checked}
+      onClick={() => onCheckedChange?.(!checked)}
+      className={`
+        w-5 h-5 flex items-center justify-center rounded-[6px] transition-all duration-200 border-2
+        ${checked 
+          ? 'bg-[#FFD700] border-[#FFD700] shadow-[0_2px_8px_rgba(255,215,0,0.3)] scale-105' 
+          : 'bg-white border-gray-200 hover:border-gray-300'
+        }
+        active:scale-90
+        ${className}
+      `}
+    >
+      <Check 
+        size={14} 
+        strokeWidth={4} 
+        className={`text-white transition-opacity duration-200 ${checked ? 'opacity-100' : 'opacity-0'}`} 
+      />
+    </button>
   );
 }

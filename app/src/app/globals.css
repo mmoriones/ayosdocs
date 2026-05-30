@@ -188,6 +188,16 @@
     font-family: inherit;
   }
 
+  /* Prevent Chrome/Safari autofill background change */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #1C1C1E !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
 }
 
 @layer utilities {

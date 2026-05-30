@@ -7,8 +7,10 @@ import Footer from '@/components/Footer';
  */
 export default function PublicLayout({ children }) {
   return (
-    <div className="min-h-screen bg-ctp-mantle flex flex-col selection:bg-ctp-sky-800/20">
-      <PublicHeader />
+    <div className="min-h-screen bg-ios-gradient flex flex-col selection:bg-[#0038A8]/10">
+      <div className="hidden lg:block">
+        <PublicHeader />
+      </div>
       <main className="flex-1">
         {children}
       </main>

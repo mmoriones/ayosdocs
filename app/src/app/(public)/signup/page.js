@@ -1,18 +1,20 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import {
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  ChevronLeft
 } from 'lucide-react';
 import {
   Button,
 } from '@/components/ui';
 import { useAuthLogic } from '@/features/auth/hooks/useAuthLogic';
-import { SocialProviders, SignupForm } from '@/features/auth/components/shared';
+import { SignupForm } from '@/features/auth/components/shared';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -22,7 +24,6 @@ export default function SignupPage() {
     isExchanging,
     exchangingMethod,
     statusMessage,
-    handleGoogleLogin,
     handleEmailSignUp,
     formData,
     handleInputChange,
@@ -41,43 +42,68 @@ export default function SignupPage() {
     }
   }, [statusMessage, router]);
 
-  if (status !== 'unauthenticated') {
+  if (status === 'authenticated') {
+    router.push('/');
     return null;
   }
 
-  const handleGuestMode = () => {
-    document.cookie = "guest-access=true; path=/; max-age=86400";
-    router.push('/');
-  };
-
   return (
-    <div className="min-h-full flex flex-col items-center justify-center p-6 lg:px-12 pb-12 animate-in fade-in duration-500 bg-ctp-mantle">
-      <div className="w-full max-w-[480px] mx-auto space-y-8">
-        <div className="bg-ctp-base border border-ctp-surface1 rounded-xl p-8 md:p-10 shadow-sm">
-          <div className="flex flex-col items-center text-center mb-8">
-            <h1 className="text-[28px] font-bold text-ctp-text tracking-tight">
-              Sign up to AyosDocs
+    <div className="min-h-screen bg-ios-gradient flex flex-col items-center animate-in fade-in duration-700">
+      {/* Mobile-Friendly Header with Back Button */}
+      <div className="w-full max-w-[1200px] px-6 pt-10 pb-6 flex justify-between items-start relative">
+        <button 
+          onClick={() => router.back()}
+          className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-transform"
+        >
+          <ChevronLeft size={24} className="text-[#1C1C1E]" strokeWidth={2.5} />
+        </button>
+      </div>
+
+      <div className="w-full max-w-[480px] px-6 flex flex-col">
+        {/* Welcome Section */}
+        <div className="flex justify-between items-end mb-8">
+          <div className="flex-1">
+            <h1 className="text-[28px] font-black text-[#1C1C1E] tracking-tight leading-none">
+              Create Account
             </h1>
+            <p className="text-[15px] font-medium text-gray-500 mt-2 leading-relaxed max-w-[240px]">
+              Sign up to simplify your <span className="text-[#0038A8] font-bold">government transactions</span>.
+            </p>
           </div>
+          
+          {/* 3D Illustration */}
+          <div className="w-24 h-24 relative -mr-2 drop-shadow-xl animate-float opacity-80">
+             <Image 
+              src="/assets/ui/CreateAccount.webp" 
+              alt="Join us" 
+              fill 
+              className="object-contain" 
+              priority
+            />
+          </div>
+        </div>
 
-          {statusMessage && (
-            <div className={`mb-8 p-4 rounded-xl border flex flex-col gap-3 animate-in fade-in zoom-in-95 duration-200 ${
-              statusMessage.type === 'error'
-                ? 'bg-ctp-red/10 border-ctp-red/20 text-ctp-red'
-                : 'bg-ctp-green/10 border-ctp-green/20 text-ctp-green'
-            }`}>
-              <div className="flex items-start gap-3">
-                {statusMessage.type === 'error' ? (
-                  <AlertCircle size={16} className="mt-0.5 shrink-0" />
-                ) : (
-                  <CheckCircle2 size={16} className="mt-0.5 shrink-0" />
-                )}
-                <p className="text-[13px] font-bold leading-tight">{statusMessage.text}</p>
-              </div>
+        {/* Status Messages */}
+        {statusMessage && (
+          <div className={`mb-6 p-4 rounded-2xl border flex flex-col gap-3 animate-in fade-in zoom-in-95 duration-200 ${
+            statusMessage.type === 'error'
+              ? 'bg-[#FF3B30]/10 border-[#FF3B30]/20 text-[#FF3B30]'
+              : 'bg-[#34C759]/10 border-[#34C759]/20 text-[#34C759]'
+          }`}>
+            <div className="flex items-start gap-3">
+              {statusMessage.type === 'error' ? (
+                <AlertCircle size={18} className="mt-0.5 shrink-0" />
+              ) : (
+                <CheckCircle2 size={18} className="mt-0.5 shrink-0" />
+              )}
+              <p className="text-[13px] font-bold leading-tight">{statusMessage.text}</p>
             </div>
-          )}
+          </div>
+        )}
 
-          <div className="space-y-5">
+        {/* Main Card */}
+        <div className="bg-white rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
+          <div className="space-y-6">
             <SignupForm
               formData={formData}
               onInputChange={handleInputChange}
@@ -87,42 +113,16 @@ export default function SignupPage() {
               isFormValid={isFormValid}
               getFieldError={getFieldError}
             />
-
-            <div className="relative py-1">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-ctp-surface1"></span>
-              </div>
-              <div className="relative flex justify-center">
-                <span className="bg-ctp-base px-6 text-[11px] font-medium text-ctp-subtext1">or</span>
-              </div>
-            </div>
-
-            <SocialProviders
-              onGoogleLogin={handleGoogleLogin}
-              onGuestClick={handleGuestMode}
-              isExchanging={isExchanging}
-              exchangingMethod={exchangingMethod}
-              showEmailOption={false}
-              variant="page"
-            />
-          </div>
-
-          <div className="mt-8 text-center">
-            <p className="text-[14px] text-ctp-subtext1 font-medium">
-              Already have an account?{' '}
-              <Link href="/login" className="text-ctp-sky-800 hover:underline font-bold transition-colors">
-                Sign in
-              </Link>
-            </p>
           </div>
         </div>
 
-        <div className="text-center px-10">
-          <p className="text-[11px] text-ctp-subtext1 leading-relaxed">
-            By continuing, I agree to AyosDocs&apos;s{' '}
-            <Link href="/terms" target="_blank" rel="noopener noreferrer" className="text-ctp-sky-800 hover:underline">terms</Link>,{' '}
-            <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="text-ctp-sky-800 hover:underline">privacy policy</Link>, and{' '}
-            <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="text-ctp-sky-800 hover:underline">cookie policy</Link>.
+        {/* Footer Link */}
+        <div className="mt-10 mb-12 text-center">
+          <p className="text-[15px] font-medium text-gray-400">
+            Already have an account?{' '}
+            <Link href="/login" className="text-[#0038A8] font-bold hover:underline transition-all">
+              Log in
+            </Link>
           </p>
         </div>
       </div>

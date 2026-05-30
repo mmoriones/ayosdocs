@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, ArrowRight } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { Button, Input } from '@/components/ui';
 
 /**
@@ -17,11 +17,12 @@ export function ForgotPasswordForm({
   getFieldError
 }) {
   return (
-    <form onSubmit={onSubmit} className="space-y-3.5 w-full">
+    <form onSubmit={onSubmit} className="space-y-4 w-full">
       <Input
         name="email"
         type="email"
-        placeholder="Email address"
+        label="Email Address"
+        placeholder="Enter your registered email"
         required
         maxLength={100}
         leftIcon={Mail}
@@ -31,15 +32,17 @@ export function ForgotPasswordForm({
         disabled={isExchanging}
       />
 
-      <Button
-        type="submit"
-        isLoading={exchangingMethod === 'reset'}
-        disabled={isExchanging || !isFormValid()}
-        className="w-full h-11 text-[13px] font-bold rounded-lg shadow-sm active:scale-[0.98] transition-all bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white mt-1"
-        rightIcon={<ArrowRight size={18} />}
-      >
-        Send Reset Link
-      </Button>
+      <div className="pt-2">
+        <Button
+          type="submit"
+          isLoading={exchangingMethod === 'reset'}
+          disabled={isExchanging || !isFormValid()}
+          style={{ background: 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
+          className="w-full h-14 text-[17px] font-black rounded-3xl shadow-[0_8px_24px_rgba(0,56,168,0.15)] active:scale-[0.98] transition-all text-white border-none"
+        >
+          Send Reset Link
+        </Button>
+      </div>
     </form>
   );
 }

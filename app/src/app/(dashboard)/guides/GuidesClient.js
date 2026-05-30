@@ -294,7 +294,7 @@ export default function GuidesClient({ initialGuides }) {
 
           {/* Centered Categories Row */}
           <div className="flex justify-center">
-            <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-2 px-6 bg-ctp-mantle/50 rounded-full border border-ctp-surface1/30">
+            <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide py-2 px-6 bg-ctp-mantle/50 rounded-full border border-ctp-surface1/30">
               {categories.map((cat) => (
                 <SelectionPill
                   key={cat}

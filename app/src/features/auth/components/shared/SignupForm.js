@@ -1,7 +1,9 @@
 'use client';
 
-import { Mail, Lock, User as UserIcon, ArrowRight } from 'lucide-react';
-import { Button, Input } from '@/components/ui';
+import { useState } from 'react';
+import { Mail, Lock, User as UserIcon, CheckCircle2 } from 'lucide-react';
+import { Button, Input, Checkbox } from '@/components/ui';
+import Link from 'next/link';
 
 /**
  * SignupForm Component
@@ -16,47 +18,49 @@ export function SignupForm({
   isFormValid,
   getFieldError
 }) {
+  const [agreed, setAgreed] = useState(false);
+  const hasMinLength = formData.password.length >= 8;
+  const hasNumber = /\d/.test(formData.password);
+  const hasUppercase = /[A-Z]/.test(formData.password);
+
   return (
-    <form onSubmit={onSubmit} className="space-y-3.5 w-full">
-      <div className="space-y-1">
-        <label className="text-[13px] font-bold text-ctp-text px-1">Full Name</label>
-        <Input
-          name="fullName"
-          type="text"
-          placeholder="Juan Dela Cruz"
-          required
-          minLength={2}
-          maxLength={70}
-          value={formData.fullName}
-          onChange={onInputChange}
-          error={getFieldError('fullName')}
-          disabled={isExchanging}
-          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
-        />
-      </div>
+    <form onSubmit={onSubmit} className="space-y-2 w-full">
+      <Input
+        name="fullName"
+        type="text"
+        label="Full Name"
+        placeholder="Enter your full name"
+        leftIcon={UserIcon}
+        required
+        minLength={2}
+        maxLength={70}
+        value={formData.fullName}
+        onChange={onInputChange}
+        error={getFieldError('fullName')}
+        disabled={isExchanging}
+      />
 
-      <div className="space-y-1">
-        <label className="text-[13px] font-bold text-ctp-text px-1">Email</label>
-        <Input
-          name="email"
-          type="email"
-          placeholder="your@email.com"
-          required
-          maxLength={100}
-          value={formData.email}
-          onChange={onInputChange}
-          error={getFieldError('email')}
-          disabled={isExchanging}
-          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
-        />
-      </div>
+      <Input
+        name="email"
+        type="email"
+        label="Email"
+        placeholder="Enter your email"
+        leftIcon={Mail}
+        required
+        maxLength={100}
+        value={formData.email}
+        onChange={onInputChange}
+        error={getFieldError('email')}
+        disabled={isExchanging}
+      />
 
-      <div className="space-y-1">
-        <label className="text-[13px] font-bold text-ctp-text px-1">Password</label>
+      <div className="space-y-3">
         <Input
           name="password"
           type="password"
-          placeholder="Min. 8 characters"
+          label="Create Password"
+          placeholder="Create a password"
+          leftIcon={Lock}
           required
           minLength={8}
           maxLength={128}
@@ -64,37 +68,51 @@ export function SignupForm({
           onChange={onInputChange}
           error={getFieldError('password')}
           disabled={isExchanging}
-          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
+          containerClassName="!space-y-1"
         />
+        
+        {/* Password Strength Indicators */}
+        <div className="flex flex-wrap gap-x-4 gap-y-2 px-1">
+          <PasswordHint label="8+ characters" active={hasMinLength} />
+          <PasswordHint label="1 number" active={hasNumber} />
+          <PasswordHint label="1 uppercase" active={hasUppercase} />
+        </div>
       </div>
 
-      <div className="space-y-1">
-        <label className="text-[13px] font-bold text-ctp-text px-1">Confirm Password</label>
-        <Input
-          name="confirmPassword"
-          type="password"
-          placeholder="Confirm your password"
-          required
-          minLength={8}
-          maxLength={128}
-          value={formData.confirmPassword}
-          onChange={onInputChange}
-          error={getFieldError('confirmPassword')}
-          disabled={isExchanging}
-          className="bg-ctp-base border-ctp-surface1 focus:border-ctp-sky-800 h-11"
-        />
+      <div className="px-1 py-2">
+        <label className="flex items-start gap-3 cursor-pointer group">
+          <Checkbox 
+            id="agree" 
+            checked={agreed}
+            onCheckedChange={setAgreed}
+            className="mt-1 flex-shrink-0" 
+          />
+          <span className="text-[13px] font-medium text-gray-500 leading-tight">
+            I agree to the <Link href="/terms" className="text-[#0038A8] font-bold hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-[#0038A8] font-bold hover:underline">Privacy Policy</Link>.
+          </span>
+        </label>
       </div>
 
-      <div className="pt-1">
+      <div className="pt-4">
         <Button
           type="submit"
           isLoading={exchangingMethod === 'signup'}
-          disabled={isExchanging || !isFormValid()}
-          className="w-full h-11 text-[13px] font-bold rounded-lg shadow-sm active:scale-[0.98] transition-all bg-ctp-sky-800 hover:bg-ctp-sky-800/90 text-white"
+          disabled={isExchanging || !isFormValid() || !agreed}
+          style={{ background: 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
+          className="w-full h-14 text-[17px] font-black rounded-3xl shadow-[0_8px_24px_rgba(0,56,168,0.15)] active:scale-[0.98] transition-all text-white border-none"
         >
-          Sign up
+          Join AyosDocs
         </Button>
       </div>
     </form>
+  );
+}
+
+function PasswordHint({ label, active }) {
+  return (
+    <div className={`flex items-center gap-1.5 transition-colors duration-300 ${active ? 'text-[#34C759]' : 'text-gray-300'}`}>
+      <CheckCircle2 size={14} strokeWidth={3} />
+      <span className="text-[11px] font-bold">{label}</span>
+    </div>
   );
 }

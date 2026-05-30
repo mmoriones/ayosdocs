@@ -19,6 +19,10 @@ import {
   Home,
   Baby,
   Umbrella,
+  Layers,
+  Flame,
+  TrendingUp,
+  Target,
 } from 'lucide-react';
 import Image from 'next/image';
 import { bundles } from '@/data/bundles';
@@ -66,6 +70,7 @@ export default function HomeClient({ allGuides }) {
           allGuides={allGuides}
           session={session}
           lastViewedSlug={activeGuideSlug}
+          trendingGuides={trendingGuides}
         />
       ) : (
         <GuestView 
@@ -143,7 +148,7 @@ function GuestView({ trendingGuides, lastViewedSlug, allGuides }) {
           leftIcon={<User size={18} strokeWidth={2.5} />}
           className="h-11 rounded-full shadow-sm"
         >
-          Sign in
+          Login
         </Button>
       </header>
 
@@ -297,7 +302,7 @@ function GuestView({ trendingGuides, lastViewedSlug, allGuides }) {
               />
             </div>
             <div className="text-left space-y-1 lg:space-y-2">
-              <h4 className="font-bold text-[#1C1C1E] text-base lg:text-xl">Sign in to AyosDocs</h4>
+              <h4 className="font-bold text-[#1C1C1E] text-base lg:text-xl">Login to AyosDocs</h4>
               <p className="text-[12px] lg:text-[14px] font-medium text-gray-400 leading-tight">
                 Save your progress and access your documents anywhere.
               </p>
@@ -373,31 +378,16 @@ function TrendingCard({ title, agency, trend, slug, theme }) {
   );
 }
 
-function UserView({ firstName, userData, isLoading, allGuides, session, lastViewedSlug }) {
+function UserView({ firstName, userData, isLoading, allGuides, session, lastViewedSlug, trendingGuides }) {
   const router = useRouter();
 
   const stats = useMemo(() => {
-    if (!userData?.savedProgress) return { active: 0, completed: 0, saved: 0 };
-
-    let active = 0;
-    let completed = 0;
-    let saved = 0;
-
-    userData.savedProgress.forEach(p => {
-      const guide = allGuides.find(g => g.slug === p.guideSlug);
-      const total = guide?.checklist?.length || 0;
-      const done = p.completedTasks?.split(',').filter(Boolean).length || 0;
-
-      if (total > 0) {
-        if (done < total) active++;
-        else if (done === total) completed++;
-      }
-      
-      if (p.isFavorite) saved++;
-    });
-
-    return { active, completed, saved };
-  }, [userData, allGuides]);
+    return {
+      guides: userData?.savedProgress?.length || 0,
+      bundles: userData?.trackedBundles?.length || 0,
+      saved: userData?.savedProgress?.filter(p => p.isFavorite).length || 0
+    };
+  }, [userData]);
 
   const latestActiveGuide = useMemo(() => {
     if (!userData?.savedProgress) return null;
@@ -431,64 +421,44 @@ function UserView({ firstName, userData, isLoading, allGuides, session, lastView
     return allGuides.find(g => g.slug === lastViewedSlug);
   }, [lastViewedSlug, allGuides]);
 
-  const userBundles = useMemo(() => {
-    // Priority: Actual tracked bundles
-    const tracked = (userData?.trackedBundles || []).map(tb => {
-      const bundle = bundles.find(b => b.id === tb.bundleId);
-      if (!bundle) return null;
-      
-      const totalGuides = bundle.flow?.reduce((acc, f) => acc + (f.guides?.length || 0), 0) || 0;
-      const style = bundleStyles[bundle.id] || THEMES.BLUE;
-      
-      const assetMap = {
-        'business': '/assets/bundles/Business.webp',
-        'foundational-docs': '/assets/bundles/GeneralIdentity.webp',
-        'first-job': '/assets/bundles/Job.webp',
-        'wedding': '/assets/bundles/Marriage.webp',
-        'ofw': '/assets/bundles/Ofw.webp',
-        'senior-citizen': '/assets/bundles/SeniorCouple.webp',
-        'solo-parent': '/assets/bundles/SoloParent.webp',
-        'travel-tourist': '/assets/bundles/Travel.webp',
-        'pwd-benefits': '/assets/bundles/WheelChair.webp'
-      };
+  const pulseData = useMemo(() => {
+    if (!userData) return null;
 
-      return {
-        ...bundle,
-        docs: `${totalGuides} documents`,
-        bgColor: style.bg,
-        image: assetMap[bundle.id] || '/assets/bundles/GeneralIdentity.webp'
-      };
-    }).filter(Boolean);
-
-    if (tracked.length >= 4) return tracked.slice(0, 4);
-
-    // Fallback/Fill with defaults
-    const defaults = [
-      { id: 'business', image: '/assets/bundles/Business.webp' },
-      { id: 'foundational-docs', image: '/assets/bundles/GeneralIdentity.webp' },
-      { id: 'first-job', image: '/assets/bundles/Job.webp' },
-      { id: 'senior-citizen', image: '/assets/bundles/SeniorCouple.webp' }
-    ];
-
-    const filled = [...tracked];
-    defaults.forEach(d => {
-      if (filled.length < 4 && !filled.find(f => f.id === d.id)) {
-        const bundle = bundles.find(b => b.id === d.id);
-        if (bundle) {
-           const totalGuides = bundle.flow?.reduce((acc, f) => acc + (f.guides?.length || 0), 0) || 0;
-           const style = bundleStyles[bundle.id] || THEMES.BLUE;
-           filled.push({
-             ...bundle,
-             docs: `${totalGuides} documents`,
-             bgColor: style.bg,
-             image: d.image
-           });
-        }
-      }
+    // 1. Weekly Momentum (Tasks completed in last 7 days)
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    
+    let weeklyTasks = 0;
+    (userData.savedProgress || []).forEach(p => {
+       if (new Date(p.updatedAt) > sevenDaysAgo) {
+          const count = p.completedTasks?.split(',').filter(Boolean).length || 0;
+          weeklyTasks += count;
+       }
     });
 
-    return filled.slice(0, 4);
-  }, [userData]);
+    // 2. Active Milestone
+    let activeMilestone = null;
+    if (userData.trackedBundles?.length > 0) {
+       const tb = userData.trackedBundles[0];
+       const bundle = bundles.find(b => b.id === tb.bundleId);
+       if (bundle) {
+          const allBundleGuides = bundle.flow.flatMap(f => f.guides);
+          const completedGuides = (userData.savedProgress || []).filter(p => 
+             allBundleGuides.includes(p.guideSlug) && 
+             (allGuides.find(g => g.slug === p.guideSlug)?.checklist?.length || 0) === p.completedTasks?.split(',').filter(Boolean).length
+          ).length;
+          const percent = Math.round((completedGuides / (allBundleGuides.length || 1)) * 100);
+          activeMilestone = { title: bundle.title.split(' / ')[0], percent };
+       }
+    }
+
+    // 3. Streak (Simplified: Days active based on updates)
+    const updateDates = (userData.savedProgress || []).map(p => new Date(p.updatedAt).toDateString());
+    const uniqueDates = [...new Set(updateDates)];
+    let streak = uniqueDates.length > 0 ? 1 : 0; // Simple placeholder for now
+
+    return { weeklyTasks, activeMilestone, streak };
+  }, [userData, allGuides]);
 
   return (
     <div className="flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-md mx-auto">
@@ -536,15 +506,15 @@ function UserView({ firstName, userData, isLoading, allGuides, session, lastView
            <StatItem 
              icon={<LayoutGrid size={22} className="text-white" strokeWidth={3} />} 
              bg="bg-[#007AFF]" 
-             value={stats.active} 
-             label="Active" 
+             value={stats.guides} 
+             label="Guides" 
            />
            <div className="w-px h-12 bg-gray-100 shrink-0" />
            <StatItem 
-             icon={<CheckCircle2 size={22} className="text-white" strokeWidth={3} />} 
+             icon={<Layers size={22} className="text-white" strokeWidth={3} />} 
              bg="bg-[#34C759]" 
-             value={stats.completed} 
-             label="Completed" 
+             value={stats.bundles} 
+             label="Bundles" 
            />
            <div className="w-px h-12 bg-gray-100 shrink-0" />
            <StatItem 
@@ -591,24 +561,123 @@ function UserView({ firstName, userData, isLoading, allGuides, session, lastView
         </section>
       )}
 
-      {/* 2x2 Favorites Grid */}
-      <section className="px-6 pb-10">
-        <h3 className="text-[19px] font-bold text-[#1C1C1E] mb-4">Your Favorite Bundles</h3>
-        <div className="grid grid-cols-2 gap-4">
-          {userBundles.map((bundle) => (
-            <BundleGridCard 
-              key={bundle.id}
-              title={bundle.title.split(' / ')[0]} 
-              docs={bundle.docs} 
-              bgColor={bundle.bgColor.startsWith('var') ? `bg-[${bundle.bgColor}]` : ''} 
-              style={{ backgroundColor: bundle.bgColor.startsWith('var') ? undefined : bundle.bgColor }}
-              image={bundle.image}
-              onClick={() => router.push(`/bundles/${bundle.id}`)}
+      {/* Activity Pulse (Minimized Analytics) */}
+      {pulseData && (
+        <ActivityPulse data={pulseData} />
+      )}
+
+      {/* Browse by Category - Horizontal Scroll */}
+      <section className="mb-12">
+        <div className="px-6 mb-4 flex justify-between items-end">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-[19px] font-bold text-[#1C1C1E]">Browse by Category</h3>
+            <p className="text-[13px] font-medium text-gray-400 uppercase tracking-tight">Knowledge Base</p>
+          </div>
+        </div>
+        
+        <SnapCarousel 
+          id="category-carousel"
+          itemWidth={120 + 16}
+          items={[
+            { title: "Gov IDs", theme: THEMES.ORANGE, image: "/assets/guides/Id.webp", cat: "Government+ID" },
+            { title: "Clearances", theme: THEMES.BLUE, image: "/assets/guides/ShieldCheck.webp", cat: "Government+Clearance" },
+            { title: "Civil Registry", theme: THEMES.PURPLE, image: "/assets/guides/FileText.webp", cat: "Civil+Registry" },
+            { title: "Business", theme: THEMES.GOLD, image: "/assets/guides/Briefcase.webp", cat: "Business+Registration" }
+          ]}
+          renderItem={(item) => (
+            <CategoryCard 
+              title={item.title} 
+              theme={item.theme} 
+              image={item.image}
+              onClick={() => router.push(`/guides?category=${item.cat}`)}
             />
-          ))}
+          )}
+        />
+      </section>
+
+      {/* Trending Section for Logged-in User */}
+      <section className="px-6 pb-12">
+        <div className="mb-6 flex justify-between items-end">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-[19px] font-bold text-[#1C1C1E]">Trending Now</h3>
+            <p className="text-[13px] font-medium text-gray-400 uppercase tracking-tight">Community Pulse</p>
+          </div>
+          <button 
+            onClick={() => router.push('/guides')}
+            className="text-[14px] font-bold text-[#0038A8] pb-0.5 active:opacity-60 transition-opacity"
+          >
+            View all
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          {trendingGuides.map((guide) => {
+            const iconName = getIconName(guide.slug, guide.agency);
+            const theme = getIconTheme(guide.slug, guide.agency, iconName);
+            return (
+              <TrendingCard 
+                key={guide.slug}
+                title={guide.shortTitle || guide.title.split(' / ')[0]} 
+                agency={guide.agency} 
+                trend={guide.trend} 
+                slug={guide.slug}
+                theme={theme}
+              />
+            );
+          })}
         </div>
       </section>
     </div>
+  );
+}
+
+function ActivityPulse({ data }) {
+  return (
+    <section className="px-6 mb-10">
+      <div className="flex flex-col gap-1 mb-4">
+        <h3 className="text-[19px] font-bold text-[#1C1C1E]">Activity Pulse</h3>
+        <p className="text-[13px] font-medium text-gray-400 tracking-tight uppercase">Weekly Snapshot</p>
+      </div>
+      <div 
+        style={{ background: 'linear-gradient(to top, #F8FAFF 0%, #FFFFFF 100%)' }}
+        className="rounded-[32px] p-2 shadow-[0_8px_32px_rgba(0,56,168,0.03)] border border-white flex items-center justify-between"
+      >
+        {/* Weekly Momentum */}
+        <div className="flex-1 flex flex-col items-center justify-center py-4 border-r border-gray-100">
+           <div className="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center mb-2">
+             <TrendingUp size={18} className="text-[#0038A8]" />
+           </div>
+           <span className="text-[18px] font-black text-[#1C1C1E]">{data.weeklyTasks}</span>
+           <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter mt-1 text-center">Tasks Done</span>
+        </div>
+
+        {/* Milestone */}
+        <div className="flex-[1.5] flex flex-col px-4 py-4 border-r border-gray-100">
+           <div className="flex items-center gap-2 mb-2">
+              <Target size={14} className="text-[#34C759]" />
+              <span className="text-[10px] font-bold text-gray-400 uppercase truncate">
+                {data.activeMilestone?.title || 'No active goal'}
+              </span>
+           </div>
+           <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden mb-1.5">
+              <div 
+                className="bg-[#34C759] h-full rounded-full transition-all duration-1000" 
+                style={{ width: `${data.activeMilestone?.percent || 0}%` }}
+              />
+           </div>
+           <span className="text-[12px] font-black text-[#1C1C1E]">{data.activeMilestone?.percent || 0}% Complete</span>
+        </div>
+
+        {/* Streak */}
+        <div className="flex-1 flex flex-col items-center justify-center py-4">
+           <div className="w-9 h-9 bg-orange-50 rounded-xl flex items-center justify-center mb-2">
+             <Flame size={18} className="text-[#FF9500]" />
+           </div>
+           <span className="text-[18px] font-black text-[#1C1C1E]">{data.streak} Day</span>
+           <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter mt-1 text-center">Streak</span>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -729,30 +798,87 @@ function HomeSearchBar({ placeholder = "What do you need to get done today?", cl
   );
 }
 
-function BundleGridCard({ title, docs, bgColor, image, onClick, style }) {
-
+function CategoryCard({ title, theme, image, onClick }) {
   return (
     <button 
       onClick={onClick}
-      className="bg-white rounded-[28px] p-4 text-left shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-white active:scale-[0.97] transition-all group relative"
+      className="bg-white rounded-[28px] p-4 text-center shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-white active:scale-[0.97] transition-all group relative overflow-hidden flex flex-col items-center justify-center w-[120px] h-[160px]"
     >
-      <div className="flex items-start gap-3">
+      <div 
+        className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+        style={{ background: theme.gradient }}
+      />
+      <div className="relative z-10 flex flex-col items-center gap-3">
         <div 
-          className={`w-12 h-12 rounded-[16px] flex items-center justify-center shrink-0 border border-black/5 overflow-hidden p-1 ${bgColor}`}
-          style={style}
+          className="w-16 h-16 rounded-2xl flex items-center justify-center border border-black/5 overflow-hidden p-2 shadow-sm"
+          style={{ background: theme.gradient }}
         >
           <div className="w-full h-full relative">
-            <Image src={image} alt={title} fill className="object-contain drop-shadow-sm" />
+            <Image src={image} alt={title} fill className="object-contain drop-shadow-md" />
           </div>
         </div>
-        <div className="space-y-0.5 min-w-0">
-          <h5 className="font-bold text-[#1C1C1E] text-[14px] leading-tight line-clamp-2">{title}</h5>
-          <p className="text-[11px] font-medium text-gray-400">{docs}</p>
-        </div>
-      </div>
-      <div className="absolute bottom-3 right-3">
-        <ChevronRight size={14} className="text-gray-300 group-hover:text-[#0038A8] transition-colors" strokeWidth={3} />
+        <h5 className="font-bold text-[#1C1C1E] text-[13px] leading-tight text-center">{title}</h5>
       </div>
     </button>
+  );
+}
+
+function SnapCarousel({ id, items, renderItem, itemWidth, className = "" }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = (e) => {
+    const { scrollLeft, scrollWidth, clientWidth } = e.target;
+    
+    if (scrollLeft + clientWidth >= scrollWidth - 10) {
+      setActiveIndex(items.length - 1);
+      return;
+    }
+
+    const index = Math.round(scrollLeft / itemWidth);
+    if (index !== activeIndex && index >= 0 && index < items.length) {
+      setActiveIndex(index);
+    }
+  };
+
+  const scrollTo = (index) => {
+    const container = document.getElementById(id);
+    if (container) {
+      container.scrollTo({
+        left: index * itemWidth,
+        behavior: 'smooth'
+      });
+      setActiveIndex(index);
+    }
+  };
+
+  return (
+    <div className={className}>
+      <div 
+        id={id}
+        onScroll={handleScroll}
+        className="flex overflow-x-auto gap-4 px-6 scrollbar-hide snap-x snap-mandatory pb-4 scroll-pl-6"
+      >
+        {items.map((item, index) => (
+          <div key={index} className="snap-start shrink-0">
+            {renderItem(item, index)}
+          </div>
+        ))}
+      </div>
+
+      <div className="flex justify-center gap-1.5 mt-2">
+        {items.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => scrollTo(idx)}
+            className={`transition-all duration-300 rounded-full ${
+              activeIndex === idx 
+                ? 'w-6 h-1.5 bg-[#0038A8]' 
+                : 'w-1.5 h-1.5 bg-gray-300'
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
