@@ -208,20 +208,17 @@ export function useAuthLogic({
             type: 'google-suggestion',
             text: 'It looks like you usually sign in with Google.'
           });
+        } else if (result.error === 'UnverifiedEmail') {
+          setStatusMessage({
+            type: 'error',
+            text: 'Your email is not verified. Please check your inbox for the verification link.'
+          });
         } else {
           const isRateLimited = result.error.includes('Too many') || result.error.includes('locked');
           setStatusMessage({
             type: 'error',
             text: result.error === 'CredentialsSignin' ? 'Invalid credentials' : result.error
           });
-          
-          if (isRateLimited) {
-            showToast({
-              type: 'error',
-              title: 'Security Alert',
-              message: result.error
-            });
-          }
         }
       }
     } catch (error) {
@@ -238,11 +235,8 @@ export function useAuthLogic({
     if (e) e.preventDefault();
     if (emailTaken) return;
 
-    if (formData.password !== formData.confirmPassword) {
-      setStatusMessage({
-        type: 'error',
-        text: 'Passwords do not match.'
-      });
+    // Only check password mismatch if confirmPassword was actually intended to be used (i.e., it's not empty)
+    if (formData.confirmPassword && formData.confirmPassword !== formData.password) {
       return;
     }
 
@@ -264,19 +258,10 @@ export function useAuthLogic({
         setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
         setTimeout(() => setMode('login'), 5000);
       } else {
-        const isRateLimited = result.message.includes('Too many');
         setStatusMessage({
           type: 'error',
           text: result.message
         });
-
-        if (isRateLimited) {
-          showToast({
-            type: 'error',
-            title: 'Action Throttled',
-            message: result.message
-          });
-        }
       }
     } catch (error) {
       setStatusMessage({
@@ -347,15 +332,25 @@ export function useAuthLogic({
     }
 
     if (mode === 'signup') {
-      return (
+      const hasMinLength = formData.password.length >= 8;
+      const hasNumber = /\d/.test(formData.password);
+      const hasUppercase = /[A-Z]/.test(formData.password);
+      const isPasswordSecure = hasMinLength && hasNumber && hasUppercase;
+
+      const basicValidation = 
         formData.fullName.trim().length >= 2 &&
         nameRegex.test(formData.fullName) &&
         emailRegex.test(formData.email) &&
-        formData.password.length >= 8 &&
-        formData.password === formData.confirmPassword &&
+        isPasswordSecure &&
         !emailTaken &&
-        !isCheckingEmail
-      );
+        !isCheckingEmail;
+
+      // If confirmPassword is provided, it must match. If not provided (single password field), ignore it.
+      if (formData.confirmPassword !== undefined && formData.confirmPassword !== '') {
+        return basicValidation && formData.password === formData.confirmPassword;
+      }
+      
+      return basicValidation;
     }
 
     if (mode === 'forgot-password') {
@@ -385,9 +380,9 @@ export function useAuthLogic({
         }
         return '';
       case 'password':
-        if (mode === 'login') return '';
-        return value.length < 8 ? 'Password must be at least 8 characters' : '';
+        return '';
       case 'confirmPassword':
+        if (!value) return '';
         return value !== formData.password ? 'Passwords do not match' : '';
       default:
         return '';

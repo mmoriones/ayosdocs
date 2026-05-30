@@ -16,6 +16,7 @@ export default function Modal({
   className = '',
   overlayClassName = '',
   contentClassName = '',
+  contentStyle = {},
   animationClassName = 'animate-in fade-in zoom-in-95 duration-300',
 }) {
   const sizes = {
@@ -53,7 +54,10 @@ export default function Modal({
         onClick={closeOnOverlay ? onClose : undefined}
       />
 
-      <div className={`relative w-full ${sizes[size]} bg-ctp-mantle rounded-xl shadow-2xl border border-ctp-surface1 pointer-events-auto ${animationClassName} ${contentClassName} overflow-hidden`}>
+      <div 
+        style={contentStyle}
+        className={`relative w-full ${sizes[size]} bg-ctp-mantle rounded-xl shadow-2xl border border-ctp-surface1 pointer-events-auto ${animationClassName} ${contentClassName} overflow-hidden`}
+      >
         {title && (
           <div className="flex items-center justify-between px-6 py-4 border-b border-ctp-surface1">
             <h2 className="text-lg font-bold text-ctp-text tracking-tight">{title}</h2>

@@ -74,16 +74,14 @@ export default function Input({
         )}
       </div>
 
-      <div className="min-h-[20px] pt-1">
-        {hasError && (
-          <div className="flex items-center gap-1.5 ml-6 animate-in fade-in slide-in-from-top-1 duration-200">
-            <AlertCircle size={11} className="text-[#FF3B30]" />
-            <p className="text-[11px] font-bold text-[#FF3B30]">
-              {error}
-            </p>
-          </div>
-        )}
-      </div>
+      {hasError && (
+        <div className="pt-1 flex items-center gap-1.5 ml-6 animate-in fade-in slide-in-from-top-1 duration-200">
+          <AlertCircle size={11} className="text-[#FF3B30]" />
+          <p className="text-[11px] font-bold text-[#FF3B30]">
+            {error}
+          </p>
+        </div>
+      )}
     </div>
   );
 }

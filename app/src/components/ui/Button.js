@@ -27,42 +27,42 @@ export default function Button({
   ...props
 }) {
   const isLink = variant === 'link';
+  const isDisabled = disabled || isLoading;
 
-  const baseStyles = "inline-flex items-center justify-center font-bold transition-all disabled:cursor-not-allowed whitespace-nowrap";
-  const shapeStyles = isLink ? "active:scale-[0.97]" : "rounded-[18px] lg:rounded-[22px] active:scale-[0.98]";
-  const liftStyles = "hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0";
-  const rippleStyles = "relative overflow-hidden after:absolute after:inset-0 after:bg-black/5 after:opacity-0 after:transition-opacity active:after:opacity-100";
+  const baseStyles = "inline-flex items-center justify-center font-black transition-all whitespace-nowrap";
+  const shapeStyles = isLink ? "" : "rounded-[22px]";
   
-  const enableFeedback = !disabled && !isLoading;
+  const interactionStyles = isLink 
+    ? "active:scale-[0.97] hover:opacity-80" 
+    : (isDisabled 
+        ? "opacity-40 shadow-none cursor-not-allowed pointer-events-none" 
+        : "active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-xl"
+      );
 
   const variants = {
-    primary: "bg-[#0038A8] text-white shadow-[0_8px_30px_rgba(0,56,168,0.15)]",
-    secondary: "bg-white border border-gray-100 text-[#0038A8] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-[#0038A8]/20",
+    primary: "bg-[#0038A8] text-white shadow-[0_8px_24px_rgba(0,56,168,0.15)]",
+    secondary: "bg-white border border-gray-100 text-[#1C1C1E] shadow-[0_4px_12px_rgba(0,0,0,0.03)] hover:border-gray-200",
     outline: "bg-transparent border border-gray-200 text-[#1C1C1E] hover:bg-gray-50",
     ghost: "bg-transparent text-gray-500 hover:text-[#0038A8] hover:bg-[#0038A8]/5",
-    danger: "bg-[#FF3B30] text-white shadow-[0_8px_30px_rgba(255,59,48,0.15)]",
-    link: "text-[#0038A8] hover:opacity-80"
+    danger: "bg-[#FF3B30] text-white shadow-[0_8px_24px_rgba(255,59,48,0.15)]",
+    link: "text-[#0038A8]"
   };
 
   const sizes = {
-    sm: "px-4 py-2 text-[13px]",
-    md: "px-6 py-3 text-[15px]",
-    lg: "px-10 py-4 text-[17px]",
+    sm: "px-4 h-10 text-[13px]",
+    md: "px-6 h-12 text-[15px]",
+    lg: "px-10 h-14 text-[17px]",
     link: "text-[14px]"
   };
 
-  const feedbackStyles = isLink
-    ? ""
-    : (enableFeedback ? `${liftStyles} ${rippleStyles}` : "");
-
-  const combinedClassName = `${baseStyles} ${shapeStyles} ${feedbackStyles} ${variants[variant]} ${sizes[isLink ? 'link' : size]} ${className}`;
+  const combinedClassName = `${baseStyles} ${shapeStyles} ${interactionStyles} ${variants[variant]} ${sizes[isLink ? 'link' : size]} ${className}`;
 
   // If used as a button, include the type prop
   const componentProps = Component === 'button' ? { type, ...props } : props;
 
   return (
     <Component
-      disabled={disabled || isLoading}
+      disabled={isDisabled}
       onClick={onClick}
       className={combinedClassName}
       {...componentProps}

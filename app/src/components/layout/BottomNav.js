@@ -16,7 +16,6 @@ export default function BottomNav() {
     { href: '/bundles', icon: Layers, label: 'Bundles' },
     ...(isLoggedIn ? [
       { href: '/my-docs', icon: CheckSquare, label: 'My Docs' },
-      { href: '/profile', icon: User, label: 'Profile' }
     ] : []),
   ];
 

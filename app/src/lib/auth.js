@@ -44,6 +44,11 @@ export const authOptions = {
           throw new Error("Invalid credentials");
         }
 
+        // Prevent login for unverified email accounts
+        if (!user.isVerified) {
+          throw new Error("UnverifiedEmail");
+        }
+
         let restoredAccount = false;
 
         // 2. Account Lockout Check
@@ -108,6 +113,38 @@ export const authOptions = {
           name: user.fullName,
           image: user.picture,
           restoredAccount,
+        };
+      }
+    }),
+    CredentialsProvider({
+      id: "verify-login",
+      name: "VerifyLogin",
+      credentials: {
+        token: { label: "Token", type: "text" }
+      },
+      async authorize(credentials) {
+        if (!credentials?.token) return null;
+
+        await connectDB();
+        const user = await User.findOne({
+          verificationLoginToken: credentials.token,
+          verificationLoginTokenExpires: { $gt: Date.now() }
+        });
+
+        if (!user) {
+          throw new Error("Login link expired. Please log in manually.");
+        }
+
+        // Token is one-time use
+        user.verificationLoginToken = undefined;
+        user.verificationLoginTokenExpires = undefined;
+        await user.save();
+
+        return {
+          id: user._id.toString(),
+          email: user.email,
+          name: user.fullName,
+          image: user.picture,
         };
       }
     }),

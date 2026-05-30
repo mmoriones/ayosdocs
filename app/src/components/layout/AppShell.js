@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
+import MobileHeader from './MobileHeader';
 import BottomNav from './BottomNav';
 import Footer from '@/components/Footer';
 import { SignOutModal } from '@/components/ui';
@@ -46,6 +47,9 @@ export default function AppShell({ children }) {
 
   return (
     <div className={`min-h-screen flex ${!isMounted ? 'opacity-0' : 'animate-in fade-in duration-500'}`}>
+      {/* Mobile Header (Sticky & Auto-Hide) */}
+      <MobileHeader sticky autoHide />
+
       {/* Mobile Backdrop */}
       {isMobileMenuOpen && (
         <div 
@@ -78,7 +82,7 @@ export default function AppShell({ children }) {
           <DashboardHeader onMenuClick={toggleMobileMenu} onLogoutClick={() => setShowLogoutConfirm(true)} />
         </div>
         
-        <main className="flex-1">
+        <main className="flex-1 lg:pt-0 pt-16">
           {children}
         </main>
 

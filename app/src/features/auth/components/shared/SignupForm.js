@@ -19,9 +19,12 @@ export function SignupForm({
   getFieldError
 }) {
   const [agreed, setAgreed] = useState(false);
+  
   const hasMinLength = formData.password.length >= 8;
   const hasNumber = /\d/.test(formData.password);
   const hasUppercase = /[A-Z]/.test(formData.password);
+
+  const isDisabled = isExchanging || !agreed || !isFormValid();
 
   return (
     <form onSubmit={onSubmit} className="space-y-2 w-full">
@@ -54,7 +57,7 @@ export function SignupForm({
         disabled={isExchanging}
       />
 
-      <div className="space-y-3">
+      <div className="space-y-1 group">
         <Input
           name="password"
           type="password"
@@ -68,11 +71,10 @@ export function SignupForm({
           onChange={onInputChange}
           error={getFieldError('password')}
           disabled={isExchanging}
-          containerClassName="!space-y-1"
         />
         
         {/* Password Strength Indicators */}
-        <div className="flex flex-wrap gap-x-4 gap-y-2 px-1">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 px-1 pb-2">
           <PasswordHint label="8+ characters" active={hasMinLength} />
           <PasswordHint label="1 number" active={hasNumber} />
           <PasswordHint label="1 uppercase" active={hasUppercase} />
@@ -85,7 +87,7 @@ export function SignupForm({
             id="agree" 
             checked={agreed}
             onCheckedChange={setAgreed}
-            className="mt-1 flex-shrink-0" 
+            className="mt-0.5 flex-shrink-0" 
           />
           <span className="text-[13px] font-medium text-gray-500 leading-tight">
             I agree to the <Link href="/terms" className="text-[#0038A8] font-bold hover:underline">Terms of Service</Link> and <Link href="/privacy" className="text-[#0038A8] font-bold hover:underline">Privacy Policy</Link>.
@@ -96,10 +98,11 @@ export function SignupForm({
       <div className="pt-4">
         <Button
           type="submit"
+          size="lg"
           isLoading={exchangingMethod === 'signup'}
-          disabled={isExchanging || !isFormValid() || !agreed}
-          style={{ background: 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
-          className="w-full h-14 text-[17px] font-black rounded-3xl shadow-[0_8px_24px_rgba(0,56,168,0.15)] active:scale-[0.98] transition-all text-white border-none"
+          disabled={isDisabled}
+          style={{ background: isDisabled ? undefined : 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
+          className="w-full text-white border-none"
         >
           Join AyosDocs
         </Button>

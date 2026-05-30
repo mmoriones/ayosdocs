@@ -1,8 +1,9 @@
 import { PublicHeader } from '@/components/layout';
+import MobileHeader from '@/components/layout/MobileHeader';
 import Footer from '@/components/Footer';
 
 /**
- * Shared layout for all public-facing informational pages and the login experience.
+ * Shared layout for all public-facing informational pages.
  * Provides a consistent header, background, and footer.
  */
 export default function PublicLayout({ children }) {
@@ -11,6 +12,7 @@ export default function PublicLayout({ children }) {
       <div className="hidden lg:block">
         <PublicHeader />
       </div>
+      <MobileHeader />
       <main className="flex-1">
         {children}
       </main>

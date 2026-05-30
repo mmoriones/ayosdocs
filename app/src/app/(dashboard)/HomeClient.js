@@ -138,20 +138,6 @@ function GuestView({ trendingGuides, lastViewedSlug, allGuides }) {
 
   return (
     <div className="flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-[1600px] mx-auto">
-      {/* Header */}
-      <header className="px-6 pt-8 pb-4 flex justify-between items-center lg:hidden">
-        <h1 className="text-2xl font-black text-[#0038A8] tracking-tight">AyosDocs</h1>
-        <Button 
-          variant="secondary"
-          size="sm"
-          onClick={() => openAuthModal()}
-          leftIcon={<User size={18} strokeWidth={2.5} />}
-          className="h-11 rounded-full shadow-sm"
-        >
-          Login
-        </Button>
-      </header>
-
       {/* Hero Title */}
       <section className="px-6 py-8 lg:py-12">
         <h2 className="text-[34px] lg:text-[48px] font-bold leading-[1.1] tracking-tight text-[#1C1C1E] max-w-[600px]">
@@ -462,25 +448,6 @@ function UserView({ firstName, userData, isLoading, allGuides, session, lastView
 
   return (
     <div className="flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-md mx-auto">
-      {/* Header */}
-      <header className="px-6 pt-6 pb-4 flex justify-between items-center lg:hidden">
-        <h1 className="text-2xl font-black text-[#0038A8] tracking-tight">AyosDocs</h1>
-        <div className="flex items-center gap-4">
-          <button className="w-10 h-10 flex items-center justify-center active:scale-90 transition-transform">
-            <Bell size={26} className="text-[#1C1C1E]" strokeWidth={1.5} />
-          </button>
-          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm active:scale-95 transition-transform">
-             {session?.user?.image ? (
-               <Image src={session.user.image} width={40} height={40} alt="Profile" className="object-cover" />
-             ) : (
-               <div className="w-full h-full bg-[#0038A8]/10 flex items-center justify-center text-[#0038A8]">
-                 <User size={20} />
-               </div>
-             )}
-          </div>
-        </div>
-      </header>
-
       {/* Personalized Greeting */}
       <section className="px-6 py-6">
         <h2 className="text-[34px] font-bold tracking-tight text-[#1C1C1E] leading-tight">

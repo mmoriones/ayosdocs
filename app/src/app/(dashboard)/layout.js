@@ -11,7 +11,6 @@ import { VerificationBanner } from "@/features/auth/components";
 export default function DashboardLayout({ children }) {
   return (
     <AppShell>
-      <VerificationBanner />
       {children}
       <ClientAuthWrapper />
     </AppShell>

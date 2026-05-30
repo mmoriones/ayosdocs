@@ -13,29 +13,52 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+const commonStyles = `
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: #1C1C1E;
+  text-align: center;
+`;
+
+const buttonStyles = `
+  background: linear-gradient(to top, #0038A8 0%, #0059E0 100%);
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  border-radius: 24px;
+  font-weight: 900;
+  display: inline-block;
+  font-size: 16px;
+  box-shadow: 0 8px 24px rgba(0, 56, 168, 0.2);
+`;
+
+const footerStyles = `
+  font-size: 12px;
+  color: #8E8E93;
+  margin-top: 40px;
+  border-top: 1px solid #F2F2F7;
+  padding-top: 20px;
+`;
+
 /**
  * Sends a contact form email to the admin.
- * 
- * @param {Object} data - The form data.
- * @param {string} data.name - Name of the sender.
- * @param {string} data.email - Email of the sender.
- * @param {string} data.message - Message content.
  */
 export const sendContactEmail = async ({ name, email, message }) => {
   const mailOptions = {
-    from: `"${name}" <${process.env.ZOHO_SUPPORT_EMAIL}>`, // Sent via alias
-    to: process.env.ZOHO_USER, // Received by you
-    replyTo: email, // Direct reply goes to the user
+    from: `"${name}" <${process.env.ZOHO_SUPPORT_EMAIL}>`, 
+    to: process.env.ZOHO_USER, 
+    replyTo: email, 
     subject: `[Contact Form] Message from ${name}`,
     text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     html: `
-      <div style="font-family: sans-serif; padding: 20px; color: #333;">
-        <h2 style="color: #075985;">New Contact Form Submission</h2>
+      <div style="${commonStyles}">
+        <h2 style="color: #0038A8; font-weight: 900; tracking: -0.02em;">New Contact Form</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
-        <p><strong>Message:</strong></p>
-        <p style="white-space: pre-wrap;">${message}</p>
+        <hr style="border: 0; border-top: 1px solid #F2F2F7; margin: 20px 0;" />
+        <p style="text-align: left; background: #F9F9FB; padding: 20px; border-radius: 16px; white-space: pre-wrap;">${message}</p>
       </div>
     `,
   };
@@ -45,10 +68,6 @@ export const sendContactEmail = async ({ name, email, message }) => {
 
 /**
  * Sends a verification email to a new user.
- * 
- * @param {string} email - The user's email address.
- * @param {string} token - The verification token.
- * @param {string} [baseUrl] - The base URL for the verification link (optional).
  */
 export const sendVerificationEmail = async (email, token, baseUrl) => {
   const base = baseUrl || process.env.NEXTAUTH_URL;
@@ -59,19 +78,21 @@ export const sendVerificationEmail = async (email, token, baseUrl) => {
     to: email,
     subject: "Verify your AyosDocs account",
     html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; border: 1px solid #eee; rounded: 12px;">
-        <h2 style="color: #075985; text-align: center;">Welcome to AyosDocs!</h2>
-        <p>Thanks for signing up. To complete your registration and secure your account, please verify your email address by clicking the button below:</p>
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="${confirmLink}" style="background-color: #075985; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
-            Verify Email Address
-          </a>
-        </div>
-        <p style="font-size: 14px; color: #666;">If you didn't create an account, you can safely ignore this email.</p>
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
-        <p style="font-size: 12px; color: #999; text-align: center;">
-          &copy; ${new Date().getFullYear()} AyosDocs. All rights reserved.
+      <div style="${commonStyles}">
+        <img src="https://ayosdocs.com/favicon.svg" alt="AyosDocs" width="64" height="64" style="margin-bottom: 24px;" />
+        <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 16px; tracking: -0.02em;">Verify your email</h1>
+        <p style="font-size: 16px; line-height: 1.5; color: #3A3A3C; margin-bottom: 32px;">
+          Mabuhay! Thanks for joining AyosDocs. To start tracking your government requirements, please confirm your email address.
         </p>
+        <a href="${confirmLink}" style="${buttonStyles}">
+          Verify Email Address
+        </a>
+        <p style="font-size: 14px; color: #8E8E93; margin-top: 32px;">
+          If you didn't create an account, you can safely ignore this email.
+        </p>
+        <div style="${footerStyles}">
+          &copy; ${new Date().getFullYear()} AyosDocs. All rights reserved.
+        </div>
       </div>
     `,
   };
@@ -81,33 +102,31 @@ export const sendVerificationEmail = async (email, token, baseUrl) => {
 
 /**
  * Sends a password reset email to the user.
- * 
- * @param {string} email - The user's email address.
- * @param {string} token - The password reset token.
- * @param {string} [baseUrl] - The base URL for the reset link (optional).
  */
 export const sendResetPasswordEmail = async (email, token, baseUrl) => {
   const base = baseUrl || process.env.NEXTAUTH_URL;
-  const resetLink = `${base}/auth/reset-password?token=${token}`;
+  const resetLink = `${base}/reset-password?token=${token}`;
 
   const mailOptions = {
     from: `"AyosDocs" <${process.env.ZOHO_AUTH_EMAIL}>`,
     to: email,
     subject: "Reset your AyosDocs password",
     html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; border: 1px solid #eee; border-radius: 12px;">
-        <h2 style="color: #075985; text-align: center;">Reset Your Password</h2>
-        <p>You recently requested to reset your password for your AyosDocs account. Click the button below to set a new password:</p>
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="${resetLink}" style="background-color: #075985; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
-            Reset Password
-          </a>
-        </div>
-        <p style="font-size: 14px; color: #666;">This link will expire in 1 hour. If you did not request a password reset, please ignore this email or contact support if you have questions.</p>
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
-        <p style="font-size: 12px; color: #999; text-align: center;">
-          &copy; ${new Date().getFullYear()} AyosDocs. All rights reserved.
+      <div style="${commonStyles}">
+        <img src="https://ayosdocs.com/favicon.svg" alt="AyosDocs" width="64" height="64" style="margin-bottom: 24px;" />
+        <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 16px; tracking: -0.02em;">Reset Password</h1>
+        <p style="font-size: 16px; line-height: 1.5; color: #3A3A3C; margin-bottom: 32px;">
+          We received a request to reset the password for your account. Click the button below to set a new one:
         </p>
+        <a href="${resetLink}" style="${buttonStyles}">
+          Reset My Password
+        </a>
+        <p style="font-size: 14px; color: #8E8E93; margin-top: 32px;">
+          This link will expire in 1 hour. If you didn't request this, you can ignore this email.
+        </p>
+        <div style="${footerStyles}">
+          &copy; ${new Date().getFullYear()} AyosDocs. All rights reserved.
+        </div>
       </div>
     `,
   };
@@ -117,8 +136,6 @@ export const sendResetPasswordEmail = async (email, token, baseUrl) => {
 
 /**
  * Sends an email to a Google OAuth user who requested a password reset.
- * 
- * @param {string} email - The user's email address.
  */
 export const sendGoogleAuthResetEmail = async (email) => {
   const mailOptions = {
@@ -126,20 +143,18 @@ export const sendGoogleAuthResetEmail = async (email) => {
     to: email,
     subject: "Regarding your AyosDocs password reset request",
     html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; border: 1px solid #eee; border-radius: 12px;">
-        <h2 style="color: #075985; text-align: center;">Sign in with Google</h2>
-        <p>You recently requested to reset your password for AyosDocs. However, your account is linked to your Google account.</p>
-        <p>To access your account, please use the <strong>"Continue with Google"</strong> button on the login page. Since you use Google to sign in, you don't have a separate password for AyosDocs.</p>
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="${process.env.NEXTAUTH_URL}" style="background-color: #075985; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
-            Go to AyosDocs
-          </a>
-        </div>
-        <p style="font-size: 14px; color: #666;">If you have any questions, feel free to reply to this email.</p>
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
-        <p style="font-size: 12px; color: #999; text-align: center;">
-          &copy; ${new Date().getFullYear()} AyosDocs. All rights reserved.
+      <div style="${commonStyles}">
+        <img src="https://ayosdocs.com/favicon.svg" alt="AyosDocs" width="64" height="64" style="margin-bottom: 24px;" />
+        <h1 style="font-size: 24px; font-weight: 900; margin-bottom: 16px; tracking: -0.02em;">Google Login Only</h1>
+        <p style="font-size: 16px; line-height: 1.5; color: #3A3A3C; margin-bottom: 32px;">
+          Your AyosDocs account is linked directly to your Google account. You don't have a separate password to reset.
         </p>
+        <a href="${process.env.NEXTAUTH_URL}/login" style="${buttonStyles}">
+          Login with Google
+        </a>
+        <div style="${footerStyles}">
+          &copy; ${new Date().getFullYear()} AyosDocs. All rights reserved.
+        </div>
       </div>
     `,
   };

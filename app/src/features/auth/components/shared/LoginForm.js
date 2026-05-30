@@ -19,6 +19,7 @@ export function LoginForm({
   getFieldError
 }) {
   const [rememberMe, setRememberMe] = useState(false);
+  const isDisabled = isExchanging || !isFormValid();
 
   return (
     <form onSubmit={onSubmit} className="space-y-2 w-full">
@@ -73,10 +74,11 @@ export function LoginForm({
       <div className="pt-4">
         <Button
           type="submit"
+          size="lg"
           isLoading={exchangingMethod === 'email'}
-          disabled={isExchanging || !isFormValid()}
+          disabled={isDisabled}
           style={{ background: 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
-          className="w-full h-14 text-[17px] font-black rounded-3xl shadow-[0_8px_24px_rgba(0,56,168,0.15)] active:scale-[0.98] transition-all text-white border-none"
+          className="w-full text-white border-none"
         >
           Login
         </Button>

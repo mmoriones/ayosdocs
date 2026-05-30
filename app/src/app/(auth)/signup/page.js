@@ -2,20 +2,23 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import {
   CheckCircle2,
   AlertCircle,
-  ChevronLeft
+  ChevronLeft,
+  Mail,
+  ExternalLink
 } from 'lucide-react';
 import {
   Button,
 } from '@/components/ui';
 import { useAuthLogic } from '@/features/auth/hooks/useAuthLogic';
-import { SocialProviders, LoginForm } from '@/features/auth/components/shared';
+import { SignupForm } from '@/features/auth/components/shared';
 
-export default function LoginPage() {
+export default function SignupPage() {
   const router = useRouter();
   const { status } = useSession();
 
@@ -23,21 +26,23 @@ export default function LoginPage() {
     isExchanging,
     exchangingMethod,
     statusMessage,
-    handleGoogleLogin,
-    handleEmailLogin,
+    handleEmailSignUp,
     formData,
     handleInputChange,
     isFormValid,
     getFieldError,
   } = useAuthLogic({
-    initialMode: 'login',
+    initialMode: 'signup',
     onSuccess: () => router.push('/')
   });
 
-  const handleGuestMode = () => {
-    document.cookie = "guest-access=true; path=/; max-age=86400";
-    router.push('/');
-  };
+  // Navigate to login after successful signup
+  useEffect(() => {
+    if (statusMessage?.type === 'success') {
+      const timer = setTimeout(() => router.push('/login'), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [statusMessage, router]);
 
   if (status === 'authenticated') {
     router.push('/');
@@ -61,18 +66,18 @@ export default function LoginPage() {
         <div className="flex justify-between items-end mb-8">
           <div className="flex-1">
             <h1 className="text-[28px] font-black text-[#1C1C1E] tracking-tight leading-none">
-              Welcome Back
+              Create Account
             </h1>
             <p className="text-[15px] font-medium text-gray-500 mt-2 leading-relaxed max-w-[240px]">
-              Log in to continue your journey with <span className="text-[#0038A8] font-bold">AyosDocs</span>.
+              Sign up to simplify your <span className="text-[#0038A8] font-bold">government transactions</span>.
             </p>
           </div>
           
           {/* 3D Illustration */}
-          <div className="w-24 h-24 relative -mr-2 drop-shadow-xl animate-float opacity-90">
+          <div className="w-24 h-24 relative -mr-2 drop-shadow-xl animate-float opacity-80">
              <Image 
-              src="/assets/ui/Stack1.webp" 
-              alt="Welcome" 
+              src="/assets/ui/CreateAccount.webp" 
+              alt="Join us" 
               fill 
               className="object-contain" 
               priority
@@ -80,22 +85,31 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Status Messages */}
+        {/* High-Fidelity Status Messages */}
         {statusMessage && (
-          <div className={`mb-6 p-4 rounded-2xl border flex flex-col gap-3 animate-in fade-in zoom-in-95 duration-200 ${
+          <div className={`mb-6 p-5 rounded-[24px] border backdrop-blur-md animate-in fade-in zoom-in-95 duration-500 shadow-sm ${
             statusMessage.type === 'error'
               ? 'bg-[#FF3B30]/10 border-[#FF3B30]/20 text-[#FF3B30]'
-              : statusMessage.type === 'google-suggestion'
-              ? 'bg-[#0038A8]/10 border-[#0038A8]/20 text-[#0038A8]'
               : 'bg-[#34C759]/10 border-[#34C759]/20 text-[#34C759]'
           }`}>
-            <div className="flex items-start gap-3">
-              {statusMessage.type === 'error' ? (
-                <AlertCircle size={18} className="mt-0.5 shrink-0" />
-              ) : (
-                <CheckCircle2 size={18} className="mt-0.5 shrink-0" />
-              )}
-              <p className="text-[13px] font-bold leading-tight">{statusMessage.text}</p>
+            <div className="flex items-start gap-4">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 border ${
+                statusMessage.type === 'error' ? 'bg-[#FF3B30]/10 border-[#FF3B30]/20' : 'bg-[#34C759]/10 border-[#34C759]/20'
+              }`}>
+                {statusMessage.type === 'error' ? (
+                  <AlertCircle size={20} strokeWidth={2.5} />
+                ) : (
+                  <CheckCircle2 size={20} strokeWidth={2.5} />
+                )}
+              </div>
+              <div className="flex-1 pt-0.5">
+                <p className="text-[14px] font-black leading-tight mb-1">
+                  {statusMessage.type === 'error' ? 'Action Required' : 'Registration Successful'}
+                </p>
+                <p className="text-[13px] font-medium opacity-80 leading-relaxed">
+                  {statusMessage.text}
+                </p>
+              </div>
             </div>
           </div>
         )}
@@ -103,35 +117,14 @@ export default function LoginPage() {
         {/* Main Card */}
         <div className="bg-white rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
           <div className="space-y-6">
-            <LoginForm
+            <SignupForm
               formData={formData}
               onInputChange={handleInputChange}
-              onSubmit={handleEmailLogin}
-              onForgotPassword={() => router.push('/forgot-password')}
+              onSubmit={handleEmailSignUp}
               isExchanging={isExchanging}
               exchangingMethod={exchangingMethod}
               isFormValid={isFormValid}
               getFieldError={getFieldError}
-            />
-
-            <div className="relative py-2">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-gray-100"></span>
-              </div>
-              <div className="relative flex justify-center text-[11px]">
-                <span className="bg-white px-4 text-gray-400 font-bold uppercase tracking-[0.2em]">
-                  Or Continue With
-                </span>
-              </div>
-            </div>
-
-            <SocialProviders
-              onGoogleLogin={handleGoogleLogin}
-              onGuestClick={handleGuestMode}
-              isExchanging={isExchanging}
-              exchangingMethod={exchangingMethod}
-              showEmailOption={false}
-              variant="page"
             />
           </div>
         </div>
@@ -139,9 +132,9 @@ export default function LoginPage() {
         {/* Footer Link */}
         <div className="mt-10 mb-12 text-center">
           <p className="text-[15px] font-medium text-gray-400">
-            Don&apos;t have an account?{' '}
-            <Link href="/signup" className="text-[#0038A8] font-bold hover:underline transition-all">
-              Sign up
+            Already have an account?{' '}
+            <Link href="/login" className="text-[#0038A8] font-bold hover:underline transition-all">
+              Log in
             </Link>
           </p>
         </div>

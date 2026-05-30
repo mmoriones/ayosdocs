@@ -16,6 +16,8 @@ export function ForgotPasswordForm({
   isFormValid,
   getFieldError
 }) {
+  const isDisabled = isExchanging || !isFormValid();
+
   return (
     <form onSubmit={onSubmit} className="space-y-4 w-full">
       <Input
@@ -35,10 +37,11 @@ export function ForgotPasswordForm({
       <div className="pt-2">
         <Button
           type="submit"
+          size="lg"
           isLoading={exchangingMethod === 'reset'}
-          disabled={isExchanging || !isFormValid()}
+          disabled={isDisabled}
           style={{ background: 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
-          className="w-full h-14 text-[17px] font-black rounded-3xl shadow-[0_8px_24px_rgba(0,56,168,0.15)] active:scale-[0.98] transition-all text-white border-none"
+          className="w-full text-white border-none"
         >
           Send Reset Link
         </Button>
