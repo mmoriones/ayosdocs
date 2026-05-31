@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
@@ -7,6 +8,7 @@ import { Home, Book, Layers, User, CheckSquare } from 'lucide-react';
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const [clickedHref, setClickedHref] = useState(null);
   const { status } = useSession();
   const isLoggedIn = status === 'authenticated';
 
@@ -29,13 +31,14 @@ export default function BottomNav() {
       
       <div className="flex items-center justify-center h-20 px-3 relative z-10">
         {navItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+          const isActive = (pathname !== clickedHref && clickedHref === item.href) || pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
           const Icon = item.icon;
 
           return (
             <Link 
               key={item.href} 
               href={item.href}
+              onClick={() => setClickedHref(item.href)}
               className={`flex flex-col items-center justify-center gap-1 w-[72px] h-full relative overflow-hidden transition-all duration-200 active:scale-95 group ${
                 isActive ? 'text-[#0038A8]' : 'text-slate-400/80'
               }`}

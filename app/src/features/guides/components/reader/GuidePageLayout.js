@@ -108,9 +108,8 @@ const FeesSection = ({ fees }) => {
   );
 };
 
-const TrackerStep = ({ step, index, isLast, localSteps, onToggle }) => {
+const TrackerStep = ({ step, index, isLast, isNext, onToggle, isSaving }) => {
   const isCompleted = step.completed;
-  const isNext = !isCompleted && (index === 0 || localSteps[index - 1].completed);
   const isLocked = !isCompleted && !isNext;
 
   return (
@@ -134,8 +133,8 @@ const TrackerStep = ({ step, index, isLast, localSteps, onToggle }) => {
         ${isLocked ? 'opacity-60' : 'opacity-100'}
       `}>
         <div 
-          className={`flex justify-between items-start mb-2 ${isNext ? 'cursor-pointer' : ''}`}
-          onClick={() => isNext && onToggle(index)}
+          className={`flex justify-between items-start mb-2 ${isNext && !isSaving ? 'cursor-pointer' : ''}`}
+          onClick={() => isNext && !isSaving && onToggle(index)}
         >
           <h4 className={`text-[17px] font-black leading-tight ${isCompleted ? 'text-gray-400 line-through' : 'text-[#1C1C1E]'}`}>
             {step.title}
@@ -157,6 +156,7 @@ const TrackerStep = ({ step, index, isLast, localSteps, onToggle }) => {
           <div className="space-y-3">
             <Button 
               onClick={() => onToggle(index)}
+              isLoading={isSaving}
               className="w-full h-12 rounded-2xl bg-[#0038A8] hover:bg-[#002B82] text-white text-[15px] font-black shadow-lg shadow-[#0038A8]/20 active:scale-95 transition-all"
             >
               Mark as Complete
@@ -214,6 +214,7 @@ const GuidePageLayout = ({
   const lastInteractionRef = useRef(0);
   const guideScrollPosRef = useRef(0);
   const isInternalScrollRef = useRef(false);
+  const [savingIndex, setSavingIndex] = useState(null);
 
   // --- Scroll & Tab Management ---
 
@@ -316,20 +317,30 @@ const GuidePageLayout = ({
   const [localSteps, setLocalSteps] = useState(checklistSteps);
 
   const saveMutation = useMutation({
-    mutationFn: async (completedTaskIndices) => {
-      return await updateProgressAction(slug, completedTaskIndices);
+    mutationFn: async ({ indices }) => {
+      return await updateProgressAction(slug, indices);
     },
-    onSuccess: () => {
+    onSuccess: (data, { nextSteps }) => {
+      setLocalSteps(nextSteps);
+      setSavingIndex(null);
       queryClient.invalidateQueries({ queryKey: ['progress', slug] });
       queryClient.invalidateQueries({ queryKey: ['user-data'] });
+    },
+    onError: () => {
+      setSavingIndex(null);
+      showToast({
+        type: 'error',
+        title: 'Sync Failed',
+        message: 'Could not save progress. Please try again.'
+      });
     }
   });
 
   // Sync server data to local state ONLY if user is not currently active
   useEffect(() => {
-    if (!progressData?.completedTasks || saveMutation.isPending) return;
+    // DON'T sync if a save is in progress or the user just interacted
+    if (!progressData?.completedTasks || saveMutation.isPending || savingIndex !== null) return;
     
-    // Block incoming server data if the user has interacted recently (within 3 seconds)
     const isUserInactive = Date.now() - lastInteractionRef.current > 3000;
     if (!isUserInactive) return;
 
@@ -352,7 +363,7 @@ const GuidePageLayout = ({
       }, 0);
       return () => clearTimeout(timer);
     }
-  }, [progressData, checklistSteps, saveMutation.isPending, localSteps]);
+  }, [progressData, checklistSteps, saveMutation.isPending, localSteps, savingIndex]);
 
   const handleStepToggle = (index) => {
     if (!isLoggedIn) {
@@ -363,28 +374,32 @@ const GuidePageLayout = ({
     // Update interaction time immediately to block server sync
     lastInteractionRef.current = Date.now();
 
-    // Use functional update to ensure we always have the latest state
-    setLocalSteps(prevSteps => {
-      const nextSteps = prevSteps.map((s, i) => 
-        i === index ? { ...s, completed: !s.completed } : s
-      );
-      
-      const indices = nextSteps
-        .map((s, i) => s.completed ? i : null)
-        .filter(i => i !== null)
-        .join(',');
-      
-      // Fire mutation with the new indices
-      if (isVerified) {
-        saveMutation.mutate(indices);
-      }
-      
-      return nextSteps;
-    });
+    const nextSteps = localSteps.map((s, i) => 
+      i === index ? { ...s, completed: !s.completed } : s
+    );
+    
+    const indices = nextSteps
+      .map((s, i) => s.completed ? i : null)
+      .filter(i => i !== null)
+      .join(',');
+    
+    // If verified, fire mutation and wait for success to update UI
+    if (isVerified) {
+      setSavingIndex(index);
+      saveMutation.mutate({ indices, index, nextSteps });
+    } else {
+      // For unverified/manual mode, update immediately
+      setLocalSteps(nextSteps);
+    }
   };
 
   const completedCount = localSteps.filter(s => s.completed).length;
   const progressPercent = localSteps.length ? Math.round((completedCount / localSteps.length) * 100) : 0;
+  
+  // Calculate next step index, but ANCHOR it to the current saving index if in flight
+  const nextStepIndex = savingIndex !== null 
+    ? savingIndex 
+    : localSteps.findIndex(s => !s.completed);
 
   // --- Effects ---
 
@@ -564,9 +579,9 @@ const GuidePageLayout = ({
                           {!isVerified ? (
                             <Badge variant="yellow" icon={AlertCircle} className="px-2 py-0.5 text-[10px]">Pending</Badge>
                           ) : saveMutation.isPending ? (
-                            <Badge variant="sky" icon={Loader2} className="px-2 py-0.5 text-[10px] animate-spin">Syncing</Badge>
+                            <Badge variant="sky" icon={Loader2} className="px-2 py-0.5 text-[10px] text-[#0038A8]">Saving...</Badge>
                           ) : (
-                            <Badge variant="green" icon={ShieldCheck} className="px-2 py-0.5 text-[10px]">Verified</Badge>
+                            <Badge variant="green" icon={ShieldCheck} className="px-2 py-0.5 text-[10px]">Saved</Badge>
                           )}
                         </div>
                       )}
@@ -606,6 +621,8 @@ const GuidePageLayout = ({
                   isLast={i === localSteps.length - 1} 
                   localSteps={localSteps}
                   onToggle={handleStepToggle}
+                  isNext={i === nextStepIndex}
+                  isSaving={saveMutation.isPending && i === savingIndex}
                 />
               ))}
 
