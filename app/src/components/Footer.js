@@ -21,35 +21,35 @@ const Footer = () => {
     {
       title: 'Support',
       links: [
-        { label: 'Help Center', href: '/support' },
+        { label: 'Help', href: '/support' },
         { label: 'FAQs', href: '/faqs' },
       ],
     },
     {
       title: 'Legal',
       links: [
-        { label: 'Terms of Service', href: '/terms' },
-        { label: 'Privacy Policy', href: '/privacy' },
+        { label: 'Terms', href: '/terms' },
+        { label: 'Privacy', href: '/privacy' },
       ],
     },
   ];
 
   return (
-    <footer className="w-full bg-[#F8F9FF] pt-10 pb-20 lg:pt-16 lg:pb-24 px-6 rounded-t-[40px] lg:rounded-t-[48px] border-t border-white shadow-[0_-12px_40px_rgba(0,0,0,0.02)]">
+    <footer className="w-full bg-[#F8F9FF] pt-8 pb-12 lg:pt-12 lg:pb-16 px-6 rounded-t-[40px] lg:rounded-t-[48px] border-t border-white shadow-[0_-12px_40px_rgba(0,0,0,0.02)]">
       <div className="max-w-[1200px] mx-auto flex flex-col items-center">
         {/* Top Section: Brand & Slogan */}
-        <div className="flex flex-col items-center text-center mb-10 lg:mb-12">
-          <h2 className="text-[32px] lg:text-[40px] font-black text-[#0038A8] tracking-tight mb-1 lg:mb-2">AyosDocs</h2>
+        <div className="flex flex-col items-center text-center mb-8 lg:mb-10">
+          <h2 className="text-[32px] lg:text-[40px] font-black text-[#0038A8] tracking-tight mb-1">AyosDocs</h2>
           <p className="text-[15px] lg:text-[17px] font-medium text-slate-500">
             Making government processes simple.
           </p>
         </div>
 
         {/* Links Grid */}
-        <div className="grid grid-cols-3 w-full max-w-2xl gap-x-4 lg:gap-x-8 gap-y-10 mb-12 lg:mb-16 px-2 lg:px-4 text-center sm:text-left">
+        <div className="grid grid-cols-3 w-full max-w-2xl gap-x-2 sm:gap-x-8 gap-y-10 text-center">
           {footerGroups.map((group) => (
             <div key={group.title} className="flex flex-col gap-4 lg:gap-6">
-              <h3 className="text-[14px] lg:text-[16px] font-bold text-[#1C1C1E]">
+              <h3 className="text-[12px] lg:text-[14px] font-bold text-[#1C1C1E] uppercase tracking-widest opacity-30">
                 {group.title}
               </h3>
               <ul className="flex flex-col gap-3 lg:gap-4">
@@ -66,6 +66,16 @@ const Footer = () => {
               </ul>
             </div>
           ))}
+        </div>
+
+        {/* Standalone Link Section */}
+        <div className="mt-8 lg:mt-10 mb-8">
+          <Link 
+            href="/about"
+            className="text-[13px] lg:text-[14px] font-bold text-[#0038A8] bg-blue-50 px-5 py-2 rounded-full hover:bg-blue-100 transition-colors shadow-sm"
+          >
+            About AyosDocs
+          </Link>
         </div>
 
         {/* Bottom Section: Copyright */}

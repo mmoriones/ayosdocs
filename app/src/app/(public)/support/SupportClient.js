@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/context';
-import { Mail, MessageCircle, Send, Loader2, Globe, Clock, Sparkles, User } from 'lucide-react';
-import { PublicPageHeader, Button, Input, Card, Badge, Banner } from '@/components/ui';
+import { Mail, MessageCircle, Send, Globe, Clock, User } from 'lucide-react';
+import { PublicPageHeader, Button, Input, Card, Badge } from '@/components/ui';
 import axios from 'axios';
+import Link from 'next/link';
 
 /**
  * SupportClient Component
@@ -53,28 +54,38 @@ export default function SupportClient() {
   };
 
   return (
-    <div className="min-h-full pb-20 animate-in fade-in duration-500">
+    <div className="min-h-full pb-20 animate-in fade-in duration-700">
       <PublicPageHeader 
         icon={Mail}
-        title="AyosDocs Support"
+        title="Support"
         description="Have questions or feedback? Our team is here to help you."
         actions={
-          <Badge variant="green" icon={Clock}>Avg. response: 24h</Badge>
+          <Badge variant="secondary" className="!bg-[#34C759]/10 !text-[#34C759] !border-none flex items-center gap-1.5 px-4 py-1.5">
+            <Clock size={14} />
+            <span className="text-[13px] font-bold uppercase tracking-wider">Avg. response: 24h</span>
+          </Badge>
         }
       />
 
-      <div className="max-w-5xl mx-auto px-6 lg:px-10 mt-8 space-y-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="max-w-5xl mx-auto px-6 lg:px-10 mt-8 lg:mt-12 space-y-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
           {/* Main Contact Form */}
           <div className="lg:col-span-2 space-y-10">
             <Card 
-              title="Send a Message"
-              background="mantle"
-              headerAction={
-                <Badge variant="sky" icon={Sparkles}>Priority support</Badge>
-              }
+              className="!rounded-[32px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl"
+              noPadding
             >
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-8" onSubmit={handleSubmit}>
+              <div className="p-8 border-b border-gray-100/50 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <h3 className="text-[19px] font-bold text-[#1C1C1E]">Send a Message</h3>
+                <div className="flex items-center gap-2">
+                   <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-[#007AFF]">
+                     <Send size={14} />
+                   </div>
+                   <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Priority Support</span>
+                </div>
+              </div>
+
+              <form className="p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" onSubmit={handleSubmit}>
                 <Input
                   label="Full Name"
                   required
@@ -86,6 +97,7 @@ export default function SupportClient() {
                   onChange={handleChange}
                   disabled={isSubmitting}
                   leftIcon={User}
+                  className="h-14 !rounded-[20px] shadow-sm border-white/60 focus-within:ring-[#007AFF]/10"
                 />
                 <Input
                   label="Email Address"
@@ -98,9 +110,10 @@ export default function SupportClient() {
                   onChange={handleChange}
                   disabled={isSubmitting}
                   leftIcon={Mail}
+                  className="h-14 !rounded-[20px] shadow-sm border-white/60 focus-within:ring-[#007AFF]/10"
                 />
-                <div className="md:col-span-2 space-y-1">
-                  <label className="text-ui-detail font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Message</label>
+                <div className="md:col-span-2 space-y-2">
+                  <label className="text-[13px] font-bold text-gray-400 uppercase tracking-widest ml-1">Message</label>
                   <textarea
                     required
                     name="message"
@@ -110,16 +123,16 @@ export default function SupportClient() {
                     placeholder="Tell us how we can help..."
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className="w-full bg-ctp-base border border-ctp-surface1 rounded-lg px-4 py-3.5 text-sm focus:outline-none focus:border-ctp-sky-800 transition-all font-medium placeholder:text-ctp-subtext0 resize-none disabled:opacity-50 shadow-inner hover:border-ctp-surface2 focus:ring-4 focus:ring-ctp-sky-800/5"
+                    className="w-full bg-white/50 border border-white/60 rounded-[24px] px-6 py-4 text-[15px] focus:outline-none focus:border-[#007AFF] transition-all font-medium placeholder:text-gray-300 resize-none disabled:opacity-50 shadow-sm hover:border-gray-200 focus:ring-4 focus:ring-[#007AFF]/5"
                   />
                 </div>
-                <div className="md:col-span-2 flex justify-end">
+                <div className="md:col-span-2 flex justify-end pt-2">
                   <Button 
                     type="submit"
                     disabled={isSubmitting}
                     isLoading={isSubmitting}
-                    className="px-8"
-                    leftIcon={isSubmitting ? null : <Send size={16} />}
+                    className="w-full md:w-auto px-10 h-14 !rounded-[22px] text-[15px] font-bold shadow-lg shadow-[#0038A8]/20"
+                    leftIcon={isSubmitting ? null : <Send size={18} />}
                   >
                     Send Message
                   </Button>
@@ -131,45 +144,46 @@ export default function SupportClient() {
           {/* Contact Details Sidebar */}
           <aside className="space-y-6">
             <Card 
-              title="Support Channels"
-              background="mantle"
+              className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl"
               noPadding
-              headerClassName="!py-3"
             >
-              <div className="divide-y divide-ctp-surface1/50">
-                <div className="p-5 flex items-start gap-4 hover:bg-ctp-mantle transition-colors">
-                  <div className="w-9 h-9 rounded-lg bg-ctp-sky-800/10 border border-ctp-sky-800/20 flex items-center justify-center text-ctp-sky-800 shrink-0">
-                    <Mail size={18} />
+              <div className="p-5 border-b border-gray-100/50">
+                <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-widest">Support Channels</h3>
+              </div>
+              <div className="divide-y divide-gray-100/50">
+                <div className="p-6 flex items-start gap-4 hover:bg-white/40 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/50 flex items-center justify-center text-[#007AFF] shrink-0 shadow-sm">
+                    <Mail size={20} />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-bold text-ctp-text tracking-tight">Email Support</h4>
-                    <p className="text-xs font-bold text-ctp-sky-800 mt-1 truncate">support@ayosdocs.com</p>
-                    <p className="text-ui-micro text-ctp-subtext1 mt-1 font-medium leading-tight">Direct response line.</p>
+                    <h4 className="text-[15px] font-bold text-[#1C1C1E] tracking-tight">Email Support</h4>
+                    <p className="text-[13px] font-bold text-[#007AFF] mt-1 truncate">support@ayosdocs.com</p>
+                    <p className="text-[11px] text-gray-400 mt-1 font-medium leading-tight uppercase tracking-wider">Direct response line.</p>
                   </div>
                 </div>
 
-                <div className="p-5 flex items-start gap-4 hover:bg-ctp-mantle transition-colors">
-                  <div className="w-9 h-9 rounded-lg bg-ctp-mauve/10 border border-ctp-mauve/20 flex items-center justify-center text-ctp-mauve shrink-0">
-                    <Globe size={18} />
+                <button className="w-full text-left p-6 flex items-start gap-4 hover:bg-white/40 transition-colors cursor-pointer group" onClick={() => router.push('/faqs')}>
+                  <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100/50 flex items-center justify-center text-[#AF52DE] shrink-0 shadow-sm group-active:scale-95 transition-all">
+                    <Globe size={20} />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-bold text-ctp-text tracking-tight">Help Center</h4>
-                    <p className="text-xs font-bold text-ctp-sky-800 mt-1 truncate cursor-pointer hover:underline" onClick={() => router.push('/faqs')}>Explore FAQs</p>
-                    <p className="text-ui-micro text-ctp-subtext1 mt-1 font-medium leading-tight">Instant guide assistance.</p>
+                    <h4 className="text-[15px] font-bold text-[#1C1C1E] tracking-tight">Help Center</h4>
+                    <p className="text-[13px] font-bold text-[#007AFF] mt-1 truncate group-hover:underline">Explore FAQs</p>
+                    <p className="text-[11px] text-gray-400 mt-1 font-medium leading-tight uppercase tracking-wider">Instant guide assistance.</p>
                   </div>
-                </div>
+                </button>
               </div>
             </Card>
 
-            <Card background="mantle" className="space-y-5">
-              <div className="flex items-center gap-3 text-ctp-mauve">
+            <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl p-6 space-y-5" noPadding>
+              <div className="flex items-center gap-3 text-[#AF52DE]">
                 <MessageCircle size={18} strokeWidth={2.5} />
-                <h3 className="text-ui-micro font-bold uppercase tracking-widest">Social Channels</h3>
+                <h3 className="text-[13px] font-bold uppercase tracking-widest">Social Channels</h3>
               </div>
-              <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
+              <p className="text-[13px] text-gray-500 leading-relaxed font-medium">
                 Follow our official channels for the latest guide updates and holiday alerts.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+              <div className="grid grid-cols-3 gap-3 pt-1">
                 {[
                   { 
                     name: 'Facebook', 
@@ -186,14 +200,14 @@ export default function SupportClient() {
                 ].map(social => (
                   <Button 
                     key={social.name} 
-                    variant="ghost"
-                    className="opacity-40 group"
+                    variant="secondary"
+                    className="!bg-white !border-gray-100 !p-3 h-12 !rounded-2xl group shadow-sm hover:shadow-md"
                     disabled
                     title={social.name}
                   >
                     <svg 
                       viewBox="0 0 24 24" 
-                      className="w-5 h-5 fill-current transition-transform group-hover:scale-110"
+                      className="w-5 h-5 fill-[#1C1C1E] transition-transform group-hover:scale-110"
                     >
                       <path d={social.path} />
                     </svg>

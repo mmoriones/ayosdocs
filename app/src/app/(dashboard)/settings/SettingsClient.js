@@ -1,254 +1,243 @@
 'use client';
 
 import { useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { 
+  ChevronLeft, 
+  Bell, 
+  User, 
+  ShieldCheck, 
+  Bell as BellIcon, 
+  Moon, 
   Globe, 
   Lock, 
-  Palette, 
-  Smartphone, 
-  Shield, 
-  CheckCircle2, 
+  HelpCircle, 
+  FileText, 
+  Info,
   ChevronRight,
-  Sun,
-  Moon,
-  Monitor,
-  Trash2,
-  ShieldAlert,
-  Calendar,
-  Languages,
-  Settings,
-  User,
   LogOut,
-  AlertTriangle
+  CheckCircle2,
+  Trash2,
+  AlertTriangle,
+  Shield,
+  ShieldAlert
 } from 'lucide-react';
+import Image from 'next/image';
 import { useTheme, useToast } from '@/context';
-import { changePasswordAction, deleteAccountAction, cancelDeletionAction } from '@/app/actions/user';
-import { Button, Input, Card, Badge, DashboardPageHeader, SortDropdown, Modal, SignOutModal } from '@/components/ui';
-import ConfirmModal from '@/components/ConfirmModal';
-
-// --- Inlined from components/ui/Switch.js ---
-function Switch({
-  checked = false,
-  onChange,
-  disabled = false,
-  label,
-  description,
-  className = '',
-}) {
-  return (
-    <label className={`flex items-center gap-3 cursor-pointer ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className}`}>
-      <button
-        role="switch"
-        aria-checked={checked}
-        disabled={disabled}
-        onClick={() => onChange?.(!checked)}
-        className={`relative inline-flex h-5 w-9 shrink-0 rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-ctp-sky-800/20 ${
-          checked ? 'bg-ctp-sky-800' : 'bg-ctp-surface1'
-        }`}
-      >
-        <span
-          className={`pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow-sm transform ring-0 transition-transform duration-200 ease-in-out ${
-            checked ? 'translate-x-4' : 'translate-x-0'
-          }`}
-        />
-      </button>
-      {(label || description) && (
-        <div className="flex flex-col">
-          {label && (
-            <span className="text-sm font-semibold text-ctp-text">{label}</span>
-          )}
-          {description && (
-            <span className="text-ui-micro font-medium text-ctp-subtext0">{description}</span>
-          )}
-        </div>
-      )}
-    </label>
-  );
-}
-// --- End of Switch ---
+import { Card, Button, SignOutModal, Modal, Input, Badge } from '@/components/ui';
+import { changePasswordAction, deleteAccountAction } from '@/app/actions/user';
 
 /**
- * Settings client page with interactive tab management and security features.
+ * Redesigned Settings client page following the new mobile-first aesthetics.
  */
 export default function SettingsClient() {
-  const [activeTab, setActiveTab] = useState('General');
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-  const [deleting, setDeleting] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
+  const router = useRouter();
+  const { setTheme, actualTheme } = useTheme();
   const { showToast } = useToast();
-  const user = session?.user;
+  
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [currentView, setCurrentView] = useState('menu'); // 'menu', 'security', 'notifications', 'privacy', 'password'
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
-  const tabs = [
-    { label: 'General', icon: Globe, description: 'Language and regional preferences' },
-    { label: 'Appearance', icon: Palette, description: 'Themes and visual styling' },
-    { label: 'Privacy & Security', icon: Shield, description: 'Data and account protection' },
-    { label: 'Password', icon: Lock, description: 'Security credentials' },
-  ];
+  const user = session?.user;
+  const isGoogleLinked = user?.googleAuth;
+
+  const viewTitles = {
+    security: 'Security',
+    notifications: 'Notifications',
+    privacy: 'Privacy',
+    password: 'Change Password',
+  };
 
   const renderActiveSection = () => {
-    switch (activeTab) {
-      case 'General':
-        return <GeneralSection />;
-      case 'Appearance':
-        return <AppearanceSection />;
-      case 'Notifications':
+    switch (currentView) {
+      case 'security':
+        return <SecuritySection user={user} onPasswordClick={() => setCurrentView('password')} onDeleteClick={() => setShowDeleteConfirm(true)} />;
+      case 'notifications':
         return <NotificationsSection />;
-      case 'Privacy & Security':
-        return <PrivacySection user={user} showToast={showToast} onDeleteClick={() => setShowDeleteConfirm(true)} />;
-      case 'Password':
-        return <PasswordSection user={user} showToast={showToast} />;
+      case 'privacy':
+        return <PrivacySection />;
+      case 'password':
+        return <PasswordSection user={user} showToast={showToast} onBack={() => setCurrentView('security')} />;
       default:
-        return <PlaceholderSection title={`${activeTab} Settings`} icon={tabs.find(t => t.label === activeTab)?.icon || Smartphone} />;
+        return (
+          <div className="max-w-md mx-auto px-6 space-y-8 animate-in fade-in duration-500">
+            {/* ACCOUNT Section */}
+            <section className="space-y-3">
+              <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider ml-1">Account</h3>
+              <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl" noPadding>
+                <SettingsItem 
+                  icon={<User size={20} className="text-[#007AFF]" />} 
+                  label="Personal Information" 
+                  onClick={() => router.push('/profile')}
+                />
+                <SettingsItem 
+                  icon={<ShieldCheck size={20} className="text-[#007AFF]" />} 
+                  label="Security" 
+                  rightElement={
+                    isGoogleLinked && (
+                      <div className="flex items-center gap-1.5 mr-1">
+                        <Image 
+                          src="https://www.svgrepo.com/show/475656/google-color.svg" 
+                          alt="Google" 
+                          width={14} 
+                          height={14} 
+                        />
+                        <span className="text-[13px] font-medium text-gray-500">Google Linked</span>
+                      </div>
+                    )
+                  }
+                  onClick={() => setCurrentView('security')}
+                />
+                <SettingsItem 
+                  icon={<BellIcon size={20} className="text-[#007AFF]" />} 
+                  label="Notification Preferences" 
+                  isLast
+                  onClick={() => setCurrentView('notifications')}
+                />
+              </Card>
+            </section>
+
+            {/* PREFERENCES Section */}
+            <section className="space-y-3">
+              <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider ml-1">Preferences</h3>
+              <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl" noPadding>
+                <SettingsItem 
+                  icon={<Moon size={20} className="text-[#007AFF]" />} 
+                  label="Theme" 
+                  rightElement={
+                    <div className="flex items-center gap-3 mr-1">
+                      <span className="text-[13px] font-medium text-gray-500 capitalize">{actualTheme}</span>
+                      <Switch 
+                        checked={actualTheme === 'dark'} 
+                        onChange={(checked) => setTheme(checked ? 'dark' : 'light')} 
+                      />
+                    </div>
+                  }
+                  hideChevron
+                />
+                <SettingsItem 
+                  icon={<Globe size={20} className="text-[#007AFF]" />} 
+                  label="Language" 
+                  rightElement={<span className="text-[13px] font-medium text-gray-500 mr-1">English</span>}
+                  onClick={() => {}}
+                />
+                <SettingsItem 
+                  icon={<Lock size={20} className="text-[#007AFF]" />} 
+                  label="Privacy Settings" 
+                  isLast
+                  onClick={() => setCurrentView('privacy')}
+                />
+              </Card>
+            </section>
+
+            {/* SUPPORT Section */}
+            <section className="space-y-3">
+              <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider ml-1">Support</h3>
+              <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl" noPadding>
+                <SettingsItem icon={<HelpCircle size={20} className="text-[#007AFF]" />} label="Help Center" onClick={() => router.push('/faqs')} />
+                <SettingsItem icon={<Shield size={20} className="text-[#007AFF]" />} label="Privacy Policy" onClick={() => router.push('/privacy')} />
+                <SettingsItem icon={<FileText size={20} className="text-[#007AFF]" />} label="Terms of Service" onClick={() => router.push('/terms')} />
+                <SettingsItem icon={<Info size={20} className="text-[#007AFF]" />} label="About AyosDocs" isLast onClick={() => router.push('/about')} />
+              </Card>
+            </section>
+
+            {/* Sign Out Button */}
+            <Button 
+              variant="secondary"
+              onClick={() => setShowLogoutConfirm(true)}
+              className="w-full !p-5 !rounded-[24px] !bg-white/80 !backdrop-blur-md !border-white/60"
+            >
+              <span className="text-[17px] font-bold text-[#FF3B30]">Sign Out</span>
+            </Button>
+
+            {/* Version */}
+            <div className="text-center pb-8">
+              <p className="text-[13px] font-medium text-gray-400">AyosDocs v1.0.4</p>
+            </div>
+          </div>
+        );
     }
   };
 
   return (
-    <div className="bg-ctp-base font-sans text-ctp-text min-h-screen pb-20 transition-colors duration-300">
-      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50 mb-8">
-        <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-1">
-            <h1 className="text-2xl font-bold tracking-tight text-ctp-text">Settings</h1>
-            <p className="text-xs text-ctp-subtext1 font-medium">Configure your account preferences and interface experience.</p>
+    <div className="min-h-screen pb-32 bg-ios-gradient animate-in fade-in duration-700">
+      {/* Header */}
+      <div className="px-6 mb-8 pt-10">
+        {currentView === 'menu' ? (
+          <h1 className="text-[34px] font-bold tracking-tight text-[#1C1C1E]">Settings</h1>
+        ) : (
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => setCurrentView('menu')}
+              className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-transform"
+            >
+              <ChevronLeft size={24} className="text-[#1C1C1E]" strokeWidth={2.5} />
+            </button>
+            <h1 className="text-[28px] font-bold tracking-tight text-[#1C1C1E]">{viewTitles[currentView]}</h1>
           </div>
-          <div className="flex items-center gap-3 bg-ctp-mantle/50 px-3.5 py-1.5 rounded-lg border border-ctp-surface1 shadow-sm">
-            <div className="w-7 h-7 rounded-full bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shadow-inner">
-              <User size={14} strokeWidth={2.5} />
-            </div>
-            <div className="flex flex-col min-w-0">
-              <span className="text-ui-micro font-bold text-ctp-text leading-tight truncate">{user?.name || 'Guest'}</span>
-              <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-tight truncate">{user?.email || 'No Email'}</span>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
-          {/* Navigation Sidebar */}
-          <div className="lg:col-span-1">
-            <nav className="flex flex-col gap-1 sticky top-24">
-              <p className="text-ui-micro font-bold text-ctp-subtext0 uppercase tracking-[0.2em] px-3 mb-3">Preferences</p>
-              {tabs.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => setActiveTab(item.label)}
-                  className={`click-ripple active:scale-[0.97] group w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs transition-all duration-200 ${
-                    activeTab === item.label 
-                      ? 'bg-ctp-sky-800/[0.08] text-ctp-sky-800' 
-                      : 'text-ctp-subtext1 hover:bg-ctp-mantle/50 hover:text-ctp-text'
-                  }`}
-                >
-                  <div className={`p-1.5 rounded transition-colors ${
-                    activeTab === item.label ? 'bg-ctp-sky-800 text-white shadow-sm' : 'bg-ctp-mantle/50 group-hover:bg-ctp-base'
-                  }`}>
-                    <item.icon size={14} strokeWidth={activeTab === item.label ? 2.5 : 2} />
-                  </div>
-                  <div className="flex flex-col items-start min-w-0">
-                    <span className={`font-bold tracking-tight ${activeTab === item.label ? 'text-ctp-sky-800' : ''}`}>{item.label}</span>
-                  </div>
-                  {activeTab === item.label && (
-                    <div className="ml-auto w-1 h-4 bg-ctp-sky-800 rounded-full" />
-                  )}
-                </button>
-              ))}
-              
-              <div className="mt-8 pt-6 border-t border-ctp-surface1">
-                <button 
-                  onClick={() => setShowLogoutConfirm(true)}
-                  className="click-ripple active:scale-[0.97] w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs text-ctp-red bg-ctp-red/[0.04] border border-ctp-red/10 hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 transition-all font-bold group"
-                >
-                  <div className="p-1.5 rounded bg-ctp-red/10 group-hover:bg-ctp-red/20 transition-colors">
-                    <LogOut size={14} strokeWidth={2.5} />
-                  </div>
-                  <span>Logout</span>
-                </button>
-              </div>
-            </nav>
-          </div>
-
-          {/* Content Area */}
-          <div className="lg:col-span-3 space-y-6">
-            {renderActiveSection()}
-          </div>
-        </div>
-      </div>
+      {renderActiveSection()}
 
       {/* Delete Confirmation Modal */}
       <Modal
         isOpen={showDeleteConfirm}
         onClose={() => setShowDeleteConfirm(false)}
         size="sm"
-        contentClassName="border-ctp-red/20"
+        contentClassName="!rounded-[32px] overflow-hidden"
       >
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-2.5 rounded-xl bg-ctp-red/10 text-ctp-red">
-            <AlertTriangle size={20} />
+        <div className="p-6 space-y-6">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-2xl bg-red-50 flex items-center justify-center text-[#FF3B30]">
+              <AlertTriangle size={24} />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-[#1C1C1E]">Delete Account</h3>
+              <p className="text-sm text-gray-500 font-medium">This action cannot be undone</p>
+            </div>
           </div>
-          <div>
-            <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Delete Account</h3>
-            <p className="text-ui-micro text-ctp-subtext1 font-medium">This action cannot be undone</p>
-          </div>
-        </div>
 
-        <div className="space-y-4 mb-6">
-          <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
-            Are you sure you want to delete your account? Here&apos;s what will happen:
+          <p className="text-sm text-gray-600 leading-relaxed font-medium">
+            Are you sure you want to delete your account? You have 30 days to change your mind.
           </p>
-          <ul className="space-y-2 text-xs text-ctp-subtext1">
-            <li className="flex items-start gap-2">
-              <span className="text-ctp-red mt-0.5">•</span>
-              <span className="font-medium">Your account will be deactivated immediately.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-ctp-red mt-0.5">•</span>
-              <span className="font-medium">You have <strong>30 days</strong> to change your mind. Logging back in within that period will restore your account.</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-ctp-red mt-0.5">•</span>
-              <span className="font-medium">After 30 days, all your data will be permanently deleted.</span>
-            </li>
-          </ul>
-        </div>
 
-        <div className="flex gap-3">
-          <Button
-            variant="outline"
-            onClick={() => setShowDeleteConfirm(false)}
-            className="flex-1 font-bold text-ui-micro uppercase tracking-widest bg-ctp-base"
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="danger"
-            onClick={async () => {
-              setDeleting(true);
-              const result = await deleteAccountAction();
-              setDeleting(false);
-              setShowDeleteConfirm(false);
-              if (result.success) {
-                showToast({
-                  type: 'success',
-                  title: 'Account Scheduled for Deletion',
-                  message: 'You have 30 days to change your mind.'
-                });
-                await new Promise(r => setTimeout(r, 2000));
-                await signOut({ redirect: true, callbackUrl: '/' });
-              } else {
-                showToast({
-                  type: 'error',
-                  title: 'Failed',
-                  message: result.message
-                });
-              }
-            }}
-            disabled={deleting}
-            leftIcon={deleting ? undefined : <Trash2 size={14} />}
-          >
-            {deleting ? 'Deleting...' : 'Delete My Account'}
-          </Button>
+          <div className="flex flex-col gap-3">
+            <Button
+              variant="danger"
+              onClick={async () => {
+                setDeleting(true);
+                const result = await deleteAccountAction();
+                setDeleting(false);
+                setShowDeleteConfirm(false);
+                if (result.success) {
+                  showToast({
+                    type: 'success',
+                    title: 'Scheduled',
+                    message: 'Your account will be deleted in 30 days.'
+                  });
+                  setTimeout(() => signOut({ redirect: true, callbackUrl: '/' }), 2000);
+                } else {
+                  showToast({ type: 'error', title: 'Error', message: result.message });
+                }
+              }}
+              disabled={deleting}
+              className="w-full h-14 !rounded-[20px] text-[15px] font-bold"
+            >
+              {deleting ? 'Processing...' : 'Delete My Account'}
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => setShowDeleteConfirm(false)}
+              className="w-full h-14 !rounded-[20px] text-[15px] font-bold"
+            >
+              Cancel
+            </Button>
+          </div>
         </div>
       </Modal>
 
@@ -260,314 +249,160 @@ export default function SettingsClient() {
   );
 }
 
-/**
- * General workspace and regional settings.
- */
-function GeneralSection() {
-  const [lang, setLang] = useState('en');
-  const [format, setFormat] = useState('MMM D, YYYY');
-
-  const langOptions = [
-    { label: 'English (US)', value: 'en' },
-    { label: 'Tagalog (Soon)', value: 'ph', disabled: true }
-  ];
-
-  const formatOptions = [
-    { label: 'MMM D, YYYY', value: 'MMM D, YYYY' },
-    { label: 'DD/MM/YYYY', value: 'DD/MM/YYYY' },
-    { label: 'MM/DD/YYYY', value: 'MM/DD/YYYY' }
-  ];
+function SettingsItem({ icon, label, rightElement, onClick, isLast, hideChevron }) {
+  const isClickable = !!onClick;
+  const Component = isClickable ? 'button' : 'div';
 
   return (
-    <Card title="Regional Controls" background="mantle" overflow="visible" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in duration-500">
-      <div className="space-y-10">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
-                <Languages size={14} strokeWidth={2.5} />
-              </div>
-              <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">Interface Language</h3>
-            </div>
-            <p className="text-xs text-ctp-subtext1 font-medium ml-9 opacity-80">Localized content and system notifications.</p>
-          </div>
-          <SortDropdown 
-            label="Lang:" 
-            value={lang} 
-            onChange={setLang} 
-            options={langOptions} 
-            className="w-full md:w-auto min-w-[140px]"
-          />
+    <Component 
+      onClick={onClick}
+      type={isClickable ? 'button' : undefined}
+      className={`w-full flex items-center justify-between p-4 ${isClickable ? 'active:bg-gray-50/50 cursor-pointer' : ''} transition-colors group ${!isLast ? 'border-b border-gray-100/50' : ''}`}
+    >
+      <div className="flex items-center gap-4">
+        <div className="w-10 h-10 flex items-center justify-center">
+          {icon}
         </div>
-        
-        <div className="pt-10 border-t border-ctp-surface1 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2.5">
-              <div className="w-7 h-7 rounded-lg bg-ctp-sky-800/10 text-ctp-sky-800 flex items-center justify-center shadow-inner">
-                <Calendar size={14} strokeWidth={2.5} />
-              </div>
-              <h3 className="text-sm font-bold text-ctp-text uppercase tracking-widest">System Date Format</h3>
-            </div>
-            <p className="text-xs text-ctp-subtext1 font-medium ml-9 opacity-80">Global date formatting across all trackers.</p>
-          </div>
-          <SortDropdown 
-            label="Format:" 
-            value={format} 
-            onChange={setFormat} 
-            options={formatOptions} 
-            className="w-full md:w-auto min-w-[140px]"
-          />
-        </div>
+        <span className="text-[15px] font-bold text-[#1C1C1E]">{label}</span>
       </div>
-    </Card>
+      <div className="flex items-center gap-2">
+        {rightElement}
+        {!hideChevron && <ChevronRight size={18} className="text-gray-300 group-active:text-[#0038A8] transition-all" strokeWidth={2.5} />}
+      </div>
+    </Component>
   );
 }
 
-/**
- * Appearance settings for theme customization.
- */
-function AppearanceSection() {
-  const { setTheme, actualTheme } = useTheme();
-
-  const themes = [
-    { id: 'light', label: 'Latte', icon: Sun, description: 'High Contrast' },
-    { id: 'dark', label: 'Mocha', icon: Moon, description: 'Dark Canvas' },
-    { id: 'system', label: 'Dynamic', icon: Monitor, description: 'Auto-detect' }
-  ];
-
+function Switch({ checked, onChange }) {
   return (
-    <Card title="Visual Theme" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in duration-500">
-      <div className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {themes.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => setTheme(t.id)}
-              className={`click-ripple active:scale-[0.97] group relative p-4 rounded-xl border transition-all duration-300 text-left flex flex-col gap-3 ${
-                actualTheme === t.id 
-                  ? 'border-ctp-sky-800 bg-ctp-sky-800/[0.08] ring-4 ring-ctp-sky-800/5 shadow-sm' 
-                  : 'border-ctp-surface1 hover:border-ctp-sky-800/30 bg-ctp-base/50'
-              }`}
-            >
-              <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300 ${
-                actualTheme === t.id ? 'bg-ctp-sky-800 text-white shadow-md' : 'bg-ctp-mantle text-ctp-subtext1 group-hover:text-ctp-sky-800 shadow-sm border border-ctp-surface1'
-              }`}>
-                <t.icon size={16} strokeWidth={2.5} />
-              </div>
-              
-              <div>
-                <p className={`text-xs font-bold tracking-tight uppercase ${actualTheme === t.id ? 'text-ctp-sky-800' : 'text-ctp-text'}`}>{t.label}</p>
-                <p className="text-ui-micro text-ctp-subtext1 font-bold uppercase tracking-widest opacity-60">{t.description}</p>
-              </div>
-
-              {actualTheme === t.id && (
-                <div className="absolute top-4 right-4">
-                  <div className="w-1.5 h-1.5 rounded-full bg-ctp-sky-800 shadow-[0_0_8px_var(--sky-800)]" />
-                </div>
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
-    </Card>
+    <button
+      type="button"
+      onClick={(e) => {
+        e.stopPropagation();
+        onChange(!checked);
+      }}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none ${
+        checked ? 'bg-[#007AFF]' : 'bg-gray-200'
+      }`}
+    >
+      <span
+        className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-200 ${
+          checked ? 'translate-x-5' : 'translate-x-1'
+        }`}
+      />
+    </button>
   );
 }
 
-/**
- * Notifications settings.
- */
-function NotificationsSection() {
-  const [emailUpdates, setEmailUpdates] = useState(true);
-  const [securityAlerts, setSecurityAlerts] = useState(true);
-  
+function SecuritySection({ user, onPasswordClick, onDeleteClick }) {
+  const isGoogleOnly = user?.googleAuth && !user?.hasPassword;
+
   return (
-    <Card title="Notifications" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-500">
-      <div className="space-y-10">
-        <Switch
-          checked={emailUpdates}
-          onChange={setEmailUpdates}
-          label="Email Updates"
-          description="Get notified about guide updates and new features."
-        />
-        <div className="pt-10 border-t border-ctp-surface1">
-          <Switch
-            checked={securityAlerts}
-            onChange={setSecurityAlerts}
-            label="Security Alerts"
-            description="Receive alerts about new sign-ins or password changes."
+    <div className="max-w-md mx-auto px-6 space-y-8 animate-in slide-in-from-right duration-500">
+      <section className="space-y-3">
+        <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider ml-1">Account Protection</h3>
+        <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl" noPadding>
+          <SettingsItem 
+            icon={<Lock size={20} className="text-[#007AFF]" />} 
+            label="Change Password" 
+            onClick={isGoogleOnly ? undefined : onPasswordClick}
+            rightElement={isGoogleOnly ? <span className="text-[12px] font-medium text-gray-400 mr-1">Google OAuth</span> : null}
+            hideChevron={isGoogleOnly}
           />
-        </div>
-      </div>
-    </Card>
-  );
-}
+          <SettingsItem 
+            icon={<ShieldCheck size={20} className="text-[#007AFF]" />} 
+            label="Two-Factor Authentication" 
+            isLast
+            rightElement={<span className="text-[12px] font-medium text-gray-400 mr-1">Coming Soon</span>}
+            hideChevron
+          />
+        </Card>
+      </section>
 
-/**
- * Privacy and security settings.
- */
-function PrivacySection({ user, showToast, onDeleteClick }) {
-  return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-500">
-      <Card title="Privacy & Security" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
-        <div className="space-y-8">
-          <div className="flex items-center justify-between">
-            <div className="space-y-1.5">
-              <h3 className="text-sm font-bold text-ctp-text uppercase tracking-wide">Profile Visibility</h3>
-              <p className="text-xs text-ctp-subtext1 font-medium">Your progress is currently private to your account.</p>
-            </div>
-            <Badge variant="sky" className="px-4 py-1.5">Private Account</Badge>
-          </div>
-          
-          <div className="pt-8 border-t border-ctp-surface1 flex items-center justify-between">
-            <div className="space-y-1.5">
-              <h3 className="text-sm font-bold text-ctp-text uppercase tracking-wide">Activity Logs</h3>
-              <p className="text-xs text-ctp-subtext1 font-medium">View your recent login activity and security events.</p>
-            </div>
-            <Button variant="secondary" size="sm" className="font-bold text-ui-micro uppercase tracking-widest bg-ctp-base">
-              View Logs
-            </Button>
-          </div>
-        </div>
-      </Card>
-
-      <Card title="Danger Zone" background="mantle" className="bg-ctp-mantle/50 border-ctp-red/20 shadow-sm">
-        <div className="space-y-6">
-           <div className="flex items-center gap-3 text-ctp-red">
-             <div className="p-2 rounded-lg bg-ctp-red/10">
-               <ShieldAlert size={18} />
-             </div>
-             <h3 className="text-sm font-bold uppercase tracking-widest">Account Deletion</h3>
-           </div>
-           <p className="text-xs text-ctp-subtext1 leading-relaxed font-medium">
-             Deleting your account will permanently remove all your saved progress, favorites, and tracked bundles. This action is irreversible and all data will be purged within 30 days.
-           </p>
-            <div className="pt-4">
-              <Button 
-                variant="danger"
-                onClick={onDeleteClick}
-                className="w-full md:w-auto"
-                leftIcon={<Trash2 size={14} />}
-              >
-                Delete AyosDocs Account
-              </Button>
-            </div>
-        </div>
-      </Card>
+      <section className="space-y-3">
+        <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider ml-1">Danger Zone</h3>
+        <Card className="!rounded-[28px] overflow-hidden border-red-100/60 shadow-sm bg-red-50/30" noPadding>
+          <SettingsItem 
+            icon={<Trash2 size={20} className="text-[#FF3B30]" />} 
+            label="Delete Account" 
+            onClick={onDeleteClick}
+            isLast
+          />
+        </Card>
+      </section>
     </div>
   );
 }
 
-/**
- * Handles password management UI logic based on account type.
- */
-function PasswordSection({ user, showToast }) {
-  const isGoogleOnly = user?.googleAuth && !user?.hasPassword;
+function NotificationsSection() {
+  const [emailUpdates, setEmailUpdates] = useState(true);
+  const [securityAlerts, setSecurityAlerts] = useState(true);
 
-  if (isGoogleOnly) {
-    return (
-      <Card title="Password Management" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-500">
-        <div className="flex flex-col items-center text-center space-y-8 py-10">
-          <div className="w-20 h-20 rounded-3xl bg-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shadow-inner">
-            <Shield size={40} />
-          </div>
-          <div className="space-y-3 max-w-md">
-            <h3 className="text-xl font-bold text-ctp-text uppercase tracking-tight">Managed by Google</h3>
-            <p className="text-sm text-ctp-subtext1 leading-relaxed font-medium">
-              Your account is secured via Google OAuth. To manage your password or security settings, please visit your Google Account preferences.
-            </p>
-          </div>
-          
-          <div className="w-full max-w-sm bg-ctp-base/50 border border-ctp-surface1 rounded-2xl p-8 text-left shadow-sm">
-            <p className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.2em] mb-5 border-b border-ctp-surface1 pb-3">Security Provider Details</p>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase">Method</span>
-                <span className="text-xs font-bold text-ctp-sky-800">Google OAuth 2.0</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase">Status</span>
-                <Badge variant="green" className="text-ui-tiny bg-ctp-green/[0.07] border-ctp-green/20">Active & Secure</Badge>
-              </div>
-            </div>
-            <button 
-              onClick={() => window.open('https://myaccount.google.com/security', '_blank')}
-              className="click-ripple active:scale-[0.97] mt-8 w-full py-3 bg-ctp-mantle border border-ctp-surface1 rounded-xl text-ui-micro font-bold uppercase tracking-widest text-ctp-text hover:border-ctp-sky-800/30 hover:text-ctp-sky-800 transition-all flex items-center justify-center gap-2 group"
-            >
-              <span>Manage Google Account</span>
-              <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-        </div>
-      </Card>
-    );
-  }
-
-  return <ChangePasswordForm showToast={showToast} />;
+  return (
+    <div className="max-w-md mx-auto px-6 space-y-8 animate-in slide-in-from-right duration-500">
+      <section className="space-y-3">
+        <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl" noPadding>
+          <SettingsItem 
+            icon={<BellIcon size={20} className="text-[#007AFF]" />} 
+            label="Email Updates" 
+            rightElement={<Switch checked={emailUpdates} onChange={setEmailUpdates} />}
+            hideChevron
+          />
+          <SettingsItem 
+            icon={<Shield size={20} className="text-[#007AFF]" />} 
+            label="Security Alerts" 
+            isLast
+            rightElement={<Switch checked={securityAlerts} onChange={setSecurityAlerts} />}
+            hideChevron
+          />
+        </Card>
+      </section>
+    </div>
+  );
 }
 
-/**
- * Standard password change form for Email and Hybrid users.
- */
-function ChangePasswordForm({ showToast }) {
-  const [formData, setFormData] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  });
+function PrivacySection() {
+  return (
+    <div className="max-w-md mx-auto px-6 space-y-8 animate-in slide-in-from-right duration-500">
+      <section className="space-y-3">
+        <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl" noPadding>
+          <SettingsItem 
+            icon={<User size={20} className="text-[#007AFF]" />} 
+            label="Profile Visibility" 
+            rightElement={<span className="text-[12px] font-medium text-gray-400 mr-1">Private</span>}
+            hideChevron
+          />
+          <SettingsItem 
+            icon={<ShieldAlert size={20} className="text-[#007AFF]" />} 
+            label="Activity Logs" 
+            isLast
+          />
+        </Card>
+      </section>
+    </div>
+  );
+}
+
+function PasswordSection({ user, showToast, onBack }) {
+  const [formData, setFormData] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleInputChange = (e) => {
-    setError('');
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const getFieldError = (name) => {
-    if (name === 'currentPassword' && error.includes('current password')) return error;
-    if (name === 'newPassword') {
-      if (formData.newPassword && formData.newPassword.length < 8) return 'Password must be at least 8 characters';
-      if (formData.newPassword && formData.newPassword === formData.currentPassword) return 'New password must be different from current';
-      if (error.includes('different from your current')) return error;
-    }
-    if (name === 'confirmPassword' && formData.confirmPassword && formData.confirmPassword !== formData.newPassword) {
-      return 'Passwords do not match';
-    }
-    return '';
-  };
-
-  const isFormValid = () => {
-    return (
-      formData.currentPassword.length > 0 &&
-      formData.newPassword.length >= 8 &&
-      formData.newPassword === formData.confirmPassword &&
-      formData.newPassword !== formData.currentPassword
-    );
-  };
+  const isFormValid = formData.currentPassword && formData.newPassword.length >= 8 && formData.newPassword === formData.confirmPassword;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isFormValid()) return;
-
     setIsSubmitting(true);
-    setError('');
-
     try {
       const result = await changePasswordAction(formData.currentPassword, formData.newPassword);
       if (result.success) {
         setIsSuccess(true);
-        showToast({
-          type: 'success',
-          title: 'Password Updated',
-          message: 'Your security credentials have been updated successfully.'
-        });
-        setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+        showToast({ type: 'success', title: 'Success', message: 'Password updated.' });
       } else {
-        setError(result.message);
+        showToast({ type: 'error', title: 'Error', message: result.message });
       }
     } catch (err) {
-      setError('An unexpected error occurred.');
+      showToast({ type: 'error', title: 'Error', message: 'Something went wrong.' });
     } finally {
       setIsSubmitting(false);
     }
@@ -575,120 +410,53 @@ function ChangePasswordForm({ showToast }) {
 
   if (isSuccess) {
     return (
-      <Card title="Change Password" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in zoom-in-95 duration-500">
-        <div className="flex flex-col items-center text-center space-y-8 py-16">
-          <div className="w-20 h-20 rounded-full bg-ctp-green/[0.07] border border-ctp-green/20 flex items-center justify-center text-ctp-green shadow-sm ring-4 ring-ctp-green/5">
-            <CheckCircle2 size={40} />
-          </div>
-          <div className="space-y-3 max-w-md">
-            <h3 className="text-2xl font-bold text-ctp-text uppercase tracking-tight">Update Successful</h3>
-            <p className="text-sm text-ctp-subtext1 leading-relaxed font-medium">
-              Your password has been securely updated. We&apos;ve synchronized your credentials across all platforms.
-            </p>
-          </div>
-          <Button variant="secondary" onClick={() => setIsSuccess(false)} className="px-10 font-bold uppercase tracking-widest text-ui-micro bg-ctp-base">
-            Return to Settings
-          </Button>
+      <div className="max-w-md mx-auto px-6 text-center space-y-6 py-12 animate-in zoom-in-95">
+        <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center text-[#34C759] mx-auto">
+          <CheckCircle2 size={40} />
         </div>
-      </Card>
+        <h3 className="text-2xl font-bold">Password Updated</h3>
+        <p className="text-gray-500">Your security credentials have been successfully changed.</p>
+        <Button onClick={onBack} variant="secondary" className="w-full h-14 !rounded-[20px]">Return to Security</Button>
+      </div>
     );
   }
 
   return (
-    <Card 
-      title="Change Password" 
-      background="mantle"
-      headerAction={<Badge variant="sky" className="text-ui-tiny uppercase tracking-widest">Secure Area</Badge>}
-      footer={
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-ctp-base flex items-center justify-center text-ctp-subtext1 border border-ctp-surface1 shrink-0 shadow-inner">
-              <Shield size={14} />
-            </div>
-            <p className="text-ui-micro text-ctp-subtext1 max-w-xs leading-relaxed font-bold uppercase tracking-wide">
-              Security Notice: You will be signed out of all other devices upon completion.
-            </p>
-          </div>
-          <Button
-            type="submit"
-            form="change-password-form"
-            disabled={isSubmitting || !isFormValid()}
-            isLoading={isSubmitting}
-            className="px-10 font-bold text-ui-micro uppercase tracking-[0.2em]"
-          >
-            Update Credentials
-          </Button>
-        </div>
-      }
-      className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-500"
-    >
-      <form id="change-password-form" onSubmit={handleSubmit} className="space-y-8 max-w-2xl">
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto px-6 space-y-6 animate-in slide-in-from-right duration-500">
+      <Card className="p-6 !rounded-[28px] border-white/60 bg-white/80 backdrop-blur-xl space-y-6" noPadding>
         <Input
-          label="Current Security Key"
+          label="Current Password"
           type="password"
-          name="currentPassword"
           value={formData.currentPassword}
-          onChange={handleInputChange}
-          placeholder="Enter current password"
-          maxLength={128}
-          error={getFieldError('currentPassword')}
+          onChange={e => setFormData({...formData, currentPassword: e.target.value})}
           leftIcon={Lock}
           required
         />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Input
-            label="New Password"
-            type="password"
-            name="newPassword"
-            value={formData.newPassword}
-            onChange={handleInputChange}
-            placeholder="Min. 8 characters"
-            maxLength={128}
-            error={getFieldError('newPassword')}
-            leftIcon={Lock}
-            required
-          />
-
-          <Input
-            label="Confirm New Password"
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleInputChange}
-            placeholder="Repeat new password"
-            maxLength={128}
-            error={getFieldError('confirmPassword')}
-            leftIcon={Lock}
-            required
-          />
-        </div>
-      </form>
-    </Card>
-  );
-}
-
-/**
- * Reusable placeholder for other settings sections.
- */
-function PlaceholderSection({ title, icon: Icon }) {
-  return (
-    <Card title={title} background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in slide-in-from-bottom-3 duration-500">
-      <div className="py-24 flex flex-col items-center text-center space-y-6">
-        <div className="w-20 h-20 rounded-3xl bg-ctp-base border border-ctp-surface1 flex items-center justify-center text-ctp-subtext1 shadow-inner relative overflow-hidden">
-          <Icon size={32} className="opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-ctp-sky-800/5 to-transparent" />
-        </div>
-        <div className="space-y-2">
-          <p className="text-sm font-bold text-ctp-text uppercase tracking-[0.2em]">Under Construction</p>
-          <p className="text-xs text-ctp-subtext1 font-medium max-w-xs mx-auto leading-relaxed">
-            We&apos;re building something great. This settings module will be available in the next platform update.
-          </p>
-        </div>
-        <Button variant="outline" size="sm" onClick={() => window.location.href = '/updates'} className="font-bold text-ui-micro uppercase tracking-widest bg-ctp-base">
-          View Roadmap
-        </Button>
-      </div>
-    </Card>
+        <Input
+          label="New Password"
+          type="password"
+          value={formData.newPassword}
+          onChange={e => setFormData({...formData, newPassword: e.target.value})}
+          leftIcon={Lock}
+          required
+        />
+        <Input
+          label="Confirm New Password"
+          type="password"
+          value={formData.confirmPassword}
+          onChange={e => setFormData({...formData, confirmPassword: e.target.value})}
+          leftIcon={Lock}
+          required
+        />
+      </Card>
+      <Button 
+        type="submit" 
+        disabled={!isFormValid || isSubmitting} 
+        isLoading={isSubmitting}
+        className="w-full h-14 !rounded-[20px] text-[15px] font-bold"
+      >
+        Update Password
+      </Button>
+    </form>
   );
 }

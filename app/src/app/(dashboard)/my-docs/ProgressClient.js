@@ -537,10 +537,6 @@ export default function ProgressClient({ allGuides, isRestricted }) {
       {/* HEADER */}
       <div className="max-w-[800px] mx-auto px-6 py-8 flex items-center justify-between">
         <h1 className="text-3xl font-black tracking-tight text-[#1C1C1E]">My Docs</h1>
-        <button className="w-11 h-11 flex items-center justify-center bg-white/50 backdrop-blur-lg rounded-full shadow-sm border border-white/40 hover:bg-white/80 transition-colors relative">
-          <Bell size={22} className="text-[#1C1C1E]" />
-          <span className="absolute top-3 right-3 w-2.5 h-2.5 bg-[#007AFF] border-2 border-white rounded-full"></span>
-        </button>
       </div>
 
       <div className="max-w-[600px] mx-auto px-6">

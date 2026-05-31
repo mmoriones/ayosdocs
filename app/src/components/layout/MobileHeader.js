@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { Sun, Moon, User, Bell } from 'lucide-react';
+import { Sun, Moon, User } from 'lucide-react';
 import { useState, useEffect, useSyncExternalStore } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -131,9 +131,6 @@ export default function MobileHeader({
               </Button>
             ) : (
               <div className="flex items-center gap-4">
-                <button className="w-10 h-10 flex items-center justify-center active:scale-90 transition-transform">
-                  <Bell size={26} className="text-[#1C1C1E]" strokeWidth={1.5} />
-                </button>
                 <button 
                   onClick={() => setIsAccountMenuOpen(true)}
                   className="active:scale-95 transition-transform outline-none"

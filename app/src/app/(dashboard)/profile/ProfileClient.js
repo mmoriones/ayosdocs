@@ -1,30 +1,102 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
-import { User, Mail, ShieldCheck, Calendar, Camera, LogOut, CheckCircle2, Edit3 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { 
+  Bell, 
+  ChevronRight, 
+  CheckCircle2, 
+  Layers, 
+  Bookmark, 
+  FileText, 
+  ShieldCheck, 
+  LogOut, 
+  Edit3,
+  User as UserIcon,
+  Mail,
+  Target
+} from 'lucide-react';
 import { useToast } from '@/context';
 import { updateUserProfileAction } from '@/app/actions/user';
-import { Button, Input, Card, Avatar, Tooltip, SignOutModal } from '@/components/ui';
+import { Button, Input, Card, Avatar, SignOutModal, Badge } from '@/components/ui';
+import { getIconName, GuideIcon } from '@/lib/guideIcons';
+import { getIconTheme } from '@/lib/assetStyles';
 
 /**
- * Enhanced Profile client page with editable identity management.
+ * Redesigned Profile client page following the new mobile-first aesthetics.
  */
-export default function ProfileClient() {
+export default function ProfileClient({ allGuides }) {
   const { data: session, status, update } = useSession();
   const { showToast } = useToast();
+  const router = useRouter();
   const user = session?.user;
 
   const [isEditing, setIsEditing] = useState(false);
-  const [newName, setNewName] = useState('');
+  const [newName, setNewName] = useState(user?.name || '');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
-  // Sync state when session data changes and we are not editing
-  if (user?.name && !isEditing && newName !== user.name) {
-    setNewName(user.name);
-  }
+  const { data: userData, isLoading: isLoadingUserData } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: async () => {
+      const response = await axios.get('/api/user/all-data');
+      return response.data;
+    },
+    enabled: !!user,
+  });
+
+  const stats = useMemo(() => {
+    if (!userData || !allGuides) return { completed: 0, activeBundles: 0, saved: 0 };
+    
+    const completed = (userData.savedProgress || []).filter(p => {
+      const guide = allGuides.find(g => g.slug === p.guideSlug);
+      if (!guide) return false;
+      const done = p.completedTasks?.split(',').filter(Boolean).length || 0;
+      return done > 0 && done >= (guide.checklist?.length || 0);
+    }).length;
+
+    return {
+      completed,
+      activeBundles: userData.trackedBundles?.length || 0,
+      saved: userData.savedProgress?.length || 0
+    };
+  }, [userData, allGuides]);
+
+  const vaultItems = useMemo(() => {
+    if (!userData?.savedProgress) return [];
+    return [...userData.savedProgress]
+      .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+      .slice(0, 3)
+      .map(p => {
+        const guide = allGuides.find(g => g.slug === p.guideSlug);
+        return {
+          ...p,
+          title: guide?.shortTitle || guide?.title || 'Unknown Guide',
+          agency: guide?.agency || 'N/A',
+          slug: p.guideSlug
+        };
+      });
+  }, [userData, allGuides]);
+
+  const overallProgress = useMemo(() => {
+    if (!userData?.savedProgress || userData.savedProgress.length === 0) return 0;
+    
+    let totalTasks = 0;
+    let completedTasks = 0;
+
+    userData.savedProgress.forEach(p => {
+      const guide = allGuides.find(g => g.slug === p.guideSlug);
+      if (guide) {
+        totalTasks += (guide.checklist?.length || 0);
+        completedTasks += p.completedTasks?.split(',').filter(Boolean).length || 0;
+      }
+    });
+
+    return totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+  }, [userData, allGuides]);
 
   const handleSaveProfile = async (e) => {
     e.preventDefault();
@@ -34,18 +106,13 @@ export default function ProfileClient() {
     }
 
     setIsSubmitting(true);
-    setError('');
-
     try {
       const formData = new FormData();
       formData.append('fullName', newName.trim());
-
       const result = await updateUserProfileAction(formData);
 
       if (result.success) {
-        // Refresh session to show new name globally
         await update();
-        
         showToast({
           type: 'success',
           title: 'Profile Updated',
@@ -53,223 +120,182 @@ export default function ProfileClient() {
         });
         setIsEditing(false);
       } else {
-        setError(result.message);
+        showToast({ type: 'error', title: 'Error', message: result.message });
       }
     } catch (err) {
-      setError('An unexpected error occurred. Please try again.');
+      showToast({ type: 'error', title: 'Error', message: 'An unexpected error occurred.' });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const getFieldError = () => {
-    if (newName && newName.trim().length < 2) return 'Name must be at least 2 characters';
-    if (error) return error;
-    return '';
-  };
-
-  return (
-    <div className="bg-ctp-base font-sans text-ctp-text min-h-screen pb-20">
-      <div className="px-6 lg:px-10 py-8 border-b border-ctp-surface1 bg-ctp-mantle/50 mb-8">
-        <div className="max-w-[1600px] mx-auto">
-          <div className="space-y-1">
-            <h1 className="text-2xl font-bold tracking-tight text-ctp-text">Profile</h1>
-            <p className="text-xs text-ctp-subtext1 font-medium">Manage your personal identity and account security credentials.</p>
-          </div>
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen bg-ios-gradient flex items-center justify-center">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+          <div className="w-20 h-20 bg-gray-200 rounded-full" />
+          <div className="h-4 w-32 bg-gray-200 rounded" />
         </div>
       </div>
+    );
+  }
 
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-10 space-y-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Profile Content */}
-          <div className="lg:col-span-2 space-y-8">
-            
-            {/* Personal Information Section */}
-            <Card 
-              title="Personal Identity" 
-              background="mantle"
-              className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm animate-in fade-in duration-300"
-              overflow="visible"
-              headerAction={
-                !isEditing && status !== 'loading' && (
-                  <Button 
-                    variant="link"
-                    onClick={() => setIsEditing(true)}
-                    leftIcon={<Edit3 size={14} />}
-                  >
-                    Modify
-                  </Button>
-                )
-              }
-            >
-              <div className="space-y-8">
-                <div className="flex flex-col md:flex-row md:items-start gap-10">
-                  <div className="relative w-20 h-20 shrink-0">
-                    <Avatar
-                      src={user?.image}
-                      name={user?.name || 'A'}
-                      size="xl"
-                      className="rounded-xl border-2 border-ctp-base ring-1 ring-ctp-surface1 shadow-sm"
-                    />
-                    <div className="absolute bottom-0 right-0 translate-x-1 translate-y-1 z-10">
-                      <Tooltip content="Upload coming soon" position="top">
-                        <div className="p-1.5 bg-ctp-base border border-ctp-surface1 rounded shadow-sm text-ctp-sky-800 cursor-not-allowed hover:bg-ctp-mantle transition-colors">
-                          <Camera size={12} strokeWidth={2.5} />
-                        </div>
-                      </Tooltip>
-                    </div>
-                  </div>
+  return (
+    <div className="min-h-screen pb-32 bg-ios-gradient animate-in fade-in duration-700">
+      {/* Top Header */}
+      <header className="px-6 pt-8 pb-4 flex justify-between items-center sticky top-0 z-20 backdrop-blur-md">
+        <h1 className="text-[34px] font-bold tracking-tight text-[#1C1C1E]">Profile</h1>
+      </header>
 
-                  {/* Info Form/Display */}
-                  <div className="flex-1 w-full">
-                    {isEditing ? (
-                      <form onSubmit={handleSaveProfile} className="space-y-6 max-w-lg">
-                        <Input
-                          label="Full Name"
-                          value={newName}
-                          onChange={(e) => {
-                            setNewName(e.target.value);
-                            if (error) setError('');
-                          }}
-                          placeholder="Enter your name"
-                          maxLength={70}
-                          error={getFieldError()}
-                          leftIcon={User}
-                          disabled={isSubmitting}
-                          autoFocus
-                          required
-                        />
-                        
-                        <div className="flex items-center gap-3 pt-2">
-                          <Button 
-                            type="submit" 
-                            isLoading={isSubmitting}
-                            disabled={newName.trim() === user?.name || newName.trim().length < 2}
-                            size="md"
-                          >
-                            Save Updates
-                          </Button>
-                          <Button 
-                            variant="secondary" 
-                            size="md" 
-                            onClick={() => {
-                              setIsEditing(false);
-                              setError('');
-                            }}
-                            disabled={isSubmitting}
-                          >
-                            Cancel
-                          </Button>
-                        </div>
-                      </form>
-                    ) : (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="space-y-1.5">
-                          <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Legal Name</label>
-                          <div className="flex items-center gap-3 px-3.5 py-2.5 bg-ctp-mantle/50 border border-ctp-surface1 rounded-lg text-sm font-bold text-ctp-text">
-                            <User size={16} className="text-ctp-sky-800" strokeWidth={2.5} />
-                            <span>{user?.name}</span>
-                          </div>
-                        </div>
-                        <div className="space-y-1.5 opacity-80 min-w-0">
-                          <label className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-[0.15em] ml-1">Email Address</label>
-                          <Tooltip content={user?.email} className="w-full">
-                            <div className="flex items-center gap-3 px-3.5 py-2.5 bg-ctp-crust/30 border border-ctp-surface1 rounded-lg text-sm font-bold text-ctp-subtext1 overflow-hidden">
-                              <Mail size={16} className="text-ctp-surface2 shrink-0" strokeWidth={2.5} />
-                              <span className="truncate">{user?.email}</span>
-                            </div>
-                          </Tooltip>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
+      <div className="max-w-md mx-auto space-y-8">
+        {/* User Identity Card */}
+        <section className="px-6">
+          <Card 
+            interactive
+            onClick={() => !isEditing && setIsEditing(true)}
+            className="p-6 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-white/80 backdrop-blur-xl group"
+            noPadding
+          >
+            <div className="flex items-center gap-5">
+              <div className="relative">
+                <Avatar 
+                  src={user?.image} 
+                  name={user?.name} 
+                  size="xl" 
+                  className="rounded-[22px] border-4 border-white shadow-md ring-1 ring-black/5" 
+                />
               </div>
-            </Card>
-
-            {/* Account Verification Section */}
-            <Card title="Security Status" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm">
-              <div className={`flex flex-col md:flex-row md:items-center gap-6 p-5 rounded-lg border ${
-                user?.isVerified 
-                  ? 'bg-ctp-green/[0.07] border-ctp-green/20' 
-                  : 'bg-ctp-yellow/[0.04] border-ctp-yellow/20'
-              }`}>
-                <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 shadow-sm border ${
-                  user?.isVerified ? 'bg-ctp-base text-ctp-green border-ctp-green/20' : 'bg-ctp-base text-ctp-yellow border-ctp-yellow/20'
-                }`}>
-                  <ShieldCheck size={20} strokeWidth={2.5} />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-sm font-bold tracking-tight uppercase">
-                    {user?.isVerified ? 'Identity Verified' : 'Action Required'}
-                  </h4>
-                  <p className="text-xs text-ctp-subtext1 mt-1 leading-relaxed font-medium">
-                    {user?.isVerified 
-                      ? 'Your account is fully verified. Secure cloud sync and guide history are active.'
-                      : 'Verify your email to enable cross-device synchronization and document backup.'}
-                  </p>
-                </div>
-                {!user?.isVerified && (
-                  <Button variant="secondary" size="sm" className="whitespace-nowrap shadow-sm bg-ctp-base">
-                    Send Link
-                  </Button>
+              <div className="flex-1 min-w-0">
+                {isEditing ? (
+                  <form onSubmit={handleSaveProfile} className="space-y-3" onClick={e => e.stopPropagation()}>
+                    <Input
+                      value={newName}
+                      onChange={(e) => setNewName(e.target.value)}
+                      placeholder="Full Name"
+                      className="h-10 text-sm"
+                      autoFocus
+                    />
+                    <div className="flex gap-2">
+                      <Button size="xs" isLoading={isSubmitting} type="submit">Save</Button>
+                      <Button size="xs" variant="secondary" onClick={() => setIsEditing(false)}>Cancel</Button>
+                    </div>
+                  </form>
+                ) : (
+                  <>
+                    <h2 className="text-[22px] font-black text-[#1C1C1E] tracking-tight truncate">
+                      {user?.name}
+                    </h2>
+                    <p className="text-[14px] font-medium text-gray-400 truncate mb-2">
+                      {user?.email}
+                    </p>
+                    {user?.isVerified && (
+                      <Badge variant="success" className="bg-[#FFCC00]/10 text-[#FF9500] border-none px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
+                        <CheckCircle2 size={12} fill="currentColor" className="text-white" />
+                        <span className="text-[10px] font-bold uppercase tracking-wider">Verified</span>
+                      </Badge>
+                    )}
+                  </>
                 )}
               </div>
-            </Card>
+              {!isEditing && (
+                <ChevronRight size={20} className="text-gray-300 group-active:translate-x-1 transition-transform" />
+              )}
+            </div>
+          </Card>
+        </section>
+
+        {/* Quick Stats Grid */}
+        <section className="px-6 grid grid-cols-3 gap-3">
+          <StatCard 
+            icon={<CheckCircle2 size={18} />} 
+            value={stats.completed} 
+            label="Guides Completed" 
+            color="text-[#007AFF]" 
+            bg="bg-[#007AFF]/5" 
+          />
+          <StatCard 
+            icon={<Layers size={18} />} 
+            value={stats.activeBundles} 
+            label="Active Bundles" 
+            color="text-[#34C759]" 
+            bg="bg-[#34C759]/5" 
+          />
+          <StatCard 
+            icon={<Bookmark size={18} />} 
+            value={stats.saved} 
+            label="Saved Documents" 
+            color="text-[#AF52DE]" 
+            bg="bg-[#AF52DE]/5" 
+          />
+        </section>
+
+        {/* Document Vault Section */}
+        <section className="px-6">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-[17px] font-bold text-[#1C1C1E]">My Document Vault</h3>
+            <button onClick={() => router.push('/my-docs')} className="text-[13px] font-bold text-[#0038A8]">See All</button>
           </div>
-
-          {/* Sidebar Stats */}
-          <div className="space-y-8">
-            <Card title="Account Overview" background="mantle" className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm border-dashed">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between py-2 border-b border-ctp-surface1/50">
-                  <div className="flex items-center gap-2.5 text-ctp-subtext1">
-                    <Calendar size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-                    <span className="text-ui-micro font-bold uppercase tracking-widest">Joined</span>
-                  </div>
-                  <span className="text-ui-micro font-bold text-ctp-text uppercase">May 2026</span>
-                </div>
-                <div className="flex items-center justify-between py-2">
-                  <div className="flex items-center gap-2.5 text-ctp-subtext1">
-                    <ShieldCheck size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-                    <span className="text-ui-micro font-bold uppercase tracking-widest">Type</span>
-                  </div>
-                  <span className="text-ui-micro font-bold text-ctp-sky-800 uppercase">
-                    {session?.user?.googleAuth && session?.user?.hasPassword ? 'Hybrid' : session?.user?.googleAuth ? 'Google' : 'Local'}
-                  </span>
-                </div>
+          <div className="space-y-3">
+            {vaultItems.length > 0 ? vaultItems.map((item) => (
+              <VaultItem key={item.slug} item={item} />
+            )) : (
+              <div className="py-8 text-center bg-white/40 rounded-[28px] border border-dashed border-gray-200">
+                <p className="text-sm text-gray-400 font-medium">No documents yet.</p>
               </div>
-
-              <Button
-                variant="outline"
-                onClick={() => setShowLogoutConfirm(true)}
-                className="w-full mt-8 flex items-center justify-center gap-2 border-ctp-red/20 bg-ctp-red/[0.04] text-ctp-red hover:bg-ctp-red/[0.08] hover:border-ctp-red/30 text-ui-micro font-bold uppercase tracking-widest"
-                leftIcon={<LogOut size={14} strokeWidth={3} className="transition-transform group-hover:-translate-x-0.5" />}
-              >
-                Sign Out of Account
-              </Button>
-            </Card>
-
-            <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm overflow-hidden group">
-              <div className="p-4 border-b border-ctp-surface1 flex items-center gap-2">
-                <Edit3 size={14} className="text-ctp-sky-800" />
-                <h3 className="text-ui-subhead font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Guide Discovery</h3>
-              </div>
-              <div className="p-5 space-y-4">
-                <p className="text-ui-detail font-medium leading-relaxed text-ctp-subtext1">
-                  Ready to track more? Explore our updated knowledge base for the latest government requirements.
-                </p>
-                <Button 
-                  variant="secondary"
-                  onClick={() => router.push('/guides')}
-                  className="w-full text-ui-micro uppercase tracking-widest shadow-lg shadow-ctp-sky-800/5"
-                >
-                  Browse Guides
-                </Button>
-              </div>
-            </Card>
+            )}
           </div>
-        </div>
+        </section>
+
+        {/* Life Goal Progress Section */}
+        <section className="px-6">
+          <Card 
+            className="p-6 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-white/80 backdrop-blur-xl"
+            noPadding
+          >
+            <div className="flex items-center justify-between">
+              <div className="space-y-1">
+                <h3 className="text-[17px] font-bold text-[#1C1C1E]">Life Goal Progress</h3>
+                <p className="text-[13px] font-medium text-gray-400">Overall Progress</p>
+              </div>
+              
+              <div className="relative w-20 h-20 flex items-center justify-center">
+                <svg className="w-full h-full transform -rotate-90">
+                  <circle cx="40" cy="40" r="34" stroke="#f2f2f7" strokeWidth="8" fill="transparent" />
+                  <circle 
+                    cx="40" cy="40" r="34" 
+                    stroke="#FFCC00" 
+                    strokeWidth="8" 
+                    fill="transparent" 
+                    strokeDasharray={213.6} 
+                    strokeDashoffset={213.6 * (1 - overallProgress / 100)} 
+                    strokeLinecap="round" 
+                  />
+                </svg>
+                <span className="absolute text-[15px] font-black text-[#1C1C1E]">{overallProgress}%</span>
+              </div>
+            </div>
+            
+            <div className="mt-6 flex items-center gap-2 text-[13px] font-medium text-gray-500">
+              <span className="text-lg">⭐</span>
+              <p>Keep going! You&apos;re doing great.</p>
+            </div>
+          </Card>
+        </section>
+
+        {/* Security & Actions Section */}
+        <section className="px-6 space-y-3">
+          <ActionButton 
+            icon={<ShieldCheck size={20} className="text-[#34C759]" />} 
+            label="Security & Privacy" 
+            onClick={() => router.push('/settings')} 
+          />
+          <ActionButton 
+            icon={<LogOut size={20} className="text-[#FF3B30]" />} 
+            label="Sign Out" 
+            onClick={() => setShowLogoutConfirm(true)} 
+            variant="danger"
+          />
+        </section>
       </div>
 
       <SignOutModal
@@ -277,5 +303,64 @@ export default function ProfileClient() {
         onClose={() => setShowLogoutConfirm(false)}
       />
     </div>
+  );
+}
+
+function StatCard({ icon, value, label, color, bg }) {
+  return (
+    <div className="bg-white/80 backdrop-blur-md rounded-[24px] p-4 flex flex-col items-center text-center shadow-sm border border-white/60">
+      <div className={`w-10 h-10 ${bg} ${color} rounded-xl flex items-center justify-center mb-3`}>
+        {icon}
+      </div>
+      <span className="text-[18px] font-black text-[#1C1C1E] leading-none">{value}</span>
+      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tight mt-1 leading-tight">
+        {label.split(' ').map((word, i) => <div key={i}>{word}</div>)}
+      </span>
+    </div>
+  );
+}
+
+function VaultItem({ item }) {
+  const router = useRouter();
+  const iconName = getIconName(item.slug, item.agency);
+  const theme = getIconTheme(item.slug, item.agency, iconName);
+  
+  return (
+    <button 
+      onClick={() => router.push(`/guides/${item.slug}`)}
+      className="w-full bg-white/80 backdrop-blur-md rounded-[24px] p-4 flex items-center justify-between shadow-sm border border-white/60 active:scale-[0.98] transition-all group"
+    >
+      <div className="flex items-center gap-4">
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center`} style={{ background: theme.gradient }}>
+           <GuideIcon slug={item.slug} agency={item.agency} size={24} className="drop-shadow-sm" />
+        </div>
+        <div className="text-left">
+          <h4 className="text-[15px] font-bold text-[#1C1C1E] leading-tight">{item.title}</h4>
+          <p className="text-[12px] font-medium text-gray-400 mt-0.5 uppercase tracking-tight">
+            Added on {new Date(item.updatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          </p>
+        </div>
+      </div>
+      <ChevronRight size={18} className="text-gray-300 group-active:text-[#0038A8] transition-colors" />
+    </button>
+  );
+}
+
+function ActionButton({ icon, label, onClick, variant = "default" }) {
+  return (
+    <button 
+      onClick={onClick}
+      className={`w-full flex items-center justify-between p-4 rounded-[24px] backdrop-blur-md border shadow-sm active:scale-[0.98] transition-all group ${
+        variant === 'danger' 
+          ? 'bg-[#FF3B30]/5 border-[#FF3B30]/10 text-[#FF3B30]' 
+          : 'bg-white/80 border-white/60 text-[#1C1C1E]'
+      }`}
+    >
+      <div className="flex items-center gap-3">
+        {icon}
+        <span className="text-[15px] font-bold">{label}</span>
+      </div>
+      <ChevronRight size={18} className={`${variant === 'danger' ? 'text-[#FF3B30]/30' : 'text-gray-300'} group-active:translate-x-1 transition-transform`} />
+    </button>
   );
 }

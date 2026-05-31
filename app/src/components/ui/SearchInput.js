@@ -18,34 +18,38 @@ export default function SearchInput({
   onClick,
   placeholder = "Search...", 
   variant = 'standard',
+  className = "",
   showShortcut = false
 }) {
   const isCompact = variant === 'compact';
 
   return (
     <div 
-      className="relative group w-full cursor-text"
+      className={`relative group w-full cursor-text ${className}`}
       onClick={onClick}
     >
-      <Search 
-        className={`absolute left-3 top-1/2 -translate-y-1/2 text-ctp-subtext1 group-focus-within:text-ctp-sky-800 transition-colors ${
-          isCompact ? 'w-4 h-4' : 'w-5 h-5'
-        }`} 
-      />
+      <div className={`absolute left-5 top-1/2 -translate-y-1/2 transition-colors text-gray-400 group-focus-within:text-[#0038A8] ${
+        isCompact ? 'left-3' : 'left-5'
+      }`}>
+        <Search 
+          className={isCompact ? 'w-4 h-4' : 'w-5 h-5'} 
+          strokeWidth={2.5}
+        />
+      </div>
       <input 
         type="text" 
         value={value}
         onChange={onChange}
         placeholder={placeholder}
         maxLength={100}
-        className={`w-full bg-ctp-base border border-ctp-surface1 rounded-2xl focus:outline-none focus:border-ctp-sky-800 focus:ring-2 focus:ring-ctp-sky-800/10 transition-all placeholder:text-ctp-subtext1 font-medium ${
-          isCompact ? 'py-2 pl-10 pr-4 text-xs' : 'py-3.5 pl-12 pr-6 text-sm'
+        className={`w-full bg-white border-white rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:outline-none focus:border-[#0038A8]/20 focus:ring-4 focus:ring-[#0038A8]/5 transition-all placeholder:text-gray-400 font-medium text-[#1C1C1E] ${
+          isCompact ? 'py-2.5 pl-10 pr-4 text-xs' : 'py-4 pl-14 pr-8 text-[15px]'
         }`}
       />
       {showShortcut && (
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 hidden md:flex items-center gap-1 pointer-events-none">
-          <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-crust text-ui-tiny font-sans text-ctp-subtext0 uppercase">⌘</kbd>
-          <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-crust text-ui-tiny font-sans text-ctp-subtext0 uppercase">K</kbd>
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 hidden md:flex items-center gap-1 pointer-events-none">
+          <kbd className="px-1.5 py-0.5 rounded border border-gray-100 bg-gray-50 text-[10px] font-sans text-gray-400 uppercase">⌘</kbd>
+          <kbd className="px-1.5 py-0.5 rounded border border-gray-100 bg-gray-50 text-[10px] font-sans text-gray-400 uppercase">K</kbd>
         </div>
       )}
     </div>

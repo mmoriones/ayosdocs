@@ -1,4 +1,4 @@
-import { PublicHeader } from '@/components/layout';
+import { PublicHeader, BottomNav } from '@/components/layout';
 import MobileHeader from '@/components/layout/MobileHeader';
 import Footer from '@/components/Footer';
 
@@ -17,6 +17,7 @@ export default function PublicLayout({ children }) {
         {children}
       </main>
       <Footer />
+      <BottomNav />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { redirect } from 'next/navigation';
 import ProfileClient from './ProfileClient';
+import { getAllGuides } from '@/lib/guides';
 
 export const metadata = {
   title: 'Profile | AyosDocs',
@@ -15,5 +16,7 @@ export default async function ProfilePage() {
     redirect('/');
   }
 
-  return <ProfileClient />;
+  const allGuides = getAllGuides(true);
+
+  return <ProfileClient allGuides={allGuides} />;
 }

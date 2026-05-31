@@ -144,7 +144,6 @@ export default function GuidesClient({ initialGuides }) {
           <section className="px-6 space-y-4">
             <div className="flex justify-between items-center">
               <h2 className="text-[20px] font-black text-[#1C1C1E] tracking-tight">Most Requested</h2>
-              <button className="text-[15px] font-bold text-[#0038A8]">See All</button>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -238,7 +237,7 @@ function FeaturedGuideCard({ guide }) {
       className={`${guide.theme.bg} ${guide.theme.border} border-[1.5px] rounded-[32px] p-5 pt-6 text-left flex flex-col items-start gap-4 relative overflow-hidden active:scale-[0.97] transition-all group shadow-sm`}
     >
       <div className="relative w-20 h-20 -mt-2 -ml-2 drop-shadow-lg transition-transform group-hover:scale-110 duration-500">
-         <GuideIcon slug={guide.slug} agency={guide.agency} size={80} />
+         <GuideIcon slug={guide.slug} agency={guide.agency} size={60} />
       </div>
       
       <div className="space-y-2 relative z-10 w-full">
