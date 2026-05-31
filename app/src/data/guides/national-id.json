@@ -1,0 +1,634 @@
+{
+  "id": "national-id",
+  "title": "How to Register for the Philippine National ID (PhilSys)",
+  "shortTitle": "National ID",
+  "slug": "national-id",
+  "relatedGuideSlugs": [
+    "national-id",
+    "psa-birth-certificate",
+    "nbi-clearance"
+  ],
+  "description": "Register for the PhilSys National ID to simplify your identity verification nationwide.",
+  "lastUpdated": "2026-04-01",
+  "category": "Government ID",
+  "agency": "PSA",
+  "difficulty": "Easy",
+  "estimatedTime": "1-3D",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "Primary ID",
+      "description": "PSA birth certificate, Passport, or any other primary government ID.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Biometric Info",
+      "description": "Fingerprints, iris scan, and photograph captured at the registration center.",
+      "icon": "User"
+    }
+  ],
+  "tags": [
+    "National ID",
+    "PhilSys",
+    "PSA",
+    "Government ID",
+    "PhilID"
+  ],
+  "aliases": [
+    "PhilSys",
+    "PhilID",
+    "National ID Online",
+    "Digital ID"
+  ],
+  "checklist": [
+    {
+      "title": "Check Eligibility",
+      "description": "Ensure you are a Filipino citizen or resident alien at least 5 years old."
+    },
+    {
+      "title": "Prepare Documents",
+      "description": "Gather primary identification documents such as a birth certificate or passport."
+    },
+    {
+      "title": "Register for PhilSys",
+      "description": "Visit a registration center to provide your personal information and undergo document verification."
+    },
+    {
+      "title": "Complete Biometrics",
+      "description": "Have your photograph, fingerprints, and iris scan taken by the registration staff."
+    },
+    {
+      "title": "Verify Information",
+      "description": "Carefully review and confirm all encoded details before final submission."
+    },
+    {
+      "title": "Wait for Delivery",
+      "description": "Keep your transaction slip and wait for the delivery of your physical card or digital ID access."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Initial Registration",
+      "amount": "₱0"
+    },
+    {
+      "label": "First PhilID Issuance",
+      "amount": "₱0"
+    },
+    {
+      "label": "Digital National ID",
+      "amount": "₱0"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-the-philippine-national-id",
+      "title": "What is the Philippine National ID?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **Philippine Identification System (PhilSys) National ID** is the official national identification system of the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "It provides every Filipino citizen and resident alien with a single, secure, and verifiable identity."
+        },
+        {
+          "type": "paragraph",
+          "content": "The National ID may be issued in different formats:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Physical National ID card (PhilID)",
+            "Paper-based PhilSys ePhilID",
+            "Digital National ID"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "The system is managed by the **Philippine Statistics Authority (PSA)** under Republic Act No. 11055 or the PhilSys Act."
+        },
+        {
+          "type": "paragraph",
+          "content": "The National ID can be used for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Identity verification",
+            "Government transactions",
+            "Opening bank accounts",
+            "School and employment requirements",
+            "SIM registration",
+            "Accessing public and private services",
+            "Financial services and benefits"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "The National ID is considered a valid proof of identity nationwide."
+        }
+      ]
+    },
+    {
+      "id": "who-can-apply",
+      "title": "Who Can Apply?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may register for the National ID if you are:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A Filipino citizen",
+            "A resident alien living in the Philippines",
+            "At least 5 years old",
+            "A parent or guardian registering a child"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Children below 5 years old may also be registered, but their biometrics will be updated when they reach the required age."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-national-id",
+      "title": "Benefits of Having a National ID",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Having a National ID provides several advantages:"
+        },
+        {
+          "type": "subheading",
+          "title": "Easier Transactions",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The National ID simplifies identity verification across government agencies and private institutions."
+        },
+        {
+          "type": "subheading",
+          "title": "Faster Access to Services",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "It may be used for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Banking",
+            "Social welfare programs",
+            "Government assistance",
+            "Healthcare services",
+            "Public records requests"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "Reduced Need for Multiple IDs",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Instead of carrying several government-issued IDs, you can use one unified identification system."
+        },
+        {
+          "type": "subheading",
+          "title": "Digital Verification",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The Digital National ID allows online and electronic identity verification."
+        }
+      ]
+    },
+    {
+      "id": "registration-methods",
+      "title": "Registration Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "There are several ways to register for the National ID."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In Registration",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants may visit designated PhilSys registration centers."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Appointment or Pre-Registration",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Some registration centers may allow online pre-registration to reduce waiting time."
+        },
+        {
+          "type": "subheading",
+          "title": "Mobile Registration",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Certain local government units and remote areas may conduct mobile registration drives."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-registration-process",
+      "title": "Step-by-Step Registration Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Most ID applications now require **Online Pre-registration**. Always take a screenshot of your QR code or transaction slip before heading to the office."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Your Documents",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Gather all required identification documents before visiting the registration center."
+        },
+        {
+          "type": "paragraph",
+          "content": "Ensure that:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Names are spelled correctly",
+            "Birth dates match all records",
+            "Documents are clear and readable"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Incorrect information may delay processing."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit a PhilSys Registration Center",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Go to the nearest registration center."
+        },
+        {
+          "type": "paragraph",
+          "content": "These may include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "PSA offices",
+            "Selected malls",
+            "Local government offices",
+            "Government service centers"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Bring your required documents."
+        },
+        {
+          "type": "subheading",
+          "title": "Fill Out the Registration Form",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "You will provide personal details such as:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Full name",
+            "Sex",
+            "Date of birth",
+            "Address",
+            "Blood type (optional)",
+            "Contact information"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Double-check all information before submission."
+        },
+        {
+          "type": "subheading",
+          "title": "Document Verification",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Staff will verify your documents and personal information."
+        },
+        {
+          "type": "paragraph",
+          "content": "Any discrepancies may require additional supporting documents."
+        },
+        {
+          "type": "subheading",
+          "title": "Biometric Capture",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Your biometric information will be collected, including:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Photograph",
+            "Fingerprints",
+            "Iris scan"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Children below 5 years old may only have a photograph taken initially."
+        },
+        {
+          "type": "subheading",
+          "title": "Review and Confirm Information",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Before final submission, carefully review all encoded details."
+        },
+        {
+          "type": "paragraph",
+          "content": "Check for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Correct spelling",
+            "Accurate birth date",
+            "Updated address",
+            "Proper formatting"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Once confirmed, your registration will be finalized."
+        },
+        {
+          "type": "subheading",
+          "title": "Receive Transaction Slip",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "You will receive a transaction or reference slip."
+        },
+        {
+          "type": "paragraph",
+          "content": "Keep this document safe since it may be needed for tracking or verification."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for Delivery or Access the Digital ID",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "After processing, you may receive:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Physical National ID card",
+            "Paper-based ePhilID",
+            "Digital National ID access"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Delivery timelines may vary depending on your location and application volume."
+        }
+      ]
+    },
+    {
+      "id": "where-to-register",
+      "title": "Where to Register",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Registration centers may be available at:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "PSA offices",
+            "SM malls and selected shopping centers",
+            "Local government offices",
+            "Government service hubs",
+            "Mobile registration events"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Schedules and availability may vary by region."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "[Philippine Identification System (PhilSys)](https://philsys.gov.ph)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processing-and-delivery-time",
+      "title": "Processing and Delivery Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines may include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Registration processing: Several days to weeks",
+            "Physical card delivery: Several weeks to months"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Delivery delays may occur because of:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "High application volume",
+            "Incomplete information",
+            "Address verification issues",
+            "Logistics and courier delays"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how-to-track-your-national-id",
+      "title": "How to Track Your National ID",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may track the delivery status using the tracking information provided after registration."
+        },
+        {
+          "type": "paragraph",
+          "content": "Tracking options may include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Official tracking websites",
+            "Courier tracking systems",
+            "PSA announcements"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always keep your transaction slip or tracking number."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Delayed card delivery",
+            "Incorrect personal information",
+            "Missing courier delivery",
+            "Incomplete biometrics",
+            "Name mismatches with PSA records"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "If errors are found, contact the PSA or visit a registration center for assistance."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Bringing incomplete requirements",
+            "Using inconsistent personal information",
+            "Forgetting transaction slips",
+            "Arriving late during scheduled appointments",
+            "Providing outdated addresses"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your details carefully before final confirmation."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-registration",
+      "title": "Tips for Faster Registration",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Visit early to avoid long queues",
+            "Prepare photocopies beforehand",
+            "Wear proper attire for ID photo capture",
+            "Ensure fingerprints are clean and readable",
+            "Verify PSA records before registration"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is the National ID free?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. Initial registration and first issuance are free of charge."
+        },
+        {
+          "type": "subheading",
+          "title": "Can minors apply?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. Children may be registered with the assistance of a parent or guardian."
+        },
+        {
+          "type": "subheading",
+          "title": "Is the Digital National ID valid?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. The Digital National ID may be accepted for many transactions and identity verification purposes."
+        },
+        {
+          "type": "subheading",
+          "title": "What if I lose my National ID?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "You may request a replacement, subject to verification and applicable replacement procedures."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I use the National ID for banking?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. Many banks and financial institutions accept the National ID as valid proof of identity."
+        }
+      ]
+    }
+  ]
+}

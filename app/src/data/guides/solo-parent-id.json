@@ -1,0 +1,356 @@
+{
+  "id": "solo-parent-id",
+  "title": "How to Apply for a Solo Parent ID in the Philippines",
+  "shortTitle": "Solo Parent ID",
+  "slug": "solo-parent-id",
+  "relatedGuideSlugs": [
+    "national-id",
+    "barangay-clearance",
+    "psa-birth-certificate"
+  ],
+  "description": "Access parental leave and social welfare benefits for qualified single parents.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government ID",
+  "agency": "LGU",
+  "difficulty": "Moderate",
+  "estimatedTime": "3D-4W",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID of the applicant.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Child's Birth Cert",
+      "description": "PSA birth certificate of the child or children.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Solo Parent Affidavit",
+      "description": "A sworn statement explaining the solo parent status.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Proof of Residency",
+      "description": "Documents verifying residence in the city or municipality for at least 6 months.",
+      "icon": "MapPin"
+    }
+  ],
+  "tags": [
+    "Solo Parent ID",
+    "DSWD",
+    "LGU",
+    "Solo Parent",
+    "Government Benefits",
+    "Philippines"
+  ],
+  "aliases": [
+    "Single Parent ID",
+    "Solo Parent Card",
+    "Solo Parent Benefits ID"
+  ],
+  "checklist": [
+    {
+      "title": "Prepare Documents",
+      "description": "Gather your valid ID, children's birth certificates, and proof of your solo parent status."
+    },
+    {
+      "title": "Secure Residency",
+      "description": "Obtain a barangay certificate or other proof of residency within the LGU."
+    },
+    {
+      "title": "Submit Form",
+      "description": "File your application at the City or Municipal Social Welfare and Development Office."
+    },
+    {
+      "title": "Attend Assessment",
+      "description": "Participate in any required interviews or home visits conducted by the social welfare staff."
+    },
+    {
+      "title": "Claim ID",
+      "description": "Receive your Solo Parent ID and booklet once your application is approved."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Solo Parent ID Application",
+      "amount": "Free"
+    },
+    {
+      "label": "Barangay Certificate",
+      "amount": "₱50–₱150"
+    },
+    {
+      "label": "Affidavit or Notarial Fees",
+      "amount": "₱100–₱500"
+    },
+    {
+      "label": "Photocopying and ID Photos",
+      "amount": "₱50–₱200"
+    },
+    {
+      "label": "Total",
+      "amount": "Free–₱850"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-solo-parent-id",
+      "title": "What is Solo Parent ID?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The Solo Parent ID is an identification card issued by the Local Government Unit (LGU) or local social welfare office to qualified solo parents under the Expanded Solo Parents Welfare Act in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "The ID serves as proof that the holder is eligible for government benefits, discounts, leave privileges, and assistance programs intended for solo parents."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Solo Parent ID is commonly used for:\n* Availing solo parent discounts and benefits\n* Applying for solo parent leave\n* Accessing government assistance programs"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a Solo Parent ID if you are:\n- Raising a child alone due to separation, annulment, or death of a spouse\n- An unmarried parent solely responsible for a child\n- A spouse or family member acting as sole caregiver\n- Applying for solo parent benefits and government assistance"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-solo-parent-id",
+      "title": "Benefits of Having Solo Parent ID",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Access to Solo Parent Benefits",
+          "content": "Qualified solo parents may receive:\n* Discounts on selected baby and child-related products\n* Priority access to assistance programs\n* Additional parental support services"
+        },
+        {
+          "type": "subheading",
+          "title": "Solo Parent Leave Privilege",
+          "content": "Eligible employees may avail of additional solo parent leave benefits under Philippine labor laws."
+        },
+        {
+          "type": "subheading",
+          "title": "Government Assistance and Support",
+          "content": "The ID may be required for:\n* Educational assistance\n* Livelihood programs\n* Medical and social welfare services"
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Solo Parent ID applications are generally processed through the city or municipal social welfare office."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Application",
+          "content": "Some LGUs may offer:\n* Online appointment systems\n* Downloadable forms\n* Electronic submission portals"
+        },
+        {
+          "type": "paragraph",
+          "content": "Availability depends on the local government unit."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In Application",
+          "content": "Applicants may visit:\n* City Social Welfare and Development Office (CSWDO)\n* Municipal Social Welfare and Development Office (MSWDO)\n* City Hall or Municipal Hall"
+        },
+        {
+          "type": "paragraph",
+          "content": "Personal interviews or assessments may be required."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Benefits for these IDs are often LGU-specific. Visit your **city hall's OSCA or MSWD office** to learn about local discounts and grocery subsidies."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Documentary Requirements",
+          "content": "Gather all required documents proving:\n* Identity\n* Residency\n* Solo parent status\n* Child relationship"
+        },
+        {
+          "type": "subheading",
+          "title": "Visit the Social Welfare Office",
+          "content": "Proceed to the CSWDO or MSWDO of your city or municipality."
+        },
+        {
+          "type": "paragraph",
+          "content": "Request and accomplish the Solo Parent application form."
+        },
+        {
+          "type": "subheading",
+          "title": "Submit the Application",
+          "content": "Submit the completed form and supporting documents for assessment and verification."
+        },
+        {
+          "type": "paragraph",
+          "content": "Some LGUs may conduct interviews or home visits."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for Evaluation and Approval",
+          "content": "The social welfare office will evaluate your eligibility under the Expanded Solo Parents Welfare Act."
+        },
+        {
+          "type": "paragraph",
+          "content": "Additional documents may be requested if necessary."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim the Solo Parent ID",
+          "content": "Once approved, claim your Solo Parent ID and related documents or booklets from the LGU office."
+        },
+        {
+          "type": "paragraph",
+          "content": "Validity periods may vary by LGU policy."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their Solo Parent ID at:\n- City Social Welfare and Development Office (CSWDO)\n- Municipal Social Welfare and Development Office (MSWDO)\n- City Hall or Municipal Hall\n- Selected LGU online portals"
+        },
+        {
+          "type": "paragraph",
+          "content": "Applications are generally filed where the applicant resides."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n* Initial assessment: Same day to 3 business days\n* Verification and approval: 1–4 weeks\n* ID issuance: Same day after approval to several business days"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor their application through:\n* CSWDO or MSWDO inquiry desks\n* LGU SMS notifications\n* Phone or email follow-ups"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- Incomplete supporting documents\n- Delayed verification processes\n- Missing proof of solo parent status\n- Residency verification issues\n- Inconsistent personal information"
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Submitting incomplete legal documents",
+            "Using expired IDs",
+            "Forgetting supporting documents for children",
+            "Applying in the wrong LGU jurisdiction",
+            "Assuming all solo parent cases require identical requirements"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your application before final submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Verify your category of solo parent status beforehand",
+            "Bring multiple photocopies of all documents",
+            "Organize supporting records in labeled folders",
+            "Coordinate directly with your LGU social welfare office",
+            "Keep copies of your approved application and ID"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "To stay informed about your rights under the Expanded Solo Parents Welfare Act, please visit:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Social Welfare:** [Department of Social Welfare and Development (DSWD)](https://www.dswd.gov.ph)",
+            "**Local Government Unit (LGU):** Visit the official website or City/Municipal Social Welfare and Development Office of your place of residence."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Who qualifies as a solo parent?",
+          "content": "Qualified solo parents include individuals solely responsible for child care due to death, separation, abandonment, annulment, or similar circumstances recognized by law."
+        },
+        {
+          "type": "subheading",
+          "title": "Is the Solo Parent ID free?",
+          "content": "Yes. The ID is generally issued free of charge by the LGU."
+        },
+        {
+          "type": "subheading",
+          "title": "How long is the Solo Parent ID valid?",
+          "content": "Validity periods may vary depending on LGU rules and current regulations."
+        },
+        {
+          "type": "subheading",
+          "title": "Can employed solo parents receive additional leave?",
+          "content": "Yes. Eligible employees may receive solo parent leave benefits under Philippine labor laws."
+        },
+        {
+          "type": "subheading",
+          "title": "Are there discounts available for solo parents?",
+          "content": "Qualified solo parents may receive discounts on selected baby and child-related products and services under current laws and regulations."
+        }
+      ]
+    }
+  ]
+}

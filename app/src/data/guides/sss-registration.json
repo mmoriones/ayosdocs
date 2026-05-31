@@ -1,0 +1,256 @@
+{
+  "id": "sss-registration",
+  "title": "How to Register for SSS Membership in the Philippines",
+  "shortTitle": "SSS Membership",
+  "slug": "sss-registration",
+  "relatedGuideSlugs": [
+    "national-id",
+    "psa-birth-certificate",
+    "nbi-clearance"
+  ],
+  "description": "Build your social security records for retirement, maternity, and sickness benefits.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government ID",
+  "agency": "SSS",
+  "difficulty": "Easy",
+  "estimatedTime": "1-3D",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "Primary ID",
+      "description": "Passport, National ID, or Driver's License for identity verification.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Email Address",
+      "description": "An active email for account verification and receiving your SS number.",
+      "icon": "Mail"
+    },
+    {
+      "title": "Birth Certificate",
+      "description": "PSA birth certificate (may be required for verification).",
+      "icon": "FileText"
+    }
+  ],
+  "tags": [
+    "SSS",
+    "Employment",
+    "Government Benefits",
+    "Social Security",
+    "Philippines"
+  ],
+  "checklist": [
+    {
+      "title": "Register Online",
+      "description": "Complete the initial registration form on the SSS website or mobile app."
+    },
+    {
+      "title": "Get SS Number",
+      "description": "Submit your application to receive your permanent, lifetime SS number."
+    },
+    {
+      "title": "Create My.SSS",
+      "description": "Verify your email and set up your My.SSS online account for contribution tracking."
+    },
+    {
+      "title": "Prepare Documents",
+      "description": "Gather any necessary supporting documents like your birth certificate or valid IDs."
+    },
+    {
+      "title": "Submit Documents",
+      "description": "Upload your documents through the portal or present them at an SSS branch if required."
+    },
+    {
+      "title": "Activate Account",
+      "description": "Ensure your My.SSS account is fully activated to access loans and benefits."
+    },
+    {
+      "title": "Start Contributions",
+      "description": "Begin paying your monthly contributions based on your salary or income level."
+    }
+  ],
+  "fees": [
+    {
+      "label": "SSS Registration",
+      "amount": "Free"
+    },
+    {
+      "label": "SS Number Issuance",
+      "amount": "Free"
+    },
+    {
+      "label": "Minimum Monthly Contribution",
+      "amount": "₱560 (starts at this level)"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-sss-registration",
+      "title": "What is SSS Registration?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "**SSS Registration** is the process of enrolling as a member of the **Social Security System (SSS)**. It is a mandatory requirement for all private sector employees, self-employed individuals, and Overseas Filipino Workers (OFWs)."
+        },
+        {
+          "type": "paragraph",
+          "content": "After successful registration, you receive a permanent **SS Number**. This number is your lifetime link to social insurance and financial benefits provided by the Philippine government."
+        },
+        {
+          "type": "paragraph",
+          "content": "The SSS provides protection against various life events, including:\n*   **Sickness and Disability:** Cash allowances during periods of illness.\n*   **Maternity:** Financial support for female members during childbirth or miscarriage.\n*   **Retirement:** A monthly pension or lump sum after reaching retirement age.\n*   **Unemployment:** Cash benefits for members who lose their jobs involuntarily.\n*   **Death and Funeral:** Assistance for the member’s beneficiaries."
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Most ID applications now require **Online Pre-registration**. Always take a screenshot of your QR code or transaction slip before heading to the office."
+        },
+        {
+          "type": "paragraph",
+          "content": "You should register for SSS if you are:\n- **Private Sector Employee:** Your employer is legally required to register you.\n- **Self-Employed/Freelancer:** To ensure your own social protection.\n- **Overseas Filipino Worker (OFW):** Mandatory for both land-based and sea-based workers.\n- **Non-Working Spouse:** To share in the benefits of your contributing spouse.\n- **Kasambahay:** Household workers are now legally mandated to have SSS coverage."
+        },
+        {
+          "type": "paragraph",
+          "content": "**Important:** You should only have **one (1) SS Number for life**. Having multiple numbers can cause severe delays in claiming benefits."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-an-sss-membership",
+      "title": "Benefits of Having an SSS Membership",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Long-Term Financial Security",
+          "content": "The SSS retirement pension provides a steady income after you stop working, based on your years of contribution and average salary credit."
+        },
+        {
+          "type": "subheading",
+          "title": "Cash Loans",
+          "content": "Once you have enough contributions (usually 36 monthly payments), you become eligible for **Salary Loans** and **Calamity Loans** with low interest rates."
+        },
+        {
+          "type": "subheading",
+          "title": "Maternity & Sickness Allowances",
+          "content": "Unlike a simple savings account, the SSS provides \"replacement income\" when you are unable to work due to medical reasons or childbirth."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online (My.SSS Portal)",
+          "content": "The primary method is through the [SSS Website](https://www.sss.gov.ph). This allows you to generate your SS number and create an online account in one go."
+        },
+        {
+          "type": "subheading",
+          "title": "SSS Mobile App",
+          "content": "You can register and monitor your contributions entirely through the official SSS Mobile App (available on App Store, Google Play, and AppGallery)."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In (SSS Branches)",
+          "content": "You can visit any SSS branch, especially those in malls (SSS Service Offices), for assistance with registration or data correction."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-registration-process",
+      "title": "Step-by-Step Registration Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Most ID applications now require **Online Pre-registration**. Always take a screenshot of your QR code or transaction slip before heading to the office."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit the SSS Online Portal",
+          "content": "Go to the [SSS Member Registration Page](https://member.sss.gov.ph/members/registrationPages/registration.jsp). Read the instructions and click \"Proceed.\""
+        },
+        {
+          "type": "subheading",
+          "title": "Fill Out the Initial Form",
+          "content": "Enter your personal details accurately. **Tip:** Double-check your name spelling and birthdate—errors here require a physical visit to a branch to fix."
+        },
+        {
+          "type": "subheading",
+          "title": "Email Verification",
+          "content": "SSS will send a link to your email. Click it within 48 hours to continue your application. If you don't see it, check your \"Spam\" or \"Promotions\" folder."
+        },
+        {
+          "type": "subheading",
+          "title": "Complete Your Profile",
+          "content": "Provide your address, employment status, and parent details. Once submitted, your **SS Number** will be generated and sent to your email."
+        },
+        {
+          "type": "subheading",
+          "title": "Set Up My.SSS Account",
+          "content": "Use your new SS Number to register for a **My.SSS account**. This is critical for viewing your contributions, applying for loans, and generating the **PRN (Payment Reference Number)** needed for payments."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate information and to manage your account, visit:\n- [Official SSS Website](https://www.sss.gov.ph)\n- [My.SSS Member Portal](https://member.sss.gov.ph/members/)\n- [SSS Facebook Page (Official Updates)](https://www.facebook.com/SSSPhils)"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**\"Existing Record Found\":** This means you likely already have an SS Number. Do NOT register again. Use the \"Forgot Password\" or \"Forgot Member ID\" feature.",
+            "**Payment Not Posted:** If you pay via a third-party app and it doesn't show in your My.SSS within 3 days, contact the SSS Helpdesk."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Download the SSS Mobile App:** It’s much more stable than the web portal during peak hours.",
+            "**Generate PRN via App:** You cannot pay your contributions without a **PRN**. The app generates this instantly.",
+            "**Keep Your Contact Info Updated:** SSS uses SMS for One-Time Pins (OTP) for all transactions. If you change your number, update it in My.SSS immediately."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is the SS Number the same as the UMID?",
+          "content": "No. Your **SS Number** is your account number. The **UMID (Unified Multi-Purpose ID)** is the physical card that uses your SS number. *Note: UMID card applications are currently limited in some areas in favor of the National ID.*"
+        },
+        {
+          "type": "subheading",
+          "title": "Can I stop contributing?",
+          "content": "If you are self-employed or an OFW, you can stop and resume anytime. However, your benefits (like loans and pension) depend on the **total number of contributions**."
+        }
+      ]
+    }
+  ]
+}

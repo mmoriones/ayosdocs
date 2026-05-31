@@ -125,9 +125,10 @@ To maintain clarity across the platform, use these canonical terms in both UI an
 -   **Server Actions:** Use Server Actions for mutations (form submissions, status updates).
 
 ### Content Management
--   Guides are stored as Markdown files in `src/data/guides/`.
--   Metadata is handled via YAML frontmatter.
--   Headings are automatically extracted for the Table of Contents.
+- Guides are stored as Block-Based JSON files in `src/data/guides/`.
+- For instructions on creating and maintaining guides, refer to [docs/GUIDE_AUTHORING.md](docs/GUIDE_AUTHORING.md).
+- Metadata and inter-linking are handled via the JSON schema.
+
 
 ## Future Roadmap
 

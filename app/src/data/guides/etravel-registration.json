@@ -1,0 +1,289 @@
+{
+  "id": "etravel-registration",
+  "shortTitle": "eTravel Registration",
+  "title": "How to Register for eTravel (Arrival/Departure)",
+  "slug": "etravel-registration",
+  "relatedGuideSlugs": [
+    "passport-appointment",
+    "dfa-apostille",
+    "nbi-clearance"
+  ],
+  "description": "Complete the mandatory digital travel declaration for all passengers entering or leaving the Philippines.",
+  "lastUpdated": "2026-05-14",
+  "category": "Travel",
+  "agency": "Bureau of Immigration",
+  "difficulty": "Easy",
+  "estimatedTime": "1D",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "Passport Details",
+      "description": "Your passport number and date of issuance.",
+      "icon": "Passport"
+    },
+    {
+      "title": "Flight Details",
+      "description": "Airline name and flight number for your trip.",
+      "icon": "Plane"
+    },
+    {
+      "title": "Personal Photo",
+      "description": "A clear, recent digital photo of your face.",
+      "icon": "User"
+    },
+    {
+      "title": "Email Address",
+      "description": "To receive your confirmation and QR code.",
+      "icon": "Mail"
+    }
+  ],
+  "tags": [
+    "eTravel",
+    "Travel",
+    "Immigration",
+    "Philippines",
+    "Arrival Card"
+  ],
+  "aliases": [
+    "eTravel QR Code",
+    "Philippine Arrival Card",
+    "eTravel Registration",
+    "Bureau of Quarantine Form"
+  ],
+  "checklist": [
+    {
+      "title": "Visit Portal",
+      "description": "Go to the official etravel.gov.ph website within 72 hours of your travel."
+    },
+    {
+      "title": "Enter Details",
+      "description": "Fill out your personal, travel, and health declaration information accurately."
+    },
+    {
+      "title": "Upload Info",
+      "description": "Provide your passport details and upload a recent digital photo."
+    },
+    {
+      "title": "Save QR Code",
+      "description": "Download or screenshot the generated QR code to present at immigration."
+    }
+  ],
+  "fees": [
+    {
+      "label": "eTravel Registration",
+      "amount": "Free"
+    },
+    {
+      "label": "Total",
+      "amount": "Free"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-etravel",
+      "title": "What is eTravel?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "**eTravel** is the unified digital platform for all passengers arriving in or departing from the Philippines. It replaces the traditional paper-based arrival and departure cards."
+        },
+        {
+          "type": "paragraph",
+          "content": "The eTravel QR Code is commonly used for:\n*   Clearing Immigration at all Philippine international airports\n*   Health declaration for the Bureau of Quarantine\n*   Customs declaration (integrated in some airports)"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need an eTravel QR Code if you are:\n- **Arriving in the PH:** All passengers (Filipinos and Foreigners).\n- **Departing from the PH:** Only Filipino citizens (including OFWs).\n- **Crew Members:** All airline crew entering the Philippines."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-etravel-registration",
+      "title": "Benefits of eTravel Registration",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The digital system streamlines the airport experience and removes the need for pens and paper forms."
+        },
+        {
+          "type": "subheading",
+          "title": "Unified Clearance",
+          "content": "One QR code covers Immigration, Health (Quarantine), and often Customs, reducing the number of checkpoints."
+        },
+        {
+          "type": "subheading",
+          "title": "Faster Processing",
+          "content": "Travelers with a \"Green\" QR code can use the Express Lanes at the airport."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Official Website",
+          "content": "The primary method is via [etravel.gov.ph](https://etravel.gov.ph)."
+        },
+        {
+          "type": "subheading",
+          "title": "eGovPH App",
+          "content": "You can also register within the **eGovPH** mobile app for a more integrated experience."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** The **DMW Mobile App** is now the primary portal for OEC and e-Registration. Ensure your profile is 100% complete before booking appointments."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit the Portal",
+          "content": "Go to [etravel.gov.ph](https://etravel.gov.ph). Be careful of fake sites that look similar but ask for payment."
+        },
+        {
+          "type": "subheading",
+          "title": "Choose Travel Type",
+          "content": "Select \"Arrival\" (if entering the Philippines) or \"Departure\" (if a Filipino citizen leaving)."
+        },
+        {
+          "type": "subheading",
+          "title": "Enter Personal Details",
+          "content": "Provide your name, nationality, passport number, and **date of issuance**. Upload your personal photo when prompted."
+        },
+        {
+          "type": "subheading",
+          "title": "Enter Travel Details",
+          "content": "Input your date of travel, flight number, airline, and the purpose of your trip (e.g., Tourism, Work, Balikbayan)."
+        },
+        {
+          "type": "subheading",
+          "title": "Health & Customs Declaration",
+          "content": "Answer the brief health questionnaire regarding your recent travel history and any symptoms. If arriving, complete the customs declaration section if applicable."
+        },
+        {
+          "type": "subheading",
+          "title": "Save the QR Code",
+          "content": "Once submitted, a **QR Code** will be displayed. Take a screenshot or download the PDF. You will also receive a copy via email."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their eTravel registration at:\n- [Official eTravel Website](https://etravel.gov.ph)\n- [eGovPH App](https://e.gov.ph)"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Online Form: 5–10 Minutes"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The system provides an instant QR code. There is no \"status tracking\" needed.\n*   **Green QR Code:** Cleared for entry/exit.\n*   **Red QR Code:** Proceed to the Bureau of Quarantine/Immigration desk for manual verification."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Website Overload:** The site may be slow during peak travel hours.\n- **Photo Upload Fail:** Ensure your photo is a JPG or PNG and under 5MB.\n- **Scam Sites:** Sites that look like eTravel but ask for credit card info. **eTravel is always FREE.**"
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Wrong Flight Number:** Ensure your flight number is correct, as the system validates this against real-time flight data.",
+            "**Registering Too Early:** If you register more than 72 hours before your flight, the QR code may not be valid."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always have a screenshot of your QR code ready before you land, as airport Wi-Fi can be unreliable."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Register while you are still at your departure airport or at home to avoid rushing at the arrival gate.",
+            "If traveling as a family, one person can create an account and add all family members to speed up the process.",
+            "Keep your passport issuance date handy, as this is a new mandatory field for 2026."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "To ensure you are using the official and free registration portal, always use the following links:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Official Portal:** [Official eTravel Portal](https://etravel.gov.ph)",
+            "**Government App:** [eGovPH Official Website](https://e.gov.ph)",
+            "**Agency Information:** [Bureau of Immigration (BI)](https://immigration.gov.ph)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Do infants need an eTravel QR code?",
+          "content": "Yes, every passenger, including children and infants, must have their own individual eTravel QR code."
+        },
+        {
+          "type": "subheading",
+          "title": "Do foreign tourists need a QR code to leave the PH?",
+          "content": "No, the departure eTravel registration is currently only mandatory for Filipino citizens. Foreigners only need it for arrival."
+        }
+      ]
+    }
+  ]
+}

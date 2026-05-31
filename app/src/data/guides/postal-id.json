@@ -1,0 +1,268 @@
+{
+  "id": "postal-id",
+  "shortTitle": "Postal ID",
+  "title": "How to Get an Improved Postal ID",
+  "slug": "postal-id",
+  "relatedGuideSlugs": [
+    "national-id",
+    "psa-birth-certificate",
+    "nbi-clearance"
+  ],
+  "description": "Obtain your digitized Postal ID, one of the fastest and most accessible primary IDs in the Philippines.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government ID",
+  "agency": "PHLPost",
+  "difficulty": "Easy",
+  "estimatedTime": "10-15D",
+  "costRange": "P5H-P2K",
+  "requirements": [
+    {
+      "title": "PSA Birth Certificate",
+      "description": "Original birth certificate in security paper.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Proof of Address",
+      "description": "Barangay certificate, utility bill, or bank statement to verify your residence.",
+      "icon": "MapPin"
+    },
+    {
+      "title": "Application Form",
+      "description": "Two copies of the completed postal ID application form.",
+      "icon": "FileText"
+    }
+  ],
+  "tags": [
+    "Postal ID",
+    "PHLPost",
+    "Government ID",
+    "Primary ID",
+    "Philippines"
+  ],
+  "aliases": [
+    "Improved Postal ID",
+    "Digitized Postal ID",
+    "PhilPost ID"
+  ],
+  "checklist": [
+    {
+      "title": "Secure Birth Cert",
+      "description": "Obtain your PSA-issued birth certificate or use a valid passport as a primary document."
+    },
+    {
+      "title": "Get Proof of Residency",
+      "description": "Secure a barangay certificate or prepare a utility bill showing your address."
+    },
+    {
+      "title": "Visit Post Office",
+      "description": "Go to any post office for biometric capture, including photo and fingerprints."
+    },
+    {
+      "title": "Pay Fee",
+      "description": "Settle the application fee for either regular or rush processing."
+    },
+    {
+      "title": "Wait for Delivery",
+      "description": "Have the ID delivered to your address by a PHLPost carrier."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Regular Application Fee",
+      "amount": "₱550.00"
+    },
+    {
+      "label": "Rush Application Fee",
+      "amount": "₱650.00"
+    },
+    {
+      "label": "Total",
+      "amount": "₱550 – ₱650"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-the-improved-postal-id",
+      "title": "What is the Improved Postal ID?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **Improved Postal ID** is a digitized government-issued identification card provided by the Philippine Postal Corporation (PHLPost). It is recognized as a **Primary ID** by government agencies (like the DFA) and private institutions (like banks)."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Postal ID is commonly used for:\n*   Passport applications (DFA)\n*   Opening bank accounts\n*   Proof of identity and address\n*   Claiming packages and mail"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need an Improved Postal ID if you are:\n- A Filipino citizen (residing in the PH or abroad)\n- A foreign resident (living in the PH for at least 6 months)\n- A first-time ID seeker who needs a Primary ID quickly"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-an-improved-postal-id",
+      "title": "Benefits of Having an Improved Postal ID",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The Postal ID is widely considered one of the most accessible \"Primary IDs\" because of its straightforward requirements."
+        },
+        {
+          "type": "subheading",
+          "title": "Fast Turnaround",
+          "content": "With the **Rush Processing** option, you can receive your ID in as little as one day at selected capture sites."
+        },
+        {
+          "type": "subheading",
+          "title": "Widely Accepted",
+          "content": "It is one of the few IDs (alongside the Passport and National ID) that is almost universally accepted for high-level transactions, including DFA passport applications."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Walk-In (Post Office)",
+          "content": "Most Post Offices nationwide accept regular applications. For **Rush Processing**, you must visit a designated \"Rush Capture\" site (e.g., SM Manila, Manila Central Post Office)."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Most ID applications now require **Online Pre-registration**. Always take a screenshot of your QR code or transaction slip before heading to the office."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit any Post Office",
+          "content": "Submit your completed application forms and requirements at the counter."
+        },
+        {
+          "type": "subheading",
+          "title": "Payment",
+          "content": "Pay the fee at the cashier.\n*   **Regular:** ₱550.00\n*   **Rush:** ₱650.00 (Only at selected sites)"
+        },
+        {
+          "type": "subheading",
+          "title": "Biometric Capture",
+          "content": "Proceed to the data capture station. They will take your digital photo, fingerprints, and digital signature. No need to bring your own ID photos."
+        },
+        {
+          "type": "subheading",
+          "title": "Delivery",
+          "content": "The ID will be delivered to your address by a PHLPost carrier. \n*   **Rush:** Next-day or within 3 days.\n*   **Regular:** 10–15 working days."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their Postal ID at:\n- **Any Post Office branch** (Nationwide)\n- **Selected SM Malls** (Government Service Express)\n- **Robinsons Malls** (Lingkod Pinoy Centers)"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   **Regular:** 10–15 Working Days\n*   **Rush (Selected Sites):** Same Day / Next Day"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor their delivery through:\n*   [PHLPost Tracking Portal](https://www.phlpost.gov.ph/) using the reference number on the receipt."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Delivery Delays:** If the address is incorrect or the recipient is not home.\n- **Biometric Issues:** If you have faint fingerprints (staff may ask you to re-capture)."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Heavy Makeup/Accessories:** These can interfere with facial recognition; wear minimal makeup and avoid large jewelry.",
+            "**Incorrect Photocopies:** Ensure your photocopies are clear and readable."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always keep your official receipt; you will need to present it to the mailman when the ID is delivered."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Download and print the application form at home to save time at the office.",
+            "Go to **SM Manila** or **Manila Central Post Office** for the most reliable rush service.",
+            "Wear a dark-colored shirt with a collar for the best photo result."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For more information on the Improved Postal ID, please visit:\n- [PHLPost Official Website](https://www.phlpost.gov.ph)"
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "How long is the Postal ID valid?",
+          "content": "It is valid for **three (3) years** for Filipinos and **one (1) year** for foreigners."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I apply even if I am unemployed?",
+          "content": "Yes. The Postal ID does not require proof of income or employment."
+        }
+      ]
+    }
+  ]
+}

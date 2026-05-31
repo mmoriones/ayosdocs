@@ -316,7 +316,7 @@ function GuestView({ trendingGuides, lastViewedSlug, allGuides }) {
             return (
               <TrendingCard 
                 key={guide.slug}
-                title={guide.shortTitle || guide.title.split(' / ')[0]} 
+                title={guide.shortTitle || guide.title} 
                 agency={guide.agency} 
                 trend={guide.trend} 
                 slug={guide.slug}
@@ -451,7 +451,7 @@ function UserView({ firstName, userData, isLoading, allGuides, session, lastView
       {/* Personalized Greeting */}
       <section className="px-6 py-6">
         <h2 className="text-[34px] font-bold tracking-tight text-[#1C1C1E] leading-tight">
-          Mabuhay, {firstName}!
+          Good morning, {firstName}!
         </h2>
         <p className="text-[17px] font-medium text-gray-500 mt-1">
           Here&apos;s what&apos;s happening with your government processes.
@@ -584,7 +584,7 @@ function UserView({ firstName, userData, isLoading, allGuides, session, lastView
             return (
               <TrendingCard 
                 key={guide.slug}
-                title={guide.shortTitle || guide.title.split(' / ')[0]} 
+                title={guide.shortTitle || guide.title} 
                 agency={guide.agency} 
                 trend={guide.trend} 
                 slug={guide.slug}
@@ -685,7 +685,7 @@ function ResumeSection({ guide, progress, title, subtitle, className = "mb-10" }
 
 function ResumeCard({ guide, progress, onClick }) {
   const agency = Array.isArray(guide.agency) ? guide.agency[0] : guide.agency;
-  const title = guide.shortTitle || guide.title.split(' / ')[0];
+  const title = guide.shortTitle || guide.title;
   const { setActiveGuideSlug } = useWorkspace();
 
   // Prioritize theme based on visual keyword for optimal contrast

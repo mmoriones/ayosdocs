@@ -1,0 +1,286 @@
+{
+  "id": "dmw-e-registration",
+  "shortTitle": "DMW E-Registration",
+  "title": "How to Register and Verify an OFW Contract (DMW E-Registration)",
+  "slug": "dmw-e-registration",
+  "relatedGuideSlugs": [
+    "passport-appointment",
+    "dfa-apostille",
+    "nbi-clearance"
+  ],
+  "description": "Complete your DMW E-Registration and contract verification process for direct-hired or agency-hired OFW positions.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government Documents",
+  "agency": "DMW",
+  "difficulty": "Complex",
+  "estimatedTime": "1-2W",
+  "costRange": "P5H-P2K",
+  "requirements": [
+    {
+      "title": "Valid Passport",
+      "description": "Original passport with at least 6 months validity.",
+      "icon": "Passport"
+    },
+    {
+      "title": "Verified Contract",
+      "description": "Employment contract verified by the Migrant Workers Office (MWO) abroad.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Valid Work Visa",
+      "description": "A valid work visa or entry permit for your destination country.",
+      "icon": "Plane"
+    },
+    {
+      "title": "PEOS Certificate",
+      "description": "Proof of completion of the Pre-Employment Orientation Seminar taken online.",
+      "icon": "GraduationCap"
+    }
+  ],
+  "tags": [
+    "OFW",
+    "DMW",
+    "E-Registration",
+    "Contract Verification",
+    "Direct Hire",
+    "Philippines"
+  ],
+  "aliases": [
+    "DMW Online Services",
+    "POEA E-Registration",
+    "Contract Verification",
+    "PopsDirect",
+    "OFW Account"
+  ],
+  "checklist": [
+    {
+      "title": "Create Account",
+      "description": "Register on the DMW Online Services Portal using an active email address."
+    },
+    {
+      "title": "Complete Profile",
+      "description": "Fill out your personal data, education, and work experience in the E-Registration dashboard."
+    },
+    {
+      "title": "Secure Verified Contract",
+      "description": "Have your employer verify the contract at the MWO abroad and send the original to you."
+    },
+    {
+      "title": "Upload Documents",
+      "description": "Submit digital copies of your verified contract, visa, and medical certificate to the PopsDirect portal."
+    },
+    {
+      "title": "Attend Briefing",
+      "description": "Participate in the mandatory DMW briefing or interview for evaluation of your documents."
+    }
+  ],
+  "fees": [
+    {
+      "label": "DMW Processing Fee",
+      "amount": "~$100 (varies by country)"
+    },
+    {
+      "label": "OWWA Membership",
+      "amount": "~$25 (₱1,300 - ₱1,500)"
+    },
+    {
+      "label": "Total",
+      "amount": "₱1,500 – ₱6,000"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-dmw-e-registration",
+      "title": "What is DMW E-Registration?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "**DMW E-Registration** is the mandatory online registration system for all Overseas Filipino Workers (OFWs). It serves as your digital profile in the Department of Migrant Workers (DMW) database and is the gateway to securing your **OEC/OFW Pass**."
+        },
+        {
+          "type": "paragraph",
+          "content": "The E-Registration portal is used for:\n*   Contract verification and registration\n*   Securing an Overseas Employment Certificate (OEC)\n*   Updating worker information and employment history\n*   Applying for direct-hire exemptions"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need to use DMW E-Registration if you are:\n- A first-time OFW (Agency-hired or Direct-hired)\n- A returning OFW updating your contract or employer\n- A worker applying for a \"Direct Hire\" exemption"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-e-registration",
+      "title": "Benefits of E-Registration",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The digital portal simplifies the documentation process and ensures your contract meets legal standards."
+        },
+        {
+          "type": "subheading",
+          "title": "Data Portability",
+          "content": "Your employment history, education, and clearances are saved in one place, making it easier to apply for renewals or new contracts."
+        },
+        {
+          "type": "subheading",
+          "title": "Worker Protection",
+          "content": "The contract verification step ensures that your salary, benefits, and working conditions follow Philippine government standards for migrant workers."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online Portal",
+          "content": "All registration and document uploads are done via the [DMW Online Services Portal](https://onlineservices.dmw.gov.ph)."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** The **DMW Mobile App** is now the primary portal for OEC and e-Registration. Ensure your profile is 100% complete before booking appointments."
+        },
+        {
+          "type": "subheading",
+          "title": "Create a DMW E-Registration Account",
+          "content": "Go to the [DMW Online Services Portal](https://onlineservices.dmw.gov.ph). Register using your active email address. **Important:** Your name must exactly match your passport."
+        },
+        {
+          "type": "subheading",
+          "title": "Complete Your Profile",
+          "content": "Fill out all sections:\n*   **Personal Data:** Address, contact info, beneficiaries.\n*   **Education:** School details.\n*   **Experience:** Previous work history.\n*   **Documents:** Upload your passport data page."
+        },
+        {
+          "type": "subheading",
+          "title": "Contract Verification (Phase 1)",
+          "content": "Your employer submits your contract to the **Migrant Workers Office (MWO)** abroad. Once verified, they must send the **original verified contract** to you in the Philippines via courier."
+        },
+        {
+          "type": "subheading",
+          "title": "Upload to PopsDirect (Phase 2)",
+          "content": "In your E-Registration dashboard, navigate to **PopsDirect** (for Direct Hires) or your agency's portal. Upload the digital copies of your verified contract, visa, medical, and PDOS certificates."
+        },
+        {
+          "type": "subheading",
+          "title": "Evaluation and Interview",
+          "content": "A DMW evaluator will check your documents. For direct hires, you may be required to attend a virtual or in-person interview at the DMW Central Office."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay Fees and Generate OEC",
+          "content": "Once approved, pay the DMW processing and OWWA membership fees. Your **OEC/OFW Pass** will then be available in the DMW Mobile App."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their registration at:\n- [DMW Online Services Portal](https://onlineservices.dmw.gov.ph)\n- **DMW Central Office:** Ortigas, Mandaluyong (For final evaluation/interviews)."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Account Setup: 10 Minutes\n*   Contract Verification (Phase 1): 3–7 Working Days\n*   DMW Approval (Phase 2): 3–5 Working Days"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You can monitor your application status (e.g., \"Pending,\" \"Evaluated,\" \"Approved\") directly in the **E-Registration dashboard** under the application history tab."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Profile Lock:** If you make a mistake in your name or birthdate, you cannot edit it yourself; you must visit a DMW office to have it unlocked.\n- **MWO Delays:** Different countries have different verification speeds."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Inconsistent Data:** Ensure your E-Registration details match your passport and verified contract.",
+            "**Missing PDOS/Medical:** Attempting to apply for an OEC before completing your mandatory seminar and medical exam."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always keep a copy of your verified contract and OEC/OFW Pass in your email or cloud storage."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Use a Gmail or Yahoo account for registration to ensure you receive the activation link.",
+            "Ensure all uploaded documents are clear and in PDF or JPG format (max 2MB per file).",
+            "Complete the PEOS (online orientation) as the very first step, even before you have a contract."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate and up-to-date information, please refer to:\n*   [Department of Migrant Workers (DMW)](https://www.dmw.gov.ph)\n*   [DMW Online Services Portal](https://onlineservices.dmw.gov.ph)"
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Can I register without a job yet?",
+          "content": "Yes, you can create a profile and complete the PEOS. You only need the contract details when you are ready for deployment."
+        },
+        {
+          "type": "subheading",
+          "title": "Is E-Registration the same as the OFW Pass?",
+          "content": "No. E-Registration is the **system** where your data is stored. The OFW Pass is the **digital document** (QR Code) generated based on that data."
+        }
+      ]
+    }
+  ]
+}

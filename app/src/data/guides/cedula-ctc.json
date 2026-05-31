@@ -1,0 +1,588 @@
+{
+  "id": "cedula-ctc",
+  "title": "How to Get a Community Tax Certificate (Cedula)",
+  "shortTitle": "Cedula",
+  "slug": "cedula-ctc",
+  "relatedGuideSlugs": [
+    "nbi-clearance",
+    "barangay-clearance",
+    "voter-registration"
+  ],
+  "description": "Obtain your annual community tax certificate required for notarization and government permits.",
+  "lastUpdated": "2026-05-14",
+  "category": "Essential Documents",
+  "agency": "LGU",
+  "difficulty": "Easy",
+  "estimatedTime": "1D",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID such as National ID, Passport, or UMID.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Application Form",
+      "description": "A completed Community Tax Declaration Form (CTDF) provided by the local office.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Proof of Income",
+      "description": "Payslip, ITR, or Certificate of Employment to determine the additional tax amount.",
+      "icon": "Wallet"
+    }
+  ],
+  "tags": [
+    "Cedula",
+    "Community Tax Certificate",
+    "CTC",
+    "Local Government",
+    "Philippines",
+    "Government Document"
+  ],
+  "aliases": [
+    "Community Tax Certificate",
+    "Cedula",
+    "Residence Tax Certificate",
+    "CTC"
+  ],
+  "checklist": [
+    {
+      "title": "Prepare Documents",
+      "description": "Gather your valid ID and proof of income before visiting the treasurer's office."
+    },
+    {
+      "title": "Visit City Hall",
+      "description": "Proceed to the City or Municipal Treasurer's Office or your local barangay hall."
+    },
+    {
+      "title": "Fill Out Form",
+      "description": "Complete the Community Tax Declaration Form with your personal details and annual income."
+    },
+    {
+      "title": "Submit Requirements",
+      "description": "Present your form and ID to the treasury personnel for computation of your tax."
+    },
+    {
+      "title": "Pay Community Tax",
+      "description": "Pay the basic tax plus any additional tax based on your declared income or property."
+    },
+    {
+      "title": "Claim Cedula",
+      "description": "Receive your signed Community Tax Certificate and verify that all details are correct."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Basic Community Tax",
+      "amount": "₱5"
+    },
+    {
+      "label": "Additional Tax",
+      "amount": "₱1 per ₱1,000 income"
+    },
+    {
+      "label": "Maximum Additional Tax (Individual)",
+      "amount": "Up to ₱5,000"
+    },
+    {
+      "label": "Corporation Community Tax",
+      "amount": "Higher rates apply"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-a-community-tax-certificate-cedula",
+      "title": "What is a Community Tax Certificate (Cedula)?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A **Community Tax Certificate (CTC)**, commonly called a **Cedula**, is an official document issued by the local government after payment of the community tax. It serves as proof that an individual or corporation has paid the required community tax for the year."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Cedula is commonly used for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Employment requirements",
+            "Business permit applications",
+            "Government transactions",
+            "Notarization of documents",
+            "License applications",
+            "Court and legal transactions",
+            "Local permit processing",
+            "Supporting identification"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "The document is usually issued by the:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "City Treasurer’s Office",
+            "Municipal Treasurer’s Office",
+            "Barangay office in some areas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a Cedula if you are:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Applying for a job",
+            "Processing government permits",
+            "Starting a business",
+            "Applying for licenses",
+            "Filing notarized documents",
+            "Engaged in business or professional work",
+            "Required to file income tax returns",
+            "Processing local government transactions"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Individuals aged 18 years old and above who are employed, engaged in business, own property, or are legally required to file taxes may generally obtain a Cedula."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-cedula",
+      "title": "Benefits of Having a Cedula",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Required for Government Transactions",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Many government offices request a Cedula before processing permits or applications."
+        },
+        {
+          "type": "subheading",
+          "title": "Useful for Legal Documents",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Cedulas are commonly required during notarization and oath-taking procedures."
+        },
+        {
+          "type": "subheading",
+          "title": "Supports Permit Applications",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants for health permits, business permits, and other licenses may need a Cedula."
+        },
+        {
+          "type": "subheading",
+          "title": "Serves as Supporting Identification",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Although not always accepted as a primary ID, it may support identity verification for certain transactions."
+        },
+        {
+          "type": "subheading",
+          "title": "Proof of Community Tax Payment",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The Cedula confirms payment of the annual community tax."
+        }
+      ]
+    },
+    {
+      "id": "qualifications",
+      "title": "Qualifications",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Individuals who may apply commonly include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Employed individuals",
+            "Self-employed workers",
+            "Business owners",
+            "Professionals",
+            "Property owners",
+            "Adults aged 18 and above with taxable income or obligations"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Corporations and juridical entities may also secure separate Community Tax Certificates."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may usually apply at:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "City Treasurer’s Office",
+            "Municipal Treasurer’s Office",
+            "City Hall",
+            "Municipal Hall",
+            "Barangay Hall in some areas",
+            "Business Permit and Licensing Offices"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some LGUs may allow processing through satellite offices or mall government service centers."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Check if your LGU has an **Online Portal**. Many cities now allow you to pay for Cedula or Police Clearance via GCash and just pick it up."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Your Documents",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Gather:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Valid ID",
+            "Proof of income if required",
+            "Supporting business documents if applicable"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Prepare photocopies if needed."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit the Treasurer’s Office or Authorized Issuing Office",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Proceed to the designated:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "City Hall",
+            "Municipal Hall",
+            "Barangay office"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some offices may have dedicated Cedula counters."
+        },
+        {
+          "type": "subheading",
+          "title": "Fill Out the Community Tax Declaration Form (CTDF)",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Provide accurate details including:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Full name",
+            "Address",
+            "Birth information",
+            "Civil status",
+            "Occupation",
+            "Gross annual income"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Ensure all information matches your official records."
+        },
+        {
+          "type": "subheading",
+          "title": "Submit Your Requirements",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Treasury personnel will review your:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Identification documents",
+            "Income declarations",
+            "Supporting records"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Incomplete information may delay issuance."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Community Tax",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The Cedula fee generally includes:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Basic community tax",
+            "Additional income-based tax"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "The amount depends on declared income, business activity, or corporate classification."
+        },
+        {
+          "type": "subheading",
+          "title": "Receive Your Cedula",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "After payment:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Your Cedula will be issued",
+            "Verify all printed information",
+            "Keep the official receipt and certificate secure"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Most applications are completed within minutes if requirements are complete."
+        }
+      ]
+    },
+    {
+      "id": "validity",
+      "title": "Validity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Cedulas are generally valid for the current calendar year only."
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants usually renew annually."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Process",
+            "Estimated Time"
+          ],
+          "rows": [
+            [
+              "Form Submission",
+              "5–10 minutes"
+            ],
+            [
+              "Payment Processing",
+              "5–15 minutes"
+            ],
+            [
+              "Cedula Issuance",
+              "Same day"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some LGUs process Cedulas within only a few minutes if requirements are complete."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Incorrect income computation",
+            "Missing proof of income",
+            "Name discrepancies",
+            "Long queues during January and February",
+            "Late payment penalties",
+            "Inconsistent LGU requirements",
+            "Missing TIN entries"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants online report confusion regarding income computation and local office practices."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Providing incorrect income information",
+            "Forgetting valid IDs",
+            "Applying late and incurring penalties",
+            "Using outdated Cedulas",
+            "Losing official receipts",
+            "Applying in the wrong jurisdiction"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always verify your LGU’s current requirements before visiting."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Visit early in the morning",
+            "Avoid peak renewal months when possible",
+            "Bring photocopies of documents",
+            "Prepare proof of income beforehand",
+            "Keep digital copies of receipts",
+            "Confirm requirements with your LGU before visiting"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants report shorter waiting times at barangay offices compared to city halls in certain areas."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate and up-to-date information, please refer to:\n*   Your respective **City or Municipal Hall website**\n*   Visit your local **City/Municipal Treasurer's Office** or **Barangay Hall**"
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is a Cedula required for employment?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Many employers and local permit offices still request Cedulas as part of employment or permit requirements."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I get a Cedula online?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Most LGUs still require in-person processing, although some cities may offer partial online systems."
+        },
+        {
+          "type": "subheading",
+          "title": "How long is a Cedula valid?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Cedulas are generally valid for one calendar year only."
+        },
+        {
+          "type": "subheading",
+          "title": "Where should I get my Cedula?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "You may usually obtain it from the city or municipality where you reside or where your transaction is being processed."
+        },
+        {
+          "type": "subheading",
+          "title": "Is Cedula the same as Barangay Clearance?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "No. A Cedula is proof of community tax payment, while Barangay Clearance certifies residency and community standing."
+        },
+        {
+          "type": "subheading",
+          "title": "Can students get a Cedula?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes, depending on the purpose and local government requirements."
+        }
+      ]
+    }
+  ]
+}

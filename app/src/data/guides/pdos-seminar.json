@@ -1,0 +1,279 @@
+{
+  "id": "pdos-seminar",
+  "shortTitle": "PDOS Seminar",
+  "title": "How to Attend the PDOS Seminar (OWWA/DMW)",
+  "slug": "pdos-seminar",
+  "relatedGuideSlugs": [
+    "passport-appointment",
+    "dfa-apostille",
+    "nbi-clearance"
+  ],
+  "description": "Complete the mandatory Pre-Departure Orientation Seminar (PDOS) required for all departing Overseas Filipino Workers.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government Documents",
+  "agency": "OWWA",
+  "difficulty": "Easy",
+  "estimatedTime": "1D",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "Valid Passport",
+      "description": "Original and photocopy valid for at least 6 months.",
+      "icon": "Passport"
+    },
+    {
+      "title": "Valid Work Visa",
+      "description": "Original and photocopy of your entry permit.",
+      "icon": "Plane"
+    },
+    {
+      "title": "Verified Contract",
+      "description": "A copy of your DMW-verified employment contract.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Appointment Confirmation",
+      "description": "A printed copy of your online booking.",
+      "icon": "Receipt"
+    }
+  ],
+  "tags": [
+    "PDOS",
+    "OWWA",
+    "DMW",
+    "OFW",
+    "Orientation",
+    "Philippines"
+  ],
+  "aliases": [
+    "Pre-Departure Orientation Seminar",
+    "OWWA Seminar",
+    "OFW Orientation"
+  ],
+  "checklist": [
+    {
+      "title": "Schedule Appointment",
+      "description": "Book your slot through your agency or the official OWWA/DMW website."
+    },
+    {
+      "title": "Document Verification",
+      "description": "Present your original passport and visa to the PDOS coordinator on the day of the seminar."
+    },
+    {
+      "title": "Attend Seminar",
+      "description": "Participate in the full 6-hour session covering country profile, rights, and financial management."
+    },
+    {
+      "title": "Receive Certificate",
+      "description": "Claim your PDOS Certificate, which is often recorded digitally in the DMW system."
+    }
+  ],
+  "fees": [
+    {
+      "label": "PDOS Seminar",
+      "amount": "Free"
+    },
+    {
+      "label": "Total",
+      "amount": "Free"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-the-pdos",
+      "title": "What is the PDOS?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **Pre-Departure Orientation Seminar (PDOS)** is a mandatory 6-hour orientation for all first-time Overseas Filipino Workers (OFWs). It is designed to prepare workers for the challenges of working and living abroad."
+        },
+        {
+          "type": "paragraph",
+          "content": "The PDOS is commonly used for:\n*   Requirement for OEC/OFW Pass issuance\n*   Cultural and legal preparation for the host country\n*   Information on OFW rights and government benefits"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a PDOS if you are:\n- A first-time OFW (Agency-hired or Direct-hired)\n- An OFW moving to a new destination country for the first time\n- An emigrant (fiancé/spouse of a foreign national - requires CFO PDOS)"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-pdos-certificate",
+      "title": "Benefits of Having a PDOS Certificate",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The seminar provides critical knowledge to ensure a safe and successful overseas stint."
+        },
+        {
+          "type": "subheading",
+          "title": "Rights Awareness",
+          "content": "Learn about your employment contract, labor laws in your host country, and what to do in case of emergencies or abuse."
+        },
+        {
+          "type": "subheading",
+          "title": "Financial Literacy",
+          "content": "Includes modules on managing remittances, saving for the future, and avoiding debt while working abroad."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Through Recruitment Agency",
+          "content": "If you are hired through an agency, they are responsible for scheduling and facilitating your PDOS."
+        },
+        {
+          "type": "subheading",
+          "title": "Online/Direct Booking",
+          "content": "Direct hires can book their session through the **OWWA/DMW Online Portal**. Online PDOS options are also available for certain categories."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** The **DMW Mobile App** is now the primary portal for OEC and e-Registration. Ensure your profile is 100% complete before booking appointments."
+        },
+        {
+          "type": "subheading",
+          "title": "Schedule an Appointment",
+          "content": "Book your slot through your agency or the official OWWA/DMW website. Choose the session that matches your destination country (e.g., Middle East, Asia, Europe)."
+        },
+        {
+          "type": "subheading",
+          "title": "Document Verification",
+          "content": "On the day of the seminar, present your original passport and visa to the PDOS coordinator for verification."
+        },
+        {
+          "type": "subheading",
+          "title": "Attend the Seminar",
+          "content": "The seminar typically lasts **6 hours**. You must stay for the entire duration to be eligible for the certificate. Topics include:\n*   Destination Country Profile & Culture\n*   Employment Contract & Legal Rights\n*   Health and Safety\n*   Remittance and Financial Management"
+        },
+        {
+          "type": "subheading",
+          "title": "Claim Your Certificate",
+          "content": "Once the seminar is finished, you will be issued a **PDOS Certificate**. This is often recorded digitally in the DMW system automatically."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their PDOS at:\n- **OWWA Main Office:** Pasay City\n- **DMW Regional Offices:** Cebu, Davao, Iloilo, etc.\n- **Accredited Providers:** Some recruitment agencies are accredited to conduct PDOS."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Seminar Duration: 6 Hours (1 Day)"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Since the certificate is issued immediately after completion, tracking is not typically required. However, you can verify your completion status in your **DMW E-Registration profile**."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Full Slots:** Seminars for popular destinations can be fully booked weeks in advance.\n- **Wrong Module:** Attending a general PDOS when your destination requires a specific country module."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Tardiness:** Latecomers are often barred from entering and must reschedule.",
+            "**Sleeping during the session:** Facilitators may withhold certificates from participants who do not pay attention."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always keep your original PDOS certificate; you may need to show it at the airport or when applying for future clearances."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Book your slot as soon as your visa is issued.",
+            "Double-check that you are attending the correct seminar for your specific destination.",
+            "If using an online PDOS, ensure you have a stable internet connection and a working webcam."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the latest schedules and online PDOS registration, please refer to:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Official Website:** [Department of Migrant Workers (DMW)](https://www.dmw.gov.ph)",
+            "**Welfare Agency:** [Overseas Workers Welfare Administration (OWWA)](https://owwa.gov.ph)",
+            "**Online Services:** [DMW Online Services Portal](https://onlineservices.dmw.gov.ph)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is the PDOS certificate valid forever?",
+          "content": "No, it is generally tied to your current contract and destination. If you move to a different country or get a new employer after a long break, you may need to attend again."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I skip PDOS if I've worked abroad before?",
+          "content": "If you are returning to the **same country** and **same employer**, you are usually exempt. If either has changed, you must attend a new session."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,296 @@
+{
+  "id": "prc-id",
+  "shortTitle": "PRC ID",
+  "title": "How to Get a PRC ID (Initial Registration)",
+  "slug": "prc-id",
+  "relatedGuideSlugs": [
+    "national-id",
+    "psa-birth-certificate",
+    "nbi-clearance"
+  ],
+  "description": "Register your professional license and obtain your PRC ID through the LERIS online portal after passing the board exam.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government ID",
+  "agency": "PRC",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-3D",
+  "costRange": "P5H-P2K",
+  "requirements": [
+    {
+      "title": "Oath Form",
+      "description": "Duly accomplished oath form printed from the LERIS portal.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Notice of Admission",
+      "description": "Your board exam Notice of Admission (NOA).",
+      "icon": "FileText"
+    },
+    {
+      "title": "Passport Photos",
+      "description": "Two white background photos with a name tag.",
+      "icon": "User"
+    },
+    {
+      "title": "Documentary Stamps",
+      "description": "Two sets of documentary stamps for your application.",
+      "icon": "Receipt"
+    }
+  ],
+  "tags": [
+    "PRC ID",
+    "Professional License",
+    "LERIS",
+    "Board Exam",
+    "Primary ID",
+    "Philippines"
+  ],
+  "aliases": [
+    "Professional ID",
+    "PRC License",
+    "PRC Registration"
+  ],
+  "checklist": [
+    {
+      "title": "Log in to LERIS",
+      "description": "Access your PRC LERIS account and select \"Initial Registration.\""
+    },
+    {
+      "title": "Book Appointment",
+      "description": "Schedule a slot at your preferred PRC branch or service center."
+    },
+    {
+      "title": "Pay Online",
+      "description": "Settle the registration and annual fees through the portal's payment options."
+    },
+    {
+      "title": "Attend Oath-Taking",
+      "description": "Participate in the mandatory face-to-face or virtual oath-taking ceremony."
+    },
+    {
+      "title": "Submit and Claim",
+      "description": "Visit the PRC office to submit your physical documents and claim your professional ID."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Initial Registration Fee",
+      "amount": "₱600.00"
+    },
+    {
+      "label": "Annual Fees (3 Years)",
+      "amount": "₱420 – ₱450"
+    },
+    {
+      "label": "Documentary Stamps",
+      "amount": "₱60 – ₱100"
+    },
+    {
+      "label": "Total",
+      "amount": "₱1,080 – ₱1,150"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-a-prc-id",
+      "title": "What is a PRC ID?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **PRC ID** (Professional Identification Card) is the official license issued by the Professional Regulation Commission (PRC) to Filipinos who have passed their respective Licensure Examinations (Board Exams). It is recognized as a top-tier **Primary ID** for all legal and financial transactions."
+        },
+        {
+          "type": "paragraph",
+          "content": "The PRC ID is commonly used for:\n*   Legally practicing your profession (Nurse, Teacher, Engineer, etc.)\n*   Primary identification for banking and passports\n*   Proof of professional standing and ethics"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a PRC ID if you are:\n- A new board exam passer (Initial Registration)\n- An existing professional whose license has expired (Renewal)\n- A professional needing to update their status or record"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-prc-id",
+      "title": "Benefits of Having a PRC ID",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Beyond being a legal requirement to work, the PRC ID carries significant prestige and utility."
+        },
+        {
+          "type": "subheading",
+          "title": "Professional Authority",
+          "content": "It serves as your \"license to practice,\" allowing you to sign official documents and certifications in your field."
+        },
+        {
+          "type": "subheading",
+          "title": "High-Level Identification",
+          "content": "It is universally accepted as a Primary ID, often carrying more weight than a basic government ID in high-security transactions."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online (LERIS Portal)",
+          "content": "The application, scheduling, and payment are all done via the [PRC LERIS Portal](https://online.prc.gov.ph/)."
+        },
+        {
+          "type": "subheading",
+          "title": "Personal Appearance",
+          "content": "After the online steps, you **must** personally appear at your chosen PRC office to sign the professional roster and submit documents."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Most ID applications now require **Online Pre-registration**. Always take a screenshot of your QR code or transaction slip before heading to the office."
+        },
+        {
+          "type": "subheading",
+          "title": "LERIS Online Registration",
+          "content": "Log in to [online.prc.gov.ph](https://online.prc.gov.ph/). Click on **\"Initial Registration\"** and enter your profession and application number."
+        },
+        {
+          "type": "subheading",
+          "title": "Book Appointment and Pay",
+          "content": "Select your preferred PRC branch and appointment date. Pay the fees (usually ₱800–₱1,050) via GCash, Maya, or Credit Card."
+        },
+        {
+          "type": "subheading",
+          "title": "Print Forms",
+          "content": "Download and print your **Oath Form** and **Appointment Slip** from the \"Existing Transactions\" tab."
+        },
+        {
+          "type": "subheading",
+          "title": "Attend Oath-Taking",
+          "content": "You must participate in the mass or special oath-taking ceremony (face-to-face or virtual as scheduled)."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit PRC for ID Issuance",
+          "content": "On your appointment date, go to the PRC office. Submit your documents and sign the Professional Registry. You will typically receive your PRC ID on the same day or be given a claiming schedule."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their PRC ID at:\n- [PRC LERIS Online Portal](https://online.prc.gov.ph/)\n- **PRC Regional Offices:** (Manila, Cebu, Davao, Baguio, etc.)\n- **PRC Service Centers:** (Robinsons Malls and SM Malls)"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Online Step: 15 Minutes\n*   Personal Appearance: 1–4 Hours (Same Day)"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You can track your application status in the **\"Existing Transactions\"** section of your LERIS account."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **No Record Found:** Ensure you entered the correct application number from your NOA.\n- **Payment Not Reflecting:** If the system doesn't update, wait 24 hours before trying again to avoid double payment."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Incomplete Requirements:** Forgetting documentary stamps or brown envelopes can cause delays.",
+            "**Wrong Branch:** Going to a different PRC branch than the one you selected in LERIS."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always check the \"Mandatory Requirements\" for your specific profession, as some (like Medicine or Law) have additional steps."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Book appointments at PRC Service Centers in malls; they are often faster and less crowded than regional offices.",
+            "Keep a digital copy of your NOA and Oath Form on your phone.",
+            "Buy your documentary stamps in advance if you want to skip the line inside the PRC."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "To ensure you are using the official LERIS portal for your registration or renewal, please visit:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Official Website:** [Professional Regulation Commission (PRC)](https://www.prc.gov.ph)",
+            "**Online Portal:** [PRC LERIS Portal](https://online.prc.gov.ph)",
+            "**Verification:** [PRC Verification System](https://online.prc.gov.ph/Verification)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "How long is the PRC ID valid?",
+          "content": "It is valid for **three (3) years** and is renewable on your birth month."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I send a representative for initial registration?",
+          "content": "Generally, no. Initial registration requires a personal signature in the professional roster (signing the book). Renewals, however, can be done by a representative with an SPA."
+        }
+      ]
+    }
+  ]
+}

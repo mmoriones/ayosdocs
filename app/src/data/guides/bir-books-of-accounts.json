@@ -1,0 +1,280 @@
+{
+  "id": "bir-books-of-accounts",
+  "shortTitle": "BIR Books of Accounts",
+  "title": "How to Register BIR Books of Accounts",
+  "slug": "bir-books-of-accounts",
+  "relatedGuideSlugs": [
+    "bir-tin-registration",
+    "mayors-permit",
+    "dti-registration"
+  ],
+  "description": "Register and maintain your mandatory manual or digital books of accounts for tax compliance in the Philippines.",
+  "lastUpdated": "2026-05-14",
+  "category": "Business",
+  "agency": "BIR",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-3D",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "BIR COR (Form 2303)",
+      "description": "A photocopy of your BIR Certificate of Registration.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID of the taxpayer.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "ORUS Account",
+      "description": "An active account on the BIR Online Registration and Update System portal.",
+      "icon": "Globe"
+    }
+  ],
+  "tags": [
+    "BIR",
+    "Business Registration",
+    "Books of Accounts",
+    "Accounting",
+    "Philippines",
+    "Tax Compliance"
+  ],
+  "aliases": [
+    "BIR Books",
+    "Manual Books of Accounts",
+    "Loose-Leaf Books",
+    "QR Stamp Books"
+  ],
+  "checklist": [
+    {
+      "title": "Choose Format",
+      "description": "Decide between manual, loose-leaf, or computerized books of accounts."
+    },
+    {
+      "title": "Prepare Books",
+      "description": "Purchase the required number of manual columnar books from an office supply store."
+    },
+    {
+      "title": "Register via ORUS",
+      "description": "Log in to the ORUS portal and input the details of your books to register them."
+    },
+    {
+      "title": "Download QR Stamp",
+      "description": "Generate and print the digital QR Code Stamp for each of your registered books."
+    },
+    {
+      "title": "Affix Stamps",
+      "description": "Paste the printed QR stamps on the inside front cover of your manual books."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Manual Books (Set of 4-6)",
+      "amount": "₱200 – ₱400"
+    },
+    {
+      "label": "BIR Registration Fee",
+      "amount": "Free (Abolished in 2024)"
+    },
+    {
+      "label": "Total",
+      "amount": "₱200 – ₱400"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-are-bir-books-of-accounts",
+      "title": "What are BIR Books of Accounts?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "**Books of Accounts** are mandatory records where all business transactions are recorded for tax purposes. Every registered taxpayer in the Philippines (individual or corporation) is required to maintain these books to ensure accurate reporting of income and expenses."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Books of Accounts are commonly used for:\n*   Recording daily sales and expenses\n*   BIR audits and tax assessments\n*   Financial reporting and monitoring"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need to register Books of Accounts if you are:\n- A self-employed professional (freelancer, doctor, lawyer)\n- A sole proprietor (Sari-sari store, online seller, etc.)\n- A corporation or partnership\n- Any entity issued a BIR Certificate of Registration (COR)"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-registered-books-of-accounts",
+      "title": "Benefits of Registered Books of Accounts",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Maintaining proper books is not just a legal requirement; it helps manage your business better."
+        },
+        {
+          "type": "subheading",
+          "title": "Tax Compliance",
+          "content": "Avoid heavy penalties (ranging from ₱1,000 to ₱50,000) for failure to keep or register books."
+        },
+        {
+          "type": "subheading",
+          "title": "Financial Clarity",
+          "content": "Properly kept books allow you to see exactly where your money is going, making it easier to file your quarterly and annual income tax returns."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online (ORUS)",
+          "content": "The BIR now requires taxpayers to register their books through the **ORUS portal** to receive a digital **QR Code Stamp**."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In (RDO)",
+          "content": "You may still need to visit your Revenue District Office (RDO) if the online system is unavailable or for specific manual stamping requirements."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Use the BIR **eFPS or eBIRForms** for faster filing and avoid manual queuing at the RDO. Most payments can now be done via GCash or Maya."
+        },
+        {
+          "type": "subheading",
+          "title": "Choose Your Format",
+          "content": "*   **Manual:** Handwritten (best for small businesses).\n*   **Loose-Leaf:** Encoded on computer, printed, and bound (requires a Permit to Use).\n*   **Computerized (CAS):** System-generated (best for large corporations)."
+        },
+        {
+          "type": "subheading",
+          "title": "Buy and Prepare Manual Books",
+          "content": "If choosing manual, buy the 4 or 6 columnar books. Fill out the \"Taxpayer Information\" on the first page of each book."
+        },
+        {
+          "type": "subheading",
+          "title": "Register via ORUS",
+          "content": "Log in to [orus.bir.gov.ph](https://orus.bir.gov.ph). Select **Secondary Registration** > **Register Books of Accounts**. Input the details of your books (type, volume number, and number of pages)."
+        },
+        {
+          "type": "subheading",
+          "title": "Download the QR Stamp",
+          "content": "Once submitted, the system will generate a **QR Code Stamp** for each book. Download and print these stamps."
+        },
+        {
+          "type": "subheading",
+          "title": "Affix the Stamps",
+          "content": "Paste the QR Code Stamp on the **inside front cover** or the **first page** of each corresponding manual book. Your books are now officially registered!"
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their Books of Accounts at:\n- [BIR ORUS Portal](https://orus.bir.gov.ph)\n- Your assigned **Revenue District Office (RDO)**"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Online (ORUS): Instant to 24 Hours\n*   Manual (RDO): Same Day (if walk-in is allowed)"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You can view your registered books and their QR stamps at any time by logging into your **ORUS account**."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **ORUS System Downtime:** The portal may occasionally be offline for maintenance.\n- **Wrong RDO:** Attempting to register books when your record is still at a different RDO."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Registering Late:** Books must be registered **before** you start business operations.",
+            "**Messy Entries:** For manual books, ensure entries are legible. Erasures should be avoided or initialed."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always keep your books updated. The BIR requires entries to be made daily or at the end of each month."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Use the ORUS portal instead of going to the RDO to save time.",
+            "Make sure you have a clear scanned copy of your COR before starting the online application.",
+            "If you are a freelancer, Manual Books are the simplest and cheapest option to maintain."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate and up-to-date information, please refer to:\n*   [Bureau of Internal Revenue (BIR)](https://www.bir.gov.ph)\n*   [BIR Online Registration and Update System (ORUS)](https://orus.bir.gov.ph)"
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Do I need to register new books every year?",
+          "content": "No. For manual books, you only register a new set once the current volumes are completely full."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I use Excel as my books?",
+          "content": "You can, but this is classified as **Loose-Leaf** or **Computerized** and requires prior approval (Permit to Use) from the BIR before you can use it for official records."
+        }
+      ]
+    }
+  ]
+}

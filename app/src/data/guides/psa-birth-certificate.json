@@ -1,0 +1,243 @@
+{
+  "id": "psa-birth-certificate",
+  "title": "How to Get a PSA Birth Certificate in the Philippines",
+  "shortTitle": "PSA Birth Certificate",
+  "slug": "psa-birth-certificate",
+  "description": "Request your official birth record for school, IDs, and other legal documentation.",
+  "lastUpdated": "2026-05-14",
+  "category": "Civil Registry",
+  "agency": "PSA",
+  "difficulty": "Easy",
+  "estimatedTime": "3-7D",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID such as National ID, Passport, or Driver's License.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Record Details",
+      "description": "Complete information including full name, birth date, place of birth, and parents' names.",
+      "icon": "User"
+    }
+  ],
+  "tags": [
+    "PSA",
+    "Birth Certificate",
+    "Civil Registry",
+    "Philippines",
+    "Government Document"
+  ],
+  "aliases": [
+    "BC",
+    "Birth Cert",
+    "NSO Birth Certificate",
+    "PSA Online"
+  ],
+  "checklist": [
+    {
+      "title": "Choose Method",
+      "description": "Decide between online delivery (PSAHelpline/Serbilis) or walk-in at a PSA CRS outlet."
+    },
+    {
+      "title": "Prepare Info",
+      "description": "Gather your valid ID and ensure all birth details are accurate to avoid errors."
+    },
+    {
+      "title": "Fill Out Form",
+      "description": "Complete the request form with your personal information and the purpose of your request."
+    },
+    {
+      "title": "Submit Application",
+      "description": "File your request through the chosen online portal or at the PSA branch."
+    },
+    {
+      "title": "Pay Fee",
+      "description": "Settle the processing fee, which varies based on the application method and delivery."
+    },
+    {
+      "title": "Receive Document",
+      "description": "Claim your birth certificate at the outlet or wait for courier delivery to your address."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Walk-In Request (at PSA CRS)",
+      "amount": "₱155"
+    },
+    {
+      "label": "Online Request (with Delivery)",
+      "amount": "₱330 – ₱365"
+    },
+    {
+      "label": "SM Business Center",
+      "amount": "₱175 – ₱195"
+    },
+    {
+      "label": "International Delivery",
+      "amount": "$20 – $30"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-a-psa-birth-certificate",
+      "title": "What is a PSA Birth Certificate?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A **PSA Birth Certificate** is an official civil registry document issued by the Philippine Statistics Authority (PSA). It is the most fundamental document for proving your identity and citizenship in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "The document contains critical information such as:\n*   Full name and sex\n*   Date and time of birth\n*   Exact place of birth\n*   Parents’ names and citizenship\n*   Registry number (from the Local Civil Registrar)"
+        },
+        {
+          "type": "paragraph",
+          "content": "The PSA-issued copy (on security paper) is the version required for all major transactions, including passport applications, school enrollment, and employment."
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** If you need it urgently, the **Walk-in** method at a PSA Serbilis Outlet is fastest (usually 1-2 days), while online delivery can take up to a week."
+        },
+        {
+          "type": "paragraph",
+          "content": "You may need a PSA Birth Certificate for:\n- **Passport Applications:** It is a core requirement for first-time applicants.\n- **Education:** From elementary school to college enrollment and board exams.\n- **Employment:** Standard requirement for pre-employment onboarding.\n- **Marriage:** Necessary for obtaining a Marriage License.\n- **Government IDs:** Required for National ID, SSS, and PhilHealth registration.\n- **Travel/Visa:** Used for immigration and foreign visa processing."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-psa-birth-certificate",
+      "title": "Benefits of Having a PSA Birth Certificate",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Primary Identification",
+          "content": "It is the ultimate \"Source Document\" for all other IDs in the Philippines. Without it, you cannot legally prove your identity."
+        },
+        {
+          "type": "subheading",
+          "title": "Nationwide & International Acceptance",
+          "content": "The PSA-authenticated copy is recognized across all government agencies in the Philippines and by foreign embassies worldwide."
+        },
+        {
+          "type": "subheading",
+          "title": "Legal & Family Protection",
+          "content": "Essential for inheritance claims, proving filiation, and resolving legal disputes regarding identity."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online (PSAHelpline.ph)",
+          "content": "The most convenient method for home delivery. They accept various payment methods and deliver nationwide."
+        },
+        {
+          "type": "subheading",
+          "title": "Online (PSASerbilis.com.ph)",
+          "content": "The official PSA portal for both local and international delivery (ideal for Filipinos abroad)."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In (PSA CRS Outlets)",
+          "content": "You can visit any PSA Civil Registry System (CRS) outlet. Most now require an **online appointment** via the PSA Appointment System."
+        },
+        {
+          "type": "subheading",
+          "title": "SM Business Centers",
+          "content": "Many SM Malls accept PSA certificate requests at their Business Centers (usually takes longer than direct PSA outlets)."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process-online",
+      "title": "Step-by-Step Application Process (Online)",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Visit an Official Portal",
+          "content": "Go to [PSAHelpline.ph](https://psahelpline.ph) or [PSASerbilis.com.ph](https://www.psaserbilis.com.ph). Avoid unofficial third-party sites."
+        },
+        {
+          "type": "subheading",
+          "title": "Fill Out the Request Form",
+          "content": "Select \"Birth Certificate\" and enter your details. **Important:** Ensure the spelling of names matches your records exactly to avoid a \"Negative Result.\""
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Fee",
+          "content": "Fees for online requests typically range from **₱330 to ₱365** per copy, inclusive of delivery. Payment can be made via GCash, Maya, Credit Card, or over-the-counter at 7-Eleven or Bayad Centers."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for Delivery",
+          "content": "*   **Metro Manila:** 2–3 working days.\n*   **Provincial:** 5–7 working days.\nYou must personally receive the document or provide an authorized representative with an SPA."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate information and to start your request, visit:\n- [PSAHelpline Official Portal](https://psahelpline.ph)\n- [PSA Serbilis Official Portal](https://www.psaserbilis.com.ph)\n- [Philippine Statistics Authority (PSA) Website](https://psa.gov.ph)\n- [PSA Online Appointment System](https://appointment.psa.gov.ph)"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Negative Result:** This happens when the PSA has no record of your birth. You may need to request a \"Manual Search\" or proceed with **Delayed Registration** at your Local Civil Registrar (LCR).",
+            "**Encoding Errors:** If there is a typo in the PSA record (but the LCR record is correct), you can file for a **Correction of Clerical Error (RA 9048)** at the LCR where you were born."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Book Your Appointment Early:** If doing a walk-in, slots for PSA outlets (especially in East Avenue, QC) fill up fast.",
+            "**Check the LCR Copy First:** If you are unsure if your birth was registered, check with the Local Civil Registrar of the town where you were born before paying for a PSA search.",
+            "**Keep Your Receipt:** If your delivery is delayed, the reference number on your receipt is the only way to track it."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Can I get a birth certificate for someone else?",
+          "content": "Only immediate family (parents, children, spouse) can request without an authorization letter. All others require a signed letter and ID."
+        },
+        {
+          "type": "subheading",
+          "title": "Does a PSA Birth Certificate expire?",
+          "content": "No, the document itself does not expire. However, some agencies (like the DFA) may require a copy issued within the last **six (6) months** to ensure no recent annotations or changes have been made."
+        }
+      ]
+    }
+  ]
+}

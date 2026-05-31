@@ -1,0 +1,352 @@
+{
+  "id": "senior-citizen-id",
+  "title": "How to Apply for a Senior Citizen ID in the Philippines",
+  "shortTitle": "Senior Citizen ID",
+  "slug": "senior-citizen-id",
+  "relatedGuideSlugs": [
+    "national-id",
+    "barangay-clearance",
+    "psa-birth-certificate"
+  ],
+  "description": "Avail of discounts, VAT exemptions, and social benefits for Filipinos aged 60 and above.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government ID",
+  "agency": "LGU",
+  "difficulty": "Easy",
+  "estimatedTime": "1-7D",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID and proof of age (must be 60 or older).",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Proof of Residency",
+      "description": "Documents verifying your residence within the city or municipality.",
+      "icon": "MapPin"
+    },
+    {
+      "title": "Application Form",
+      "description": "A completed application form from the Office for Senior Citizens Affairs (OSCA).",
+      "icon": "FileText"
+    },
+    {
+      "title": "ID Photo",
+      "description": "Recent 1x1 or 2x2 photograph of the applicant.",
+      "icon": "User"
+    }
+  ],
+  "tags": [
+    "Senior Citizen ID",
+    "OSCA",
+    "Elderly Benefits",
+    "Government ID",
+    "Discounts",
+    "Philippines"
+  ],
+  "aliases": [
+    "OSCA ID",
+    "Senior ID",
+    "Elderly ID"
+  ],
+  "checklist": [
+    {
+      "title": "Prepare Documents",
+      "description": "Gather your valid ID, proof of age, and proof of residency."
+    },
+    {
+      "title": "Secure Residency",
+      "description": "Obtain a barangay certificate or prepare other documents to verify your local address."
+    },
+    {
+      "title": "Submit Form",
+      "description": "File your completed application at the OSCA office or your local social welfare department."
+    },
+    {
+      "title": "Receive ID",
+      "description": "Wait for the verification process and claim your Senior Citizen ID and discount booklet."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Senior Citizen ID Application",
+      "amount": "Free"
+    },
+    {
+      "label": "ID Photo (if required)",
+      "amount": "₱50–₱150"
+    },
+    {
+      "label": "Photocopying and Documents",
+      "amount": "₱20–₱100"
+    },
+    {
+      "label": "Barangay Certificate (if required)",
+      "amount": "₱50–₱150"
+    },
+    {
+      "label": "Total",
+      "amount": "Free–₱400"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-senior-citizen-id",
+      "title": "What is Senior Citizen ID?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The Senior Citizen ID is an identification card issued by the Office for Senior Citizens Affairs (OSCA) to qualified Filipino senior citizens aged 60 years old and above."
+        },
+        {
+          "type": "paragraph",
+          "content": "The ID serves as proof of eligibility for benefits, discounts, and privileges granted under the Expanded Senior Citizens Act in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Senior Citizen ID is commonly used for:\n* Availing discounts and VAT exemptions\n* Accessing government senior citizen benefits\n* Identification for senior-related services and programs"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a Senior Citizen ID if you are:\n- A Filipino citizen aged 60 years old or older\n- A resident of a city or municipality in the Philippines\n- Applying for senior citizen discounts and benefits"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-senior-citizen-id",
+      "title": "Benefits of Having Senior Citizen ID",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Mandatory Discounts and VAT Exemptions",
+          "content": "Senior citizens may receive:\n* 20% discounts\n* VAT exemptions\non qualified goods and services."
+        },
+        {
+          "type": "subheading",
+          "title": "Access to Government Assistance",
+          "content": "The ID may be required for:\n* Social pension programs\n* Medical assistance\n* OSCA programs and services"
+        },
+        {
+          "type": "subheading",
+          "title": "Accepted Valid Identification",
+          "content": "Many establishments and agencies recognize the Senior Citizen ID as a valid supporting ID."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Senior Citizen ID applications are usually processed through the local Office for Senior Citizens Affairs (OSCA)."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Application",
+          "content": "Some LGUs may provide:\n* Online pre-registration\n* Appointment systems\n* Downloadable forms"
+        },
+        {
+          "type": "paragraph",
+          "content": "Availability depends on the local government unit."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In Application",
+          "content": "Applicants may personally visit:\n* OSCA offices\n* City Hall or Municipal Hall\n* Social Welfare and Development Offices"
+        },
+        {
+          "type": "paragraph",
+          "content": "Personal appearance may be required for photo capture and verification."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Benefits for these IDs are often LGU-specific. Visit your **city hall's OSCA or MSWD office** to learn about local discounts and grocery subsidies."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Documentary Requirements",
+          "content": "Gather all required documents including proof of age, residency, and valid IDs."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit the OSCA Office",
+          "content": "Proceed to the OSCA office of your city or municipality."
+        },
+        {
+          "type": "paragraph",
+          "content": "Request and complete the Senior Citizen ID application form if not downloaded beforehand."
+        },
+        {
+          "type": "subheading",
+          "title": "Submit the Application",
+          "content": "Submit the accomplished form and documentary requirements for verification."
+        },
+        {
+          "type": "paragraph",
+          "content": "Some LGUs may take applicant photos on-site."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for Processing and Verification",
+          "content": "The OSCA staff will verify your eligibility and residency."
+        },
+        {
+          "type": "paragraph",
+          "content": "Processing time varies by LGU."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim the Senior Citizen ID",
+          "content": "Once approved, claim your Senior Citizen ID and booklet from the OSCA office."
+        },
+        {
+          "type": "paragraph",
+          "content": "Some LGUs release IDs on the same day while others schedule release dates."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their Senior Citizen ID at:\n- Office for Senior Citizens Affairs (OSCA)\n- City Hall or Municipal Hall\n- Local Social Welfare and Development Office\n- Selected LGU online portals"
+        },
+        {
+          "type": "paragraph",
+          "content": "Applications are generally filed in the applicant's city or municipality of residence."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n* Same-day issuance (selected LGUs)\n* Standard processing: 1–7 business days\n* Delayed verification cases: Additional processing time may apply"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor their application through:\n* OSCA inquiry counters\n* LGU SMS notifications\n* Phone or email follow-ups"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- Missing proof of residency\n- Incomplete application forms\n- Delayed ID card printing\n- Incorrect personal information\n- Lack of available ID materials in some LGUs"
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Bringing expired or invalid IDs",
+            "Using inconsistent personal information",
+            "Forgetting photocopies of documents",
+            "Applying in the wrong LGU jurisdiction",
+            "Failing to update OSCA records after address changes"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your application before final submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Visit the OSCA office early in the morning",
+            "Bring multiple photocopies of all documents",
+            "Verify LGU-specific requirements beforehand",
+            "Wear proper attire if photo capture is required",
+            "Keep your OSCA booklet and ID in good condition"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the latest updates on senior citizen privileges and local registration procedures, please refer to:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**National Commission:** [National Commission of Senior Citizens (NCSC)](https://ncsc.gov.ph)",
+            "**Local Government Unit (LGU):** Visit the official website or Office for Senior Citizens Affairs (OSCA) of your City or Municipality."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "What age qualifies for a Senior Citizen ID?",
+          "content": "Filipino citizens aged 60 years old and above may qualify."
+        },
+        {
+          "type": "subheading",
+          "title": "Is the Senior Citizen ID free?",
+          "content": "Yes. The ID itself is generally issued free of charge by the LGU."
+        },
+        {
+          "type": "subheading",
+          "title": "Can bedridden seniors apply?",
+          "content": "Yes. Authorized representatives may assist, subject to LGU requirements."
+        },
+        {
+          "type": "subheading",
+          "title": "What benefits can senior citizens receive?",
+          "content": "Qualified seniors may receive:\n* 20% discounts\n* VAT exemptions\n* Priority lanes\n* Medical and social assistance"
+        },
+        {
+          "type": "subheading",
+          "title": "Can the Senior Citizen ID be used nationwide?",
+          "content": "Yes. The ID and privileges are generally recognized nationwide."
+        }
+      ]
+    }
+  ]
+}

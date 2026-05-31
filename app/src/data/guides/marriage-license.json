@@ -1,0 +1,365 @@
+{
+  "id": "marriage-license",
+  "title": "How to Apply for a Marriage License in the Philippines",
+  "shortTitle": "Marriage License",
+  "slug": "marriage-license",
+  "relatedGuideSlugs": [
+    "psa-birth-certificate",
+    "cedula-ctc",
+    "national-id"
+  ],
+  "description": "Essential legal requirements and procedures for couples planning to marry in the Philippines.",
+  "lastUpdated": "2026-05-14",
+  "category": "Civil Registry",
+  "agency": "LGU",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-2W",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "PSA Birth Certificate",
+      "description": "Original birth certificate in security paper for both applicants.",
+      "icon": "FileText"
+    },
+    {
+      "title": "PSA CENOMAR",
+      "description": "Certificate of No Marriage issued by the PSA.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Valid ID",
+      "description": "Government-issued IDs for both parties.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Cedula",
+      "description": "Community Tax Certificate for both applicants.",
+      "icon": "Receipt"
+    },
+    {
+      "title": "Seminar Certificate",
+      "description": "Proof of attendance from pre-marriage counseling and family planning seminars.",
+      "icon": "GraduationCap"
+    }
+  ],
+  "tags": [
+    "Marriage License",
+    "Civil Registry",
+    "Local Civil Registrar",
+    "PSA",
+    "Wedding Requirements",
+    "Philippines"
+  ],
+  "aliases": [
+    "Marriage Permit",
+    "Civil Marriage License",
+    "Wedding License"
+  ],
+  "checklist": [
+    {
+      "title": "Secure Documents",
+      "description": "Obtain updated PSA birth certificates and CENOMAR copies for both applicants."
+    },
+    {
+      "title": "Attend Seminars",
+      "description": "Participate in mandatory pre-marriage counseling and family planning sessions required by the LGU."
+    },
+    {
+      "title": "Submit Application",
+      "description": "File your application forms and requirements at the Local Civil Registrar's office."
+    },
+    {
+      "title": "Wait for Publication",
+      "description": "Allow for the mandatory 10-day public posting period required by Philippine law."
+    },
+    {
+      "title": "Claim License",
+      "description": "Pick up your marriage license, which is valid for 120 days nationwide."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Marriage License Fee",
+      "amount": "₱100–₱300"
+    },
+    {
+      "label": "Pre-Marriage Seminar Fees",
+      "amount": "Free–₱300"
+    },
+    {
+      "label": "Documentary Requirements",
+      "amount": "₱300–₱800"
+    },
+    {
+      "label": "Community Tax Certificate (Cedula)",
+      "amount": "₱5–₱100"
+    },
+    {
+      "label": "Total",
+      "amount": "₱500–₱1500+"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-marriage-license",
+      "title": "What is Marriage License?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A Marriage License is an official legal document issued by the Local Government Unit (LGU) through the Local Civil Registrar (LCR), authorizing two individuals to marry in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "Under Philippine law, most couples must obtain a marriage license before a civil or church wedding can legally proceed."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Marriage License is commonly used for:\n* Civil weddings\n* Church weddings\n* Legal registration of marriage"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a Marriage License if you are:\n- Planning to get married in the Philippines\n- Applying for a church or civil wedding\n- Registering a legal union recognized by Philippine law"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-marriage-license",
+      "title": "Benefits of Having Marriage License",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Legal Authority to Marry",
+          "content": "The license legally authorizes a couple to marry anywhere in the Philippines within its validity period."
+        },
+        {
+          "type": "subheading",
+          "title": "Required for Wedding Ceremonies",
+          "content": "Churches, judges, mayors, and solemnizing officers usually require a valid marriage license before officiating a wedding."
+        },
+        {
+          "type": "subheading",
+          "title": "Enables Official Marriage Registration",
+          "content": "Without a valid marriage license, most marriages cannot be properly registered with the PSA."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Marriage License applications are generally processed through walk-in applications at the Local Civil Registrar (LCR) office of the city or municipality where either applicant resides."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Application",
+          "content": "Some LGUs provide online appointment systems or downloadable application forms through their official websites."
+        },
+        {
+          "type": "paragraph",
+          "content": "However, personal appearance is usually still required for verification and seminar attendance."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In Application",
+          "content": "Applicants may visit the Local Civil Registrar office directly to submit requirements and process their application."
+        },
+        {
+          "type": "paragraph",
+          "content": "Both applicants are usually required to appear in person."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Always double-check for 'Negative Results'. If your record is missing, you must process **Late Registration** at the LCR where the event occurred."
+        },
+        {
+          "type": "subheading",
+          "title": "Secure PSA Documents",
+          "content": "Obtain updated PSA Birth Certificates and PSA CENOMAR copies for both applicants."
+        },
+        {
+          "type": "subheading",
+          "title": "Attend Required Seminars",
+          "content": "Attend mandatory seminars such as:\n* Pre-Marriage Counseling\n* Family Planning Seminar\n* Responsible Parenthood Seminar"
+        },
+        {
+          "type": "paragraph",
+          "content": "Requirements vary depending on the LGU."
+        },
+        {
+          "type": "subheading",
+          "title": "Submit Application Forms",
+          "content": "Submit completed application forms along with all documentary requirements to the Local Civil Registrar."
+        },
+        {
+          "type": "paragraph",
+          "content": "The officer will review and verify the submitted documents."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Applicable Fees",
+          "content": "Pay the required processing fees at the LGU cashier or authorized payment center."
+        },
+        {
+          "type": "paragraph",
+          "content": "Keep all official receipts."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for the 10-Day Publication Period",
+          "content": "Philippine law requires the marriage license application to be posted publicly for 10 consecutive days."
+        },
+        {
+          "type": "paragraph",
+          "content": "This allows any legal objections to be raised."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim the Marriage License",
+          "content": "After the publication period and approval, applicants may claim their Marriage License from the Local Civil Registrar."
+        },
+        {
+          "type": "paragraph",
+          "content": "The license is generally valid for 120 days nationwide."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their Marriage License at:\n- Local Civil Registrar Office (City Hall or Municipal Hall)\n- LGU Civil Registry Department\n- Selected LGU online appointment portals"
+        },
+        {
+          "type": "paragraph",
+          "content": "Applications are usually filed in the city or municipality where either applicant resides."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "[City/Municipal Hall Website](https://www.gov.ph/services/lgu) (or visit your respective local city/municipal hall)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n* Document preparation: 1–7 days\n* Seminar attendance: Same day to 2 days\n* Mandatory publication period: 10 consecutive days\n* License release: 10–14 days total processing"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor their application through:\n* Local Civil Registrar inquiry desks\n* LGU SMS or online appointment systems\n* Phone or email follow-ups"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- Incorrect PSA records or misspelled names\n- Incomplete seminar requirements\n- Delayed publication period processing\n- Missing parental consent documents\n- Expired or invalid IDs"
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Using outdated PSA documents",
+            "Ignoring seminar schedules",
+            "Submitting incomplete requirements",
+            "Applying too close to the wedding date",
+            "Forgetting photocopies of documents and IDs"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your application before final submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Prepare all PSA documents in advance",
+            "Book seminars early if slots are limited",
+            "Bring multiple photocopies of all documents",
+            "Verify LGU-specific requirements beforehand",
+            "Apply at least 1 month before your wedding date"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "How long is a Marriage License valid?",
+          "content": "A Marriage License is generally valid for 120 days from the date of issue anywhere in the Philippines."
+        },
+        {
+          "type": "subheading",
+          "title": "Is a Marriage License required for church weddings?",
+          "content": "Yes. Most churches require a valid Marriage License before conducting the ceremony."
+        },
+        {
+          "type": "subheading",
+          "title": "Can foreigners apply for a Marriage License in the Philippines?",
+          "content": "Yes, but additional requirements such as a Certificate of Legal Capacity to Marry may be required."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I apply in a different city?",
+          "content": "Applications are usually filed where either applicant resides, depending on LGU rules."
+        },
+        {
+          "type": "subheading",
+          "title": "Is the 10-day waiting period mandatory?",
+          "content": "Yes. The publication period is required by Philippine law for most marriage license applications."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "id": "parental-consent-advice",
+  "shortTitle": "Parental Consent / Advice",
+  "title": "Parental Consent vs. Parental Advice for Marriage",
+  "slug": "parental-consent-advice",
+  "relatedGuideSlugs": [
+    "psa-birth-certificate",
+    "cedula-ctc",
+    "national-id"
+  ],
+  "description": "Understand the legal requirements for parental involvement in Philippine marriages for applicants aged 18 to 25.",
+  "lastUpdated": "2026-05-14",
+  "category": "Civil Registry",
+  "agency": "LGU",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-3D",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "Parents' Presence",
+      "description": "Parents should ideally appear personally at the Local Civil Registrar.",
+      "icon": "Users"
+    },
+    {
+      "title": "Valid IDs",
+      "description": "Government-issued IDs of both the applicants and the parents/guardians.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Affidavit Form",
+      "description": "A sworn statement of consent (for ages 18-20) or advice (for ages 21-24).",
+      "icon": "FileText"
+    },
+    {
+      "title": "Death Certificate",
+      "description": "Required if one or both parents are deceased.",
+      "icon": "FileText"
+    }
+  ],
+  "tags": [
+    "Marriage",
+    "Wedding",
+    "Legal Requirements",
+    "Philippines",
+    "Family Code"
+  ],
+  "aliases": [
+    "Parental Consent",
+    "Parental Advice",
+    "Affidavit of Consent",
+    "Affidavit of Advice"
+  ],
+  "checklist": [
+    {
+      "title": "Determine Requirement",
+      "description": "Check if you need Parental Consent (ages 18-20) or Parental Advice (ages 21-24) based on your age."
+    },
+    {
+      "title": "Prepare Affidavit",
+      "description": "Obtain the correct template and fill out the details for your parents to sign."
+    },
+    {
+      "title": "Sign and Notarize",
+      "description": "Have your parents sign the form before the LCR or a Notary Public if they cannot appear in person."
+    },
+    {
+      "title": "Submit Application",
+      "description": "Attach the signed and notarized affidavit to your Marriage License application."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Notarization Fee",
+      "amount": "₱200 – ₱500"
+    },
+    {
+      "label": "LCR Filing Fee",
+      "amount": "Variable (usually included in license fee)"
+    },
+    {
+      "label": "Total",
+      "amount": "₱200 – ₱500"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-are-parental-consent-and-parental-advice",
+      "title": "What are Parental Consent and Parental Advice?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Under the **Philippine Family Code**, individuals who wish to marry but have not yet reached the age of 25 are legally required to involve their parents or guardians in the process."
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Parental Consent:** Required for applicants aged **18 to 20**.",
+            "**Parental Advice:** Required for applicants aged **21 to 24**."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "These documents are commonly used for:\n*   Applying for a Marriage License at the Local Civil Registrar\n*   Ensuring the legal validity of the marriage (for Consent)\n*   Avoiding the mandatory 90-day waiting period (for Advice)"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need these documents if you are:\n- An applicant aged **18, 19, or 20** (Needs **Consent**)\n- An applicant aged **21, 22, 23, or 24** (Needs **Advice**)"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-parental-consentadvice",
+      "title": "Benefits of Having Parental Consent/Advice",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Following these legal steps ensures your marriage is valid and processed without delays."
+        },
+        {
+          "type": "subheading",
+          "title": "Legal Validity (For Consent)",
+          "content": "For those under 21, marrying without consent makes the marriage **voidable** (annullable). Obtaining consent secures the marriage's legal standing."
+        },
+        {
+          "type": "subheading",
+          "title": "Faster Licensing (For Advice)",
+          "content": "For those aged 21–24, if parental advice is not obtained or is unfavorable, the marriage license issuance is **legally suspended for 90 days**. Providing the advice avoids this wait."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Personal Appearance (LCR)",
+          "content": "Parents can sign the marriage license application form directly in front of the Local Civil Registrar."
+        },
+        {
+          "type": "subheading",
+          "title": "Notarized Affidavit",
+          "content": "If parents cannot come to the City Hall, you can bring a notarized **Affidavit of Consent** or **Affidavit of Parental Advice**."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Always double-check for 'Negative Results'. If your record is missing, you must process **Late Registration** at the LCR where the event occurred."
+        },
+        {
+          "type": "subheading",
+          "title": "Determine Your Requirement",
+          "content": "Check your age on the day of the marriage license application.\n*   18–20 = Consent\n*   21–24 = Advice"
+        },
+        {
+          "type": "subheading",
+          "title": "Talk to Your Parents",
+          "content": "Discuss your plans with your parents. Their cooperation is essential for a smooth process."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare the Document",
+          "content": "Obtain the template for the **Affidavit of Consent** or **Affidavit of Advice** from the LCR office or a legal forms website."
+        },
+        {
+          "type": "subheading",
+          "title": "Signing and Notarization",
+          "content": "Have your father, mother, or guardian sign the document. If done outside the LCR office, it must be sworn before a Notary Public."
+        },
+        {
+          "type": "subheading",
+          "title": "Submit to the LCR",
+          "content": "Attach the signed and notarized affidavit to your Marriage License application."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process these documents at:\n- **Local Civil Registrar (LCR):** At your City or Municipal Hall.\n- **Notary Public Office:** For notarizing the affidavits."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Preparation: 1 Day\n*   LCR Publication: 10 Days (Standard for all licenses)"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You can check the status of your marriage license application at the LCR office after the 10-day publication period."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Parental Refusal:** If parents refuse consent (under 21), the license **cannot** be issued. If they refuse advice (21–24), the license is delayed by 90 days.\n- **Separated Parents:** Generally, the consent/advice of the parent with whom you live or the surviving parent is sufficient."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Forging Signatures:** This is a criminal offense and will render the marriage license (and potentially the marriage) void.",
+            "**Wrong Form:** Using a \"Consent\" form when you are already 22 years old."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always use the parent's name exactly as it appears on their valid ID."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Bring your parents with you to the LCR to avoid the extra step and cost of notarization.",
+            "Ensure you have the death certificate ready if one parent is deceased.",
+            "If your parents are unavailable, seek a legal guardian's consent/advice."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the legal templates and specific local requirements for marriage licensing, please refer to:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Local Government Unit (LGU):** Visit the official website or City/Municipal Hall where you are applying for a marriage license.",
+            "**PSA Census:** [PSA Official Website](https://psa.gov.ph) (For civil registry guidelines)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "What if I am 25 or older?",
+          "content": "You no longer need parental consent or advice. You can apply for a marriage license independently."
+        },
+        {
+          "type": "subheading",
+          "title": "Can a sibling give consent?",
+          "content": "Only if they are your legally appointed guardian. Otherwise, only parents (or surviving parent) can provide the required consent/advice."
+        }
+      ]
+    }
+  ]
+}

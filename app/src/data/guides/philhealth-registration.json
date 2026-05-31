@@ -1,0 +1,659 @@
+{
+  "id": "philhealth-registration",
+  "title": "How to Apply for PhilHealth Membership and ID",
+  "shortTitle": "PhilHealth ID",
+  "slug": "philhealth-registration",
+  "relatedGuideSlugs": [
+    "national-id",
+    "psa-birth-certificate",
+    "nbi-clearance"
+  ],
+  "description": "Secure health insurance coverage and access medical benefits for you and your family.",
+  "lastUpdated": "2026-04-01",
+  "category": "Government ID",
+  "agency": "PhilHealth",
+  "difficulty": "Easy",
+  "estimatedTime": "1-3D",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "PMRF Form",
+      "description": "A completed PhilHealth Member Registration Form.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID for identity verification.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Birth Certificate",
+      "description": "PSA-issued birth certificate (may be required).",
+      "icon": "FileText"
+    }
+  ],
+  "tags": [
+    "PhilHealth",
+    "Healthcare",
+    "Government ID",
+    "Health Insurance",
+    "Philippines"
+  ],
+  "checklist": [
+    {
+      "title": "Register Membership",
+      "description": "Determine your membership category and obtain the PhilHealth Member Registration Form (PMRF)."
+    },
+    {
+      "title": "Fill PMRF Form",
+      "description": "Complete the form with your personal details and list your qualified dependents."
+    },
+    {
+      "title": "Prepare Documents",
+      "description": "Gather your valid IDs and any required supporting documents like birth or marriage certificates."
+    },
+    {
+      "title": "Submit Requirements",
+      "description": "File your application at a PhilHealth office or service center for verification."
+    },
+    {
+      "title": "Verify Details",
+      "description": "Review your encoded information and report any errors immediately."
+    },
+    {
+      "title": "Get PhilHealth Number",
+      "description": "Receive your permanent PhilHealth Identification Number (PIN) for future transactions."
+    },
+    {
+      "title": "Claim ID",
+      "description": "Request and claim your PhilHealth ID card from the branch."
+    }
+  ],
+  "fees": [
+    {
+      "label": "PhilHealth Membership Registration",
+      "amount": "₱0"
+    },
+    {
+      "label": "Basic PhilHealth ID Issuance",
+      "amount": "₱0"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-a-philhealth-id",
+      "title": "What is a PhilHealth ID?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A **PhilHealth ID** is an identification card issued by the Philippine Health Insurance Corporation (PhilHealth) to registered members of the national health insurance program."
+        },
+        {
+          "type": "paragraph",
+          "content": "The ID contains your:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Full name",
+            "PhilHealth Identification Number (PIN)",
+            "Membership information"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "PhilHealth membership allows individuals to access healthcare benefits and medical assistance from accredited healthcare providers and hospitals in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "The PhilHealth ID is commonly used for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Healthcare and hospital transactions",
+            "Insurance verification",
+            "Government transactions",
+            "Supporting identification purposes"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Your **PhilHealth Identification Number (PIN)** is permanent and should be used for all future PhilHealth transactions."
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Most ID applications now require **Online Pre-registration**. Always take a screenshot of your QR code or transaction slip before heading to the office."
+        },
+        {
+          "type": "paragraph",
+          "content": "You should apply for PhilHealth membership if you are:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Employed in the private or public sector",
+            "Self-employed",
+            "A freelancer or online worker",
+            "A business owner",
+            "An overseas Filipino worker (OFW)",
+            "A student voluntarily registering",
+            "A senior citizen",
+            "An indigent or sponsored member",
+            "An unemployed individual voluntarily contributing"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "PhilHealth membership is important for accessing healthcare coverage and medical benefits."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-philhealth-id",
+      "title": "Benefits of Having a PhilHealth ID",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "PhilHealth membership provides several advantages."
+        },
+        {
+          "type": "subheading",
+          "title": "Access to Healthcare Benefits",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Members may receive financial assistance for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Hospital confinement",
+            "Surgeries",
+            "Outpatient procedures",
+            "Medical treatments",
+            "Selected preventive healthcare services"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "Reduced Medical Expenses",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "PhilHealth coverage helps lower hospitalization and treatment costs."
+        },
+        {
+          "type": "subheading",
+          "title": "Nationwide Coverage",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Benefits may be used at accredited hospitals and clinics across the Philippines."
+        },
+        {
+          "type": "subheading",
+          "title": "Lifetime Membership Record",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Your PhilHealth Identification Number remains permanent even if your employment or membership category changes."
+        },
+        {
+          "type": "subheading",
+          "title": "Additional Government Transaction Support",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The PhilHealth ID may also help support identity verification in some transactions."
+        }
+      ]
+    },
+    {
+      "id": "registration-methods",
+      "title": "Registration Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may register for PhilHealth membership through different methods."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In Registration",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants may visit PhilHealth offices and service centers for registration."
+        },
+        {
+          "type": "subheading",
+          "title": "Employer-Assisted Registration",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Employers commonly register employees as part of employment onboarding."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Registration",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Some PhilHealth services and member information updates may be available online."
+        },
+        {
+          "type": "paragraph",
+          "content": "Availability of online registration features may vary depending on PhilHealth system updates."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-registration-process",
+      "title": "Step-by-Step Registration Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Most ID applications now require **Online Pre-registration**. Always take a screenshot of your QR code or transaction slip before heading to the office."
+        },
+        {
+          "type": "subheading",
+          "title": "Determine Your Membership Category",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Choose the correct membership classification, such as:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Employed",
+            "Self-employed",
+            "Voluntary",
+            "OFW",
+            "Sponsored",
+            "Senior citizen"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Your category may affect contribution requirements and supporting documents."
+        },
+        {
+          "type": "subheading",
+          "title": "Obtain and Fill Out the PMRF",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Get the PhilHealth Member Registration Form (PMRF)."
+        },
+        {
+          "type": "paragraph",
+          "content": "Fill out the form carefully and clearly."
+        },
+        {
+          "type": "paragraph",
+          "content": "Required information may include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Full name",
+            "Birth date",
+            "Address",
+            "Civil status",
+            "Contact information",
+            "Dependents"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Ensure all details match your official records and IDs."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Your Supporting Documents",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Gather all required documents based on your membership category."
+        },
+        {
+          "type": "paragraph",
+          "content": "Check that:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "IDs are valid",
+            "Documents are readable",
+            "Information is consistent"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Incomplete or mismatched records may delay processing."
+        },
+        {
+          "type": "subheading",
+          "title": "Submit Your Application",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Submit your PMRF and supporting documents at a PhilHealth office or service center."
+        },
+        {
+          "type": "paragraph",
+          "content": "Staff will verify your information and supporting requirements."
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants may be asked additional questions regarding employment or membership classification."
+        },
+        {
+          "type": "subheading",
+          "title": "Receive Your PhilHealth Identification Number (PIN)",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "After successful registration, you will receive your permanent PhilHealth Identification Number."
+        },
+        {
+          "type": "paragraph",
+          "content": "Keep your PIN secure because it will be used for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Contributions",
+            "Benefit claims",
+            "Membership updates",
+            "Future transactions"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "Verify Your Membership Information",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Carefully review your:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Full name",
+            "Birth date",
+            "Address",
+            "Dependents",
+            "Membership category"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Immediately report errors to avoid future issues with claims and benefits."
+        },
+        {
+          "type": "subheading",
+          "title": "Request or Claim Your PhilHealth ID",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "After registration, you may request a PhilHealth ID card."
+        },
+        {
+          "type": "paragraph",
+          "content": "Depending on office availability and policies, you may receive:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Regular PhilHealth ID card",
+            "PVC insurance card (if applicable)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Processing and issuance procedures may vary by branch."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "PhilHealth registration may be processed at:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "PhilHealth Local Insurance Offices (LHIOs)",
+            "PhilHealth Express branches",
+            "Government service centers",
+            "Selected malls with PhilHealth counters"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some employers may also process membership registration for employees."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "[PhilHealth Official Website](https://www.philhealth.gov.ph)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Membership registration: Same day",
+            "PIN issuance: Same day",
+            "ID issuance: Same day or several days depending on branch availability"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Delays may occur because of:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Incomplete documents",
+            "High applicant volume",
+            "System maintenance",
+            "Verification issues"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Members may monitor or verify their PhilHealth information through:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "PhilHealth member portals",
+            "PhilHealth offices",
+            "Official transaction records"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Keep copies of:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "PMRF forms",
+            "Transaction slips",
+            "Contribution records",
+            "Membership details"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "These documents may help with future updates and claims."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Incorrect member information",
+            "Duplicate PhilHealth numbers",
+            "Missing records",
+            "Delayed ID issuance",
+            "Incorrect dependent details",
+            "Contribution posting delays"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some issues may require correction requests or record updates."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Using inconsistent personal information",
+            "Submitting incomplete forms",
+            "Forgetting supporting documents",
+            "Losing your PhilHealth number",
+            "Registering duplicate memberships",
+            "Failing to update dependents or contact information"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your details carefully before submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Fill out the PMRF before visiting the office",
+            "Bring extra photocopies of documents",
+            "Visit early to avoid long queues",
+            "Organize documents in one folder",
+            "Double-check all personal information",
+            "Keep digital copies of your records"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is PhilHealth registration free?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. Membership registration and basic PhilHealth ID issuance are generally free."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I apply online?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Some registration and update services may be available online, depending on PhilHealth system availability."
+        },
+        {
+          "type": "subheading",
+          "title": "Is the PhilHealth number permanent?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. Your PhilHealth Identification Number (PIN) remains permanent for life."
+        },
+        {
+          "type": "subheading",
+          "title": "Can unemployed individuals register?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. Individuals may apply as voluntary members even without formal employment."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I use the PhilHealth ID as a valid ID?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The PhilHealth ID may be accepted in some transactions, but acceptance depends on the institution or agency involved."
+        }
+      ]
+    }
+  ]
+}

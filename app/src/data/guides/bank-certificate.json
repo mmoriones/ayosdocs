@@ -1,0 +1,298 @@
+{
+  "id": "bank-certificate",
+  "shortTitle": "Bank Certificate",
+  "title": "How to Get a Bank Certificate or Statement",
+  "slug": "bank-certificate",
+  "relatedGuideSlugs": [
+    "national-id",
+    "psa-birth-certificate",
+    "nbi-clearance"
+  ],
+  "description": "Request official proof of your financial capacity for visa applications, loans, or school requirements in the Philippines.",
+  "lastUpdated": "2026-05-14",
+  "category": "Essential Documents",
+  "agency": "Bank",
+  "difficulty": "Easy",
+  "estimatedTime": "1D",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "At least one government-issued ID.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Account Details",
+      "description": "Your account number or ATM card.",
+      "icon": "CreditCard"
+    },
+    {
+      "title": "Processing Fee",
+      "description": "Usually ₱100 to ₱200 per document.",
+      "icon": "Wallet"
+    }
+  ],
+  "tags": [
+    "Bank Certificate",
+    "Bank Statement",
+    "Proof of Funds",
+    "Visa Requirements",
+    "Philippines"
+  ],
+  "aliases": [
+    "Bank Cert",
+    "Account Statement",
+    "Proof of Income",
+    "ADB Certificate"
+  ],
+  "checklist": [
+    {
+      "title": "Identify Purpose",
+      "description": "Determine if you need the certificate for a visa, loan, or other requirement."
+    },
+    {
+      "title": "Visit Bank",
+      "description": "Go to your branch of account or use online banking to request the document."
+    },
+    {
+      "title": "Fill Out Form",
+      "description": "Request the certificate or statement and specify if you need the ADB included."
+    },
+    {
+      "title": "Pay Fee",
+      "description": "Settle the processing fee, which is usually deducted from your account."
+    },
+    {
+      "title": "Claim Document",
+      "description": "Receive the signed document with the bank's official dry seal."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Bank Certificate",
+      "amount": "₱100 – ₱200"
+    },
+    {
+      "label": "Bank Statement (per page/month)",
+      "amount": "₱50 – ₱100"
+    },
+    {
+      "label": "Total",
+      "amount": "₱100 – ₱300"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-are-bank-certificates-and-statements",
+      "title": "What are Bank Certificates and Statements?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "These are official documents issued by your bank to prove your financial standing."
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Bank Certificate:** A one-page formal letter confirming you have an account, its current balance, and its opening date.",
+            "**Bank Statement:** A detailed list of all transactions (deposits, withdrawals) over a specific period (usually 3 or 6 months)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "These documents are commonly used for:\n*   Tourist or Student Visa applications\n*   Housing or Car Loan applications\n*   Proving \"Strong Ties\" to the Philippines for travel\n*   School enrollment or scholarship requirements"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need these documents if you are:\n- A traveler applying for a visa (Japan, Korea, Schengen, etc.)\n- A borrower applying for a credit line or loan\n- A student applying for a program that requires financial proof\n- A business owner proving liquidity for a contract"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-bank-certificatestatement",
+      "title": "Benefits of Having a Bank Certificate/Statement",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "These documents serve as credible evidence of your ability to fund your plans."
+        },
+        {
+          "type": "subheading",
+          "title": "Visa Approval",
+          "content": "For most embassies, a healthy **Average Daily Balance (ADB)** is a key factor in proving you are a legitimate traveler and not an intending immigrant."
+        },
+        {
+          "type": "subheading",
+          "title": "Financial Credibility",
+          "content": "Shows banks and institutions that you have a stable source of income and consistent saving habits."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Walk-In (Branch of Account)",
+          "content": "Visit the branch where you opened your account for the fastest service. Most banks can issue certificates on the spot."
+        },
+        {
+          "type": "subheading",
+          "title": "Online/Mobile Banking",
+          "content": "Many banks (BPI, BDO, UnionBank) now allow you to request and download Bank Statements as PDFs. Some even offer digital Bank Certificates with a QR code for verification."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Most ID applications now require **Online Pre-registration**. Always take a screenshot of your QR code or transaction slip before heading to the office."
+        },
+        {
+          "type": "subheading",
+          "title": "Determine Your Requirement",
+          "content": "Check the requirements of the embassy or institution. Do they need a one-page **Certificate** or a detailed **Statement** of the last 6 months?"
+        },
+        {
+          "type": "subheading",
+          "title": "Visit Your Bank",
+          "content": "Go to your branch of account. It's best to go during mid-morning to avoid long lines."
+        },
+        {
+          "type": "subheading",
+          "title": "Fill Out the Request Form",
+          "content": "Request the \"Bank Certificate\" or \"Bank Statement\" form. Specify if you need the **ADB** and the **Account Type** (Savings/Current) included."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Fee",
+          "content": "Pay the processing fee (usually deducted from your account or paid in cash)."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim the Document",
+          "content": "For certificates, you usually wait 15–30 minutes. For statements covering several years, you might be asked to return the next day. Ensure the document is **signed** and has the **bank's dry seal**."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their documents at:\n- **Your Bank Branch:** (BDO, BPI, Metrobank, etc.)\n- **Online Banking Portal:** (For digital statements)"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Bank Certificate: 15–30 Minutes (Same Day)\n*   Bank Statement: 1 Hour to 1 Day"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "There is no tracking system for these requests as they are usually handled immediately at the branch."
+        },
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "If you are requesting via online banking, you can usually check the status of your request in the \"Transaction History\" or \"Service Requests\" section of your bank's mobile app."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **\"Show Money\" Suspicion:** Large, sudden deposits right before a visa application can look suspicious to embassy officers.\n- **Digital Bank Acceptance:** Some embassies may not yet accept printed statements from digital-only banks without a physical stamp."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Missing ADB:** Forgetting to ask for the Average Daily Balance when required for a visa.",
+            "**Incorrect Name:** Ensure the name on the certificate matches your passport exactly."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always double-check that the document has the bank's official dry seal or stamp before leaving."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Request your documents via your bank's mobile app if they support it.",
+            "If you have a \"preferred\" or \"gold\" status with your bank, the fees are often waived and processing is faster.",
+            "Ask for multiple copies if you are applying for more than one visa."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate and up-to-date information, we recommend contacting your bank branch directly or visiting their official website."
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Bank Branch:** Visit your branch of account for physical certificates and statements.",
+            "**Online Banking:** Check your bank's official mobile app or web portal for digital statements."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Does a Bank Certificate expire?",
+          "content": "Embassies usually require certificates to be issued within **1 to 3 months** of your application date."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I get a certificate from a branch where I didn't open the account?",
+          "content": "Most modern banks (BPI, BDO) allow \"inter-branch\" requests, but some smaller banks may still require you to go to your \"home branch.\""
+        }
+      ]
+    }
+  ]
+}

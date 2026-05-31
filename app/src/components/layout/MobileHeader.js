@@ -10,6 +10,7 @@ import { useTheme } from '@/context';
 import { Button, Avatar } from '@/components/ui';
 import { useAuthUI } from '@/components/Providers';
 import AccountMenu from './AccountMenu';
+import { useRef } from 'react';
 
 const emptySubscribe = () => () => {};
 const getClientSnapshot = () => true;
@@ -34,25 +35,39 @@ export default function MobileHeader({
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
 
+  const lastScrollYRef = useRef(0);
+
   // Auto-hide logic on scroll
   useEffect(() => {
+    // Initialize offset on mount
+    document.documentElement.style.setProperty('--header-offset', '64px');
+
     if (!autoHide) return;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const lastScrollY = lastScrollYRef.current;
+      
+      let visible = true;
       if (currentScrollY < 10) {
-        setIsVisible(true);
+        visible = true;
       } else if (currentScrollY > lastScrollY && currentScrollY > 60) {
-        setIsVisible(false);
+        visible = false;
       } else if (currentScrollY < lastScrollY) {
-        setIsVisible(true);
+        visible = true;
       }
-      setLastScrollY(currentScrollY);
+      
+      setIsVisible(visible);
+      document.documentElement.style.setProperty('--header-offset', visible ? '64px' : '0px');
+      
+      lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, autoHide]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [autoHide]);
 
   const headerStyles = `
     ${sticky ? 'fixed top-0 left-0 right-0' : 'relative'}

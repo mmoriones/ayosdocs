@@ -1,0 +1,289 @@
+{
+  "id": "bir-official-receipts",
+  "shortTitle": "BIR Authority to Print",
+  "title": "How to Get BIR Authority to Print (Invoices)",
+  "slug": "bir-official-receipts",
+  "relatedGuideSlugs": [
+    "bir-tin-registration",
+    "mayors-permit",
+    "dti-registration"
+  ],
+  "description": "Apply for the mandatory Authority to Print (ATP) for your business invoices and receipts under the Ease of Paying Taxes Act.",
+  "lastUpdated": "2026-05-14",
+  "category": "Business",
+  "agency": "BIR",
+  "difficulty": "Moderate",
+  "estimatedTime": "1W",
+  "costRange": "P5H-P2K",
+  "requirements": [
+    {
+      "title": "BIR Form 1906",
+      "description": "The application form for Authority to Print.",
+      "icon": "FileText"
+    },
+    {
+      "title": "BIR COR (Form 2303)",
+      "description": "A photocopy of your BIR Certificate of Registration.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Sample Layout",
+      "description": "A draft of your proposed invoice showing all mandatory business information.",
+      "icon": "Receipt"
+    },
+    {
+      "title": "Accredited Printer",
+      "description": "Details of a BIR-authorized printing shop for your booklets.",
+      "icon": "Building2"
+    }
+  ],
+  "tags": [
+    "BIR",
+    "Business Registration",
+    "Invoices",
+    "ATP",
+    "Philippines",
+    "Tax Compliance"
+  ],
+  "aliases": [
+    "Authority to Print",
+    "BIR Invoices",
+    "Official Receipts",
+    "BIR Form 1906"
+  ],
+  "checklist": [
+    {
+      "title": "Find Printer",
+      "description": "Locate a BIR-accredited printing shop and request a quote for your booklets."
+    },
+    {
+      "title": "Create Layout",
+      "description": "Work with the printer to design an invoice layout that complies with EOPT rules."
+    },
+    {
+      "title": "File Form 1906",
+      "description": "Submit your ATP application through the ORUS portal or your assigned RDO."
+    },
+    {
+      "title": "Receive ATP",
+      "description": "Get the official Authority to Print (Form 1921) from the BIR once approved."
+    },
+    {
+      "title": "Pick Up Booklets",
+      "description": "Collect your printed invoice booklets once the printer has completed the job."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Printing Cost (approx. 10 booklets)",
+      "amount": "₱1,000 – ₱2,500"
+    },
+    {
+      "label": "BIR Application Fee",
+      "amount": "Free"
+    },
+    {
+      "label": "Total",
+      "amount": "₱1,000 – ₱2,500"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-the-authority-to-print-atp",
+      "title": "What is the Authority to Print (ATP)?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **Authority to Print (ATP)** is a permit issued by the BIR that allows a business to print its own official Invoices and Receipts through an accredited printer."
+        },
+        {
+          "type": "paragraph",
+          "content": "**Note for 2026:** Under the **Ease of Paying Taxes (EOPT) Act**, the **\"Invoice\"** is now the primary document for both sales of goods and services. The traditional \"Official Receipt\" is now a supplementary document."
+        },
+        {
+          "type": "paragraph",
+          "content": "The ATP and Invoices are commonly used for:\n*   Issuing legal proof of sale to customers\n*   Claiming Input VAT (for VAT-registered buyers)\n*   Substantiating business income and expenses during audits"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need an ATP if you are:\n- A new business owner (Sole Proprietor or Corporation)\n- A freelancer or self-employed professional\n- An existing business whose current invoice booklets are running out\n- An existing business transitioning from \"Official Receipts\" to \"Invoices\" under the new law"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-official-invoices",
+      "title": "Benefits of Having Official Invoices",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Official invoices are the backbone of a legal business in the Philippines."
+        },
+        {
+          "type": "subheading",
+          "title": "Professionalism and Trust",
+          "content": "Issuing a BIR-registered invoice builds trust with corporate clients who need these documents for their own tax deductions."
+        },
+        {
+          "type": "subheading",
+          "title": "Avoidance of Penalties",
+          "content": "Failure to issue an official invoice for sales can result in fines starting at ₱10,000 per violation."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online (ORUS)",
+          "content": "You can apply for the ATP digitally via the [BIR ORUS Portal](https://orus.bir.gov.ph)."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In (RDO)",
+          "content": "Submit your Form 1906 and requirements to the Revenue District Office (RDO) where your business is registered."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Use the BIR **eFPS or eBIRForms** for faster filing and avoid manual queuing at the RDO. Most payments can now be done via GCash or Maya."
+        },
+        {
+          "type": "subheading",
+          "title": "Find an Accredited Printer",
+          "content": "Look for a printer with a \"BIR Accredited\" sign. Request a quote for printing (usually sold in sets of 10 or 50 booklets)."
+        },
+        {
+          "type": "subheading",
+          "title": "Create the Layout",
+          "content": "Work with the printer to create your invoice layout. Ensure it includes:\n*   \"Invoice\" title (not \"Official Receipt\")\n*   Your Business Name, Address, and TIN (with Branch Code)\n*   Space for Customer Name, Address, and TIN\n*   VAT breakdown (if applicable)"
+        },
+        {
+          "type": "subheading",
+          "title": "File BIR Form 1906",
+          "content": "Log in to **ORUS** or visit your **RDO**. Submit the application and upload/attach the sample layout and your COR."
+        },
+        {
+          "type": "subheading",
+          "title": "Receive the ATP (Form 1921)",
+          "content": "Once approved, the BIR will issue the **Authority to Print (Form 1921)**."
+        },
+        {
+          "type": "subheading",
+          "title": "Printing and Delivery",
+          "content": "Give the ATP to your printer. They will print your booklets and must submit a **Printer’s Certificate of Delivery (PCD)** to the BIR within 30 days. You can then pick up your official booklets."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their ATP at:\n- [BIR ORUS Portal](https://orus.bir.gov.ph)\n- Your assigned **Revenue District Office (RDO)**"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   ATP Approval: 1–3 Working Days\n*   Printing Duration: 1–2 Weeks (depends on the printer)"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "If applying via ORUS, you can check the \"Application Status\" tab in your dashboard. If manual, you will need to follow up with your RDO or the printer."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Layout Rejection:** If mandatory information is missing or the text is too small.\n- **Printer Delay:** Printers may have a backlog, especially during peak registration seasons (January)."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Using \"Official Receipt\" for Services:** Ensure your new booklets say **\"Invoice\"** to comply with 2026 EOPT rules.",
+            "**Printing without ATP:** Never print receipts or invoices through a non-accredited shop; they will not be legally valid."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always check the serial numbers on your printed booklets against the ATP to ensure they match."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Ask your printer if they can handle the BIR filing for you.",
+            "Ensure your COR is updated and shows the correct \"Registered Activity.\"",
+            "Print at least 10–20 booklets at once to save on the per-unit cost."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate and up-to-date information, please refer to:\n*   [Bureau of Internal Revenue (BIR)](https://www.bir.gov.ph)\n*   [BIR Online Registration and Update System (ORUS)](https://orus.bir.gov.ph)"
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Can I use generic \"Receipt\" booklets from bookstores?",
+          "content": "No. For a registered business, only invoices/receipts printed with an official ATP and serial numbers are valid for tax purposes."
+        },
+        {
+          "type": "subheading",
+          "title": "Do Invoices expire?",
+          "content": "Invoices no longer have a 5-year expiration date (as of RR 6-2022). You can use them until the booklets are consumed."
+        }
+      ]
+    }
+  ]
+}

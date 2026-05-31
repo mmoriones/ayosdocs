@@ -1,0 +1,294 @@
+{
+  "id": "ofw-medical-exam",
+  "shortTitle": "OFW Medical Exam",
+  "title": "How to Get an OFW Medical Exam (PEME)",
+  "slug": "ofw-medical-exam",
+  "relatedGuideSlugs": [
+    "passport-appointment",
+    "dfa-apostille",
+    "nbi-clearance"
+  ],
+  "description": "Complete the mandatory Pre-Employment Medical Examination (PEME) at DOH-accredited clinics for your overseas deployment.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government Documents",
+  "agency": "DOH",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-3D",
+  "costRange": "P2K+",
+  "requirements": [
+    {
+      "title": "Valid Passport",
+      "description": "Original passport and at least two photocopies.",
+      "icon": "Passport"
+    },
+    {
+      "title": "Referral Slip",
+      "description": "Job offer or referral slip from your recruitment agency.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Passport Photos",
+      "description": "3–4 recent white background photos.",
+      "icon": "User"
+    },
+    {
+      "title": "Wafid Appointment",
+      "description": "Required registration for workers bound for GCC countries.",
+      "icon": "Receipt"
+    }
+  ],
+  "tags": [
+    "OFW",
+    "Medical Exam",
+    "PEME",
+    "DMW",
+    "DOH",
+    "Philippines"
+  ],
+  "aliases": [
+    "PEME",
+    "OFW Medical",
+    "GCC Medical",
+    "Wafid Medical",
+    "GAMCA Medical"
+  ],
+  "checklist": [
+    {
+      "title": "Find Accredited Clinic",
+      "description": "Locate a DOH-accredited clinic or follow your Wafid assignment for GCC countries."
+    },
+    {
+      "title": "Prepare for Exam",
+      "description": "Fast for 8-10 hours and avoid alcohol or meds 48 hours before the test."
+    },
+    {
+      "title": "Register at Clinic",
+      "description": "Arrive early at the clinic with your passport, photos, and referral slip to pay the fee."
+    },
+    {
+      "title": "Undergo Medical Tests",
+      "description": "Complete the laboratory, imaging, physical, and mandatory psychological evaluations."
+    },
+    {
+      "title": "Receive Results",
+      "description": "Wait 1-3 days for your \"Fit to Work\" status to be uploaded to the DMW system."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Standard Medical Package",
+      "amount": "₱2,500 – ₱4,500"
+    },
+    {
+      "label": "GCC/Wafid Package",
+      "amount": "₱4,500 – ₱7,500"
+    },
+    {
+      "label": "Total",
+      "amount": "₱2,500 – ₱7,500"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-the-ofw-medical-exam-peme",
+      "title": "What is the OFW Medical Exam (PEME)?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **Pre-Employment Medical Examination (PEME)** is a mandatory health screening for all Filipinos planning to work abroad. It ensures that the worker is physically and mentally fit to perform their duties in the host country and meets the health standards set by the Department of Migrant Workers (DMW) and the Department of Health (DOH)."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Medical Exam is commonly used for:\n*   Requirement for OEC/OFW Pass issuance\n*   Visa application for certain countries (e.g., South Korea, Taiwan, Gulf countries)\n*   Company compliance for the foreign employer"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need an OFW Medical Exam if you are:\n- A first-time OFW (Land-based or Sea-based)\n- A returning OFW with a new contract or employer\n- A seafarer renewing their medical certificate"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-peme-certificate",
+      "title": "Benefits of Having a PEME Certificate",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Completing your medical exam at an accredited clinic ensures your deployment is legal and your health is protected."
+        },
+        {
+          "type": "subheading",
+          "title": "Legal Compliance",
+          "content": "The DMW will not issue your exit clearance without a \"Fit to Work\" status uploaded by an accredited clinic."
+        },
+        {
+          "type": "subheading",
+          "title": "Health Awareness",
+          "content": "The comprehensive exam can detect underlying conditions (like high blood sugar or hypertension) before you leave, allowing you to seek treatment in the Philippines."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Agency Referral",
+          "content": "If you have a recruitment agency, they will usually direct you to a specific accredited clinic."
+        },
+        {
+          "type": "subheading",
+          "title": "Wafid System (For GCC Countries)",
+          "content": "For those bound for the Middle East, you must register at [Wafid.com](https://wafid.com) to be assigned to a clinic."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** The **DMW Mobile App** is now the primary portal for OEC and e-Registration. Ensure your profile is 100% complete before booking appointments."
+        },
+        {
+          "type": "subheading",
+          "title": "Find an Accredited Clinic",
+          "content": "Check the list of DOH-accredited OFW clinics. If bound for the GCC, follow the Wafid assignment."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare for the Exam",
+          "content": "Fast for 8–10 hours. Get enough sleep and avoid drinking alcohol or taking unnecessary medication 24–48 hours before the test."
+        },
+        {
+          "type": "subheading",
+          "title": "Registration at the Clinic",
+          "content": "Arrive early (usually 7:00 AM to 8:00 AM). Present your passport, photos, and referral slip. Pay the medical fee."
+        },
+        {
+          "type": "subheading",
+          "title": "Undergo Medical Tests",
+          "content": "The exam typically includes:\n*   **Laboratory:** Blood tests (HIV, Hep B/C, Syphilis), Urinalysis, and Stool exam.\n*   **Imaging:** Chest X-ray.\n*   **Physical:** Vision (Ishihara), Hearing, BP, and General Physical Exam.\n*   **Psychological:** A mandatory personality and psychological evaluation."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for Results",
+          "content": "Results are usually ready within **24 to 72 hours**. If you are \"Fit to Work,\" the clinic will upload your results directly to the DMW system."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their Medical Exam at:\n- **DOH-Accredited OFW Clinics:** Mostly located in Manila (Ermita/Malate), Cebu, and Davao.\n- [Wafid Portal](https://wafid.com) (For GCC registration)."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Examination: 4–6 Hours\n*   Results Release: 1–3 Working Days"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You can check your medical status on the **DMW Online Services Portal** or by contacting the clinic directly."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Hazy X-ray:** Often caused by a recent cough or cold. You may be asked to undergo \"Sputum Testing\" which can take weeks.\n- **High Blood Sugar/BP:** Can lead to a \"Temporary Unfit\" status until the condition is controlled."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Using a non-accredited clinic:** Your results will not be recognized by the DMW.",
+            "**Lying about medical history:** If discovered during the exam or abroad, it can lead to deportation or being banned from working overseas."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always ensure the name on your medical certificate exactly matches your passport."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Drink plenty of water in the days leading up to your exam.",
+            "If you have a pre-existing condition (like Diabetes), bring your latest doctor's clearance and maintenance meds.",
+            "Avoid salty and fatty foods 3 days before the exam."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For a list of currently accredited clinics and health advisories for OFWs, please visit:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Official Website:** [Department of Migrant Workers (DMW)](https://www.dmw.gov.ph)",
+            "**DOH Health Facilities:** [Department of Health (DOH)](https://doh.gov.ph)",
+            "**Wafid Services:** [Wafid (for GCC bound workers)](https://wafid.com)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "How long is the medical certificate valid?",
+          "content": "Most OFW medical certificates are valid for **three (3) months** from the date of issuance."
+        },
+        {
+          "type": "subheading",
+          "title": "What if I get an \"Unfit to Work\" result?",
+          "content": "You will be given a chance to undergo treatment or \"re-evaluation\" depending on the condition. Some conditions (like HIV or Hepatitis B for certain countries) are permanent disqualifications."
+        }
+      ]
+    }
+  ]
+}

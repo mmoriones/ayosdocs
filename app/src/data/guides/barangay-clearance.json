@@ -1,0 +1,583 @@
+{
+  "id": "barangay-clearance",
+  "title": "How to Get a Barangay Clearance in the Philippines",
+  "shortTitle": "Barangay Clearance",
+  "slug": "barangay-clearance",
+  "description": "Get your residency certification for employment, business, and other local government transactions.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government Clearance",
+  "agency": "LGU",
+  "difficulty": "Easy",
+  "estimatedTime": "1D",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID such as National ID, Passport, or Driver's License.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Proof of Residency",
+      "description": "Utility bills, lease contracts, or homeowner certifications to verify your address.",
+      "icon": "MapPin"
+    },
+    {
+      "title": "Application Form",
+      "description": "A completed form provided by the barangay hall.",
+      "icon": "FileText"
+    }
+  ],
+  "tags": [
+    "Barangay Clearance",
+    "Barangay Certificate",
+    "Local Government",
+    "Philippines",
+    "Government Document"
+  ],
+  "aliases": [
+    "Brgy Clearance",
+    "Community Clearance",
+    "Barangay Certificate",
+    "Barangay Document"
+  ],
+  "checklist": [
+    {
+      "title": "Prepare Documents",
+      "description": "Gather your valid ID and proof of residency before visiting the barangay hall."
+    },
+    {
+      "title": "Visit Barangay Hall",
+      "description": "Proceed to your local barangay office during official working hours."
+    },
+    {
+      "title": "Fill Out Form",
+      "description": "Provide accurate personal information and the purpose of your request on the application form."
+    },
+    {
+      "title": "Submit Requirements",
+      "description": "Present your documents to the barangay personnel for verification and record checking."
+    },
+    {
+      "title": "Pay Fees",
+      "description": "Pay the required clearance fee and keep the official receipt."
+    },
+    {
+      "title": "Claim Clearance",
+      "description": "Receive your approved Barangay Clearance and verify that all information is correct."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Barangay Clearance Fee",
+      "amount": "₱20–₱200"
+    },
+    {
+      "label": "Cedula (if required)",
+      "amount": "Varies"
+    },
+    {
+      "label": "Photocopy Expenses",
+      "amount": "Minimal cost"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-a-barangay-clearance",
+      "title": "What is a Barangay Clearance?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A **Barangay Clearance** is an official document issued by the barangay government certifying that an individual is a resident of the barangay and has no known derogatory record or unresolved issue within the community."
+        },
+        {
+          "type": "paragraph",
+          "content": "It is one of the most commonly requested local government documents in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "The document is often required for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Employment applications",
+            "Business permit applications",
+            "Government transactions",
+            "Police clearance applications",
+            "NBI clearance applications",
+            "Proof of residency",
+            "Scholarship requirements",
+            "Loan and banking requirements"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Barangay Clearances are issued by the barangay hall or barangay office where the applicant resides."
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a Barangay Clearance if you are:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Applying for a job",
+            "Starting a business",
+            "Processing government documents",
+            "Applying for police or NBI clearance",
+            "Applying for permits or licenses",
+            "Opening certain bank accounts",
+            "Requesting proof of residency",
+            "Processing school or scholarship requirements"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Many government and private institutions request Barangay Clearances as supporting documentation."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-barangay-clearance",
+      "title": "Benefits of Having a Barangay Clearance",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Proof of Residency",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The clearance confirms that you are a resident of the barangay."
+        },
+        {
+          "type": "subheading",
+          "title": "Required for Various Applications",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Many agencies require Barangay Clearances before processing other government documents."
+        },
+        {
+          "type": "subheading",
+          "title": "Supports Identity Verification",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The document may help verify your local address and community records."
+        },
+        {
+          "type": "subheading",
+          "title": "Useful for Business Applications",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants for barangay business permits may first need barangay clearance or certification."
+        },
+        {
+          "type": "subheading",
+          "title": "Community Record Verification",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The clearance helps confirm that the applicant has no unresolved community-related issues on record."
+        }
+      ]
+    },
+    {
+      "id": "types-of-barangay-documents",
+      "title": "Types of Barangay Documents",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Barangays may issue several types of certifications including:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Document",
+            "Common Purpose"
+          ],
+          "rows": [
+            [
+              "Barangay Clearance",
+              "General verification"
+            ],
+            [
+              "Barangay Certificate",
+              "Residency or status confirmation"
+            ],
+            [
+              "Certificate of Indigency",
+              "Financial assistance requirements"
+            ],
+            [
+              "Business Clearance",
+              "Business permit applications"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants should confirm the exact document required by the requesting institution."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may usually apply at:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Barangay Hall",
+            "Barangay Office",
+            "Barangay Satellite Offices",
+            "Designated community service centers"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Applications are generally processed in the barangay where the applicant currently resides."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Some modern Barangays now accept payments via **GCash or Maya**. Check your local Barangay hall's Facebook page for digital payment options."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Your Documents",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Gather:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Valid ID",
+            "Proof of residency",
+            "Supporting documents if applicable"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Prepare photocopies if required by the barangay office."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit Your Barangay Hall",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Proceed to your barangay office during official working hours."
+        },
+        {
+          "type": "paragraph",
+          "content": "Some barangays may have designated counters for clearance processing."
+        },
+        {
+          "type": "subheading",
+          "title": "Request and Fill Out the Application Form",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Provide accurate information including:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Full name",
+            "Address",
+            "Purpose of request",
+            "Contact information"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Ensure all information matches your IDs and records."
+        },
+        {
+          "type": "subheading",
+          "title": "Submit Your Requirements",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Barangay personnel will review your:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Identification documents",
+            "Residency information",
+            "Community records"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some barangays may conduct verification checks before approval."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Required Fees",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Proceed to payment if applicable."
+        },
+        {
+          "type": "paragraph",
+          "content": "Keep the official receipt for claiming and verification purposes."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for Processing",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Processing times vary depending on:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Barangay procedures",
+            "Volume of applicants",
+            "Verification requirements"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some barangays issue clearances immediately while others require additional waiting time."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim Your Barangay Clearance",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Once approved:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Verify all printed information",
+            "Report errors immediately",
+            "Keep the document secure"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some barangays may require signatures from barangay officials before release."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Process",
+            "Estimated Time"
+          ],
+          "rows": [
+            [
+              "Document Review",
+              "10–30 minutes"
+            ],
+            [
+              "Clearance Processing",
+              "Same day"
+            ],
+            [
+              "Additional Verification",
+              "Several hours to several days"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Most straightforward applications are processed on the same day."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Missing proof of residency",
+            "Incorrect personal information",
+            "Residency verification issues",
+            "Unpaid barangay obligations",
+            "Long queues",
+            "Missing signatures",
+            "Incomplete forms"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some barangays may deny applications if residency cannot be verified."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Bringing expired IDs",
+            "Using incomplete addresses",
+            "Applying in the wrong barangay",
+            "Forgetting photocopies",
+            "Providing incorrect information",
+            "Losing official receipts"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always verify your barangay’s specific requirements before visiting."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Visit early in the morning",
+            "Bring multiple valid IDs",
+            "Prepare photocopies beforehand",
+            "Confirm requirements through your barangay office",
+            "Wear appropriate attire",
+            "Organize documents in advance"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants recommend avoiding peak days such as Mondays and Fridays."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For official updates and specific local requirements, residents are encouraged to visit their respective City or Municipal Hall's official website or visit their Barangay Hall in person."
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Local Government Unit (LGU):** Visit your City or Municipal website for community announcements.",
+            "**Barangay Office:** Coordination with your local barangay officials is the best way to confirm current fees and requirements."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is a Barangay Clearance the same as a Barangay Certificate?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Not always. Barangay Certificates may be issued for residency or other specific purposes, while Barangay Clearance generally includes community verification."
+        },
+        {
+          "type": "subheading",
+          "title": "How long is a Barangay Clearance valid?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Validity periods vary depending on the requesting institution and barangay policies."
+        },
+        {
+          "type": "subheading",
+          "title": "Can someone else apply on my behalf?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Some barangays may allow representatives provided authorization documents are submitted."
+        },
+        {
+          "type": "subheading",
+          "title": "Is Barangay Clearance accepted nationwide?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes, although some agencies may still request additional supporting documents."
+        },
+        {
+          "type": "subheading",
+          "title": "Can students apply for Barangay Clearance?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. Students commonly request Barangay Clearances for scholarships, school requirements, and employment applications."
+        },
+        {
+          "type": "subheading",
+          "title": "Do I need a cedula?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Some barangays may require a Community Tax Certificate (Cedula) depending on local rules and application purpose."
+        }
+      ]
+    }
+  ]
+}

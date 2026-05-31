@@ -1,0 +1,294 @@
+{
+  "id": "oec-registration",
+  "shortTitle": "OEC / OFW Pass",
+  "title": "How to Get an OEC / OFW Pass (DMW Mobile App)",
+  "slug": "oec-registration",
+  "relatedGuideSlugs": [
+    "passport-appointment",
+    "dfa-apostille",
+    "nbi-clearance"
+  ],
+  "description": "Secure your digital exit clearance (OFW Pass) through the DMW Mobile App for your overseas deployment.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government Documents",
+  "agency": "DMW",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-3D",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "E-Registration Account",
+      "description": "An active account on the DMW Online Services Portal.",
+      "icon": "User"
+    },
+    {
+      "title": "Valid Passport",
+      "description": "A clear digital scan of your passport's data page.",
+      "icon": "Passport"
+    },
+    {
+      "title": "Valid Work Visa",
+      "description": "Proof of legal work status in your destination country.",
+      "icon": "Plane"
+    },
+    {
+      "title": "Verified Contract",
+      "description": "Employment contract verified by the Migrant Workers Office (MWO).",
+      "icon": "FileText"
+    },
+    {
+      "title": "PDOS Certificate",
+      "description": "Proof of completion of the Pre-Departure Orientation Seminar.",
+      "icon": "GraduationCap"
+    }
+  ],
+  "tags": [
+    "OEC",
+    "OFW Pass",
+    "DMW",
+    "POEA",
+    "Overseas Work",
+    "Philippines"
+  ],
+  "aliases": [
+    "OFW Pass",
+    "Overseas Employment Certificate",
+    "DMW Online Services",
+    "Exit Clearance"
+  ],
+  "checklist": [
+    {
+      "title": "Register E-Account",
+      "description": "Create and complete your profile on the DMW E-Registration portal."
+    },
+    {
+      "title": "Download Mobile App",
+      "description": "Install the DMW Mobile App and log in using your E-Registration credentials."
+    },
+    {
+      "title": "Verify Identity",
+      "description": "Upload your passport photo for automated identity verification within the app."
+    },
+    {
+      "title": "Upload Visa",
+      "description": "Provide your valid work visa details and upload a clear photo of the document."
+    },
+    {
+      "title": "Generate OFW Pass",
+      "description": "Once your status turns green, save your OFW Pass QR code to your phone."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Digital OFW Pass",
+      "amount": "Free"
+    },
+    {
+      "label": "Total",
+      "amount": "Free"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-the-ofw-pass-oec",
+      "title": "What is the OFW Pass (OEC)?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **OFW Pass** is the digital version of the **Overseas Employment Certificate (OEC)**. It serves as an official exit clearance for Overseas Filipino Workers (OFWs) departing from the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "The OFW Pass is commonly used for:\n*   Exemption from Travel Tax\n*   Exemption from Terminal Fees at the airport\n*   Proof of legal employment status for immigration"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need an OFW Pass if you are:\n- A first-time OFW with a verified contract\n- A returning OFW (Balik-Manggagawa) with a new employer or job site\n- An OFW returning to the same employer (for exemption/travel pass generation)"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-an-ofw-pass",
+      "title": "Benefits of Having an OFW Pass",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The transition to the digital OFW Pass makes processing faster and more convenient."
+        },
+        {
+          "type": "subheading",
+          "title": "Free of Charge",
+          "content": "The DMW has moved to make the digital OFW Pass free, saving workers money."
+        },
+        {
+          "type": "subheading",
+          "title": "Entirely Paperless",
+          "content": "You can present the QR code directly from your smartphone at the airport. No need for physical stamping or long queues at the DMW office."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online Application (DMW Mobile App)",
+          "content": "This is the primary and recommended method for 2026."
+        },
+        {
+          "type": "subheading",
+          "title": "eGovPH App",
+          "content": "You can also access your OFW Pass through the unified Philippine government app, **eGovPH**, under the NGA > DMW section."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** The **DMW Mobile App** is now the primary portal for OEC and e-Registration. Ensure your profile is 100% complete before booking appointments."
+        },
+        {
+          "type": "subheading",
+          "title": "Register for E-Registration",
+          "content": "If you don't have one, create an account on the [DMW Online Services Portal](https://onlineservices.dmw.gov.ph). Ensure all profile details (Experience, Education, etc.) are complete."
+        },
+        {
+          "type": "subheading",
+          "title": "Download the DMW Mobile App",
+          "content": "Install the app from the Google Play Store or Apple App Store and log in using your E-Registration credentials."
+        },
+        {
+          "type": "subheading",
+          "title": "Identity Verification",
+          "content": "Upload a photo of your passport. The app will use facial recognition or database cross-referencing to verify your identity."
+        },
+        {
+          "type": "subheading",
+          "title": "Apply for OFW Pass",
+          "content": "Input your visa details and upload a photo of your valid work visa. The DMW will verify these against their records."
+        },
+        {
+          "type": "subheading",
+          "title": "Generate QR Code",
+          "content": "Once your status turns **Green**, your OFW Pass QR code will be generated. Save a screenshot of this QR code on your phone."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their OFW Pass at:\n- [DMW Mobile App](https://www.dmw.gov.ph)\n- [eGovPH App](https://e.gov.ph)\n- [DMW Online Services Portal](https://onlineservices.dmw.gov.ph)"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Verified Records: Instant to 24 Hours\n*   Manual Verification: 1–3 Working Days"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor their application through:\n*   The DMW Mobile App (Status Indicator: Green/Yellow/Red)\n*   Email notifications from the DMW portal"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Record Mismatch:** Differences between your passport name and E-Registration profile.\n- **Verification Delays:** High volume of applications or unclear document uploads."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Incorrect Visa Type:** Uploading a tourist visa instead of a work visa.",
+            "**Incomplete Profile:** Not updating your latest contract details before applying."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your QR code status at least 48 hours before your flight."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Keep your DMW E-Registration profile updated with your latest employer details.",
+            "Take passport and visa photos in a well-lit area with no shadows.",
+            "Use the same email address across all DMW and eGovPH platforms."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the latest advisories on the OFW Pass and airport procedures, please refer to:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Official Website:** [Department of Migrant Workers (DMW)](https://www.dmw.gov.ph)",
+            "**Online Services:** [DMW Online Services Portal](https://onlineservices.dmw.gov.ph)",
+            "**Mobile App Support:** Check the DMW Mobile App \"Help\" section for technical assistance."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Do I still need to print the OEC?",
+          "content": "No, the digital QR code on your phone is sufficient. However, having a printed backup is recommended for peace of mind."
+        },
+        {
+          "type": "subheading",
+          "title": "What if my status is Red?",
+          "content": "A Red status means there is an issue with your records (e.g., missing contract verification or expired medical). You must contact the DMW or your agency to resolve the issue."
+        }
+      ]
+    }
+  ]
+}

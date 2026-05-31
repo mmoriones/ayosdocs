@@ -43,6 +43,8 @@ const GuideCard = ({
     active:scale-[0.98] active:translate-y-0 relative flex items-center gap-6 shadow-sm
   `;
 
+  const displayTitle = guide.shortTitle || guide.title;
+
   if (isList) {
     return (
       <Link href={`/guides/${guide.slug}`} className={`${listCardClass} ${className} overflow-hidden group/card`}>
@@ -63,7 +65,7 @@ const GuideCard = ({
             )}
           </div>
           <h3 className="text-xl font-black text-ctp-text group-hover/card:text-ctp-sky-800 transition-colors leading-tight tracking-tighter truncate">
-            {guide.shortTitle || guide.title}
+            {displayTitle}
           </h3>
         </div>
 
@@ -73,14 +75,14 @@ const GuideCard = ({
               <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-0.5">Time</span>
               <div className="flex items-center gap-1.5 text-xs font-bold text-ctp-text">
                 <Clock size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-                <span>{guide.estimatedTime || "1-3 days"}</span>
+                <span className="uppercase">{guide.estimatedTime || "1-3D"}</span>
               </div>
             </div>
             <div className="flex flex-col">
               <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-0.5">Cost</span>
               <div className="flex items-center gap-1.5 text-xs font-bold text-ctp-text">
                 <DollarSign size={14} className="text-ctp-sky-800" strokeWidth={2.5} />
-                <span>{guide.costRange || "Free"}</span>
+                <span className="uppercase">{guide.costRange || "Free"}</span>
               </div>
             </div>
           </div>
@@ -142,7 +144,7 @@ const GuideCard = ({
 
       <div className={`flex-1 relative z-10 ${isSpotlight ? 'md:pr-12' : ''}`}>
         <h3 className={`${isSpotlight ? 'text-3xl md:text-4xl' : 'text-2xl'} font-black text-ctp-text group-hover/card:text-ctp-sky-800 transition-colors leading-tight tracking-tighter mb-6`}>
-          {guide.shortTitle || guide.title}
+          {displayTitle}
         </h3>
 
         {showMeta && (
@@ -151,14 +153,14 @@ const GuideCard = ({
               <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1 opacity-70">Processing Time</span>
               <div className="flex items-center gap-2 text-sm font-bold text-ctp-text">
                 <Clock size={16} className="text-ctp-sky-800 shrink-0" strokeWidth={2.5} />
-                <span className="truncate">{guide.estimatedTime || "1-3 days"}</span>
+                <span className="truncate uppercase">{guide.estimatedTime || "1-3D"}</span>
               </div>
             </div>
             <div className="flex flex-col">
               <span className="text-[10px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1 opacity-70">Estimated Cost</span>
               <div className="flex items-center gap-2 text-sm font-bold text-ctp-text">
                 <DollarSign size={16} className="text-ctp-sky-800 shrink-0" strokeWidth={2.5} />
-                <span className="truncate">{guide.costRange || "Free"}</span>
+                <span className="truncate uppercase">{guide.costRange || "Free"}</span>
               </div>
             </div>
           </div>

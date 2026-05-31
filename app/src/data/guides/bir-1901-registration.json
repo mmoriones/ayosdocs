@@ -1,0 +1,385 @@
+{
+  "id": "bir-1901-registration",
+  "title": "How to Register for BIR Business Registration (Form 1901)",
+  "shortTitle": "BIR Form 1901",
+  "slug": "bir-1901-registration",
+  "relatedGuideSlugs": [
+    "bir-tin-registration",
+    "mayors-permit",
+    "dti-registration"
+  ],
+  "description": "Official tax registration for sole proprietors, freelancers, and self-employed professionals.",
+  "lastUpdated": "2026-05-14",
+  "category": "Business Registration",
+  "agency": "BIR",
+  "difficulty": "Moderate",
+  "estimatedTime": "1D-2W",
+  "costRange": "P5H-P2K",
+  "requirements": [
+    {
+      "title": "BIR Form 1901",
+      "description": "The accomplished application form for business registration.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID of the taxpayer.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "DTI Certificate",
+      "description": "Proof of business name registration for sole proprietors.",
+      "icon": "Building2"
+    },
+    {
+      "title": "Mayor's Permit",
+      "description": "Proof of local business permit or application.",
+      "icon": "LandMark"
+    },
+    {
+      "title": "Proof of Address",
+      "description": "Documents verifying the business location, such as a lease contract.",
+      "icon": "MapPin"
+    },
+    {
+      "title": "Books of Accounts",
+      "description": "Mandatory records for recording business transactions.",
+      "icon": "Wallet"
+    }
+  ],
+  "tags": [
+    "BIR",
+    "BIR Form 1901",
+    "Business Registration",
+    "Sole Proprietorship",
+    "COR",
+    "Philippines"
+  ],
+  "aliases": [
+    "BIR 1901",
+    "BIR Sole Proprietor Registration",
+    "Certificate of Registration"
+  ],
+  "checklist": [
+    {
+      "title": "Prepare Documents",
+      "description": "Gather your DTI registration, permits, and completed BIR Form 1901."
+    },
+    {
+      "title": "Submit Form 1901",
+      "description": "File your application at the Revenue District Office (RDO) having jurisdiction over your business."
+    },
+    {
+      "title": "Pay Fees",
+      "description": "Pay the applicable registration fees and documentary stamp taxes."
+    },
+    {
+      "title": "Register Books",
+      "description": "Have your manual or digital books of accounts stamped or acknowledged by the BIR."
+    },
+    {
+      "title": "Apply for Invoices",
+      "description": "Secure an Authority to Print (ATP) for your official business invoices."
+    },
+    {
+      "title": "Claim COR",
+      "description": "Receive your BIR Form 2303 (Certificate of Registration) and display it at your business."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Annual Registration Fee (if applicable)",
+      "amount": "₱500"
+    },
+    {
+      "label": "Documentary Stamp Tax",
+      "amount": "₱30"
+    },
+    {
+      "label": "Books of Accounts",
+      "amount": "₱200–₱1000"
+    },
+    {
+      "label": "Receipt/Invoice Printing",
+      "amount": "₱1000–₱3000+"
+    },
+    {
+      "label": "Total",
+      "amount": "₱530–₱4500+"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-bir-business-registration-form-1901",
+      "title": "What is BIR Business Registration (Form 1901)?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "BIR Business Registration using BIR Form 1901 is the process of registering a sole proprietorship business, self-employed individual, freelancer, or mixed-income earner with the Bureau of Internal Revenue (BIR)."
+        },
+        {
+          "type": "paragraph",
+          "content": "After registration, the taxpayer receives a Certificate of Registration (COR), authority to issue receipts or invoices, and official tax obligations under Philippine tax laws."
+        },
+        {
+          "type": "paragraph",
+          "content": "The BIR Business Registration is commonly used for:\n* Legal business operations\n* Tax compliance and filing\n* Issuing official receipts or invoices\n* Opening business bank accounts"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need BIR Business Registration using Form 1901 if you are:\n- A sole proprietor with DTI registration\n- A freelancer or self-employed professional\n- An online seller or content creator\n- A mixed-income earner with business income\n- Starting a small business or consultancy"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-bir-business-registration",
+      "title": "Benefits of Having BIR Business Registration",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Legal Tax Compliance",
+          "content": "Registration ensures compliance with Philippine tax laws and regulations."
+        },
+        {
+          "type": "subheading",
+          "title": "Authority to Issue Receipts or Invoices",
+          "content": "Registered businesses may legally issue official receipts or invoices to customers and clients."
+        },
+        {
+          "type": "subheading",
+          "title": "Required for Business Transactions",
+          "content": "Banks, suppliers, government agencies, and clients often require BIR registration documents."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process BIR registration through online systems or physical Revenue District Offices (RDOs)."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Application",
+          "content": "Some taxpayers may register through:\n* BIR Online Registration and Update System (ORUS)\n* Electronic submission channels"
+        },
+        {
+          "type": "paragraph",
+          "content": "Availability may depend on taxpayer classification and RDO support."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In Application",
+          "content": "Applicants may visit the Revenue District Office (RDO) with jurisdiction over the business address."
+        },
+        {
+          "type": "paragraph",
+          "content": "Personal appearance may be required for verification and registration."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Use the BIR **eFPS or eBIRForms** for faster filing and avoid manual queuing at the RDO. Most payments can now be done via GCash or Maya."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Your Business Documents",
+          "content": "Prepare your:\n* DTI registration\n* Mayor's Permit or proof of application\n* Valid IDs\n* Proof of address\n* Completed BIR Form 1901"
+        },
+        {
+          "type": "subheading",
+          "title": "Submit BIR Form 1901",
+          "content": "Submit the accomplished form and requirements to your assigned RDO."
+        },
+        {
+          "type": "paragraph",
+          "content": "The officer will verify your taxpayer classification and registration details."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Registration Fees",
+          "content": "Depending on current BIR policies and taxpayer type, fees may include:\n* Documentary Stamp Tax\n* Loose-leaf or invoicing fees\n* Other applicable charges"
+        },
+        {
+          "type": "paragraph",
+          "content": "Payments may be made through:\n* Authorized Agent Banks\n* ePayment systems\n* Online payment channels"
+        },
+        {
+          "type": "subheading",
+          "title": "Register Books of Accounts",
+          "content": "Businesses are generally required to register:\n* Manual books\n* Loose-leaf books\n* Computerized books of accounts"
+        },
+        {
+          "type": "paragraph",
+          "content": "The BIR may stamp or electronically acknowledge the books."
+        },
+        {
+          "type": "subheading",
+          "title": "Apply for Official Receipts or Invoices",
+          "content": "Businesses must secure:\n* Authority to Print (ATP), or\n* BIR-approved invoicing system"
+        },
+        {
+          "type": "paragraph",
+          "content": "This allows legal issuance of invoices or receipts."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim the Certificate of Registration (COR)",
+          "content": "After approval, the BIR issues:\n* BIR Form 2303 (Certificate of Registration)\n* Official tax type details\n* “Ask for Receipt” notice\n* Registered books information"
+        },
+        {
+          "type": "paragraph",
+          "content": "Display the COR at your business establishment."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process BIR Business Registration at:\n- Bureau of Internal Revenue Revenue District Office (RDO)\n- BIR Online Registration and Update System (ORUS)\n- Authorized Agent Banks (for payments)"
+        },
+        {
+          "type": "paragraph",
+          "content": "Applications are generally filed with the RDO having jurisdiction over the business address."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n* Basic registration approval: Same day to 3 business days\n* Books of accounts registration: Same day\n* Official receipt/invoice printing: 1–2 weeks\n* Online applications: Depends on RDO processing"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor their application through:\n* BIR ORUS portal\n* RDO inquiry counters\n* Email notifications\n* Accredited printer updates"
+        },
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "If you applied through ORUS, keep a record of your Transaction Reference Number (TRN) to easily track the progress of your application online."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- Incorrect RDO assignment\n- Incomplete documentary requirements\n- Delays in receipt printing\n- Missing permit requirements\n- Incorrect taxpayer classification"
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Registering under the wrong taxpayer type",
+            "Forgetting to register books of accounts",
+            "Operating without invoices or receipts",
+            "Ignoring tax filing deadlines",
+            "Using an incorrect business address"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your application before final submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Verify your assigned RDO before applying",
+            "Prepare both printed and digital copies of requirements",
+            "Coordinate early with accredited printers",
+            "Keep multiple copies of your COR and receipts",
+            "Learn your filing deadlines immediately after registration"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most reliable information on tax registration and business compliance, please refer to the official BIR channels:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Official Website:** [Bureau of Internal Revenue (BIR)](https://www.bir.gov.ph)",
+            "**Online Portal:** [BIR ORUS (Online Registration and Update System)](https://orus.bir.gov.ph)",
+            "**Inquiries:** You may also visit your assigned Revenue District Office (RDO) for direct assistance."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Who should use BIR Form 1901?",
+          "content": "BIR Form 1901 is commonly used by sole proprietors, freelancers, professionals, and self-employed individuals."
+        },
+        {
+          "type": "subheading",
+          "title": "Is the ₱500 annual registration fee still required?",
+          "content": "BIR policies may change over time. Verify the latest fee requirements directly with the BIR."
+        },
+        {
+          "type": "subheading",
+          "title": "Do freelancers need BIR registration?",
+          "content": "Yes. Freelancers and self-employed professionals generally need BIR registration for legal tax compliance."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I register online?",
+          "content": "Some registrations may be processed through BIR ORUS depending on eligibility and RDO support."
+        },
+        {
+          "type": "subheading",
+          "title": "What is BIR Form 2303?",
+          "content": "BIR Form 2303 is the Certificate of Registration (COR) issued after successful business registration."
+        }
+      ]
+    }
+  ]
+}

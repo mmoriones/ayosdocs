@@ -1,0 +1,273 @@
+{
+  "id": "nbi-clearance",
+  "title": "How to Apply for an NBI Clearance in the Philippines",
+  "shortTitle": "NBI Clearance",
+  "slug": "nbi-clearance",
+  "description": "Secure your official background clearance for employment and travel requirements.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government Clearance",
+  "agency": "NBI",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-3D",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "Two (2) Valid IDs",
+      "description": "Government-issued IDs with photo and signature.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Online Appointment Receipt",
+      "description": "Printed or digital copy of your NBI appointment.",
+      "icon": "Receipt"
+    },
+    {
+      "title": "Active Email Address",
+      "description": "For receiving updates and your e-clearance.",
+      "icon": "Mail"
+    },
+    {
+      "title": "Personal Information",
+      "description": "Complete details (name, birth date, address, etc.)",
+      "icon": "User"
+    }
+  ],
+  "checklist": [
+    {
+      "title": "Register Online Account",
+      "description": "Create an account and complete the online application form."
+    },
+    {
+      "title": "Pay Application Fee",
+      "description": "Pay the corresponding fee at any Bayad Center or online."
+    },
+    {
+      "title": "Visit NBI Branch",
+      "description": "Go to your chosen NBI branch on your appointment date."
+    },
+    {
+      "title": "Biometrics & Photo",
+      "description": "Provide your biometrics and have your photo taken."
+    }
+  ],
+  "tags": [
+    "NBI Clearance",
+    "Background Check",
+    "Employment Requirements",
+    "Philippines",
+    "Government Document"
+  ],
+  "aliases": [
+    "Police Clearance",
+    "NBI Online",
+    "Background Check"
+  ],
+  "relatedGuideSlugs": [
+    "police-clearance",
+    "national-id",
+    "voter-registration"
+  ],
+  "fees": [
+    {
+      "label": "NBI Clearance Fee",
+      "amount": "₱130"
+    },
+    {
+      "label": "Service/Convenience Fee",
+      "amount": "₱25–₱35"
+    },
+    {
+      "label": "Total",
+      "amount": "₱155–₱170"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-an-nbi-clearance",
+      "title": "What is an NBI Clearance?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "An **NBI Clearance** is an official document issued by the National Bureau of Investigation (NBI) in the Philippines. It is a mandatory requirement for most legal, employment, and travel-related transactions in the country."
+        },
+        {
+          "type": "paragraph",
+          "content": "It serves as proof that an individual does not have a criminal record, pending criminal case, or derogatory record based on the NBI's centralized national database."
+        },
+        {
+          "type": "paragraph",
+          "content": "The clearance is commonly required for:\n*   **Employment:** Local and overseas job applications.\n*   **Travel:** Passport and Visa processing.\n*   **Professionalism:** Government transactions & Professional Licenses (PRC).\n*   **Legal:** Business requirements & court-related documentation.\n*   **Education:** School enrollment and scholarship applications."
+        },
+        {
+          "type": "paragraph",
+          "content": "The NBI Clearance is one of the most widely accepted and trusted government-issued clearance documents in the Philippines."
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Fresh graduates can get this for FREE under the First-Time Jobseekers Act. Bring your Barangay Certificate of First-Time Jobseeker."
+        },
+        {
+          "type": "paragraph",
+          "content": "You may need an NBI Clearance if you are:\n- Applying for a new job or a promotion.\n- Working abroad or processing immigration papers.\n- Applying for a Philippine passport or a foreign visa.\n- Processing professional licenses with the PRC.\n- Starting a business or applying for local permits.\n- Completing legal or court-related requirements."
+        },
+        {
+          "type": "paragraph",
+          "content": "**Note:** First-time applicants are required to register online before visiting an NBI branch for biometrics capture."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-an-nbi-clearance",
+      "title": "Benefits of Having an NBI Clearance",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Employment Requirement",
+          "content": "Most employers in the Philippines require a valid NBI Clearance before hiring to ensure the integrity of their workforce."
+        },
+        {
+          "type": "subheading",
+          "title": "Proof of Good Standing",
+          "content": "The clearance helps verify that you have no criminal records or pending cases nationwide, which is essential for many civil transactions."
+        },
+        {
+          "type": "subheading",
+          "title": "Travel and Visa Applications",
+          "content": "Embassies and overseas employers request an NBI Clearance as part of their standard background verification for applicants."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online Registration (Portal)",
+          "content": "The standard method for all applicants to schedule appointments and pay fees is via the official portal."
+        },
+        {
+          "type": "subheading",
+          "title": "NBI Clearance Mobile App",
+          "content": "You can now apply and pay directly through the official NBI Clearance mobile app, which is often faster for renewals."
+        },
+        {
+          "type": "subheading",
+          "title": "NBI Clearance \"Quick Renewal\"",
+          "content": "For those whose clearance expired between 2014 and the present, you can use the \"Quick Renewal\" service for home delivery without visiting a branch, provided no changes are needed to your personal data."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Create an Online Account",
+          "content": "Register through the official NBI portal. Provide an active email address as you will receive your **Reference Number** and notifications there."
+        },
+        {
+          "type": "subheading",
+          "title": "Fill Out the Application Form",
+          "content": "Complete your personal information carefully. Ensure that your name, civil status, and birth details match your valid IDs and PSA records exactly."
+        },
+        {
+          "type": "subheading",
+          "title": "Select Your Appointment Schedule",
+          "content": "Choose your preferred NBI branch and a time slot."
+        },
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "Some popular branches (like NBI Main or mall-based satellite offices) fill up weeks in advance."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the NBI Clearance Fee",
+          "content": "After scheduling, pay via GCash, Maya, or other payment centers. **Save the Reference Number**—you cannot proceed at the branch without it."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit the NBI Branch",
+          "content": "Arrive at your selected branch on your appointment date. Bring your valid IDs and the Reference Number."
+        },
+        {
+          "type": "subheading",
+          "title": "Biometrics and Image Capture",
+          "content": "Undergo fingerprint scanning and photo capture. If you have a \"Hit,\" you will be asked to return after a few days."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim Your Clearance",
+          "content": "If you have \"No Hit,\" your clearance is usually released within minutes. If you have a \"Hit,\" wait for the advised release date (usually 10 working days)."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate and up-to-date information, please visit:\n- [Official NBI Clearance Portal](https://clearance.nbi.gov.ph)\n- [National Bureau of Investigation (NBI) Official Website](https://www.nbi.gov.ph)"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**\"With Hit\" Status:** This means your name matches a person with a criminal record in the NBI database. It requires manual verification by an NBI agent, which typically takes 8–10 working days.",
+            "**Reference Number Not Received:** Check your spam folder or log in to the portal to view your transaction history."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Apply for Renewal via App:** If you've had a clearance before, using the official app is much faster.",
+            "**Avoid Peak Days:** Mondays and Fridays are typically the busiest days. Mid-week appointments are usually smoother.",
+            "**Use the First-Time Jobseeker Act:** If you're a fresh graduate, get the certificate from your Barangay first. Presenting this at the NBI branch will waive the ₱130 fee under **RA 11261**."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "warning",
+          "content": "**Note:** A 'HIT' is common and usually just means a manual name check. Don't panic; it just adds about 8-10 working days to your release."
+        },
+        {
+          "type": "subheading",
+          "title": "What does \"With Hit\" mean?",
+          "content": "A \"hit\" simply means your name (or a very similar one) exists in the NBI's database of people with criminal records. It does **not** necessarily mean you have a record; it just requires NBI to verify you aren't the person in question."
+        },
+        {
+          "type": "subheading",
+          "title": "How long is the NBI Clearance valid?",
+          "content": "The NBI Clearance is valid for **one (1) year** from the date of issuance."
+        }
+      ]
+    }
+  ]
+}

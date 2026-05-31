@@ -82,7 +82,7 @@ export const sendVerificationEmail = async (email, token, baseUrl) => {
         <img src="https://ayosdocs.com/favicon.svg" alt="AyosDocs" width="64" height="64" style="margin-bottom: 24px;" />
         <h1 style="font-size: 28px; font-weight: 900; margin-bottom: 16px; tracking: -0.02em;">Verify your email</h1>
         <p style="font-size: 16px; line-height: 1.5; color: #3A3A3C; margin-bottom: 32px;">
-          Mabuhay! Thanks for joining AyosDocs. To start tracking your government requirements, please confirm your email address.
+         Thanks for joining AyosDocs. To start tracking your government requirements, please confirm your email address.
         </p>
         <a href="${confirmLink}" style="${buttonStyles}">
           Verify Email Address

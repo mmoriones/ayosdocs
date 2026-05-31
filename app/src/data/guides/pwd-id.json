@@ -1,0 +1,665 @@
+{
+  "id": "pwd-id",
+  "title": "How to Apply for a PWD ID in the Philippines",
+  "shortTitle": "PWD ID",
+  "slug": "pwd-id",
+  "relatedGuideSlugs": [
+    "national-id",
+    "barangay-clearance",
+    "psa-birth-certificate"
+  ],
+  "description": "Access mandated discounts and government assistance for persons with disabilities.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government ID",
+  "agency": "LGU",
+  "difficulty": "Easy",
+  "estimatedTime": "1-2W",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "Medical Certificate",
+      "description": "A certificate from a licensed physician indicating the diagnosis and type of disability.",
+      "icon": "HeartPulse"
+    },
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID for identity verification.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "ID Photo",
+      "description": "Recent 1x1 or 2x2 photograph of the applicant.",
+      "icon": "User"
+    },
+    {
+      "title": "Proof of Residency",
+      "description": "Documents verifying your residence in the city or municipality.",
+      "icon": "MapPin"
+    }
+  ],
+  "tags": [
+    "PWD ID",
+    "Person with Disability",
+    "Disability Benefits",
+    "NCDA",
+    "Philippines",
+    "Government ID"
+  ],
+  "aliases": [
+    "Disability ID",
+    "Persons with Disability ID",
+    "PWD Card",
+    "PWD Identification Card"
+  ],
+  "checklist": [
+    {
+      "title": "Secure Medical Cert",
+      "description": "Visit a physician for a medical evaluation and obtain a certificate clearly stating your diagnosis."
+    },
+    {
+      "title": "Prepare IDs",
+      "description": "Gather your valid government IDs and personal information for the application."
+    },
+    {
+      "title": "Complete Form",
+      "description": "Fill out the PWD application form provided by your local PDAO or social welfare office."
+    },
+    {
+      "title": "Submit Requirements",
+      "description": "Present your documents to the PDAO office at your City or Municipal Hall for review."
+    },
+    {
+      "title": "Wait for Approval",
+      "description": "Allow for the assessment and verification process, which varies by local government unit."
+    },
+    {
+      "title": "Claim ID",
+      "description": "Receive your PWD ID and discount purchase booklet once approved."
+    }
+  ],
+  "fees": [
+    {
+      "label": "PWD ID Application",
+      "amount": "Usually Free"
+    },
+    {
+      "label": "Medical Certificate",
+      "amount": "₱300–₱1,500"
+    },
+    {
+      "label": "ID Photo",
+      "amount": "₱50–₱150"
+    },
+    {
+      "label": "Document Photocopies",
+      "amount": "Minimal cost"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-a-pwd-id",
+      "title": "What is a PWD ID?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A **PWD ID** is an official identification card issued to qualified Persons with Disability (PWDs) in the Philippines through the local government unit (LGU) and Persons with Disability Affairs Office (PDAO). ([ncda.gov.ph](https://ncda.gov.ph/disability-laws/republic-acts/republic-act-no-10754/))"
+        },
+        {
+          "type": "paragraph",
+          "content": "The card certifies that the holder is recognized as a Person with Disability under Philippine law and is entitled to specific government-mandated benefits and privileges."
+        },
+        {
+          "type": "paragraph",
+          "content": "The PWD ID is commonly used for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Discounts on medicines and medical services",
+            "Transportation discounts",
+            "Restaurant and grocery discounts",
+            "Tax exemptions",
+            "Government assistance programs",
+            "Priority lanes",
+            "Healthcare support"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Qualified applicants also receive a purchase booklet for monitoring discounts and VAT exemptions."
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may apply for a PWD ID if you have a long-term physical, mental, intellectual, or sensory impairment that substantially affects daily activities."
+        },
+        {
+          "type": "paragraph",
+          "content": "This may include individuals with:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Physical disabilities",
+            "Visual impairments",
+            "Hearing impairments",
+            "Learning disabilities",
+            "Psychosocial disabilities",
+            "Chronic illnesses",
+            "Intellectual disabilities",
+            "Speech impairments",
+            "Mental health-related disabilities"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Eligibility is generally determined through medical evaluation and local government assessment. ([ncda.gov.ph](https://ncda.gov.ph/disability-laws/republic-acts/republic-act-no-9442/))"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-pwd-id",
+      "title": "Benefits of Having a PWD ID",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Mandatory Discounts",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "PWD ID holders are entitled to discounts on certain goods and services including:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Medicines",
+            "Medical procedures",
+            "Public transportation",
+            "Restaurants",
+            "Hotels",
+            "Recreation facilities"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "VAT Exemption",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Qualified transactions may receive Value Added Tax (VAT) exemption."
+        },
+        {
+          "type": "subheading",
+          "title": "Priority Lane Access",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "PWDs may use priority lanes in:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Government offices",
+            "Hospitals",
+            "Banks",
+            "Transportation terminals"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "Government Assistance Programs",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "PWDs may qualify for additional support and social welfare programs."
+        },
+        {
+          "type": "subheading",
+          "title": "Educational and Employment Support",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Some institutions and employers provide special accommodations and assistance for PWDs."
+        },
+        {
+          "type": "paragraph",
+          "content": "([ncda.gov.ph](https://ncda.gov.ph/disability-laws/republic-acts/republic-act-no-10754/))"
+        }
+      ]
+    },
+    {
+      "id": "disability-categories",
+      "title": "Disability Categories",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "PWD classifications may include:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Category",
+            "Examples"
+          ],
+          "rows": [
+            [
+              "Physical Disability",
+              "Mobility impairments"
+            ],
+            [
+              "Visual Disability",
+              "Blindness or low vision"
+            ],
+            [
+              "Hearing Disability",
+              "Deaf or hard of hearing"
+            ],
+            [
+              "Psychosocial Disability",
+              "Mental health conditions"
+            ],
+            [
+              "Intellectual Disability",
+              "Developmental limitations"
+            ],
+            [
+              "Learning Disability",
+              "Dyslexia and similar conditions"
+            ],
+            [
+              "Speech and Language Impairment",
+              "Communication disorders"
+            ],
+            [
+              "Chronic Illness",
+              "Cancer, kidney disease, rare disorders"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Final classification depends on medical assessment and local government evaluation."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may usually apply through:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Persons with Disability Affairs Office (PDAO)",
+            "City Social Welfare and Development Office (CSWDO)",
+            "Municipal Social Welfare Office",
+            "Local Government Units (LGUs)"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some cities also offer online pre-registration systems."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Benefits for these IDs are often LGU-specific. Visit your **city hall's OSCA or MSWD office** to learn about local discounts and grocery subsidies."
+        },
+        {
+          "type": "subheading",
+          "title": "Secure a Medical Certificate",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Visit a licensed physician or specialist for medical evaluation."
+        },
+        {
+          "type": "paragraph",
+          "content": "The certificate should indicate:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Diagnosis",
+            "Disability type",
+            "Severity or condition details",
+            "Physician information"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some LGUs may require recent medical certificates only."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Your Requirements",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Gather:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Valid IDs",
+            "Medical documents",
+            "Proof of residency",
+            "Photographs",
+            "Application forms"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Prepare photocopies and original documents."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit the PDAO or LGU Office",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Proceed to the designated PWD registration office in your city or municipality."
+        },
+        {
+          "type": "paragraph",
+          "content": "Submit your application documents for review."
+        },
+        {
+          "type": "subheading",
+          "title": "Fill Out the Application Form",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Provide accurate information including:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Personal details",
+            "Address",
+            "Contact information",
+            "Disability classification",
+            "Emergency contact details"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Ensure consistency with your IDs and medical records."
+        },
+        {
+          "type": "subheading",
+          "title": "Undergo Verification and Assessment",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The office may:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Review your documents",
+            "Verify residency",
+            "Confirm medical findings",
+            "Conduct interviews if necessary"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Additional documentation may sometimes be requested."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for Approval",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Processing times vary depending on:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "LGU procedures",
+            "Volume of applicants",
+            "Completeness of documents"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some offices issue IDs on the same day while others require several working days."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim Your PWD ID and Booklet",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Once approved:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Claim your PWD ID",
+            "Receive your discount purchase booklet",
+            "Verify all printed information"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Report errors immediately before leaving."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Process",
+            "Estimated Time"
+          ],
+          "rows": [
+            [
+              "Application Review",
+              "Same day to several days"
+            ],
+            [
+              "ID Issuance",
+              "Same day to 2 weeks"
+            ],
+            [
+              "Booklet Release",
+              "Usually same day as ID"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Processing time varies by city or municipality."
+        },
+        {
+          "type": "paragraph",
+          "content": "Some LGUs release IDs immediately if requirements are complete."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Incomplete medical certificates",
+            "Missing residency documents",
+            "Delayed approval",
+            "Incorrect disability classification",
+            "Lost records",
+            "Name discrepancies",
+            "Lack of available ID cards or booklets"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants may need additional medical documentation before approval."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Submitting outdated medical certificates",
+            "Using incomplete forms",
+            "Bringing expired IDs",
+            "Providing inconsistent information",
+            "Forgetting photocopies",
+            "Applying in the wrong LGU jurisdiction"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always verify your local requirements beforehand because procedures may differ across cities."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Contact your LGU or PDAO before visiting",
+            "Bring extra photocopies of documents",
+            "Ensure medical certificates are recent and complete",
+            "Arrive early to avoid long queues",
+            "Organize all requirements in one folder",
+            "Save digital copies of all documents"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants recommend calling the PDAO office first because requirements may vary by locality."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the latest PWD laws and nationwide guidelines, visit:\n- [National Council on Disability Affairs (NCDA)](https://ncda.gov.ph)\n- [Department of Health (DOH) PWD Registry](https://pwd.doh.gov.ph)"
+        },
+        {
+          "type": "banner",
+          "variant": "note",
+          "content": "For actual applications, please visit your local **Persons with Disability Affairs Office (PDAO)** at your City or Municipal Hall."
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is the PWD ID free?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The application itself is usually free, although applicants may still pay for medical certificates and document preparation."
+        },
+        {
+          "type": "subheading",
+          "title": "Who issues the PWD ID?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "PWD IDs are generally issued by the local government unit through the PDAO or social welfare office."
+        },
+        {
+          "type": "subheading",
+          "title": "Can mental health conditions qualify for a PWD ID?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. Certain psychosocial disabilities and mental health conditions may qualify subject to medical evaluation. ([ncda.gov.ph](https://ncda.gov.ph/disability-laws/republic-acts/republic-act-no-9442/))"
+        },
+        {
+          "type": "subheading",
+          "title": "Is the PWD ID accepted nationwide?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. Valid PWD IDs issued by authorized LGUs are generally recognized nationwide."
+        },
+        {
+          "type": "subheading",
+          "title": "Can someone else apply on behalf of a PWD?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes, provided authorization and supporting documents are submitted."
+        },
+        {
+          "type": "subheading",
+          "title": "Does the PWD ID expire?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Policies vary by LGU. Some IDs may require periodic renewal or record updates."
+        },
+        {
+          "type": "paragraph",
+          "content": "Policies vary by LGU. Some IDs may require periodic renewal or record updates."
+        }
+      ]
+    }
+  ]
+}

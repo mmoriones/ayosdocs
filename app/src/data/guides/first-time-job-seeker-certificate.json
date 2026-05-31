@@ -1,0 +1,268 @@
+{
+  "id": "first-time-job-seeker-certificate",
+  "shortTitle": "First-Time Job Seeker",
+  "title": "How to Get a First-Time Job Seeker Certificate (RA 11261)",
+  "slug": "first-time-job-seeker-certificate",
+  "relatedGuideSlugs": [
+    "nbi-clearance",
+    "barangay-clearance",
+    "voter-registration"
+  ],
+  "description": "Avail of free government documents and clearances for your first employment under the First-Time Jobseekers Assistance Act.",
+  "lastUpdated": "2026-05-14",
+  "category": "Essential Documents",
+  "agency": "LGU",
+  "difficulty": "Easy",
+  "estimatedTime": "1D",
+  "costRange": "Free",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "Any government-issued ID or school ID for recent graduates.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Proof of Residency",
+      "description": "Documents proving you have lived in the barangay for at least 6 months.",
+      "icon": "MapPin"
+    },
+    {
+      "title": "Oath of Undertaking",
+      "description": "A signed document provided by the barangay hall.",
+      "icon": "FileText"
+    }
+  ],
+  "tags": [
+    "First-Time Job Seeker",
+    "RA 11261",
+    "Fresh Graduate",
+    "Philippines",
+    "Government Document"
+  ],
+  "aliases": [
+    "RA 11261 Certificate",
+    "Barangay First-Time Job Seeker",
+    "Free Clearance Certificate"
+  ],
+  "checklist": [
+    {
+      "title": "Prepare IDs",
+      "description": "Gather your valid ID or proof of education before visiting the barangay hall."
+    },
+    {
+      "title": "Visit Barangay Hall",
+      "description": "Go to the administrative office of the barangay where you reside."
+    },
+    {
+      "title": "Sign Oath",
+      "description": "Request and sign the Oath of Undertaking affirming your status as a first-time job seeker."
+    },
+    {
+      "title": "Receive Certificate",
+      "description": "Claim your signed certificate, which is issued free of charge and valid for one year."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Barangay Certificate",
+      "amount": "Free"
+    },
+    {
+      "label": "Oath of Undertaking",
+      "amount": "Free"
+    },
+    {
+      "label": "Total",
+      "amount": "Free"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-the-first-time-job-seeker-certificate",
+      "title": "What is the First-Time Job Seeker Certificate?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **First-Time Job Seeker Certificate** is a document issued by your local Barangay under **Republic Act No. 11261** (First-Time Jobseekers Assistance Act)."
+        },
+        {
+          "type": "paragraph",
+          "content": "It allows qualified Filipinos who are looking for their first job to get various government-issued documents and clearances **free of charge**."
+        },
+        {
+          "type": "paragraph",
+          "content": "The certificate is commonly used to waive fees for:\n*   NBI Clearance\n*   Police Clearance (National)\n*   PSA Birth and Marriage Certificates\n*   Barangay Clearance (for employment)\n*   Medical Certificate from public hospitals\n*   Tax Identification Number (TIN) application"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a First-Time Job Seeker Certificate if you are:\n- A fresh graduate (College, High School, or Vocational)\n- An out-of-school youth (OSY)\n- A student on leave of absence seeking work\n- Any Filipino citizen who has never been employed (formal or informal)"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-first-time-job-seeker-certificate",
+      "title": "Benefits of Having a First-Time Job Seeker Certificate",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Obtaining this certificate significantly reduces the financial burden of pre-employment requirements."
+        },
+        {
+          "type": "subheading",
+          "title": "Fee Waivers",
+          "content": "You can save between ₱500 to ₱2,000 in total by waiving the processing fees of multiple government agencies."
+        },
+        {
+          "type": "subheading",
+          "title": "Ease of Application",
+          "content": "Most agencies (like NBI and PNP) have integrated \"First-Time Job Seeker\" options into their online portals, making the process smoother."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Walk-In Application",
+          "content": "This is the only method available, as you must sign the **Oath of Undertaking** in person before a barangay official."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Check if your LGU has an **Online Portal**. Many cities now allow you to pay for Cedula or Police Clearance via GCash and just pick it up."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit your Barangay Hall",
+          "content": "Go to the administrative office of the Barangay where you have resided for at least 6 months."
+        },
+        {
+          "type": "subheading",
+          "title": "Request the Forms",
+          "content": "Ask the staff for the **First-Time Job Seeker Certification** and the **Oath of Undertaking** form."
+        },
+        {
+          "type": "subheading",
+          "title": "Fill Out and Sign",
+          "content": "Fill out your personal details and sign the **Oath of Undertaking**. By signing this, you swear that you are a first-time job seeker and have not yet availed of these benefits."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim Your Certificate",
+          "content": "The Barangay Chairman or an authorized official will sign your certificate. It is issued **free of charge** and is usually ready within minutes."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their First-Time Job Seeker Certificate at:\n- Your local Barangay Hall (Barangay Office)"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Walk-in: 15–30 Minutes (Same Day)"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Since the document is issued immediately, there is no online tracking system. You receive the physical copy right after signing."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Residency Issues:** If you recently moved, you may not meet the 6-month requirement.\n- **Lost Certificate:** You can only avail of the free documents once. If you lose the certificate, you may have to pay for your clearances normally."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Using it twice:** The law only allows you to avail of the free services **once**.",
+            "**Expired Certificate:** The certificate is only valid for **one (1) year**. Use it to get all your clearances before it expires."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review the information on the certificate for typos before leaving the Barangay Hall."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Bring your own black pen to sign the forms.",
+            "Have photocopies of your ID and diploma ready just in case.",
+            "Go during mid-morning (9 AM to 11 AM) when the office is less crowded."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate and up-to-date information, please refer to:\n*   Your local **Barangay Hall website** or visit the **Barangay Office** directly.\n*   [Republic Act No. 11261 (First-Time Jobseekers Assistance Act)](https://www.officialgazette.gov.ph/2019/04/10/republic-act-no-11261/)"
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is there an age limit?",
+          "content": "No, as long as you are a first-time job seeker, you can avail of the benefits regardless of age."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I get a free Passport with this?",
+          "content": "No, the Passport fee is **not** included in the list of waived fees under RA 11261."
+        }
+      ]
+    }
+  ]
+}

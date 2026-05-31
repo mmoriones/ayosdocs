@@ -1,0 +1,313 @@
+{
+  "id": "psa-cenomar",
+  "title": "How to Get a PSA CENOMAR (Certificate of No Marriage)",
+  "shortTitle": "PSA CENOMAR",
+  "slug": "psa-cenomar",
+  "relatedGuideSlugs": [
+    "psa-birth-certificate",
+    "cedula-ctc",
+    "national-id"
+  ],
+  "description": "Obtain proof of single status required for marriage licenses and visa applications.",
+  "lastUpdated": "2026-05-14",
+  "category": "Civil Registry",
+  "agency": "PSA",
+  "difficulty": "Easy",
+  "estimatedTime": "1D-1W",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID for identity verification.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Personal Details",
+      "description": "Full name, birth date, place of birth, and parents' maiden names.",
+      "icon": "User"
+    }
+  ],
+  "tags": [
+    "PSA",
+    "CENOMAR",
+    "Certificate of No Marriage",
+    "Marriage Requirement",
+    "Civil Registry",
+    "Philippines"
+  ],
+  "aliases": [
+    "Certificate of No Marriage",
+    "Certificate of Singleness",
+    "Certificate of No Marriage Record"
+  ],
+  "checklist": [
+    {
+      "title": "Prepare Details",
+      "description": "Gather your valid ID and complete personal information needed for verification."
+    },
+    {
+      "title": "Choose Method",
+      "description": "Select between online application for home delivery or walk-in processing at a PSA outlet."
+    },
+    {
+      "title": "Pay Fees",
+      "description": "Settle the applicable fees using GCash, Maya, or other authorized payment channels."
+    },
+    {
+      "title": "Receive Document",
+      "description": "Collect your certificate at the PSA outlet or wait for it to be delivered to your home."
+    }
+  ],
+  "fees": [
+    {
+      "label": "PSA CRS Walk-In Request",
+      "amount": "₱210"
+    },
+    {
+      "label": "SM Business Center Request",
+      "amount": "₱235"
+    },
+    {
+      "label": "Online Delivery Request",
+      "amount": "₱420–₱430"
+    },
+    {
+      "label": "PSA e-Certificate (Digital Copy)",
+      "amount": "₱360+"
+    },
+    {
+      "label": "Total",
+      "amount": "₱210–₱430+"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-psa-cenomar",
+      "title": "What is PSA CENOMAR?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A PSA CENOMAR (Certificate of No Marriage Record) is an official document issued by the Philippine Statistics Authority (PSA) certifying that a person has no registered marriage in the Philippine civil registry database."
+        },
+        {
+          "type": "paragraph",
+          "content": "It is commonly required when applying for a marriage license, visa, employment abroad, loans, or other legal transactions requiring proof of civil status."
+        },
+        {
+          "type": "paragraph",
+          "content": "The PSA CENOMAR is commonly used for:\n* Marriage license applications\n* Visa and immigration requirements\n* Employment or overseas work applications"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a PSA CENOMAR if you are:\n- Applying for a marriage license in the Philippines\n- Processing visa or immigration documents\n- Applying for certain government or private sector requirements"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-psa-cenomar",
+      "title": "Benefits of Having PSA CENOMAR",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Proof of Civil Status",
+          "content": "The document officially certifies that you have no registered marriage record under the PSA database."
+        },
+        {
+          "type": "subheading",
+          "title": "Required for Marriage Applications",
+          "content": "Most Local Civil Registry Offices require a CENOMAR before issuing a marriage license."
+        },
+        {
+          "type": "subheading",
+          "title": "Accepted for Legal Transactions",
+          "content": "Embassies, employers, banks, and government agencies commonly accept PSA-issued CENOMAR documents."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may request a PSA CENOMAR through online services or walk-in applications."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Application",
+          "content": "Applicants may request online through:\n* PSAHelpline\n* PSA Serbilis\n* PSA e-Certificate services"
+        },
+        {
+          "type": "paragraph",
+          "content": "Documents may be delivered to your home address or provided digitally (if available)."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In Application",
+          "content": "Applicants may process requests at PSA Civil Registry System (CRS) outlets and selected SM Business Centers."
+        },
+        {
+          "type": "paragraph",
+          "content": "Most PSA outlets require online appointment booking before visiting."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Always double-check for 'Negative Results'. If your record is missing, you must process **Late Registration** at the LCR where the event occurred."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Requirements",
+          "content": "Prepare your valid ID and complete personal information needed for verification."
+        },
+        {
+          "type": "subheading",
+          "title": "Submit Your Application",
+          "content": "Choose either:\n* Online application through PSA-authorized websites\n* Walk-in processing at PSA CRS outlets"
+        },
+        {
+          "type": "paragraph",
+          "content": "Fill out the application form carefully."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Fees",
+          "content": "Pay using available payment methods such as:\n* GCash\n* Maya\n* Debit/Credit Card\n* Over-the-counter payment centers"
+        },
+        {
+          "type": "subheading",
+          "title": "Claim or Receive the Document",
+          "content": "Depending on your application method:\n* Walk-in requests may be released on the same day\n* Online applications are delivered via courier or email (for e-certificates)"
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their PSA CENOMAR at:\n- PSA Civil Registry System (CRS) Outlets\n- Selected SM Business Centers\n- PSAHelpline website\n- PSA Serbilis website"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n* PSA CRS Walk-In: Same day to 1 business day\n* Online Delivery (Metro Manila): 2–5 business days\n* Provincial Delivery: 3–8 business days\n* SM Business Center Requests: 7–10 business days"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor their application through:\n* PSAHelpline tracking system\n* Courier tracking updates\n* Email or SMS notifications"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- “No Record Found” results due to incorrect details\n- Delayed courier delivery\n- Name mismatches between IDs and PSA records\n- Appointment slot availability issues"
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Entering incorrect birth details or parent names",
+            "Using unofficial PSA websites",
+            "Forgetting to bring valid IDs",
+            "Waiting until the last minute before deadlines"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your application before final submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Book appointments early in the morning",
+            "Double-check spelling and birth information",
+            "Use online applications if you cannot visit PSA offices",
+            "Bring extra photocopies of IDs and receipts",
+            "Save digital copies of payment confirmations"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "To request your PSA CENOMAR online or book an appointment, visit:\n- [PSAHelpline Official Portal](https://psahelpline.ph)\n- [PSA Serbilis Official Portal](https://www.psaserbilis.com.ph)"
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is a CENOMAR required for marriage in the Philippines?",
+          "content": "Yes. Most Local Civil Registry Offices require a PSA CENOMAR before issuing a marriage license."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I request a CENOMAR for another person?",
+          "content": "Yes, but additional requirements such as authorization letters and IDs may be required."
+        },
+        {
+          "type": "subheading",
+          "title": "How long is a PSA CENOMAR valid?",
+          "content": "Validity depends on the requesting institution. Many offices accept documents issued within the last 6 months."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I get a digital copy of my CENOMAR?",
+          "content": "Yes. PSA now offers e-Certificate services for eligible applicants."
+        },
+        {
+          "type": "subheading",
+          "title": "What happens if I previously had a marriage record?",
+          "content": "Instead of a CENOMAR, PSA may issue an Advisory on Marriage."
+        }
+      ]
+    }
+  ]
+}

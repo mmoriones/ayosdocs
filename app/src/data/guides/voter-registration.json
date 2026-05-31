@@ -1,0 +1,276 @@
+{
+  "id": "voter-registration",
+  "shortTitle": "Voter's Certification",
+  "title": "How to Get a Voter's Certification",
+  "slug": "voter-registration",
+  "relatedGuideSlugs": [
+    "national-id",
+    "psa-birth-certificate",
+    "nbi-clearance"
+  ],
+  "description": "Obtain your official Voter's Certification, a valid primary ID and proof of registration while Voter ID cards are discontinued.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government ID",
+  "agency": "COMELEC",
+  "difficulty": "Easy",
+  "estimatedTime": "1D",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID and one photocopy.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Proof of Status",
+      "description": "Active voter status confirmed in the COMELEC database.",
+      "icon": "ShieldCheck"
+    }
+  ],
+  "tags": [
+    "Voter's Certification",
+    "COMELEC",
+    "Voter ID",
+    "Government ID",
+    "Philippines"
+  ],
+  "aliases": [
+    "Voter's Cert",
+    "Proof of Voting",
+    "Voter Registration Certificate"
+  ],
+  "checklist": [
+    {
+      "title": "Verify Status",
+      "description": "Confirm that you are an active registered voter who has not been deactivated."
+    },
+    {
+      "title": "Visit COMELEC",
+      "description": "Proceed to the Office of the Election Officer in the city or municipality where you are registered."
+    },
+    {
+      "title": "Present ID",
+      "description": "Provide a valid government-issued ID and a clear photocopy for verification."
+    },
+    {
+      "title": "Pay Fee",
+      "description": "Settle the certification fee at the local treasurer's office and obtain an official receipt."
+    },
+    {
+      "title": "Receive Certificate",
+      "description": "Claim your watermarked Voter's Certification with the official dry seal."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Certification Fee",
+      "amount": "₱75.00"
+    },
+    {
+      "label": "Total",
+      "amount": "₱75.00"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-the-voters-certification",
+      "title": "What is the Voter's Certification?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **Voter's Certification** is an official document issued by the Commission on Elections (COMELEC). Since the physical Voter ID card has been discontinued, this certification serves as its legal substitute."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Voter's Certification is commonly used for:\n*   Primary identification for Passport applications (DFA)\n*   Opening bank accounts\n*   Proof of active voter status and residency\n*   Applying for other government IDs"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a Voter's Certification if you are:\n- A registered voter who needs a valid Primary ID\n- An individual needing proof of residency for local permits\n- A traveler needing an alternative document for the DFA"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-voters-certification",
+      "title": "Benefits of Having a Voter's Certification",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "While it is a paper document, its high security (watermark and dry seal) makes it a powerful identification tool."
+        },
+        {
+          "type": "subheading",
+          "title": "Instant Availability",
+          "content": "Unlike the old Voter ID which took years to print, the Certification is issued **Same-Day** at your local COMELEC office."
+        },
+        {
+          "type": "subheading",
+          "title": "Legally Recognized",
+          "content": "It is officially mandated to be accepted as a **Primary ID** by government agencies and private banks in the Philippines."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Walk-In (Local OEO)",
+          "content": "Visit the **Office of the Election Officer (OEO)** in the city or municipality where you are registered."
+        },
+        {
+          "type": "subheading",
+          "title": "COMELEC Main Office (Intramuros)",
+          "content": "For \"National Certification\" if you are currently in Metro Manila but registered in a province."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Most ID applications now require **Online Pre-registration**. Always take a screenshot of your QR code or transaction slip before heading to the office."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit your Local COMELEC Office",
+          "content": "Go to the OEO located at your Municipal or City Hall."
+        },
+        {
+          "type": "subheading",
+          "title": "Status Verification",
+          "content": "The staff will check the database to confirm you are an **Active Voter**."
+        },
+        {
+          "type": "subheading",
+          "title": "Payment",
+          "content": "Pay the ₱75 fee at the local Treasurer's Office (usually in the same building). Get the Official Receipt."
+        },
+        {
+          "type": "subheading",
+          "title": "Issuance",
+          "content": "Present your receipt and ID photocopy back to the OEO. They will print your certification on secure paper and affix the **Official Dry Seal**."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim the Document",
+          "content": "Your certification is usually ready in 15–30 minutes."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their certification at:\n- **Local Office of the Election Officer (OEO):** Found in every City/Municipal Hall.\n- **COMELEC Main Office:** Intramuros, Manila (For national central file requests)."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Walk-in: 30 Minutes to 1 Hour (Same Day)"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "There is no online tracking for certifications as they are issued immediately. You can check your voter status beforehand via the **COMELEC Precinct Finder** (if available online)."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Deactivated Status:** This happens if you miss two consecutive regular elections. You cannot get a certificate until you reactivate.\n- **Records Not Found:** If you recently transferred registration, the records might not yet be in the system."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Wrong Office:** Going to the COMELEC office of where you live now, instead of where you are actually registered.",
+            "**Expired ID:** Ensure the ID you present is still valid."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always check if the certification has the **Raised Dry Seal** before leaving; without it, the document may be rejected by banks or the DFA."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Go on a weekday afternoon (2 PM to 4 PM) when there are usually fewer registration applicants.",
+            "If you are a Senior or PWD, mention it immediately to be prioritized and have the fee waived.",
+            "Bring your own black pen for signing the logbooks."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For information on voter registration periods and precinct status, please visit the official COMELEC channels:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Official Website:** [Commission on Elections (COMELEC)](https://www.comelec.gov.ph)",
+            "**Online Portal:** [COMELEC ITD Portal](https://itd.comelec.gov.ph)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Can I get a physical Voter ID card?",
+          "content": "No. COMELEC has stopped printing plastic IDs to transition to the National ID system. The Certification is the only official document they issue now."
+        },
+        {
+          "type": "subheading",
+          "title": "Does the certification expire?",
+          "content": "Technically, it proves your status at the time of issuance. Some agencies (like the DFA) may require it to be issued within the last **six (6) months**."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,283 @@
+{
+  "id": "pre-marriage-counseling",
+  "shortTitle": "Pre-Marriage Counseling",
+  "title": "How to Get a Pre-Marriage Counseling (PMOC) Certificate",
+  "slug": "pre-marriage-counseling",
+  "relatedGuideSlugs": [
+    "psa-birth-certificate",
+    "cedula-ctc",
+    "national-id"
+  ],
+  "description": "Complete the mandatory Pre-Marriage Orientation and Counseling (PMOC) required for obtaining a marriage license in the Philippines.",
+  "lastUpdated": "2026-05-14",
+  "category": "Civil Registry",
+  "agency": "LGU",
+  "difficulty": "Easy",
+  "estimatedTime": "1-3D",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "PSA Birth Certificate",
+      "description": "Original birth certificate for both parties.",
+      "icon": "FileText"
+    },
+    {
+      "title": "PSA CENOMAR",
+      "description": "Certificate of No Marriage valid within 6 months.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Valid ID",
+      "description": "Government-issued ID with your current address.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Official Receipt",
+      "description": "Proof of payment of the seminar fee from the treasurer's office.",
+      "icon": "Receipt"
+    }
+  ],
+  "tags": [
+    "Marriage",
+    "Wedding",
+    "PMOC",
+    "Counseling",
+    "Philippines",
+    "Government Document"
+  ],
+  "aliases": [
+    "PMOC Certificate",
+    "Pre-Marriage Seminar",
+    "Marriage Counseling Certificate",
+    "Family Planning Seminar"
+  ],
+  "checklist": [
+    {
+      "title": "Visit LCR",
+      "description": "Go to your City or Municipal Hall to request a referral for the pre-marriage seminar."
+    },
+    {
+      "title": "Book Schedule",
+      "description": "Proceed to the Population Office to reserve a slot for the mandatory orientation."
+    },
+    {
+      "title": "Pay Fee",
+      "description": "Settle the seminar fee at the City Treasurer's Office and keep the receipt."
+    },
+    {
+      "title": "Attend Seminar",
+      "description": "Participate in the full orientation and counseling session on marriage and family planning."
+    },
+    {
+      "title": "Claim Certificate",
+      "description": "Receive your PMOC Certificate immediately after the seminar or within 48 hours."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Seminar Fee",
+      "amount": "₱200 – ₱500"
+    },
+    {
+      "label": "Total",
+      "amount": "₱200 – ₱500"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-pre-marriage-counseling-pmoc",
+      "title": "What is Pre-Marriage Counseling (PMOC)?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The **Pre-Marriage Orientation and Counseling (PMOC)** is a mandatory program for all couples applying for a marriage license in the Philippines. It ensures that couples are prepared for the responsibilities of married life and family planning."
+        },
+        {
+          "type": "paragraph",
+          "content": "The PMOC Certificate is commonly used for:\n*   Applying for a Marriage License at the Local Civil Registrar\n*   Legal requirement for civil and church weddings\n*   Education on reproductive health and financial management"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a PMOC Certificate if you are:\n- A couple planning to get married legally in the Philippines\n- Applicants aged 18–25 (Strictly required to undergo the **Counseling** portion)\n- Foreigners marrying a Filipino citizen in the Philippines"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-pmoc-certificate",
+      "title": "Benefits of Having a PMOC Certificate",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Beyond being a legal requirement, the seminar offers practical advice for a successful marriage."
+        },
+        {
+          "type": "subheading",
+          "title": "Legal Compliance",
+          "content": "Without this certificate, the Local Civil Registrar cannot issue your Marriage License."
+        },
+        {
+          "type": "subheading",
+          "title": "Relationship Foundations",
+          "content": "Couples receive guidance on communication, conflict resolution, and financial planning tailored to the Filipino family context."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Walk-In (Local Government Unit)",
+          "content": "You must apply at the City or Municipal Hall where at least one of you resides. The seminar is conducted by the **Population Office** or **City Health Office**."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Always double-check for 'Negative Results'. If your record is missing, you must process **Late Registration** at the LCR where the event occurred."
+        },
+        {
+          "type": "subheading",
+          "title": "Visit the Local Civil Registrar (LCR)",
+          "content": "Go to your City or Municipal Hall. Submit your initial marriage requirements and request a referral for the Pre-Marriage Seminar."
+        },
+        {
+          "type": "subheading",
+          "title": "Book Your Seminar Schedule",
+          "content": "Proceed to the Population Office or Social Welfare Office. Present your referral and choose from the available seminar dates. Most LGUs only hold these seminars 1–2 times a week."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Fees",
+          "content": "Pay the PMOC fee at the City Treasurer’s Office. Keep the Official Receipt (OR), as you will need to present it on the day of the seminar."
+        },
+        {
+          "type": "subheading",
+          "title": "Attend the Seminar",
+          "content": "Attend the full session (usually 4 to 8 hours). It covers:\n*   **Orientation (PMO):** Legalities, rights, and duties of spouses.\n*   **Counseling (PMC):** For younger couples, focusing on emotional maturity.\n*   **Family Planning:** Reproductive health and responsible parenthood."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim Your Certificate",
+          "content": "The PMOC Certificate is usually issued immediately after the seminar or within the next 24–48 hours."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their PMOC Certificate at:\n- **City or Municipal Hall:** Specifically the Population Office, City Health Office, or MSWDO/CSWDO."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n*   Scheduling: 1–2 Weeks (depends on slot availability)\n*   Seminar & Issuance: 1 Day"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "There is no online tracking for LGU seminars. You will be given a physical claim stub or told to wait for the certificate after the session."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- **Conflicting Schedules:** Seminars are usually held during office hours on weekdays.\n- **Fully Booked Slots:** You might have to wait for the next month's schedule if you apply late."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Tardiness:** Many LGUs have a \"No Late\" policy; if you miss the start, you must reschedule for a different week.",
+            "**Incomplete Parties:** Both the bride and groom **must** be present for the entire duration."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always check the specific seminar days of your LGU (e.g., \"Every Tuesday and Thursday only\")."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Inquire about the seminar schedule *before* gathering all your other documents.",
+            "Bring a snack and water, as some seminars are long and held in basic government facilities.",
+            "Ensure your CENOMAR and Birth Certificates are ready before booking."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Couples are advised to coordinate with their specific LGU for the current seminar schedule and registration procedures:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Local Government Unit (LGU):** Visit the official website or City/Municipal Hall of your place of residence.",
+            "**Population Commission:** [POPCOM Official Website](https://www.popcom.gov.ph) (For family planning guidelines)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Can we attend the seminar in a different city?",
+          "content": "Generally, you must attend the seminar in the same city/municipality where you are applying for the marriage license."
+        },
+        {
+          "type": "subheading",
+          "title": "Is the certificate valid forever?",
+          "content": "No, it is typically valid for **six (6) months**. You must apply for your marriage license within this period."
+        }
+      ]
+    }
+  ]
+}

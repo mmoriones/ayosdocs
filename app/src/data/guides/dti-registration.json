@@ -1,0 +1,345 @@
+{
+  "id": "dti-registration",
+  "title": "How to Register for DTI Business Name Registration",
+  "shortTitle": "DTI Registration",
+  "slug": "dti-registration",
+  "relatedGuideSlugs": [
+    "bir-tin-registration",
+    "mayors-permit",
+    "dti-registration"
+  ],
+  "description": "Register your business name and secure legal rights for your sole proprietorship.",
+  "lastUpdated": "2026-05-14",
+  "category": "Business Registration",
+  "agency": "DTI",
+  "difficulty": "Easy",
+  "estimatedTime": "1-3D",
+  "costRange": "P5H-P2K",
+  "requirements": [
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID of the applicant.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Proposed Business Name",
+      "description": "Your preferred name for the sole proprietorship.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Email Address",
+      "description": "An active email for receiving the digital certificate.",
+      "icon": "Mail"
+    },
+    {
+      "title": "Personal Information",
+      "description": "Complete details including business address and activity.",
+      "icon": "User"
+    }
+  ],
+  "tags": [
+    "DTI",
+    "Business Name Registration",
+    "Sole Proprietorship",
+    "Negosyo",
+    "Business Permit",
+    "Philippines"
+  ],
+  "aliases": [
+    "DTI Permit",
+    "DTI Registration",
+    "Sole Proprietor Registration"
+  ],
+  "checklist": [
+    {
+      "title": "Prepare Details",
+      "description": "Gather your valid ID and finalize your proposed business name and address."
+    },
+    {
+      "title": "Check Availability",
+      "description": "Use the DTI BNRS portal to verify if your preferred business name is available and not restricted."
+    },
+    {
+      "title": "Submit Application",
+      "description": "Complete the registration form online or at a DTI office and select your territorial scope."
+    },
+    {
+      "title": "Pay Fees",
+      "description": "Settle the registration fee via GCash, Maya, or other authorized payment channels."
+    },
+    {
+      "title": "Claim Certificate",
+      "description": "Download your digital certificate or receive a printed copy from the DTI office."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Territorial Scope",
+      "amount": "Estimated Cost"
+    },
+    {
+      "label": "Barangay",
+      "amount": "₱200"
+    },
+    {
+      "label": "City/Municipality",
+      "amount": "₱500"
+    },
+    {
+      "label": "Regional",
+      "amount": "₱1000"
+    },
+    {
+      "label": "National",
+      "amount": "₱2000"
+    },
+    {
+      "label": "Documentary Stamp Tax",
+      "amount": "₱30"
+    },
+    {
+      "label": "Total",
+      "amount": "₱230–₱2030"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-dti-business-name-registration",
+      "title": "What is DTI Business Name Registration?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "DTI Business Name Registration is the process of registering a business name for a sole proprietorship with the Department of Trade and Industry (DTI) in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "This registration grants the owner the right to use the chosen business name for commercial activities within a specified territorial scope."
+        },
+        {
+          "type": "paragraph",
+          "content": "The DTI Business Name Registration is commonly used for:\n* Starting a sole proprietorship business\n* Applying for business permits and BIR registration\n* Opening business bank accounts"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need DTI Business Name Registration if you are:\n- Starting a sole proprietorship business\n- Operating a small business or online shop\n- Applying for local business permits\n- Registering with the BIR as a business owner"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-dti-business-name-registration",
+      "title": "Benefits of Having DTI Business Name Registration",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Legal Right to Use a Business Name",
+          "content": "The registration gives the owner authority to use the approved business name within the selected territorial scope."
+        },
+        {
+          "type": "subheading",
+          "title": "Requirement for Other Business Permits",
+          "content": "Most LGUs and government agencies require DTI registration before issuing permits and tax registrations."
+        },
+        {
+          "type": "subheading",
+          "title": "Builds Business Credibility",
+          "content": "A registered business name improves trust with customers, suppliers, and financial institutions."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may register through online systems or selected DTI offices."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Application",
+          "content": "Applicants may register online through the DTI Business Name Registration System (BNRS)."
+        },
+        {
+          "type": "paragraph",
+          "content": "The online portal allows:\n* Business name search\n* Online application submission\n* Fee payment\n* Certificate download"
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In Application",
+          "content": "Applicants may also visit:\n* DTI Regional Offices\n* DTI Provincial Offices\n* Negosyo Centers"
+        },
+        {
+          "type": "paragraph",
+          "content": "Some offices may require appointments."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Use the BIR **eFPS or eBIRForms** for faster filing and avoid manual queuing at the RDO. Most payments can now be done via GCash or Maya."
+        },
+        {
+          "type": "subheading",
+          "title": "Prepare Your Business Information",
+          "content": "Prepare your:\n* Proposed business names\n* Business address\n* Business activity details\n* Valid IDs and contact information"
+        },
+        {
+          "type": "subheading",
+          "title": "Check Business Name Availability",
+          "content": "Use the DTI BNRS portal or inquire at DTI offices to verify if your preferred business name is available."
+        },
+        {
+          "type": "paragraph",
+          "content": "DTI may reject names that are:\n* Identical or confusingly similar to existing businesses\n* Offensive or misleading\n* Restricted by law"
+        },
+        {
+          "type": "subheading",
+          "title": "Submit the Application",
+          "content": "Complete the application form online or at the DTI office."
+        },
+        {
+          "type": "paragraph",
+          "content": "Select your territorial scope:\n* Barangay\n* City/Municipality\n* Regional\n* National"
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Registration Fees",
+          "content": "Pay through:\n* GCash\n* Maya\n* Debit/Credit Card\n* LandBank\n* Over-the-counter payment centers"
+        },
+        {
+          "type": "subheading",
+          "title": "Receive Your Certificate",
+          "content": "After approval and payment confirmation:\n* Online applicants may download the certificate digitally\n* Walk-in applicants may receive printed copies"
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process DTI Business Name Registration at:\n- DTI Business Name Registration System (BNRS)\n- DTI Regional Offices\n- DTI Provincial Offices\n- Negosyo Centers"
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n* Online applications: Same day to 24 hours\n* Walk-in applications: Same day to 3 business days\n* Corrections or verification issues: Additional processing time may apply"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor their application through:\n* DTI BNRS portal\n* Email notifications\n* DTI office inquiry counters"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- Rejected business names\n- Payment confirmation delays\n- Incorrect business information\n- Duplicate or restricted business names\n- Email delivery issues for certificates"
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Using prohibited or trademarked business names",
+            "Entering incorrect business addresses",
+            "Forgetting to save payment receipts",
+            "Choosing the wrong territorial scope",
+            "Assuming DTI registration alone is sufficient to operate legally"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your application before final submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Prepare multiple backup business names",
+            "Use a valid and active email address",
+            "Double-check spelling and business details",
+            "Register online for faster processing",
+            "Download and save multiple copies of your certificate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate and up-to-date information, please refer to:\n*   [Department of Trade and Industry (DTI)](https://www.dti.gov.ph)\n*   [DTI Business Name Registration System (BNRS)](https://bnrs.dti.gov.ph)"
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is DTI registration required for all businesses?",
+          "content": "DTI registration is generally required for sole proprietorship businesses using a business name other than the owner's legal name."
+        },
+        {
+          "type": "subheading",
+          "title": "How long is DTI Business Name Registration valid?",
+          "content": "The registration is generally valid for 5 years unless revoked or canceled."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I renew my DTI registration online?",
+          "content": "Yes. DTI allows online renewal through the BNRS portal."
+        },
+        {
+          "type": "subheading",
+          "title": "Is DTI registration the same as a business permit?",
+          "content": "No. DTI registration only registers the business name. You still need:\n*   Barangay Clearance\n*   Mayor's Permit\n*   BIR Registration\n*   Other permits if applicable"
+        },
+        {
+          "type": "subheading",
+          "title": "Can online sellers register with DTI?",
+          "content": "Yes. Many online businesses and sellers register their business names with DTI."
+        }
+      ]
+    }
+  ]
+}

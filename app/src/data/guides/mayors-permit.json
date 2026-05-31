@@ -1,0 +1,352 @@
+{
+  "id": "mayors-permit",
+  "title": "How to Apply for a Mayor's Permit / Business Permit",
+  "shortTitle": "Mayor's Permit",
+  "slug": "mayors-permit",
+  "relatedGuideSlugs": [
+    "bir-tin-registration",
+    "mayors-permit",
+    "dti-registration"
+  ],
+  "description": "Secure your local license to operate a business within your city or municipality.",
+  "lastUpdated": "2026-05-14",
+  "category": "Business Registration",
+  "agency": "LGU",
+  "difficulty": "Moderate",
+  "estimatedTime": "3D-2W",
+  "costRange": "P5H-P2K",
+  "requirements": [
+    {
+      "title": "DTI/SEC Registration",
+      "description": "Proof of business name or entity registration.",
+      "icon": "Building2"
+    },
+    {
+      "title": "Barangay Clearance",
+      "description": "Local clearance from the barangay where the business is located.",
+      "icon": "LandMark"
+    },
+    {
+      "title": "Lease Contract",
+      "description": "Proof of business address or occupancy.",
+      "icon": "House"
+    },
+    {
+      "title": "Valid ID",
+      "description": "Government-issued ID of the business owner or representative.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Cedula",
+      "description": "Community Tax Certificate of the applicant.",
+      "icon": "Receipt"
+    }
+  ],
+  "tags": [
+    "Mayor's Permit",
+    "Business Permit",
+    "LGU",
+    "Business Registration",
+    "Permit to Operate",
+    "Philippines"
+  ],
+  "aliases": [
+    "Business License",
+    "Permit to Operate",
+    "City Hall Business Permit"
+  ],
+  "checklist": [
+    {
+      "title": "Secure Initial Docs",
+      "description": "Obtain your DTI or SEC registration and local barangay clearance."
+    },
+    {
+      "title": "Submit Application",
+      "description": "File your business permit application at the City or Municipal Hall's BPLO."
+    },
+    {
+      "title": "Undergo Inspections",
+      "description": "Prepare for required inspections by the fire, sanitation, and zoning departments."
+    },
+    {
+      "title": "Pay Fees",
+      "description": "Settle the assessed taxes and permit fees at the LGU cashier."
+    },
+    {
+      "title": "Claim Permit",
+      "description": "Receive your Mayor's Permit and business plate for display at your establishment."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Barangay Clearance",
+      "amount": "₱100–₱1000"
+    },
+    {
+      "label": "Mayor's Permit Fee",
+      "amount": "₱500–₱5000+"
+    },
+    {
+      "label": "Sanitary Permit",
+      "amount": "₱100–₱1000"
+    },
+    {
+      "label": "Fire Safety Inspection Fee",
+      "amount": "₱500–₱5000+"
+    },
+    {
+      "label": "Other Local Fees and Taxes",
+      "amount": "Varies"
+    },
+    {
+      "label": "Total",
+      "amount": "₱1000–₱10000+"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-mayors-permit-business-permit",
+      "title": "What is Mayor's Permit / Business Permit?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A Mayor's Permit, also called a Business Permit, is an official authorization issued by the Local Government Unit (LGU) allowing a business to legally operate within a city or municipality in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "Businesses are generally required to secure a Mayor's Permit before starting operations and renew it annually."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Mayor's Permit is commonly used for:\n* Legal operation of businesses\n* BIR and tax compliance\n* Opening business bank accounts\n* Applying for government accreditations and contracts"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a Mayor's Permit if you are:\n- Starting a sole proprietorship, partnership, or corporation\n- Operating a physical store, office, or commercial establishment\n- Running an online business with local operations\n- Renewing an existing business annually"
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-mayors-permit",
+      "title": "Benefits of Having Mayor's Permit",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Legal Authority to Operate",
+          "content": "The permit allows businesses to legally conduct operations within the jurisdiction of the LGU."
+        },
+        {
+          "type": "subheading",
+          "title": "Compliance with Government Regulations",
+          "content": "It demonstrates compliance with local ordinances, zoning, sanitation, and safety requirements."
+        },
+        {
+          "type": "subheading",
+          "title": "Required for Other Business Transactions",
+          "content": "Banks, suppliers, and government agencies often require a valid business permit."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Most Mayor's Permit applications are processed through the Business Permits and Licensing Office (BPLO) of the city or municipality where the business is located."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Application",
+          "content": "Some LGUs provide:\n* Online appointment systems\n* Electronic submission portals\n* Online payment options"
+        },
+        {
+          "type": "paragraph",
+          "content": "Availability depends on the local government unit."
+        },
+        {
+          "type": "subheading",
+          "title": "Walk-In Application",
+          "content": "Applicants may personally visit the BPLO to:\n* Submit requirements\n* Undergo inspections\n* Pay fees\n* Claim permits"
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Use the BIR **eFPS or eBIRForms** for faster filing and avoid manual queuing at the RDO. Most payments can now be done via GCash or Maya."
+        },
+        {
+          "type": "subheading",
+          "title": "Secure Preliminary Business Documents",
+          "content": "Prepare your:\n* DTI or SEC registration\n* Barangay Clearance\n* Lease contract or proof of address\n* Valid IDs and other supporting documents"
+        },
+        {
+          "type": "subheading",
+          "title": "Submit the Business Permit Application",
+          "content": "Submit the application form and documentary requirements to the BPLO."
+        },
+        {
+          "type": "paragraph",
+          "content": "The office will review your application and assess fees."
+        },
+        {
+          "type": "subheading",
+          "title": "Undergo Inspections",
+          "content": "Depending on the business type, inspections may be conducted by:\n* Fire Department\n* Sanitation Office\n* Engineering Office\n* Zoning Office"
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Assessed Fees",
+          "content": "Pay the required taxes and permit fees at:\n* City Hall cashier\n* Authorized payment centers\n* Online LGU payment portals"
+        },
+        {
+          "type": "paragraph",
+          "content": "Keep all official receipts."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim the Mayor's Permit",
+          "content": "After approval and payment verification, claim your:\n* Mayor's Permit\n* Business plate or sticker (if applicable)\n* Official receipts and certificates"
+        },
+        {
+          "type": "paragraph",
+          "content": "Display the permit prominently at your business establishment."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process their Mayor's Permit at:\n- City Hall Business Permits and Licensing Office (BPLO)\n- Municipal Hall BPLO\n- LGU online business portals\n- Negosyo Centers (selected LGUs)"
+        },
+        {
+          "type": "paragraph",
+          "content": "Applications are generally filed where the business establishment is physically located."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "[City/Municipal Hall Website](https://www.gov.ph/services/lgu) (or visit your respective local city/municipal hall)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:\n* Small businesses: 3–7 business days\n* Businesses requiring inspections: 1–2 weeks\n* Online renewal applications: Same day to 5 business days"
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor their application through:\n* BPLO inquiry counters\n* LGU online portals\n* SMS or email notifications (for participating LGUs)"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:\n- Delayed inspections\n- Incomplete documentary requirements\n- Zoning or location issues\n- Incorrect tax assessments\n- Long queues during annual renewal season"
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Applying without complete requirements",
+            "Using incorrect business addresses",
+            "Forgetting annual renewal deadlines",
+            "Operating without required inspections",
+            "Ignoring local zoning regulations"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your application before final submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Apply early before peak renewal season",
+            "Bring multiple photocopies of all documents",
+            "Verify zoning compliance before leasing a location",
+            "Keep digital and printed copies of permits",
+            "Coordinate directly with your BPLO for updated requirements"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is a Mayor's Permit required for online businesses?",
+          "content": "Yes, many LGUs require online businesses with local operations or inventory storage to secure permits."
+        },
+        {
+          "type": "subheading",
+          "title": "How often should a Mayor's Permit be renewed?",
+          "content": "Business permits are generally renewed annually, usually every January."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I operate without a Mayor's Permit?",
+          "content": "Operating without a permit may result in penalties, closure orders, or fines from the LGU."
+        },
+        {
+          "type": "subheading",
+          "title": "Is the process different for corporations?",
+          "content": "Yes. Corporations and partnerships generally require SEC registration and additional documents."
+        },
+        {
+          "type": "subheading",
+          "title": "What happens if I renew late?",
+          "content": "Late renewal may result in penalties, surcharges, and additional interest charges."
+        }
+      ]
+    }
+  ]
+}

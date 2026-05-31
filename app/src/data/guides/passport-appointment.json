@@ -1,0 +1,711 @@
+{
+  "id": "passport-appointment",
+  "title": "How to Book a DFA Passport Appointment in the Philippines",
+  "shortTitle": "Passport Appointment",
+  "slug": "passport-appointment",
+  "description": "Book and prepare for your Department of Foreign Affairs (DFA) passport application.",
+  "lastUpdated": "2026-04-01",
+  "category": "Government ID",
+  "agency": "DFA",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-3D",
+  "costRange": "P5H-P2K",
+  "requirements": [
+    {
+      "title": "Appointment Packet",
+      "description": "A printed copy of your confirmed appointment and application form.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Valid ID",
+      "description": "An original government-issued ID and one photocopy.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "PSA Birth Certificate",
+      "description": "Original birth certificate in security paper.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Old Passport",
+      "description": "Required for renewal applications.",
+      "icon": "Passport"
+    }
+  ],
+  "tags": [
+    "Passport",
+    "DFA",
+    "Travel",
+    "Philippine Passport",
+    "Government ID"
+  ],
+  "checklist": [
+    {
+      "title": "Register Account",
+      "description": "Create an account on the DFA passport appointment portal using an active email."
+    },
+    {
+      "title": "Set Appointment",
+      "description": "Select your preferred DFA branch, date, and time slot for your application."
+    },
+    {
+      "title": "Pay Fee",
+      "description": "Settle the processing fee through authorized payment channels to confirm your slot."
+    },
+    {
+      "title": "Prepare Requirements",
+      "description": "Gather and photocopy all necessary documents like your birth certificate and IDs."
+    },
+    {
+      "title": "Attend Appointment",
+      "description": "Arrive at the DFA office 30 minutes early on your scheduled date."
+    },
+    {
+      "title": "Complete Biometrics",
+      "description": "Have your photo, fingerprints, and signature captured by DFA staff."
+    },
+    {
+      "title": "Claim Passport",
+      "description": "Wait for delivery or pick up your passport on the advised release date."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Regular Processing",
+      "amount": "₱950"
+    },
+    {
+      "label": "Expedited Processing",
+      "amount": "₱1,200"
+    },
+    {
+      "label": "Courier Delivery (Optional)",
+      "amount": "₱150–₱250"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-a-passport-appointment",
+      "title": "What is a Passport Appointment?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A **passport appointment** is a scheduled reservation required before applying for or renewing a Philippine passport through the Department of Foreign Affairs (DFA)."
+        },
+        {
+          "type": "paragraph",
+          "content": "The DFA uses an online appointment system to manage applicants efficiently and reduce overcrowding at passport processing centers."
+        },
+        {
+          "type": "paragraph",
+          "content": "A passport appointment is required for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "New passport applications",
+            "Passport renewals",
+            "Replacement of lost passports",
+            "Damaged passport applications",
+            "Minor passport applications",
+            "Changes or corrections in passport details"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants must secure a confirmed appointment before visiting most DFA offices."
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You need a passport appointment if you are:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A first-time passport applicant",
+            "Renewing an expired or expiring passport",
+            "Replacing a lost passport",
+            "Replacing a damaged passport",
+            "Applying for a passport for a minor",
+            "Correcting or updating passport information"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Most applicants are required to schedule online before visiting a DFA processing site."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-booking-a-passport-appointment",
+      "title": "Benefits of Booking a Passport Appointment",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Booking a passport appointment provides several advantages."
+        },
+        {
+          "type": "subheading",
+          "title": "Organized Processing",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Appointments help reduce long lines and overcrowding at DFA sites."
+        },
+        {
+          "type": "subheading",
+          "title": "Faster Transactions",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants with confirmed schedules are processed more efficiently compared to walk-ins."
+        },
+        {
+          "type": "subheading",
+          "title": "Better Document Preparation",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants receive guidance on required documents before their appointment date."
+        },
+        {
+          "type": "subheading",
+          "title": "Flexible Location Options",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants may choose from different DFA offices and satellite sites depending on availability."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Payment Convenience",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Fees can be paid using multiple payment channels without needing to queue at DFA offices."
+        }
+      ]
+    },
+    {
+      "id": "appointment-methods",
+      "title": "Appointment Methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants usually secure appointments through the official DFA online appointment system."
+        },
+        {
+          "type": "subheading",
+          "title": "Online Appointment Booking",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "This is the standard method for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "New applications",
+            "Renewals",
+            "Replacement passports"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "Courtesy Lane Appointments",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants may qualify for courtesy lanes, including:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Senior citizens",
+            "Persons with disabilities",
+            "Pregnant applicants",
+            "Infants and minors below a certain age"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Eligibility requirements may vary depending on DFA policies."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-appointment-process",
+      "title": "Step-by-Step Appointment Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Appointment slots are usually refreshed at **12:00 PM** and **6:00 PM**. Check the portal at these times for newly opened slots."
+        },
+        {
+          "type": "subheading",
+          "title": "Access the DFA Appointment System",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Visit the DFA passport appointment portal."
+        },
+        {
+          "type": "paragraph",
+          "content": "Carefully read the reminders and instructions before proceeding."
+        },
+        {
+          "type": "paragraph",
+          "content": "Prepare:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Active email address",
+            "Personal information",
+            "Valid IDs",
+            "Preferred appointment location"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "Create or Confirm Your Appointment Information",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Enter your:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Full legal name",
+            "Birth information",
+            "Address",
+            "Contact details",
+            "Application type"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Ensure all details exactly match your PSA documents and IDs."
+        },
+        {
+          "type": "paragraph",
+          "content": "Incorrect information may cause delays or rejection."
+        },
+        {
+          "type": "subheading",
+          "title": "Select Your DFA Office and Schedule",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Choose:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "DFA branch or satellite office",
+            "Preferred appointment date",
+            "Available time slot"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Appointment availability depends on branch capacity and demand."
+        },
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "Appointment slots in major cities fill quickly, especially during peak travel seasons."
+        },
+        {
+          "type": "subheading",
+          "title": "Review and Confirm Your Application",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Before final submission:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Double-check your personal details",
+            "Verify spelling and birth dates",
+            "Confirm your selected schedule"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "After confirmation, appointment details may become difficult to modify."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Passport Processing Fee",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Proceed with payment using approved channels."
+        },
+        {
+          "type": "paragraph",
+          "content": "Payment methods may include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Online banking",
+            "GCash",
+            "Maya",
+            "Bayad Centers",
+            "Convenience stores",
+            "Over-the-counter bank payments"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Save your:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Reference number",
+            "Official receipt",
+            "Payment confirmation"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Failure to pay on time may automatically cancel your appointment."
+        },
+        {
+          "type": "subheading",
+          "title": "Receive Your Appointment Packet",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "After successful payment, you will receive:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Appointment confirmation",
+            "Application form",
+            "Reference details"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Print the appointment packet before your scheduled visit."
+        },
+        {
+          "type": "subheading",
+          "title": "Attend Your DFA Appointment",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Arrive at the DFA office at least 30 minutes before your schedule."
+        },
+        {
+          "type": "paragraph",
+          "content": "Bring:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Printed appointment packet",
+            "Valid IDs",
+            "Original supporting documents",
+            "Photocopies if required"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Security and verification procedures may be conducted before entry."
+        },
+        {
+          "type": "subheading",
+          "title": "Complete Biometrics and Data Encoding",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "At the DFA office, you will undergo:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Document verification",
+            "Data encoding",
+            "Fingerprint capture",
+            "Photograph capture",
+            "Signature recording"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Staff may ask you to confirm your encoded information before final submission."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim or Receive Your Passport",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "After processing, applicants may choose:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Courier delivery",
+            "DFA office pickup"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Keep your claim stub or tracking information safe."
+        },
+        {
+          "type": "paragraph",
+          "content": "Verify all passport details immediately after receiving your passport."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Passport appointments may be processed at:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "DFA Consular Offices",
+            "DFA Satellite Offices",
+            "Selected mall-based DFA branches",
+            "Temporary off-site processing centers"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some branches may offer extended schedules depending on demand."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Regular processing: Around 7–12 working days",
+            "Expedited processing: Around 5–7 working days"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Processing may take longer during:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Peak travel seasons",
+            "High application volume",
+            "Holidays",
+            "System maintenance periods"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Provincial delivery may also require additional time."
+        }
+      ]
+    },
+    {
+      "id": "tracking-or-status-updates",
+      "title": "Tracking or Status Updates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may monitor the status of their passport through:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Courier tracking systems",
+            "DFA notifications",
+            "Claim stubs and reference numbers"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Tracking availability may depend on the selected delivery method."
+        },
+        {
+          "type": "paragraph",
+          "content": "Always keep your appointment and payment records."
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Limited appointment slot availability",
+            "Payment confirmation delays",
+            "Incorrect personal information",
+            "Missing supporting documents",
+            "Delayed passport delivery",
+            "Website access issues",
+            "Long processing queues"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some issues may require rescheduling or revisiting the DFA office."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Booking with incorrect personal details",
+            "Missing your appointment schedule",
+            "Bringing incomplete requirements",
+            "Using expired IDs",
+            "Paying through unauthorized channels",
+            "Forgetting printed appointment documents"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Carefully review all information before submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Book appointments several weeks in advance",
+            "Choose less crowded DFA branches if available",
+            "Prepare photocopies ahead of time",
+            "Arrive early on appointment day",
+            "Organize documents in advance",
+            "Wear proper attire for passport photo capture"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "To ensure you are using the official appointment system and avoiding scams, please use the following links:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Official Appointment Portal:** [DFA Passport Appointment](https://passport.gov.ph)",
+            "**Agency Website:** [Department of Foreign Affairs (DFA)](https://www.dfa.gov.ph)",
+            "**Requirements Guide:** [DFA Passport Requirements](https://consular.dfa.gov.ph/passport)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Can I walk in without an appointment?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Most DFA branches require confirmed online appointments before processing applications."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I reschedule my appointment?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Rescheduling may be allowed depending on DFA policies and slot availability."
+        },
+        {
+          "type": "subheading",
+          "title": "How long is passport processing?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Regular processing may take around 7–12 working days, while expedited processing is generally faster."
+        },
+        {
+          "type": "subheading",
+          "title": "What happens if I miss my appointment?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "You may need to book a new schedule depending on DFA policies."
+        },
+        {
+          "type": "subheading",
+          "title": "Is courier delivery required?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "No. Applicants may choose either courier delivery or office pickup when available."
+        }
+      ]
+    }
+  ]
+}

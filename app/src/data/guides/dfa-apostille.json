@@ -1,0 +1,245 @@
+{
+  "id": "dfa-apostille",
+  "title": "How to Get a DFA Apostille Authentication",
+  "shortTitle": "DFA Apostille",
+  "slug": "dfa-apostille",
+  "relatedGuideSlugs": [
+    "passport-appointment",
+    "dfa-apostille",
+    "nbi-clearance"
+  ],
+  "description": "Authenticate your Philippine documents for legal use in foreign countries and embassies.",
+  "lastUpdated": "2026-05-14",
+  "category": "Essential Documents",
+  "agency": "DFA",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-5D",
+  "costRange": "P5H-P2K",
+  "requirements": [
+    {
+      "title": "Original Document",
+      "description": "The official document to be authenticated (e.g., PSA certificate, NBI clearance).",
+      "icon": "FileText"
+    },
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID and one photocopy.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Appointment Code",
+      "description": "A printed copy of your confirmed DFA appointment code.",
+      "icon": "Receipt"
+    }
+  ],
+  "tags": [
+    "DFA",
+    "Apostille",
+    "Authentication",
+    "Document Authentication",
+    "International Documents",
+    "Philippines"
+  ],
+  "aliases": [
+    "DFA Red Ribbon",
+    "Apostille Certificate",
+    "Document Authentication"
+  ],
+  "checklist": [
+    {
+      "title": "Prepare Documents",
+      "description": "Ensure your documents have the necessary prior certification (CAV) from the issuing agency."
+    },
+    {
+      "title": "Verify Eligibility",
+      "description": "Confirm that the destination country is a member of the Apostille Convention."
+    },
+    {
+      "title": "Book Appointment",
+      "description": "Schedule a slot through the official DFA Apostille portal for document submission."
+    },
+    {
+      "title": "Submit and Pay",
+      "description": "Visit the DFA branch on your appointment date to submit documents and pay the processing fee."
+    },
+    {
+      "title": "Claim Apostille",
+      "description": "Return on the release date to collect your apostilled document with the security sticker."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Regular Processing (4-5 Days)",
+      "amount": "₱100.00"
+    },
+    {
+      "label": "Expedited Processing (Same/Next Day)",
+      "amount": "₱200.00"
+    },
+    {
+      "label": "Courier/Delivery (Optional)",
+      "amount": "₱150 – ₱250"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-dfa-apostille-authentication",
+      "title": "What is DFA Apostille Authentication?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "**DFA Apostille Authentication** is the official process of certifying Philippine-issued public documents for use in foreign countries that are members of the **Apostille Convention**."
+        },
+        {
+          "type": "paragraph",
+          "content": "Since May 2019, the Philippines has used the Apostille system, which replaced the traditional **\"Red Ribbon\"** authentication. Once a document is apostilled by the Department of Foreign Affairs (DFA), it no longer needs to be authenticated by the foreign embassy of the destination country (if that country is also an Apostille member)."
+        },
+        {
+          "type": "paragraph",
+          "content": "The Apostille is commonly used for:\n*   Overseas employment requirements (NBI, Diplomas)\n*   Immigration and visa applications\n*   Foreign school enrollment (Transcript of Records)\n*   Marriage abroad (PSA Birth/Cenomar)\n*   International legal and corporate transactions"
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need DFA Apostille Authentication if you are:\n- Applying for work, internship, or study in another country.\n- Submitting Philippine legal documents to foreign government agencies.\n- Processing family or work-based immigration.\n- Getting married to a foreign national overseas.\n- Using corporate documents (DTI/SEC) for international business."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-dfa-apostille-authentication",
+      "title": "Benefits of Having DFA Apostille Authentication",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "International Legal Recognition",
+          "content": "An Apostille certificate confirms the authenticity of the signature and seal on your document, making it legally valid in over 120 member countries."
+        },
+        {
+          "type": "subheading",
+          "title": "Faster Processing Abroad",
+          "content": "By removing the need for \"Consularization\" at foreign embassies, the Apostille system saves you significant time and money during international applications."
+        },
+        {
+          "type": "subheading",
+          "title": "Unified Standard",
+          "content": "The Apostille follows a globally recognized format, ensuring that your Philippine documents are treated with the same weight as local documents in the host country."
+        }
+      ]
+    },
+    {
+      "id": "application-methods",
+      "title": "Application Methods",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online Appointment (Official Portal)",
+          "content": "The standard way is to book a slot via the official DFA Apostille portal."
+        },
+        {
+          "type": "subheading",
+          "title": "DFA \"Courtesy Lane\"",
+          "content": "Available for Senior Citizens, PWDs, pregnant women, and OFWs with valid contracts. No appointment is usually needed for these groups at selected sites like DFA Aseana."
+        },
+        {
+          "type": "subheading",
+          "title": "e-Apostille (New for 2026)",
+          "content": "The DFA has introduced the **e-Apostille** for selected documents (like digital PSA certificates). This allows for a completely paperless authentication process for participating countries."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** The **DMW Mobile App** is now the primary portal for OEC and e-Registration. Ensure your profile is 100% complete before booking appointments."
+        },
+        {
+          "type": "subheading",
+          "title": "Verify Document Eligibility",
+          "content": "Ensure your document has the necessary CAV or agency certification. The DFA will reject documents that haven't been pre-certified by the issuing body."
+        },
+        {
+          "type": "subheading",
+          "title": "Book a DFA Appointment",
+          "content": "Visit the [DFA Apostille Portal](https://apostille.dfa.gov.ph). Choose your preferred branch (Aseana, SM Megamall, SM Manila, etc.) and time slot."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Fees Online",
+          "content": "Most branches now require online payment. Regular processing is **₱100**, and expedited is **₱200** per document."
+        },
+        {
+          "type": "subheading",
+          "title": "Appearance and Submission",
+          "content": "Go to the DFA branch on your appointment date. Submit your documents and have your ID verified. You will receive a claim stub."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim the Apostille Certificate",
+          "content": "Return on the release date to pick up your document. It will have a security sticker (Apostille) attached to the back or a separate certificate leaf."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "For the most accurate information and to book your appointment, visit:\n- [Official DFA Apostille Portal](https://apostille.dfa.gov.ph)\n- [Department of Foreign Affairs (DFA) Main Website](https://www.dfa.gov.ph)\n- [List of Apostille Convention Member Countries](https://www.hcch.net/en/instruments/conventions/status-table/?cid=41)"
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Missing CAV:** The most common reason for rejection. Ensure your school records have been \"CAV-ed\" by the proper education agency first.",
+            "**Unrecognized Destination:** If the country you are moving to doesn't recognize Apostilles, the DFA will issue a different type of authentication certificate."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "**Use DFA Aseana for Expedited:** The main office in Aseana often has the most slots for expedited (same-day) processing.",
+            "**Batch Your Documents:** If you need multiple documents apostilled (e.g., TOR, NBI, Birth Cert), book them all in one appointment to save on trips.",
+            "**Select Courier Delivery:** If you don't want to return to the DFA office, most branches offer a courier service (LBC/Wexpress) for a small fee."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Can I still get a \"Red Ribbon\"?",
+          "content": "Technically, no. The Apostille sticker has replaced the gold seal and red ribbon for most countries. However, for non-Apostille countries, a similar-looking authentication certificate is still used."
+        },
+        {
+          "type": "subheading",
+          "title": "Does the Apostille certificate expire?",
+          "content": "The Apostille itself does not have an expiration date. However, the **underlying document** (like an NBI clearance) might expire, which would make the Apostille effectively invalid."
+        }
+      ]
+    }
+  ]
+}

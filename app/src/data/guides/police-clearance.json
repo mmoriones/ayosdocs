@@ -1,0 +1,692 @@
+{
+  "id": "police-clearance",
+  "title": "How to Apply for a National Police Clearance in the Philippines",
+  "shortTitle": "Police Clearance",
+  "slug": "police-clearance",
+  "relatedGuideSlugs": [
+    "nbi-clearance",
+    "barangay-clearance",
+    "voter-registration"
+  ],
+  "description": "Obtain a nationwide criminal record check through the NPCS for employment and permits.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government Clearance",
+  "agency": "PNP",
+  "difficulty": "Easy",
+  "estimatedTime": "1D-1W",
+  "costRange": "P1H-P5H",
+  "requirements": [
+    {
+      "title": "NPCS Online Account",
+      "description": "An active account on the National Police Clearance System portal.",
+      "icon": "Globe"
+    },
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID with a clear photo and signature.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Reference Number",
+      "description": "The system-generated reference number from your appointment.",
+      "icon": "Receipt"
+    },
+    {
+      "title": "Payment Confirmation",
+      "description": "Proof of payment of the clearance fee.",
+      "icon": "Receipt"
+    }
+  ],
+  "tags": [
+    "Police Clearance",
+    "National Police Clearance",
+    "PNP",
+    "NPCS",
+    "Clearance",
+    "Philippines",
+    "Government Document"
+  ],
+  "aliases": [
+    "PNP Clearance",
+    "NPCS Clearance",
+    "Police Clearance Certificate",
+    "National Police Clearance"
+  ],
+  "checklist": [
+    {
+      "title": "Create Account",
+      "description": "Register on the NPCS website and complete your applicant profile."
+    },
+    {
+      "title": "Schedule Appointment",
+      "description": "Book a slot at your preferred police station through the online portal."
+    },
+    {
+      "title": "Pay Fee",
+      "description": "Settle the clearance fee via GCash, Maya, or other authorized payment channels."
+    },
+    {
+      "title": "Prepare ID",
+      "description": "Ensure you have at least one valid government ID to present at the station."
+    },
+    {
+      "title": "Visit Police Station",
+      "description": "Go to the selected station on your appointment date for biometrics and photo capture."
+    },
+    {
+      "title": "Claim Clearance",
+      "description": "Receive your National Police Clearance, which is usually released on the same day if there is \"No Hit.\""
+    }
+  ],
+  "fees": [
+    {
+      "label": "Police Clearance Fee",
+      "amount": "₱150"
+    },
+    {
+      "label": "Convenience Fee",
+      "amount": "₱10–₱30"
+    },
+    {
+      "label": "Total Estimated Cost",
+      "amount": "Around ₱160–₱180"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-a-national-police-clearance",
+      "title": "What is a National Police Clearance?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A **National Police Clearance** is an official document issued by the Philippine National Police (PNP) through the National Police Clearance System (NPCS). It certifies whether an applicant has a criminal record or derogatory information in the PNP database."
+        },
+        {
+          "type": "paragraph",
+          "content": "Unlike older local police clearances that only covered a specific city or municipality, the National Police Clearance system performs nationwide database verification."
+        },
+        {
+          "type": "paragraph",
+          "content": "The clearance is commonly required for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Employment applications",
+            "Government transactions",
+            "Business permit applications",
+            "Travel requirements",
+            "License applications",
+            "Visa processing",
+            "School requirements",
+            "Legal documentation"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "The clearance is processed through the online **National Police Clearance System (NPCS)**."
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You may need a National Police Clearance if you are:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Applying for a job",
+            "Processing government requirements",
+            "Applying for permits or licenses",
+            "Starting a business",
+            "Applying for visas or overseas employment",
+            "Processing legal documents",
+            "Completing school requirements",
+            "Verifying criminal record status"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Both first-time applicants and renewals may process applications through the NPCS online system."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-police-clearance",
+      "title": "Benefits of Having a Police Clearance",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Nationwide Criminal Record Verification",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The National Police Clearance checks records through the centralized PNP database."
+        },
+        {
+          "type": "subheading",
+          "title": "Widely Accepted Document",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Many employers, government agencies, and private institutions accept National Police Clearance as proof of good standing."
+        },
+        {
+          "type": "subheading",
+          "title": "Faster Online Processing",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The NPCS online system allows applicants to:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Register online",
+            "Schedule appointments",
+            "Pay online",
+            "Monitor application status"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "Useful for Employment and Government Transactions",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The clearance is one of the most commonly requested supporting documents in the Philippines."
+        }
+      ]
+    },
+    {
+      "id": "important-updates-and-reminders",
+      "title": "Important Updates and Reminders",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Online Appointment is Required",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants are generally required to:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Register online",
+            "Book an appointment",
+            "Visit the selected police station personally"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "Non-Appearance Renewal May Be Available",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "PNP states that certain applicants may renew without appearance for up to three years from their last personal appearance, subject to system verification requirements."
+        },
+        {
+          "type": "paragraph",
+          "content": "However, some applicants online reported system issues with non-appearance renewal features in 2026."
+        },
+        {
+          "type": "subheading",
+          "title": "First Time Job Seekers May Qualify for Free Clearance",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Under the First Time Jobseekers Assistance Act, qualified first-time job seekers may receive free police clearance processing upon presentation of the required certification."
+        }
+      ]
+    },
+    {
+      "id": "where-to-apply",
+      "title": "Where to Apply",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may process National Police Clearance through:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "National Police Clearance System (NPCS) online portal",
+            "Selected police stations nationwide",
+            "PNP clearance processing centers"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants may usually choose their preferred police station during online appointment scheduling."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Pro Tip:** Check if your LGU has an **Online Portal**. Many cities now allow you to pay for Cedula or Police Clearance via GCash and just pick it up."
+        },
+        {
+          "type": "subheading",
+          "title": "Register an NPCS Account",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Access the National Police Clearance System website and create an account."
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants commonly provide:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Full name",
+            "Birth date",
+            "Email address",
+            "Mobile number",
+            "Password"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Use an active email account because verification messages may be sent there."
+        },
+        {
+          "type": "subheading",
+          "title": "Verify and Complete Your Profile",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "After account registration:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Verify your email if required",
+            "Log in to your account",
+            "Complete your applicant profile"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Details may include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Address",
+            "Civil status",
+            "Educational background",
+            "Family information"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Ensure all information matches your IDs and official records."
+        },
+        {
+          "type": "subheading",
+          "title": "Schedule Your Appointment",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Select:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Preferred police station",
+            "Appointment date",
+            "Time slot"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Available slots depend on station capacity and scheduling availability."
+        },
+        {
+          "type": "subheading",
+          "title": "Pay the Police Clearance Fee",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Proceed with payment through available channels which may include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "GCash",
+            "Maya",
+            "Landbank",
+            "7-Eleven",
+            "Cebuana Lhuillier",
+            "Online banking"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Keep:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Payment receipt",
+            "Reference number",
+            "Screenshots or transaction records"
+          ]
+        },
+        {
+          "type": "subheading",
+          "title": "Visit the Selected Police Station",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Arrive at your selected police station on your appointment date."
+        },
+        {
+          "type": "paragraph",
+          "content": "Bring:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Valid ID",
+            "Reference number",
+            "Appointment details",
+            "Payment confirmation"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants online report that screenshots of payment confirmations are sometimes accepted, although policies may vary by station."
+        },
+        {
+          "type": "subheading",
+          "title": "Undergo Biometrics and Verification",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "At the station, applicants commonly undergo:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Fingerprint scanning",
+            "Photograph capture",
+            "Identity verification"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "The process usually takes only a few minutes if requirements are complete."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for Clearance Processing",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Possible outcomes include:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "**No Hit** — clearance may be released the same day",
+            "**With Hit** — additional verification is required"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "A “hit” does not automatically mean the applicant has a criminal case. It may simply indicate a name match in the system."
+        },
+        {
+          "type": "subheading",
+          "title": "Claim Your Police Clearance",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "If approved:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Verify all printed information",
+            "Report errors immediately",
+            "Keep the clearance secure"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants with “No Hit” status commonly receive clearance on the same day."
+        }
+      ]
+    },
+    {
+      "id": "official-sources-external-links",
+      "title": "Official Sources & External Links",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "[National Police Clearance System (NPCS)](https://clearance.pnp.gov.ph)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "validity",
+      "title": "Validity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "The PNP states that National Police Clearance is generally valid for six months from the date of issuance."
+        },
+        {
+          "type": "paragraph",
+          "content": "Some employers or agencies may require newer clearances depending on their policies."
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Typical processing timelines include:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Process",
+            "Estimated Time"
+          ],
+          "rows": [
+            [
+              "Online Registration",
+              "10–20 minutes"
+            ],
+            [
+              "Police Station Processing",
+              "15–30 minutes"
+            ],
+            [
+              "No Hit Release",
+              "Same day"
+            ],
+            [
+              "With Hit Verification",
+              "Several days to 1 week or more"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Processing times may vary depending on:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Station workload",
+            "Database verification",
+            "Name matches",
+            "System availability"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-problems-encountered",
+      "title": "Common Problems Encountered",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "Applicants may experience:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "“With hit” verification delays",
+            "NPCS website downtime",
+            "Non-appearance renewal issues",
+            "Long queues",
+            "Incorrect encoded information",
+            "Appointment slot shortages",
+            "Payment confirmation delays"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants online reported recurring errors with the non-appearance renewal feature in 2026."
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-to-avoid",
+      "title": "Common Mistakes to Avoid",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Registering duplicate accounts",
+            "Bringing expired IDs",
+            "Missing appointment schedules",
+            "Using incorrect personal information",
+            "Forgetting payment reference numbers",
+            "Arriving late for appointments"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Always review your application details before final submission."
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Schedule appointments early",
+            "Arrive before your appointment time",
+            "Use stable internet during registration",
+            "Bring backup IDs if available",
+            "Save digital and printed payment receipts",
+            "Avoid peak application days when possible"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants recommend morning appointments for faster processing."
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Is online appointment required?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Yes. National Police Clearance applications are generally processed through the NPCS online appointment system."
+        },
+        {
+          "type": "subheading",
+          "title": "How long is Police Clearance valid?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "The PNP states that the clearance is generally valid for six months."
+        },
+        {
+          "type": "subheading",
+          "title": "What does “With Hit” mean?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "A “hit” means your name matches a record in the PNP database and requires additional verification."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I apply at any police station?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Applicants may generally select available police stations during online scheduling."
+        },
+        {
+          "type": "subheading",
+          "title": "Is Barangay Clearance required?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Many applicants report that valid ID and payment confirmation are usually sufficient, although requirements may vary by station."
+        },
+        {
+          "type": "subheading",
+          "title": "Is digital National ID accepted?",
+          "content": null
+        },
+        {
+          "type": "paragraph",
+          "content": "Some applicants reported that digital National IDs were accepted at certain stations, although acceptance may vary."
+        }
+      ]
+    }
+  ]
+}

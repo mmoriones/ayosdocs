@@ -1,0 +1,364 @@
+{
+  "id": "drivers-license",
+  "title": "How to Apply for a Driver’s License in the Philippines",
+  "shortTitle": "Driver’s License",
+  "slug": "drivers-license",
+  "description": "Complete guide to student permits, non-pro, and professional license applications.",
+  "lastUpdated": "2026-05-14",
+  "category": "Government ID",
+  "agency": "LTO",
+  "difficulty": "Moderate",
+  "estimatedTime": "1-8W",
+  "costRange": "P2K+",
+  "relatedGuideSlugs": [
+    "psa-birth-certificate",
+    "national-id",
+    "nbi-clearance"
+  ],
+  "requirements": [
+    {
+      "title": "PSA Birth Certificate",
+      "description": "Original birth certificate in security paper.",
+      "icon": "FileText"
+    },
+    {
+      "title": "Valid ID",
+      "description": "A government-issued ID for identity verification.",
+      "icon": "IdCard"
+    },
+    {
+      "title": "Medical Certificate",
+      "description": "Certificate from an LTO-accredited clinic transmitted electronically.",
+      "icon": "HeartPulse"
+    },
+    {
+      "title": "TDC Certificate",
+      "description": "Certificate of completion for the Theoretical Driving Course.",
+      "icon": "GraduationCap"
+    },
+    {
+      "title": "PDC Certificate",
+      "description": "Certificate of completion for the Practical Driving Course.",
+      "icon": "Truck"
+    }
+  ],
+  "tags": [
+    "Driver's License",
+    "LTO",
+    "Student Permit",
+    "Non-Professional License",
+    "Professional License",
+    "Philippines",
+    "Driving Requirements"
+  ],
+  "aliases": [
+    "LTO License",
+    "Non-Pro License",
+    "Student Permit",
+    "Professional License"
+  ],
+  "checklist": [
+    {
+      "title": "Complete TDC",
+      "description": "Attend and finish the mandatory Theoretical Driving Course at an LTO-accredited school."
+    },
+    {
+      "title": "Apply for Student Permit",
+      "description": "Submit your TDC and medical certificates to the LTO to get your student permit."
+    },
+    {
+      "title": "Complete PDC",
+      "description": "Finish the Practical Driving Course required for the specific vehicle type you plan to drive."
+    },
+    {
+      "title": "Pass Written Exam",
+      "description": "Successfully complete the computerized LTO written examination on traffic rules."
+    },
+    {
+      "title": "Pass Practical Exam",
+      "description": "Demonstrate your driving skills during the LTO's practical driving test."
+    },
+    {
+      "title": "Pay License Fees",
+      "description": "Pay the required fees for your non-professional or professional driver's license."
+    },
+    {
+      "title": "Claim License",
+      "description": "Receive your official driver's license card after completing biometrics capture."
+    }
+  ],
+  "fees": [
+    {
+      "label": "Medical Certificate",
+      "amount": "₱400–₱800"
+    },
+    {
+      "label": "Theoretical Driving Course (TDC)",
+      "amount": "₱1,500–₱3,500"
+    },
+    {
+      "label": "Practical Driving Course (PDC)",
+      "amount": "₱1,500–₱4,000"
+    },
+    {
+      "label": "Student Permit Fee",
+      "amount": "₱250–₱350"
+    },
+    {
+      "label": "Non-Professional License Fee",
+      "amount": "₱585+"
+    },
+    {
+      "label": "Vehicle Rental for Practical Exam",
+      "amount": "₱250–₱500"
+    }
+  ],
+  "content": [
+    {
+      "id": "what-is-a-drivers-license",
+      "title": "What is a Driver’s License?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "A **Driver’s License** is an official government-issued document from the Land Transportation Office (LTO) that authorizes a person to legally operate motor vehicles in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "It serves as proof that the holder has passed the required driving education, written examinations, and practical driving tests required by the LTO."
+        },
+        {
+          "type": "paragraph",
+          "content": "The LTO issues different license types including:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Student Permit",
+            "Non-Professional Driver’s License",
+            "Professional Driver’s License"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "A Driver’s License is commonly used for:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Driving private vehicles",
+            "Employment requirements",
+            "Public transportation work",
+            "Government identification",
+            "Vehicle registration transactions",
+            "Travel and identity verification"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "who-needs-this",
+      "title": "Who Needs This?",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "content": "You need a Driver’s License if you plan to legally drive a motor vehicle in the Philippines."
+        },
+        {
+          "type": "paragraph",
+          "content": "This applies to individuals who:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Want to drive motorcycles or cars",
+            "Need a license for work or business",
+            "Plan to become a professional driver",
+            "Operate private vehicles",
+            "Work in delivery, transport, or logistics services",
+            "Need a valid government-issued ID"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": "First-time applicants are generally required to begin with a Student Permit before applying for a Non-Professional or Professional License."
+        }
+      ]
+    },
+    {
+      "id": "types-of-drivers-licenses-in-the-philippines",
+      "title": "Types of Driver’s Licenses in the Philippines",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Student Permit",
+          "content": "A Student Permit allows new drivers to practice driving under the supervision of a licensed driver. It is the first step before applying for a full license."
+        },
+        {
+          "type": "subheading",
+          "title": "Non-Professional Driver’s License",
+          "content": "A Non-Professional License allows holders to drive private vehicles for personal use only. This is the most common type for regular drivers."
+        },
+        {
+          "type": "subheading",
+          "title": "Professional Driver’s License",
+          "content": "A Professional License is required for individuals driving vehicles for paid or commercial purposes such as taxi, bus, or delivery drivers."
+        }
+      ]
+    },
+    {
+      "id": "benefits-of-having-a-drivers-license",
+      "title": "Benefits of Having a Driver’s License",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Legal Authorization to Drive",
+          "content": "A Driver’s License allows you to legally operate vehicles on public roads."
+        },
+        {
+          "type": "subheading",
+          "title": "Valid Government Identification",
+          "content": "The license is widely accepted as a primary government-issued ID."
+        },
+        {
+          "type": "subheading",
+          "title": "Employment Opportunities",
+          "content": "Many jobs require a valid Driver’s License, especially in transportation and logistics."
+        },
+        {
+          "type": "subheading",
+          "title": "Easier Vehicle Transactions",
+          "content": "The license is often needed for vehicle registration and insurance-related transactions."
+        },
+        {
+          "type": "subheading",
+          "title": "Personal Mobility",
+          "content": "A license allows greater convenience and independence for transportation."
+        }
+      ]
+    },
+    {
+      "id": "qualifications",
+      "title": "Qualifications",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "Student Permit Qualifications",
+          "content": "Applicants must generally be at least 16 years old, physically and mentally fit to drive, and able to read and write Filipino or English."
+        },
+        {
+          "type": "subheading",
+          "title": "Non-Professional License Qualifications",
+          "content": "Applicants must hold a valid Student Permit, complete the required waiting period, complete the Practical Driving Course (PDC), and pass exams."
+        }
+      ]
+    },
+    {
+      "id": "step-by-step-application-process",
+      "title": "Step-by-Step Application Process",
+      "blocks": [
+        {
+          "type": "banner",
+          "variant": "info",
+          "content": "**Portal Tip:** Register for an **LTO LTMS** account before your visit. Ensure your driving school has uploaded your TDC/PDC certificates to the system."
+        },
+        {
+          "type": "subheading",
+          "title": "Complete the Theoretical Driving Course (TDC)",
+          "content": "Applicants must complete the mandatory 15-hour TDC from an LTO-accredited driving school. The course covers traffic laws, signs, and road safety."
+        },
+        {
+          "type": "subheading",
+          "title": "Get a Medical Certificate",
+          "content": "Visit an LTO-accredited clinic. Certificates are transmitted electronically to the LTO system."
+        },
+        {
+          "type": "subheading",
+          "title": "Wait for Eligibility Period",
+          "content": "Student Permit holders must wait at least one month and one day before applying for a Non-Professional license."
+        },
+        {
+          "type": "subheading",
+          "title": "Take the Written and Practical Exams",
+          "content": "You must pass the computerized written exam and the practical driving test to qualify for a license."
+        }
+      ]
+    },
+    {
+      "id": "restriction-codes",
+      "title": "Restriction Codes",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "Restriction",
+            "Vehicle Type"
+          ],
+          "rows": [
+            [
+              "Motorcycle",
+              "Motorcycles and scooters"
+            ],
+            [
+              "Light Vehicles",
+              "Cars and SUVs"
+            ],
+            [
+              "Heavy Vehicles",
+              "Trucks and buses"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processing-time",
+      "title": "Processing Time",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Student Permit: Same day",
+            "Non-Professional License: Same day to several hours",
+            "Professional License: May vary"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tips-for-faster-processing",
+      "title": "Tips for Faster Processing",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Schedule your visit early in the morning",
+            "Prepare multiple photocopies",
+            "Practice actual driving beforehand",
+            "Avoid fixers and unofficial transactions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "frequently-asked-questions",
+      "title": "Frequently Asked Questions",
+      "blocks": [
+        {
+          "type": "subheading",
+          "title": "What happens if I fail the written exam?",
+          "content": null
+        },
+        {
+          "type": "banner",
+          "variant": "warning",
+          "content": "**Pro Tip:** You can usually retake the exam after one month. Use official LTO reviewers to prepare for the computerized test."
+        },
+        {
+          "type": "subheading",
+          "title": "Can I drive alone with a Student Permit?",
+          "content": "No. Student Permit holders must be accompanied by a licensed driver."
+        }
+      ]
+    }
+  ]
+}
