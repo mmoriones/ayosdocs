@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
@@ -8,9 +8,16 @@ import { Home, Book, Layers, User, CheckSquare } from 'lucide-react';
 
 export default function BottomNav() {
   const pathname = usePathname();
-  const [clickedHref, setClickedHref] = useState(null);
+  const [clickedNav, setClickedNav] = useState(null);
   const { status } = useSession();
   const isLoggedIn = status === 'authenticated';
+
+  // Clear optimistic state asynchronously after navigation should settle
+  useEffect(() => {
+    if (!clickedNav) return;
+    const timer = setTimeout(() => setClickedNav(null), 2000);
+    return () => clearTimeout(timer);
+  }, [clickedNav]);
 
   const navItems = [
     { href: '/', icon: Home, label: 'Home' },
@@ -31,14 +38,15 @@ export default function BottomNav() {
       
       <div className="flex items-center justify-center h-20 px-3 relative z-10">
         {navItems.map((item) => {
-          const isActive = (pathname !== clickedHref && clickedHref === item.href) || pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+          const isOptimistic = clickedNav?.href === item.href && pathname === clickedNav.pathnameAtClick;
+          const isActive = isOptimistic || pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
           const Icon = item.icon;
 
           return (
             <Link 
               key={item.href} 
               href={item.href}
-              onClick={() => setClickedHref(item.href)}
+              onClick={() => setClickedNav({ href: item.href, pathnameAtClick: pathname })}
               className={`flex flex-col items-center justify-center gap-1 w-[72px] h-full relative overflow-hidden transition-all duration-200 active:scale-95 group ${
                 isActive ? 'text-[#0038A8]' : 'text-slate-400/80'
               }`}

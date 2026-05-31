@@ -2,7 +2,6 @@
 
 import { AppShell } from "@/components/layout";
 import ClientAuthWrapper from "@/components/ClientAuthWrapper";
-import { VerificationBanner } from "@/features/auth/components";
 
 /**
  * Dashboard Layout

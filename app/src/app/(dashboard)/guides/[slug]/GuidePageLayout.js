@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { 
   Share2, 
   Sparkles,
@@ -40,19 +40,30 @@ import {
   Scan,
   UserPlus
 } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useToast, useWorkspace } from '@/context';
 import { GuideIcon } from '@/lib/guideIcons';
-import { Banner, Tooltip, BookmarkButton, Tabs, Tab, TabPanel, Button, Badge } from '@/components/ui';
+import { Banner, Tooltip, Button, Badge, TimelineStep } from '@/components/ui';
 import Adsense from '@/components/Adsense';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
-import RelatedGuides from './RelatedGuides';
 import { toggleFavoriteAction, updateProgressAction } from '@/app/actions/user';
 import { useAuthUI } from '@/components/Providers';
 
-// --- Sub-components (Moved outside to fix ESLint "Cannot create components during render") ---
+// --- Inlined from components/ui/Tabs.js ---
+function TabPanel({ active, children, className = '' }) {
+  if (!active) return null;
+  return (
+    <div className={`animate-in fade-in duration-200 ${className}`}>
+      {children}
+    </div>
+  );
+}
+// --- End of TabPanel ---
+
+// --- Sub-components ---
 
 const IconMap = {
   IdCard, Receipt, Mail, User, FileText, Building2, CreditCard, 
@@ -113,67 +124,99 @@ const TrackerStep = ({ step, index, isLast, isNext, onToggle, isSaving }) => {
   const isLocked = !isCompleted && !isNext;
 
   return (
-    <div className="relative pl-12 pb-10 group">
-      {!isLast && (
-        <div className={`absolute left-[19px] top-10 bottom-0 w-0.5 border-l-2 border-dashed transition-colors duration-500
-          ${isCompleted ? 'border-[#0038A8]' : 'border-gray-200'}
-        `} />
+    <TimelineStep
+      indicator={index + 1}
+      isCompleted={isCompleted}
+      isCurrent={isNext}
+      isLocked={isLocked}
+      isLast={isLast}
+      className="pb-10"
+    >
+      <div 
+        className={`flex justify-between items-start mb-2 ${isNext && !isSaving ? 'cursor-pointer' : ''}`}
+        onClick={() => isNext && !isSaving && onToggle(index)}
+      >
+        <h4 className={`text-[17px] font-black leading-tight ${isCompleted ? 'text-gray-400 line-through' : 'text-[#1C1C1E]'}`}>
+          {step.title}
+        </h4>
+        {isCompleted ? (
+          <Badge variant="green" className="bg-emerald-50 text-emerald-600 border-emerald-100">Completed</Badge>
+        ) : isNext ? (
+          <Badge variant="sky" className="bg-blue-50 text-blue-600 border-blue-100">In Progress</Badge>
+        ) : (
+          <Badge variant="gray" icon={Lock} className="text-gray-400">Locked</Badge>
+        )}
+      </div>
+      
+      <p className="text-[14px] font-medium text-gray-500 leading-relaxed mb-6">
+        {step.description}
+      </p>
+
+      {isNext && (
+        <div className="space-y-3">
+          <Button 
+            onClick={() => onToggle(index)}
+            isLoading={isSaving}
+            className="w-full h-12 rounded-2xl bg-[#0038A8] hover:bg-[#002B82] text-white text-[15px] font-black shadow-lg shadow-[#0038A8]/20 active:scale-95 transition-all"
+          >
+            Mark as Complete
+          </Button>
+          <button className="w-full flex items-center justify-between px-2 text-[14px] font-bold text-gray-400 hover:text-[#0038A8] transition-colors">
+              <span>View Details</span>
+              <ChevronRight size={16} />
+          </button>
+        </div>
       )}
       
-      <div className={`absolute left-0 top-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 z-10
-        ${isCompleted ? 'bg-[#0038A8] text-white shadow-lg shadow-[#0038A8]/20' : 
-          isNext ? 'bg-white border-2 border-[#0038A8] text-[#0038A8] shadow-md' : 
-          'bg-gray-100 text-gray-400 border border-gray-200'}
-      `}>
-        {isCompleted ? <Check size={20} strokeWidth={3} /> : <span className="text-[15px] font-black">{index + 1}</span>}
-      </div>
+      {(isCompleted || isLocked) && (
+          <button className="flex items-center gap-2 text-[14px] font-bold text-[#0038A8]/60 hover:text-[#0038A8] transition-colors">
+            View Details <ChevronRight size={14} />
+          </button>
+      )}
+    </TimelineStep>
+  );
+};
 
-      <div className={`bg-white/70 backdrop-blur-md rounded-[28px] p-6 border transition-all duration-300
-        ${isNext ? 'border-[#0038A8]/30 shadow-[0_8px_32px_rgba(0,56,168,0.06)]' : 'border-white/40 shadow-sm'}
-        ${isLocked ? 'opacity-60' : 'opacity-100'}
-      `}>
-        <div 
-          className={`flex justify-between items-start mb-2 ${isNext && !isSaving ? 'cursor-pointer' : ''}`}
-          onClick={() => isNext && !isSaving && onToggle(index)}
+const RelatedGuides = ({ currentSlug, category, allGuides, relatedGuideSlugs = [] }) => {
+  const related = useMemo(() => {
+    const explicitRelated = (relatedGuideSlugs || [])
+      .map(slug => allGuides.find(g => g.slug === slug))
+      .filter(Boolean);
+
+    const categoryRelated = allGuides
+      .filter(g => (g.category === category || !category) && g.slug !== currentSlug && !(relatedGuideSlugs || []).includes(g.slug))
+      .slice(0, 4 - explicitRelated.length);
+
+    return [...explicitRelated, ...categoryRelated].slice(0, 4);
+  }, [currentSlug, category, allGuides, relatedGuideSlugs]);
+
+  if (related.length === 0) return null;
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {related.map(g => (
+        <Link
+          key={g.slug}
+          href={`/guides/${g.slug}`}
+          className="hover-lift active:scale-[0.98] flex items-center gap-4 p-5 rounded-[28px] bg-white/60 backdrop-blur-md border border-white/40 hover:border-[#0038A8]/20 group shadow-sm transition-all"
         >
-          <h4 className={`text-[17px] font-black leading-tight ${isCompleted ? 'text-gray-400 line-through' : 'text-[#1C1C1E]'}`}>
-            {step.title}
-          </h4>
-          {isCompleted ? (
-            <Badge variant="green" className="bg-emerald-50 text-emerald-600 border-emerald-100">Completed</Badge>
-          ) : isNext ? (
-            <Badge variant="sky" className="bg-blue-50 text-blue-600 border-blue-100">In Progress</Badge>
-          ) : (
-            <Badge variant="ghost" icon={Lock} className="text-gray-400">Locked</Badge>
-          )}
-        </div>
-        
-        <p className="text-[14px] font-medium text-gray-500 leading-relaxed mb-6">
-          {step.description}
-        </p>
-
-        {isNext && (
-          <div className="space-y-3">
-            <Button 
-              onClick={() => onToggle(index)}
-              isLoading={isSaving}
-              className="w-full h-12 rounded-2xl bg-[#0038A8] hover:bg-[#002B82] text-white text-[15px] font-black shadow-lg shadow-[#0038A8]/20 active:scale-95 transition-all"
-            >
-              Mark as Complete
-            </Button>
-            <button className="w-full flex items-center justify-between px-2 text-[14px] font-bold text-gray-400 hover:text-[#0038A8] transition-colors">
-               <span>View Details</span>
-               <ChevronRight size={16} />
-            </button>
+          <div className="w-12 h-12 shrink-0 bg-white rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform border border-white/50 shadow-sm">
+            <GuideIcon 
+              slug={g.slug} 
+              agency={g.agency} 
+              size={28}
+            />
           </div>
-        )}
-        
-        {(isCompleted || isLocked) && (
-           <button className="flex items-center gap-2 text-[14px] font-bold text-[#0038A8]/60 hover:text-[#0038A8] transition-colors">
-              View Details <ChevronRight size={14} />
-           </button>
-        )}
-      </div>
+          <div className="min-w-0">
+            <span className="text-[#1C1C1E] text-[15px] font-black group-hover:text-[#0038A8] transition-colors line-clamp-1 tracking-tight">
+              {g.shortTitle || g.title}
+            </span>
+            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider truncate mt-0.5">
+              {g.agency}
+            </p>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };

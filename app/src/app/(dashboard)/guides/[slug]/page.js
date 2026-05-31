@@ -2,7 +2,7 @@ import { getGuideBySlug, getGuideSlugs, getAllGuides } from '@/lib/guides';
 import { notFound } from 'next/navigation';
 import { guideViewCounter } from '@/lib/metrics';
 import ReactMarkdown from 'react-markdown';
-import { GuidePageLayout } from '@/features/guides/components/reader';
+import GuidePageLayout from './GuidePageLayout';
 import Adsense from '@/components/Adsense';
 import { Sparkles, AlertCircle, Info } from 'lucide-react';
 import { Banner } from '@/components/ui';
