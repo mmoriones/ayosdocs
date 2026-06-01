@@ -2,19 +2,14 @@
 
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { Sun, Moon, User } from 'lucide-react';
-import { useState, useEffect, useSyncExternalStore } from 'react';
+import { User } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useTheme } from '@/context';
 import { Button, Avatar } from '@/components/ui';
 import { useAuthUI } from '@/components/Providers';
 import AccountMenu from './AccountMenu';
 import { useRef } from 'react';
-
-const emptySubscribe = () => () => {};
-const getClientSnapshot = () => true;
-const getServerSnapshot = () => false;
 
 /**
  * Reusable Mobile Header component with iOS Modern aesthetic.
@@ -27,9 +22,7 @@ export default function MobileHeader({
 }) {
   const router = useRouter();
   const { data: session } = useSession();
-  const { theme, toggleTheme } = useTheme();
   const { openAuthModal } = useAuthUI();
-  const mounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
   
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -105,20 +98,6 @@ export default function MobileHeader({
           </Link>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <button 
-              onClick={toggleTheme}
-              className="p-2 text-gray-400 hover:text-[#0038A8] transition-colors active:scale-90"
-              aria-label="Toggle theme"
-            >
-              {!mounted ? (
-                <div className="w-5 h-5" />
-              ) : theme === 'light' ? (
-                <Moon size={20} strokeWidth={2.5} />
-              ) : (
-                <Sun size={20} strokeWidth={2.5} />
-              )}
-            </button>
-
             {!session ? (
               <Button 
                 variant="secondary" 

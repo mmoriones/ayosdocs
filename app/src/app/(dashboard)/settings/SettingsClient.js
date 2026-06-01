@@ -24,7 +24,7 @@ import {
   ShieldAlert
 } from 'lucide-react';
 import Image from 'next/image';
-import { useTheme, useToast } from '@/context';
+import { useToast } from '@/context';
 import { Card, Button, SignOutModal, Modal, Input, Badge } from '@/components/ui';
 import { changePasswordAction, deleteAccountAction } from '@/app/actions/user';
 
@@ -34,7 +34,6 @@ import { changePasswordAction, deleteAccountAction } from '@/app/actions/user';
 export default function SettingsClient() {
   const { data: session, status, update } = useSession();
   const router = useRouter();
-  const { setTheme, actualTheme } = useTheme();
   const { showToast } = useToast();
   
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -109,13 +108,7 @@ export default function SettingsClient() {
                   icon={<Moon size={20} className="text-[#007AFF]" />} 
                   label="Theme" 
                   rightElement={
-                    <div className="flex items-center gap-3 mr-1">
-                      <span className="text-[13px] font-medium text-gray-500 capitalize">{actualTheme}</span>
-                      <Switch 
-                        checked={actualTheme === 'dark'} 
-                        onChange={(checked) => setTheme(checked ? 'dark' : 'light')} 
-                      />
-                    </div>
+                    <span className="text-[11px] font-bold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full">Coming Soon</span>
                   }
                   hideChevron
                 />

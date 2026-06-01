@@ -1,18 +1,13 @@
 'use client';
 
-import { Bell, Menu, Sun, Moon, User, Settings, LogOut, ShieldCheck } from 'lucide-react';
+import { Bell, Menu, User, Settings, LogOut, ShieldCheck } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTheme, useSearch } from "@/context";
-import { useSyncExternalStore } from "react";
+import { useSearch } from "@/context";
 import { useSession } from 'next-auth/react';
 import { SearchInput, Avatar, DropdownMenu, DropdownMenuItem } from '@/components/ui';
 import { useAuthUI } from '@/components/Providers';
-
-const emptySubscribe = () => () => {};
-const getClientSnapshot = () => true;
-const getServerSnapshot = () => false;
 
 /**
  * Global application header containing breadcrumb navigation, 
@@ -22,9 +17,7 @@ const getServerSnapshot = () => false;
 export default function DashboardHeader({ onMenuClick, onLogoutClick }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { theme, toggleTheme } = useTheme();
   const { toggleSearch } = useSearch();
-  const mounted = useSyncExternalStore(emptySubscribe, getClientSnapshot, getServerSnapshot);
   const { data: session, status } = useSession();
   const { openAuthModal } = useAuthUI();
   const user = session?.user;
@@ -93,20 +86,6 @@ export default function DashboardHeader({ onMenuClick, onLogoutClick }) {
       )}
 
       <div className="flex items-center gap-2">
-        <button 
-          onClick={toggleTheme}
-          className="p-2 text-ctp-subtext1 hover:text-ctp-sky-800 hover:bg-ctp-sky-800/5 rounded-lg transition-all active:scale-[0.97]"
-          aria-label="Toggle theme"
-        >
-          {!mounted ? (
-            <div className="w-5 h-5" />
-          ) : theme === 'light' ? (
-            <Moon size={18} />
-          ) : (
-            <Sun size={18} />
-          )}
-        </button>
-
         {!session ? (
           <button 
             onClick={openAuthModal}
