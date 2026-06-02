@@ -28,11 +28,16 @@ docker-up:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d
 
 docker-minimal:
-
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d app mongodb nginx backup account-cleanup
 
 docker-down:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml down
+
+docker-dev-up:
+	docker compose -f docker/compose/docker-compose.dev.yml up -d
+
+docker-dev-down:
+	docker compose -f docker/compose/docker-compose.dev.yml down
 
 docker-logs:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f
