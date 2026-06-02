@@ -26,18 +26,19 @@ const bundleIconMap = {
  * @returns {JSX.Element} The rendered icon (Image or Lucide fallback).
  */
 export const getBundleIcon = (id, props = {}) => {
-  const { className = "text-ctp-sky-800", size = 32, ...rest } = props;
+  const { className = '', size = 32 } = props;
   
   const iconPath = bundleIconMap[id] || '/assets/bundles/GeneralIdentity.webp';
 
   return (
-    <Image 
-      src={iconPath}
-      alt={`${id} bundle icon`}
-      width={size}
-      height={size}
-      className={className}
-      {...rest}
-    />
+    <div className={`relative shrink-0 ${className}`} style={{ width: size, height: size }}>
+      <Image 
+        src={iconPath}
+        alt={`${id} bundle icon`}
+        fill
+        sizes="100px"
+        className="object-contain"
+      />
+    </div>
   );
 };

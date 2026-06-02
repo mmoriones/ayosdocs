@@ -62,20 +62,21 @@ export const getIconName = (slug, agency) => {
 /**
  * Renders a custom webp icon based on guide slug and agency.
  */
-export const GuideIcon = ({ slug, agency, size = 24, className = '', strokeWidth, ...props }) => {
+export const GuideIcon = ({ slug, agency, size = 24, className = '' }) => {
   const iconName = getIconName(slug, agency);
   const iconPath = `/assets/guides/${iconName}.webp`;
 
   const dimensions = typeof size === 'number' ? size : 24;
   
   return (
-    <Image 
-      src={iconPath}
-      alt={`${agency || slug || 'guide'} icon`}
-      width={dimensions}
-      height={dimensions}
-      className={className}
-      {...props}
-    />
+    <div className={`relative shrink-0 ${className}`} style={{ width: dimensions, height: dimensions }}>
+      <Image 
+        src={iconPath}
+        alt={`${agency || slug || 'guide'} icon`}
+        fill
+        sizes="100px"
+        className="object-contain"
+      />
+    </div>
   );
 };

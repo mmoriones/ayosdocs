@@ -89,7 +89,7 @@ export default function UpdatesClient({ initialUpdates }) {
                   >
                     <div className="flex items-center gap-6">
                       <div className="w-14 h-14 rounded-xl bg-ctp-mantle flex items-center justify-center border border-ctp-surface1 shrink-0 group-hover:scale-105 transition-transform shadow-inner">
-                        <GuideIcon slug={update.slug} className="w-7 h-7 text-ctp-sky-800" strokeWidth={1.5} />
+                        <GuideIcon slug={update.slug} size={28} />
                       </div>
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">

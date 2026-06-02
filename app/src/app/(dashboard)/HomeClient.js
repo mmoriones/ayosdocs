@@ -46,7 +46,7 @@ const HolidayAlert = ({ className = "" }) => {
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
         }}
-        className="relative overflow-hidden border-white/40 shadow-[0_8px_32px_rgba(255,59,48,0.08)] group"
+        className="relative overflow-hidden border-[#FF3B30]/10 shadow-[0_8px_32px_rgba(255,59,48,0.08)] group"
         noPadding
       >
         <div className="flex items-center gap-4 p-5 md:p-6">
@@ -106,7 +106,7 @@ export default function HomeClient({ allGuides }) {
   }, [allGuides]);
 
   return (
-    <div className="min-h-screen pb-32 font-sans selection:bg-[#0038A8]/10 lg:pt-0">
+    <div className="min-h-screen pb-32 font-sans selection:bg-[#0038A8]/10 lg:pt-0 bg-ios-gradient">
       {isLoggedIn ? (
         <UserView 
           firstName={firstName} 
@@ -142,10 +142,10 @@ function GuestView({ trendingGuides, lastViewedSlug, allGuides }) {
   // Select the 4 essential bundles with specific backgrounds
   const essentialBundles = useMemo(() => {
     const config = [
-      { id: 'first-job', image: '/assets/bundles/Job.webp', gradient: 'linear-gradient(to top, #E0EFFF 0%, #FFFFFF 100%)' },
-      { id: 'travel-tourist', image: '/assets/bundles/Travel.webp', gradient: 'linear-gradient(to top, #F3E8FF 0%, #FFFFFF 100%)' },
-      { id: 'wedding', image: '/assets/bundles/Marriage.webp', gradient: 'linear-gradient(to top, #FFE4F2 0%, #FFFFFF 100%)' },
-      { id: 'foundational-docs', image: '/assets/bundles/GeneralIdentity.webp', gradient: 'linear-gradient(to top, #E4F9F2 0%, #FFFFFF 100%)' }
+      { id: 'first-job', image: '/assets/bundles/Job.webp', gradient: 'linear-gradient(to top, #E0EFFF 0%, #FDFDFD 100%)' },
+      { id: 'travel-tourist', image: '/assets/bundles/Travel.webp', gradient: 'linear-gradient(to top, #F3E8FF 0%, #FDFDFD 100%)' },
+      { id: 'wedding', image: '/assets/bundles/Marriage.webp', gradient: 'linear-gradient(to top, #FFE4F2 0%, #FDFDFD 100%)' },
+      { id: 'foundational-docs', image: '/assets/bundles/GeneralIdentity.webp', gradient: 'linear-gradient(to top, #E4F9F2 0%, #FDFDFD 100%)' }
     ];
     return config.map(item => {
       const bundle = bundles.find(b => b.id === item.id);
@@ -232,31 +232,34 @@ function GuestView({ trendingGuides, lastViewedSlug, allGuides }) {
               <Card 
                 key={bundle.id}
                 interactive
+                noPadding
                 onClick={() => router.push(`/bundles/${bundle.id}`)}
                 style={{ background: bundle.bg }}
-                className="relative min-w-[190px] h-[260px] flex flex-col justify-center gap-3 snap-start !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
+                className="relative min-w-[190px] h-[260px] flex flex-col snap-start !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
               >
-                {/* Illustration Container */}
-                <div className="relative w-full h-16 shrink-0 px-4 transform group-hover:scale-110 transition-transform duration-500">
-                  <Image 
-                    src={bundle.image} 
-                    alt={bundle.title} 
-                    fill 
-                    sizes="200px"
-                    className="object-contain object-bottom drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.12)]"
-                    priority={bundle.id === 'first-job'}
-                  />
-                </div>
-
-                {/* Content Row */}
-                <div className="space-y-1">
-                    <h4 className="font-bold text-[#1C1C1E] text-[16px] leading-tight line-clamp-2">
-                      {bundle.title.split(' / ')[0]}
-                    </h4>
-                    <p className="text-[11px] font-medium text-gray-500 leading-tight line-clamp-2">
-                      {bundle.description}
-                    </p>
+                <div className="flex flex-col px-5 pt-12 pb-8">
+                  {/* Illustration Container */}
+                  <div className="relative w-full h-20 shrink-0 px-4 mb-8 transform group-hover:scale-110 transition-transform duration-500">
+                    <Image 
+                      src={bundle.image} 
+                      alt={bundle.title} 
+                      fill 
+                      sizes="200px"
+                      className="object-contain object-bottom drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.12)]"
+                      priority={bundle.id === 'first-job'}
+                    />
                   </div>
+
+                  {/* Content Row */}
+                  <div>
+                      <h4 className="font-bold text-[#1C1C1E] text-[16px] leading-tight">
+                        {bundle.title.split(' / ')[0]}
+                      </h4>
+                      <p className="text-[11px] font-medium text-gray-500 leading-tight mt-1">
+                        {bundle.description}
+                      </p>
+                    </div>
+                </div>
               </Card>
             ))}
           </div>
@@ -284,29 +287,32 @@ function GuestView({ trendingGuides, lastViewedSlug, allGuides }) {
             <Card 
               key={bundle.id}
               interactive
+              noPadding
               onClick={() => router.push(`/bundles/${bundle.id}`)}
               style={{ background: bundle.bg }}
-              className="relative h-[300px] flex flex-col justify-center gap-6 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
+              className="relative h-[300px] flex flex-col !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
             >
-              {/* Illustration Container */}
-              <div className="relative w-full h-28 shrink-0 transform group-hover:scale-110 transition-transform duration-500">
-                <Image 
-                  src={bundle.image} 
-                  alt={bundle.title} 
-                  fill 
-                  sizes="300px"
-                  className="object-contain object-bottom drop-shadow-[-10px_12px_16px_rgba(0,0,0,0.12)]"
-                />
-              </div>
+              <div className="flex flex-col px-6 pt-14 pb-10">
+                {/* Illustration Container */}
+                <div className="relative w-full h-28 shrink-0 px-4 mb-10 transform group-hover:scale-110 transition-transform duration-500">
+                  <Image 
+                    src={bundle.image} 
+                    alt={bundle.title} 
+                    fill 
+                    sizes="300px"
+                    className="object-contain object-bottom drop-shadow-[-10px_12px_16px_rgba(0,0,0,0.12)]"
+                  />
+                </div>
 
-              {/* Content Row */}
-              <div className="space-y-2">
-                <h4 className="font-bold text-[#1C1C1E] text-[20px] leading-tight">
-                  {bundle.title.split(' / ')[0]}
-                </h4>
-                <p className="text-[13px] font-medium text-gray-500 leading-tight">
-                  {bundle.description}
-                </p>
+                {/* Content Row */}
+                <div>
+                  <h4 className="font-bold text-[#1C1C1E] text-[20px] leading-tight">
+                    {bundle.title.split(' / ')[0]}
+                  </h4>
+                  <p className="text-[13px] font-medium text-gray-500 leading-tight mt-1.5">
+                    {bundle.description}
+                  </p>
+                </div>
               </div>
             </Card>
           ))}
