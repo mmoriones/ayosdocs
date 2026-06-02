@@ -62,17 +62,23 @@ export default function MobileHeader({
     };
   }, [autoHide]);
 
+  const bgOpacity = sticky && lastScrollY > 10 ? '80%' : '70%';
+
   const headerStyles = `
     ${sticky ? 'fixed top-0 left-0 right-0' : 'relative'}
     h-16 z-[100] transition-all duration-500 ease-in-out border-b border-white/50 lg:hidden
     ${autoHide && !isVisible ? '-translate-y-full' : 'translate-y-0'}
-    ${sticky && lastScrollY > 10 ? 'bg-white/80 backdrop-blur-lg shadow-sm' : 'bg-white/70 backdrop-blur-md'}
+    backdrop-blur-lg
+    ${sticky && lastScrollY > 10 ? 'shadow-sm' : ''}
     ${className}
   `;
 
   return (
     <>
-      <header className={headerStyles}>
+      <header
+        className={headerStyles}
+        style={{ backgroundColor: `color-mix(in srgb, var(--bg-page-base) ${bgOpacity}, transparent)` }}
+      >
         <div className="max-w-[1600px] mx-auto h-full px-6 flex items-center justify-between">
           {/* Brand Link */}
           <Link 

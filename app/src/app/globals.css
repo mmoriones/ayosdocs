@@ -2,6 +2,9 @@
 @plugin "@tailwindcss/typography";
 
 :root {
+  /* Page Background */
+  --bg-page-base: #f2f4fc;
+
   /* Semantic Typography Scale - Global */
   --ui-tiny: 9px;
   --ui-micro: 11px;
@@ -165,12 +168,12 @@
   }
 
   html, body {
-    background-color: #f2f2f7 !important;
+    background-color: var(--bg-page-base) !important;
     background-image: 
-      radial-gradient(at 0% 0%, #fbfcff 0%, transparent 50%), 
-      radial-gradient(at 100% 0%, #f4f7ff 0%, transparent 50%), 
-      radial-gradient(at 0% 100%, #f0f4fc 0%, transparent 50%), 
-      radial-gradient(at 100% 100%, #f2f4fc 0%, transparent 50%) !important;
+      radial-gradient(at 0% 0%, #f5f8fe 0%, transparent 50%), 
+      radial-gradient(at 100% 0%, #f4f6fd 0%, transparent 50%), 
+      radial-gradient(at 100% 100%, #f2f4fc 0%, transparent 50%), 
+      radial-gradient(at 0% 100%, #f0f4fc 0%, transparent 50%) !important;
     background-attachment: fixed !important;
     background-size: cover !important;
     min-height: 100% !important;
@@ -202,12 +205,12 @@
 
 @layer utilities {
   .bg-ios-gradient {
-    background-color: #f2f4fc;
+    background-color: var(--bg-page-base);
     background-image: 
-      radial-gradient(at 0% 0%, #f5f8fe 0px, transparent 50%), 
-      radial-gradient(at 100% 0%, #f4f6fd 0px, transparent 50%), 
-      radial-gradient(at 100% 100%, #f2f4fc 0px, transparent 50%), 
-      radial-gradient(at 0% 100%, #f0f4fc 0px, transparent 50%);
+      radial-gradient(at 0% 0%, #f5f8fe 0%, transparent 50%), 
+      radial-gradient(at 100% 0%, #f4f6fd 0%, transparent 50%), 
+      radial-gradient(at 100% 100%, #f2f4fc 0%, transparent 50%), 
+      radial-gradient(at 0% 100%, #f0f4fc 0%, transparent 50%);
     background-attachment: fixed;
     background-size: cover;
   }
