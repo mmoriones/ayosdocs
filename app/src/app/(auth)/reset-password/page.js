@@ -2,12 +2,12 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Loader2, Lock, CheckCircle2, AlertCircle, ChevronLeft } from 'lucide-react';
+import { Loader2, Lock, CheckCircle2, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { resetPasswordAction } from '@/app/actions/user';
 import { useToast } from '@/context';
-import { Button, Input } from '@/components/ui';
+import { Button, Input, AuthPageHeader } from '@/components/ui';
 
 function ResetPasswordForm() {
   const router = useRouter();
@@ -82,17 +82,9 @@ function ResetPasswordForm() {
   };
 
   return (
-    <div className="w-full max-w-[480px] px-6 flex flex-col animate-in fade-in duration-700">
-      {/* Back Button */}
-      <div className="w-full pt-10 pb-6 flex items-start">
-        <button 
-          onClick={() => router.push('/login')}
-          className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-transform"
-        >
-          <ChevronLeft size={24} className="text-[#1C1C1E]" strokeWidth={2.5} />
-        </button>
-      </div>
-
+    <>
+      <AuthPageHeader onBackClick={() => router.push('/login')} />
+      <div className="w-full max-w-[480px] px-6 flex flex-col animate-in fade-in duration-700">
       {/* Header Section */}
       <div className="flex justify-between items-end mb-8">
         <div className="flex-1">
@@ -105,7 +97,7 @@ function ResetPasswordForm() {
         </div>
         
         {/* 3D Illustration */}
-        <div className="w-24 h-24 relative -mr-2 drop-shadow-xl animate-float opacity-80">
+        <div className="w-24 h-24 relative -mr-2 drop-shadow-xl opacity-80">
            <Image 
             src="/assets/ui/Lock.webp" 
             alt="Secure" 
@@ -209,6 +201,7 @@ function ResetPasswordForm() {
         )}
       </div>
     </div>
+  </>
   );
 }
 

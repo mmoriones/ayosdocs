@@ -35,10 +35,10 @@ export default function DashboardHeader({ onMenuClick, onLogoutClick }) {
         {/* LOGO (Mobile Only) */}
         <Link href="/" className="lg:hidden flex items-center gap-2">
           <Image
-            src="/favicon.svg"
+            src="/ayosdocs.webp"
             alt="AyosDocs"
-            width={28}
-            height={28}
+            width={32}
+            height={32}
             className="shrink-0"
           />
           <span className="text-sm font-black tracking-tight text-ctp-text">

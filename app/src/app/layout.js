@@ -21,6 +21,7 @@ export const metadata = {
   description: "Your guide to Philippine government processes.",
   icons: {
     icon: "/favicon.svg",
+    shortcut: "/favicon.ico",
   },
 };
 

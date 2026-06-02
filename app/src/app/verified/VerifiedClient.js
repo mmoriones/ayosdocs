@@ -89,7 +89,7 @@ export default function VerifiedClient() {
 
         {/* Brand Subtle Logo */}
         <div className="mt-20 opacity-20 flex items-center gap-2 grayscale brightness-50">
-          <Image src="/favicon.svg" alt="AyosDocs" width={24} height={24} />
+          <Image src="/ayosdocs.webp" alt="AyosDocs" width={24} height={24} />
           <span className="text-lg font-black tracking-tight text-[#1C1C1E]">
             AyosDocs
           </span>

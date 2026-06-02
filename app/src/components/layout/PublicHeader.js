@@ -23,10 +23,10 @@ export default function PublicHeader() {
       <div className="max-w-[1600px] mx-auto h-full px-6 lg:px-10 flex items-center justify-between">
         <div className="flex items-center gap-3 z-50">
           <Image 
-            src="/favicon.svg" 
-            alt="AyosDocs" 
-            width={36} 
-            height={36} 
+            src="/ayosdocs.webp"
+            alt="AyosDocs"
+            width={32}
+            height={32}
             className="shrink-0"
           />
           <span className="text-xl font-bold tracking-tight">

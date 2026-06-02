@@ -86,11 +86,10 @@ export default function MobileHeader({
             }}
           >
             <Image 
-              src="/favicon.svg" 
-              alt="AyosDocs" 
-              width={32} 
-              height={32} 
-              className="shrink-0 drop-shadow-sm"
+              src="/ayosdocs.webp"
+              alt="AyosDocs"
+              width={32}
+              height={32}              className="shrink-0 drop-shadow-sm"
             />
             <span className="text-xl font-black tracking-tight text-[#1C1C1E]">
               Ayos<span className="text-[#0038A8]">Docs</span>

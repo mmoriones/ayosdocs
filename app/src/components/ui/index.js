@@ -15,4 +15,5 @@ export { default as ProgressBar } from './ProgressBar';
 export { default as Avatar } from './Avatar';
 export { default as Tooltip } from './Tooltip';
 export { default as Checkbox } from './Checkbox';
+export { default as AuthPageHeader } from './AuthPageHeader';
 export { default as DropdownMenu, DropdownMenuItem } from './DropdownMenu';

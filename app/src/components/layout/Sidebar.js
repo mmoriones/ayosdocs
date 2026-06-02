@@ -62,7 +62,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
       <div className="h-20 flex items-center px-6 shrink-0 overflow-hidden">
         <Link href="/" onClick={closeMobile} className="flex items-center gap-3 shrink-0">
           <Image
-            src="/favicon.svg"
+            src="/ayosdocs.webp"
             alt="AyosDocs"
             width={32}
             height={32}

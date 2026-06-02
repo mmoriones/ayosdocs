@@ -8,12 +8,12 @@ import { useSession } from 'next-auth/react';
 import {
   CheckCircle2,
   AlertCircle,
-  ChevronLeft,
   Mail,
-  ExternalLink
+  ExternalLink,
 } from 'lucide-react';
 import {
   Button,
+  AuthPageHeader,
 } from '@/components/ui';
 import { useAuthLogic } from '@/features/auth/hooks/useAuthLogic';
 import { SignupForm } from '@/features/auth/components/shared';
@@ -44,6 +44,11 @@ export default function SignupPage() {
     }
   }, [statusMessage, router]);
 
+  const handleGuestMode = () => {
+    document.cookie = "guest-access=true; path=/; max-age=86400";
+    router.push('/');
+  };
+
   if (status === 'authenticated') {
     router.push('/');
     return null;
@@ -51,15 +56,10 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen bg-ios-gradient flex flex-col items-center animate-in fade-in duration-700">
-      {/* Mobile-Friendly Header with Back Button */}
-      <div className="w-full max-w-[1200px] px-6 pt-10 pb-6 flex justify-between items-start relative">
-        <button 
-          onClick={() => router.back()}
-          className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-transform"
-        >
-          <ChevronLeft size={24} className="text-[#1C1C1E]" strokeWidth={2.5} />
-        </button>
-      </div>
+      <AuthPageHeader
+        onBackClick={() => router.back()}
+        onGuestClick={handleGuestMode}
+      />
 
       <div className="w-full max-w-[480px] px-6 flex flex-col">
         {/* Welcome Section */}
@@ -74,7 +74,7 @@ export default function SignupPage() {
           </div>
           
           {/* 3D Illustration */}
-          <div className="w-24 h-24 relative -mr-2 drop-shadow-xl animate-float opacity-80">
+          <div className="w-24 h-24 relative -mr-2 drop-shadow-xl opacity-80">
              <Image 
               src="/assets/ui/CreateAccount.webp" 
               alt="Join us" 
