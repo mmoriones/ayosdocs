@@ -1,0 +1,12 @@
+services:
+  mongodb:
+    container_name: ayosdocs-dev-db
+    image: mongo:latest
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_dev_data:/data/db
+
+volumes:
+  mongodb_dev_data:
