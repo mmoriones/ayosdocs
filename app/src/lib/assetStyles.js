@@ -16,6 +16,8 @@ export const THEMES = {
   GOLD:   { bg: 'var(--theme-gold-light)',   gradient: createGradient('var(--theme-gold-dark)', 'var(--theme-gold-light)'),   ripple: 'rgba(0, 0, 0, 0.05)', ring: '#0038A8' },
   PINK:   { bg: 'var(--theme-pink-light)',   gradient: createGradient('var(--theme-pink-dark)', 'var(--theme-pink-light)'),   ripple: 'rgba(0, 0, 0, 0.05)', ring: '#0038A8' },
   GRAY:   { bg: 'var(--theme-gray-light)',   gradient: createGradient('var(--theme-gray-dark)', 'var(--theme-gray-light)'),   ripple: 'rgba(0, 0, 0, 0.05)', ring: '#0038A8' },
+  TEAL:   { bg: 'var(--theme-teal-light)',   gradient: createGradient('var(--theme-teal-dark)', 'var(--theme-teal-light)'),   ripple: 'rgba(0, 0, 0, 0.05)', ring: '#0038A8' },
+  CORAL:  { bg: 'var(--theme-coral-light)',  gradient: createGradient('var(--theme-coral-dark)', 'var(--theme-coral-light)'),  ripple: 'rgba(0, 0, 0, 0.05)', ring: '#0038A8' },
 };
 
 /**

@@ -140,6 +140,10 @@
     --theme-pink-light: #FFF9FC;
     --theme-gray-dark: #F2F2F7;
     --theme-gray-light: #F9F9FB;
+    --theme-teal-dark: #E4F5F5;
+    --theme-teal-light: #F5FCFC;
+    --theme-coral-dark: #FFE4E4;
+    --theme-coral-light: #FFF5F5;
   }
 
   .dark {

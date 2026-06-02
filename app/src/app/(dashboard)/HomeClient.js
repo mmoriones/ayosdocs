@@ -50,14 +50,14 @@ export default function HomeClient({ allGuides }) {
   // Select 4 trending guides dynamically for the guest view
   const trendingGuides = useMemo(() => {
     const slugs = [
-      { slug: 'passport-appointment', trend: '+12%' },
-      { slug: 'nbi-clearance', trend: '+8%' },
-      { slug: 'psa-birth-certificate', trend: '+15%' },
-      { slug: 'drivers-license', trend: '+5%' }
+      { slug: 'passport-appointment', trend: '+12%', theme: THEMES.BLUE },
+      { slug: 'nbi-clearance', trend: '+8%', theme: THEMES.TEAL },
+      { slug: 'psa-birth-certificate', trend: '+15%', theme: THEMES.GOLD },
+      { slug: 'drivers-license', trend: '+5%', theme: THEMES.CORAL }
     ];
     return slugs.map(item => {
       const guide = allGuides.find(g => g.slug === item.slug);
-      return guide ? { ...guide, trend: item.trend } : null;
+      return guide ? { ...guide, trend: item.trend, theme: item.theme } : null;
     }).filter(Boolean);
   }, [allGuides]);
 
@@ -317,27 +317,22 @@ function GuestView({ trendingGuides, lastViewedSlug, allGuides }) {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-          {trendingGuides.map((guide) => {
-            const iconName = getIconName(guide.slug, guide.agency);
-            const theme = getIconTheme(guide.slug, guide.agency, iconName);
-            return (
-              <TrendingCard 
-                key={guide.slug}
-                title={guide.shortTitle || guide.title} 
-                agency={guide.agency} 
-                trend={guide.trend} 
-                slug={guide.slug}
-                theme={theme}
-              />
-            );
-          })}
+          {trendingGuides.map((guide) => (
+            <TrendingCard 
+              key={guide.slug}
+              title={guide.shortTitle || guide.title} 
+              agency={guide.agency} 
+              trend={guide.trend} 
+              slug={guide.slug}
+            />
+          ))}
         </div>
       </section>
     </div>
   );
 }
 
-function TrendingCard({ title, agency, trend, slug, theme }) {
+function TrendingCard({ title, agency, trend, slug }) {
   const router = useRouter();
   const { setActiveGuideSlug } = useWorkspace();
   
@@ -348,7 +343,7 @@ function TrendingCard({ title, agency, trend, slug, theme }) {
         setActiveGuideSlug(slug);
         router.push(`/guides/${slug}`);
       }}
-      style={{ background: theme.gradient }}
+      style={{ background: 'linear-gradient(to top, #F2F4FC 0%, #FFFFFF 100%)' }}
       className="p-5 text-left !border-white/60 flex flex-col h-full shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
       noPadding
     >
@@ -361,7 +356,7 @@ function TrendingCard({ title, agency, trend, slug, theme }) {
         />
       </div>
       <div className="space-y-0.5 mt-auto">
-        <h5 className="font-bold text-[#1C1C1E] text-[14px] leading-tight line-clamp-1">{title}</h5>
+        <h5 className="font-bold text-[#1C1C1E] text-[13px] leading-tight line-clamp-2">{title}</h5>
         <div className="flex items-center justify-between">
           <span className="text-[11px] font-bold text-gray-500 uppercase tracking-tight">{agency}</span>
           <span className="text-[10px] font-black text-[#34C759]">{trend}</span>
@@ -585,20 +580,15 @@ function UserView({ firstName, userData, isLoading, allGuides, session, lastView
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          {trendingGuides.map((guide) => {
-            const iconName = getIconName(guide.slug, guide.agency);
-            const theme = getIconTheme(guide.slug, guide.agency, iconName);
-            return (
-              <TrendingCard 
-                key={guide.slug}
-                title={guide.shortTitle || guide.title} 
-                agency={guide.agency} 
-                trend={guide.trend} 
-                slug={guide.slug}
-                theme={theme}
-              />
-            );
-          })}
+          {trendingGuides.map((guide) => (
+            <TrendingCard 
+              key={guide.slug}
+              title={guide.shortTitle || guide.title} 
+              agency={guide.agency} 
+              trend={guide.trend} 
+              slug={guide.slug}
+            />
+          ))}
         </div>
       </section>
     </div>
