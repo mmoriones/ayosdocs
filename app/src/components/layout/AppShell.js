@@ -46,7 +46,7 @@ export default function AppShell({ children }) {
   const { isCollapsed, isMounted } = layout;
 
   return (
-    <div className={`min-h-screen flex ${!isMounted ? 'opacity-0' : 'animate-in fade-in duration-500'}`}>
+    <div className={`min-h-screen flex lg:h-screen lg:overflow-hidden lg:bg-ios-gradient ${!isMounted ? 'opacity-0' : 'animate-in fade-in duration-500'}`}>
       {/* Mobile Header (Sticky & Auto-Hide) */}
       <MobileHeader sticky autoHide />
 
@@ -59,7 +59,7 @@ export default function AppShell({ children }) {
       )}
 
       {/* DESKTOP SIDEBAR */}
-      <div className={`hidden lg:block ${!isMounted ? 'transition-none' : ''}`}>
+      <div className={`hidden lg:block shrink-0 ${!isMounted ? 'transition-none' : ''}`}>
         <Sidebar 
           isCollapsed={isCollapsed} 
           setIsCollapsed={handleToggleCollapse} 
@@ -70,23 +70,29 @@ export default function AppShell({ children }) {
           onLogoutClick={() => setShowLogoutConfirm(true)}
         />
       </div>
-      
+
       <div 
         className={`flex-1 flex flex-col min-w-0 ${
           !isMounted ? 'transition-none' : 'transition-all duration-300'
         } ${
-          isCollapsed ? 'lg:pl-16' : 'lg:pl-64'
-        } pb-24 lg:pb-0`}
+          isCollapsed ? 'lg:pl-0' : 'lg:pl-0'
+        } pb-24 lg:p-6 lg:bg-transparent`}
       >
-        <div className="hidden lg:block sticky top-0 z-40">
-          <DashboardHeader onMenuClick={toggleMobileMenu} onLogoutClick={() => setShowLogoutConfirm(true)} />
+        {/* NESTED CONTENT CARD */}
+        <div className="flex-1 flex flex-col bg-ctp-mantle lg:rounded-[32px] lg:shadow-sm lg:border lg:border-ctp-surface1/20 lg:overflow-hidden relative">
+          <div className="hidden lg:block sticky top-0 z-40">
+            <DashboardHeader onMenuClick={toggleMobileMenu} onLogoutClick={() => setShowLogoutConfirm(true)} />
+          </div>
+          
+          <main className="flex-1 lg:pt-0 pt-16 lg:overflow-y-auto custom-scrollbar">
+            <div className="min-h-full flex flex-col">
+              <div className="flex-1">
+                {children}
+              </div>
+              <Footer />
+            </div>
+          </main>
         </div>
-        
-        <main className="flex-1 lg:pt-0 pt-16">
-          {children}
-        </main>
-
-        <Footer />
       </div>
 
       {/* MOBILE BOTTOM NAVIGATION */}

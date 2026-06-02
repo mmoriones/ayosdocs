@@ -30,7 +30,7 @@ export default function DashboardHeader({ onMenuClick, onLogoutClick }) {
   });
 
   return (
-    <header className="h-16 border-b border-ctp-surface1 bg-ctp-base/80 backdrop-blur-md sticky top-0 z-40 px-6 flex items-center justify-between">
+    <header className="h-16 bg-transparent backdrop-blur-md sticky top-0 z-40 px-6 flex items-center justify-between">
       <div className="flex items-center gap-4">
         {/* LOGO (Mobile Only) */}
         <Link href="/" className="lg:hidden flex items-center gap-2">

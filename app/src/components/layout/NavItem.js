@@ -25,24 +25,19 @@ export default function NavItem({ href, icon: Icon, label, collapsed, active, on
     <Link
       href={href}
       onClick={onClick}
-      className={`relative flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group active:scale-[0.98] ${
+      className={`relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-300 group active:scale-[0.96] ${
         isActive
-          ? 'bg-ctp-sky-800/[0.08] text-ctp-sky-800'
-          : 'text-ctp-subtext1 hover:bg-ctp-sky-800/[0.05] hover:text-ctp-text'
+          ? 'bg-brand-blue/15 text-brand-blue shadow-sm shadow-brand-blue/5'
+          : 'text-ctp-subtext1 hover:bg-brand-blue/8 hover:text-ctp-text'
       }`}
     >
-      {/* Active Indicator Bar */}
-      {isActive && (
-        <div className="absolute left-0 top-2 bottom-2 w-1 bg-ctp-sky-800 rounded-r-full" />
-      )}
-      
-      <div className={`shrink-0 transition-colors duration-200 ${isActive ? 'text-ctp-sky-800' : 'text-ctp-subtext0 group-hover:text-ctp-text'}`}>
-        <Icon size={20} strokeWidth={isActive ? 2.25 : 2} />
+      <div className={`shrink-0 transition-all duration-300 ${isActive ? 'text-brand-blue scale-110' : 'text-ctp-subtext0 group-hover:text-ctp-text'}`}>
+        <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
       </div>
       
       {!collapsed && (
-        <span className={`text-sm font-medium truncate transition-all duration-300 whitespace-nowrap ${
-          isActive ? 'text-ctp-sky-800' : ''
+        <span className={`text-sm tracking-tight transition-all duration-300 whitespace-nowrap ${
+          isActive ? 'text-brand-blue font-bold' : 'font-medium'
         }`}>
           {label}
         </span>
