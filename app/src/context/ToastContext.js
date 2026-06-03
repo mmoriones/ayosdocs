@@ -8,49 +8,36 @@ const ToastModal = ({ isOpen, type = "success", title, message, onClose }) => {
   if (!isOpen) return null;
 
   const icons = {
-    success: <CheckCircle className="text-ctp-green" size={20} />,
-    error: <AlertCircle className="text-ctp-red" size={20} />,
-    warning: <AlertTriangle className="text-ctp-yellow" size={20} />,
-    info: <Info className="text-ctp-sky" size={20} />,
-  };
-
-  const borderColors = {
-    success: "border-ctp-green/20",
-    error: "border-ctp-red/20",
-    warning: "border-ctp-yellow/20",
-    info: "border-ctp-sky/20",
+    success: <CheckCircle className="text-[#34C759]" size={18} strokeWidth={3} />,
+    error: <AlertCircle className="text-[#FF3B30]" size={18} strokeWidth={3} />,
+    warning: <AlertTriangle className="text-[#FF9500]" size={18} strokeWidth={3} />,
+    info: <Info className="text-[#007AFF]" size={18} strokeWidth={3} />,
   };
 
   return (
-    <div className="fixed top-24 right-6 z-[300] w-full max-w-sm pointer-events-none animate-in slide-in-from-right duration-300">
-      <div className={`relative w-full bg-ctp-mantle rounded-2xl shadow-2xl border ${borderColors[type] || borderColors.success} p-5 pointer-events-auto backdrop-blur-md bg-ctp-mantle/95`}>
-        
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-1 text-ctp-subtext1 hover:text-ctp-text rounded-full transition-all active:scale-95"
-        >
-          <X size={14} />
-        </button>
+    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[300] w-auto max-w-[90vw] pointer-events-none animate-in slide-in-from-top-4 duration-500">
+      <div className="bg-white/80 backdrop-blur-2xl rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.08)] border border-white/60 px-6 py-3.5 pointer-events-auto flex items-center gap-3">
+        <div className="shrink-0">
+          {icons[type] || icons.success}
+        </div>
 
-        <div className="flex items-start gap-4">
-          <div className="shrink-0 mt-0.5">
-            {icons[type] || icons.success}
-          </div>
-
-          <div className="space-y-1 pr-4">
-            <h4 className="text-sm font-bold text-ctp-text tracking-tight">
-              {title}
-            </h4>
-            
-            <p className="text-xs font-medium text-ctp-subtext1 leading-relaxed">
+        <div className="flex flex-col min-w-0">
+          <h4 className="text-[14px] font-bold text-[#1C1C1E] tracking-tight whitespace-nowrap">
+            {title}
+          </h4>
+          {message && (
+            <p className="text-[11px] font-medium text-gray-500 leading-none mt-0.5 truncate">
               {message}
             </p>
-          </div>
+          )}
         </div>
 
-        <div className="absolute bottom-0 left-0 h-1 bg-ctp-sky-800/10 w-full overflow-hidden rounded-b-2xl">
-           <div className="h-full bg-ctp-sky-800/20 animate-toast-progress origin-left" />
-        </div>
+        <button
+          onClick={onClose}
+          className="ml-2 p-1 text-gray-300 hover:text-gray-500 transition-colors active:scale-90"
+        >
+          <X size={14} strokeWidth={3} />
+        </button>
       </div>
     </div>
   );

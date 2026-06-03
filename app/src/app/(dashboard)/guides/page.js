@@ -2,7 +2,7 @@ import { getAllGuides } from '@/lib/guides';
 import GuidesClient from './GuidesClient';
 
 export const metadata = {
-  title: 'All Guides | AyosDocs',
+  title: 'Guides Library | AyosDocs',
   description: 'Comprehensive step-by-step procedures for Philippine government requirements.',
 };
 
