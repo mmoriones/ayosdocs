@@ -84,7 +84,7 @@ export default function AppShell({ children }) {
             <DashboardHeader onMenuClick={toggleMobileMenu} onLogoutClick={() => setShowLogoutConfirm(true)} />
           </div>
           
-          <main className="flex-1 lg:pt-0 pt-16 lg:overflow-y-auto custom-scrollbar">
+          <main className="flex-1 lg:pt-0 pt-[var(--header-offset)] lg:overflow-y-auto custom-scrollbar transition-[padding-top] duration-500 ease-in-out">
             <div className="min-h-full flex flex-col">
               <div className="flex-1">
                 {children}
