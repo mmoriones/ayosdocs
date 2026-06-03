@@ -172,6 +172,7 @@
   }
 
   html, body {
+    overscroll-behavior: none;
     background-color: var(--bg-page-base) !important;
     background-image: 
       radial-gradient(at 0% 0%, #f5f8fe 0%, transparent 50%), 

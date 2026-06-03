@@ -61,6 +61,34 @@ export default function MobileHeader({
     };
   }, [autoHide]);
 
+  // Prevent pull-to-refresh overscroll on mobile when header is sticky
+  useEffect(() => {
+    if (!sticky) return;
+
+    let lastTouchY = 0;
+
+    const handleTouchStart = (e) => {
+      lastTouchY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      const touchY = e.touches[0].clientY;
+      // Pulling down (finger moves down) when at the top of the page
+      if (window.scrollY <= 0 && touchY > lastTouchY) {
+        e.preventDefault();
+      }
+      lastTouchY = touchY;
+    };
+
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [sticky]);
+
   const bgOpacity = sticky ? '80%' : '70%';
 
   const headerStyles = `
