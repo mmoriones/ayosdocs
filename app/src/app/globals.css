@@ -186,7 +186,7 @@
   body {
     @apply text-ctp-text font-sans antialiased overflow-x-hidden;
     margin: 0;
-    overscroll-behavior-y: contain;
+    overscroll-behavior: none;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 

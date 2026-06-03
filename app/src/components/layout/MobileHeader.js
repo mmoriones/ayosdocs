@@ -25,7 +25,6 @@ export default function MobileHeader({
   const { openAuthModal } = useAuthUI();
   
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
 
   const lastScrollYRef = useRef(0);
@@ -39,14 +38,14 @@ export default function MobileHeader({
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const lastScrollY = lastScrollYRef.current;
+      const prevScrollY = lastScrollYRef.current;
       
       let visible = true;
       if (currentScrollY < 10) {
         visible = true;
-      } else if (currentScrollY > lastScrollY && currentScrollY > 60) {
+      } else if (currentScrollY > prevScrollY && currentScrollY > 60) {
         visible = false;
-      } else if (currentScrollY < lastScrollY) {
+      } else if (currentScrollY < prevScrollY) {
         visible = true;
       }
       
@@ -62,14 +61,14 @@ export default function MobileHeader({
     };
   }, [autoHide]);
 
-  const bgOpacity = sticky && lastScrollY > 10 ? '80%' : '70%';
+  const bgOpacity = sticky ? '80%' : '70%';
 
   const headerStyles = `
     ${sticky ? 'fixed top-0 left-0 right-0' : 'relative'}
     h-16 z-[100] transition-all duration-500 ease-in-out border-b border-white/50 lg:hidden
     ${autoHide && !isVisible ? '-translate-y-full' : 'translate-y-0'}
     backdrop-blur-lg
-    ${sticky && lastScrollY > 10 ? 'shadow-sm' : ''}
+    ${sticky ? 'shadow-sm' : ''}
     ${className}
   `;
 
