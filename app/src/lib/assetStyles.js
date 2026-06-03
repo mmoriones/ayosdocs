@@ -91,6 +91,21 @@ export const getIconTheme = (slug, agency, iconName) => {
 };
 
 /**
+ * Mapping of Bundle IDs to their respective 3D illustrations.
+ */
+export const bundleImages = {
+  'first-job': '/assets/bundles/Job.webp',
+  'ofw': '/assets/bundles/Ofw.webp',
+  'wedding': '/assets/bundles/Marriage.webp',
+  'business': '/assets/bundles/Business.webp',
+  'travel-tourist': '/assets/bundles/Travel.webp',
+  'senior-citizen': '/assets/bundles/SeniorCouple.webp',
+  'pwd-benefits': '/assets/bundles/WheelChair.webp',
+  'solo-parent': '/assets/bundles/SoloParent.webp',
+  'foundational-docs': '/assets/bundles/GeneralIdentity.webp',
+};
+
+/**
  * Mapping of Bundle IDs to their respective themes.
  * Uses CSS variables for consistent theming.
  */

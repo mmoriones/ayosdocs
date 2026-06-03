@@ -17,9 +17,11 @@ import {
 import { GuideIcon } from '@/lib/guideIcons';
 import { Badge, Button, ProgressBar, Skeleton, TimelineStep } from '@/components/ui';
 import { startBundleAction, stopBundleAction, resendVerificationAction } from '@/app/actions/user';
+import { bundleStyles, bundleImages } from '@/lib/assetStyles';
 import { useToast } from '@/context';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import { useAuthUI } from '@/components/Providers';
 import ConfirmModal from '@/components/ConfirmModal';
 
@@ -38,6 +40,9 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
   const [isResending, setIsResending] = useState(false);
   const { showToast } = useToast();
   const router = useRouter();
+
+  const theme = bundleStyles[bundle.id] || bundleStyles['foundational-docs'];
+  const imagePath = bundleImages[bundle.id] || bundleImages['foundational-docs'];
 
   // Fetch comprehensive user data
   const { data: userData, isLoading: isLoadingUserData } = useQuery({
@@ -229,62 +234,126 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
 
   const isDataLoading = isLoggedIn && isLoadingUserData;
 
+  const startText = isLoggedIn ? 'Start This Workflow' : 'Login to Start Tracking';
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({ 
+        title: `${bundle.title} | AyosDocs`, 
+        text: `Check out this life event bundle: ${bundle.title}`, 
+        url: window.location.href 
+      }).catch(console.error);
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      showToast({ type: 'success', title: 'Link Copied', message: 'URL copied to clipboard.' });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-ios-gradient font-sans pb-24 text-ctp-text">
+    <div className="min-h-screen bg-ios-gradient font-sans pb-32 selection:bg-[#0038A8]/10 text-[#1C1C1E]">
       {/* HEADER */}
-      <div className="max-w-[800px] mx-auto px-6 py-4 flex items-center justify-between sticky top-0 bg-white/70 backdrop-blur-xl z-50 border-b border-white/20">
-        <Link 
-          href="/bundles"
-          className="w-10 h-10 flex items-center justify-center bg-ctp-mantle rounded-full shadow-sm border border-ctp-surface1 hover:bg-ctp-base transition-colors"
-        >
-          <ChevronLeft size={20} className="text-ctp-text" />
-        </Link>
-        <div className="flex-1 px-4 min-w-0">
-          <h1 className="text-base font-bold tracking-tight text-ctp-text truncate">{bundle.title}</h1>
-          <p className="text-[10px] font-bold text-brand-blue uppercase tracking-widest">{bundle.category}</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <button 
-            onClick={isTracked ? () => setIsConfirmOpen(true) : handleStartTracking}
-            disabled={isLoading}
-            className={`px-4 py-2 rounded-xl text-[11px] font-bold uppercase tracking-widest transition-all ${
-              isTracked 
-                ? 'bg-ctp-surface0 text-ctp-red border border-ctp-red/20' 
-                : 'bg-brand-blue text-white shadow-lg shadow-brand-blue/20'
-            }`}
+      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-white/40">
+        <div className="max-w-[800px] mx-auto px-6 h-16 flex items-center justify-between">
+          <Link 
+            href="/bundles"
+            className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm border border-gray-100 active:scale-90 transition-all"
           >
-            {isLoading ? <Loader2 size={14} className="animate-spin" /> : isTracked ? 'Stop' : 'Start'}
-          </button>
-          <button className="w-10 h-10 flex items-center justify-center bg-ctp-mantle rounded-full shadow-sm border border-ctp-surface1 hover:bg-ctp-base transition-colors">
-            <Share2 size={18} className="text-ctp-text" />
-          </button>
+            <ChevronLeft size={22} className="text-[#1C1C1E]" strokeWidth={2.5} />
+          </Link>
+          <div className="flex-1 px-4 min-w-0 text-center">
+             <h2 className="text-[14px] font-bold text-[#1C1C1E] truncate px-4">{bundle.title.split(' / ')[0]}</h2>
+          </div>
+          <div className="flex items-center gap-2">
+            {isTracked && (
+               <button 
+                onClick={() => setIsConfirmOpen(true)}
+                disabled={isLoading}
+                className="px-4 py-2 bg-red-50 text-red-500 rounded-full text-[11px] font-bold uppercase tracking-widest active:scale-95 transition-all disabled:opacity-50"
+              >
+                {isLoading ? <Loader2 size={14} className="animate-spin" /> : 'Stop'}
+              </button>
+            )}
+            <button 
+              onClick={handleShare}
+              className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-sm border border-gray-100 active:scale-90 transition-all hover:bg-gray-50"
+            >
+              <Share2 size={18} className="text-[#1C1C1E]" />
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-[600px] mx-auto px-6 py-6">
+      {/* HERO SECTION */}
+      <section className="pt-10 pb-12 px-6">
+        <div className="max-w-[600px] mx-auto text-center">
+          <div 
+            className="w-32 h-32 lg:w-40 lg:h-40 mx-auto rounded-[32px] flex items-center justify-center relative overflow-hidden mb-8 shadow-inner border border-white/40"
+            style={{ background: theme.gradient || theme.bg }}
+          >
+            <div className="relative w-24 h-24 lg:w-32 lg:h-32">
+              <Image 
+                src={imagePath} 
+                alt={bundle.title}
+                fill
+                className="object-contain drop-shadow-[-10px_12px_16px_rgba(0,0,0,0.12)]"
+              />
+            </div>
+          </div>
+          <Badge variant="sky" className="mb-4 text-[10px] uppercase tracking-[0.15em] font-black py-1 px-3 bg-[#0038A8]/5 text-[#0038A8] border-[#0038A8]/10 rounded-full">
+            {bundle.category}
+          </Badge>
+          <h1 className="text-[32px] lg:text-[42px] font-black text-[#1C1C1E] tracking-tight leading-[1.1] mb-4">
+            {bundle.title}
+          </h1>
+          <p className="text-[16px] lg:text-[17px] font-medium text-gray-500 leading-relaxed max-w-[500px] mx-auto">
+            {bundle.description}
+          </p>
+
+          {!isTracked && (
+            <div className="mt-10 flex flex-col items-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <Button 
+                onClick={handleStartTracking}
+                isLoading={isLoading}
+                className="w-full max-w-[320px] h-14 rounded-2xl bg-[#0038A8] hover:bg-[#0038A8]/90 text-white text-[16px] font-black shadow-[0_12px_40px_rgba(0,56,168,0.25)] active:scale-95 transition-all"
+              >
+                {startText}
+              </Button>
+              <div className="flex items-center gap-3">
+                <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">Free</span>
+                <div className="w-1 h-1 bg-gray-300 rounded-full" />
+                <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">{totalGuides} Guides</span>
+                <div className="w-1 h-1 bg-gray-300 rounded-full" />
+                <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">{analytics.time.total}</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <div className="max-w-[650px] mx-auto px-6">
         
         {/* PROGRESS SECTION */}
         {isTracked && (
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-bold text-ctp-subtext1">Overall Progress</span>
-              <span className="text-sm font-bold text-ctp-text">{overallPercentage}%</span>
+          <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="flex items-center justify-between mb-3 px-1">
+              <span className="text-sm font-bold text-gray-500 uppercase tracking-wider">Overall Progress</span>
+              <span className="text-sm font-black text-[#1C1C1E]">{overallPercentage}%</span>
             </div>
-            <ProgressBar value={overallPercentage} color="yellow" size="lg" className="h-2.5" />
+            <ProgressBar value={overallPercentage} color="blue" size="lg" className="h-3 rounded-full" />
             
             {/* ANALYTICS BANNER */}
-            <div className="mt-6 grid grid-cols-3 gap-3">
-              <div className="bg-ctp-mantle rounded-2xl p-3 border border-ctp-surface1 text-center shadow-sm">
-                <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1 opacity-60">Est. Cost</p>
-                <p className="text-xs font-black text-ctp-text">{analytics.cost.total}</p>
+            <div className="mt-8 grid grid-cols-3 gap-4">
+              <div className="bg-white/60 backdrop-blur-md rounded-[24px] p-4 border border-white/60 text-center shadow-sm">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Est. Cost</p>
+                <p className="text-[15px] font-black text-[#1C1C1E]">{analytics.cost.total}</p>
               </div>
-              <div className="bg-ctp-mantle rounded-2xl p-3 border border-ctp-surface1 text-center shadow-sm">
-                <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1 opacity-60">Time Goal</p>
-                <p className="text-xs font-black text-ctp-text">{analytics.time.total}</p>
+              <div className="bg-white/60 backdrop-blur-md rounded-[24px] p-4 border border-white/60 text-center shadow-sm">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Time Goal</p>
+                <p className="text-[15px] font-black text-[#1C1C1E]">{analytics.time.total}</p>
               </div>
-              <div className="bg-ctp-mantle rounded-2xl p-3 border border-ctp-surface1 text-center shadow-sm">
-                <p className="text-[9px] font-bold text-ctp-subtext1 uppercase tracking-widest mb-1 opacity-60">Remaining</p>
-                <p className="text-xs font-black text-ctp-text">{totalGuides - analytics.completedGuides} Guides</p>
+              <div className="bg-white/60 backdrop-blur-md rounded-[24px] p-4 border border-white/60 text-center shadow-sm">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Remaining</p>
+                <p className="text-[15px] font-black text-[#1C1C1E]">{totalGuides - analytics.completedGuides} <span className="text-[11px] text-gray-400">Guides</span></p>
               </div>
             </div>
           </div>
@@ -292,16 +361,18 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
 
         {/* VERIFICATION ALERT */}
         {isLoggedIn && !isVerified && (
-          <div className="mb-8 p-4 bg-ctp-yellow/5 border border-ctp-yellow/20 rounded-2xl flex items-center gap-4">
-            <ShieldAlert size={20} className="text-ctp-yellow" />
+          <div className="mb-12 p-5 bg-orange-50/50 backdrop-blur-md border border-orange-100 rounded-[28px] flex items-center gap-5">
+            <div className="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center shrink-0">
+              <ShieldAlert size={24} className="text-orange-500" />
+            </div>
             <div className="flex-1">
-              <p className="text-xs font-bold text-ctp-text">Verification Required</p>
-              <p className="text-[10px] text-ctp-subtext1">Syncing progress requires a verified email.</p>
+              <p className="text-sm font-bold text-[#1C1C1E]">Verification Required</p>
+              <p className="text-[13px] text-gray-500 font-medium">Syncing progress requires a verified email.</p>
             </div>
             <button 
               onClick={handleResendVerification}
               disabled={isResending}
-              className="px-3 py-1.5 bg-ctp-yellow/10 text-ctp-yellow rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-ctp-yellow/20"
+              className="px-4 py-2 bg-orange-500 text-white rounded-xl font-bold text-[12px] uppercase tracking-widest hover:bg-orange-600 active:scale-95 transition-all"
             >
               {isResending ? 'Sending...' : 'Verify'}
             </button>
@@ -309,7 +380,7 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
         )}
 
         {/* TIMELINE */}
-        <div className="relative pl-0 sm:pl-4">
+        <div className="relative">
           <div className="space-y-0">
             {stageStats.map((stage, idx) => {
               const isCompleted = stage.completed;
@@ -332,17 +403,23 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                   isLast={isLast}
                 >
                   {/* STAGE HEADER */}
-                  <div className="mb-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <h2 className={`text-[17px] font-black leading-tight ${isCompleted ? 'text-ctp-subtext0 line-through' : 'text-ctp-text'}`}>
-                        {stage.step}. {stage.label}
+                  <div className="mb-8">
+                    <div className="flex items-center justify-between mb-3">
+                      <h2 className={`text-[19px] font-black tracking-tight ${isCompleted ? 'text-gray-400 line-through' : 'text-[#1C1C1E]'}`}>
+                        {stage.label}
                       </h2>
-                      <Badge variant={statusVariant} className="text-[10px] uppercase tracking-widest py-0.5">
-                        {isLocked && <Lock size={10} className="mr-1" />}
-                        {statusLabel}
-                      </Badge>
+                      {!(isActionable && !isTracked) && (
+                        <div className={`px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 border ${
+                          isCompleted ? 'bg-green-50 text-green-600 border-green-100' : 
+                          (isCurrent || isActionable) ? 'bg-[#0038A8]/5 text-[#0038A8] border-[#0038A8]/10' : 
+                          'bg-gray-50 text-gray-400 border-gray-100'
+                        }`}>
+                          {isLocked && <Lock size={10} strokeWidth={3} />}
+                          {statusLabel}
+                        </div>
+                      )}
                     </div>
-                    <p className="text-[14px] font-medium text-ctp-subtext0 leading-relaxed">
+                    <p className="text-[15px] font-medium text-gray-500 leading-relaxed">
                       {stage.description || `Step ${stage.step} of your ${bundle.title}.`}
                     </p>
                   </div>
@@ -365,9 +442,9 @@ export default function BundleWorkflowClient({ bundle, allGuides, initialIsTrack
                       <Button 
                         onClick={handleStartTracking}
                         isLoading={isLoading}
-                        className="w-full h-12 rounded-2xl bg-brand-blue hover:bg-brand-blue/90 text-white text-[15px] font-black shadow-lg shadow-brand-blue/20 active:scale-95 transition-all"
+                        className="w-full h-14 rounded-2xl bg-[#0038A8] hover:bg-[#0038A8]/90 text-white text-[16px] font-black shadow-[0_12px_40px_rgba(0,56,168,0.2)] active:scale-95 transition-all"
                       >
-                        Start This Workflow
+                        {startText}
                       </Button>
                     </div>
                   )}
@@ -397,33 +474,37 @@ const StageGuideCard = ({ guide, isLocked, isTracked, onStart }) => {
 
   const CardContent = (
     <>
-      <div className="w-10 h-10 rounded-lg bg-ctp-base border border-ctp-surface1 flex items-center justify-center shrink-0 shadow-inner overflow-hidden">
-        <GuideIcon slug={guide.slug} agency={guide.agency} size={24} className="object-contain" />
+      <div className="w-12 h-12 rounded-[14px] bg-white border border-gray-100 flex items-center justify-center shrink-0 shadow-sm relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
+        <GuideIcon slug={guide.slug} agency={guide.agency} size={28} className="relative z-10" />
       </div>
 
       <div className="flex-1 min-w-0">
-        <h4 className="text-sm font-bold text-ctp-text truncate">{displayTitle}</h4>
-        <p className="text-[10px] text-ctp-subtext0 font-medium line-clamp-1">
+        <h4 className="text-[15px] font-bold text-[#1C1C1E] truncate group-hover:text-[#0038A8] transition-colors">{displayTitle}</h4>
+        <p className="text-[12px] text-gray-400 font-medium truncate mt-0.5">
           {guide.description?.replace(/#{1,6}\s/g, '').replace(/\[(.*?)\]\(.*?\)/g, '$1') || 'No description available.'}
         </p>
       </div>
 
       <div className="shrink-0">
         {isLocked ? (
-          <Lock size={14} className="text-ctp-subtext1 opacity-50" />
+          <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center">
+            <Lock size={14} className="text-gray-300" strokeWidth={3} />
+          </div>
         ) : isCompleted ? (
-          <div className="w-5 h-5 rounded-full bg-ctp-green flex items-center justify-center shadow-sm">
-            <Check size={12} className="text-white" strokeWidth={4} />
+          <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center shadow-sm shadow-green-500/20 animate-in zoom-in-50 duration-500">
+            <Check size={16} className="text-white" strokeWidth={4} />
           </div>
         ) : (
-          <ChevronRight size={16} className="text-ctp-subtext1 group-hover:text-brand-blue transition-colors" />
+          <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-300 group-hover:bg-[#0038A8]/10 group-hover:text-[#0038A8] transition-all">
+            <ChevronRight size={18} strokeWidth={3} />
+          </div>
         )}
       </div>
     </>
   );
 
-  const containerClasses = `bg-ctp-mantle border border-ctp-surface1 rounded-xl p-3 flex items-center gap-3 transition-all duration-300 group ${
-    isLocked ? 'opacity-50 grayscale select-none pointer-events-none' : 'hover:shadow-md hover:border-brand-blue/30 active:scale-[0.98]'
+  const containerClasses = `bg-white/60 backdrop-blur-md border border-white/60 rounded-[22px] p-4 flex items-center gap-4 transition-all duration-300 group ${
+    isLocked ? 'opacity-50 grayscale select-none pointer-events-none' : 'hover:shadow-md hover:border-[#0038A8]/20 active:scale-[0.98]'
   }`;
 
   if (isLocked) {
@@ -448,4 +529,3 @@ const StageGuideCard = ({ guide, isLocked, isTracked, onStart }) => {
     </Link>
   );
 };
-
