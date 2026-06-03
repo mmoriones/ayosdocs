@@ -102,7 +102,7 @@ export function SignupForm({
           isLoading={exchangingMethod === 'signup'}
           disabled={isDisabled}
           style={{ background: isDisabled ? undefined : 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
-          className="w-full text-white border-none"
+          className="w-full text-white border-none rounded-full"
         >
           Join AyosDocs
         </Button>

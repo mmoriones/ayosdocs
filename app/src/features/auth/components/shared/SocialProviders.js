@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { Loader2, Mail, User } from 'lucide-react';
+import { User } from 'lucide-react';
+import { Button } from '@/components/ui';
 
 /**
  * SocialProviders Component
@@ -20,50 +21,44 @@ export function SocialProviders({
   return (
     <div className="space-y-3 w-full">
       <div className={onGuestClick ? "grid grid-cols-2 gap-3" : "space-y-3"}>
-        <button
+        <Button
+          variant="secondary"
           onClick={onGoogleLogin}
           disabled={isExchanging}
-          className={`w-full flex items-center justify-center gap-2.5 bg-white border border-gray-100 hover:border-gray-200 text-[#1C1C1E] font-bold rounded-2xl transition-all active:scale-[0.98] shadow-[0_4px_12px_rgba(0,0,0,0.03)] disabled:cursor-not-allowed ${
-            isPage ? 'py-4 text-[15px]' : 'py-3.5 text-[14px]'
-          }`}
-        >
-          {exchangingMethod === 'google' ? (
-            <Loader2 size={18} className="animate-spin text-[#0038A8]" />
-          ) : (
+          isLoading={exchangingMethod === 'google'}
+          leftIcon={
             <Image
               src="https://www.svgrepo.com/show/475656/google-color.svg"
               alt="Google"
               width={18}
               height={18}
             />
-          )}
+          }
+          className={`w-full rounded-full font-bold ${isPage ? 'h-14 text-[15px]' : 'h-12 text-[14px]'} disabled:cursor-not-allowed`}
+        >
           Google
-        </button>
+        </Button>
 
         {onGuestClick && (
-          <button
+          <Button
+            variant="secondary"
             onClick={onGuestClick}
             disabled={isExchanging}
-            className={`w-full flex items-center justify-center gap-2.5 bg-white border border-gray-100 hover:border-gray-200 text-[#1C1C1E] font-bold rounded-2xl transition-all active:scale-[0.98] shadow-[0_4px_12px_rgba(0,0,0,0.03)] disabled:cursor-not-allowed ${
-              isPage ? 'py-4 text-[15px]' : 'py-3.5 text-[14px]'
-            }`}
+            leftIcon={<User size={18} className="text-[#0038A8]" strokeWidth={2.5} />}
+            className={`w-full rounded-full font-bold ${isPage ? 'h-14 text-[15px]' : 'h-12 text-[14px]'} disabled:cursor-not-allowed`}
           >
-            <User size={18} className="text-[#0038A8]" strokeWidth={2.5} />
             Guest
-          </button>
+          </Button>
         )}
       </div>
 
       {showEmailOption && (
-        <div className="relative py-3">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-gray-100"></span>
-          </div>
-          <div className="relative flex justify-center text-[11px]">
-            <span className="bg-white px-4 text-gray-400 font-bold uppercase tracking-[0.2em]">
-              Or Continue With
-            </span>
-          </div>
+        <div className="flex items-center gap-4 py-3">
+          <span className="flex-1 border-t border-gray-100"></span>
+          <span className="text-[11px] text-gray-400 font-bold uppercase tracking-[0.2em] shrink-0">
+            Or Continue With
+          </span>
+          <span className="flex-1 border-t border-gray-100"></span>
         </div>
       )}
     </div>

@@ -130,7 +130,7 @@ function ResetPasswordForm() {
       )}
 
       {/* Main Card */}
-      <div className="bg-white rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
+      <div className="bg-gradient-to-b from-white to-[#F5F8FE] rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
         {status?.type === 'success' ? (
           <div className="text-center space-y-6 py-4 flex flex-col items-center">
             <div className="w-16 h-16 rounded-full bg-[#34C759]/10 flex items-center justify-center text-[#34C759] mb-2">
@@ -192,7 +192,7 @@ function ResetPasswordForm() {
                 disabled={isSubmitting || !isFormValid()}
                 isLoading={isSubmitting}
                 style={{ background: (isSubmitting || !isFormValid()) ? undefined : 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
-                className="w-full text-white border-none"
+                className="w-full text-white border-none rounded-full"
               >
                 Update Password
               </Button>

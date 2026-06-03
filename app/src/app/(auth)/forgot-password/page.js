@@ -75,7 +75,7 @@ export default function ForgotPasswordPage() {
                 <Button
                   onClick={() => router.push('/login')}
                   size="lg"
-                  className="w-full h-14 rounded-3xl font-black shadow-[0_8px_24px_rgba(0,56,168,0.1)]"
+                  className="w-full h-14 rounded-full font-black shadow-[0_8px_24px_rgba(0,56,168,0.1)]"
                   style={{ background: 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
                 >
                   Return to Login
@@ -123,7 +123,7 @@ export default function ForgotPasswordPage() {
             )}
 
             {/* Main Card */}
-            <div className="bg-white rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
+            <div className="bg-gradient-to-b from-white to-[#F5F8FE] rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
               <ForgotPasswordForm
                 formData={formData}
                 onInputChange={handleInputChange}

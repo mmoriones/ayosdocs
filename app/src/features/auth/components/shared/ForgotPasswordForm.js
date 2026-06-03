@@ -41,7 +41,7 @@ export function ForgotPasswordForm({
           isLoading={exchangingMethod === 'reset'}
           disabled={isDisabled}
           style={{ background: 'linear-gradient(to top, #0038A8 0%, #0059E0 100%)' }}
-          className="w-full text-white border-none"
+          className="w-full text-white border-none rounded-full"
         >
           Send Reset Link
         </Button>

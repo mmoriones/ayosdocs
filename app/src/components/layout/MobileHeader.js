@@ -109,7 +109,7 @@ export default function MobileHeader({
                 size="sm" 
                 onClick={() => openAuthModal()}
                 leftIcon={<User size={18} strokeWidth={2.5} />}
-                className="h-10 rounded-full shadow-sm bg-white border-gray-100 text-[#1C1C1E] font-bold text-sm px-5"
+                className="h-10 rounded-full shadow-sm bg-white border-gray-100 text-[#1C1C1E] font-bold text-sm px-5 active:scale-90"
               >
                 Login
               </Button>

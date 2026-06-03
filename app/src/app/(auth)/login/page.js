@@ -114,7 +114,7 @@ export default function LoginPage() {
         )}
 
         {/* Main Card */}
-        <div className="bg-white rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
+        <div className="bg-gradient-to-b from-white to-[#F5F8FE] rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
           <div className="space-y-6">
             <LoginForm
               formData={formData}
@@ -127,15 +127,12 @@ export default function LoginPage() {
               getFieldError={getFieldError}
             />
 
-            <div className="relative py-2">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-gray-100"></span>
-              </div>
-              <div className="relative flex justify-center text-[11px]">
-                <span className="bg-white px-4 text-gray-400 font-bold uppercase tracking-[0.2em]">
-                  Or Continue With
-                </span>
-              </div>
+            <div className="flex items-center gap-4 py-2">
+              <span className="flex-1 border-t border-gray-100"></span>
+              <span className="text-[11px] text-gray-400 font-bold uppercase tracking-[0.2em] shrink-0">
+                Or Continue With
+              </span>
+              <span className="flex-1 border-t border-gray-100"></span>
             </div>
 
             <SocialProviders

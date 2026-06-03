@@ -57,9 +57,10 @@ export default function Input({
             ${LeftIcon ? 'pl-14' : 'pl-6'}
             ${rightPadding}
             ${hasError 
-              ? 'border-[#FF3B30]/50 focus:border-[#FF3B30] focus:ring-4 focus:ring-[#FF3B30]/5' 
-              : 'border-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:border-[#0038A8]/20 focus:ring-4 focus:ring-[#0038A8]/5'
+              ? 'border-[#FF3B30]/50 focus:border-[#FF3B30] focus:ring-4 focus:ring-[#FF3B30]/5 autofill:shadow-[inset_0_0_0_1000px_white]' 
+              : 'border-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] focus:border-[#0038A8]/20 focus:ring-4 focus:ring-[#0038A8]/5 autofill:shadow-[inset_0_0_0_1000px_white,0_4px_20px_rgba(0,0,0,0.03)]'
             }
+            autofill:[-webkit-text-fill-color:#1C1C1E]
             ${disabled ? 'opacity-50 cursor-not-allowed bg-gray-50' : 'hover:border-gray-100'}
             ${className}
           `}

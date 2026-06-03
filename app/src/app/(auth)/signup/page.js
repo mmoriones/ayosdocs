@@ -115,7 +115,7 @@ export default function SignupPage() {
         )}
 
         {/* Main Card */}
-        <div className="bg-white rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
+        <div className="bg-gradient-to-b from-white to-[#F5F8FE] rounded-[40px] p-6 lg:p-8 shadow-[0_8px_40px_rgba(0,0,0,0.04)] border border-white">
           <div className="space-y-6">
             <SignupForm
               formData={formData}
