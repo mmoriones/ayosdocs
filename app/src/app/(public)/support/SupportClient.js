@@ -54,38 +54,38 @@ export default function SupportClient() {
   };
 
   return (
-    <div className="min-h-full pb-20 animate-in fade-in duration-700">
+    <div className="min-h-full pb-32 animate-in fade-in duration-700 relative overflow-hidden">
       <PublicPageHeader 
         icon={Mail}
         title="Support"
         description="Have questions or feedback? Our team is here to help you."
         actions={
-          <Badge variant="secondary" className="!bg-[#34C759]/10 !text-[#34C759] !border-none flex items-center gap-1.5 px-4 py-1.5">
-            <Clock size={14} />
-            <span className="text-[13px] font-bold uppercase tracking-wider">Avg. response: 24h</span>
+          <Badge variant="secondary" className="!bg-[#34C759]/10 !text-[#34C759] !border-none flex items-center gap-2 px-4 py-2 rounded-full shadow-sm">
+            <Clock size={14} strokeWidth={2.5} />
+            <span className="text-[11px] font-black uppercase tracking-widest">Avg. response: 24h</span>
           </Badge>
         }
       />
 
-      <div className="max-w-5xl mx-auto px-6 lg:px-10 mt-8 lg:mt-12 space-y-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
+      <div className="max-w-6xl mx-auto px-6 lg:px-10 mt-4 space-y-12 lg:space-y-16 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Main Contact Form */}
-          <div className="lg:col-span-2 space-y-10">
+          <div className="lg:col-span-8 space-y-10">
             <Card 
-              className="!rounded-[32px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl"
+              className="!rounded-[32px] overflow-hidden border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-white/70 backdrop-blur-xl relative"
               noPadding
             >
-              <div className="p-8 border-b border-gray-100/50 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <h3 className="text-[19px] font-bold text-[#1C1C1E]">Send a Message</h3>
-                <div className="flex items-center gap-2">
-                   <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-[#007AFF]">
-                     <Send size={14} />
+              <div className="p-8 lg:p-10 border-b border-gray-100/50 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <h3 className="text-[20px] lg:text-[22px] font-black text-[#1C1C1E] tracking-tight">Send a Message</h3>
+                <div className="flex items-center gap-3 px-3 py-1.5 bg-[#007AFF]/5 rounded-full border border-[#007AFF]/10">
+                   <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center text-[#007AFF]">
+                     <Send size={12} strokeWidth={3} />
                    </div>
-                   <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Priority Support</span>
+                   <span className="text-[10px] font-black text-[#007AFF] uppercase tracking-widest">Priority Support</span>
                 </div>
               </div>
 
-              <form className="p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" onSubmit={handleSubmit}>
+              <form className="p-6 md:p-10 lg:p-12 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10" onSubmit={handleSubmit}>
                 <Input
                   label="Full Name"
                   required
@@ -97,7 +97,7 @@ export default function SupportClient() {
                   onChange={handleChange}
                   disabled={isSubmitting}
                   leftIcon={User}
-                  className="h-14 !rounded-[20px] shadow-sm border-white/60 focus-within:ring-[#007AFF]/10"
+                  className="h-16 !rounded-[24px] shadow-sm border-white/60 focus-within:border-[#007AFF]/20 focus-within:ring-[#007AFF]/5"
                 />
                 <Input
                   label="Email Address"
@@ -110,29 +110,29 @@ export default function SupportClient() {
                   onChange={handleChange}
                   disabled={isSubmitting}
                   leftIcon={Mail}
-                  className="h-14 !rounded-[20px] shadow-sm border-white/60 focus-within:ring-[#007AFF]/10"
+                  className="h-16 !rounded-[24px] shadow-sm border-white/60 focus-within:border-[#007AFF]/20 focus-within:ring-[#007AFF]/5"
                 />
-                <div className="md:col-span-2 space-y-2">
-                  <label className="text-[13px] font-bold text-gray-400 uppercase tracking-widest ml-1">Message</label>
+                <div className="md:col-span-2 space-y-3">
+                  <label className="text-[12px] font-black text-gray-400 uppercase tracking-[0.2em] ml-2">Message</label>
                   <textarea
                     required
                     name="message"
                     maxLength={1000}
                     value={formData.message}
-                    rows={5}
+                    rows={6}
                     placeholder="Tell us how we can help..."
                     onChange={handleChange}
                     disabled={isSubmitting}
-                    className="w-full bg-white/50 border border-white/60 rounded-[24px] px-6 py-4 text-[15px] focus:outline-none focus:border-[#007AFF] transition-all font-medium placeholder:text-gray-300 resize-none disabled:opacity-50 shadow-sm hover:border-gray-200 focus:ring-4 focus:ring-[#007AFF]/5"
+                    className="w-full bg-white/50 backdrop-blur-sm border border-white/60 rounded-[32px] px-8 py-6 text-[16px] focus:outline-none focus:border-[#007AFF]/30 transition-all font-medium placeholder:text-gray-300 resize-none disabled:opacity-50 shadow-sm hover:border-gray-200 focus:ring-8 focus:ring-[#007AFF]/5"
                   />
                 </div>
-                <div className="md:col-span-2 flex justify-end pt-2">
+                <div className="md:col-span-2 flex justify-end pt-4">
                   <Button 
                     type="submit"
                     disabled={isSubmitting}
                     isLoading={isSubmitting}
-                    className="w-full md:w-auto px-10 h-14 !rounded-[22px] text-[15px] font-bold shadow-lg shadow-[#0038A8]/20"
-                    leftIcon={isSubmitting ? null : <Send size={18} />}
+                    className="w-full md:w-auto px-12 h-16 !rounded-[24px] text-[16px] font-black shadow-[0_12px_40px_rgba(0,56,168,0.2)] bg-[#0038A8] text-white hover:bg-[#0038A8]/90 active:scale-95 transition-all"
+                    rightIcon={isSubmitting ? null : <Send size={20} strokeWidth={3} />}
                   >
                     Send Message
                   </Button>
@@ -142,48 +142,50 @@ export default function SupportClient() {
           </div>
 
           {/* Contact Details Sidebar */}
-          <aside className="space-y-6">
+          <aside className="lg:col-span-4 space-y-8">
             <Card 
-              className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl"
+              className="!rounded-[32px] overflow-hidden border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-white/70 backdrop-blur-xl"
               noPadding
             >
-              <div className="p-5 border-b border-gray-100/50">
-                <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-widest">Support Channels</h3>
+              <div className="p-6 border-b border-gray-100/50">
+                <h3 className="text-[12px] font-black text-gray-400 uppercase tracking-[0.2em]">Support Channels</h3>
               </div>
               <div className="divide-y divide-gray-100/50">
-                <div className="p-6 flex items-start gap-4 hover:bg-white/40 transition-colors">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/50 flex items-center justify-center text-[#007AFF] shrink-0 shadow-sm">
-                    <Mail size={20} />
+                <div className="p-8 lg:p-10 flex items-start gap-6 hover:bg-white transition-all duration-500">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100/50 flex items-center justify-center text-[#007AFF] shrink-0 shadow-sm">
+                    <Mail size={24} strokeWidth={2.5} />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-[15px] font-bold text-[#1C1C1E] tracking-tight">Email Support</h4>
-                    <p className="text-[13px] font-bold text-[#007AFF] mt-1 truncate">support@ayosdocs.com</p>
-                    <p className="text-[11px] text-gray-400 mt-1 font-medium leading-tight uppercase tracking-wider">Direct response line.</p>
+                    <h4 className="text-[16px] font-bold text-[#1C1C1E] tracking-tight">Email Support</h4>
+                    <p className="text-[14px] font-black text-[#007AFF] mt-1.5 truncate">support@ayosdocs.com</p>
+                    <p className="text-[12px] text-gray-400 mt-2 font-medium leading-relaxed uppercase tracking-wider">Direct response line for all inquiries.</p>
                   </div>
                 </div>
 
-                <button className="w-full text-left p-6 flex items-start gap-4 hover:bg-white/40 transition-colors cursor-pointer group" onClick={() => router.push('/faqs')}>
-                  <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100/50 flex items-center justify-center text-[#AF52DE] shrink-0 shadow-sm group-active:scale-95 transition-all">
-                    <Globe size={20} />
+                <button className="w-full text-left p-8 lg:p-10 flex items-start gap-6 hover:bg-white transition-all duration-500 cursor-pointer group" onClick={() => router.push('/faqs')}>
+                  <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100/50 flex items-center justify-center text-[#AF52DE] shrink-0 shadow-sm group-active:scale-90 transition-all">
+                    <Globe size={24} strokeWidth={2.5} />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-[15px] font-bold text-[#1C1C1E] tracking-tight">Help Center</h4>
-                    <p className="text-[13px] font-bold text-[#007AFF] mt-1 truncate group-hover:underline">Explore FAQs</p>
-                    <p className="text-[11px] text-gray-400 mt-1 font-medium leading-tight uppercase tracking-wider">Instant guide assistance.</p>
+                    <h4 className="text-[16px] font-bold text-[#1C1C1E] tracking-tight">Help Center</h4>
+                    <p className="text-[14px] font-black text-[#007AFF] mt-1.5 truncate group-hover:underline">Explore FAQs</p>
+                    <p className="text-[12px] text-gray-400 mt-2 font-medium leading-relaxed uppercase tracking-wider">Instant assistance for common guides.</p>
                   </div>
                 </button>
               </div>
             </Card>
 
-            <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl p-6 space-y-5" noPadding>
-              <div className="flex items-center gap-3 text-[#AF52DE]">
-                <MessageCircle size={18} strokeWidth={2.5} />
-                <h3 className="text-[13px] font-bold uppercase tracking-widest">Social Channels</h3>
+            <Card className="!rounded-[32px] overflow-hidden border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-white/70 backdrop-blur-xl p-8 lg:p-10 space-y-6 relative group" noPadding>
+              <div className="flex items-center gap-4 text-[#AF52DE]">
+                <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100/50">
+                  <MessageCircle size={20} strokeWidth={2.5} />
+                </div>
+                <h3 className="text-[12px] font-black uppercase tracking-[0.2em]">Social Channels</h3>
               </div>
-              <p className="text-[13px] text-gray-500 leading-relaxed font-medium">
+              <p className="text-[14px] text-gray-500 leading-relaxed font-medium">
                 Follow our official channels for the latest guide updates and holiday alerts.
               </p>
-              <div className="grid grid-cols-3 gap-3 pt-1">
+              <div className="grid grid-cols-3 gap-4 pt-2">
                 {[
                   { 
                     name: 'Facebook', 
@@ -201,23 +203,28 @@ export default function SupportClient() {
                   <Button 
                     key={social.name} 
                     variant="secondary"
-                    className="!bg-white !border-gray-100 !p-3 h-12 !rounded-2xl group shadow-sm hover:shadow-md"
+                    className="!bg-white/80 !border-white/60 !p-4 h-14 !rounded-2xl group shadow-sm hover:shadow-md hover:scale-105 active:scale-95 transition-all"
                     disabled
                     title={social.name}
                   >
                     <svg 
                       viewBox="0 0 24 24" 
-                      className="w-5 h-5 fill-[#1C1C1E] transition-transform group-hover:scale-110"
+                      className="w-6 h-6 fill-[#1C1C1E] transition-transform group-hover:scale-110"
                     >
                       <path d={social.path} />
                     </svg>
                   </Button>
                 ))}
               </div>
+              <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-purple-500/5 blur-2xl rounded-full" />
             </Card>
           </aside>
         </div>
       </div>
+
+      {/* Decorative Background Elements */}
+      <div className="absolute top-[20%] -left-20 w-80 h-80 bg-[#0038A8]/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[10%] -right-20 w-96 h-96 bg-[#AF52DE]/5 blur-[120px] rounded-full pointer-events-none" />
     </div>
   );
 }
