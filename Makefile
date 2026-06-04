@@ -28,7 +28,7 @@ docker-up:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d
 
 docker-minimal:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d app mongodb nginx backup account-cleanup
+	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d app mongodb nginx backup account-cleanup qdrant
 
 docker-down:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml down

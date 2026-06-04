@@ -148,6 +148,17 @@ services:
     networks:
       - ayosdocs-network
 
+  qdrant:
+    container_name: ayosdocs-qdrant
+    image: qdrant/qdrant:latest
+    restart: always
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - ayosdocs-network
+
 networks:
   ayosdocs-network:
     driver: bridge
@@ -156,3 +167,4 @@ volumes:
   mongodb_data:
   prometheus_data:
   grafana_data:
+  qdrant_data:
