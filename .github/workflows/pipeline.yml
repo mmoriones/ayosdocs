@@ -22,7 +22,11 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm config set fetch-retries 5
+          npm config set fetch-retry-maxtimeout 600000
+          rm -rf node_modules
+          npm ci
       - name: Run Lint
         run: npm run lint
 
