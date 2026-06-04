@@ -2,6 +2,7 @@
 
 import { AppShell } from "@/components/layout";
 import ClientAuthWrapper from "@/components/ClientAuthWrapper";
+import ChatAssistant from "@/components/chat/ChatAssistant";
 
 /**
  * Dashboard Layout
@@ -12,6 +13,7 @@ export default function DashboardLayout({ children }) {
     <AppShell>
       {children}
       <ClientAuthWrapper />
+      <ChatAssistant />
     </AppShell>
   );
 }

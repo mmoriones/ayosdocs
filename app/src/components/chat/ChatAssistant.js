@@ -9,6 +9,8 @@ export default function ChatAssistant() {
   const [mounted, setMounted] = useState(false);
   const [localInput, setLocalInput] = useState('');
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   
   const messagesEndRef = useRef(null);
   const scrollContainerRef = useRef(null);
@@ -21,6 +23,30 @@ export default function ChatAssistant() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Intelligent Auto-Hide Logic (Synchronized with BottomNav)
+  useEffect(() => {
+    const handleScroll = () => {
+      // Don't hide if the chat modal is actually open
+      if (isOpen) {
+        setIsVisible(true);
+        return;
+      }
+
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < 50) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY, isOpen]);
 
   // BLOCK BACKGROUND SCROLL when chat is open
   useEffect(() => {
@@ -72,7 +98,9 @@ export default function ChatAssistant() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[200]">
+    <div className={`fixed bottom-20 right-6 z-[200] transition-all duration-500 ease-in-out ${
+      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-28 opacity-0 pointer-events-none'
+    }`}>
       {/* Background Overlay (Blocks clicks on site while chat is open) */}
       {isOpen && (
         <div 
@@ -95,7 +123,7 @@ export default function ChatAssistant() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-4 left-4 md:right-6 md:left-auto md:w-[400px] h-[550px] max-h-[calc(100dvh-120px)] bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
+        <div className="fixed bottom-36 right-4 left-4 md:right-6 md:left-auto md:w-[400px] h-[550px] max-h-[calc(100dvh-160px)] bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
           {/* Header */}
           <div className="bg-blue-600 p-4 text-white flex justify-between items-center">
             <div>

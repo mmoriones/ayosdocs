@@ -39,7 +39,6 @@ export default async function RootLayout({ children }) {
         <ThemeProvider>
           <Providers session={session}>
             {children}
-            <ChatAssistant />
           </Providers>
         </ThemeProvider>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
