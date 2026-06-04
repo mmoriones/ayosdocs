@@ -1,38 +1,121 @@
 'use client';
 
 import { useChat } from '@ai-sdk/react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MessageCircle, X, Send, User, Bot, Loader2 } from 'lucide-react';
 
 export default function ChatAssistant() {
   const [isOpen, setIsOpen] = useState(false);
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat();
+  const [mounted, setMounted] = useState(false);
+  const [localInput, setLocalInput] = useState('');
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+  
+  const messagesEndRef = useRef(null);
+  const scrollContainerRef = useRef(null);
+  
+  const chat = useChat();
+  const { messages, error } = chat;
+  const isLoading = chat.status === 'streaming' || chat.status === 'submitted';
+
+  // Fix hydration issues and ensures hook is ready on client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // BLOCK BACKGROUND SCROLL when chat is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  // Detect if user has scrolled up
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
+      const isAtBottom = scrollHeight - scrollTop - clientHeight < 100;
+      setShouldAutoScroll(isAtBottom);
+    }
+  };
+
+  // Auto-scroll to bottom whenever messages change or window opens
+  useEffect(() => {
+    if (isOpen && messagesEndRef.current && shouldAutoScroll) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, isOpen, shouldAutoScroll]);
+
+  if (!mounted) return null;
+
+  const handleMySubmit = async (e) => {
+    e.preventDefault();
+    if (!localInput.trim() || isLoading) return;
+
+    const content = localInput;
+    setLocalInput('');
+    
+    try {
+      if (chat.sendMessage) {
+        await chat.sendMessage({ text: content });
+      } else if (chat.append) {
+        await chat.append({ role: 'user', content });
+      }
+    } catch (err) {
+      console.error("Chat error:", err);
+      setLocalInput(content);
+    }
+  };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-[200]">
+      {/* Background Overlay (Blocks clicks on site while chat is open) */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/20 backdrop-blur-[2px] z-[-1] animate-in fade-in duration-300"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
       {/* Chat Bubble Toggle */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-2xl transition-all active:scale-95 flex items-center justify-center"
+        className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-2xl transition-all active:scale-95 flex items-center justify-center relative"
+        aria-label={isOpen ? "Close Chat" : "Open Chat"}
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
+        {!isOpen && (
+          <span className="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full border-2 border-white animate-pulse" />
+        )}
       </button>
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-[350px] md:w-[400px] h-[500px] bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
+        <div className="fixed bottom-24 right-4 left-4 md:right-6 md:left-auto md:w-[400px] h-[550px] max-h-[calc(100dvh-120px)] bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
           {/* Header */}
-          <div className="bg-blue-600 p-4 text-white">
-            <h3 className="font-bold">AyosDocs Assistant</h3>
-            <p className="text-xs text-blue-100">Ask about government requirements</p>
+          <div className="bg-blue-600 p-4 text-white flex justify-between items-center">
+            <div>
+              <h3 className="font-bold">AyosDocs Assistant</h3>
+              <p className="text-[10px] text-blue-100 uppercase tracking-widest font-semibold">Government Procedure Expert</p>
+            </div>
+            <Bot className="w-5 h-5 opacity-50" />
           </div>
 
           {/* Messages area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div 
+            ref={scrollContainerRef}
+            onScroll={handleScroll}
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 custom-scrollbar"
+          >
             {messages.length === 0 && (
               <div className="text-center py-10 text-gray-400">
                 <Bot className="w-12 h-12 mx-auto mb-2 opacity-20" />
-                <p>Mabuhay! How can I help you today?</p>
+                <p className="text-sm">Mabuhay! How can I help you today?</p>
+                <p className="text-[10px] mt-2 bg-blue-100 text-blue-700 inline-block px-2 py-1 rounded">Ask about: Passport, BIR, NBI, etc.</p>
               </div>
             )}
             
@@ -42,9 +125,9 @@ export default function ChatAssistant() {
                 className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-2xl p-3 text-sm ${
+                  className={`max-w-[85%] rounded-2xl p-3 text-sm ${
                     m.role === 'user'
-                      ? 'bg-blue-600 text-white rounded-tr-none'
+                      ? 'bg-blue-600 text-white rounded-tr-none shadow-sm'
                       : 'bg-white border border-gray-200 text-gray-800 rounded-tl-none shadow-sm'
                   }`}
                 >
@@ -55,8 +138,10 @@ export default function ChatAssistant() {
                       <><Bot className="w-3 h-3" /> Assistant</>
                     )}
                   </div>
-                  <div className="whitespace-pre-wrap leading-relaxed">
-                    {m.content}
+                  <div className="whitespace-pre-wrap leading-relaxed text-[13px]">
+                    {m.parts && Array.isArray(m.parts) 
+                      ? m.parts.filter(p => p.type === 'text').map(p => p.text).join(' ')
+                      : (m.content || m.text)}
                   </div>
                 </div>
               </div>
@@ -71,25 +156,32 @@ export default function ChatAssistant() {
             )}
             
             {error && (
-              <div className="text-center text-xs text-red-500 bg-red-50 p-2 rounded">
-                Something went wrong. Please check your connection.
+              <div className="text-center text-xs text-red-500 bg-red-50 p-2 rounded border border-red-100">
+                Connection issue. Please try again.
               </div>
             )}
+
+            {/* Scroll Anchor */}
+            <div ref={messagesEndRef} className="h-1" />
           </div>
 
           {/* Input area */}
-          <form onSubmit={handleSubmit} className="p-4 bg-white border-t border-gray-100 flex gap-2">
+          <form onSubmit={handleMySubmit} className="p-4 bg-white border-t border-gray-100 flex gap-2">
             <input
-              value={input}
-              onChange={handleInputChange}
+              value={localInput}
+              onChange={(e) => {
+                setLocalInput(e.target.value);
+                if (chat.setInput) chat.setInput(e.target.value);
+              }}
               placeholder="Type your question..."
               className="flex-1 bg-gray-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
               disabled={isLoading}
+              autoFocus
             />
             <button
               type="submit"
-              disabled={isLoading || !input.trim()}
-              className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white p-2 rounded-full transition-all flex items-center justify-center"
+              disabled={isLoading || !localInput.trim()}
+              className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white w-10 h-10 rounded-full transition-all flex items-center justify-center shadow-lg active:scale-90 shrink-0"
             >
               <Send className="w-4 h-4" />
             </button>

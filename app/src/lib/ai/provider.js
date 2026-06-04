@@ -14,13 +14,14 @@ const AWS_CONFIG = {
 };
 
 // 1. The LLM (The Brain)
-// We use Claude 3 Haiku for best cost/performance
-export const aiModel = bedrock('anthropic.claude-3-haiku-20240307-v1:0', {
+// We use the Asia-Pacific regional inference profile for Claude 3 Haiku
+export const aiModel = bedrock('apac.anthropic.claude-3-haiku-20240307-v1:0', {
   bedrockOptions: AWS_CONFIG,
 });
 
 // 2. The Embedding Model (The Translator)
-export const embeddingModel = bedrock.embedding('amazon.titan-embed-text-v2:0', {
+// We use Cohere Multilingual v3 for best-in-class Taglish and Filipino support
+export const embeddingModel = bedrock.embedding('cohere.embed-multilingual-v3', {
   bedrockOptions: AWS_CONFIG,
 });
 

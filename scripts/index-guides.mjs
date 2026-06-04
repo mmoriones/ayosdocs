@@ -13,7 +13,8 @@ import { embedMany } from 'ai';
 import { embeddingModel, qdrant, COLLECTION_NAME } from '../app/src/lib/ai/provider.js';
 import dotenv from 'dotenv';
 
-// Load env from the app directory where it's stored in prod
+// Load env from the app directory (supports both local and prod structures)
+dotenv.config({ path: path.join(process.cwd(), 'app/.env.local') });
 dotenv.config({ path: path.join(process.cwd(), 'app/.env') });
 
 const GUIDES_DIR = path.join(process.cwd(), 'app/src/data/guides');
@@ -30,7 +31,7 @@ async function main() {
       console.log(`📦 Creating collection: ${COLLECTION_NAME}...`);
       await qdrant.createCollection(COLLECTION_NAME, {
         vectors: {
-          size: 1024, // Titan Embed v2 default size
+          size: 1024, // Cohere v3 standard size
           distance: 'Cosine',
         },
       });
@@ -77,6 +78,9 @@ async function main() {
     const { embeddings } = await embedMany({
       model: embeddingModel,
       values: documents.map(doc => doc.text),
+      // Cohere specific: inputType is required for best results
+      // 'search_document' for the knowledge base, 'search_query' for the user question
+      inputType: 'search_document',
     });
 
     // 4. Upsert to Qdrant
