@@ -59,7 +59,7 @@ docker-log-%:
 ai-sync:
 	@if [ "$$(docker ps -q -f name=ayosdocs-app)" ]; then \
 		echo "Running sync inside Docker container..."; \
-		docker exec -it ayosdocs-app node scripts/index-guides.mjs; \
+		docker exec -it ayosdocs-app node ../scripts/index-guides.mjs; \
 	else \
 		echo "Running sync locally..."; \
 		node scripts/index-guides.mjs; \

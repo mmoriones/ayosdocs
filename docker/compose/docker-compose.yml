@@ -16,6 +16,8 @@ services:
       - AI_ENABLED=${AI_ENABLED}
       - QDRANT_URL=${QDRANT_URL:-http://qdrant:6333}
       - NEXT_PUBLIC_ADSENSE_ENABLED=false
+    volumes:
+      - ../../scripts:/app/scripts
     depends_on:
       - mongodb
     networks:
