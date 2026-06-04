@@ -10,7 +10,7 @@ export default function ChatAssistant() {
   const [localInput, setLocalInput] = useState('');
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
   
   const messagesEndRef = useRef(null);
   const scrollContainerRef = useRef(null);
@@ -28,13 +28,13 @@ export default function ChatAssistant() {
   // Intelligent Auto-Hide Logic (Synchronized with BottomNav)
   useEffect(() => {
     const handleScroll = () => {
-      // Don't hide if the chat modal is actually open
       if (isOpen) {
         setIsVisible(true);
         return;
       }
 
       const currentScrollY = window.scrollY;
+      const lastScrollY = lastScrollYRef.current;
       if (currentScrollY < 50) {
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY) {
@@ -42,12 +42,12 @@ export default function ChatAssistant() {
       } else {
         setIsVisible(true);
       }
-      setLastScrollY(currentScrollY);
+      lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, isOpen]);
+  }, [isOpen]);
 
   // BLOCK BACKGROUND SCROLL when chat is open
   useEffect(() => {

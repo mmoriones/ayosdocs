@@ -181,13 +181,12 @@
       radial-gradient(at 0% 100%, #f0f4fc 0%, transparent 50%) !important;
     background-attachment: fixed !important;
     background-size: cover !important;
-    min-height: 100% !important;
+    min-height: 100dvh !important;
   }
 
   body {
     @apply text-ctp-text font-sans antialiased overflow-x-hidden;
     margin: 0;
-    overscroll-behavior: none;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 

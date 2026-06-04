@@ -73,8 +73,7 @@ export default function MobileHeader({
 
     const handleTouchMove = (e) => {
       const touchY = e.touches[0].clientY;
-      // Pulling down (finger moves down) when at the top of the page
-      if (window.scrollY <= 0 && touchY > lastTouchY) {
+      if (window.scrollY <= 0 && touchY > lastTouchY && document.documentElement.scrollTop <= 0) {
         e.preventDefault();
       }
       lastTouchY = touchY;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, memo, useState, useEffect } from 'react';
+import { useMemo, memo, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Book, Layers, CheckSquare } from 'lucide-react';
@@ -8,15 +8,14 @@ import { Home, Book, Layers, CheckSquare } from 'lucide-react';
 function BottomNav({ isLoggedIn = false }) {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
 
   // Intelligent Auto-Hide Logic
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      // Show if scrolling up, hide if scrolling down
-      // But always show if near the top
+      const lastScrollY = lastScrollYRef.current;
+
       if (currentScrollY < 50) {
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY) {
@@ -24,13 +23,13 @@ function BottomNav({ isLoggedIn = false }) {
       } else {
         setIsVisible(true);
       }
-      
-      setLastScrollY(currentScrollY);
+
+      lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const navItems = useMemo(() => [
     { href: '/', icon: Home, label: 'Home' },
