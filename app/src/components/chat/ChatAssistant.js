@@ -28,6 +28,7 @@ export default function ChatAssistant() {
   // Intelligent Auto-Hide Logic (Synchronized with BottomNav)
   useEffect(() => {
     const handleScroll = () => {
+      // Don't hide if the chat window is actually open
       if (isOpen) {
         setIsVisible(true);
         return;
@@ -35,6 +36,7 @@ export default function ChatAssistant() {
 
       const currentScrollY = window.scrollY;
       const lastScrollY = lastScrollYRef.current;
+      
       if (currentScrollY < 50) {
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY) {
@@ -62,7 +64,7 @@ export default function ChatAssistant() {
   }, [isOpen]);
 
   // Detect if user has scrolled up
-  const handleScroll = () => {
+  const handleScrollInside = () => {
     if (scrollContainerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
       const isAtBottom = scrollHeight - scrollTop - clientHeight < 100;
@@ -100,53 +102,62 @@ export default function ChatAssistant() {
 
   return (
     <>
-      {/* Background Overlay (Blocks clicks on site while chat is open) */}
+      {/* Background Overlay (Blocks clicks on site while chat is open) - Only on Desktop */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/20 backdrop-blur-[2px] z-[190] animate-in fade-in duration-300"
+          className="hidden md:block fixed inset-0 bg-black/20 backdrop-blur-[2px] z-[190] animate-in fade-in duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      {/* Chat Bubble Toggle - Nested in a transitioning container */}
+      {/* Chat Bubble Toggle - Hide on mobile when chat is open or when scrolling down */}
       <div className={`fixed bottom-20 right-6 z-[200] transition-all duration-500 ease-in-out ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-28 opacity-0 pointer-events-none'
+        isVisible && !isOpen ? 'translate-y-0 opacity-100' : 'translate-y-28 opacity-0 pointer-events-none'
       }`}>
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen(true)}
           className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-2xl transition-all active:scale-95 flex items-center justify-center relative"
-          aria-label={isOpen ? "Close Chat" : "Open Chat"}
+          aria-label="Open Chat"
         >
-          {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
-          {!isOpen && (
-            <span className="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full border-2 border-white animate-pulse" />
-          )}
+          <MessageCircle className="w-6 h-6" />
+          <span className="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full border-2 border-white animate-pulse" />
         </button>
       </div>
 
-      {/* Chat Window - OUTSIDE the transitioning parent so left-4 right-4 works correctly relative to viewport */}
+      {/* Chat Window - Full screen on mobile, floating on desktop */}
       {isOpen && (
-        <div className="fixed bottom-36 right-4 left-4 md:right-6 md:left-auto md:w-[400px] h-[550px] max-h-[calc(100dvh-160px)] bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300 z-[210]">
+        <div className="fixed inset-0 md:inset-auto md:bottom-36 md:right-6 md:w-[400px] md:h-[550px] md:max-h-[calc(100dvh-160px)] h-[100dvh] w-full bg-white md:rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300 z-[210]">
           {/* Header */}
-          <div className="bg-blue-600 p-4 text-white flex justify-between items-center">
-            <div>
-              <h3 className="font-bold text-sm md:text-base">AyosDocs Assistant</h3>
-              <p className="text-[10px] text-blue-100 uppercase tracking-widest font-semibold">Government Procedure Expert</p>
+          <div className="bg-blue-600 p-4 text-white flex justify-between items-center shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="bg-white/20 p-2 rounded-lg">
+                <Bot className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm md:text-base leading-tight">AyosDocs Assistant</h3>
+                <p className="text-[10px] text-blue-100 uppercase tracking-widest font-semibold font-mono">Government Procedure Expert</p>
+              </div>
             </div>
-            <Bot className="w-5 h-5 opacity-50" />
+            <button 
+              onClick={() => setIsOpen(false)}
+              className="p-2 hover:bg-white/10 rounded-full transition-colors active:scale-90"
+              aria-label="Close Chat"
+            >
+              <X className="w-5 h-5 text-white" />
+            </button>
           </div>
 
           {/* Messages area */}
           <div 
             ref={scrollContainerRef}
-            onScroll={handleScroll}
-            className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 custom-scrollbar"
+            onScroll={handleScrollInside}
+            className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 custom-scrollbar overscroll-contain"
           >
             {messages.length === 0 && (
-              <div className="text-center py-10 text-gray-400">
+              <div className="text-center py-20 text-gray-400">
                 <Bot className="w-12 h-12 mx-auto mb-2 opacity-20" />
-                <p className="text-sm">Mabuhay! How can I help you today?</p>
-                <p className="text-[10px] mt-2 bg-blue-100 text-blue-700 inline-block px-2 py-1 rounded">Ask about: Passport, BIR, NBI, etc.</p>
+                <p className="text-sm font-medium">Mabuhay! How can I help you today?</p>
+                <p className="text-[10px] mt-2 bg-blue-100 text-blue-700 inline-block px-3 py-1.5 rounded-full">Try: "Ano ang requirements para sa passport?"</p>
               </div>
             )}
             
@@ -156,20 +167,20 @@ export default function ChatAssistant() {
                 className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl p-3 text-sm ${
+                  className={`max-w-[85%] rounded-2xl p-3 text-sm shadow-sm ${
                     m.role === 'user'
-                      ? 'bg-blue-600 text-white rounded-tr-none shadow-sm'
-                      : 'bg-white border border-gray-200 text-gray-800 rounded-tl-none shadow-sm'
+                      ? 'bg-blue-600 text-white rounded-tr-none'
+                      : 'bg-white border border-gray-100 text-gray-800 rounded-tl-none'
                   }`}
                 >
-                  <div className="flex items-center gap-2 mb-1 opacity-60 text-[10px] uppercase font-bold">
+                  <div className="flex items-center gap-2 mb-1 opacity-60 text-[10px] uppercase font-extrabold tracking-wider">
                     {m.role === 'user' ? (
                       <>You <User className="w-3 h-3" /></>
                     ) : (
-                      <><Bot className="w-3 h-3" /> Assistant</>
+                      <>Assistant <Bot className="w-3 h-3" /></>
                     )}
                   </div>
-                  <div className="whitespace-pre-wrap leading-relaxed text-[13px]">
+                  <div className="whitespace-pre-wrap leading-relaxed text-[13px] md:text-sm">
                     {m.parts && Array.isArray(m.parts) 
                       ? m.parts.filter(p => p.type === 'text').map(p => p.text).join(' ')
                       : (m.content || m.text)}
@@ -180,35 +191,47 @@ export default function ChatAssistant() {
             
             {isLoading && messages[messages.length - 1]?.role === 'user' && (
               <div className="flex justify-start">
-                <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-none p-3 shadow-sm">
-                  <Loader2 className="w-4 h-4 animate-spin text-blue-600" />
+                <div className="bg-white border border-gray-100 rounded-2xl rounded-tl-none p-4 shadow-sm">
+                  <div className="flex gap-1">
+                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce" />
+                  </div>
                 </div>
               </div>
             )}
             
             {error && (
-              <div className="text-center text-xs text-red-500 bg-red-50 p-2 rounded border border-red-100">
+              <div className="text-center text-xs text-red-500 bg-red-50 p-3 rounded-xl border border-red-100 animate-in shake duration-300">
                 Connection issue. Please try again.
               </div>
             )}
 
             {/* Scroll Anchor */}
-            <div ref={messagesEndRef} className="h-1" />
+            <div ref={messagesEndRef} className="h-4" />
           </div>
 
           {/* Input area */}
-          <form onSubmit={handleMySubmit} className="p-4 bg-white border-t border-gray-100 flex gap-2">
-            <input
-              value={localInput}
-              onChange={(e) => {
-                setLocalInput(e.target.value);
-                if (chat.setInput) chat.setInput(e.target.value);
-              }}
-              placeholder="Type your question..."
-              className="flex-1 bg-gray-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-blue-600 outline-none"
-              disabled={isLoading}
-              autoFocus
-            />
+          <form 
+            onSubmit={handleMySubmit} 
+            className="p-4 bg-white border-t border-gray-100 flex gap-2 items-center pb-safe shrink-0"
+          >
+            <div className="flex-1 bg-gray-100 rounded-full px-4 py-2 flex items-center focus-within:ring-2 focus-within:ring-blue-600 focus-within:bg-white transition-all">
+              <input
+                value={localInput}
+                onChange={(e) => {
+                  setLocalInput(e.target.value);
+                  if (chat.setInput) chat.setInput(e.target.value);
+                }}
+                placeholder="Ask AyosDocs..."
+                className="flex-1 bg-transparent border-none text-sm outline-none text-gray-800 focus:ring-0"
+                disabled={isLoading}
+                autoFocus
+                inputMode="text"
+                enterKeyHint="send"
+                autoComplete="off"
+              />
+            </div>
             <button
               type="submit"
               disabled={isLoading || !localInput.trim()}
