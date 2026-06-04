@@ -5,6 +5,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import { ThemeProvider } from "@/context";
+import ChatAssistant from "@/components/chat/ChatAssistant";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default async function RootLayout({ children }) {
         <ThemeProvider>
           <Providers session={session}>
             {children}
+            <ChatAssistant />
           </Providers>
         </ThemeProvider>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />

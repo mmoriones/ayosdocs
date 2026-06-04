@@ -45,6 +45,9 @@ docker-logs:
 docker-log-%:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f $*
 
+ai-sync:
+	node scripts/index-guides.mjs
+
 backup:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml exec backup /scripts/backup.sh
 

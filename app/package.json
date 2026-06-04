@@ -11,9 +11,13 @@
     "lint": "eslint --quiet"
   },
   "dependencies": {
+    "@ai-sdk/amazon-bedrock": "^4.0.112",
+    "@ai-sdk/react": "^3.0.198",
     "@next/third-parties": "^16.2.6",
+    "@qdrant/js-client-rest": "^1.18.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tanstack/react-query": "^5.100.10",
+    "ai": "^6.0.196",
     "axios": "^1.16.1",
     "bcryptjs": "^3.0.3",
     "google-auth-library": "^10.6.2",

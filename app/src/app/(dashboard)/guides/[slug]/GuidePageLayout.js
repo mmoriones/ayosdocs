@@ -28,6 +28,7 @@ import {
   MapPin,
   Plane,
   Scale,
+  AlertCircle,
   ShieldCheck,
   Truck,
   Users,
