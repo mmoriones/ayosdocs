@@ -99,36 +99,38 @@ export default function ChatAssistant() {
   };
 
   return (
-    <div className={`fixed bottom-20 right-6 z-[200] transition-all duration-500 ease-in-out ${
-      isVisible ? 'translate-y-0 opacity-100' : 'translate-y-28 opacity-0 pointer-events-none'
-    }`}>
+    <>
       {/* Background Overlay (Blocks clicks on site while chat is open) */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/20 backdrop-blur-[2px] z-[-1] animate-in fade-in duration-300"
+          className="fixed inset-0 bg-black/20 backdrop-blur-[2px] z-[190] animate-in fade-in duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      {/* Chat Bubble Toggle */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-2xl transition-all active:scale-95 flex items-center justify-center relative"
-        aria-label={isOpen ? "Close Chat" : "Open Chat"}
-      >
-        {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
-        {!isOpen && (
-          <span className="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full border-2 border-white animate-pulse" />
-        )}
-      </button>
+      {/* Chat Bubble Toggle - Nested in a transitioning container */}
+      <div className={`fixed bottom-20 right-6 z-[200] transition-all duration-500 ease-in-out ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-28 opacity-0 pointer-events-none'
+      }`}>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-2xl transition-all active:scale-95 flex items-center justify-center relative"
+          aria-label={isOpen ? "Close Chat" : "Open Chat"}
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
+          {!isOpen && (
+            <span className="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full border-2 border-white animate-pulse" />
+          )}
+        </button>
+      </div>
 
-      {/* Chat Window */}
+      {/* Chat Window - OUTSIDE the transitioning parent so left-4 right-4 works correctly relative to viewport */}
       {isOpen && (
-        <div className="fixed bottom-36 right-4 left-4 md:right-6 md:left-auto md:w-[400px] h-[550px] max-h-[calc(100dvh-160px)] bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
+        <div className="fixed bottom-36 right-4 left-4 md:right-6 md:left-auto md:w-[400px] h-[550px] max-h-[calc(100dvh-160px)] bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300 z-[210]">
           {/* Header */}
           <div className="bg-blue-600 p-4 text-white flex justify-between items-center">
             <div>
-              <h3 className="font-bold">AyosDocs Assistant</h3>
+              <h3 className="font-bold text-sm md:text-base">AyosDocs Assistant</h3>
               <p className="text-[10px] text-blue-100 uppercase tracking-widest font-semibold">Government Procedure Expert</p>
             </div>
             <Bot className="w-5 h-5 opacity-50" />
@@ -217,6 +219,6 @@ export default function ChatAssistant() {
           </form>
         </div>
       )}
-    </div>
+    </>
   );
 }

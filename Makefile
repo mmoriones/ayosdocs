@@ -27,8 +27,11 @@ docker-pull-app:
 docker-up:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d
 
-docker-minimal:
+docker-minimal-up:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d app mongodb nginx backup account-cleanup qdrant
+
+docker-minimal-build:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml up -d --build app mongodb nginx backup account-cleanup qdrant
 
 docker-down:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml down
@@ -46,7 +49,13 @@ docker-log-%:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f $*
 
 ai-sync:
-	node scripts/index-guides.mjs
+	@if [ "$$(docker ps -q -f name=ayosdocs-app)" ]; then \
+		echo "Running sync inside Docker container..."; \
+		docker exec -it ayosdocs-app node scripts/index-guides.mjs; \
+	else \
+		echo "Running sync locally..."; \
+		node scripts/index-guides.mjs; \
+	fi
 
 backup:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml exec backup /scripts/backup.sh

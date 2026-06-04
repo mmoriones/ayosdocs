@@ -1,0 +1,92 @@
+services:
+  app:
+    container_name: ayosdocs-app
+    build:
+      context: ../../
+      dockerfile: app/Dockerfile
+    restart: always
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - CRON_SECRET=${CRON_SECRET}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AI_ENABLED=${AI_ENABLED}
+      - QDRANT_URL=${QDRANT_URL:-http://qdrant:6333}
+      - NEXT_PUBLIC_ADSENSE_ENABLED=false
+    depends_on:
+      - mongodb
+      - qdrant
+    networks:
+      - ayosdocs-network
+
+  nginx:
+    container_name: ayosdocs-nginx
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ../nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - app
+    networks:
+      - ayosdocs-network
+
+  mongodb:
+    container_name: ayosdocs-db
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - ayosdocs-network
+
+  backup:
+    container_name: ayosdocs-backup
+    image: alpine:latest
+    restart: always
+    depends_on:
+      - mongodb
+    volumes:
+      - ../../scripts:/scripts:ro
+      - ../../backups:/backups
+      - ../../docker/monitoring/rclone.conf:/root/.config/rclone/rclone.conf:ro
+    entrypoint: ["sh", "-c", "apk add --no-cache mongodb-tools rclone bash && echo '0 3 * * * /scripts/backup.sh' > /etc/crontabs/root && crond -f"]
+    networks:
+      - ayosdocs-network
+
+  account-cleanup:
+    container_name: ayosdocs-account-cleanup
+    image: alpine:latest
+    restart: always
+    depends_on:
+      - app
+    environment:
+      - CRON_SECRET=${CRON_SECRET}
+    entrypoint: ["sh", "-c", "apk add --no-cache curl bash && echo '0 2 * * * curl -sf -H \"Authorization: Bearer $$CRON_SECRET\" http://app:3000/api/cron/cleanup-accounts' > /etc/crontabs/root && crond -f"]
+    networks:
+      - ayosdocs-network
+
+  qdrant:
+    container_name: ayosdocs-qdrant
+    image: qdrant/qdrant:latest
+    restart: always
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - ayosdocs-network
+
+networks:
+  ayosdocs-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  qdrant_data:
