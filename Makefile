@@ -1,4 +1,4 @@
-.PHONY: dev build start infra-up infra-down infra-provision vault-edit docker-up docker-down docker-minimal docker-logs docker-stats
+.PHONY: dev build start infra-up infra-down infra-provision vault-edit docker-pull-app docker-up docker-down docker-minimal-pull docker-minimal-up docker-minimal-down docker-minimal-build docker-dev-up docker-dev-down docker-logs ai-sync backup cron-cleanup
 
 dev:
 	npm run dev
@@ -24,23 +24,31 @@ vault-edit:
 docker-pull-app:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml pull app
 
+docker-minimal-pull:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml pull nginx mongodb backup account-cleanup qdrant
+
 docker-up:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d
-
-docker-minimal-up:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d app mongodb nginx backup account-cleanup qdrant
-
-docker-minimal-build:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml up -d --build app mongodb nginx backup account-cleanup qdrant
 
 docker-down:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml down
 
+docker-minimal-up:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d app mongodb nginx backup account-cleanup qdrant
+
+docker-minimal-down:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.yml down app mongodb nginx backup account-cleanup qdrant
+
+docker-minimal-build:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml up -d --build app mongodb nginx backup account-cleanup qdrant
+
+
+
 docker-dev-up:
-	docker compose -f docker/compose/docker-compose.dev.yml up -d
+	docker compose --env-file app/.env.local -f docker/compose/docker-compose.dev.yml up -d
 
 docker-dev-down:
-	docker compose -f docker/compose/docker-compose.dev.yml down
+	docker compose --env-file app/.env.local -f docker/compose/docker-compose.dev.yml down
 
 docker-logs:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f
