@@ -1,6 +1,6 @@
 'use client';
 import { useMemo } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
@@ -9,7 +9,7 @@ import {
   CheckSquare,
   ChevronRight
 } from 'lucide-react';
-import { Skeleton } from '@/components/ui'
+import { Skeleton, Card } from '@/components/ui'
 import { bundleStyles, bundleImages } from '@/lib/assetStyles';
 
 // --- Inlined from components/ui/TrackingIndicator.js ---
@@ -90,14 +90,17 @@ export default function BundlesClient({ initialBundles }) {
 }
 
 const BundleCard = ({ bundle, isTracking }) => {
+  const router = useRouter();
   const totalGuides = bundle.flow.reduce((acc, step) => acc + step.guides.length, 0);
   const theme = bundleStyles[bundle.id] || bundleStyles['foundational-docs'];
   const imagePath = bundleImages[bundle.id] || bundleImages['foundational-docs'];
 
   return (
-    <Link 
-      href={`/bundles/${bundle.id}`}
-      className="group bg-white/70 backdrop-blur-xl rounded-[32px] p-5 lg:p-6 border border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.08)] hover:scale-[1.01] active:scale-[0.98] transition-all duration-500 flex flex-row gap-5 lg:gap-8 items-center relative overflow-hidden"
+    <Card 
+      interactive
+      noPadding
+      onClick={() => router.push(`/bundles/${bundle.id}`)}
+      className="group bg-white/70 backdrop-blur-xl border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] flex flex-row gap-5 lg:gap-8 items-center p-5 lg:p-6"
     >
       {/* 3D ILLUSTRATION CONTAINER */}
       <div 
@@ -149,13 +152,13 @@ const BundleCard = ({ bundle, isTracking }) => {
 
       {/* SUBTLE BACKGROUND DECOR */}
       <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[#0038A8]/5 rounded-full blur-3xl group-hover:bg-[#0038A8]/10 transition-colors duration-700 hidden lg:block"></div>
-    </Link>
+    </Card>
   );
 };
 
 BundleCard.Skeleton = function BundleCardSkeleton() {
   return (
-    <div className="bg-white/70 backdrop-blur-xl rounded-[32px] p-5 lg:p-6 border border-white/60 shadow-sm flex flex-row gap-5 lg:gap-8 items-center">
+    <Card noPadding className="bg-white/70 backdrop-blur-xl border-white/60 shadow-sm flex flex-row gap-5 lg:gap-8 items-center p-5 lg:p-6">
       <Skeleton className="w-28 h-28 sm:w-32 sm:h-32 lg:w-44 lg:h-44 rounded-[24px] lg:rounded-[28px] shrink-0" />
       <div className="flex-1 space-y-3 lg:space-y-4 py-2 w-full">
         <Skeleton className="w-2/3 h-6 lg:h-7 rounded-lg" />
@@ -165,6 +168,6 @@ BundleCard.Skeleton = function BundleCardSkeleton() {
         </div>
         <Skeleton className="w-32 lg:w-40 h-4 lg:h-5 rounded-md mt-2 lg:mt-4" />
       </div>
-    </div>
+    </Card>
   );
 };
