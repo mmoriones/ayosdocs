@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
 import MobileHeader from './MobileHeader';
@@ -17,6 +18,9 @@ import { SignOutModal } from '@/components/ui';
  * @param {React.ReactNode} props.children - Content to be rendered in the main area.
  */
 export default function AppShell({ children }) {
+  const { status } = useSession();
+  const isLoggedIn = status === 'authenticated';
+
   // Consolidate layout state to minimize renders on mount and satisfy linting
   const [layout, setLayout] = useState({
     isCollapsed: false,
@@ -96,7 +100,7 @@ export default function AppShell({ children }) {
       </div>
 
       {/* MOBILE BOTTOM NAVIGATION */}
-      <BottomNav />
+      <BottomNav isLoggedIn={isLoggedIn} />
 
       <SignOutModal
         isOpen={showLogoutConfirm}
