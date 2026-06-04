@@ -63,7 +63,14 @@
         force: yes
       become: no
 
-    # 3. Server Hardening
+    # 3. Install npm dependencies
+    - name: Install npm dependencies
+      command: npm ci
+      args:
+        chdir: "{{ project_path }}"
+      become: no
+
+    # 5. Server Hardening
     - name: Install UFW and Fail2Ban
       apt:
         name:
@@ -160,7 +167,7 @@
     - name: Reset connection to apply group changes
       meta: reset_connection
 
-    # 5. Secrets & Env Configuration
+    # 6. Secrets & Env Configuration
     - name: Create .env file in app/ dir
       copy:
         content: |
@@ -178,7 +185,7 @@
         mode: '0600'
         owner: "{{ ansible_user }}"
 
-    # 7. Final Verification
+    # 8. Final Verification
     - name: Verify Docker Compose is accessible
       command: docker compose version
       register: compose_version
