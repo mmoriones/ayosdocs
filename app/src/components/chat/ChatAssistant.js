@@ -11,6 +11,8 @@ export default function ChatAssistant() {
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
   const [viewportHeight, setViewportHeight] = useState('100dvh');
+  const [viewportOffset, setViewportOffset] = useState('0px');
+  const [isMobile, setIsMobile] = useState(false);
   const lastScrollYRef = useRef(0);
   
   const messagesEndRef = useRef(null);
@@ -25,10 +27,15 @@ export default function ChatAssistant() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
 
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     // Handle mobile keyboard and viewport resizing
     if (typeof window !== 'undefined' && window.visualViewport) {
       const handleResize = () => {
         setViewportHeight(`${window.visualViewport.height}px`);
+        setViewportOffset(`${window.visualViewport.offsetTop}px`);
         // Re-scroll to bottom if we were already at bottom
         if (shouldAutoScroll) {
           setTimeout(() => {
@@ -37,8 +44,14 @@ export default function ChatAssistant() {
         }
       };
       window.visualViewport.addEventListener('resize', handleResize);
-      return () => window.visualViewport.removeEventListener('resize', handleResize);
+      window.visualViewport.addEventListener('scroll', handleResize);
+      return () => {
+        window.removeEventListener('resize', checkMobile);
+        window.visualViewport.removeEventListener('resize', handleResize);
+        window.visualViewport.removeEventListener('scroll', handleResize);
+      };
     }
+    return () => window.removeEventListener('resize', checkMobile);
   }, [shouldAutoScroll]);
 
   // Intelligent Auto-Hide Logic (Synchronized with BottomNav)
@@ -143,8 +156,11 @@ export default function ChatAssistant() {
       {/* Chat Window - Full screen on mobile, floating on desktop */}
       {isOpen && (
         <div 
-          style={{ height: typeof window !== 'undefined' && window.innerWidth < 768 ? viewportHeight : undefined }}
-          className="fixed inset-0 md:inset-auto md:bottom-36 md:right-6 md:w-[400px] md:h-[550px] md:max-h-[calc(100dvh-160px)] w-full bg-white md:rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300 z-[210]"
+          style={{ 
+            height: isMobile ? viewportHeight : undefined,
+            top: isMobile ? viewportOffset : undefined
+          }}
+          className={`fixed inset-x-0 md:inset-auto md:bottom-36 md:right-6 md:w-[400px] md:h-[550px] md:max-h-[calc(100dvh-160px)] w-full bg-white md:rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300 z-[210] ${!isMobile ? 'inset-y-0' : ''}`}
         >
           {/* Header */}
           <div className="bg-blue-600 p-4 text-white flex justify-between items-center shrink-0">
@@ -233,7 +249,7 @@ export default function ChatAssistant() {
           {/* Input area */}
           <form 
             onSubmit={handleMySubmit} 
-            className="p-4 bg-white border-t border-gray-100 flex gap-2 items-center pb-safe md:pb-4 shrink-0"
+            className="p-4 bg-white border-t border-gray-100 flex gap-2 items-center pb-4 md:pb-4 shrink-0"
           >
             <div className="flex-1 bg-gray-100 rounded-full px-4 py-2 flex items-center focus-within:ring-2 focus-within:ring-blue-600 focus-within:bg-white transition-all">
               <input
