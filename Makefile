@@ -19,9 +19,6 @@ vault-edit:
 docker-pull-app:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml pull app
 
-docker-minimal-pull:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml pull nginx mongodb backup account-cleanup qdrant
-
 docker-up:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d
 
@@ -37,6 +34,9 @@ docker-log-%:
 
 
 # Minimal docker compose for low specs VPS
+docker-minimal-pull:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml pull nginx mongodb backup account-cleanup qdrant
+
 docker-minimal-up:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml up -d app mongodb nginx backup account-cleanup qdrant
 
@@ -47,10 +47,10 @@ docker-minimal-build:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml up -d --build app mongodb nginx backup account-cleanup qdrant
 
 docker-minimal-logs:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal.build.yml logs -f
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml logs -f
 
 docker-minimal-log-%:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal.build.yml logs -f $*
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml logs -f $*
 
 
 # for local dev (will run db and qdrant containers)
