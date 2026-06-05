@@ -1,29 +1,29 @@
 services:
-  app:
-    container_name: ayosdocs-app-dev
-    build:
-      context: ../../
-      dockerfile: app/Dockerfile
-    restart: always
-    ports:
-      - "3000:3000"
-    environment:
-      - MONGO_URI=${MONGO_URI:-mongodb://mongodb:27017/ayosdocs}
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-      - CRON_SECRET=${CRON_SECRET}
-      - AWS_REGION=${AWS_REGION}
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AI_ENABLED=${AI_ENABLED:-true}
-      - QDRANT_URL=${QDRANT_URL:-http://qdrant:6333}
-    depends_on:
-      - mongodb
-      - qdrant
-    networks:
-      - ayosdocs-network
+  # app:
+  #   container_name: ayosdocs-app-dev
+  #   build:
+  #     context: ../../
+  #     dockerfile: app/Dockerfile
+  #   restart: always
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - MONGO_URI=${MONGO_URI:-mongodb://mongodb:27017/ayosdocs}
+  #     - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+  #     - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
+  #     - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+  #     - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+  #     - CRON_SECRET=${CRON_SECRET}
+  #     - AWS_REGION=${AWS_REGION}
+  #     - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+  #     - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+  #     - AI_ENABLED=${AI_ENABLED:-true}
+  #     - QDRANT_URL=${QDRANT_URL:-http://qdrant:6333}
+  #   depends_on:
+  #     - mongodb
+  #     - qdrant
+  #   networks:
+  #     - ayosdocs-network
 
   mongodb:
     container_name: ayosdocs-db-dev

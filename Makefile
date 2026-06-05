@@ -1,13 +1,5 @@
-.PHONY: dev build start infra-up infra-down infra-provision vault-edit docker-pull-app docker-up docker-down docker-minimal-pull docker-minimal-up docker-minimal-down docker-minimal-build docker-dev-up docker-dev-down docker-logs ai-sync backup cron-cleanup
+.PHONY: infra-up infra-down infra-provision vault-edit docker-pull-app docker-up docker-down docker-minimal-pull docker-minimal-up docker-minimal-down docker-minimal-build docker-dev-up docker-dev-down docker-minimal-logs docker-logs ai-sync backup cron-cleanup
 
-dev:
-	npm run dev
-
-build:
-	npm run build
-
-start:
-	npm run start
 
 infra-up:
 	cd infra/terraform && terraform apply
@@ -21,6 +13,9 @@ infra-provision:
 vault-edit:
 	ansible-vault edit infra/ansible/vars/secrets.yml
 
+
+
+# Full stack docker compose
 docker-pull-app:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml pull app
 
@@ -33,28 +28,39 @@ docker-up:
 docker-down:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.yml down
 
+docker-logs:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f
+
+docker-log-%:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f $*
+
+
+
+# Minimal docker compose for low specs VPS
 docker-minimal-up:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.yml up -d app mongodb nginx backup account-cleanup qdrant
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml up -d app mongodb nginx backup account-cleanup qdrant
 
 docker-minimal-down:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.yml down app mongodb nginx backup account-cleanup qdrant
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml down app mongodb nginx backup account-cleanup qdrant
 
 docker-minimal-build:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml up -d --build app mongodb nginx backup account-cleanup qdrant
 
+docker-minimal-logs:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal.build.yml logs -f
+
+docker-minimal-log-%:
+	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal.build.yml logs -f $*
 
 
+# for local dev (will run db and qdrant containers)
 docker-dev-up:
 	docker compose --env-file app/.env.local -f docker/compose/docker-compose.dev.yml up -d
 
 docker-dev-down:
 	docker compose --env-file app/.env.local -f docker/compose/docker-compose.dev.yml down
 
-docker-logs:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f
 
-docker-log-%:
-	docker compose --env-file app/.env -f docker/compose/docker-compose.yml logs -f $*
 
 ai-sync:
 	node scripts/index-guides.mjs
