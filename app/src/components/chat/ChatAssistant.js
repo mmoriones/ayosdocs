@@ -259,7 +259,7 @@ export default function ChatAssistant() {
                   if (chat.setInput) chat.setInput(e.target.value);
                 }}
                 placeholder="Ask AyosDocs..."
-                className="flex-1 bg-transparent border-none text-sm outline-none text-gray-800 focus:ring-0"
+                className="flex-1 bg-transparent border-none text-base md:text-sm outline-none text-gray-800 focus:ring-0"
                 disabled={isLoading}
                 inputMode="text"
                 enterKeyHint="send"
