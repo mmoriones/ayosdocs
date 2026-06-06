@@ -10,6 +10,7 @@ const WorkspaceContext = createContext();
  */
 export function WorkspaceProvider({ children }) {
   const [activeGuideSlug, setActiveGuideSlugState] = useState(null);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   // Initialize from localStorage on mount
   useEffect(() => {
@@ -27,10 +28,16 @@ export function WorkspaceProvider({ children }) {
     localStorage.setItem('ayosdocs_last_viewed_guide', slug);
   }, []);
 
+  const setChatOpen = useCallback((isOpen) => {
+    setIsChatOpen(isOpen);
+  }, []);
+
   return (
     <WorkspaceContext.Provider value={{ 
       activeGuideSlug, 
-      setActiveGuideSlug 
+      setActiveGuideSlug,
+      isChatOpen,
+      setChatOpen
     }}>
       {children}
     </WorkspaceContext.Provider>

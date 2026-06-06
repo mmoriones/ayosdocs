@@ -36,7 +36,8 @@ import {
   Loader2,
   UserPlus,
   X,
-  Scan
+  Scan,
+  Check
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

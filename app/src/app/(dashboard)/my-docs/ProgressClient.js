@@ -2,8 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { 
-  Bell,
+import {
   ChevronRight,
   Heart,
   Check,
@@ -12,29 +11,23 @@ import {
   CheckCircle2,
   Bookmark,
   BarChart3,
-  Calendar,
-  Zap,
-  ListChecks,
-  Clock,
-  Layers,
   Trash2,
-  MoreVertical
+  MoreVertical,
+  Package
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import axios from 'axios';
-import { useSession } from 'next-auth/react';
 
 import { bundles } from "@/data/bundles";
-import { Skeleton, Card, Input, Button, ProgressBar, DropdownMenu, DropdownMenuItem, SortDropdown } from '@/components/ui';
+import { bundleStyles, bundleImages } from '@/lib/assetStyles';
+import { Skeleton, Card, Button, ProgressBar, DropdownMenu, DropdownMenuItem, SearchBar } from '@/components/ui';
 import { useToast } from '@/context';
 import ConfirmModal from '@/components/ConfirmModal';
 import { deleteProgressAction, toggleFavoriteAction, stopBundleAction } from '@/app/actions/user';
 import { GuideIcon, getIconName } from '@/lib/guideIcons';
 import { getIconTheme } from '@/lib/assetStyles';
-import { getBundleIcon } from '@/lib/bundleIcons';
-
-// --- Inlined from features/guides/components/tracking ---
 
 const SummaryStats = ({ stats }) => {
   const statItems = [
@@ -74,239 +67,79 @@ SummaryStats.Skeleton = function SummaryStatsSkeleton() {
   );
 };
 
-const DashboardSidebar = () => {
-  const router = useRouter();
-  const [selectedMonth, setSelectedMonth] = useState('May 2026');
-
-  const monthOptions = [
-    { label: 'May 2026', value: 'May 2026' },
-    { label: 'April 2026', value: 'April 2026' }
-  ];
-
-  return (
-    <aside className="w-full lg:w-[320px] shrink-0 space-y-6">
-      
-      <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
-        <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
-          <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Reminders</h3>
-          <Button 
-            variant="link"
-            onClick={() => router.push('/coming-soon')}
-            className="text-ui-tiny uppercase tracking-widest"
-          >
-            View all
-          </Button>
-        </div>
-        
-        <div className="divide-y divide-ctp-surface1/50">
-          <div className="p-4 hover:bg-ctp-mantle/30 transition-colors group cursor-pointer flex gap-4">
-            <div className="w-8 h-8 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-all shrink-0">
-              <Calendar size={14} />
-            </div>
-            <div className="min-w-0">
-              <h4 className="text-xs font-bold text-ctp-text tracking-tight">Passport Appointment</h4>
-              <p className="text-ui-micro text-ctp-subtext1 mt-1 font-medium leading-tight">No appointment set yet.</p>
-            </div>
-          </div>
-
-          <div className="p-4 hover:bg-ctp-mantle/30 transition-colors group cursor-pointer flex gap-4">
-            <div className="w-8 h-8 rounded-lg bg-ctp-peach/10 border border-ctp-peach/20 flex items-center justify-center text-ctp-peach shrink-0">
-              <Clock size={14} />
-            </div>
-            <div className="min-w-0">
-              <h4 className="text-xs font-bold text-ctp-text tracking-tight uppercase">Driver&apos;s License</h4>
-              <p className="text-ui-tiny text-ctp-peach font-bold mt-1 uppercase tracking-tight animate-pulse">Expires in 28 days</p>
-            </div>
-          </div>
-        </div>
-      </Card>
-
-      <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
-        <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50">
-          <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Next Best Steps</h3>
-        </div>
-        
-        <div className="p-1.5 space-y-0.5">
-          {[
-            { title: 'Schedule DFA appointment', sub: 'Passport Appointment', icon: Calendar },
-            { title: 'Register online account', sub: 'SSS Registration', icon: Zap },
-            { title: 'Check requirements', sub: 'PhilHealth ID', icon: ListChecks },
-          ].map((step, i) => (
-            <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-ctp-mantle transition-all cursor-pointer group">
-              <div className="w-8 h-8 rounded-lg bg-ctp-sky-800/5 border border-ctp-sky-800/10 flex items-center justify-center text-ctp-sky-800 shrink-0 shadow-inner">
-                <step.icon size={14} strokeWidth={2.5} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className="text-xs font-bold text-ctp-text truncate tracking-tight">{step.title}</h4>
-                <p className="text-ui-tiny text-ctp-subtext1 mt-0.5 truncate font-bold uppercase tracking-widest opacity-60">{step.sub}</p>
-              </div>
-              <ChevronRight size={12} className="text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-all group-hover:translate-x-0.5" />
-            </div>
-          ))}
-        </div>
-        
-        <Button 
-          variant="link"
-          onClick={() => router.push('/coming-soon')}
-          className="w-full rounded-none border-t border-ctp-surface1 text-ui-tiny uppercase tracking-widest py-3"
-        >
-          View recommendations
-        </Button>
-      </Card>
-
-      <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm overflow-hidden flex flex-col">
-        <div className="p-4 border-b border-ctp-surface1 bg-ctp-mantle/50 flex items-center justify-between">
-          <h3 className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">Activity</h3>
-          <SortDropdown 
-            value={selectedMonth}
-            onChange={setSelectedMonth}
-            options={monthOptions}
-            label=""
-          />
-        </div>
-
-        <div className="p-4 space-y-4">
-          {[
-            { label: 'Guides started', value: '5', icon: ListChecks },
-            { label: 'Steps completed', value: '18', icon: CheckCircle2 },
-            { label: 'Guides finished', value: '2', icon: CheckCircle2, color: 'text-ctp-mauve' },
-            { label: 'Time spent', value: '2.8h', icon: Clock }
-          ].map((item, i) => (
-            <div key={i} className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className={`w-7 h-7 rounded-lg bg-ctp-mantle border border-ctp-surface1 flex items-center justify-center ${item.color || 'text-ctp-subtext1'} shadow-inner`}>
-                  <item.icon size={12} strokeWidth={2.5} />
-                </div>
-                <span className="text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">{item.label}</span>
-              </div>
-              <span className="text-xs font-bold text-ctp-text tracking-tight">{item.value}</span>
-            </div>
-          ))}
-        </div>
-
-        <Button 
-          variant="link"
-          onClick={() => router.push('/coming-soon')}
-          className="w-full rounded-none border-t border-ctp-surface1 text-ui-tiny uppercase tracking-widest py-3"
-        >
-          View detailed log
-        </Button>
-      </Card>
-
-      <Card background="mantle" noPadding className="bg-ctp-mantle/50 border-ctp-surface1 shadow-sm overflow-hidden group">
-        <div className="p-4 border-b border-ctp-surface1 flex items-center gap-2">
-          <Zap size={14} className="text-ctp-sky-800" />
-          <h3 className="text-ui-micro font-bold text-ctp-subtext0 uppercase tracking-[0.15em]">Workspace Tip</h3>
-        </div>
-        <div className="p-5 space-y-4">
-          <p className="text-ui-micro font-medium leading-relaxed text-ctp-subtext1">
-            Keep your momentum! Small daily checks lead to stress-free government applications.
-          </p>
-          <Button 
-            variant="secondary"
-            onClick={() => router.push('/guides')}
-            className="w-full text-ui-micro uppercase tracking-widest shadow-lg shadow-ctp-sky-800/5"
-          >
-            Explore more guides
-          </Button>
-        </div>
-      </Card>
-
-    </aside>
-  );
-};
-
 const BundleCard = ({ bundle, progress, onDelete }) => {
   const router = useRouter();
   const percentage = Math.round((progress.completed / progress.total) * 100) || 0;
+  const theme = bundleStyles[bundle.id] || bundleStyles['foundational-docs'];
+  const imagePath = bundleImages[bundle.id] || bundleImages['foundational-docs'];
 
   return (
-    <Card 
+    <Card
       onClick={() => router.push(`/bundles/${bundle.id}`)}
-      background="mantle"
       interactive
       noPadding
-      className="p-5 flex flex-col h-full overflow-hidden"
+      style={{ background: theme.gradient }}
+      className="p-5 flex flex-col border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
     >
-      <div className="flex gap-5 items-start relative z-10">
-        <div className="w-12 h-12 rounded-lg bg-ctp-mantle flex items-center justify-center group-hover:scale-105 transition-transform border border-ctp-surface1 shrink-0 shadow-inner">
-          {getBundleIcon(bundle.id, { size: 20, className: "text-ctp-sky-800" })}
-        </div>
-        
-        <div className="flex-1 min-w-0 space-y-3.5">
-          <div className="flex items-center justify-between gap-4">
-            <div className="space-y-1 min-w-0">
-              <div className="flex items-center gap-2">
-                <span className={`text-ui-tiny font-bold px-1.5 py-0.5 rounded uppercase tracking-widest border ${
-                  percentage === 100 
-                    ? 'bg-ctp-green/[0.07] text-ctp-green border-ctp-green/20' 
-                    : 'bg-ctp-sky-800/10 text-ctp-sky-800 border-ctp-sky-800/20'
-                }`}>
-                  {percentage === 100 ? 'Completed' : 'In Progress'}
-                </span>
-                <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest flex items-center gap-1.5">
-                  <Layers size={12} className="text-ctp-subtext0" />
-                  {bundle.flow.length} Stages
-                </span>
-              </div>
-              <h3 className="text-base font-bold text-ctp-text truncate tracking-tight group-hover:text-ctp-sky-800 transition-colors leading-tight">{bundle.title}</h3>
-            </div>
-            
-            <div className="flex items-center gap-2 shrink-0">
-              {onDelete && (
-                <div onClick={(e) => e.stopPropagation()}>
-                  <DropdownMenu
-                    trigger={
-                      <button 
-                        className="click-ripple w-8 h-8 rounded-lg bg-ctp-base border border-ctp-surface1 text-ctp-subtext1 hover:text-ctp-text hover:border-ctp-surface2 transition-all flex items-center justify-center active:scale-90"
-                      >
-                        <MoreVertical size={14} />
-                      </button>
-                    }
-                    align="right"
-                  >
-                    <DropdownMenuItem
-                      onClick={() => onDelete(bundle.id)}
-                      variant="danger"
-                      icon={Trash2}
-                    >
-                      Stop Tracking
-                    </DropdownMenuItem>
-                  </DropdownMenu>
-                </div>
-              )}
-              <div className="text-ctp-subtext1 group-hover:text-ctp-sky-800 transition-all group-hover:translate-x-0.5">
-                <ChevronRight size={16} strokeWidth={2.5} />
-              </div>
-            </div>
-          </div>
-
-          
-          <div className="space-y-2.5">
-            <div className="flex items-center justify-between text-ui-micro font-bold uppercase tracking-widest">
-              <span className="text-ctp-subtext1 opacity-80">{progress.completed} of {progress.total} guides</span>
-              <span className="text-ctp-sky-800">{percentage}%</span>
-            </div>
-            <ProgressBar
-              value={percentage}
-              size="sm"
-              color={percentage === 100 ? 'green' : 'sky'}
+      <div className="flex gap-4 items-center">
+        <div className="w-16 h-16 rounded-[18px] flex items-center justify-center shrink-0 bg-white/40 backdrop-blur-sm border border-white/50 relative overflow-hidden shadow-inner">
+          <div className="relative w-9 h-9">
+            <Image
+              src={imagePath}
+              alt={bundle.title}
+              fill
+              className="object-contain drop-shadow-lg"
+              sizes="36px"
             />
           </div>
+        </div>
 
-          <div className="flex flex-wrap gap-x-3 gap-y-1.5 pt-1">
-            {bundle.flow.slice(0, 3).map((step, idx) => {
-              const isCurrent = idx === 0 && percentage < 100;
-              return (
-                <div key={idx} className="flex items-center gap-1.5 opacity-80">
-                   <div className={`w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-ctp-sky-800 animate-pulse' : 'bg-ctp-surface1'}`} />
-                   <span className={`text-ui-tiny font-bold uppercase tracking-tight ${isCurrent ? 'text-ctp-text' : 'text-ctp-subtext1'}`}>{step.label}</span>
-                </div>
-              );
-            })}
-            {bundle.flow.length > 3 && (
-              <span className="text-ui-tiny font-bold text-ctp-subtext1 uppercase tracking-widest">+{bundle.flow.length - 3}</span>
-            )}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start justify-between gap-2">
+            <div className="min-w-0">
+              <h3 className="font-bold text-[#1C1C1E] text-[15px] leading-tight truncate group-hover:text-[#0038A8] transition-colors">
+                {bundle.title}
+              </h3>
+              <span className="text-[11px] font-bold text-white/70 uppercase tracking-widest">
+                {bundle.category}
+              </span>
+            </div>
+            <div className="flex items-center gap-1 shrink-0 pt-0.5">
+              {onDelete && (
+                <DropdownMenu
+                  trigger={
+                    <button
+                      onClick={(e) => e.stopPropagation()}
+                      className="w-7 h-7 rounded-full bg-white/50 border border-white/40 text-gray-400 hover:text-red-500 hover:bg-white/80 transition-all flex items-center justify-center active:scale-90"
+                    >
+                      <MoreVertical size={12} />
+                    </button>
+                  }
+                  align="right"
+                >
+                  <DropdownMenuItem onClick={() => onDelete(bundle.id)} variant="danger" icon={Trash2}>
+                    Stop Tracking
+                  </DropdownMenuItem>
+                </DropdownMenu>
+              )}
+              <ChevronRight size={16} className="text-gray-300 group-hover:text-[#0038A8] transition-colors" strokeWidth={2.5} />
+            </div>
+          </div>
+
+          <div className="mt-3 flex items-center gap-3">
+            <div className="flex-1">
+              <ProgressBar value={percentage} size="sm" color={percentage === 100 ? 'green' : 'sky'} />
+            </div>
+            <span className="text-[11px] font-bold text-gray-400 whitespace-nowrap">
+              {progress.completed}/{progress.total}
+            </span>
+            <span className="text-[11px] font-bold text-[#0038A8]">{percentage}%</span>
+          </div>
+
+          <div className="mt-1 flex items-center gap-2 text-[11px] font-bold text-gray-400/80">
+            <span>{bundle.flow.length} steps</span>
+            <span className="text-gray-300">·</span>
+            <span>{progress.total} guides</span>
           </div>
         </div>
       </div>
@@ -316,30 +149,25 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
 
 BundleCard.Skeleton = function BundleCardSkeleton() {
   return (
-    <div className="bg-ctp-base rounded-xl p-5 border border-ctp-surface1 shadow-sm flex flex-col h-full space-y-4">
-      <div className="flex gap-5 items-start">
-        <Skeleton className="w-12 h-12 rounded-lg shrink-0" />
-        <div className="flex-1 space-y-3.5">
-          <div className="flex items-center justify-between gap-4">
-            <div className="space-y-2 flex-1">
-              <div className="flex gap-2">
-                <Skeleton className="w-16 h-3.5 rounded-md" />
-                <Skeleton className="w-16 h-3" />
-              </div>
-              <Skeleton className="w-3/4 h-5" />
-            </div>
-            <Skeleton className="w-4 h-4 rounded-md shrink-0" />
-          </div>
+    <div className="bg-white/70 backdrop-blur-xl rounded-[28px] p-5 border border-white/60 shadow-sm flex flex-col">
+      <div className="flex gap-4 items-center">
+        <Skeleton className="w-16 h-16 rounded-[18px] shrink-0" />
+        <div className="flex-1 min-w-0 space-y-3">
           <div className="space-y-2">
-             <div className="flex justify-between">
-               <Skeleton className="w-24 h-2.5" />
-               <Skeleton className="w-8 h-2.5" />
-             </div>
-             <Skeleton className="w-full h-1.5 rounded-full" />
+            <Skeleton className="w-3/4 h-4 rounded-md" />
+            <Skeleton className="w-20 h-3 rounded-md" />
           </div>
-          <div className="flex gap-3 pt-1">
-            <Skeleton className="w-16 h-2.5" />
-            <Skeleton className="w-16 h-2.5" />
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-3">
+              <Skeleton className="flex-1 h-1.5 rounded-full" />
+              <Skeleton className="w-10 h-3 rounded-md" />
+              <Skeleton className="w-8 h-3 rounded-md" />
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Skeleton className="w-12 h-3 rounded-md" />
+            <Skeleton className="w-3 h-3 rounded-full" />
+            <Skeleton className="w-12 h-3 rounded-md" />
           </div>
         </div>
       </div>
@@ -347,9 +175,6 @@ BundleCard.Skeleton = function BundleCardSkeleton() {
   );
 };
 
-/**
- * ProgressClient Component
- */
 export default function ProgressClient({ allGuides, isRestricted }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('In Progress');
@@ -382,6 +207,17 @@ export default function ProgressClient({ allGuides, isRestricted }) {
     }
   });
 
+  const deleteProgressMutation = useMutation({
+    mutationFn: async (slug) => {
+      const result = await deleteProgressAction(slug);
+      return result;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      showToast({ type: 'success', title: 'Progress Removed', message: 'Guide progress has been removed.' });
+    }
+  });
+
   const favoriteMutation = useMutation({
     mutationFn: async (slug) => {
       const result = await toggleFavoriteAction(slug);
@@ -405,10 +241,10 @@ export default function ProgressClient({ allGuides, isRestricted }) {
     const progressData = userData?.savedProgress || [];
     const uniqueProgress = [...progressData]
       .sort((a, b) => new Date(b.updatedAt || 0) - new Date(a.updatedAt || 0))
-      .filter((item, index, self) => 
+      .filter((item, index, self) =>
         index === self.findIndex((t) => t.guideSlug === item.guideSlug)
       );
-    
+
     return uniqueProgress
       .map((item) => {
         const guide = allGuides.find(g => g.slug === item.guideSlug);
@@ -436,8 +272,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
     const inProgress = total - completed;
     const favorites = processedGuides.filter(g => g.isFavorite).length;
     const activeBundles = userData.trackedBundles?.length || 0;
-    
-    // Aggregate Analytics for Active Bundles
+
     let totalMinCost = 0;
     let totalMaxCost = 0;
     let totalMinDays = 0;
@@ -465,7 +300,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
         step.guides.forEach(slug => {
           const guide = allGuides.find(g => g.slug === slug);
           const progress = processedGuides.find(pg => pg.slug === slug);
-          
+
           if (!progress || progress.percent < 100) {
              const [minC, maxC] = parseCost(guide?.costRange);
              const [minD, maxD] = parseTime(guide?.estimatedTime);
@@ -478,11 +313,11 @@ export default function ProgressClient({ allGuides, isRestricted }) {
       });
     });
 
-    return { 
-      total, 
-      completed, 
-      inProgress, 
-      favorites, 
+    return {
+      total,
+      completed,
+      inProgress,
+      favorites,
       activeBundles,
       aggregateRemaining: {
         cost: `₱${totalMinCost}-${totalMaxCost}`,
@@ -498,7 +333,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
       .filter(bundle => trackedIds.includes(bundle.id))
       .map(bundle => {
         const allBundleGuides = bundle.flow.flatMap(f => f.guides);
-        const relatedGuides = processedGuides.filter(pg => 
+        const relatedGuides = processedGuides.filter(pg =>
           allBundleGuides.includes(pg.slug)
         );
 
@@ -528,78 +363,108 @@ export default function ProgressClient({ allGuides, isRestricted }) {
   const handleConfirmAction = () => {
     if (confirmConfig.type === 'bundle') {
       stopBundleMutation.mutate(confirmConfig.id);
+    } else if (confirmConfig.type === 'guide') {
+      deleteProgressMutation.mutate(confirmConfig.id);
     }
     setIsConfirmOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-ios-gradient font-sans pb-24 text-ctp-text">
-      {/* HEADER */}
-      <div className="max-w-[800px] mx-auto px-6 py-8 flex items-center justify-between">
-        <h1 className="text-3xl font-black tracking-tight text-[#1C1C1E]">My Docs</h1>
-      </div>
+    <div className="min-h-screen bg-ios-gradient pb-32 animate-in fade-in duration-700 selection:bg-[#0038A8]/10">
+      {/* Header */}
+      <section className="px-6 pt-6 pb-2 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <h1 className="text-[34px] font-bold tracking-tight text-[#1C1C1E] leading-tight">
+          My Docs
+        </h1>
+        <p className="text-[17px] font-medium text-gray-500 mt-1">
+          Track your government document progress across all your processes.
+        </p>
+      </section>
 
-      <div className="max-w-[600px] mx-auto px-6">
-        {/* SUMMARY STATS */}
-        <section className="mb-10">
+      {/* Search Bar */}
+      <SearchBar placeholder="Search your documents..." allGuides={allGuides} />
+
+      <div className="max-w-md mx-auto px-6">
+        {/* Summary Stats */}
+        <section className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
           {isLoading ? <SummaryStats.Skeleton /> : <SummaryStats stats={stats} />}
         </section>
 
-        {/* BUNDLE ANALYTICS & GOALS */}
-        {!isLoading && stats.activeBundles > 0 && (
-          <section className="mb-10 space-y-6">
-            <div className="bg-white/70 backdrop-blur-md rounded-[28px] p-6 border border-white/50 shadow-sm">
-               <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-[#007AFF]/10 text-[#007AFF] flex items-center justify-center shadow-inner">
-                    <BarChart3 size={18} strokeWidth={2.5} />
-                  </div>
-                  <h3 className="text-xs font-black uppercase tracking-[0.15em] text-[#1C1C1E] opacity-60">Milestone Forecast</h3>
-               </div>
-               
-               <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Remaining Cost</span>
-                    <p className="text-lg font-black text-[#1C1C1E]">{stats.aggregateRemaining.cost}</p>
-                  </div>
-                  <div className="space-y-1 text-right">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Goal Timeframe</span>
-                    <p className="text-lg font-black text-[#1C1C1E]">{stats.aggregateRemaining.time}</p>
-                  </div>
-               </div>
-            </div>
+        {/* Bundle Analytics & Goals */}
+        {!isLoading && (
+          stats.activeBundles > 0 ? (
+            <section className="mb-10 space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="bg-white/70 backdrop-blur-md rounded-[28px] p-6 border border-white/50 shadow-sm">
+                 <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded-lg bg-[#0038A8]/10 text-[#0038A8] flex items-center justify-center shadow-inner">
+                      <BarChart3 size={18} strokeWidth={2.5} />
+                    </div>
+                    <h3 className="text-xs font-black uppercase tracking-[0.15em] text-[#1C1C1E] opacity-60">Milestone Forecast</h3>
+                 </div>
 
-            <div className="space-y-4">
-              <div className="flex items-center justify-between px-1">
-                <h3 className="text-lg font-bold text-[#1C1C1E]">Goal Bundles</h3>
-                <Link href="/bundles" className="text-[13px] font-bold text-[#007AFF]">Browse More</Link>
+                 <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Remaining Cost</span>
+                      <p className="text-lg font-black text-[#1C1C1E]">{stats.aggregateRemaining.cost}</p>
+                    </div>
+                    <div className="space-y-1 text-right">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Goal Timeframe</span>
+                      <p className="text-lg font-black text-[#1C1C1E]">{stats.aggregateRemaining.time}</p>
+                    </div>
+                 </div>
               </div>
-              <div className="space-y-3">
-                {bundleProgress.map((item) => (
-                  <BundleCard 
-                    key={item.bundle.id} 
-                    bundle={item.bundle} 
-                    progress={item} 
-                    onDelete={(id) => {
-                      setConfirmConfig({ type: 'bundle', id });
-                      setIsConfirmOpen(true);
-                    }}
-                  />
-                ))}
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between px-1">
+                  <h3 className="text-[19px] font-bold text-[#1C1C1E]">Goal Bundles</h3>
+                  <Link href="/bundles" className="text-[13px] font-bold text-[#0038A8]">Browse More</Link>
+                </div>
+                <div className="space-y-3">
+                  {bundleProgress.map((item) => (
+                    <BundleCard
+                      key={item.bundle.id}
+                      bundle={item.bundle}
+                      progress={item}
+                      onDelete={(id) => {
+                        setConfirmConfig({ type: 'bundle', id });
+                        setIsConfirmOpen(true);
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          ) : (
+            <section className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
+              <div className="bg-white/60 backdrop-blur-xl rounded-[28px] p-8 border border-white/60 shadow-sm text-center">
+                <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm border border-white/50">
+                  <Package size={24} className="text-gray-300" />
+                </div>
+                <h4 className="text-[15px] font-bold text-[#1C1C1E]">No bundles tracked yet</h4>
+                <p className="text-[13px] font-medium text-gray-400 mt-1.5 max-w-[240px] mx-auto">
+                  Start tracking a life event bundle to see your milestone forecast and progress here.
+                </p>
+                <Link
+                  href="/bundles"
+                  className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-bold text-[#0038A8] active:opacity-60 transition-opacity"
+                >
+                  Browse Bundles <ChevronRight size={14} strokeWidth={3} />
+                </Link>
+              </div>
+            </section>
+          )
         )}
 
-        {/* TAB SYSTEM */}
-        <section className="mb-8">
+        {/* Tab System */}
+        <section className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div className="flex items-center gap-1.5 bg-white/30 backdrop-blur-md p-1.5 rounded-2xl border border-white/20">
             {['In Progress', 'Completed', 'Favorites'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`flex-1 py-2.5 rounded-xl text-[13px] font-bold transition-all duration-300 ${
-                  activeTab === tab 
-                    ? 'bg-[#007AFF] text-white shadow-md' 
+                className={`flex-1 px-5 py-2.5 rounded-full text-[13px] font-bold whitespace-nowrap transition-all duration-300 ${
+                  activeTab === tab
+                    ? 'bg-[#0038A8] text-white shadow-[0_8px_20px_rgba(0,56,168,0.15)]'
                     : 'text-gray-500 hover:bg-white/40'
                 }`}
               >
@@ -609,40 +474,73 @@ export default function ProgressClient({ allGuides, isRestricted }) {
           </div>
         </section>
 
-        {/* CONTENT LIST */}
+        {/* Content List */}
         <section className="space-y-6">
           <div className="flex items-center justify-between px-1">
-             <h3 className="text-lg font-bold text-[#1C1C1E]">{activeTab}</h3>
-             <button className="text-[13px] font-bold text-[#007AFF]">See All</button>
+             <h3 className="text-[19px] font-bold text-[#1C1C1E]">{activeTab}</h3>
+             <button
+               onClick={() => router.push('/guides')}
+               className="text-[13px] font-bold text-[#0038A8] active:opacity-60 transition-opacity"
+             >
+               See All
+             </button>
           </div>
 
-          {isLoading ? (
-             <div className="space-y-4">
-               {[1, 2, 3].map(i => <Skeleton key={i} className="w-full h-32 rounded-3xl" />)}
+           {isLoading ? (
+              <div className="space-y-4">
+                {[1, 2, 3].map(i => <Skeleton key={i} className="w-full h-32 rounded-3xl" />)}
+              </div>
+           ) : filteredGuides.length > 0 ? (
+             <div className={activeTab === 'Completed' ? 'grid grid-cols-2 sm:grid-cols-3 gap-4' : 'space-y-4'}>
+                {filteredGuides.map((item) => {
+                  if (activeTab === 'Completed') {
+                    return (
+                      <CompletedGridCard
+                        key={item.slug}
+                        guide={item.guide}
+                        onClick={() => router.push(`/guides/${item.slug}`)}
+                        onDelete={() => {
+                          setConfirmConfig({ type: 'guide', id: item.slug });
+                          setIsConfirmOpen(true);
+                        }}
+                      />
+                    );
+                  }
+                  if (activeTab === 'Favorites') {
+                    return (
+                      <FavoriteRowCard
+                        key={item.slug}
+                        guide={item.guide}
+                        onClick={() => router.push(`/guides/${item.slug}`)}
+                        isFavorite={item.isFavorite}
+                        onToggleFavorite={() => handleFavoriteGuide(item.slug)}
+                      />
+                    );
+                  }
+                  return (
+                    <InProgressCard
+                      key={item.slug}
+                      guide={item.guide}
+                      percent={item.percent}
+                      completedTasks={item.completedTasks}
+                      onClick={() => router.push(`/guides/${item.slug}`)}
+                      onDelete={() => {
+                        setConfirmConfig({ type: 'guide', id: item.slug });
+                        setIsConfirmOpen(true);
+                      }}
+                    />
+                  );
+                })}
              </div>
-          ) : filteredGuides.length > 0 ? (
-            <div className={activeTab === 'Completed' ? 'grid grid-cols-2 sm:grid-cols-3 gap-4' : 'space-y-4'}>
-               {filteredGuides.map((item) => {
-                 if (activeTab === 'Completed') {
-                   return <CompletedGridCard key={item.slug} guide={item.guide} onClick={() => router.push(`/guides/${item.slug}`)} />;
-                 }
-                 if (activeTab === 'Favorites') {
-                   return <FavoriteRowCard key={item.slug} guide={item.guide} onClick={() => router.push(`/guides/${item.slug}`)} />;
-                 }
-                 return (
-                   <InProgressCard 
-                     key={item.slug} 
-                     guide={item.guide} 
-                     percent={item.percent}
-                     completedTasks={item.completedTasks}
-                     onClick={() => router.push(`/guides/${item.slug}`)} 
-                   />
-                 );
-               })}
-            </div>
           ) : (
-            <div className="py-20 text-center bg-white/20 rounded-[32px] border border-white/30 border-dashed">
-               <p className="text-gray-400 font-bold">No documents here yet.</p>
+            <div className="py-16 text-center bg-white/60 backdrop-blur-xl rounded-[32px] border border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.02)] animate-in fade-in zoom-in-95 duration-500">
+              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm border border-white/50">
+                <Search size={20} className="text-gray-300" />
+              </div>
+              <h4 className="text-[15px] font-bold text-[#1C1C1E]">No documents here yet</h4>
+              <p className="text-[13px] font-medium text-gray-400 mt-1 max-w-[220px] mx-auto">
+                Start a guide to begin tracking your progress.
+              </p>
             </div>
           )}
         </section>
@@ -652,34 +550,32 @@ export default function ProgressClient({ allGuides, isRestricted }) {
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={handleConfirmAction}
-        title="Stop tracking bundle?"
-        message="Are you sure you want to stop tracking this life event bundle? This will remove the bundle from your dashboard, but your individual guide progress will be saved."
-        confirmText="Stop Tracking"
+        title={confirmConfig.type === 'bundle' ? 'Stop tracking bundle?' : 'Remove guide progress?'}
+        message={confirmConfig.type === 'bundle'
+          ? 'Are you sure you want to stop tracking this life event bundle? This will remove the bundle from your dashboard, but your individual guide progress will be saved.'
+          : 'This will remove all progress for this guide. You can start tracking again at any time.'}
+        confirmText={confirmConfig.type === 'bundle' ? 'Stop Tracking' : 'Remove Progress'}
         variant="danger"
       />
     </div>
   );
 }
 
-/**
- * Local Components for My Docs
- */
-
-function InProgressCard({ guide, percent, completedTasks, onClick }) {
+function InProgressCard({ guide, percent, completedTasks, onClick, onDelete }) {
   const percentage = Math.round(percent) || 0;
   const iconName = getIconName(guide.slug, guide.agency);
   const theme = getIconTheme(guide.slug, guide.agency, iconName);
-  
+
   const completedIndices = completedTasks ? completedTasks.split(',').map(Number) : [];
   const nextStepIndex = guide.checklist?.findIndex((_, idx) => !completedIndices.includes(idx));
   const nextStep = nextStepIndex !== -1 ? guide.checklist[nextStepIndex] : { title: 'Ready to verify' };
 
   return (
-    <Card 
+    <Card
       interactive
       onClick={onClick}
       style={{ background: theme.gradient }}
-      className="w-full flex items-center justify-between group px-5 py-6 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[28px]"
+      className="w-full flex items-center justify-between group px-5 py-6 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[28px] relative"
       noPadding
     >
       <div className="flex items-center gap-4 flex-1 min-w-0">
@@ -689,45 +585,77 @@ function InProgressCard({ guide, percent, completedTasks, onClick }) {
         <div className="text-left flex-1 min-w-0 pr-4">
           <h4 className="font-bold text-[#1C1C1E] text-[17px] leading-tight line-clamp-1 mb-1.5">{guide.shortTitle || guide.title}</h4>
           <div className="space-y-0.5">
-            <span className="text-[11px] font-bold text-[#007AFF] uppercase tracking-widest leading-none">Next Step</span>
+            <span className="text-[11px] font-bold text-[#0038A8] uppercase tracking-widest leading-none">Next Step</span>
             <p className="text-[13px] font-medium text-gray-500 line-clamp-1">{nextStep.title}</p>
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-2">
-        <div className="relative w-16 h-16 flex items-center justify-center">
+      <div className="flex items-center gap-2 shrink-0">
+        {onDelete && (
+          <div onClick={(e) => e.stopPropagation()}>
+            <DropdownMenu
+              trigger={
+                <button className="click-ripple w-8 h-8 rounded-full bg-gray-50 border border-gray-100 text-gray-300 hover:text-[#1C1C1E] hover:border-gray-200 hover:bg-gray-100 transition-all flex items-center justify-center active:scale-90">
+                  <MoreVertical size={14} />
+                </button>
+              }
+              align="right"
+            >
+              <DropdownMenuItem onClick={onDelete} variant="danger" icon={Trash2}>
+                Remove Progress
+              </DropdownMenuItem>
+            </DropdownMenu>
+          </div>
+        )}
+        <div className="relative w-14 h-14 flex items-center justify-center">
             <svg className="w-full h-full transform -rotate-90">
-              <circle cx="32" cy="32" r="28" stroke="white/80" strokeWidth="5" fill="transparent" />
-              <circle 
-                cx="32" cy="32" r="28" 
-                stroke={theme.ring} strokeWidth="5" fill="transparent" 
-                strokeDasharray={175.9} strokeDashoffset={175.9 * (1 - percentage / 100)} 
-                strokeLinecap="round" 
+              <circle cx="28" cy="28" r="24" stroke="white/80" strokeWidth="5" fill="transparent" />
+              <circle
+                cx="28" cy="28" r="24"
+                stroke={theme.ring} strokeWidth="5" fill="transparent"
+                strokeDasharray={150.8} strokeDashoffset={150.8 * (1 - percentage / 100)}
+                strokeLinecap="round"
               />
             </svg>
-            <span className="absolute text-[13px] font-black text-[#1C1C1E]">{percentage}%</span>
+            <span className="absolute text-[12px] font-black text-[#1C1C1E]">{percentage}%</span>
         </div>
         {percentage >= 80 ? (
-           <div className="ml-2 bg-[#007AFF] text-white px-4 py-2 rounded-xl text-[11px] font-bold shadow-md shadow-[#007AFF]/20 group-hover:translate-x-1 transition-transform">Resume</div>
+           <div className="bg-[#0038A8] text-white px-3.5 py-1.5 rounded-xl text-[11px] font-bold shadow-md shadow-[#0038A8]/20 group-hover:translate-x-1 transition-transform">Resume</div>
         ) : (
-          <ChevronRight size={18} className="text-gray-300 group-hover:text-[#007AFF] transition-colors ml-2" strokeWidth={3} />
+          <ChevronRight size={18} className="text-gray-300 group-hover:text-[#0038A8] transition-colors" strokeWidth={3} />
         )}
       </div>
     </Card>
   );
 }
 
-function CompletedGridCard({ guide, onClick }) {
+function CompletedGridCard({ guide, onClick, onDelete }) {
   const iconName = getIconName(guide.slug, guide.agency);
   const theme = getIconTheme(guide.slug, guide.agency, iconName);
   const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
   return (
-    <Card 
+    <Card
       interactive onClick={onClick} style={{ background: theme.gradient }}
-      className="flex flex-col items-center justify-center text-center p-5 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] aspect-square rounded-[28px]"
+      className="flex flex-col items-center justify-center text-center p-5 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] aspect-square rounded-[28px] relative"
       noPadding
     >
+      {onDelete && (
+        <div onClick={(e) => e.stopPropagation()} className="absolute top-2 right-2 z-10">
+          <DropdownMenu
+            trigger={
+              <button className="click-ripple w-7 h-7 rounded-full bg-white/40 border border-white/40 text-gray-300 hover:text-[#1C1C1E] hover:bg-white/80 transition-all flex items-center justify-center active:scale-90 backdrop-blur-sm">
+                <MoreVertical size={12} />
+              </button>
+            }
+            align="right"
+          >
+            <DropdownMenuItem onClick={onDelete} variant="danger" icon={Trash2}>
+              Remove Progress
+            </DropdownMenuItem>
+          </DropdownMenu>
+        </div>
+      )}
       <div className="relative mb-3">
         <div className="w-14 h-14 flex items-center justify-center">
           <GuideIcon slug={guide.slug} agency={guide.agency} size={40} className="object-contain drop-shadow-sm" />
@@ -744,13 +672,13 @@ function CompletedGridCard({ guide, onClick }) {
   );
 }
 
-function FavoriteRowCard({ guide, onClick }) {
+function FavoriteRowCard({ guide, onClick, isFavorite, onToggleFavorite }) {
   const iconName = getIconName(guide.slug, guide.agency);
   const theme = getIconTheme(guide.slug, guide.agency, iconName);
   const agency = Array.isArray(guide.agency) ? guide.agency[0] : guide.agency;
 
   return (
-    <Card 
+    <Card
       interactive onClick={onClick} style={{ background: theme.gradient }}
       className="w-full flex items-center justify-between group px-5 py-4 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-2xl"
       noPadding
@@ -765,8 +693,20 @@ function FavoriteRowCard({ guide, onClick }) {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <Heart size={18} fill="#FFCC00" className="text-[#FFCC00]" />
-        <ChevronRight size={18} className="text-gray-300 group-hover:text-[#007AFF] transition-colors" strokeWidth={3} />
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleFavorite?.();
+          }}
+          className="transition-all active:scale-75 outline-none"
+        >
+          <Heart
+            size={18}
+            fill={isFavorite ? "#FFCC00" : "none"}
+            className={isFavorite ? "text-[#FFCC00]" : "text-gray-200 hover:text-gray-300"}
+          />
+        </button>
+        <ChevronRight size={18} className="text-gray-300 group-hover:text-[#0038A8] transition-colors" strokeWidth={3} />
       </div>
     </Card>
   );

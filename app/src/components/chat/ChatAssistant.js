@@ -3,17 +3,16 @@
 import { useChat } from '@ai-sdk/react';
 import { useState, useEffect, useRef } from 'react';
 import { MessageCircle, X, Send, User, Bot, Loader2 } from 'lucide-react';
+import { useWorkspace } from '@/context';
 
 export default function ChatAssistant() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isChatOpen: isOpen, setChatOpen: setIsOpen } = useWorkspace();
   const [mounted, setMounted] = useState(false);
   const [localInput, setLocalInput] = useState('');
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
-  const [isVisible, setIsVisible] = useState(true);
   const [viewportHeight, setViewportHeight] = useState('100dvh');
   const [viewportOffset, setViewportOffset] = useState('0px');
   const [isMobile, setIsMobile] = useState(false);
-  const lastScrollYRef = useRef(0);
   
   const messagesEndRef = useRef(null);
   const scrollContainerRef = useRef(null);
@@ -53,32 +52,6 @@ export default function ChatAssistant() {
     }
     return () => window.removeEventListener('resize', checkMobile);
   }, [shouldAutoScroll]);
-
-  // Intelligent Auto-Hide Logic (Synchronized with BottomNav)
-  useEffect(() => {
-    const handleScroll = () => {
-      // Don't hide if the chat window is actually open
-      if (isOpen) {
-        setIsVisible(true);
-        return;
-      }
-
-      const currentScrollY = window.scrollY;
-      const lastScrollY = lastScrollYRef.current;
-      
-      if (currentScrollY < 50) {
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-      lastScrollYRef.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isOpen]);
 
   // BLOCK BACKGROUND SCROLL when chat is open
   useEffect(() => {
@@ -139,20 +112,6 @@ export default function ChatAssistant() {
         />
       )}
 
-      {/* Chat Bubble Toggle - Hide on mobile when chat is open or when scrolling down */}
-      <div className={`fixed bottom-20 right-6 z-[200] transition-all duration-500 ease-in-out ${
-        isVisible && !isOpen ? 'translate-y-0 opacity-100' : 'translate-y-28 opacity-0 pointer-events-none'
-      }`}>
-        <button
-          onClick={() => setIsOpen(true)}
-          className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-2xl transition-all active:scale-95 flex items-center justify-center relative"
-          aria-label="Open Chat"
-        >
-          <MessageCircle className="w-6 h-6" />
-          <span className="absolute -top-1 -right-1 bg-red-500 w-3 h-3 rounded-full border-2 border-white animate-pulse" />
-        </button>
-      </div>
-
       {/* Chat Window - Full screen on mobile, floating on desktop */}
       {isOpen && (
         <div 
@@ -163,14 +122,14 @@ export default function ChatAssistant() {
           className={`fixed inset-x-0 md:inset-auto md:bottom-36 md:right-6 md:w-[400px] md:h-[550px] md:max-h-[calc(100dvh-160px)] w-full bg-white md:rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300 z-[210] ${!isMobile ? 'inset-y-0' : ''}`}
         >
           {/* Header */}
-          <div className="bg-blue-600 p-4 text-white flex justify-between items-center shrink-0">
+          <div className="bg-brand-blue p-4 text-white flex justify-between items-center shrink-0">
             <div className="flex items-center gap-3">
               <div className="bg-white/20 p-2 rounded-lg">
                 <Bot className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h3 className="font-bold text-sm md:text-base leading-tight">AyosDocs Assistant</h3>
-                <p className="text-[10px] text-blue-100 uppercase tracking-widest font-semibold font-mono">Government Procedure Expert</p>
+                <p className="text-[10px] text-brand-gold/80 uppercase tracking-widest font-semibold font-mono">Government Procedure Expert</p>
               </div>
             </div>
             <button 
@@ -192,7 +151,7 @@ export default function ChatAssistant() {
               <div className="text-center py-20 text-gray-400">
                 <Bot className="w-12 h-12 mx-auto mb-2 opacity-20" />
                 <p className="text-sm font-medium">Mabuhay! How can I help you today?</p>
-                <p className="text-[10px] mt-2 bg-blue-100 text-blue-700 inline-block px-3 py-1.5 rounded-full">Try: &quot;Ano ang requirements para sa passport?&quot;</p>
+                <p className="text-[10px] mt-2 bg-brand-blue/10 text-brand-blue inline-block px-3 py-1.5 rounded-full">Try: &quot;Ano ang requirements para sa passport?&quot;</p>
               </div>
             )}
             
@@ -204,7 +163,7 @@ export default function ChatAssistant() {
                 <div
                   className={`max-w-[85%] rounded-2xl p-3 text-sm shadow-sm ${
                     m.role === 'user'
-                      ? 'bg-blue-600 text-white rounded-tr-none'
+                      ? 'bg-brand-blue text-white rounded-tr-none'
                       : 'bg-white border border-gray-100 text-gray-800 rounded-tl-none'
                   }`}
                 >
@@ -228,9 +187,9 @@ export default function ChatAssistant() {
               <div className="flex justify-start">
                 <div className="bg-white border border-gray-100 rounded-2xl rounded-tl-none p-4 shadow-sm">
                   <div className="flex gap-1">
-                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce" />
+                    <div className="w-1.5 h-1.5 bg-brand-blue/40 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                    <div className="w-1.5 h-1.5 bg-brand-blue/40 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                    <div className="w-1.5 h-1.5 bg-brand-blue/40 rounded-full animate-bounce" />
                   </div>
                 </div>
               </div>
@@ -251,7 +210,7 @@ export default function ChatAssistant() {
             onSubmit={handleMySubmit} 
             className="p-4 bg-white border-t border-gray-100 flex gap-2 items-center pb-4 md:pb-4 shrink-0"
           >
-            <div className="flex-1 bg-gray-100 rounded-full px-4 py-2 flex items-center focus-within:ring-2 focus-within:ring-blue-600 focus-within:bg-white transition-all">
+            <div className="flex-1 bg-gray-100 rounded-full px-4 py-2 flex items-center focus-within:ring-2 focus-within:ring-brand-blue focus-within:bg-white transition-all">
               <input
                 value={localInput}
                 onChange={(e) => {
@@ -269,7 +228,7 @@ export default function ChatAssistant() {
             <button
               type="submit"
               disabled={isLoading || !localInput.trim()}
-              className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white w-10 h-10 rounded-full transition-all flex items-center justify-center shadow-lg active:scale-90 shrink-0"
+              className="bg-brand-blue hover:opacity-90 disabled:opacity-50 text-white w-10 h-10 rounded-full transition-all flex items-center justify-center shadow-lg active:scale-90 shrink-0"
             >
               <Send className="w-4 h-4" />
             </button>
