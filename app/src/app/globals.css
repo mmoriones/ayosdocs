@@ -20,6 +20,7 @@
   /* Brand Colors - Philippine Blue & Sun Gold */
   --color-brand-blue: #0038A8;
   --color-brand-gold: #FFD700;
+  --color-brand-teal: #20A9AF;
   
   --color-accent: var(--color-brand-blue);
   

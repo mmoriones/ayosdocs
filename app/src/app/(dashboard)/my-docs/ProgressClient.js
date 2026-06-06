@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   ChevronRight,
@@ -29,41 +29,83 @@ import { deleteProgressAction, toggleFavoriteAction, stopBundleAction } from '@/
 import { GuideIcon, getIconName } from '@/lib/guideIcons';
 import { getIconTheme } from '@/lib/assetStyles';
 
-const SummaryStats = ({ stats }) => {
-  const statItems = [
-    { label: 'Active', value: stats.inProgress || 0, icon: LayoutGrid, color: 'text-[#007AFF]', bg: 'bg-[#007AFF]/10' },
-    { label: 'Done', value: stats.completed || 0, icon: CheckCircle2, color: 'text-[#34C759]', bg: 'bg-[#34C759]/10' },
-    { label: 'Saved', value: stats.favorites || 0, icon: Bookmark, color: 'text-[#AF52DE]', bg: 'bg-[#AF52DE]/10', fill: true }
-  ];
-
+const GoalsStats = ({ stats }) => {
   return (
-    <div className="grid grid-cols-3 gap-3 sm:gap-4">
-      {statItems.map((item) => (
-        <div key={item.label} className="bg-white/70 backdrop-blur-md rounded-2xl p-3 sm:p-4 border border-white/50 shadow-sm flex flex-col items-center justify-center text-center">
-          <div className={`w-10 h-10 rounded-xl ${item.bg} ${item.color} flex items-center justify-center mb-2 shadow-inner`}>
-            <item.icon size={22} strokeWidth={3} className={item.fill ? 'fill-current' : ''} />
+    <div className="bg-gradient-to-t from-[#00205B] to-[#0038A8] rounded-[32px] p-8 shadow-xl shadow-[#0038A8]/20 relative overflow-hidden text-white group h-[220px] flex flex-col justify-between border border-white/10">
+      {/* Abstract background patterns */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/15 rounded-full blur-3xl -mr-16 -mt-16" />
+      <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-white/5 rounded-full blur-2xl" />
+      
+      <div className="relative z-10">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-xl border border-white/10 flex items-center justify-center shadow-inner">
+            <Package className="text-brand-gold" size={20} strokeWidth={2.5} />
           </div>
-          <div className="flex flex-col items-center">
-            <span className="text-xl sm:text-2xl font-black text-[#1C1C1E] leading-none mb-1">{item.value}</span>
-            <h4 className="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none">{item.label}</h4>
+          <span className="text-[12px] font-black text-white/60 uppercase tracking-[0.15em]">Investment Forecast</span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-1">
+            <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Total Remaining</span>
+            <p className="text-[28px] font-black tracking-tight leading-none">{stats.aggregateRemaining.cost}</p>
+          </div>
+          <div className="space-y-1 text-right">
+            <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Goal Timeframe</span>
+            <p className="text-[28px] font-black tracking-tight leading-none">{stats.aggregateRemaining.time}</p>
           </div>
         </div>
-      ))}
+      </div>
+
+      <div className="relative z-10 flex items-center justify-between">
+        <div className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-[10px] font-black text-brand-gold uppercase tracking-widest">
+          {stats.activeBundles} {stats.activeBundles === 1 ? 'Bundle' : 'Bundles'} Tracked
+        </div>
+        <ChevronRight size={16} className="text-white/40" />
+      </div>
+    </div>
+  );
+};
+
+const SummaryStats = ({ stats }) => {
+  const percentage = Math.round((stats.completed / (stats.total || 1)) * 100) || 0;
+
+  return (
+    <div className="bg-gradient-to-t from-[#16888D] to-brand-teal rounded-[32px] p-8 shadow-xl shadow-brand-teal/20 relative overflow-hidden text-white group h-[220px] flex flex-col justify-between border border-white/10">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
+
+      <div className="relative z-10 space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="space-y-1">
+            <span className="text-[12px] font-black text-white/60 uppercase tracking-[0.15em]">Overall Progress</span>
+            <h3 className="text-[44px] font-black tracking-tight leading-none">{percentage}%</h3>
+          </div>
+          <div className="w-14 h-14 rounded-[22px] bg-white/15 backdrop-blur-xl border border-white/10 flex items-center justify-center shadow-inner">
+            <BarChart3 className="text-white" size={26} strokeWidth={2.5} />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
+          <div className="space-y-0.5">
+            <span className="text-[9px] font-bold text-white/40 uppercase tracking-widest">Active</span>
+            <p className="text-xl font-black">{stats.inProgress}</p>
+          </div>
+          <div className="space-y-0.5">
+            <span className="text-[9px] font-bold text-white/40 uppercase tracking-widest">Done</span>
+            <p className="text-xl font-black">{stats.completed}</p>
+          </div>
+          <div className="space-y-0.5 text-right">
+            <span className="text-[9px] font-bold text-white/40 uppercase tracking-widest">Saved</span>
+            <p className="text-xl font-black">{stats.favorites}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 SummaryStats.Skeleton = function SummaryStatsSkeleton() {
   return (
-    <div className="grid grid-cols-3 gap-4">
-      {[1, 2, 3].map((i) => (
-        <div key={i} className="bg-white/70 backdrop-blur-md rounded-2xl p-4 border border-white/50 shadow-sm flex flex-col items-center justify-center">
-          <Skeleton className="w-10 h-10 rounded-xl mb-2" />
-          <Skeleton className="w-12 h-6 rounded-lg mb-1" />
-          <Skeleton className="w-16 h-2.5 rounded-md" />
-        </div>
-      ))}
-    </div>
+    <div className="w-full h-[220px] bg-gray-100 rounded-[32px] animate-pulse border border-gray-200" />
   );
 };
 
@@ -178,6 +220,16 @@ BundleCard.Skeleton = function BundleCardSkeleton() {
 export default function ProgressClient({ allGuides, isRestricted }) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('In Progress');
+  const [scrollIndex, setScrollIndex] = useState(0);
+  const carouselRef = useRef(null);
+
+  const handleScroll = (e) => {
+    const scrollLeft = e.target.scrollLeft;
+    const width = e.target.offsetWidth;
+    const index = Math.round(scrollLeft / width);
+    setScrollIndex(index);
+  };
+
   const [searchQuery, setSearchQuery] = useState('');
   const queryClient = useQueryClient();
   const { showToast } = useToast();
@@ -371,92 +423,94 @@ export default function ProgressClient({ allGuides, isRestricted }) {
 
   return (
     <div className="min-h-screen bg-ios-gradient pb-32 animate-in fade-in duration-700 selection:bg-[#0038A8]/10">
-      {/* Header */}
-      <section className="px-6 pt-6 pb-2 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <h1 className="text-[34px] font-bold tracking-tight text-[#1C1C1E] leading-tight">
+      {/* Native App Header */}
+      <section className="px-6 pt-12 pb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <h1 className="text-[36px] font-black tracking-tight text-[#1C1C1E] leading-tight">
           My Docs
         </h1>
-        <p className="text-[17px] font-medium text-gray-500 mt-1">
-          Track your government document progress across all your processes.
-        </p>
       </section>
 
-      {/* Search Bar */}
-      <SearchBar placeholder="Search your documents..." allGuides={allGuides} />
-
-      <div className="max-w-md mx-auto px-6">
-        {/* Summary Stats */}
-        <section className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          {isLoading ? <SummaryStats.Skeleton /> : <SummaryStats stats={stats} />}
+      <div className="max-w-md mx-auto">
+        {/* Horizontal Scroll Analytics Carousel - Full Width (No Peeking) */}
+        <section 
+          ref={carouselRef}
+          onScroll={handleScroll}
+          className="mb-4 overflow-x-auto snap-x snap-mandatory flex scrollbar-hide pb-4"
+        >
+          {isLoading ? (
+            <div className="min-w-full snap-center px-6">
+              <SummaryStats.Skeleton />
+            </div>
+          ) : (
+            <>
+              <div className="min-w-full snap-center px-6">
+                <GoalsStats stats={stats} />
+              </div>
+              <div className="min-w-full snap-center px-6">
+                <SummaryStats stats={stats} />
+              </div>
+            </>
+          )}
         </section>
 
-        {/* Bundle Analytics & Goals */}
-        {!isLoading && (
-          stats.activeBundles > 0 ? (
-            <section className="mb-10 space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <div className="bg-white/70 backdrop-blur-md rounded-[28px] p-6 border border-white/50 shadow-sm">
-                 <div className="flex items-center gap-3 mb-4">
-                    <div className="w-8 h-8 rounded-lg bg-[#0038A8]/10 text-[#0038A8] flex items-center justify-center shadow-inner">
-                      <BarChart3 size={18} strokeWidth={2.5} />
-                    </div>
-                    <h3 className="text-xs font-black uppercase tracking-[0.15em] text-[#1C1C1E] opacity-60">Milestone Forecast</h3>
-                 </div>
+        {/* Carousel Dot Indicators */}
+        <div className="flex justify-center items-center gap-1.5 mb-8">
+          {[0, 1].map((idx) => (
+            <div 
+              key={idx} 
+              className={`transition-all duration-300 rounded-full ${
+                scrollIndex === idx ? 'w-4 h-1.5 bg-brand-blue' : 'w-1.5 h-1.5 bg-gray-300'
+              }`} 
+            />
+          ))}
+        </div>
 
-                 <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Remaining Cost</span>
-                      <p className="text-lg font-black text-[#1C1C1E]">{stats.aggregateRemaining.cost}</p>
-                    </div>
-                    <div className="space-y-1 text-right">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Goal Timeframe</span>
-                      <p className="text-lg font-black text-[#1C1C1E]">{stats.aggregateRemaining.time}</p>
-                    </div>
-                 </div>
-              </div>
+        {/* Goal Bundles List */}
+        {!isLoading && stats.activeBundles > 0 && (
+          <section className="mb-10 space-y-4 px-6">
+            <div className="flex items-center justify-between px-1">
+              <h3 className="text-[20px] font-black text-[#1C1C1E] tracking-tight">Active Goals</h3>
+              <Link href="/bundles" className="text-[13px] font-bold text-[#0038A8]">View All</Link>
+            </div>
+            <div className="space-y-3">
+              {bundleProgress.map((item) => (
+                <BundleCard
+                  key={item.bundle.id}
+                  bundle={item.bundle}
+                  progress={item}
+                  onDelete={(id) => {
+                    setConfirmConfig({ type: 'bundle', id });
+                    setIsConfirmOpen(true);
+                  }}
+                />
+              ))}
+            </div>
+          </section>
+        )}
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between px-1">
-                  <h3 className="text-[19px] font-bold text-[#1C1C1E]">Goal Bundles</h3>
-                  <Link href="/bundles" className="text-[13px] font-bold text-[#0038A8]">Browse More</Link>
-                </div>
-                <div className="space-y-3">
-                  {bundleProgress.map((item) => (
-                    <BundleCard
-                      key={item.bundle.id}
-                      bundle={item.bundle}
-                      progress={item}
-                      onDelete={(id) => {
-                        setConfirmConfig({ type: 'bundle', id });
-                        setIsConfirmOpen(true);
-                      }}
-                    />
-                  ))}
-                </div>
+        {/* Empty State for Bundles */}
+        {!isLoading && stats.activeBundles === 0 && (
+          <section className="mb-10 px-6">
+            <div className="bg-white/60 backdrop-blur-xl rounded-[32px] p-8 border border-white/60 shadow-sm text-center">
+              <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm border border-white/50">
+                <Package size={24} className="text-gray-300" />
               </div>
-            </section>
-          ) : (
-            <section className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <div className="bg-white/60 backdrop-blur-xl rounded-[28px] p-8 border border-white/60 shadow-sm text-center">
-                <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm border border-white/50">
-                  <Package size={24} className="text-gray-300" />
-                </div>
-                <h4 className="text-[15px] font-bold text-[#1C1C1E]">No bundles tracked yet</h4>
-                <p className="text-[13px] font-medium text-gray-400 mt-1.5 max-w-[240px] mx-auto">
-                  Start tracking a life event bundle to see your milestone forecast and progress here.
-                </p>
-                <Link
-                  href="/bundles"
-                  className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-bold text-[#0038A8] active:opacity-60 transition-opacity"
-                >
-                  Browse Bundles <ChevronRight size={14} strokeWidth={3} />
-                </Link>
-              </div>
-            </section>
-          )
+              <h4 className="text-[15px] font-bold text-[#1C1C1E]">No bundles tracked yet</h4>
+              <p className="text-[13px] font-medium text-gray-400 mt-1.5 max-w-[240px] mx-auto">
+                Start tracking a life event bundle to see your milestone forecast and progress here.
+              </p>
+              <Link
+                href="/bundles"
+                className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-bold text-[#0038A8] active:opacity-60 transition-opacity"
+              >
+                Browse Bundles <ChevronRight size={14} strokeWidth={3} />
+              </Link>
+            </div>
+          </section>
         )}
 
         {/* Tab System */}
-        <section className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <section className="mb-8 px-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div className="flex items-center gap-1.5 bg-white/30 backdrop-blur-md p-1.5 rounded-2xl border border-white/20">
             {['In Progress', 'Completed', 'Favorites'].map((tab) => (
               <button

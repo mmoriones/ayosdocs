@@ -102,7 +102,7 @@ function BottomNav({ isLoggedIn = false }) {
                 
                 {/* Precision Active Indicator Dot */}
                 {isActive && (
-                  <div className="absolute bottom-2.5 w-2 h-2 bg-brand-blue rounded-full shadow-[0_0_8px_rgba(0,56,168,0.3)] animate-in zoom-in duration-300" />
+                  <div className="absolute bottom-2.5 w-1 h-1 bg-brand-blue rounded-full shadow-[0_0_6px_rgba(0,56,168,0.3)] animate-in zoom-in duration-300" />
                 )}
               </Link>
             );
@@ -119,9 +119,9 @@ function BottomNav({ isLoggedIn = false }) {
             <BotMessageSquare className="w-7 h-7 text-white transition-transform group-hover:scale-110" />
           </button>
           
-          {/* Active Indicator for Chat */}
+          {/* Precision Active Indicator Dot */}
           {isChatOpen && (
-            <div className="absolute bottom-2.5 w-2 h-2 bg-brand-blue rounded-full shadow-[0_0_8px_rgba(0,56,168,0.3)] animate-in zoom-in duration-300" />
+            <div className="absolute bottom-2.5 w-1 h-1 bg-brand-blue rounded-full shadow-[0_0_6px_rgba(0,56,168,0.3)] animate-in zoom-in duration-300" />
           )}
         </div>
 
@@ -139,11 +139,11 @@ function BottomNav({ isLoggedIn = false }) {
                   isActive ? 'text-brand-blue' : 'text-[#AEAEB2] hover:text-[#1C1C1E]'
                 }`}
               >
-                <Icon size={24} strokeWidth={isActive ? 2 : 1.5} className="mb-2" />
+                <Icon size={24} strokeWidth={isActive ? 2 : 1.5} className="mb-1" />
                 
                 {/* Precision Active Indicator Dot */}
                 {isActive && (
-                  <div className="absolute bottom-2.5 w-2 h-2 bg-brand-blue rounded-full shadow-[0_0_8px_rgba(0,56,168,0.3)] animate-in zoom-in duration-300" />
+                  <div className="absolute bottom-2.5 w-1 h-1 bg-brand-blue rounded-full shadow-[0_0_6px_rgba(0,56,168,0.3)] animate-in zoom-in duration-300" />
                 )}
               </Link>
             );
