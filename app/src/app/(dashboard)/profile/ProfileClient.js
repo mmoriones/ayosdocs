@@ -147,7 +147,7 @@ export default function ProfileClient({ allGuides }) {
         <h1 className="text-[34px] font-bold tracking-tight text-[#1C1C1E]">Profile</h1>
       </header>
 
-      <div className="max-w-md mx-auto space-y-8">
+      <div className="max-w-md lg:max-w-[1200px] mx-auto lg:px-10 space-y-8">
         {/* User Identity Card */}
         <section className="px-6">
           <Card 

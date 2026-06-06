@@ -430,39 +430,55 @@ export default function ProgressClient({ allGuides, isRestricted }) {
         </h1>
       </section>
 
-      <div className="max-w-md mx-auto">
-        {/* Horizontal Scroll Analytics Carousel - Full Width (No Peeking) */}
-        <section 
-          ref={carouselRef}
-          onScroll={handleScroll}
-          className="mb-4 overflow-x-auto snap-x snap-mandatory flex scrollbar-hide pb-4"
-        >
+      <div className="max-w-md lg:max-w-[1200px] mx-auto lg:px-10">
+        {/* Mobile: Horizontal Scroll Analytics Carousel */}
+        <div className="lg:hidden">
+          <section 
+            ref={carouselRef}
+            onScroll={handleScroll}
+            className="mb-4 overflow-x-auto snap-x snap-mandatory flex scrollbar-hide pb-4"
+          >
+            {isLoading ? (
+              <div className="min-w-full snap-center px-6">
+                <SummaryStats.Skeleton />
+              </div>
+            ) : (
+              <>
+                <div className="min-w-full snap-center px-6">
+                  <GoalsStats stats={stats} />
+                </div>
+                <div className="min-w-full snap-center px-6">
+                  <SummaryStats stats={stats} />
+                </div>
+              </>
+            )}
+          </section>
+
+          {/* Carousel Dot Indicators */}
+          <div className="flex justify-center items-center gap-1.5 mb-8">
+            {[0, 1].map((idx) => (
+              <div 
+                key={idx} 
+                className={`transition-all duration-300 rounded-full ${
+                  scrollIndex === idx ? 'w-4 h-1.5 bg-brand-blue' : 'w-1.5 h-1.5 bg-gray-300'
+                }`} 
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: Side-by-side grid */}
+        <div className="hidden lg:grid grid-cols-2 gap-6 mb-8">
           {isLoading ? (
-            <div className="min-w-full snap-center px-6">
+            <div className="col-span-2">
               <SummaryStats.Skeleton />
             </div>
           ) : (
             <>
-              <div className="min-w-full snap-center px-6">
-                <GoalsStats stats={stats} />
-              </div>
-              <div className="min-w-full snap-center px-6">
-                <SummaryStats stats={stats} />
-              </div>
+              <GoalsStats stats={stats} />
+              <SummaryStats stats={stats} />
             </>
           )}
-        </section>
-
-        {/* Carousel Dot Indicators */}
-        <div className="flex justify-center items-center gap-1.5 mb-8">
-          {[0, 1].map((idx) => (
-            <div 
-              key={idx} 
-              className={`transition-all duration-300 rounded-full ${
-                scrollIndex === idx ? 'w-4 h-1.5 bg-brand-blue' : 'w-1.5 h-1.5 bg-gray-300'
-              }`} 
-            />
-          ))}
         </div>
 
         {/* Goal Bundles List */}

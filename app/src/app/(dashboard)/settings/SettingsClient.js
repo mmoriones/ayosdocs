@@ -63,7 +63,7 @@ export default function SettingsClient() {
         return <PasswordSection user={user} showToast={showToast} onBack={() => setCurrentView('security')} />;
       default:
         return (
-          <div className="max-w-md mx-auto px-6 space-y-8 animate-in fade-in duration-500">
+          <div className="max-w-md lg:max-w-[1200px] mx-auto px-6 lg:px-10 space-y-8 animate-in fade-in duration-500">
             {/* ACCOUNT Section */}
             <section className="space-y-3">
               <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider ml-1">Account</h3>
@@ -291,7 +291,7 @@ function SecuritySection({ user, onPasswordClick, onDeleteClick }) {
   const isGoogleOnly = user?.googleAuth && !user?.hasPassword;
 
   return (
-    <div className="max-w-md mx-auto px-6 space-y-8 animate-in slide-in-from-right duration-500">
+    <div className="max-w-md lg:max-w-[1200px] mx-auto px-6 lg:px-10 space-y-8 animate-in slide-in-from-right duration-500">
       <section className="space-y-3">
         <h3 className="text-[13px] font-bold text-gray-400 uppercase tracking-wider ml-1">Account Protection</h3>
         <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl" noPadding>
@@ -332,7 +332,7 @@ function NotificationsSection() {
   const [securityAlerts, setSecurityAlerts] = useState(true);
 
   return (
-    <div className="max-w-md mx-auto px-6 space-y-8 animate-in slide-in-from-right duration-500">
+    <div className="max-w-md lg:max-w-[1200px] mx-auto px-6 lg:px-10 space-y-8 animate-in slide-in-from-right duration-500">
       <section className="space-y-3">
         <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl" noPadding>
           <SettingsItem 
@@ -356,7 +356,7 @@ function NotificationsSection() {
 
 function PrivacySection() {
   return (
-    <div className="max-w-md mx-auto px-6 space-y-8 animate-in slide-in-from-right duration-500">
+    <div className="max-w-md lg:max-w-[1200px] mx-auto px-6 lg:px-10 space-y-8 animate-in slide-in-from-right duration-500">
       <section className="space-y-3">
         <Card className="!rounded-[28px] overflow-hidden border-white/60 shadow-sm bg-white/80 backdrop-blur-xl" noPadding>
           <SettingsItem 
@@ -403,7 +403,7 @@ function PasswordSection({ user, showToast, onBack }) {
 
   if (isSuccess) {
     return (
-      <div className="max-w-md mx-auto px-6 text-center space-y-6 py-12 animate-in zoom-in-95">
+      <div className="max-w-md lg:max-w-[1200px] mx-auto px-6 lg:px-10 text-center space-y-6 py-12 animate-in zoom-in-95">
         <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center text-[#34C759] mx-auto">
           <CheckCircle2 size={40} />
         </div>
@@ -415,7 +415,7 @@ function PasswordSection({ user, showToast, onBack }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto px-6 space-y-6 animate-in slide-in-from-right duration-500">
+    <form onSubmit={handleSubmit} className="max-w-md lg:max-w-[1200px] mx-auto px-6 lg:px-10 space-y-6 animate-in slide-in-from-right duration-500">
       <Card className="p-6 !rounded-[28px] border-white/60 bg-white/80 backdrop-blur-xl space-y-6" noPadding>
         <Input
           label="Current Password"

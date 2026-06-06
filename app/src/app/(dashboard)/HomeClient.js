@@ -456,7 +456,7 @@ function UserView({ firstName, userData, isLoading, allGuides, session, lastView
   }, [userData, allGuides]);
 
   return (
-    <div className="flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-md mx-auto">
+    <div className="flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-md lg:max-w-[1600px] mx-auto lg:px-10">
       {/* Personalized Greeting */}
       <section className="px-6 py-6">
         <h2 className="text-[34px] font-bold tracking-tight text-[#1C1C1E] leading-tight">
