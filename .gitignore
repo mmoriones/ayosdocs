@@ -53,6 +53,10 @@ _override.tf.json
 .terraformrc
 terraform.rc
 
+# serwist / pwa
+public/sw*
+public/swe-worker*
+
 # backups
 backups/*
 !backups/.gitkeep

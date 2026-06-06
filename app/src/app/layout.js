@@ -6,6 +6,7 @@ import "./globals.css";
 import Providers from "@/components/Providers";
 import { ThemeProvider } from "@/context";
 import ChatAssistant from "@/components/chat/ChatAssistant";
+import SerwistProviderWrapper from "@/components/SerwistProviderWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,10 +21,25 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "AyosDocs - Government Guide Platform",
   description: "Your guide to Philippine government processes.",
+  applicationName: "AyosDocs",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "AyosDocs",
+  },
+  formatDetection: {
+    telephone: false,
+  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
+};
+
+export const viewport = {
+  themeColor: "#0038A8",
 };
 
 export default async function RootLayout({ children }) {
@@ -37,9 +53,11 @@ export default async function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col text-ctp-text antialiased">
         <ThemeProvider>
-          <Providers session={session}>
-            {children}
-          </Providers>
+          <SerwistProviderWrapper>
+            <Providers session={session}>
+              {children}
+            </Providers>
+          </SerwistProviderWrapper>
         </ThemeProvider>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
       </body>

@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
+import { withSerwist } from "@serwist/turbopack";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -53,4 +54,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSerwist(nextConfig);
