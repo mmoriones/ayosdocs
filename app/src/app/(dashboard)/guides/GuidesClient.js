@@ -336,12 +336,12 @@ function SearchResultCard({ guide }) {
       onClick={() => router.push(`/guides/${guide.slug}`)}
       className="!rounded-[28px] border-white/60 relative overflow-hidden group/card bg-white shadow-[0_8px_24px_rgba(0,0,0,0.02)] active:scale-[0.98] transition-all"
     >
-      <div className="p-6 flex items-center gap-5 relative z-10">
+      <div className="p-6 flex items-center gap-4 relative z-10">
         <div 
-          className="w-16 h-16 rounded-[22px] flex items-center justify-center shrink-0 shadow-sm border border-white/50 relative overflow-hidden"
+          className="w-14 h-14 rounded-[22px] flex items-center justify-center shrink-0 shadow-sm border border-white/50 relative overflow-hidden"
           style={{ background: theme.gradient }}
         >
-          <GuideIcon slug={guide.slug} agency={guide.agency} size={36} className="relative z-10 drop-shadow-md" />
+          <GuideIcon slug={guide.slug} agency={guide.agency} size={30} className="relative z-10 drop-shadow-md" />
           <div className="absolute inset-0 bg-white/10 opacity-50" />
         </div>
 
@@ -394,12 +394,12 @@ function GuideListRow({ guide, isLast }) {
         !isLast ? 'border-b border-gray-100/40' : ''
       }`}
     >
-      <div className="flex items-center gap-5 flex-1 min-w-0 text-left">
+      <div className="flex items-center gap-4 flex-1 min-w-0 text-left">
         <div 
-          className="w-14 h-14 rounded-[18px] flex items-center justify-center border border-white/50 shadow-sm shrink-0 relative overflow-hidden"
+          className="w-12 h-12 rounded-[18px] flex items-center justify-center border border-white/50 shadow-sm shrink-0 relative overflow-hidden"
           style={{ background: theme.gradient }}
         >
-           <GuideIcon slug={guide.slug} agency={guide.agency} size={30} className="relative z-10 drop-shadow-sm" />
+           <GuideIcon slug={guide.slug} agency={guide.agency} size={26} className="relative z-10 drop-shadow-sm" />
            <div className="absolute inset-0 bg-white/20 opacity-30" />
         </div>
         <div className="flex-1 min-w-0 pr-4">
