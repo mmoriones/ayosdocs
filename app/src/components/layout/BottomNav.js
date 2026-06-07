@@ -14,17 +14,39 @@ function BottomNav({ isLoggedIn = false }) {
   const lastScrollYRef = useRef(0);
   const navRef = useRef(null);
 
+  const scrollDistanceRef = useRef(0);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const lastScrollY = lastScrollYRef.current;
+      const delta = currentScrollY - lastScrollY;
 
-      if (currentScrollY < 50) {
+      // Always show at the top of the page
+      if (currentScrollY <= 10) {
         setIsVisible(true);
-      } else if (currentScrollY > lastScrollY) {
-        setIsVisible(false);
-      } else {
+        scrollDistanceRef.current = 0;
+      } 
+      // Always show when near the bottom of the page
+      else if (window.innerHeight + currentScrollY >= document.documentElement.scrollHeight - 50) {
         setIsVisible(true);
+        scrollDistanceRef.current = 0;
+      }
+      else {
+        // Accumulate scroll distance in the same direction
+        if ((delta > 0 && scrollDistanceRef.current < 0) || (delta < 0 && scrollDistanceRef.current > 0)) {
+          scrollDistanceRef.current = 0;
+        }
+        scrollDistanceRef.current += delta;
+
+        // Chrome-like thresholds
+        // 1. Hide after scrolling down 60px
+        // 2. Show immediately after scrolling up 20px
+        if (scrollDistanceRef.current > 60) {
+          setIsVisible(false);
+        } else if (scrollDistanceRef.current < -20) {
+          setIsVisible(true);
+        }
       }
 
       lastScrollYRef.current = currentScrollY;
@@ -70,8 +92,8 @@ function BottomNav({ isLoggedIn = false }) {
   return (
     <nav
       ref={navRef}
-      className={`fixed left-0 right-0 w-full z-[60] lg:hidden transform-gpu transition-[transform,opacity] duration-500 ease-in-out ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'
+      className={`fixed left-0 right-0 w-full z-[60] lg:hidden transform-gpu transition-all duration-300 ease-in-out ${
+        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-[calc(100%+env(safe-area-inset-bottom,0px))] opacity-0 pointer-events-none'
       }`}
       style={{ bottom: bottomOffset }}
     >
