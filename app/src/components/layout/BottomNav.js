@@ -16,7 +16,9 @@ function BottomNav({ isLoggedIn = false }) {
   const pathname = usePathname();
   const { setChatOpen, isChatOpen } = useWorkspace();
   const [isVisible, setIsVisible] = useState(true);
+  const [bottomOffset, setBottomOffset] = useState(0);
   const lastScrollYRef = useRef(0);
+  const navRef = useRef(null);
 
   // Intelligent Auto-Hide Logic: Hides on scroll down, shows on scroll up
   useEffect(() => {
@@ -39,6 +41,29 @@ function BottomNav({ isLoggedIn = false }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // visualViewport: keep nav at the visual bottom on Chrome iOS
+  useEffect(() => {
+    const handleViewportChange = () => {
+      const vv = window.visualViewport;
+      if (vv) {
+        const offset = window.innerHeight - (vv.offsetTop + vv.height);
+        setBottomOffset(Math.max(0, Math.round(offset)));
+      }
+    };
+
+    const vv = window.visualViewport;
+    if (vv) {
+      vv.addEventListener('resize', handleViewportChange);
+    }
+    handleViewportChange();
+
+    return () => {
+      if (vv) {
+        vv.removeEventListener('resize', handleViewportChange);
+      }
+    };
+  }, []);
+
   const navItems = useMemo(() => [
     { href: '/', icon: Home, label: 'Home' },
     { href: '/guides', icon: LibraryBig, label: 'Guides' },
@@ -52,9 +77,11 @@ function BottomNav({ isLoggedIn = false }) {
 
   return (
     <nav 
+      ref={navRef}
       className={`fixed left-0 right-0 w-full z-[60] lg:hidden transform-gpu transition-all duration-500 ease-in-out ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'
-      } bottom-0`}
+      }`}
+      style={{ bottom: bottomOffset }}
     >
       {/* 
         HIGH-FIDELITY FLUID SVG BACKGROUND 
