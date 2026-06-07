@@ -42,11 +42,11 @@ const SelectionPill = ({ selected, onClick, children, className = '' }) => {
  */
 const MAX_QUERY_LENGTH = 100;
 
-export default function GuidesClient({ initialGuides }) {
+export default function GuidesClient({ initialGuides, initialCategory = null }) {
   const router = useRouter();
   const { data: session } = useSession();
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState(initialCategory || 'All');
   const [visibleCategoriesCount, setVisibleCategoriesCount] = useState(3);
 
   const sanitize = (val) => val.replace(/[<>]/g, '').slice(0, MAX_QUERY_LENGTH);
