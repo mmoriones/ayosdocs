@@ -24,14 +24,9 @@ function BottomNav({ isLoggedIn = false }) {
 
       // Always show at the top of the page
       if (currentScrollY <= 10) {
-        setIsVisible(true);
+        setIsVisible((prev) => (!prev ? true : prev));
         scrollDistanceRef.current = 0;
       } 
-      // Always show when near the bottom of the page
-      else if (window.innerHeight + currentScrollY >= document.documentElement.scrollHeight - 50) {
-        setIsVisible(true);
-        scrollDistanceRef.current = 0;
-      }
       else {
         // Accumulate scroll distance in the same direction
         if ((delta > 0 && scrollDistanceRef.current < 0) || (delta < 0 && scrollDistanceRef.current > 0)) {
