@@ -70,7 +70,7 @@ function BottomNav({ isLoggedIn = false }) {
   return (
     <nav
       ref={navRef}
-      className={`fixed left-0 right-0 w-full z-[60] lg:hidden transform-gpu transition-all duration-500 ease-in-out ${
+      className={`fixed left-0 right-0 w-full z-[60] lg:hidden transform-gpu transition-[transform,opacity] duration-500 ease-in-out ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 pointer-events-none'
       }`}
       style={{ bottom: bottomOffset }}
