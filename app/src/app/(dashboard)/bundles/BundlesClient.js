@@ -104,7 +104,7 @@ const BundleCard = ({ bundle, isTracking }) => {
     >
       {/* 3D ILLUSTRATION CONTAINER */}
       <div 
-        className="w-28 h-28 sm:w-32 sm:h-32 lg:w-44 lg:h-44 rounded-[24px] lg:rounded-[28px] flex items-center justify-center relative overflow-hidden shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-inner border border-white/40"
+        className="w-28 h-28 sm:w-32 sm:h-32 lg:w-44 lg:h-44 rounded-[24px] lg:rounded-[28px] flex items-center justify-center relative overflow-visible shrink-0 group-hover:scale-105 transition-transform duration-500 shadow-inner border border-white/40"
         style={{ 
           background: theme.gradient || theme.bg,
         }}
@@ -120,7 +120,7 @@ const BundleCard = ({ bundle, isTracking }) => {
         </div>
         
         {isTracking && (
-          <div className="absolute top-2 right-2">
+          <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-10">
             <TrackingIndicator variant="bundle" pulse />
           </div>
         )}
