@@ -75,10 +75,10 @@ function BottomNav({ isLoggedIn = false }) {
       }`}
       style={{ bottom: bottomOffset }}
     >
-      <div className="relative h-[64px]">
+      <div className="relative h-[72px]">
         <div className="absolute inset-0 -z-10 select-none pointer-events-none">
           <svg
-            viewBox="0 0 400 64"
+            viewBox="0 0 400 72"
             width="100%"
             height="100%"
             preserveAspectRatio="none"
@@ -90,8 +90,8 @@ function BottomNav({ isLoggedIn = false }) {
                  C160 0, 175 32, 200 32
                  C225 32, 240 0, 270 0
                  L400 0
-                 L400 64
-                 L0 64
+                 L400 72
+                 L0 72
                  Z"
               fill="white"
             />
