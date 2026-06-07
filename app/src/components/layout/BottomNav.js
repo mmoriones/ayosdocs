@@ -75,8 +75,30 @@ function BottomNav({ isLoggedIn = false }) {
       }`}
       style={{ bottom: bottomOffset }}
     >
-      <div className="bg-white rounded-t-[32px] shadow-[0_-8px_20px_rgba(0,0,0,0.04)] h-[72px]">
-        <div className="flex items-center justify-between h-full px-4">
+      <div className="relative h-[64px]">
+        <div className="absolute inset-0 -z-10 select-none pointer-events-none">
+          <svg
+            viewBox="0 0 400 64"
+            width="100%"
+            height="100%"
+            preserveAspectRatio="none"
+            className="filter drop-shadow-[0_-8px_20px_rgba(0,0,0,0.04)]"
+          >
+            <path
+              d="M0 0
+                 L130 0
+                 C160 0, 175 32, 200 32
+                 C225 32, 240 0, 270 0
+                 L400 0
+                 L400 64
+                 L0 64
+                 Z"
+              fill="white"
+            />
+          </svg>
+        </div>
+
+        <div className="flex items-center justify-between h-full relative z-10 px-4">
           <div className="flex-1 flex items-center justify-around h-full">
             {navItems.slice(0, 2).map((item) => {
               const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
@@ -90,7 +112,7 @@ function BottomNav({ isLoggedIn = false }) {
                     isActive ? 'text-brand-blue' : 'text-[#AEAEB2] hover:text-[#1C1C1E]'
                   }`}
                 >
-                  <Icon size={24} strokeWidth={isActive ? 2 : 1.5} className="mb-0.5" />
+                  <Icon size={24} strokeWidth={isActive ? 2 : 1.5} className="mb-2" />
                   {isActive && (
                     <div className="absolute bottom-2.5 w-1 h-1 bg-brand-blue rounded-full shadow-[0_0_6px_rgba(0,56,168,0.3)] animate-in zoom-in duration-300" />
                   )}
@@ -99,14 +121,18 @@ function BottomNav({ isLoggedIn = false }) {
             })}
           </div>
 
-          <div className="flex items-center justify-center w-24 h-full">
+          <div className="relative w-24 h-full flex items-center justify-center">
             <button
               onClick={() => setChatOpen(true)}
-              className="w-14 h-14 bg-brand-blue rounded-full shadow-[0_8px_24px_rgba(0,56,168,0.25)] flex items-center justify-center transition-all active:scale-90 group"
+              className="w-14 h-14 bg-brand-blue rounded-full shadow-[0_12px_24px_rgba(0,56,168,0.25)] flex items-center justify-center -mt-8 transition-all active:scale-90 group"
               aria-label="Ask AI Assistant"
             >
               <BotMessageSquare className="w-7 h-7 text-white transition-transform group-hover:scale-110" />
             </button>
+
+            {isChatOpen && (
+              <div className="absolute bottom-2.5 w-1 h-1 bg-brand-blue rounded-full shadow-[0_0_6px_rgba(0,56,168,0.3)] animate-in zoom-in duration-300" />
+            )}
           </div>
 
           <div className="flex-1 flex items-center justify-around h-full">
@@ -122,7 +148,7 @@ function BottomNav({ isLoggedIn = false }) {
                     isActive ? 'text-brand-blue' : 'text-[#AEAEB2] hover:text-[#1C1C1E]'
                   }`}
                 >
-                  <Icon size={24} strokeWidth={isActive ? 2 : 1.5} className="mb-0.5" />
+                  <Icon size={24} strokeWidth={isActive ? 2 : 1.5} className="mb-1" />
                   {isActive && (
                     <div className="absolute bottom-2.5 w-1 h-1 bg-brand-blue rounded-full shadow-[0_0_6px_rgba(0,56,168,0.3)] animate-in zoom-in duration-300" />
                   )}
