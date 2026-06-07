@@ -98,22 +98,23 @@ export default async function GuidePage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className="mb-10 animate-in fade-in slide-in-from-top-2 duration-1000">
-        <Adsense variant="article" />
-      </div>
+      {process.env.NEXT_PUBLIC_ADSENSE_ENABLED === 'true' && (
+        <div className="mb-10 animate-in fade-in slide-in-from-top-2 duration-1000">
+          <Adsense variant="article" />
+        </div>
+      )}
 
       <article>
         <div className="space-y-12">
           {guide.content.map((section, sIdx) => (
             <section key={section.id || sIdx} id={section.id} className="scroll-mt-32">
-              <div className="flex items-center gap-4 mb-2">
-                <span className="text-[13px] font-black text-[#0038A8] bg-[#0038A8]/5 w-8 h-8 rounded-full flex items-center justify-center shrink-0 border border-[#0038A8]/10">
+              <div className="flex items-baseline gap-3 mb-2">
+                <span className="text-[13px] font-black text-[#0038A8] bg-[#0038A8]/5 w-8 h-8 rounded-full flex items-center justify-center shrink-0 border border-[#0038A8]/10 leading-none">
                   {sIdx + 1}
                 </span>
-                <h2 className="text-[20px] lg:text-[22px] font-bold text-[#1C1C1E] tracking-tight">
+                <h2 className="text-[20px] lg:text-[22px] font-bold text-[#1C1C1E] leading-snug tracking-tight min-w-0 m-0">
                   {section.title}
                 </h2>
-                <div className="flex-1 border-t border-gray-100/60" />
               </div>
 
               <div className="space-y-6">
@@ -128,7 +129,7 @@ export default async function GuidePage({ params }) {
                     )}
                     {block.type === 'subheading' && (
                       <div className={`${bIdx === 0 ? 'mt-0' : 'mt-10'} mb-4`}>
-                        <h3 className="text-[18px] lg:text-[20px] font-bold text-[#1C1C1E] mb-2 tracking-tight">{block.title}</h3>
+                        <h3 className="text-[18px] lg:text-[20px] font-bold text-[#1C1C1E] mb-2 tracking-tight m-0">{block.title}</h3>
                         {block.content && (
                           <div className="text-[14px] text-gray-400 font-medium leading-relaxed">
                             <ReactMarkdown components={mdComponents}>
@@ -140,7 +141,7 @@ export default async function GuidePage({ params }) {
                     )}
                     {block.type === 'list' && (
                       <div className={`${bIdx === 0 ? 'mt-0' : 'mt-8'} mb-6 space-y-4`}>
-                        {block.title && <h4 className="text-[15px] font-bold text-[#1C1C1E] mb-2">{block.title}</h4>}
+                        {block.title && <h4 className="text-[15px] font-bold text-[#1C1C1E] mb-2 m-0">{block.title}</h4>}
                         <ul className="space-y-3">
                           {block.items.map((item, iIdx) => (
                             <li key={iIdx} className="flex gap-4 text-[14px] lg:text-[15px] text-gray-500 font-medium leading-relaxed group">
@@ -187,20 +188,20 @@ export default async function GuidePage({ params }) {
                       </div>
                     )}
                     {block.type === 'banner' && (
-                      <div className={`rounded-[28px] p-6 border flex gap-5 transition-all hover:shadow-md ${bIdx === 0 ? 'mt-0' : 'mt-8'} mb-8 ${
+                      <div className={`rounded-[28px] p-6 border flex flex-col sm:flex-row gap-4 sm:gap-5 transition-all hover:shadow-md ${bIdx === 0 ? 'mt-0' : 'mt-8'} mb-8 ${
                         block.variant === 'info' ? 'bg-blue-50/30 border-blue-100/50 text-blue-900' :
                         block.variant === 'warning' ? 'bg-amber-50/30 border-amber-100/50 text-amber-900' :
                         block.variant === 'note' ? 'bg-gray-50/50 border-gray-100 text-gray-700' :
                         'bg-gray-50/30 border-gray-100 text-gray-900'
                       }`}>
-                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm border border-white/50">
+                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm border border-white/50 sm:mt-0.5">
                           {block.variant === 'note' ? (
                             <Info size={20} className="text-gray-400" />
                           ) : (
                             <Sparkles size={20} className="text-[#0038A8] opacity-60" />
                           )}
                         </div>
-                        <div className="text-[14px] lg:text-[15px] font-medium leading-relaxed pt-2">
+                        <div className="text-[14px] lg:text-[15px] font-medium leading-relaxed sm:pt-2">
                           {block.variant === 'note' && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-gray-200 text-gray-700 text-[10px] font-bold uppercase tracking-widest mr-2 align-middle mb-0.5">Note</span>
                           )}

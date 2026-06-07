@@ -72,7 +72,7 @@ function TabPanel({ active, children, className = '' }) {
 const RequirementsSection = ({ requirements, theme }) => {
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-end px-1">
+      <div className="flex justify-between items-end">
         <h2 className="text-[20px] lg:text-[24px] font-bold text-[#1C1C1E] tracking-tight">What you need</h2>
         <span className="text-[12px] font-bold text-gray-300 uppercase tracking-widest">{requirements.length} Items</span>
       </div>
@@ -106,7 +106,7 @@ const FeesSection = ({ fees, theme }) => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-[20px] lg:text-[24px] font-bold text-[#1C1C1E] tracking-tight px-1">Fee Breakdown</h2>
+      <h2 className="text-[20px] lg:text-[24px] font-bold text-[#1C1C1E] tracking-tight">Fee Breakdown</h2>
       <div className="bg-white/60 backdrop-blur-xl border border-white/60 rounded-[32px] overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
         {fees.map((fee, i) => (
           <div key={i} className={`flex items-center justify-between p-5 ${i !== fees.length - 1 ? 'border-b border-gray-100/40' : ''}`}>
@@ -158,12 +158,12 @@ const TrackerStep = ({ step, index, isLast, isNext, onToggle, isSaving, theme, i
         ) : null}
       </div>
       
-      <p className="text-[14px] font-medium text-gray-500 leading-relaxed mb-8">
+      <p className="text-[14px] font-medium text-gray-500 leading-relaxed mb-5">
         {step.description}
       </p>
 
       {isNext && (
-        <div className="space-y-4">
+        <div>
           <Button 
             onClick={() => onToggle(index)}
             isLoading={isSaving}
@@ -172,17 +172,7 @@ const TrackerStep = ({ step, index, isLast, isNext, onToggle, isSaving, theme, i
           >
             {isLoggedIn ? 'Mark Step as Complete' : 'Save my progress'}
           </Button>
-          <button className="w-full flex items-center justify-between px-3 text-[13px] font-bold text-gray-400 hover:text-[#0038A8] active:scale-95 transition-all uppercase tracking-wider">
-              <span>Detailed Instructions</span>
-              <ChevronRight size={14} strokeWidth={3} />
-          </button>
         </div>
-      )}
-      
-      {(isCompleted || isLocked) && (
-          <button className="flex items-center gap-2 text-[13px] font-bold text-[#0038A8]/60 hover:text-[#0038A8] active:scale-95 transition-all uppercase tracking-wider">
-            View Instructions <ChevronRight size={14} strokeWidth={3} />
-          </button>
       )}
     </TimelineStep>
   );
@@ -205,7 +195,7 @@ const RelatedGuides = ({ currentSlug, category, allGuides, relatedGuideSlugs = [
 
   return (
     <div className="space-y-6">
-      <h2 className="text-[20px] lg:text-[24px] font-bold text-[#1C1C1E] tracking-tight px-1">Related Guides</h2>
+      <h2 className="text-[20px] lg:text-[24px] font-bold text-[#1C1C1E] tracking-tight">Related Guides</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
         {related.map(g => {
           const theme = getIconTheme(g.slug, g.agency);
@@ -213,7 +203,7 @@ const RelatedGuides = ({ currentSlug, category, allGuides, relatedGuideSlugs = [
             <Link
               key={g.slug}
               href={`/guides/${g.slug}`}
-              className="hover-lift active:scale-[0.98] flex items-center gap-5 p-5 rounded-[28px] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-white/60 hover:border-[#0038A8]/20 group transition-all"
+              className="hover-lift active:scale-[0.98] flex items-center gap-5 p-5 rounded-[28px] bg-white shadow-[0_8px_24px_rgba(0,0,0,0.02)] border border-white/60 hover:border-[#0038A8]/20 group transition-all"
             >
               <div 
                 className="w-14 h-14 rounded-[20px] flex items-center justify-center shrink-0 shadow-sm border border-white/50 relative overflow-hidden"
@@ -511,7 +501,7 @@ const GuidePageLayout = ({
                          </div>
                          <div className="text-center">
                             <p className="text-[14px] font-bold text-[#1C1C1E] leading-none whitespace-nowrap">{stat.value}</p>
-                            <p className="text-[9px] font-bold text-gray-400 uppercase tracking-[0.1em] opacity-80 mt-1">{stat.label}</p>
+                             <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider opacity-80 mt-1">{stat.label}</p>
                          </div>
                       </div>
                     ))}
@@ -527,8 +517,8 @@ const GuidePageLayout = ({
 
            {/* About Section */}
            <section className="space-y-6">
-              <h2 className="text-[20px] lg:text-[24px] font-bold text-[#1C1C1E] tracking-tight px-1">About this guide</h2>
-              <div className="bg-white/40 backdrop-blur-xl border border-white/60 rounded-[32px] p-8 md:p-10 shadow-sm prose prose-ctp max-w-none">
+               <h2 className="text-[20px] lg:text-[24px] font-bold text-[#1C1C1E] tracking-tight">About this guide</h2>
+              <div className="bg-white/60 backdrop-blur-xl border border-white/60 rounded-[32px] p-6 md:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.02)] prose prose-ctp max-w-none">
                  {children}
               </div>
            </section>
@@ -573,7 +563,7 @@ const GuidePageLayout = ({
               </div>
 
               {isLoggedIn && !isVerified && (
-                <div className="bg-[#FF9500]/5 border border-[#FF9500]/10 rounded-[24px] p-5 flex items-center gap-5 animate-in slide-in-from-top-2">
+                <div className="bg-[#FF9500]/5 border border-[#FF9500]/10 rounded-[24px] p-5 flex flex-col sm:flex-row items-start gap-4 animate-in slide-in-from-top-2">
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#FF9500] shadow-sm shrink-0">
                     <AlertCircle size={22} strokeWidth={2.5} />
                   </div>
@@ -645,7 +635,7 @@ const GuidePageLayout = ({
         </TabPanel>
 
         <TabPanel active={activeTab === 'content'}>
-           <div className="bg-white/60 backdrop-blur-xl border border-white/60 rounded-[40px] p-8 lg:p-12 shadow-[0_8px_32px_rgba(0,0,0,0.03)]">
+           <div className="bg-white/60 backdrop-blur-xl border border-white/60 rounded-[32px] p-8 lg:p-12 shadow-[0_8px_32px_rgba(0,0,0,0.03)]">
               <div className="flex flex-col gap-2 mb-10 text-center">
                 <h2 className="text-[28px] font-bold text-[#1C1C1E] tracking-tight">Table of Contents</h2>
                 <p className="text-[15px] font-medium text-gray-400">Quickly navigate to any section.</p>

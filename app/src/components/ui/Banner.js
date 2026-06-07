@@ -44,9 +44,9 @@ const Banner = ({
   };
 
   return (
-    <div className={`border rounded-[16px] p-4 flex gap-4 animate-in fade-in slide-in-from-top-1 duration-200 ${variants[variant]} ${className.includes('items-') ? '' : 'items-start'} ${className}`}>
+    <div className={`border rounded-[16px] p-4 flex flex-col sm:flex-row gap-3 sm:gap-4 animate-in fade-in slide-in-from-top-1 duration-200 ${variants[variant]} ${className.includes('items-') ? '' : 'items-start'} ${className}`}>
       {Icon && (
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-white shadow-sm border border-black/5 ${iconVariants[variant]} ${className.includes('items-center') ? '' : 'mt-0.5'}`}>
+        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-white shadow-sm border border-black/5 ${iconVariants[variant]} ${className.includes('items-center') ? '' : ''}`}>
           <Icon size={18} strokeWidth={2.5} />
         </div>
       )}
