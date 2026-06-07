@@ -40,12 +40,12 @@ function BottomNav({ isLoggedIn = false }) {
         scrollDistanceRef.current += delta;
 
         // Chrome-like thresholds
-        // 1. Hide after scrolling down 60px
+        // 1. Hide after scrolling down 40px
         // 2. Show immediately after scrolling up 20px
-        if (scrollDistanceRef.current > 60) {
-          setIsVisible(false);
+        if (scrollDistanceRef.current > 40) {
+          setIsVisible((prev) => (prev ? false : prev));
         } else if (scrollDistanceRef.current < -20) {
-          setIsVisible(true);
+          setIsVisible((prev) => (!prev ? true : prev));
         }
       }
 
@@ -92,7 +92,7 @@ function BottomNav({ isLoggedIn = false }) {
   return (
     <nav
       ref={navRef}
-      className={`fixed left-0 right-0 w-full z-[60] lg:hidden transform-gpu transition-all duration-300 ease-in-out ${
+      className={`fixed left-0 right-0 w-full z-[60] lg:hidden transform-gpu transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.3,0,0.2,1)] ${
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-[calc(100%+env(safe-area-inset-bottom,0px))] opacity-0 pointer-events-none'
       }`}
       style={{ bottom: bottomOffset }}
