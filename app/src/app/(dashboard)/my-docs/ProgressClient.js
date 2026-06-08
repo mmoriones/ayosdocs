@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
 import {
   ChevronRight,
   Heart,
@@ -13,7 +14,8 @@ import {
   BarChart3,
   Trash2,
   MoreVertical,
-  Package
+  Package,
+  X
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -22,7 +24,7 @@ import axios from 'axios';
 
 import { bundles } from "@/data/bundles";
 import { bundleStyles, bundleImages } from '@/lib/assetStyles';
-import { Skeleton, Card, Button, ProgressBar, DropdownMenu, DropdownMenuItem, SearchBar } from '@/components/ui';
+import { Skeleton, Card, Button, ProgressBar, DropdownMenu, DropdownMenuItem, SearchBar, Input } from '@/components/ui';
 import { useToast } from '@/context';
 import ConfirmModal from '@/components/ConfirmModal';
 import { deleteProgressAction, toggleFavoriteAction, stopBundleAction } from '@/app/actions/user';
@@ -121,17 +123,17 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
       interactive
       noPadding
       style={{ background: theme.gradient }}
-      className="p-5 flex flex-col border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)]"
+      className="p-6 flex flex-col border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[32px] group relative"
     >
-      <div className="flex gap-4 items-center">
-        <div className="w-16 h-16 rounded-[18px] flex items-center justify-center shrink-0 bg-white/40 backdrop-blur-sm border border-white/50 relative overflow-hidden shadow-inner">
-          <div className="relative w-9 h-9">
+      <div className="flex gap-5 items-center">
+        <div className="w-20 h-20 rounded-[24px] flex items-center justify-center shrink-0 bg-white/40 backdrop-blur-sm border border-white/50 relative overflow-hidden shadow-inner group-hover:scale-105 transition-transform duration-500">
+          <div className="relative w-12 h-12">
             <Image
               src={imagePath}
               alt={bundle.title}
               fill
-              className="object-contain drop-shadow-lg"
-              sizes="36px"
+              className="object-contain drop-shadow-lg group-hover:rotate-3 transition-transform"
+              sizes="48px"
             />
           </div>
         </div>
@@ -139,12 +141,12 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
-              <h3 className="font-bold text-[#1C1C1E] text-[15px] leading-tight truncate group-hover:text-[#0038A8] transition-colors">
-                {bundle.title}
-              </h3>
-              <span className="text-[11px] font-bold text-white/70 uppercase tracking-widest">
+              <span className="text-[11px] font-bold text-[#0038A8]/60 uppercase tracking-widest block mb-0.5">
                 {bundle.category}
               </span>
+              <h3 className="font-bold text-[#1C1C1E] text-[17px] leading-tight truncate group-hover:text-[#0038A8] transition-colors">
+                {bundle.title}
+              </h3>
             </div>
             <div className="flex items-center gap-1 shrink-0 pt-0.5">
               {onDelete && (
@@ -152,9 +154,9 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
                   trigger={
                     <button
                       onClick={(e) => e.stopPropagation()}
-                      className="w-7 h-7 rounded-full bg-white/50 border border-white/40 text-gray-400 hover:text-red-500 hover:bg-white/80 transition-all flex items-center justify-center active:scale-90"
+                      className="w-8 h-8 rounded-full bg-white/50 border border-white/40 text-gray-400 hover:text-red-500 hover:bg-white/80 transition-all flex items-center justify-center active:scale-90"
                     >
-                      <MoreVertical size={12} />
+                      <MoreVertical size={14} />
                     </button>
                   }
                   align="right"
@@ -164,26 +166,29 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
                   </DropdownMenuItem>
                 </DropdownMenu>
               )}
-              <ChevronRight size={16} className="text-gray-300 group-hover:text-[#0038A8] transition-colors" strokeWidth={2.5} />
             </div>
           </div>
 
-          <div className="mt-3 flex items-center gap-3">
+          <div className="mt-4 flex items-center gap-3">
             <div className="flex-1">
               <ProgressBar value={percentage} size="sm" color={percentage === 100 ? 'green' : 'sky'} />
             </div>
-            <span className="text-[11px] font-bold text-gray-400 whitespace-nowrap">
-              {progress.completed}/{progress.total}
-            </span>
-            <span className="text-[11px] font-bold text-[#0038A8]">{percentage}%</span>
+            <span className="text-[12px] font-black text-[#0038A8]">{percentage}%</span>
           </div>
 
-          <div className="mt-1 flex items-center gap-2 text-[11px] font-bold text-gray-400/80">
-            <span>{bundle.flow.length} steps</span>
+          <div className="mt-2 flex items-center gap-2 text-[11px] font-bold text-gray-400/80">
+            <div className="flex items-center gap-1 bg-white/40 px-2 py-0.5 rounded-md border border-white/40">
+               <span>{progress.completed}/{progress.total} Guides</span>
+            </div>
             <span className="text-gray-300">·</span>
-            <span>{progress.total} guides</span>
+            <span>{bundle.flow.length} milestones</span>
           </div>
         </div>
+      </div>
+      
+      {/* Native-like chevron indicator */}
+      <div className="absolute top-1/2 -translate-y-1/2 right-4 w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-gray-300 opacity-0 group-hover:opacity-100 transition-all">
+        <ChevronRight size={18} strokeWidth={3} />
       </div>
     </Card>
   );
@@ -191,25 +196,21 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
 
 BundleCard.Skeleton = function BundleCardSkeleton() {
   return (
-    <div className="bg-white/70 backdrop-blur-xl rounded-[28px] p-5 border border-white/60 shadow-sm flex flex-col">
-      <div className="flex gap-4 items-center">
-        <Skeleton className="w-16 h-16 rounded-[18px] shrink-0" />
+    <div className="bg-white/70 backdrop-blur-xl rounded-[32px] p-6 border border-white/60 shadow-sm flex flex-col">
+      <div className="flex gap-5 items-center">
+        <Skeleton className="w-20 h-20 rounded-[24px] shrink-0" />
         <div className="flex-1 min-w-0 space-y-3">
           <div className="space-y-2">
-            <Skeleton className="w-3/4 h-4 rounded-md" />
-            <Skeleton className="w-20 h-3 rounded-md" />
+            <Skeleton className="w-3/4 h-5 rounded-md" />
+            <Skeleton className="w-24 h-3 rounded-md" />
           </div>
           <div className="space-y-1.5">
-            <div className="flex items-center gap-3">
-              <Skeleton className="flex-1 h-1.5 rounded-full" />
-              <Skeleton className="w-10 h-3 rounded-md" />
-              <Skeleton className="w-8 h-3 rounded-md" />
+            <Skeleton className="w-full h-2 rounded-full" />
+            <div className="flex items-center gap-2">
+              <Skeleton className="w-16 h-3 rounded-md" />
+              <Skeleton className="w-3 h-3 rounded-full" />
+              <Skeleton className="w-16 h-3 rounded-md" />
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Skeleton className="w-12 h-3 rounded-md" />
-            <Skeleton className="w-3 h-3 rounded-full" />
-            <Skeleton className="w-12 h-3 rounded-md" />
           </div>
         </div>
       </div>
@@ -219,9 +220,14 @@ BundleCard.Skeleton = function BundleCardSkeleton() {
 
 export default function ProgressClient({ allGuides, isRestricted }) {
   const router = useRouter();
+  const { data: session } = useSession();
+  const firstName = session?.user?.name?.split(' ')[0] || 'there';
+
   const [activeTab, setActiveTab] = useState('In Progress');
   const [scrollIndex, setScrollIndex] = useState(0);
   const carouselRef = useRef(null);
+  const searchContainerRef = useRef(null);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   const handleScroll = (e) => {
     const scrollLeft = e.target.scrollLeft;
@@ -236,6 +242,29 @@ export default function ProgressClient({ allGuides, isRestricted }) {
 
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [confirmConfig, setConfirmConfig] = useState({ type: null, id: null });
+
+  // Global search results from all guides
+  const globalSearchResults = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    const q = searchQuery.toLowerCase();
+    return allGuides.filter(guide =>
+      guide.title.toLowerCase().includes(q) ||
+      guide.shortTitle?.toLowerCase().includes(q) ||
+      guide.description?.toLowerCase().includes(q) ||
+      guide.agency?.toLowerCase().includes(q) ||
+      guide.tags?.some(t => t.toLowerCase().includes(q))
+    ).slice(0, 8);
+  }, [searchQuery, allGuides]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
+        setIsSearchFocused(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const { data: userData = { savedProgress: [] }, isLoading } = useQuery({
     queryKey: ['user-data'],
@@ -423,110 +452,194 @@ export default function ProgressClient({ allGuides, isRestricted }) {
 
   return (
     <div className="min-h-screen bg-ios-gradient pb-32 animate-in fade-in duration-700 selection:bg-[#0038A8]/10">
-      {/* Native App Header */}
-      <section className="px-6 pt-12 pb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <h1 className="text-[36px] font-black tracking-tight text-[#1C1C1E] leading-tight">
-          My Docs
-        </h1>
-      </section>
-
-      <div className="max-w-md lg:max-w-[1200px] mx-auto lg:px-10">
-        {/* Mobile: Horizontal Scroll Analytics Carousel */}
-        <div className="lg:hidden">
-          <section 
-            ref={carouselRef}
-            onScroll={handleScroll}
-            className="mb-4 overflow-x-auto snap-x snap-mandatory flex scrollbar-hide pb-4"
-          >
-            {isLoading ? (
-              <div className="min-w-full snap-center px-6">
-                <SummaryStats.Skeleton />
-              </div>
-            ) : (
-              <>
-                <div className="min-w-full snap-center px-6">
-                  <GoalsStats stats={stats} />
-                </div>
-                <div className="min-w-full snap-center px-6">
-                  <SummaryStats stats={stats} />
-                </div>
-              </>
-            )}
-          </section>
-
-          {/* Carousel Dot Indicators */}
-          <div className="flex justify-center items-center gap-1.5 mb-8">
-            {[0, 1].map((idx) => (
-              <div 
-                key={idx} 
-                className={`transition-all duration-300 rounded-full ${
-                  scrollIndex === idx ? 'w-4 h-1.5 bg-brand-blue' : 'w-1.5 h-1.5 bg-gray-300'
-                }`} 
-              />
-            ))}
-          </div>
+      {/* High-Fidelity Discovery Header */}
+      <header className="px-6 pt-12 pb-8 max-w-[1600px] mx-auto lg:px-10">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-[34px] lg:text-[48px] font-bold text-[#1C1C1E] tracking-tight leading-none">
+            My Dashboard
+          </h1>
+          <p className="text-[15px] lg:text-[17px] font-medium text-gray-500 mt-2">
+            Track your government requirements and application progress.
+          </p>
         </div>
+      </header>
 
-        {/* Desktop: Side-by-side grid */}
-        <div className="hidden lg:grid grid-cols-2 gap-6 mb-8">
-          {isLoading ? (
-            <div className="col-span-2">
-              <SummaryStats.Skeleton />
-            </div>
-          ) : (
-            <>
-              <GoalsStats stats={stats} />
-              <SummaryStats stats={stats} />
-            </>
-          )}
-        </div>
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-10">
+        {/* Analytics Section */}
+        {!isLoading && (stats.activeBundles > 0 || stats.total > 0) && (
+          <>
+            {/* Mobile: Horizontal Scroll Analytics Carousel */}
+            <div className="lg:hidden -mx-6">
+              <section 
+                ref={carouselRef}
+                onScroll={handleScroll}
+                className="mb-4 overflow-x-auto snap-x snap-mandatory flex scrollbar-hide pb-4"
+              >
+                {stats.activeBundles > 0 && (
+                  <div className="min-w-full snap-center px-6">
+                    <GoalsStats stats={stats} />
+                  </div>
+                )}
+                {stats.total > 0 && (
+                  <div className="min-w-full snap-center px-6">
+                    <SummaryStats stats={stats} />
+                  </div>
+                )}
+              </section>
 
-        {/* Goal Bundles List */}
-        {!isLoading && stats.activeBundles > 0 && (
-          <section className="mb-10 space-y-4 px-6">
-            <div className="flex items-center justify-between px-1">
-              <h3 className="text-[20px] font-black text-[#1C1C1E] tracking-tight">Active Goals</h3>
-              <Link href="/bundles" className="text-[13px] font-bold text-[#0038A8]">View All</Link>
+              {/* Carousel Dot Indicators - Only show if both are present */}
+              {stats.activeBundles > 0 && stats.total > 0 && (
+                <div className="flex justify-center items-center gap-1.5 mb-8">
+                  {[0, 1].map((idx) => (
+                    <div 
+                      key={idx} 
+                      className={`transition-all duration-300 rounded-full ${
+                        scrollIndex === idx ? 'w-4 h-1.5 bg-brand-blue' : 'w-1.5 h-1.5 bg-gray-300'
+                      }`} 
+                    />
+                  ))}
+                </div>
+              )}
             </div>
-            <div className="space-y-3">
-              {bundleProgress.map((item) => (
-                <BundleCard
-                  key={item.bundle.id}
-                  bundle={item.bundle}
-                  progress={item}
-                  onDelete={(id) => {
-                    setConfirmConfig({ type: 'bundle', id });
-                    setIsConfirmOpen(true);
-                  }}
-                />
-              ))}
+
+            {/* Desktop: Grid */}
+            <div className={`hidden lg:grid gap-6 mb-8 ${stats.activeBundles > 0 && stats.total > 0 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {stats.activeBundles > 0 && <GoalsStats stats={stats} />}
+              {stats.total > 0 && <SummaryStats stats={stats} />}
             </div>
-          </section>
+          </>
         )}
 
-        {/* Empty State for Bundles */}
-        {!isLoading && stats.activeBundles === 0 && (
-          <section className="mb-10 px-6">
-            <div className="bg-white/60 backdrop-blur-xl rounded-[32px] p-8 border border-white/60 shadow-sm text-center">
-              <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm border border-white/50">
-                <Package size={24} className="text-gray-300" />
+        {/* Loading Skeleton */}
+        {isLoading && (
+          <div className="mb-8">
+             <div className="lg:hidden">
+               <SummaryStats.Skeleton />
+             </div>
+             <div className="hidden lg:grid grid-cols-2 gap-6">
+               <SummaryStats.Skeleton />
+               <SummaryStats.Skeleton />
+             </div>
+          </div>
+        )}
+
+        {/* Search Bar */}
+        <section className="mb-10">
+          <div ref={searchContainerRef} className="relative group">
+            <Input 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setIsSearchFocused(true)}
+              placeholder="Search your tracked documents or find new guides..."
+              leftIcon={Search}
+              rightContent={searchQuery ? (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-200 active:scale-90 transition-all"
+                >
+                  <X size={14} strokeWidth={3} />
+                </button>
+              ) : null}
+              className="h-16 shadow-[0_8px_32px_rgba(0,0,0,0.04)] border-white/60 focus:border-[#0038A8]/20 transition-all rounded-[24px]"
+            />
+
+            {/* Global Search Results Dropdown */}
+            {isSearchFocused && searchQuery.trim() && (
+              <div className="absolute top-full left-0 right-0 mt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-300">
+                <div className="bg-white/80 backdrop-blur-xl rounded-[28px] border border-white/40 shadow-lg overflow-hidden">
+                  {globalSearchResults.length > 0 ? (
+                    <div className="py-2 max-h-[400px] overflow-y-auto">
+                      <div className="px-5 py-2">
+                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Global Results</span>
+                      </div>
+                      {globalSearchResults.map((guide) => (
+                        <button
+                          key={guide.slug}
+                          onClick={() => {
+                            router.push(`/guides/${guide.slug}`);
+                            setIsSearchFocused(false);
+                          }}
+                          className="w-full flex items-center gap-4 px-5 py-3 text-left active:scale-[0.98] transition-transform hover:bg-black/[0.02]"
+                        >
+                          <div className="w-10 h-10 rounded-xl bg-white shadow-sm border border-white/50 flex items-center justify-center shrink-0">
+                            <GuideIcon slug={guide.slug} agency={guide.agency} size={22} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h5 className="text-[14px] font-bold text-[#1C1C1E] leading-tight truncate">
+                              {guide.shortTitle || guide.title}
+                            </h5>
+                            <p className="text-[11px] font-medium text-gray-400 mt-0.5 truncate">
+                              {guide.agency}
+                            </p>
+                          </div>
+                          <ChevronRight size={14} className="text-gray-300 shrink-0" strokeWidth={3} />
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center py-8 text-center">
+                      <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-400 mb-3">
+                        <Search size={20} />
+                      </div>
+                      <h5 className="text-[14px] font-bold text-[#1C1C1E]">No guides found</h5>
+                      <p className="text-[12px] font-medium text-gray-400 mt-1 max-w-[200px]">
+                        Try a different search term.
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
-              <h4 className="text-[15px] font-bold text-[#1C1C1E]">No bundles tracked yet</h4>
-              <p className="text-[13px] font-medium text-gray-400 mt-1.5 max-w-[240px] mx-auto">
-                Start tracking a life event bundle to see your milestone forecast and progress here.
-              </p>
-              <Link
-                href="/bundles"
-                className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-bold text-[#0038A8] active:opacity-60 transition-opacity"
-              >
-                Browse Bundles <ChevronRight size={14} strokeWidth={3} />
+            )}
+          </div>
+        </section>
+
+        {/* Goal Bundles List */}
+        {!isLoading && (
+          <section className="mb-12 space-y-6">
+            <div className="flex items-center justify-between px-1">
+              <h3 className="text-[19px] font-bold text-[#1C1C1E]">Active Goals</h3>
+              <Link href="/bundles" className="text-[13px] font-bold text-[#0038A8] active:opacity-60 transition-opacity">
+                See All
               </Link>
             </div>
+            
+            {stats.activeBundles > 0 ? (
+              <div className="space-y-3">
+                {bundleProgress.map((item) => (
+                  <BundleCard
+                    key={item.bundle.id}
+                    bundle={item.bundle}
+                    progress={item}
+                    onDelete={(id) => {
+                      setConfirmConfig({ type: 'bundle', id });
+                      setIsConfirmOpen(true);
+                    }}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white/60 backdrop-blur-xl rounded-[32px] p-8 border border-white/60 shadow-sm text-center">
+                <div className="w-14 h-14 bg-[var(--orange)]/15 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner border border-[var(--orange)]/10">
+                  <Package size={24} className="text-[var(--orange)]" />
+                </div>
+                <h4 className="text-[15px] font-bold text-[#1C1C1E]">No bundles tracked yet</h4>
+                <p className="text-[13px] font-medium text-gray-400 mt-1.5 max-w-[240px] mx-auto">
+                  Start tracking a life event bundle to see your milestone forecast and progress here.
+                </p>
+                <Link
+                  href="/bundles"
+                  className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-bold text-[#0038A8] active:opacity-60 transition-opacity"
+                >
+                  Browse Bundles <ChevronRight size={14} strokeWidth={3} />
+                </Link>
+              </div>
+            )}
           </section>
         )}
 
         {/* Tab System */}
-        <section className="mb-8 px-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <section className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div className="flex items-center gap-1.5 bg-white/30 backdrop-blur-md p-1.5 rounded-2xl border border-white/20">
             {['In Progress', 'Completed', 'Favorites'].map((tab) => (
               <button
@@ -593,6 +706,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                       guide={item.guide}
                       percent={item.percent}
                       completedTasks={item.completedTasks}
+                      updatedAt={item.updatedAt}
                       onClick={() => router.push(`/guides/${item.slug}`)}
                       onDelete={() => {
                         setConfirmConfig({ type: 'guide', id: item.slug });
@@ -604,13 +718,19 @@ export default function ProgressClient({ allGuides, isRestricted }) {
              </div>
           ) : (
             <div className="py-16 text-center bg-white/60 backdrop-blur-xl rounded-[32px] border border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.02)] animate-in fade-in zoom-in-95 duration-500">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm border border-white/50">
-                <Search size={20} className="text-gray-300" />
+              <div className="w-14 h-14 bg-[var(--teal)]/15 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner border border-[var(--teal)]/10">
+                <Search size={24} className="text-[var(--teal)]" />
               </div>
               <h4 className="text-[15px] font-bold text-[#1C1C1E]">No documents here yet</h4>
               <p className="text-[13px] font-medium text-gray-400 mt-1 max-w-[220px] mx-auto">
                 Start a guide to begin tracking your progress.
               </p>
+              <Link
+                href="/guides"
+                className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-bold text-[#0038A8] active:opacity-60 transition-opacity"
+              >
+                Explore Guides <ChevronRight size={14} strokeWidth={3} />
+              </Link>
             </div>
           )}
         </section>
@@ -631,7 +751,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
   );
 }
 
-function InProgressCard({ guide, percent, completedTasks, onClick, onDelete }) {
+function InProgressCard({ guide, percent, completedTasks, onClick, onDelete, updatedAt }) {
   const percentage = Math.round(percent) || 0;
   const iconName = getIconName(guide.slug, guide.agency);
   const theme = getIconTheme(guide.slug, guide.agency, iconName);
@@ -639,6 +759,17 @@ function InProgressCard({ guide, percent, completedTasks, onClick, onDelete }) {
   const completedIndices = completedTasks ? completedTasks.split(',').map(Number) : [];
   const nextStepIndex = guide.checklist?.findIndex((_, idx) => !completedIndices.includes(idx));
   const nextStep = nextStepIndex !== -1 ? guide.checklist[nextStepIndex] : { title: 'Ready to verify' };
+
+  const timeAgo = (date) => {
+    if (!date) return null;
+    const now = new Date();
+    const past = new Date(date);
+    const diffInSeconds = Math.floor((now - past) / 1000);
+    if (diffInSeconds < 60) return 'just now';
+    if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
+    if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
+    return past.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  };
 
   return (
     <Card
@@ -653,10 +784,23 @@ function InProgressCard({ guide, percent, completedTasks, onClick, onDelete }) {
           <GuideIcon slug={guide.slug} agency={guide.agency} size={48} className="object-contain drop-shadow-md" />
         </div>
         <div className="text-left flex-1 min-w-0 pr-4">
+          <div className="flex items-center gap-2 mb-0.5">
+             <span className="text-[10px] font-bold text-[#0038A8] uppercase tracking-widest leading-none">
+               {Array.isArray(guide.agency) ? guide.agency[0] : guide.agency}
+             </span>
+             {updatedAt && (
+               <>
+                 <span className="w-1 h-1 rounded-full bg-gray-300" />
+                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">
+                   {timeAgo(updatedAt)}
+                 </span>
+               </>
+             )}
+          </div>
           <h4 className="font-bold text-[#1C1C1E] text-[17px] leading-tight line-clamp-1 mb-1.5">{guide.shortTitle || guide.title}</h4>
           <div className="space-y-0.5">
-            <span className="text-[11px] font-bold text-[#0038A8] uppercase tracking-widest leading-none">Next Step</span>
-            <p className="text-[13px] font-medium text-gray-500 line-clamp-1">{nextStep.title}</p>
+            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none">Next Step</span>
+            <p className="text-[13px] font-medium text-gray-600 line-clamp-1">{nextStep.title}</p>
           </div>
         </div>
       </div>
@@ -679,12 +823,13 @@ function InProgressCard({ guide, percent, completedTasks, onClick, onDelete }) {
         )}
         <div className="relative w-14 h-14 flex items-center justify-center">
             <svg className="w-full h-full transform -rotate-90">
-              <circle cx="28" cy="28" r="24" stroke="white/80" strokeWidth="5" fill="transparent" />
+              <circle cx="28" cy="28" r="24" stroke="white" strokeOpacity="0.5" strokeWidth="5" fill="transparent" />
               <circle
                 cx="28" cy="28" r="24"
                 stroke={theme.ring} strokeWidth="5" fill="transparent"
                 strokeDasharray={150.8} strokeDashoffset={150.8 * (1 - percentage / 100)}
                 strokeLinecap="round"
+                className="transition-all duration-1000 ease-out"
               />
             </svg>
             <span className="absolute text-[12px] font-black text-[#1C1C1E]">{percentage}%</span>
@@ -707,15 +852,15 @@ function CompletedGridCard({ guide, onClick, onDelete }) {
   return (
     <Card
       interactive onClick={onClick} style={{ background: theme.gradient }}
-      className="flex flex-col items-center justify-center text-center p-5 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] aspect-square rounded-[28px] relative"
+      className="flex flex-col items-center justify-center text-center p-5 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] aspect-square rounded-[32px] relative group"
       noPadding
     >
       {onDelete && (
-        <div onClick={(e) => e.stopPropagation()} className="absolute top-2 right-2 z-10">
+        <div onClick={(e) => e.stopPropagation()} className="absolute top-3 right-3 z-10">
           <DropdownMenu
             trigger={
-              <button className="click-ripple w-7 h-7 rounded-full bg-white/40 border border-white/40 text-gray-300 hover:text-[#1C1C1E] hover:bg-white/80 transition-all flex items-center justify-center active:scale-90 backdrop-blur-sm">
-                <MoreVertical size={12} />
+              <button className="click-ripple w-8 h-8 rounded-full bg-white/40 border border-white/40 text-gray-400 hover:text-[#1C1C1E] hover:bg-white/80 transition-all flex items-center justify-center active:scale-90 backdrop-blur-sm">
+                <MoreVertical size={14} />
               </button>
             }
             align="right"
@@ -726,17 +871,17 @@ function CompletedGridCard({ guide, onClick, onDelete }) {
           </DropdownMenu>
         </div>
       )}
-      <div className="relative mb-3">
-        <div className="w-14 h-14 flex items-center justify-center">
-          <GuideIcon slug={guide.slug} agency={guide.agency} size={40} className="object-contain drop-shadow-sm" />
+      <div className="relative mb-3 group-hover:scale-110 transition-transform duration-500">
+        <div className="w-16 h-16 flex items-center justify-center">
+          <GuideIcon slug={guide.slug} agency={guide.agency} size={48} className="object-contain drop-shadow-md" />
         </div>
-        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-[#FFCC00] rounded-full border-2 border-white flex items-center justify-center shadow-sm">
-          <Check size={10} strokeWidth={4} className="text-white" />
+        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-[#34C759] rounded-full border-2 border-white flex items-center justify-center shadow-sm">
+          <Check size={12} strokeWidth={4} className="text-white" />
         </div>
       </div>
       <div className="space-y-0.5">
-        <h5 className="font-bold text-[#1C1C1E] text-[13px] leading-tight line-clamp-2 px-1">{guide.shortTitle || guide.title}</h5>
-        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tight opacity-70">{date}</span>
+        <h5 className="font-bold text-[#1C1C1E] text-[14px] leading-tight line-clamp-2 px-1">{guide.shortTitle || guide.title}</h5>
+        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tight opacity-70">Done {date}</span>
       </div>
     </Card>
   );
@@ -750,16 +895,16 @@ function FavoriteRowCard({ guide, onClick, isFavorite, onToggleFavorite }) {
   return (
     <Card
       interactive onClick={onClick} style={{ background: theme.gradient }}
-      className="w-full flex items-center justify-between group px-5 py-4 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-2xl"
+      className="w-full flex items-center justify-between group px-5 py-4 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[24px]"
       noPadding
     >
       <div className="flex items-center gap-4 flex-1 min-w-0">
-        <div className="w-10 h-10 flex items-center justify-center shrink-0">
+        <div className="w-12 h-12 flex items-center justify-center shrink-0 bg-white/40 backdrop-blur-sm rounded-2xl border border-white/40 shadow-inner">
           <GuideIcon slug={guide.slug} agency={guide.agency} size={32} className="object-contain drop-shadow-sm" />
         </div>
         <div className="text-left flex-1 min-w-0">
-          <h4 className="font-bold text-[#1C1C1E] text-[15px] leading-tight truncate">{guide.shortTitle || guide.title}</h4>
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest truncate block">{agency}</span>
+          <h4 className="font-bold text-[#1C1C1E] text-[16px] leading-tight truncate">{guide.shortTitle || guide.title}</h4>
+          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest truncate block mt-0.5">{agency}</span>
         </div>
       </div>
       <div className="flex items-center gap-3">
@@ -768,15 +913,17 @@ function FavoriteRowCard({ guide, onClick, isFavorite, onToggleFavorite }) {
             e.stopPropagation();
             onToggleFavorite?.();
           }}
-          className="transition-all active:scale-75 outline-none"
+          className="w-10 h-10 rounded-full bg-white/40 backdrop-blur-sm border border-white/40 flex items-center justify-center transition-all active:scale-75 outline-none hover:bg-white/60"
         >
           <Heart
-            size={18}
+            size={20}
             fill={isFavorite ? "#FFCC00" : "none"}
-            className={isFavorite ? "text-[#FFCC00]" : "text-gray-200 hover:text-gray-300"}
+            className={isFavorite ? "text-[#FFCC00]" : "text-gray-300"}
           />
         </button>
-        <ChevronRight size={18} className="text-gray-300 group-hover:text-[#0038A8] transition-colors" strokeWidth={3} />
+        <div className="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-gray-300 group-hover:bg-[#0038A8]/10 group-hover:text-[#0038A8] transition-all">
+          <ChevronRight size={18} strokeWidth={3} />
+        </div>
       </div>
     </Card>
   );
