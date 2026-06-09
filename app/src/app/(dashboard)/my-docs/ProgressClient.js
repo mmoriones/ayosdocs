@@ -14,6 +14,7 @@ import {
   BarChart3,
   Trash2,
   MoreVertical,
+  MoreHorizontal,
   Package,
   X
 } from 'lucide-react';
@@ -24,7 +25,7 @@ import axios from 'axios';
 
 import { bundles } from "@/data/bundles";
 import { bundleStyles, bundleImages } from '@/lib/assetStyles';
-import { Skeleton, Card, Button, ProgressBar, DropdownMenu, DropdownMenuItem, SearchBar, Input } from '@/components/ui';
+import { Skeleton, Card, Button, ProgressBar, DropdownMenu, DropdownMenuItem, DropdownMenuSeparator, SearchBar, Input } from '@/components/ui';
 import { useToast } from '@/context';
 import ConfirmModal from '@/components/ConfirmModal';
 import { deleteProgressAction, toggleFavoriteAction, stopBundleAction } from '@/app/actions/user';
@@ -33,7 +34,7 @@ import { getIconTheme } from '@/lib/assetStyles';
 
 const GoalsStats = ({ stats }) => {
   return (
-    <div className="bg-gradient-to-t from-[#00205B] to-[#0038A8] rounded-[32px] p-8 shadow-xl shadow-[#0038A8]/20 relative overflow-hidden text-white group h-[220px] flex flex-col justify-between border border-white/10">
+    <div className="bg-gradient-to-t from-[#0038A8] to-[#4D74C2] rounded-[32px] p-8 shadow-xl shadow-[#0038A8]/20 relative overflow-hidden text-white group h-[220px] flex flex-col justify-between border border-white/10">
       {/* Abstract background patterns */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-brand-gold/15 rounded-full blur-3xl -mr-16 -mt-16" />
       <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-white/5 rounded-full blur-2xl" />
@@ -43,26 +44,25 @@ const GoalsStats = ({ stats }) => {
           <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-xl border border-white/10 flex items-center justify-center shadow-inner">
             <Package className="text-brand-gold" size={20} strokeWidth={2.5} />
           </div>
-          <span className="text-[12px] font-black text-white/60 uppercase tracking-[0.15em]">Investment Forecast</span>
+          <span className="text-[12px] font-black text-white/60 uppercase tracking-[0.15em]">Milestone Forecast</span>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
             <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Total Remaining</span>
-            <p className="text-[28px] font-black tracking-tight leading-none">{stats.aggregateRemaining.cost}</p>
+            <p className="text-[20px] font-black tracking-tight leading-none">{stats.aggregateRemaining.cost}</p>
           </div>
           <div className="space-y-1 text-right">
             <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Goal Timeframe</span>
-            <p className="text-[28px] font-black tracking-tight leading-none">{stats.aggregateRemaining.time}</p>
+            <p className="text-[20px] font-black tracking-tight leading-none">{stats.aggregateRemaining.time}</p>
           </div>
         </div>
       </div>
 
-      <div className="relative z-10 flex items-center justify-between">
+      <div className="relative z-10 flex items-center">
         <div className="px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-[10px] font-black text-brand-gold uppercase tracking-widest">
           {stats.activeBundles} {stats.activeBundles === 1 ? 'Bundle' : 'Bundles'} Tracked
         </div>
-        <ChevronRight size={16} className="text-white/40" />
       </div>
     </div>
   );
@@ -72,7 +72,7 @@ const SummaryStats = ({ stats }) => {
   const percentage = Math.round((stats.completed / (stats.total || 1)) * 100) || 0;
 
   return (
-    <div className="bg-gradient-to-t from-[#16888D] to-brand-teal rounded-[32px] p-8 shadow-xl shadow-brand-teal/20 relative overflow-hidden text-white group h-[220px] flex flex-col justify-between border border-white/10">
+    <div className="bg-gradient-to-t from-[#20A9AF] to-[#63C3C7] rounded-[32px] p-8 shadow-xl shadow-brand-teal/20 relative overflow-hidden text-white group h-[220px] flex flex-col justify-between border border-white/10">
       <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
 
       <div className="relative z-10 space-y-6">
@@ -124,7 +124,26 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
       noPadding
       style={{ background: theme.gradient }}
       className="p-6 flex flex-col border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[32px] group relative"
+      overflow="visible"
     >
+      {onDelete && (
+        <div className="absolute top-4 right-4 z-30" onClick={(e) => e.stopPropagation()}>
+          <DropdownMenu
+            trigger={
+              <button
+                className="w-8 h-8 rounded-full bg-white/40 backdrop-blur-md border border-white/40 text-gray-500 hover:text-gray-900 transition-all flex items-center justify-center active:scale-90 shadow-sm"
+              >
+                <MoreHorizontal size={16} strokeWidth={2.5} />
+              </button>
+            }
+            align="right"
+          >
+            <DropdownMenuItem onClick={() => onDelete(bundle.id)} variant="danger" icon={Trash2}>
+              Stop Tracking
+            </DropdownMenuItem>
+          </DropdownMenu>
+        </div>
+      )}
       <div className="flex gap-5 items-center">
         <div className="w-20 h-20 rounded-[24px] flex items-center justify-center shrink-0 bg-white/40 backdrop-blur-sm border border-white/50 relative overflow-hidden shadow-inner group-hover:scale-105 transition-transform duration-500">
           <div className="relative w-12 h-12">
@@ -140,32 +159,13 @@ const BundleCard = ({ bundle, progress, onDelete }) => {
 
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
-            <div className="min-w-0">
+            <div className="min-w-0 pr-8">
               <span className="text-[11px] font-bold text-[#0038A8]/60 uppercase tracking-widest block mb-0.5">
                 {bundle.category}
               </span>
               <h3 className="font-bold text-[#1C1C1E] text-[17px] leading-tight truncate group-hover:text-[#0038A8] transition-colors">
                 {bundle.title}
               </h3>
-            </div>
-            <div className="flex items-center gap-1 shrink-0 pt-0.5">
-              {onDelete && (
-                <DropdownMenu
-                  trigger={
-                    <button
-                      onClick={(e) => e.stopPropagation()}
-                      className="w-8 h-8 rounded-full bg-white/50 border border-white/40 text-gray-400 hover:text-red-500 hover:bg-white/80 transition-all flex items-center justify-center active:scale-90"
-                    >
-                      <MoreVertical size={14} />
-                    </button>
-                  }
-                  align="right"
-                >
-                  <DropdownMenuItem onClick={() => onDelete(bundle.id)} variant="danger" icon={Trash2}>
-                    Stop Tracking
-                  </DropdownMenuItem>
-                </DropdownMenu>
-              )}
             </div>
           </div>
 
@@ -361,24 +361,32 @@ export default function ProgressClient({ allGuides, isRestricted }) {
 
     const parseCost = (range) => {
       if (!range || range === 'Free') return [0, 0];
-      if (range.includes('Under ₱500')) return [0, 500];
-      if (range.includes('₱500–₱2000')) return [500, 2000];
-      if (range.includes('₱2000+')) return [2000, 5000];
+      if (range.includes('P1H')) return [100, 500];
+      if (range.includes('P5H')) return [500, 2000];
+      if (range.includes('P2K')) return [2000, 5000];
       return [0, 0];
     };
 
     const parseTime = (time) => {
-      if (!time || time === 'Same Day') return [0, 1];
-      if (time === '1-3 Days') return [1, 3];
-      if (time === '3-7 Days') return [3, 7];
-      if (time === '1 Week+') return [7, 14];
-      return [0, 0];
+      if (!time) return [0, 0];
+      const toDays = (s) => {
+        const num = parseInt(s, 10);
+        if (s.includes('W')) return num * 7;
+        return num;
+      };
+      const parts = time.split('-');
+      if (parts.length === 1) return [0, toDays(parts[0])];
+      return [toDays(parts[0]), toDays(parts[1])];
     };
 
     const trackedBundleIds = userData.trackedBundles?.map(b => b.bundleId) || [];
+    const countedSlugs = new Set();
     bundles.filter(b => trackedBundleIds.includes(b.id)).forEach(bundle => {
       bundle.flow.forEach(step => {
         step.guides.forEach(slug => {
+          if (countedSlugs.has(slug)) return;
+          countedSlugs.add(slug);
+
           const guide = allGuides.find(g => g.slug === slug);
           const progress = processedGuides.find(pg => pg.slug === slug);
 
@@ -432,7 +440,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
       result = result.filter(g => g.guide.title.toLowerCase().includes(searchQuery.toLowerCase()));
     }
     if (activeTab === 'In Progress') {
-      result = result.filter(g => g.percent < 100);
+      result = result.filter(g => g.percent > 0 && g.percent < 100);
     } else if (activeTab === 'Completed') {
       result = result.filter(g => g.percent === 100);
     } else if (activeTab === 'Favorites') {
@@ -697,6 +705,10 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                         onClick={() => router.push(`/guides/${item.slug}`)}
                         isFavorite={item.isFavorite}
                         onToggleFavorite={() => handleFavoriteGuide(item.slug)}
+                        onDelete={() => {
+                          setConfirmConfig({ type: 'guide', id: item.slug });
+                          setIsConfirmOpen(true);
+                        }}
                       />
                     );
                   }
@@ -707,6 +719,8 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                       percent={item.percent}
                       completedTasks={item.completedTasks}
                       updatedAt={item.updatedAt}
+                      isFavorite={item.isFavorite}
+                      onToggleFavorite={() => handleFavoriteGuide(item.slug)}
                       onClick={() => router.push(`/guides/${item.slug}`)}
                       onDelete={() => {
                         setConfirmConfig({ type: 'guide', id: item.slug });
@@ -717,7 +731,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
                 })}
              </div>
           ) : (
-            <div className="py-16 text-center bg-white/60 backdrop-blur-xl rounded-[32px] border border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.02)] animate-in fade-in zoom-in-95 duration-500">
+            <div className="py-16 text-center bg-white/60 backdrop-blur-xl rounded-[32px] border border-white/60 shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
               <div className="w-14 h-14 bg-[var(--teal)]/15 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner border border-[var(--teal)]/10">
                 <Search size={24} className="text-[var(--teal)]" />
               </div>
@@ -751,7 +765,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
   );
 }
 
-function InProgressCard({ guide, percent, completedTasks, onClick, onDelete, updatedAt }) {
+function InProgressCard({ guide, percent, completedTasks, onClick, onDelete, onToggleFavorite, isFavorite, updatedAt }) {
   const percentage = Math.round(percent) || 0;
   const iconName = getIconName(guide.slug, guide.agency);
   const theme = getIconTheme(guide.slug, guide.agency, iconName);
@@ -778,13 +792,14 @@ function InProgressCard({ guide, percent, completedTasks, onClick, onDelete, upd
       style={{ background: theme.gradient }}
       className="w-full flex items-center justify-between group px-5 py-6 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[28px] relative"
       noPadding
+      overflow="visible"
     >
       <div className="flex items-center gap-4 flex-1 min-w-0">
         <div className="w-16 h-16 flex items-center justify-center shrink-0">
           <GuideIcon slug={guide.slug} agency={guide.agency} size={48} className="object-contain drop-shadow-md" />
         </div>
-        <div className="text-left flex-1 min-w-0 pr-4">
-          <div className="flex items-center gap-2 mb-0.5">
+        <div className="text-left flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1">
              <span className="text-[10px] font-bold text-[#0038A8] uppercase tracking-widest leading-none">
                {Array.isArray(guide.agency) ? guide.agency[0] : guide.agency}
              </span>
@@ -797,30 +812,14 @@ function InProgressCard({ guide, percent, completedTasks, onClick, onDelete, upd
                </>
              )}
           </div>
-          <h4 className="font-bold text-[#1C1C1E] text-[17px] leading-tight line-clamp-1 mb-1.5">{guide.shortTitle || guide.title}</h4>
+          <h4 className="font-bold text-[#1C1C1E] text-[17px] leading-tight line-clamp-1 mb-2">{guide.shortTitle || guide.title}</h4>
           <div className="space-y-0.5">
-            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none">Next Step</span>
+            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest leading-none">Next Milestone</span>
             <p className="text-[13px] font-medium text-gray-600 line-clamp-1">{nextStep.title}</p>
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-2 shrink-0">
-        {onDelete && (
-          <div onClick={(e) => e.stopPropagation()}>
-            <DropdownMenu
-              trigger={
-                <button className="click-ripple w-8 h-8 rounded-full bg-gray-50 border border-gray-100 text-gray-300 hover:text-[#1C1C1E] hover:border-gray-200 hover:bg-gray-100 transition-all flex items-center justify-center active:scale-90">
-                  <MoreVertical size={14} />
-                </button>
-              }
-              align="right"
-            >
-              <DropdownMenuItem onClick={onDelete} variant="danger" icon={Trash2}>
-                Remove Progress
-              </DropdownMenuItem>
-            </DropdownMenu>
-          </div>
-        )}
+      <div className="flex items-center gap-4 shrink-0">
         <div className="relative w-14 h-14 flex items-center justify-center">
             <svg className="w-full h-full transform -rotate-90">
               <circle cx="28" cy="28" r="24" stroke="white" strokeOpacity="0.5" strokeWidth="5" fill="transparent" />
@@ -834,11 +833,36 @@ function InProgressCard({ guide, percent, completedTasks, onClick, onDelete, upd
             </svg>
             <span className="absolute text-[12px] font-black text-[#1C1C1E]">{percentage}%</span>
         </div>
-        {percentage >= 80 ? (
-           <div className="bg-[#0038A8] text-white px-3.5 py-1.5 rounded-xl text-[11px] font-bold shadow-md shadow-[#0038A8]/20 group-hover:translate-x-1 transition-transform">Resume</div>
-        ) : (
-          <ChevronRight size={18} className="text-gray-300 group-hover:text-[#0038A8] transition-colors" strokeWidth={3} />
-        )}
+        
+        <div className="flex flex-col items-center gap-2">
+          {onDelete && (
+            <div onClick={(e) => e.stopPropagation()}>
+              <DropdownMenu
+                trigger={
+                  <button className="w-7 h-7 rounded-full bg-white/40 backdrop-blur-md border border-white/40 text-gray-500 hover:text-gray-900 transition-all flex items-center justify-center active:scale-90 shadow-sm">
+                    <MoreHorizontal size={14} strokeWidth={2.5} />
+                  </button>
+                }
+                align="right"
+              >
+                <DropdownMenuItem onClick={onToggleFavorite} icon={Heart} className={isFavorite ? "text-[#FFD700]" : ""}>
+                  {isFavorite ? 'Unsave' : 'Favorite'}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={onDelete} variant="danger" icon={Trash2}>
+                  Remove Progress
+                </DropdownMenuItem>
+              </DropdownMenu>
+            </div>
+          )}
+          {percentage >= 80 ? (
+             <div className="bg-[#0038A8] text-white px-3 py-1.5 rounded-xl text-[10px] font-bold shadow-md shadow-[#0038A8]/20 transition-transform">Resume</div>
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-gray-400 group-hover:text-[#0038A8] transition-all">
+              <ChevronRight size={18} strokeWidth={3} />
+            </div>
+          )}
+        </div>
       </div>
     </Card>
   );
@@ -854,22 +878,18 @@ function CompletedGridCard({ guide, onClick, onDelete }) {
       interactive onClick={onClick} style={{ background: theme.gradient }}
       className="flex flex-col items-center justify-center text-center p-5 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] aspect-square rounded-[32px] relative group"
       noPadding
+      overflow="visible"
     >
       {onDelete && (
-        <div onClick={(e) => e.stopPropagation()} className="absolute top-3 right-3 z-10">
-          <DropdownMenu
-            trigger={
-              <button className="click-ripple w-8 h-8 rounded-full bg-white/40 border border-white/40 text-gray-400 hover:text-[#1C1C1E] hover:bg-white/80 transition-all flex items-center justify-center active:scale-90 backdrop-blur-sm">
-                <MoreVertical size={14} />
-              </button>
-            }
-            align="right"
-          >
-            <DropdownMenuItem onClick={onDelete} variant="danger" icon={Trash2}>
-              Remove Progress
-            </DropdownMenuItem>
-          </DropdownMenu>
-        </div>
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete();
+          }} 
+          className="absolute top-3 right-3 z-30 w-8 h-8 rounded-full bg-white/40 border border-white/40 text-gray-400 hover:text-[#FF3B30] hover:bg-white/80 transition-all flex items-center justify-center active:scale-90 backdrop-blur-sm shadow-sm"
+        >
+          <X size={14} strokeWidth={3} />
+        </button>
       )}
       <div className="relative mb-3 group-hover:scale-110 transition-transform duration-500">
         <div className="w-16 h-16 flex items-center justify-center">
@@ -887,7 +907,7 @@ function CompletedGridCard({ guide, onClick, onDelete }) {
   );
 }
 
-function FavoriteRowCard({ guide, onClick, isFavorite, onToggleFavorite }) {
+function FavoriteRowCard({ guide, onClick, isFavorite, onToggleFavorite, onDelete }) {
   const iconName = getIconName(guide.slug, guide.agency);
   const theme = getIconTheme(guide.slug, guide.agency, iconName);
   const agency = Array.isArray(guide.agency) ? guide.agency[0] : guide.agency;
@@ -895,33 +915,41 @@ function FavoriteRowCard({ guide, onClick, isFavorite, onToggleFavorite }) {
   return (
     <Card
       interactive onClick={onClick} style={{ background: theme.gradient }}
-      className="w-full flex items-center justify-between group px-5 py-4 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[24px]"
+      className="w-full flex items-center justify-between group px-5 py-5 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] rounded-[28px] relative"
       noPadding
+      overflow="visible"
     >
       <div className="flex items-center gap-4 flex-1 min-w-0">
-        <div className="w-12 h-12 flex items-center justify-center shrink-0 bg-white/40 backdrop-blur-sm rounded-2xl border border-white/40 shadow-inner">
-          <GuideIcon slug={guide.slug} agency={guide.agency} size={32} className="object-contain drop-shadow-sm" />
+        <div className="w-14 h-14 flex items-center justify-center shrink-0 bg-white/40 backdrop-blur-md rounded-2xl border border-white/40 shadow-inner">
+          <GuideIcon slug={guide.slug} agency={guide.agency} size={36} className="object-contain drop-shadow-sm" />
         </div>
         <div className="text-left flex-1 min-w-0">
           <h4 className="font-bold text-[#1C1C1E] text-[16px] leading-tight truncate">{guide.shortTitle || guide.title}</h4>
-          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest truncate block mt-0.5">{agency}</span>
+          <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest truncate block mt-1">{agency}</span>
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleFavorite?.();
-          }}
-          className="w-10 h-10 rounded-full bg-white/40 backdrop-blur-sm border border-white/40 flex items-center justify-center transition-all active:scale-75 outline-none hover:bg-white/60"
-        >
-          <Heart
-            size={20}
-            fill={isFavorite ? "#FFCC00" : "none"}
-            className={isFavorite ? "text-[#FFCC00]" : "text-gray-300"}
-          />
-        </button>
-        <div className="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-gray-300 group-hover:bg-[#0038A8]/10 group-hover:text-[#0038A8] transition-all">
+      <div className="flex flex-col items-center gap-2 shrink-0">
+        {onDelete && (
+          <div onClick={(e) => e.stopPropagation()}>
+            <DropdownMenu
+              trigger={
+                <button className="w-7 h-7 rounded-full bg-white/40 backdrop-blur-md border border-white/40 text-gray-500 hover:text-gray-900 transition-all flex items-center justify-center active:scale-90 shadow-sm">
+                  <MoreHorizontal size={14} strokeWidth={2.5} />
+                </button>
+              }
+              align="right"
+            >
+              <DropdownMenuItem onClick={onToggleFavorite} icon={Heart} className={isFavorite ? "text-[#FFD700]" : ""}>
+                {isFavorite ? 'Unsave' : 'Favorite'}
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={onDelete} variant="danger" icon={Trash2}>
+                Remove Progress
+              </DropdownMenuItem>
+            </DropdownMenu>
+          </div>
+        )}
+        <div className="w-8 h-8 rounded-full bg-white/40 flex items-center justify-center text-gray-400 group-hover:text-[#0038A8] transition-all">
           <ChevronRight size={18} strokeWidth={3} />
         </div>
       </div>

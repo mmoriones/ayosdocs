@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { 
   Search,
   ChevronRight,
@@ -14,9 +15,12 @@ import {
   X,
 } from 'lucide-react';
 import Image from 'next/image';
+import axios from 'axios';
 import { Button, Card, Badge, Input } from '@/components/ui';
 import { GuideIcon } from '@/lib/guideIcons';
 import { getIconTheme, THEMES } from '@/lib/assetStyles';
+import { toggleFavoriteAction } from '@/app/actions/user';
+import { useToast } from '@/context';
 
 /**
  * SelectionPill Component
@@ -44,10 +48,55 @@ const MAX_QUERY_LENGTH = 100;
 
 export default function GuidesClient({ initialGuides, initialCategory = null }) {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState(initialCategory || 'All');
   const [visibleCategoriesCount, setVisibleCategoriesCount] = useState(3);
+
+  const queryClient = useQueryClient();
+  const { showToast } = useToast();
+
+  const { data: userData = { savedProgress: [] } } = useQuery({
+    queryKey: ['user-data'],
+    queryFn: async () => {
+      const response = await axios.get('/api/user/all-data');
+      return response.data;
+    },
+    enabled: status === 'authenticated',
+    staleTime: 30000,
+  });
+
+  const favoriteMutation = useMutation({
+    mutationFn: async (slug) => {
+      const result = await toggleFavoriteAction(slug);
+      return result;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['user-data'] });
+      showToast({
+        type: 'success',
+        title: data.isFavorite ? 'Added to Favorites' : 'Removed from Favorites',
+        message: data.message,
+      });
+    },
+    onError: () => {
+      showToast({
+        type: 'error',
+        title: 'Error',
+        message: 'Failed to update favorite. Please try again.',
+      });
+    },
+  });
+
+  const handleFavoriteGuide = (slug) => {
+    favoriteMutation.mutate(slug);
+  };
+
+  const favoritedSlugs = useMemo(() => {
+    return new Set(
+      userData.savedProgress.filter(p => p.isFavorite).map(p => p.guideSlug)
+    );
+  }, [userData]);
 
   const sanitize = (val) => val.replace(/[<>]/g, '').slice(0, MAX_QUERY_LENGTH);
   const isOverLimit = searchQuery.length >= MAX_QUERY_LENGTH;
@@ -245,7 +294,12 @@ export default function GuidesClient({ initialGuides, initialCategory = null }) 
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
               {filteredGroups.flatMap(([_, g]) => g).map((guide) => (
-                <SearchResultCard key={guide.slug} guide={guide} />
+                <SearchResultCard
+                  key={guide.slug}
+                  guide={guide}
+                  isFavorite={favoritedSlugs.has(guide.slug)}
+                  onToggleFavorite={() => handleFavoriteGuide(guide.slug)}
+                />
               ))}
             </div>
           )}
@@ -317,16 +371,15 @@ function FeaturedGuideCard({ guide }) {
   );
 }
 
-function SearchResultCard({ guide }) {
+function SearchResultCard({ guide, isFavorite, onToggleFavorite }) {
   const router = useRouter();
   const { status } = useSession();
-  const [isFavorite, setIsFavorite] = useState(false);
   const theme = getIconTheme(guide.slug, guide.agency);
   const isLoggedIn = status === 'authenticated';
 
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
-    setIsFavorite(!isFavorite);
+    onToggleFavorite?.();
   };
 
   return (

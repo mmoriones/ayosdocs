@@ -31,7 +31,7 @@ export default function Card({
   const bgStyles = backgrounds[background] || backgrounds.base;
   const overflowClass = overflow === 'hidden' ? 'overflow-hidden' : 'overflow-visible';
   const interactiveStyles = (interactive || props.onClick) 
-    ? 'cursor-pointer hover:border-white hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] border-white/50 relative overflow-hidden after:absolute after:inset-0 after:bg-black/5 after:opacity-0 after:transition-opacity active:after:opacity-100' 
+    ? 'cursor-pointer hover:border-white hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] transition-all hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] border-white/50 relative after:absolute after:inset-0 after:bg-black/5 after:opacity-0 after:transition-opacity active:after:opacity-100 after:pointer-events-none' 
     : 'border-white/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)]';
   
   return (

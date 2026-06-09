@@ -16,5 +16,5 @@ export { default as Avatar } from './Avatar';
 export { default as Tooltip } from './Tooltip';
 export { default as Checkbox } from './Checkbox';
 export { default as AuthPageHeader } from './AuthPageHeader';
-export { default as DropdownMenu, DropdownMenuItem } from './DropdownMenu';
+export { default as DropdownMenu, DropdownMenuItem, DropdownMenuSeparator } from './DropdownMenu';
 export { default as SearchBar } from './SearchBar';

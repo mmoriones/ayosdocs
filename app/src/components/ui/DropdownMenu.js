@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 
 /**
  * Reusable DropdownMenu component for action menus and option pickers.
- * Improved with robust propagation handling to prevent accidental parent clicks.
+ * Renders the menu via portal to avoid stacking context / overflow issues.
  *
  * @param {Object} props
  * @param {React.ReactNode} props.trigger - The trigger element.
@@ -22,11 +22,45 @@ export default function DropdownMenu({
   className = '',
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const triggerRef = useRef(null);
+  const menuRef = useRef(null);
+  const [menuStyle, setMenuStyle] = useState({});
+
+  const updatePosition = useCallback(() => {
+    if (!triggerRef.current) return;
+    const rect = triggerRef.current.getBoundingClientRect();
+    const style = {
+      position: 'fixed',
+      zIndex: 9999,
+      minWidth: '240px',
+    };
+    if (align === 'right') {
+      style.right = window.innerWidth - rect.right + window.innerWidth - rect.right > 0 ? '0px' : '0px';
+      style.right = Math.max(0, window.innerWidth - rect.right) + 'px';
+    } else {
+      style.left = Math.max(0, rect.left) + 'px';
+    }
+    style.top = (rect.bottom + 8) + 'px';
+    setMenuStyle(style);
+  }, [align]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    updatePosition();
+    window.addEventListener('scroll', updatePosition, { capture: true });
+    window.addEventListener('resize', updatePosition);
+    return () => {
+      window.removeEventListener('scroll', updatePosition, { capture: true });
+      window.removeEventListener('resize', updatePosition);
+    };
+  }, [isOpen, updatePosition]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        menuRef.current && !menuRef.current.contains(event.target) &&
+        triggerRef.current && !triggerRef.current.contains(event.target)
+      ) {
         setIsOpen(false);
       }
     };
@@ -34,49 +68,41 @@ export default function DropdownMenu({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handlePointerDown = (e) => {
-    // Stop at pointer level to prevent CSS :active on parent elements
-    e.stopPropagation();
-  };
-
   const handleToggle = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   const handleMenuClick = (e) => {
-    // Stop bubbling to parent components (like GuideRowCard)
     e.stopPropagation();
-    
-    // Automatically close if requested
     if (closeOnSelect) {
       setIsOpen(false);
     }
   };
 
-  const alignClasses = {
-    left: 'left-0',
-    right: 'right-0',
-  };
-
   return (
-    <div className={`relative inline-flex ${className}`} ref={dropdownRef}>
-      <div onPointerDown={handlePointerDown} onClick={handleToggle} className="cursor-pointer">
-        {trigger}
+    <>
+      <div className={`inline-block ${className}`} ref={triggerRef}>
+        <div onClick={handleToggle} className="cursor-pointer">
+          {trigger}
+        </div>
       </div>
 
-      {isOpen && (
+      {isOpen && createPortal(
         <div
-          className={`absolute ${alignClasses[align]} top-full mt-2 w-52 bg-ctp-base border border-ctp-surface1 rounded-xl shadow-2xl z-[60] overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right`}
+          ref={menuRef}
+          style={menuStyle}
+          className="w-60 bg-white/80 backdrop-blur-xl border border-white/40 rounded-[14px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden animate-in fade-in zoom-in-95 slide-in-from-top-2 duration-200 origin-top-right"
           onClick={handleMenuClick}
         >
-          <div className="p-1 space-y-0.5">
+          <div className="py-1">
             {children}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
-    </div>
+    </>
   );
 }
 
@@ -91,22 +117,27 @@ export function DropdownMenuItem({
   className = '',
 }) {
   const variants = {
-    default: 'text-ctp-subtext1 hover:bg-ctp-mantle hover:text-ctp-text',
-    danger: 'text-ctp-red hover:bg-ctp-red/10',
-    active: 'bg-ctp-sky-800 text-white hover:bg-ctp-sky-700',
+    default: 'text-[#3A3A3C] hover:bg-black/5 active:bg-black/10',
+    danger: 'text-[#FF3B30] hover:bg-[#FF3B30]/10 active:bg-[#FF3B30]/20',
+    active: 'bg-[#0038A8] text-white hover:bg-[#0038A8]/90',
   };
 
   return (
     <button
       onClick={(e) => {
-        // We let it bubble to handleMenuClick in the parent for closing
-        // but the parent handles stopPropagation to the outside world.
         onClick?.(e);
       }}
-      className={`w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-lg text-ui-micro font-bold uppercase tracking-widest transition-all ${variants[variant]} ${className}`}
+      className={`w-full text-left flex items-center justify-between px-4 py-3 text-[15px] font-medium transition-all ${variants[variant]} ${className}`}
     >
-      {Icon && <Icon size={14} />}
-      {children}
+      <span className="flex-1 truncate">{children}</span>
+      {Icon && <Icon size={18} className="shrink-0 opacity-70" />}
     </button>
   );
+}
+
+/**
+ * Separator for the DropdownMenu.
+ */
+export function DropdownMenuSeparator({ className = '' }) {
+  return <div className={`h-[0.5px] bg-black/10 my-1 mx-4 ${className}`} />;
 }

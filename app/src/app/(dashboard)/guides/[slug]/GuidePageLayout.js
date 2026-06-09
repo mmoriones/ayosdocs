@@ -462,18 +462,18 @@ const GuidePageLayout = ({
                        {isLoggedIn && (
                          <button 
                            onClick={() => favoriteMutation.mutate()} 
-                           className={`w-12 h-12 rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-all border border-white/60 ${
+                           className={`w-10 h-10 rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-all border border-white/60 ${
                              isFavorite ? 'bg-[#FFD700]/10 border-[#FFD700]/20' : 'bg-white'
                            }`}
                          >
-                           <Heart size={24} className={isFavorite ? 'text-[#FFD700]' : 'text-[#1C1C1E]'} fill={isFavorite ? 'currentColor' : 'none'} strokeWidth={2.5} />
+                           <Heart size={20} className={isFavorite ? 'text-[#FFD700]' : 'text-[#0038A8]'} fill={isFavorite ? 'currentColor' : 'none'} strokeWidth={2.5} />
                          </button>
                        )}
                        <button 
                         onClick={handleShare}
-                        className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-all border border-white/60 hover:bg-gray-50"
+                        className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-all border border-white/60 hover:bg-gray-50"
                        >
-                         <Share2 size={22} className="text-[#1C1C1E]" strokeWidth={2.5} />
+                         <Share2 size={20} className="text-[#0038A8]" strokeWidth={2.5} />
                        </button>
                     </div>
                  </div>
