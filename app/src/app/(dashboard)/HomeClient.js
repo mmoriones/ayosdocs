@@ -32,6 +32,15 @@ import { Card, Button, Badge, SearchBar } from '@/components/ui';
 import { GuideIcon, getIconName } from '@/lib/guideIcons';
 import HolidayAlert from '@/components/HolidayAlert';
 
+const CATEGORIES = [
+  { title: "Gov IDs", theme: THEMES.ORANGE, image: "/assets/guides/Id.webp", cat: "Government ID" },
+  { title: "Clearances", theme: THEMES.BLUE, image: "/assets/guides/ShieldCheck.webp", cat: "Government Clearance" },
+  { title: "Civil Registry", theme: THEMES.PURPLE, image: "/assets/guides/FileText.webp", cat: "Civil Registry" },
+  { title: "Business", theme: THEMES.GOLD, image: "/assets/guides/Briefcase.webp", cat: "Business Registration" },
+  { title: "Travel", theme: THEMES.TEAL, image: "/assets/guides/Passport.webp", cat: "Travel" },
+  { title: "Documents", theme: THEMES.GREEN, image: "/assets/guides/FileCheck.webp", cat: "Government Documents" },
+];
+
 export default function HomeClient({ allGuides }) {
   const { status, data: session } = useSession();
   const { activeGuideSlug } = useWorkspace();
@@ -307,6 +316,52 @@ function GuestView({ trendingGuides, lastViewedSlug, allGuides }) {
         </Card>
       </section>
 
+      {/* Browse by Category Section */}
+      <section className="mb-12">
+        <div className="px-6 mb-6 flex justify-between items-end lg:px-10">
+          <div className="flex flex-col gap-1">
+            <h3 className="text-[19px] lg:text-[24px] font-bold text-[#1C1C1E]">Explore Topics</h3>
+            <p className="text-[13px] lg:text-[15px] font-medium text-gray-400">Knowledge Base</p>
+          </div>
+          <button 
+            onClick={() => router.push('/guides')}
+            className="text-[14px] lg:text-[16px] font-bold text-[#0038A8] pb-0.5 active:opacity-60 transition-opacity"
+          >
+            View all
+          </button>
+        </div>
+
+        {/* Carousel for Mobile */}
+        <div className="lg:hidden">
+          <SnapCarousel 
+            id="guest-category-carousel"
+            itemWidth={140 + 16}
+            items={CATEGORIES}
+            renderItem={(item) => (
+              <CategoryCard 
+                title={item.title} 
+                theme={item.theme} 
+                image={item.image}
+                onClick={() => router.push(`/guides?category=${item.cat}`)}
+              />
+            )}
+          />
+        </div>
+
+        {/* Desktop Grid */}
+        <div className="hidden lg:grid grid-cols-6 gap-6 px-10">
+          {CATEGORIES.map((item, idx) => (
+            <CategoryCard 
+              key={idx}
+              title={item.title} 
+              theme={item.theme} 
+              image={item.image}
+              onClick={() => router.push(`/guides?category=${item.cat}`)}
+            />
+          ))}
+        </div>
+      </section>
+
       {/* Trending / Community Insights Section */}
       <section className="px-6 pb-12 lg:px-10">
         <div className="mb-6 flex justify-between items-end">
@@ -544,31 +599,48 @@ function UserView({ firstName, userData, isLoading, allGuides, session, lastView
 
       {/* Browse by Category - Horizontal Scroll */}
       <section className="mb-12">
-        <div className="px-6 mb-4 flex justify-between items-end">
+        <div className="px-6 mb-4 flex justify-between items-end lg:px-10">
           <div className="flex flex-col gap-1">
-            <h3 className="text-[19px] font-bold text-[#1C1C1E]">Browse by Category</h3>
-            <p className="text-[13px] font-medium text-gray-400 uppercase tracking-tight">Knowledge Base</p>
+            <h3 className="text-[19px] lg:text-[24px] font-bold text-[#1C1C1E]">Browse by Category</h3>
+            <p className="text-[13px] lg:text-[15px] font-medium text-gray-400 uppercase tracking-tight">Knowledge Base</p>
           </div>
+          <button 
+            onClick={() => router.push('/guides')}
+            className="text-[14px] lg:text-[16px] font-bold text-[#0038A8] pb-0.5 active:opacity-60 transition-opacity hidden lg:block"
+          >
+            View all
+          </button>
         </div>
         
-        <SnapCarousel 
-          id="category-carousel"
-          itemWidth={120 + 16}
-          items={[
-            { title: "Gov IDs", theme: THEMES.ORANGE, image: "/assets/guides/Id.webp", cat: "Government+ID" },
-            { title: "Clearances", theme: THEMES.BLUE, image: "/assets/guides/ShieldCheck.webp", cat: "Government+Clearance" },
-            { title: "Civil Registry", theme: THEMES.PURPLE, image: "/assets/guides/FileText.webp", cat: "Civil+Registry" },
-            { title: "Business", theme: THEMES.GOLD, image: "/assets/guides/Briefcase.webp", cat: "Business+Registration" }
-          ]}
-          renderItem={(item) => (
+        {/* Carousel for Mobile */}
+        <div className="lg:hidden">
+          <SnapCarousel 
+            id="category-carousel"
+            itemWidth={140 + 16}
+            items={CATEGORIES}
+            renderItem={(item) => (
+              <CategoryCard 
+                title={item.title} 
+                theme={item.theme} 
+                image={item.image}
+                onClick={() => router.push(`/guides?category=${item.cat}`)}
+              />
+            )}
+          />
+        </div>
+
+        {/* Desktop Grid */}
+        <div className="hidden lg:grid grid-cols-6 gap-6 px-10">
+          {CATEGORIES.map((item, idx) => (
             <CategoryCard 
+              key={idx}
               title={item.title} 
               theme={item.theme} 
               image={item.image}
               onClick={() => router.push(`/guides?category=${item.cat}`)}
             />
-          )}
-        />
+          ))}
+        </div>
       </section>
 
       {/* Trending Section for Logged-in User */}
@@ -756,26 +828,38 @@ function ResumeCard({ guide, progress, onClick }) {
 
 function CategoryCard({ title, theme, image, onClick }) {
   return (
-    <button 
+    <Card 
+      interactive
+      noPadding
       onClick={onClick}
-      className="bg-white rounded-[28px] p-4 text-center shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-white active:scale-[0.97] transition-all group relative overflow-hidden flex flex-col items-center justify-center w-[120px] h-[160px]"
+      style={{ background: theme.gradient }}
+      className="relative min-w-[140px] h-[180px] lg:h-[220px] flex flex-col !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.04)] overflow-hidden group"
     >
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-        style={{ background: theme.gradient }}
-      />
-      <div className="relative z-10 flex flex-col items-center gap-3">
-        <div 
-          className="w-16 h-16 rounded-2xl flex items-center justify-center border border-black/5 overflow-hidden p-2 shadow-sm"
-          style={{ background: theme.gradient }}
-        >
-          <div className="w-full h-full relative">
-            <Image src={image} alt={title} fill className="object-contain drop-shadow-md" />
-          </div>
+      <div className="flex flex-col items-center justify-between h-full p-5 lg:p-6">
+        {/* Icon Container */}
+        <div className="relative w-16 h-16 lg:w-24 lg:h-24 shrink-0 transform group-hover:scale-110 transition-transform duration-500">
+          <Image 
+            src={image} 
+            alt={title} 
+            fill 
+            sizes="(max-width: 1024px) 64px, 96px"
+            className="object-contain drop-shadow-[-6px_8px_12px_rgba(0,0,0,0.12)]"
+          />
         </div>
-        <h5 className="font-bold text-[#1C1C1E] text-[13px] leading-tight text-center">{title}</h5>
+
+        {/* Title */}
+        <div className="text-center w-full">
+          <h4 className="font-bold text-[#1C1C1E] text-[15px] lg:text-[17px] leading-tight">
+            {title}
+          </h4>
+        </div>
       </div>
-    </button>
+      
+      {/* Subtle background decoration */}
+      <div className="absolute -right-4 -bottom-4 w-20 h-20 opacity-[0.03] pointer-events-none group-hover:scale-125 transition-transform duration-700">
+         <Image src={image} alt="" fill className="object-contain" />
+      </div>
+    </Card>
   );
 }
 
