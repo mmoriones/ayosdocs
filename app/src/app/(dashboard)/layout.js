@@ -1,7 +1,6 @@
 'use client';
 
 import { AppShell } from "@/components/layout";
-import ClientAuthWrapper from "@/components/ClientAuthWrapper";
 import ChatAssistant from "@/components/chat/ChatAssistant";
 
 /**
@@ -12,7 +11,6 @@ export default function DashboardLayout({ children }) {
   return (
     <AppShell>
       {children}
-      <ClientAuthWrapper />
       <ChatAssistant />
     </AppShell>
   );

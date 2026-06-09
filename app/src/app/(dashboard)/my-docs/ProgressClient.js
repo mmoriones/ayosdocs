@@ -758,7 +758,7 @@ export default function ProgressClient({ allGuides, isRestricted }) {
         message={confirmConfig.type === 'bundle'
           ? 'Are you sure you want to stop tracking this life event bundle? This will remove the bundle from your dashboard, but your individual guide progress will be saved.'
           : 'This will remove all progress for this guide. You can start tracking again at any time.'}
-        confirmText={confirmConfig.type === 'bundle' ? 'Stop Tracking' : 'Remove Progress'}
+        confirmText={confirmConfig.type === 'bundle' ? 'Stop Tracking' : 'Confirm'}
         variant="danger"
       />
     </div>

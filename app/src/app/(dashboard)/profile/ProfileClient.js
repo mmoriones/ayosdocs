@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import Image from 'next/image';
 import { 
   Bell, 
   ChevronRight, 
@@ -17,11 +18,14 @@ import {
   Edit3,
   User as UserIcon,
   Mail,
-  Target
+  Target,
+  X,
+  UserCircle,
+  Loader2
 } from 'lucide-react';
 import { useToast } from '@/context';
 import { updateUserProfileAction } from '@/app/actions/user';
-import { Button, Input, Card, Avatar, SignOutModal, Badge } from '@/components/ui';
+import { Button, Input, Card, Avatar, SignOutModal, Badge, Modal } from '@/components/ui';
 import { getIconName, GuideIcon } from '@/lib/guideIcons';
 import { getIconTheme } from '@/lib/assetStyles';
 
@@ -99,8 +103,13 @@ export default function ProfileClient({ allGuides }) {
   }, [userData, allGuides]);
 
   const handleSaveProfile = async (e) => {
-    e.preventDefault();
-    if (!newName.trim() || newName === user?.name) {
+    if (e) e.preventDefault();
+    if (!newName.trim()) {
+      showToast({ type: 'error', title: 'Invalid Name', message: 'Name cannot be empty.' });
+      return;
+    }
+    
+    if (newName.trim() === user?.name) {
       setIsEditing(false);
       return;
     }
@@ -152,7 +161,7 @@ export default function ProfileClient({ allGuides }) {
         <section className="px-6">
           <Card 
             interactive
-            onClick={() => !isEditing && setIsEditing(true)}
+            onClick={() => setIsEditing(true)}
             className="p-6 !border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.03)] bg-white/80 backdrop-blur-xl group"
             noPadding
           >
@@ -164,42 +173,25 @@ export default function ProfileClient({ allGuides }) {
                   size="xl" 
                   className="rounded-[22px] border-4 border-white shadow-md ring-1 ring-black/5" 
                 />
+                <div className="absolute -bottom-1 -right-1 w-7 h-7 bg-white rounded-full shadow-md flex items-center justify-center border border-gray-100">
+                  <Edit3 size={14} className="text-[#007AFF]" strokeWidth={2.5} />
+                </div>
               </div>
               <div className="flex-1 min-w-0">
-                {isEditing ? (
-                  <form onSubmit={handleSaveProfile} className="space-y-3" onClick={e => e.stopPropagation()}>
-                    <Input
-                      value={newName}
-                      onChange={(e) => setNewName(e.target.value)}
-                      placeholder="Full Name"
-                      className="h-10 text-sm"
-                      autoFocus
-                    />
-                    <div className="flex gap-2">
-                      <Button size="xs" isLoading={isSubmitting} type="submit">Save</Button>
-                      <Button size="xs" variant="secondary" onClick={() => setIsEditing(false)}>Cancel</Button>
-                    </div>
-                  </form>
-                ) : (
-                  <>
-                    <h2 className="text-[22px] font-black text-[#1C1C1E] tracking-tight truncate">
-                      {user?.name}
-                    </h2>
-                    <p className="text-[14px] font-medium text-gray-400 truncate mb-2">
-                      {user?.email}
-                    </p>
-                    {user?.isVerified && (
-                      <Badge variant="success" className="bg-[#FFCC00]/10 text-[#FF9500] border-none px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
-                        <CheckCircle2 size={12} fill="currentColor" className="text-white" />
-                        <span className="text-[10px] font-bold uppercase tracking-wider">Verified</span>
-                      </Badge>
-                    )}
-                  </>
+                <h2 className="text-[22px] font-black text-[#1C1C1E] tracking-tight truncate">
+                  {user?.name}
+                </h2>
+                <p className="text-[14px] font-medium text-gray-400 truncate mb-2">
+                  {user?.email}
+                </p>
+                {user?.isVerified && (
+                  <Badge variant="success" className="bg-[#FFCC00]/10 text-[#FF9500] border-none px-2 py-0.5 rounded-full flex items-center gap-1 w-fit">
+                    <CheckCircle2 size={12} fill="currentColor" className="text-white" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">Verified</span>
+                  </Badge>
                 )}
               </div>
-              {!isEditing && (
-                <ChevronRight size={20} className="text-gray-300 group-active:translate-x-1 transition-transform" />
-              )}
+              <ChevronRight size={20} className="text-gray-300 group-active:translate-x-1 transition-transform" />
             </div>
           </Card>
         </section>
@@ -302,6 +294,66 @@ export default function ProfileClient({ allGuides }) {
         isOpen={showLogoutConfirm}
         onClose={() => setShowLogoutConfirm(false)}
       />
+
+      {/* Edit Profile Modal */}
+      <Modal
+        isOpen={isEditing}
+        onClose={() => !isSubmitting && setIsEditing(false)}
+        showClose={false}
+        size="md"
+        noPadding
+        contentClassName="!backdrop-blur-2xl !rounded-[32px] border border-[#007AFF]/20 bg-[#EDF4FF]/90 !shadow-2xl max-w-[340px] overflow-hidden"
+      >
+        <div className="relative">
+          {/* Header - Minimalist & Focused */}
+          <div className="px-8 pt-10 pb-8 text-center">
+            <h2 className="text-[24px] font-black text-[#1C1C1E] tracking-tight leading-none mb-3">
+              Your Name
+            </h2>
+            <p className="text-[15px] font-medium text-gray-500 leading-snug">
+              Update how you appear across <span className="text-[#0038A8] font-bold">AyosDocs</span>.
+            </p>
+          </div>
+
+          <div className="px-8 pb-10">
+            <form onSubmit={handleSaveProfile}>
+              <div className="relative group">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#007AFF] transition-colors">
+                  <UserCircle size={20} strokeWidth={2.5} />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Enter your name"
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                  autoFocus
+                  className="w-full h-14 pl-12 pr-4 bg-white/60 backdrop-blur-sm border-2 border-white/40 rounded-[20px] text-[16px] font-bold text-[#1C1C1E] placeholder-gray-400 outline-none focus:border-[#007AFF]/30 focus:bg-white transition-all"
+                />
+              </div>
+            </form>
+          </div>
+
+          {/* Action Buttons - iOS Grid Style */}
+          <div className="w-full flex border-t border-black/5">
+            <button
+              onClick={() => !isSubmitting && setIsEditing(false)}
+              disabled={isSubmitting}
+              className="flex-1 py-4.5 text-[17px] font-bold text-[#007AFF] active:bg-black/5 transition-colors border-r border-black/5 outline-none disabled:opacity-50"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSaveProfile}
+              disabled={isSubmitting}
+              className="flex-1 py-4.5 text-[17px] font-black text-[#0038A8] active:bg-black/5 transition-colors outline-none disabled:opacity-50 flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Update'}
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

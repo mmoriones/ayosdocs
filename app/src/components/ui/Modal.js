@@ -37,10 +37,19 @@ export default function Modal({
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      // Also lock the main scrollable area in the dashboard layout
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        mainElement.style.overflow = 'hidden';
+      }
       document.addEventListener('keydown', handleKeyDown);
     }
     return () => {
       document.body.style.overflow = 'unset';
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        mainElement.style.overflow = '';
+      }
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, handleKeyDown]);

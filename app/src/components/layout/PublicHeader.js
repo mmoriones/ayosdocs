@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { LogIn, UserPlus } from 'lucide-react';
+import { User, UserPlus } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import { Button } from '@/components/ui';
 
@@ -36,8 +36,8 @@ export default function PublicHeader() {
 
         <div className="flex items-center gap-2 md:gap-4">
           {!session && isSignupPage && (
-            <Button variant="primary" size="sm" onClick={() => router.push('/login')} leftIcon={<LogIn size={16} />} className="text-sm px-5 py-2">
-              Sign In
+            <Button variant="secondary" size="sm" onClick={() => router.push('/login')} leftIcon={<User size={16} strokeWidth={2.5} />} className="text-sm px-5 py-2 text-brand-blue rounded-full font-bold">
+              Login
             </Button>
           )}
 
@@ -48,8 +48,8 @@ export default function PublicHeader() {
           )}
 
           {!session && !isLoginPage && !isSignupPage && (
-            <Button variant="primary" size="sm" onClick={() => router.push('/login')} leftIcon={<LogIn size={16} />} className="text-sm px-5 py-2">
-              Sign In
+            <Button variant="secondary" size="sm" onClick={() => router.push('/login')} leftIcon={<User size={16} strokeWidth={2.5} />} className="text-sm px-5 py-2 text-brand-blue rounded-full font-bold">
+              Login
             </Button>
           )}
         </div>

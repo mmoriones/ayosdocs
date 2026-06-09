@@ -87,11 +87,11 @@ export default function DashboardHeader({ onMenuClick, onLogoutClick }) {
 
       <div className="flex items-center gap-2">
         {!session ? (
-          <button 
+          <button
             onClick={openAuthModal}
-            className="px-5 py-1.5 bg-ctp-sky-800 text-white rounded-lg text-sm font-bold hover:bg-ctp-sky-800/90 transition-all shadow-sm shadow-ctp-sky-800/20 active:scale-95 ml-2"
+            className="px-5 py-2 rounded-full bg-white border border-gray-100 text-brand-blue shadow-sm text-sm font-bold hover:bg-gray-50 transition-all active:scale-90 ml-2"
           >
-            Sign In
+            Login
           </button>
         ) : (
           <>

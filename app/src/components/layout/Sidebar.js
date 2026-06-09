@@ -4,47 +4,41 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { useAuthUI } from '@/components/Providers';
+import { useWorkspace } from '@/context';
 import {
   Home,
-  BookOpen,
+  LibraryBig,
   Layers,
-  MapPin,
   PanelLeft,
   PanelRight,
-  CheckSquare,
+  LayoutDashboard,
   Settings,
   LogOut,
-  LogIn,
-  User
+  User,
+  BotMessageSquare
 } from 'lucide-react';
 import NavItem from './NavItem';
+import { Tooltip } from '@/components/ui';
 
 /**
  * Main navigation container supporting desktop collapse and mobile drawer modes.
  * Groups links into discovery/workspace sections and provides
  * global authentication and settings triggers.
- * 
- * @param {Object} props
- * @param {boolean} props.isCollapsed - Desktop-only toggle for the slim view.
- * @param {Function} props.setIsCollapsed - Callback to toggle desktop view.
- * @param {boolean} [props.isMobileOpen] - Controls visibility on small screens.
- * @param {Function} props.closeMobile - Callback to hide the sidebar on mobile.
- * @param {boolean} [props.isMounted] - Controls whether animations are enabled.
- * @param {string} [props.className] - Optional custom classes.
  */
 export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = false, closeMobile, isMounted = true, className = "", onLogoutClick }) {
   const { data: session, status } = useSession();
   const { openAuthModal } = useAuthUI();
+  const { setChatOpen, isChatOpen } = useWorkspace();
   const isLoggedIn = status === 'authenticated';
 
   const navItems = [
     { href: '/', icon: Home, label: 'Overview' },
-    { href: '/guides', icon: BookOpen, label: 'Guides' },
+    { href: '/guides', icon: LibraryBig, label: 'Guides' },
     { href: '/bundles', icon: Layers, label: 'Bundles' },
   ];
 
   const authItems = [
-    { href: '/my-docs', icon: CheckSquare, label: 'My Docs' },
+    { href: '/my-docs', icon: LayoutDashboard, label: 'My Docs' },
     { href: '/profile', icon: User, label: 'Profile' },
   ];
 
@@ -92,6 +86,41 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
               onClick={closeMobile}
             />
           ))}
+          
+          {/* AI Assistant Trigger for Desktop */}
+          <div className="pt-2">
+            <button
+              onClick={() => {
+                setChatOpen(true);
+                closeMobile?.();
+              }}
+              className={`w-full relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-300 group active:scale-[0.96] ${
+                isChatOpen
+                  ? 'bg-brand-blue/15 text-brand-blue shadow-sm shadow-brand-blue/5'
+                  : 'text-ctp-subtext1 hover:bg-brand-blue/8 hover:text-ctp-text'
+              }`}
+            >
+              <div className={`shrink-0 transition-all duration-300 ${isChatOpen ? 'text-brand-blue scale-110' : 'text-ctp-subtext0 group-hover:text-ctp-text'}`}>
+                <BotMessageSquare size={20} strokeWidth={isChatOpen ? 2.5 : 2} />
+              </div>
+              
+              {!isCollapsed && (
+                <span className={`text-sm tracking-tight transition-all duration-300 whitespace-nowrap ${
+                  isChatOpen ? 'text-brand-blue font-bold' : 'font-medium'
+                }`}>
+                  AI Assistant
+                </span>
+              )}
+
+              {isCollapsed && (
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 z-50">
+                  <Tooltip content="AI Assistant" position="right" delay={100}>
+                    <div className="w-full h-full" />
+                  </Tooltip>
+                </div>
+              )}
+            </button>
+          </div>
         </div>
 
         {isLoggedIn && (
@@ -114,8 +143,8 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
 
       {/* Footer / User Profile Island */}
       <div className="p-4 border-t lg:border-t-0 border-ctp-surface1 overflow-hidden">
-        <div className={`space-y-1.5 lg:bg-ctp-mantle lg:rounded-2xl lg:shadow-[0_8px_32px_rgba(0,0,0,0.04)] lg:p-2 lg:border lg:border-white/50 transition-all duration-500 ${
-          isCollapsed ? 'lg:px-1' : 'lg:p-2'
+        <div className={`space-y-1.5 lg:rounded-2xl transition-all duration-500 ${
+          isCollapsed ? 'lg:px-1' : ''
         }`}>
           {isLoggedIn ? (
             <>
@@ -144,13 +173,13 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, isMobileOpen = fa
                 openAuthModal();
                 closeMobile?.();
               }}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-ctp-sky-800 text-white hover:bg-ctp-sky-800/90 transition-all duration-300 shadow-sm shadow-ctp-sky-800/20 overflow-hidden whitespace-nowrap group active:scale-[0.96]`}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-full bg-white border border-gray-100 text-brand-blue hover:bg-gray-50 transition-all duration-300 shadow-sm overflow-hidden whitespace-nowrap group active:scale-[0.96]`}
             >
               <div className="shrink-0 transition-transform group-hover:scale-110">
-                <LogIn size={20} />
+                <User size={20} strokeWidth={2.5} />
               </div>
               <span className={`text-sm font-bold tracking-tight transition-all duration-500 ${isCollapsed ? 'opacity-0 -translate-x-4 w-0' : 'opacity-100 translate-x-0 w-auto'}`}>
-                Sign In
+                Login
               </span>
             </button>
           )}

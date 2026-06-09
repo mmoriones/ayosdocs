@@ -57,11 +57,24 @@ export default function ChatAssistant() {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      // Also lock the main scrollable area in the dashboard layout
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        mainElement.style.overflow = 'hidden';
+      }
     } else {
       document.body.style.overflow = 'unset';
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        mainElement.style.overflow = '';
+      }
     }
     return () => {
       document.body.style.overflow = 'unset';
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        mainElement.style.overflow = '';
+      }
     };
   }, [isOpen]);
 

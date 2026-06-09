@@ -94,13 +94,13 @@ function CommandPalette() {
   return (
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh] px-4">
       <div 
-        className="absolute inset-0 bg-ctp-crust/60 backdrop-blur-sm animate-in fade-in duration-200" 
+        className="absolute inset-0 bg-[#F2F2F7]/60 backdrop-blur-md animate-in fade-in duration-300" 
         onClick={closeSearch}
       />
       
-      <div className="relative w-full max-w-2xl bg-ctp-base border border-ctp-surface1 rounded-2xl shadow-2xl shadow-ctp-crust/50 overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-200">
-        <div className="flex items-center px-4 border-b border-ctp-surface1 bg-ctp-mantle/50">
-          <Search className="text-ctp-subtext1" size={20} />
+      <div className="relative w-full max-w-2xl bg-white/80 backdrop-blur-2xl border border-white/60 rounded-[32px] shadow-[0_20px_70px_rgba(0,0,0,0.15)] overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300">
+        <div className="flex items-center px-6 py-2 border-b border-gray-100/50 bg-white/40">
+          <Search className="text-gray-400" size={20} strokeWidth={2.5} />
           <input
             ref={inputRef}
             type="text"
@@ -112,24 +112,24 @@ function CommandPalette() {
               setQuery(sanitized);
             }}
             onKeyDown={handleKeyDown}
-            className="w-full bg-transparent border-none py-4 px-3 text-sm focus:ring-0 outline-none text-ctp-text font-medium"
+            className="w-full bg-transparent border-none py-5 px-4 text-[15px] focus:ring-0 outline-none text-[#1C1C1E] font-bold placeholder-gray-400"
           />
           <button 
             onClick={closeSearch}
-            className="p-1 hover:bg-ctp-surface1 rounded text-ctp-subtext1 transition-colors"
+            className="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-400 hover:bg-gray-200 hover:text-gray-600 transition-all active:scale-90"
           >
-            <X size={16} />
+            <X size={16} strokeWidth={2.5} />
           </button>
         </div>
 
-        <div className="max-h-[60vh] overflow-y-auto py-2 custom-scrollbar">
+        <div className="max-h-[60vh] overflow-y-auto py-4 custom-scrollbar">
           {isLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="animate-spin text-ctp-sky-800" size={24} />
+            <div className="flex items-center justify-center py-16">
+              <Loader2 className="animate-spin text-[#0038A8]" size={28} strokeWidth={2.5} />
             </div>
           ) : filteredItems.length > 0 ? (
-            <div className="space-y-1 px-2">
-              <div className="px-3 py-2 text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">
+            <div className="space-y-1.5 px-3">
+              <div className="px-4 py-2 text-[11px] font-black text-gray-400 uppercase tracking-[0.15em]">
                 {query ? 'Search Results' : 'Suggested Actions'}
               </div>
               {filteredItems.map((item, index) => {
@@ -142,63 +142,66 @@ function CommandPalette() {
                     key={item.href}
                     onClick={() => handleSelect(item)}
                     onMouseEnter={() => setSelectedIndex(index)}
-                    className={`w-full flex items-center gap-4 px-3 py-3 rounded-xl text-left transition-all ${
-                      isSelected ? 'bg-ctp-sky-800 text-white shadow-lg shadow-ctp-sky-800/20' : 'hover:bg-ctp-mantle'
+                    className={`w-full flex items-center gap-4 px-4 py-3 rounded-[20px] text-left transition-all duration-200 ${
+                      isSelected ? 'bg-[#0038A8] text-white shadow-lg shadow-[#0038A8]/20' : 'hover:bg-gray-50'
                     }`}
                   >
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 border ${
-                      isSelected ? 'bg-white/10 border-white/20' : 'bg-ctp-mantle border-ctp-surface1'
+                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border transition-colors ${
+                      isSelected ? 'bg-white/10 border-white/20' : 'bg-white border-gray-100 shadow-sm'
                     }`}>
-                      <Icon size={18} />
+                      <Icon size={20} strokeWidth={isSelected ? 2.5 : 2} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold truncate">{item.title}</span>
+                        <span className="text-[15px] font-bold truncate">{item.title}</span>
                         {isActiveGuide ? (
-                          <span className="px-1.5 py-0.5 rounded border border-ctp-sky-800/30 bg-ctp-sky-800/10 text-ui-tiny font-bold text-ctp-sky-800 uppercase tracking-widest flex items-center gap-1 shadow-sm">
-                            <Sparkles size={8} />
+                          <span className="px-2 py-0.5 rounded-full border border-white/30 bg-white/10 text-[9px] font-black text-white uppercase tracking-wider flex items-center gap-1">
+                            <Sparkles size={10} fill="currentColor" />
                             Active
                           </span>
                         ) : (
-                          <span className={`text-ui-tiny px-1.5 py-0.5 rounded border uppercase tracking-widest font-bold ${
-                            isSelected ? 'border-white/30 bg-white/10' : 'border-ctp-surface1 bg-ctp-crust text-ctp-subtext1'
+                          <span className={`text-[9px] px-2 py-0.5 rounded-full border uppercase tracking-wider font-black ${
+                            isSelected ? 'border-white/30 bg-white/10' : 'border-gray-100 bg-gray-50 text-gray-400'
                           }`}>
                             {item.type}
                           </span>
                         )}
                       </div>
                       {item.description && (
-                        <p className={`text-xs truncate opacity-70 mt-0.5`}>
+                        <p className={`text-[12px] truncate mt-0.5 ${isSelected ? 'text-white/70' : 'text-gray-400 font-medium'}`}>
                           {item.description}
                         </p>
                       )}
                     </div>
-                    {isSelected && <ArrowRight size={16} className="shrink-0" />}
+                    {isSelected && <ArrowRight size={18} strokeWidth={2.5} className="shrink-0 animate-in slide-in-from-left-2 duration-300" />}
                   </button>
                 );
               })}
             </div>
           ) : (
-            <div className="text-center py-12 px-6">
-              <p className="text-sm text-ctp-subtext1">No results found for &quot;<span className="font-bold text-ctp-text">{query}</span>&quot;</p>
-              <p className="text-xs text-ctp-subtext0 mt-1">Try searching for &quot;Profile&quot; or &quot;Passport&quot;.</p>
+            <div className="text-center py-16 px-8">
+              <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-100">
+                <Search size={24} className="text-gray-300" />
+              </div>
+              <p className="text-[15px] text-gray-600 font-bold">No results found for &quot;<span className="text-[#0038A8]">{query}</span>&quot;</p>
+              <p className="text-[13px] text-gray-400 mt-1 font-medium">Try searching for &quot;Profile&quot; or &quot;Passport&quot;.</p>
             </div>
           )}
         </div>
 
-        <div className="px-4 py-3 bg-ctp-mantle/50 border-t border-ctp-surface1 flex items-center justify-between text-ui-micro font-bold text-ctp-subtext1 uppercase tracking-widest">
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5">
-              <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-base text-ui-tiny">ENTER</kbd>
+        <div className="px-6 py-4 bg-gray-50/50 border-t border-gray-100/50 flex items-center justify-between text-[11px] font-black text-gray-400 uppercase tracking-widest">
+          <div className="flex items-center gap-5">
+            <span className="flex items-center gap-2">
+              <kbd className="px-2 py-1 rounded-md border border-gray-200 bg-white text-[10px] shadow-sm">ENTER</kbd>
               to select
             </span>
-            <span className="flex items-center gap-1.5">
-              <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-base text-ui-tiny">↑↓</kbd>
+            <span className="flex items-center gap-2">
+              <kbd className="px-2 py-1 rounded-md border border-gray-200 bg-white text-[10px] shadow-sm">↑↓</kbd>
               to navigate
             </span>
           </div>
-          <span className="flex items-center gap-1.5">
-            <kbd className="px-1.5 py-0.5 rounded border border-ctp-surface1 bg-ctp-base text-ui-tiny">ESC</kbd>
+          <span className="flex items-center gap-2">
+            <kbd className="px-2 py-1 rounded-md border border-gray-200 bg-white text-[10px] shadow-sm">ESC</kbd>
             to close
           </span>
         </div>
@@ -225,27 +228,10 @@ export default function Providers({ children, session }) {
     },
   }));
   
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-
   const openAuthModal = () => {
     if (typeof window === 'undefined') return;
-
-    const isMobile = window.innerWidth < 1024;
-    const isGuest = document.cookie.includes('guest-access=true');
-
-    if (isMobile) {
-      router.push('/login');
-    } else {
-      // Desktop logic: Use modal if already a guest to keep context, else go to login page
-      if (isGuest) {
-        setIsAuthModalOpen(true);
-      } else {
-        router.push('/login');
-      }
-    }
+    router.push('/login');
   };
-
-  const closeAuthModal = () => setIsAuthModalOpen(false);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -254,9 +240,7 @@ export default function Providers({ children, session }) {
           <SearchProvider>
             <WorkspaceProvider>
               <AuthUIContext.Provider value={{
-                isAuthModalOpen,
-                openAuthModal,
-                closeAuthModal
+                openAuthModal
               }}>
                 {children}
                 <CommandPalette />
