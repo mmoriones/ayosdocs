@@ -5,9 +5,9 @@ This plan outlines the process of migrating the AyosDocs project from a decouple
 ## 1. Project Initialization & Setup
 - [x] Initialize a new Next.js project with App Router.
 - [x] Install essential dependencies:
-  - Frontend: `lucide-react`, `react-icons`, `react-markdown`, `gray-matter`, `rehype-slug`, `rehype-autolink-headings`, `remark-gfm`.
-  - Backend/Auth: `mongoose`, `next-auth`, `google-auth-library`, `jsonwebtoken`, `nodemailer`.
-  - Utility: `axios`, `@tanstack/react-query`.
+ - Frontend: `lucide-react`, `react-icons`, `react-markdown`, `gray-matter`, `rehype-slug`, `rehype-autolink-headings`, `remark-gfm`.
+ - Backend/Auth: `mongoose`, `next-auth`, `google-auth-library`, `jsonwebtoken`, `nodemailer`.
+ - Utility: `axios`, `@tanstack/react-query`.
 - [x] Configure Tailwind CSS 4 (porting settings from `client/src/tailwind.config.js`).
 - [x] Set up environment variables in a single `.env.local` file.
 - [x] Create a MongoDB utility file for database connection management (singleton pattern).
@@ -42,11 +42,11 @@ This plan outlines the process of migrating the AyosDocs project from a decouple
 
 ## 6. Backend Logic Migration (API Routes & Server Actions)
 - [x] Implement API routes for:
-  - Progress updates (`/api/user/update-progress`)
-  - Fetching progress (`/api/user/get-progress/[slug]`)
-  - Deleting progress (`/api/user/delete-progress/[slug]`)
-  - Onboarding status (`/api/user/update-onboarding`).
-  - Retrieving all user progress data (`/api/user/all-data`).
+ - Progress updates (`/api/user/update-progress`)
+ - Fetching progress (`/api/user/get-progress/[slug]`)
+ - Deleting progress (`/api/user/delete-progress/[slug]`)
+ - Onboarding status (`/api/user/update-onboarding`).
+ - Retrieving all user progress data (`/api/user/all-data`).
 - [x] Refactor mutations to use Next.js Server Actions for better performance and less boilerplate.
 
 ## 7. SEO & Metadata

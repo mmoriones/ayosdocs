@@ -70,9 +70,9 @@ Standard text. Use for general descriptions. Supports mini-markdown (Bold, Links
 Use for Level 3 headings (H3) within a section.
 ```json
 { 
-  "type": "subheading", 
-  "title": "Online Appointment", 
-  "content": "Description text for this sub-section." 
+ "type": "subheading", 
+ "title": "Online Appointment", 
+ "content": "Description text for this sub-section." 
 }
 ```
 
@@ -80,8 +80,8 @@ Use for Level 3 headings (H3) within a section.
 Bulleted items. Optimized for mobile line-height.
 ```json
 { 
-  "type": "list", 
-  "items": ["Item 1", "Item 2 with [link](https://...)"] 
+ "type": "list", 
+ "items": ["Item 1", "Item 2 with [link](https://...)"] 
 }
 ```
 
@@ -90,9 +90,9 @@ Used for Pro-Tips, Notes, and Warnings.
 - `variant`: `"info"` (blue/Pro-Tip), `"note"` (gray/Note badge), `"warning"` (amber/Important).
 ```json
 { 
-  "type": "banner", 
-  "variant": "info", 
-  "content": "**Pro Tip:** DFA slots refresh at 12:00 PM." 
+ "type": "banner", 
+ "variant": "info", 
+ "content": "**Pro Tip:** DFA slots refresh at 12:00 PM." 
 }
 ```
 
@@ -100,12 +100,12 @@ Used for Pro-Tips, Notes, and Warnings.
 Use for fees or restriction codes. Structured as headers and rows for easy maintenance.
 ```json
 { 
-  "type": "table", 
-  "headers": ["Restriction", "Vehicle Type"],
-  "rows": [
-    ["Motorcycle", "Motorcycles and scooters"],
-    ["Light Vehicles", "Cars and SUVs"]
-  ]
+ "type": "table", 
+ "headers": ["Restriction", "Vehicle Type"],
+ "rows": [
+ ["Motorcycle", "Motorcycles and scooters"],
+ ["Light Vehicles", "Cars and SUVs"]
+ ]
 }
 ```
 

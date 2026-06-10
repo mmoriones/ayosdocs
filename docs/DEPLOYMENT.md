@@ -1,10 +1,10 @@
-# 🚀 AyosDocs Deployment Guide
+# AyosDocs Deployment Guide
 
 This guide covers how to provision and deploy the AyosDocs stack to a fresh AWS instance using Terraform, Ansible, and Docker.
 
 ---
 
-## 📋 0. Prerequisites
+## 0. Prerequisites
 
 Before starting, ensure you have the following ready:
 
@@ -21,100 +21,124 @@ Before starting, ensure you have the following ready:
 
 ---
 
-## 🏗️ Step 1: Infrastructure Provisioning (Terraform - LOCAL)
+## Step 1: Infrastructure Provisioning (Terraform - LOCAL)
 
 Use Terraform on your **local machine** to create the AWS EC2 instance and configure the Cloudflare DNS record.
 
-1.  **Navigate to Terraform directory (Local):**
-    ```bash
-    cd infra/terraform
-    ```
-2.  **Configure Variables (Local):**
-    Create a `terraform.tfvars` file (this file is gitignored):
-    ```hcl
-    cloudflare_api_token = "your_token"
-    cloudflare_zone_id   = "your_zone_id"
-    ssh_key_name         = "ayosdocs-key" # Must match your AWS Key Pair name
-    ```
-3.  **Initialize and Apply (Local):**
-    ```bash
-    terraform init
-    terraform apply
-    ```
-    *Note the output `public_ip` for the next step.*
+1. **Navigate to Terraform directory (Local):**
+ ```bash
+ cd infra/terraform
+ ```
+2. **Configure Variables (Local):**
+ Create a `terraform.tfvars` file (this file is gitignored):
+ ```hcl
+ cloudflare_api_token = "your_token"
+ cloudflare_zone_id = "your_zone_id"
+ ssh_key_name = "ayosdocs-key" # Must match your AWS Key Pair name
+ ```
+3. **Initialize and Apply (Local):**
+ ```bash
+ terraform init
+ terraform apply
+ ```
+ *Note the output `public_ip` for the next step.*
 
 ---
 
-## 🛠️ Step 2: Server Configuration (Ansible - LOCAL)
+## Step 2: Server Configuration (Ansible - LOCAL)
 
 Run these commands from your **local machine**. Ansible will connect to the server via SSH to configure it.
 
-1.  **Configure Inventory (Local):**
-    Edit `infra/ansible/inventory.ini` with your new server IP:
-    ```ini
-    [webservers]
-    your_server_ip ansible_user=ubuntu project_path=/home/ubuntu/ayosdocs ansible_ssh_private_key_file=~/.ssh/ayosdocs-key.pem
-    ```
-2.  **Secrets Management (Local):**
-    AyosDocs uses Ansible Vault in `infra/ansible/vars/secrets.yml`. 
-    ```bash
-    # To edit secrets
-    make vault-edit
-    ```
-3.  **Run the Playbook (Local):**
-    ```bash
-    make infra-provision
-    ```
+1. **Configure Inventory (Local):**
+ Edit `infra/ansible/inventory.ini` with your new server IP:
+ ```ini
+ [webservers]
+ your_server_ip ansible_user=ubuntu project_path=/home/ubuntu/ayosdocs ansible_ssh_private_key_file=~/.ssh/ayosdocs-key.pem
+ ```
+2. **Secrets Management (Local):**
+ AyosDocs uses Ansible Vault in `infra/ansible/vars/secrets.yml`. 
+ ```bash
+ # To edit secrets
+ make vault-edit
+ ```
+3. **Run the Playbook (Local):**
+ ```bash
+ make infra-provision
+ ```
 
 ---
 
-## 🚢 Step 3: Launch Application (REMOTE SERVER)
+## Step 3: Launch Application (REMOTE SERVER)
 
 Once the playbook finishes, SSH into the **remote server** to launch the stack.
 
-1.  **SSH into Server:**
-    ```bash
-    ssh ubuntu@your_server_ip
-    ```
+1. **SSH into Server:**
+ ```bash
+ ssh ubuntu@your_server_ip
+ ```
 
-2.  **Start the stack:**
-    ```bash
-    cd /home/ubuntu/ayosdocs
-    # For full observability stack (requires >1GB RAM)
-    make docker-up
+2. **Start the stack:**
+ ```bash
+ cd /home/ubuntu/ayosdocs
+ # For full observability stack (requires >1GB RAM)
+ make docker-up
 
-    # For minimal resource usage (recommended for 1GB RAM instances)
-    make docker-minimal
-    ```
+ # For minimal resource usage (recommended for 1GB RAM instances)
+ make docker-minimal
+ ```
 
-3.  **Automatic Updates:**
-    The stack includes **Watchtower**. Every day at 3:00 AM, it will check GHCR for a new version of your image. If you push a change to `main`, GitHub Actions will build a new image, and Watchtower will automatically restart your app on the server with the latest version. No manual `git pull` or `docker compose restart` required!
+3. **Automatic Updates:**
+ The stack includes **Watchtower**. Every day at 3:00 AM, it will check GHCR for a new version of your image. If you push a change to `master`, GitHub Actions will build a new image, and Watchtower will automatically restart your app on the server with the latest version. No manual `git pull` or `docker compose restart` required!
 
-## 📦 Backup Strategy (Cloudflare R2)
+### AI Setup (Qdrant + Bedrock)
+
+The AI chat feature requires additional environment variables. After starting the stack:
+
+1. **Set AI env vars on the server:**
+ ```bash
+ # Edit the app service in docker/compose/docker-compose.yml or a .env file
+ # Required:
+ AWS_REGION=ap-southeast-1
+ AWS_ACCESS_KEY_ID=your_key
+ AWS_SECRET_ACCESS_KEY=your_secret
+ QDRANT_URL=http://qdrant:6333
+ AI_ENABLED=true
+ ```
+
+2. **Index guides into Qdrant:**
+ ```bash
+ cd /home/ubuntu/ayosdocs
+ make ai-sync
+ ```
+ This chunks all guides, generates embeddings via **Cohere Multilingual v3**, and upserts to Qdrant.
+
+3. **Verify:** Open the chat bubble on the site and ask a question about any guide.
+
+## Backup Strategy (Cloudflare R2)
 
 The application includes an automated backup service that runs every day at 3:00 AM.
 
-1.  **Rclone Configuration**:
-    The `backup` service uses `rclone` to upload encrypted database dumps to Cloudflare R2. You must provide the `rclone.conf` content via Ansible Vault.
+1. **Rclone Configuration**:
+ The `backup` service uses `rclone` to upload encrypted database dumps to Cloudflare R2. You must provide the `rclone.conf` content via Ansible Vault.
 
-2.  **Manual Test**:
-    To run a backup manually:
-    ```bash
-    docker exec ayosdocs-backup /scripts/backup.sh
-    ```
-
----
-
-## 🏗️ CI/CD Pipeline Flow
-
-1.  **Code Push**: You push code to the `main` branch.
-2.  **Lint & Scan**: GitHub Actions runs ESLint and **Trivy** (security scanner).
-3.  **Build & Push**: If scans pass, a new image is built and pushed to **GHCR**.
-4.  **Auto-Deploy**: **Watchtower** on your VPS detects the new image and restarts the container.
+2. **Manual Test**:
+ To run a backup manually:
+ ```bash
+ docker exec ayosdocs-backup /scripts/backup.sh
+ ```
 
 ---
 
-## 📊 Monitoring & Observability
+## CI/CD Pipeline Flow
+
+1. **Code Push**: You push code to the `main` branch.
+2. **Lint & Scan**: GitHub Actions runs ESLint and **Trivy** (security scanner).
+3. **Build & Push**: If scans pass, a new image is built and pushed to **GHCR**.
+4. **Auto-Deploy**: **Watchtower** on your VPS detects the new image and restarts the container.
+
+---
+
+## Monitoring & Observability
 
 AyosDocs includes a full observability stack (Prometheus, Grafana, Node Exporter, cAdvisor). 
 
@@ -124,12 +148,12 @@ AyosDocs includes a full observability stack (Prometheus, Grafana, Node Exporter
 Navigate to [http://admin.ayosdocs.com/grafana/](http://admin.ayosdocs.com/grafana/)
 
 #### Option B: SSH Tunnel (Secure Backdoor)
-1.  **Start the SSH Tunnel (from your local machine):**
-    ```bash
-    ssh -i ~/.ssh/ayosdocs-key.pem -L 3000:localhost:3000 ubuntu@your_server_ip
-    ```
-2.  **Open your browser:**
-    Navigate to [http://localhost:3000](http://localhost:3000)
+1. **Start the SSH Tunnel (from your local machine):**
+ ```bash
+ ssh -i ~/.ssh/ayosdocs-key.pem -L 3000:localhost:3000 ubuntu@your_server_ip
+ ```
+2. **Open your browser:**
+ Navigate to [http://localhost:3000](http://localhost:3000)
 
 #### Credentials:
 - **User:** `admin`
@@ -137,9 +161,9 @@ Navigate to [http://admin.ayosdocs.com/grafana/](http://admin.ayosdocs.com/grafa
 
 ---
 
-## 🛠️ Operations & Maintenance
+## Operations & Maintenance
 
-### 📝 Check Logs
+### Check Logs
 - **All Services:** `make docker-logs`
 - **Web App:** `make docker-log-app`
 - **Nginx Proxy:** `make docker-log-nginx`
@@ -148,7 +172,7 @@ Navigate to [http://admin.ayosdocs.com/grafana/](http://admin.ayosdocs.com/grafa
 - **Watchtower (Auto-updates):** `make docker-log-watchtower`
 - **Observability:** `make docker-log-prometheus` or `make docker-log-grafana`
 
-### 🛠️ Diagnostic Commands
+### Diagnostic Commands
 - **Nginx Syntax Check:** `docker exec -it ayosdocs-nginx nginx -t`
 - **MongoDB Shell:** `docker exec -it ayosdocs-db mongosh`
 - **Manual Backup Trigger:** `make backup`

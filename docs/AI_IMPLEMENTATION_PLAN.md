@@ -12,10 +12,10 @@ This document outlines the architectural roadmap for upgrading the AyosDocs infr
 - **Reasoning**: Next.js, MongoDB, and the new Vector DB (Qdrant) require more than 1GB of memory to prevent OOM (Out of Memory) kills.
 
 ### 1.2 Execution
-1.  Navigate to `infra/terraform`.
-2.  Run `terraform apply`. 
-    - *Note: This will stop the current instance, change the type, and restart it. Expected downtime: 2-5 minutes.*
-3.  SSH into the server and verify with `free -h` or `htop`.
+1. Navigate to `infra/terraform`.
+2. Run `terraform apply`. 
+ - *Note: This will stop the current instance, change the type, and restart it. Expected downtime: 2-5 minutes.*
+3. SSH into the server and verify with `free -h` or `htop`.
 
 ### 1.3 Full Stack Activation
 - **Action**: Switch from `make docker-minimal` to `make docker-up`.
@@ -32,10 +32,10 @@ Instead of paying for AWS OpenSearch ($170/mo), we will host **Qdrant** in Docke
 
 ### 2.2 The Ingestion Pipeline (`scripts/index-guides.js`)
 A Node.js script that performs the following:
-1.  Parses all JSON files in `app/src/data/guides/`.
-2.  Chunks the text (to fit AI context limits).
-3.  Calls **AWS Bedrock (Titan Embeddings)** to generate vectors.
-4.  Upserts vectors and metadata (guide title, slug, category) into Qdrant.
+1. Parses all JSON files in `app/src/data/guides/`.
+2. Chunks the text (to fit AI context limits).
+3. Calls **AWS Bedrock (Titan Embeddings)** to generate vectors.
+4. Upserts vectors and metadata (guide title, slug, category) into Qdrant.
 
 ### 2.3 The Future-Proof AI Wrapper (`app/src/lib/ai/`)
 To avoid lock-in, we will implement a provider-agnostic layer using the **Vercel AI SDK**.
@@ -49,11 +49,11 @@ The code will be "defensive" to prevent errors on platforms like Vercel or in lo
 const isAIReady = process.env.AWS_ACCESS_KEY_ID && process.env.AI_ENABLED === 'true';
 
 export async function chat(messages) {
-  if (!isAIReady) {
-    // Fallback: Returns a simulated response so the UI doesn't crash
-    return { text: "AI is currently disabled or keys are missing.", isMock: true };
-  }
-  // Proceed with real Bedrock call using Vercel AI SDK...
+ if (!isAIReady) {
+ // Fallback: Returns a simulated response so the UI doesn't crash
+ return { text: "AI is currently disabled or keys are missing.", isMock: true };
+ }
+ // Proceed with real Bedrock call using Vercel AI SDK...
 }
 ```
 
@@ -65,12 +65,12 @@ export async function chat(messages) {
 
 ## Part 3: Environment Management Matrix
 
-| Feature            | Local Dev (Docker)     | Vercel (Staging)         | AWS Production      |
+| Feature | Local Dev (Docker) | Vercel (Staging) | AWS Production |
 | :----------------- | :--------------------- | :----------------------- | :------------------ |
-| **Qdrant**         | Running in Docker      | **Disabled** (Not Found) | Running in Docker   |
-| **AWS Bedrock**    | Accessible (with keys) | **Disabled** (No Keys)   | Accessible          |
-| **Chat Feature**   | Full / Mock Mode       | **Mock / Hidden**        | **Full Activation** |
-| **Error Handling** | Logs warnings          | Silent Fallback          | Alerts via Grafana  |
+| **Qdrant** | Running in Docker | **Disabled** (Not Found) | Running in Docker |
+| **AWS Bedrock** | Accessible (with keys) | **Disabled** (No Keys) | Accessible |
+| **Chat Feature** | Full / Mock Mode | **Mock / Hidden** | **Full Activation** |
+| **Error Handling** | Logs warnings | Silent Fallback | Alerts via Grafana |
 
 ---
 
@@ -90,22 +90,22 @@ export async function chat(messages) {
 
 ## Part 5: Migration Strategy (Post-Credits)
 When credits expire in Nov 2026:
-1.  **Switch VPS**: Move to a $10/mo provider.
-2.  **Switch AI**: Change `provider.js` from `bedrock` to `openai` (GPT-4o-mini) or `groq` (Llama 3). 
-3.  **No Code Change**: Because we used the Vercel AI SDK, your UI and API logic remain untouched.
+1. **Switch VPS**: Move to a $10/mo provider.
+2. **Switch AI**: Change `provider.js` from `bedrock` to `openai` (GPT-4o-mini) or `groq` (Llama 3). 
+3. **No Code Change**: Because we used the Vercel AI SDK, your UI and API logic remain untouched.
 
 ---
 
-## ⚠️ CRITICAL REMINDERS
+## CRITICAL REMINDERS
 
 ### 1. Update Ansible Vault (Server Config)
 Before running `make infra-provision`, you MUST update your encrypted secrets to ensure the production environment receives the new AI configuration.
 - **Action**: Run `make vault-edit`
 - **Fields to add/update**:
-  - `AI_ENABLED: "true"`
-  - `AWS_ACCESS_KEY_ID: "your_key_here"`
-  - `AWS_SECRET_ACCESS_KEY: "your_secret_here"`
-  - `QDRANT_URL: "http://ayosdocs-qdrant:6333"` (Internal Docker network address)
+ - `AI_ENABLED: "true"`
+ - `AWS_ACCESS_KEY_ID: "your_key_here"`
+ - `AWS_SECRET_ACCESS_KEY: "your_secret_here"`
+ - `QDRANT_URL: "http://ayosdocs-qdrant:6333"` (Internal Docker network address)
 
 ### 2. Update Local Environment Files
 Ensure your `app/.env.local` (and other `.env` files) match the production logic. You need to add:

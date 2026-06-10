@@ -204,8 +204,8 @@ Example:
 
 Inside the bundle:
 
-* PSA ✓
-* CENOMAR ✓
+* PSA 
+* CENOMAR 
 * Marriage License ⏳
 * Barangay Clearance ⏳
 
@@ -404,10 +404,10 @@ For a DFA office:
 
 ### Ratings
 
-* Processing Speed ★
-* Staff Friendliness ★
-* Queue Management ★
-* Facility Cleanliness ★
+* Processing Speed 
+* Staff Friendliness 
+* Queue Management 
+* Facility Cleanliness 
 
 ---
 

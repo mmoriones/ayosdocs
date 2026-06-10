@@ -14,8 +14,8 @@ Open your application and use the browser **Developer Tools** (F12):
 ### Cookies:
 - Go to the **Application** (Chrome) or **Storage** (Firefox) tab.
 - Under **Cookies**, verify that `next-auth.session-token` and `next-auth.csrf-token` are:
-  - `HTTPOnly`: Yes (prevents JS access)
-  - `SameSite`: `Strict` (for CSRF token) or `Lax` (for Session)
+ - `HTTPOnly`: Yes (prevents JS access)
+ - `SameSite`: `Strict` (for CSRF token) or `Lax` (for Session)
 
 ## 2. Verify Rate Limiting & Account Lockout (Manual)
 
@@ -24,14 +24,14 @@ Open your application and use the browser **Developer Tools** (F12):
 2. Enter a valid registered email but a **wrong password**.
 3. Repeat **5 times**.
 4. On the **6th attempt**, verify:
-   - Status message says: *"Account temporarily locked. Try again in 15 minutes."*
-   - A red **Security Alert** toast appears at the top.
+ - Status message says: *"Account temporarily locked. Try again in 15 minutes."*
+ - A red **Security Alert** toast appears at the top.
 
 ### IP-Based Throttling (System-Level)
 1. Try to **Sign Up** with different random emails rapidly.
 2. After **5 attempts** within a minute, verify:
-   - Status message says: *"Too many registration attempts. Please try again later."*
-   - An **Action Throttled** toast appears.
+ - Status message says: *"Too many registration attempts. Please try again later."*
+ - An **Action Throttled** toast appears.
 
 ## 3. Database "Peek Under the Hood"
 The most reliable way to verify the logic is to check your MongoDB (using **MongoDB Compass**):
