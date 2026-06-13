@@ -6,7 +6,7 @@
 crash.log
 
 # Ignore variables file containing credentials
-terraform.tfvars
+root/terraform.tfvars
 
 # Ignore the .terraform directory
-.terraform/
+root/.terraform/
