@@ -10,3 +10,7 @@ root/terraform.tfvars
 
 # Ignore the .terraform directory
 root/.terraform/
+bootstrap/.terraform/
+
+# Generated files
+root/inventory.ini

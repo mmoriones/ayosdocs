@@ -1,14 +1,16 @@
-.PHONY: infra-up infra-down infra-provision vault-edit docker-pull-app docker-up docker-down docker-minimal-pull docker-minimal-up docker-minimal-down docker-minimal-build docker-dev-up docker-dev-down docker-minimal-logs docker-logs ai-sync backup cron-cleanup
+.PHONY: infra-bootstrap infra-up infra-down infra-provision vault-edit docker-pull-app docker-up docker-down docker-minimal-pull docker-minimal-up docker-minimal-down docker-minimal-build docker-dev-up docker-dev-down docker-minimal-logs docker-logs ai-sync backup cron-cleanup remote-docker-minimal-up remote-docker-minimal-down remote-docker-minimal-build remote-ai-sync remote-git-pull
 
+infra-bootstrap:
+	cd infra/terraform/bootstrap && terraform init && terraform apply -auto-approve
 
 infra-up:
-	cd infra/terraform && terraform apply
+	BUCKET=$$(cd infra/terraform/bootstrap && terraform output -raw state_bucket_name) && cd infra/terraform/root && terraform init -backend-config="bucket=$$BUCKET" -migrate-state && terraform apply -auto-approve
 
 infra-down:
-	cd infra/terraform && terraform destroy
+	BUCKET=$$(cd infra/terraform/bootstrap && terraform output -raw state_bucket_name) && cd infra/terraform/root && terraform init -backend-config="bucket=$$BUCKET" -reconfigure && terraform destroy -auto-approve
 
 infra-provision:
-	ansible-playbook -i infra/ansible/inventory.ini infra/ansible/setup-server.yml --ask-vault-pass
+	ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i infra/terraform/root/inventory.ini infra/ansible/setup-server.yml --ask-vault-pass
 
 vault-edit:
 	ansible-vault edit infra/ansible/vars/secrets.yml
@@ -51,6 +53,26 @@ docker-minimal-logs:
 
 docker-minimal-log-%:
 	docker compose --env-file app/.env -f docker/compose/docker-compose.minimal-build.yml logs -f $*
+
+
+# Remote commands via Ansible ad-hoc (no vault password needed)
+INVENTORY = infra/terraform/root/inventory.ini
+REMOTE_CMD = ANSIBLE_HOST_KEY_CHECKING=False ansible webservers -i $(INVENTORY) -m shell
+
+remote-docker-minimal-up:
+	$(REMOTE_CMD) -a "cd /home/ubuntu/ayosdocs && make docker-minimal-up"
+
+remote-docker-minimal-down:
+	$(REMOTE_CMD) -a "cd /home/ubuntu/ayosdocs && make docker-minimal-down"
+
+remote-docker-minimal-build:
+	$(REMOTE_CMD) -a "cd /home/ubuntu/ayosdocs && make docker-minimal-build"
+
+remote-ai-sync:
+	$(REMOTE_CMD) -a "cd /home/ubuntu/ayosdocs && make ai-sync"
+
+remote-git-pull:
+	$(REMOTE_CMD) -a "cd /home/ubuntu/ayosdocs && git pull"
 
 
 # for local dev (will run db and qdrant containers)
