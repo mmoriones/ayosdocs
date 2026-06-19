@@ -145,14 +145,14 @@ npm run setup-env
 For a detailed end-to-end guide on provisioning AWS and deploying the stack, see our **[Deployment Guide](docs/DEPLOYMENT.md)**.
 
 ```bash
-# Infrastructure (Local)
-cd infra/terraform && terraform apply
+# Bootstrap remote state (first time only)
+make infra-bootstrap
 
-# Configuration (Local)
-cd infra/ansible && ansible-playbook -i inventory.ini setup-server.yml --ask-vault-pass
+# Provision infrastructure (Terraform + Ansible)
+make infra-up && make infra-provision
 
-# Index guides for AI (after deploy)
-make ai-sync
+# Launch the stack and index AI guides
+make remote-docker-minimal-build && make remote-ai-sync
 ```
 
 ---
@@ -162,9 +162,15 @@ make ai-sync
 We prioritize "Operations as Code." Our stack includes a pre-configured observability suite.
 
 - **Metrics:** App performance is exposed via `/api/metrics`.
-- **Dashboards:** Access Grafana via SSH Tunnel (`localhost:3000`).
+- **Dashboards:** Access Grafana at [http://admin.ayosdocs.com/grafana/](http://admin.ayosdocs.com/grafana/).
 - **Backups:** Automated daily backups to Cloudflare R2 at 3:00 AM.
 - **AI:** Re-index guides after content updates with `make ai-sync`.
+
+---
+
+## Project Roadmap
+
+Development follows a structured plan documented in [docs/INFRA_ROADMAP.md](docs/INFRA_ROADMAP.md). It covers infrastructure refactoring, CI/CD, AWS architecture, Kubernetes, observability, and security hardening.
 
 ---
 
