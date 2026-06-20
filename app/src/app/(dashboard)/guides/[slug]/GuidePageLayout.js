@@ -422,7 +422,7 @@ const GuidePageLayout = ({
   return (
     <div className="min-h-screen bg-ios-gradient pb-32 selection:bg-[#0038A8]/10">
       {/* High-Fidelity Fixed Navigation */}
-      <nav className="sticky top-[var(--header-offset,4rem)] lg:top-16 z-40 bg-white/80 backdrop-blur-2xl border-b border-white/50 px-6 py-3 flex items-center gap-4 transition-[top] duration-500 ease-in-out shadow-sm shadow-black/[0.01]">
+      <nav className="sticky top-[var(--header-offset,4rem)] lg:top-0 z-40 bg-white/80 backdrop-blur-2xl border-b border-white/50 px-6 py-3 flex items-center gap-4 transition-[top] duration-500 ease-in-out shadow-sm shadow-black/[0.01]">
         <button 
           onClick={() => router.back()} 
           className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-all shrink-0 border border-white/60 hover:bg-gray-50"

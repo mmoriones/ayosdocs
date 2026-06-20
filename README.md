@@ -159,18 +159,21 @@ make remote-docker-minimal-build && make remote-ai-sync
 
 ## Monitoring & Maintenance
 
-We prioritize "Operations as Code." Our stack includes a pre-configured observability suite.
+The platform is fully containerized with built-in observability — automated health monitoring, metric collection, alerting, and daily encrypted backups to Cloudflare R2. The monitoring stack (Prometheus + Grafana + Alertmanager) runs alongside the application for real-time visibility.
 
-- **Metrics:** App performance is exposed via `/api/metrics`.
-- **Dashboards:** Access Grafana at [http://admin.ayosdocs.com/grafana/](http://admin.ayosdocs.com/grafana/).
-- **Backups:** Automated daily backups to Cloudflare R2 at 3:00 AM.
-- **AI:** Re-index guides after content updates with `make ai-sync`.
+For operational details, see the [Runbook](docs/RUNBOOK.md) and [Disaster Recovery Plan](docs/DISASTER_RECOVERY.md).
 
 ---
 
 ## Project Roadmap
 
-Development follows a structured plan documented in [docs/INFRA_ROADMAP.md](docs/INFRA_ROADMAP.md). It covers infrastructure refactoring, CI/CD, AWS architecture, Kubernetes, observability, and security hardening.
+AyosDocs is actively developed with these focus areas:
+
+- **Content Expansion** — Adding more government agency guides, life event bundles, and localized content for regions across the Philippines.
+- **Mobile Experience** — Improving responsive design, touch interactions, and progressive web app capabilities for on-the-go access.
+- **Community Contributions** — Building a workflow for community-authored guides with review and moderation.
+- **AI Assistant** — Enhancing the RAG-based chat with better context awareness and support for follow-up questions.
+- **Performance & Reliability** — Ongoing infrastructure hardening, edge caching, and observability improvements.
 
 ---
 
